@@ -9,6 +9,11 @@
 
 /* Breakpoint: Mobile/Tablet (<992px) */
 @media (max-width: 991.98px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
     /* Hide desktop headers */
     .header-top,
     #masthead.site-header {
