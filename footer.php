@@ -14,10 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<footer id="colophon" class="site-footer">
 			<div class="container-fluid px-lg-5">
 				<!-- Top Row -->
-				<div class="row footer-top-row mb-5">
+				<div class="row footer-top-row">
 					<!-- Col 1: Logo & Socials -->
 					<div class="col-xl-3 col-lg-4 col-12 mb-5 mb-lg-0">
-						<div class="footer-brand mb-5">
+						<div class="footer-brand">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link d-inline-block">
 								<div class="logo-wrapper">
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/footer-logo-mark.svg' ); ?>" alt="Waterside Dentalcare Logo Mark" class="logo-mark">
@@ -115,16 +115,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 
 				<!-- Middle Row: Subscribe & Language -->
-				<div class="row align-items-end justify-content-between py-4 my-4 footer-middle-row">
+				<div class="row align-items-end justify-content-between footer-middle-row">
 					<!-- Subscribe -->
 					<div class="col-lg-7 col-12 mb-4 mb-lg-0 subscribe-col">
 						<div class="footer-subscribe d-flex flex-wrap align-items-end gap-4">
 							<div class="subscribe-input-wrapper">
 								<label for="subscribe-email" class="subscribe-label">Get to know our updates:</label>
-								<input type="email" id="subscribe-email" class="subscribe-input" placeholder="Your email address">
-								<div class="subscribe-line-wrapper">
+								<input type="email" id="subscribe-email" class="subscribe-input" />
+								<!-- <div class="subscribe-line-wrapper">
 									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/subscribe-line.svg' ); ?>" alt="" class="subscribe-line-img">
-								</div>
+								</div> -->
 							</div>
 							<div class="subscribe-btn-wrapper">
 								<button class="btn btn-subscribe">Subscribe</button>
@@ -145,7 +145,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 
 				<!-- Bottom Row: Copyright -->
-				<div class="row footer-bottom-row pt-4 text-white-50">
+				<div class="row footer-bottom-row text-white-50">
 					<div class="col-md-6 col-12 mb-2 mb-md-0 text-center text-md-start last-updated-text">
 						<span>Last updated: June 10, 2025 - 12:55 pm</span>
 					</div>

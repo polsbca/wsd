@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div id="page" class="site">
 		<div class="header-top d-none d-lg-block">
-			<div class="container-fluid px-lg-5">
+			<div class="container-fluid px-lg-0">
 				<div class="row align-items-center justify-content-between">
 					<div class="col-12 col-md-auto text-center text-md-start mb-3 mb-md-0">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link d-inline-block">
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<header id="masthead" class="site-header d-none d-lg-flex">
-			<div class="container-fluid px-lg-5">
+			<div class="container-fluid px-lg-0">
 				<div class="row justify-content-center">
 					<div class="col-12">
 						<nav id="site-navigation" class="main-navigation text-center">
