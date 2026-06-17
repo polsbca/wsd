@@ -24,7 +24,9 @@ body {
   margin: 0;
   padding: 0;
 }
-
+.px-lg-120 {
+  padding-inline: 120px;
+}
 /* ============================================================
    HEADER STYLES
    ============================================================ */
@@ -181,7 +183,7 @@ body {
   border: 2px solid var(--primary-color);
   border-radius: 8px;
   padding: 16px 8px;
-  width: 214px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -217,6 +219,7 @@ body {
   width: 100%;
   display: block;
   border-bottom: none;
+  text-align: left;
 }
 
 .dropdown-item:hover,
@@ -250,7 +253,7 @@ body {
 
 .hero-section {
   background-color: var(--light-bg);
-  padding: 100px 0 60px;
+  padding: 100px 0 80px;
   position: relative;
   overflow: hidden;
   min-height: calc(100vh - 215px);
@@ -280,7 +283,6 @@ body {
 }
 
 .hero-content {
-  padding-left: 60px;
   margin-top: 0;
 }
 
@@ -421,13 +423,13 @@ body {
 .hero-img {
   max-height: 100%;
   max-width: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  object-position: bottom right;
+  width: 100%;
+  height: 690px;
+  object-fit: cover;
+  object-position: left center;
   border-radius: 0;
   box-shadow: none;
-  margin-bottom: -100px;
+  margin-bottom: -60px;
 }
 
 /* Call Us Side Tab */
@@ -1020,8 +1022,8 @@ body {
    ============================================================ */
 
 .key-treatments-section {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 160px;
+  margin-bottom: 160px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -1043,7 +1045,7 @@ body {
   display: inline-block;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .treatments-header-title {
@@ -1053,6 +1055,8 @@ body {
   letter-spacing: -1px;
   color: #5e5d5f;
   margin: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .treatments-header-title .accent {
@@ -1065,7 +1069,7 @@ body {
 
 .treatments-row {
   display: flex;
-  gap: 125px;
+  gap: 110px;
 }
 
 @media (min-width: 992px) {
@@ -1173,6 +1177,8 @@ body {
   color: rgba(94, 93, 95, 0.4);
   margin: 0;
   transition: all 0.3s ease;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .accordion-tab.active .accordion-tab-title {
@@ -1200,7 +1206,10 @@ body {
   font-size: 20px;
   line-height: 32px;
   color: #5e5d5f;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
+  margin-top: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .tab-includes-wrapper {
@@ -1213,6 +1222,9 @@ body {
   font-size: 16px;
   color: #5e5d5f;
   margin-bottom: 25px;
+  margin-top: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .includes-items {
@@ -1224,8 +1236,12 @@ body {
   font-size: 20px;
   color: #5e5d5f;
   letter-spacing: 1px;
+  line-height: normal;
 }
-
+.includes-items span {
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
 .gold-underlined {
   color: #d8a444;
   text-decoration: underline;
@@ -1235,7 +1251,7 @@ body {
 .tab-action-btn {
   width: 356px;
   max-width: 100%;
-  height: 68px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1247,6 +1263,8 @@ body {
   text-decoration: none;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .tab-action-btn:hover {
@@ -1512,6 +1530,8 @@ body {
   letter-spacing: -1px;
   color: #5e5d5f;
   margin: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .about-header-title .light {
@@ -1538,6 +1558,8 @@ body {
   color: #5e5d5f;
   margin: 0;
   letter-spacing: -1px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .about-description {
@@ -1547,6 +1569,8 @@ body {
   line-height: 46px;
   color: #5e5d5f;
   margin: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .about-right-col {
@@ -1560,7 +1584,7 @@ body {
   display: flex;
   width: 100%;
   height: 1040px;
-  max-height: 90%;
+  max-height: 100%;
   align-items: center;
   gap: 10px;
 }
@@ -1570,14 +1594,14 @@ body {
   height: 100%;
   overflow: hidden;
   position: relative;
-  border-radius: 30px;
+  border-radius: 0px;
 }
 
 .about-image-frame {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 0px;
   overflow: hidden;
   clip-path: inset(50% 0% 50% 0%);
   /* Start cropped vertically from the center */
@@ -1594,7 +1618,7 @@ body {
   transition:
     opacity 0.8s ease,
     visibility 0.8s ease;
-  border-radius: 30px;
+  border-radius: 0px;
   transform: scale(1.15);
   /* Start scaled up */
 }
@@ -1640,7 +1664,7 @@ body {
 
 .about-scroll-indicator-track {
   position: absolute;
-  top: 114.4px;
+  top: 0;
   bottom: 0;
   left: 0;
   width: 5px;
@@ -1741,7 +1765,7 @@ body {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 60px 120px;
+  padding: 100px 120px;
   justify-content: space-between;
   box-sizing: border-box;
 }
@@ -1772,6 +1796,8 @@ body {
   color: #5e5d5f;
   margin: 0;
   width: 312px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .gallery-header-title .light {
@@ -1790,12 +1816,13 @@ body {
   line-height: 40px;
   margin: 0;
   flex: 1;
-  max-width: 800px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .gallery-content-layout {
   display: flex;
-  gap: 60px;
+  gap: 23px;
   width: 100%;
   flex: 1;
   align-items: center;
@@ -1861,13 +1888,13 @@ body {
 }
 
 .before-card {
-  left: 0;
-  top: 0;
+  left: 9px;
+  top: 9px;
 }
 
 .after-card {
-  left: 457px;
-  top: 159px;
+  left: 450px;
+  top: 155px;
 }
 
 .gallery-card-image-wrapper {
@@ -1959,12 +1986,12 @@ body {
 .gallery-detail-card {
   background: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(94, 93, 95, 0.24);
-  padding: 30px;
+  padding: 40px 30px;
   border-radius: 16px;
   height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px;
   box-sizing: border-box;
 }
 
@@ -1974,6 +2001,8 @@ body {
   font-weight: 600;
   color: #5e5d5f;
   opacity: 0.4;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .detail-value {
@@ -1981,12 +2010,14 @@ body {
   font-size: 18px;
   font-weight: 500;
   color: #5e5d5f;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .btn-gallery-action {
   border: 1px solid rgba(94, 93, 95, 0.52);
-  padding: 28px;
-  border-radius: 32px;
+  padding: 26px 28px;
+  border-radius: 60px;
   font-family: var(--font-family-primary);
   font-size: 20px;
   font-weight: 500;
@@ -1997,12 +2028,15 @@ body {
   display: inline-block;
   box-sizing: border-box;
   transition: all 0.3s ease;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .btn-gallery-action:hover {
   border-color: #d8a444;
   color: #d8a444;
   background: rgba(216, 164, 68, 0.05);
+  text-decoration: none;
 }
 
 /* Scroll indicator vertical track and handle */
@@ -2018,8 +2052,8 @@ body {
 
 .gallery-scroll-indicator-track {
   position: absolute;
-  top: 82.5px;
-  bottom: 82.5px;
+  top: 0;
+  bottom: 0;
   left: 0;
   width: 5px;
   background-color: rgba(94, 93, 95, 0.1);
@@ -2158,7 +2192,7 @@ body {
 
 .testimonials-section {
   background-color: #faf3e6;
-  padding: 120px 0;
+  padding: 133px 0;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -2205,6 +2239,8 @@ body {
   letter-spacing: 0.96px;
   line-height: 44px;
   transition: opacity 0.3s ease;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .testimonials-rating-link:hover {
@@ -2228,6 +2264,8 @@ body {
   color: #5e5d5f;
   line-height: 44.1px;
   letter-spacing: -1px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .testimonials-nav-buttons {
@@ -2287,22 +2325,26 @@ body {
 .testimonial-quote-mark {
   font-family: var(--font-family-primary);
   font-weight: 600;
-  font-size: 300px;
+  font-size: 600px;
   color: rgba(94, 93, 95, 0.24);
   opacity: 0.2;
-  line-height: 0.5;
+  line-height: 100%;
   user-select: none;
   display: inline-block;
+  max-height: 250px;
+  position: absolute;
 }
 
 .testimonial-quote-mark.left-quote {
   align-self: flex-start;
-  margin-top: -30px;
+  margin-top: 0px;
+  left: 0;
 }
 
 .testimonial-quote-mark.right-quote {
   align-self: flex-end;
-  margin-bottom: -90px;
+  margin-bottom: 0px;
+  right: 0;
 }
 
 .testimonials-slider {
@@ -2313,7 +2355,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 380px;
-  max-width: 900px;
+  max-width: 1350px;
   margin: 0 auto;
 }
 
@@ -2341,9 +2383,11 @@ body {
   font-style: italic;
   font-size: 50px;
   color: #5e5d5f;
-  margin: 0 0 30px 0;
+  margin: 0 0 60px 0;
   line-height: 1.2;
   letter-spacing: 0.42px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .testimonial-text {
@@ -2352,15 +2396,17 @@ body {
   font-weight: 400;
   font-size: 28px;
   color: #5e5d5f;
-  margin: 0 0 40px 0;
+  margin: 0 0 60px 0;
   line-height: 1.6;
   letter-spacing: 0.42px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .testimonial-stars {
   display: flex;
   gap: 4.2px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   align-items: center;
 }
 
@@ -2377,6 +2423,8 @@ body {
   color: #5e5d5f;
   margin: 0;
   letter-spacing: 0.42px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .testimonials-progress-track {
@@ -2482,7 +2530,7 @@ body {
   overflow: hidden;
   display: flex;
   align-items: center;
-  margin: 100px 0;
+  margin: 160px 0;
 }
 
 .dentist-bg-wrapper {
@@ -2532,10 +2580,9 @@ body {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to left,
-    rgba(250, 243, 230, 0) 45%,
-    #faf3e6 75%,
-    #faf3e6 100%
+    270deg,
+    rgba(43, 43, 44, 0) 0%,
+    rgba(43, 43, 44, 0.8) 100%
   );
   z-index: 3;
 }
@@ -2559,7 +2606,7 @@ body {
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 40px;
-  color: #5e5d5f;
+  color: #ffffff;
   margin: 0;
   letter-spacing: -1px;
   line-height: 44px;
@@ -2595,7 +2642,7 @@ body {
   font-weight: 500;
   font-size: 20px;
   line-height: 37px;
-  color: #5e5d5f;
+  color: #ffffff;
   margin: 0;
   letter-spacing: 0.4px;
 }
@@ -2616,9 +2663,9 @@ body {
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid rgba(94, 93, 95, 0.52);
+  border: 1px solid #ffffff;
   background-color: transparent;
-  color: rgba(94, 93, 95, 0.52);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2628,6 +2675,7 @@ body {
 .dentist-tab-btn:hover {
   border-color: #d8a444;
   color: #d8a444;
+  background-color: #ffffff;
 }
 
 .dentist-tab-btn.active {
@@ -2706,7 +2754,7 @@ body {
 .payment-options-section {
   width: 100%;
   background-color: #fefdf6;
-  margin: 100px 0;
+  margin-bottom: 160px;
   display: flex;
   justify-content: center;
 }
@@ -2740,6 +2788,8 @@ body {
   margin: 0;
   text-transform: capitalize;
   letter-spacing: -1px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .payment-title .accent {
@@ -2753,12 +2803,14 @@ body {
   line-height: 28px;
   color: #5e5d5f;
   margin: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .payment-grid {
   display: flex;
   width: 100%;
-  height: 470px;
+  /* height: 470px; */
   box-sizing: border-box;
 }
 
@@ -2768,6 +2820,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 90px;
   padding: 100px 60px;
   height: 100%;
   box-sizing: border-box;
@@ -2806,6 +2859,8 @@ body {
   color: #5e5d5f;
   margin: 0;
   letter-spacing: 0.4px;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .payment-card-text {
@@ -2815,6 +2870,8 @@ body {
   line-height: 24px;
   color: #5e5d5f;
   margin: 0;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .payment-card-button-wrapper {
@@ -2834,8 +2891,9 @@ body {
   width: 100%;
   box-sizing: border-box;
   transition: all 0.4s ease;
-
-  /* Default Outline Style (grey) */
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+  line-height: 100%;
   border: 1px solid rgba(94, 93, 95, 0.52);
   color: rgba(94, 93, 95, 0.52);
   background-color: transparent;
@@ -2848,8 +2906,11 @@ body {
   background-color: #d8a444;
   border-color: #d8a444;
   color: #ffffff;
+  text-decoration: none;
 }
-
+.payment-btn:hover {
+  text-decoration: none;
+}
 /* Responsive adjustments */
 @media (max-width: 1440px) {
   .payment-options-container {
@@ -2930,10 +2991,11 @@ body {
 .book-appointment-section {
   position: relative;
   width: 100%;
-  padding: 185px 0;
+  padding: 185px 120px;
   display: flex;
   justify-content: center;
   overflow: hidden;
+  margin-bottom: 160px;
 }
 
 .book-appointment-bg-wrapper {
@@ -2953,7 +3015,7 @@ body {
 .book-appointment-container {
   position: relative;
   z-index: 2;
-  max-width: 1311px;
+  /* max-width: 1311px; */
   width: 100%;
   box-sizing: border-box;
 }
@@ -2986,6 +3048,8 @@ body {
   margin: 0;
   letter-spacing: 1.92px;
   text-transform: capitalize;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .book-appointment-text {
@@ -2996,6 +3060,8 @@ body {
   color: #ffffff;
   margin: 0;
   letter-spacing: 0.4px;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .book-appointment-btn-wrapper {
@@ -3011,8 +3077,8 @@ body {
   background-color: #d8a444;
   border: 1px solid #d8a444;
   color: #ffffff;
-  padding: 28px;
-  border-radius: 32px;
+  padding: 24px 28px;
+  border-radius: 60px;
   font-family: var(--font-family-primary);
   font-weight: 700;
   font-size: 20px;
@@ -3022,12 +3088,16 @@ body {
   box-sizing: border-box;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .book-appointment-btn:hover {
   background-color: #c79333;
   border-color: #c79333;
   transform: scale(1.02);
+  text-decoration: none;
+  color: #fff;
 }
 
 /* Responsive adjustments */

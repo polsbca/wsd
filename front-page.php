@@ -22,7 +22,7 @@ get_header();
 			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-bg-waves.svg' ); ?>" alt="" class="hero-bg-waves">
 		</div>
 
-		<div class="container-fluid px-lg-5 h-100 position-relative z-3">
+		<div class="container-fluid px-lg-120 h-100 position-relative z-3">
 			<div class="row align-items-center h-100">
 				<div class="col-lg-6 hero-content-col">
 					<div class="hero-content">
@@ -77,7 +77,7 @@ get_header();
 			<h2 class="treatments-header-title">Our Key <span class="accent">Treatments</span></h2>
 		</div>
 
-		<div class="container-fluid px-lg-5 treatments-main-container">
+		<div class="container-fluid px-lg-120 treatments-main-container">
 			<div class="row align-items-center treatments-row">
 				<!-- Left Column: Counter & Active Image -->
 				<div class="col-lg-6 treatments-left-col">
