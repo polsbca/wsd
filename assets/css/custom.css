@@ -253,7 +253,7 @@ body {
 
 .hero-section {
   background-color: var(--light-bg);
-  padding: 100px 0 80px;
+  padding: 100px 0 0px;
   position: relative;
   overflow: hidden;
   min-height: calc(100vh - 215px);
@@ -269,6 +269,7 @@ body {
   top: 64.45%;
   z-index: 1;
   pointer-events: none;
+  display: none;
 }
 
 .hero-bg-waves {
@@ -284,6 +285,7 @@ body {
 
 .hero-content {
   margin-top: 0;
+  padding-bottom: 80px;
 }
 
 .hero-title {
@@ -397,9 +399,9 @@ body {
 }
 
 .btn-secondary:hover {
-  background-color: var(--white);
-  color: var(--dark-color);
-  border-color: var(--dark-color);
+  background-color: #d8a444;
+  color: var(--white);
+  border-color: #d8a444;
   text-decoration: none;
 }
 
@@ -408,6 +410,7 @@ body {
   height: 100%;
   display: flex;
   align-items: flex-end;
+  align-self: flex-end;
 }
 
 .hero-image-wrapper {
@@ -424,12 +427,12 @@ body {
   max-height: 100%;
   max-width: 100%;
   width: 100%;
-  height: 690px;
+  height: 100%;
   object-fit: cover;
   object-position: left center;
   border-radius: 0;
   box-shadow: none;
-  margin-bottom: -60px;
+  margin-bottom: 0px;
 }
 
 /* Call Us Side Tab */
@@ -464,6 +467,7 @@ body {
 .btn-call-us:hover {
   background-color: #c59435;
   box-shadow: 0 6px 16px rgba(216, 164, 68, 0.4);
+  text-decoration: none;
 }
 
 .phone-icon {
@@ -1071,7 +1075,12 @@ body {
   display: flex;
   gap: 110px;
 }
-
+@media (min-width: 1800px) {
+  .hero-img {
+    max-height: 90%;
+    max-width: 90%;
+  }
+}
 @media (min-width: 992px) {
   .treatments-row {
     flex-wrap: nowrap !important;
@@ -1087,8 +1096,9 @@ body {
 
 .treatments-left-col {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 18px;
+  height: stretch;
 }
 
 .treatments-interactive-wrapper {
@@ -1096,6 +1106,7 @@ body {
   align-items: center;
   gap: 18px;
   width: 100%;
+  height: 96%;
 }
 
 .treatment-slide-counter {
@@ -1241,6 +1252,12 @@ body {
 .includes-items span {
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
+  transition: all 0.25s;
+}
+.includes-items span:hover {
+  color: #d8a444;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .gold-underlined {
   color: #d8a444;
@@ -1276,9 +1293,9 @@ body {
 /* Responsive updates for Key Treatments */
 @media (min-width: 992px) {
   .treatment-image-frame {
-    height: auto !important;
+    height: 100% !important;
     aspect-ratio: 777.5 / 846 !important;
-    max-height: 846px !important;
+    max-height: 100% !important;
   }
 }
 
@@ -2025,7 +2042,8 @@ body {
   text-decoration: none;
   text-align: center;
   width: 489px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
   transition: all 0.3s ease;
   text-box-edge: cap alphabetic;
@@ -2034,8 +2052,8 @@ body {
 
 .btn-gallery-action:hover {
   border-color: #d8a444;
-  color: #d8a444;
-  background: rgba(216, 164, 68, 0.05);
+  color: #ffffff;
+  background: #d8a444;
   text-decoration: none;
 }
 
@@ -2234,7 +2252,8 @@ body {
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 24px;
-  color: #d8a444;
+  color: #5e5d5f;
+
   text-decoration: underline;
   letter-spacing: 0.96px;
   line-height: 44px;
@@ -2245,6 +2264,7 @@ body {
 
 .testimonials-rating-link:hover {
   opacity: 0.8;
+  color: #d8a444;
 }
 
 .testimonials-dot {
@@ -2674,8 +2694,8 @@ body {
 
 .dentist-tab-btn:hover {
   border-color: #d8a444;
-  color: #d8a444;
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #d8a444;
 }
 
 .dentist-tab-btn.active {
@@ -2842,7 +2862,7 @@ body {
 
 /* Hover state for the card background (deeper cream) */
 .payment-card:hover {
-  background-color: #eedfad;
+  background-color: #f6e9d2;
 }
 
 .payment-card-content {
