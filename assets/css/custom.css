@@ -2704,6 +2704,11 @@ body {
   color: #ffffff;
   font-weight: 700;
 }
+.dentist-tab-btn.active:hover {
+  border-color: #d8a444;
+  color: #d8a444;
+  background-color: #fff;
+}
 
 @media (max-width: 991px) {
   .principal-dentist-section {
