@@ -9,7 +9,9 @@
 
 /* Breakpoint: Mobile/Tablet (<992px) */
 @media (max-width: 991.98px) {
-    html, body {
+
+    html,
+    body {
         overflow-x: hidden !important;
         width: 100% !important;
     }
@@ -269,7 +271,7 @@
         background-color: #faf3e6;
         border-bottom: 1px solid rgba(216, 164, 68, 0.28);
         margin: 0;
-        padding: 0;
+        padding: 20px 28px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -280,7 +282,7 @@
         background-color: rgba(216, 164, 68, 0.2);
     }
 
-    .mobile-menu .menu-item > a {
+    .mobile-menu .menu-item>a {
         font-family: 'Montserrat', sans-serif;
         color: #5e5d5f;
         font-size: 16px;
@@ -293,7 +295,7 @@
         transition: color 0.3s ease;
     }
 
-    .mobile-menu .menu-item > a:hover {
+    .mobile-menu .menu-item>a:hover {
         color: #d8a444;
     }
 
@@ -306,7 +308,7 @@
         padding: 20px 28px;
     }
 
-    .menu-item-row > a {
+    .menu-item-row>a {
         font-family: 'Montserrat', sans-serif;
         color: #5e5d5f;
         font-size: 16px;
@@ -316,7 +318,7 @@
         transition: color 0.3s ease;
     }
 
-    .menu-item-row > a:hover {
+    .menu-item-row>a:hover {
         color: #d8a444;
     }
 
@@ -332,6 +334,7 @@
         box-shadow: none !important;
         -webkit-tap-highlight-color: transparent;
     }
+
     .submenu-toggle-btn:focus,
     .submenu-toggle-btn:active {
         outline: none !important;
@@ -534,9 +537,13 @@
         content: '+';
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
-        color: #d8a444;
+        color: #fffffe;
         transition: transform 0.3s ease;
         line-height: 1;
+    }
+
+    #colophon.site-footer .footer-nav-title.active {
+        border-bottom: none !important;
     }
 
     #colophon.site-footer .footer-nav-title.active::after {
@@ -894,12 +901,29 @@
         transform: translateY(0) !important;
     }
 
-    .key-treatments-section.mobile-visible .treatments-header-badge { transition-delay: 0s !important; }
-    .key-treatments-section.mobile-visible .treatments-left-col { transition-delay: 0.15s !important; }
-    .key-treatments-section.mobile-visible .accordion-tab:nth-child(1) { transition-delay: 0.3s !important; }
-    .key-treatments-section.mobile-visible .accordion-tab:nth-child(2) { transition-delay: 0.4s !important; }
-    .key-treatments-section.mobile-visible .accordion-tab:nth-child(3) { transition-delay: 0.5s !important; }
-    .key-treatments-section.mobile-visible .accordion-tab:nth-child(4) { transition-delay: 0.6s !important; }
+    .key-treatments-section.mobile-visible .treatments-header-badge {
+        transition-delay: 0s !important;
+    }
+
+    .key-treatments-section.mobile-visible .treatments-left-col {
+        transition-delay: 0.15s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(1) {
+        transition-delay: 0.3s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(2) {
+        transition-delay: 0.4s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(3) {
+        transition-delay: 0.5s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(4) {
+        transition-delay: 0.6s !important;
+    }
 
     /* 2. Testimonials Section */
     .testimonials-section .testimonials-header,
@@ -936,13 +960,33 @@
         transform: scale(1) !important;
     }
 
-    .testimonials-section.mobile-visible .testimonials-header { transition-delay: 0s !important; }
-    .testimonials-section.mobile-visible .left-quote { transition-delay: 0.2s !important; }
-    .testimonials-section.mobile-visible .right-quote { transition-delay: 0.2s !important; }
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title { transition-delay: 0.1s !important; }
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text { transition-delay: 0.2s !important; }
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars { transition-delay: 0.3s !important; }
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author { transition-delay: 0.4s !important; }
+    .testimonials-section.mobile-visible .testimonials-header {
+        transition-delay: 0s !important;
+    }
+
+    .testimonials-section.mobile-visible .left-quote {
+        transition-delay: 0.2s !important;
+    }
+
+    .testimonials-section.mobile-visible .right-quote {
+        transition-delay: 0.2s !important;
+    }
+
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title {
+        transition-delay: 0.1s !important;
+    }
+
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text {
+        transition-delay: 0.2s !important;
+    }
+
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars {
+        transition-delay: 0.3s !important;
+    }
+
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
+        transition-delay: 0.4s !important;
+    }
 
     /* 3. Principal Dentist Section */
     .principal-dentist-section .dentist-bg-wrapper {
@@ -999,10 +1043,21 @@
         transform: translateY(0) !important;
     }
 
-    .payment-options-section.mobile-visible .payment-header { transition-delay: 0s !important; }
-    .payment-options-section.mobile-visible .payment-card:nth-child(1) { transition-delay: 0.2s !important; }
-    .payment-options-section.mobile-visible .payment-card:nth-child(2) { transition-delay: 0.35s !important; }
-    .payment-options-section.mobile-visible .payment-card:nth-child(3) { transition-delay: 0.5s !important; }
+    .payment-options-section.mobile-visible .payment-header {
+        transition-delay: 0s !important;
+    }
+
+    .payment-options-section.mobile-visible .payment-card:nth-child(1) {
+        transition-delay: 0.2s !important;
+    }
+
+    .payment-options-section.mobile-visible .payment-card:nth-child(2) {
+        transition-delay: 0.35s !important;
+    }
+
+    .payment-options-section.mobile-visible .payment-card:nth-child(3) {
+        transition-delay: 0.5s !important;
+    }
 
     /* 5. Book Appointment Section */
     .book-appointment-section .book-appointment-bg {
@@ -1110,10 +1165,28 @@
     .accordion-tab-header {
         padding: 16px 0 !important;
         cursor: pointer;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .accordion-tab-header::after {
+        content: '+';
+        font-family: 'Montserrat', sans-serif;
+        font-size: 24px;
+        color: #d8a444;
+        transition: transform 0.3s ease;
+        line-height: 1;
+        font-weight: 400;
     }
 
     .accordion-tab.active .accordion-tab-header {
-        padding: 20px 0 0 0 !important;
+        padding: 20px 0 !important;
+    }
+
+    .accordion-tab.active .accordion-tab-header::after {
+        content: '\2013';
+        /* Minus sign */
     }
 
     .accordion-tab-title {
@@ -1124,13 +1197,14 @@
         line-height: normal !important;
         letter-spacing: -0.4px !important;
         transition: all 0.3s ease;
+        margin: 0 !important;
     }
 
     .accordion-tab.active .accordion-tab-title {
         font-size: 20px !important;
         font-weight: 600 !important;
         color: #5e5d5f !important;
-        margin-bottom: 20px !important;
+        margin: 0 !important;
         letter-spacing: -0.2px !important;
     }
 
@@ -1139,6 +1213,7 @@
     }
 
     .accordion-tab.active .accordion-tab-content {
+        padding-top: 10px !important;
         padding-bottom: 24px !important;
     }
 
@@ -1408,10 +1483,21 @@
         transform: translateY(0) !important;
     }
 
-    .about-waterside-section.mobile-visible .about-header-title { transition-delay: 0s !important; }
-    .about-waterside-section.mobile-visible .about-subtitle { transition-delay: 0.15s !important; }
-    .about-waterside-section.mobile-visible .about-description { transition-delay: 0.3s !important; }
-    .about-waterside-section.mobile-visible .about-right-col { transition-delay: 0.45s !important; }
+    .about-waterside-section.mobile-visible .about-header-title {
+        transition-delay: 0s !important;
+    }
+
+    .about-waterside-section.mobile-visible .about-subtitle {
+        transition-delay: 0.15s !important;
+    }
+
+    .about-waterside-section.mobile-visible .about-description {
+        transition-delay: 0.3s !important;
+    }
+
+    .about-waterside-section.mobile-visible .about-right-col {
+        transition-delay: 0.45s !important;
+    }
 
     /* Smile Gallery Mobile Layout */
     .smile-gallery-section {
@@ -1577,7 +1663,7 @@
         font-weight: 600 !important;
         color: #d8a444 !important;
         z-index: 5 !important;
-        box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05) !important;
     }
 
     .gallery-connecting-arrow {
@@ -1661,29 +1747,27 @@
     }
 
     .btn-gallery-action {
-        display: inline-block !important;
-        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 312px !important;
         max-width: none !important;
-        padding: 0 !important;
-        height: 42px !important;
-        line-height: 40px !important;
-        border-radius: 24px !important;
-        font-size: 14px !important;
+        padding: 16px !important;
+        height: 48px !important;
+        border-radius: 32px !important;
         opacity: 1 !important;
         transform: none !important;
         box-sizing: border-box !important;
-        text-align: center !important;
-        margin-top: 10px !important;
+        margin-top: 30px !important;
         border: 1px solid rgba(94, 93, 95, 0.52) !important;
         font-family: 'Montserrat', sans-serif !important;
         font-size: 14px !important;
         font-weight: 500 !important;
         color: rgba(94, 93, 95, 0.52) !important;
         text-decoration: none !important;
-        text-align: center !important;
-        width: 100% !important;
-        display: inline-block !important;
-        box-sizing: border-box !important;
+        text-box-trim: none !important;
+        text-box-edge: auto !important;
+        gap: 7.619px;
     }
 
     .gallery-scroll-indicator-container {
@@ -1734,10 +1818,21 @@
         transform: translateY(0) !important;
     }
 
-    .smile-gallery-section.mobile-visible .gallery-header-badge { transition-delay: 0s !important; }
-    .smile-gallery-section.mobile-visible .gallery-header-desc { transition-delay: 0.15s !important; }
-    .smile-gallery-section.mobile-visible .gallery-left-col { transition-delay: 0.3s !important; }
-    .smile-gallery-section.mobile-visible .gallery-right-col { transition-delay: 0.45s !important; }
+    .smile-gallery-section.mobile-visible .gallery-header-badge {
+        transition-delay: 0s !important;
+    }
+
+    .smile-gallery-section.mobile-visible .gallery-header-desc {
+        transition-delay: 0.15s !important;
+    }
+
+    .smile-gallery-section.mobile-visible .gallery-left-col {
+        transition-delay: 0.3s !important;
+    }
+
+    .smile-gallery-section.mobile-visible .gallery-right-col {
+        transition-delay: 0.45s !important;
+    }
 }
 
 /* ============================================================
@@ -1768,7 +1863,7 @@
     .testimonials-rating-badge {
         display: grid !important;
         grid-template-columns: max-content max-content !important;
-        grid-template-areas: 
+        grid-template-areas:
             "logo link"
             "title title";
         justify-content: center !important;
@@ -2161,7 +2256,7 @@
         border-top: 1px solid rgba(216, 164, 68, 0.2) !important;
         border-right: none !important;
         border-radius: 0 !important;
-        padding: 20px !important;
+        padding: 30px !important;
         height: auto !important;
         box-sizing: border-box !important;
         display: flex !important;
@@ -2414,10 +2509,12 @@
     }
 
     @keyframes spin {
-        0% { transform: translate(-50%, -50%) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg); }
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
     }
 }
-
-
-

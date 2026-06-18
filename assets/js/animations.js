@@ -531,7 +531,19 @@ function initTreatmentsAccordion() {
     tabs.forEach(tab => {
         const header = tab.querySelector('.accordion-tab-header');
         header.addEventListener('click', () => {
-            if (tab.classList.contains('active')) return;
+            const isMobile = window.innerWidth < 992;
+            if (tab.classList.contains('active')) {
+                if (isMobile) {
+                    tab.classList.remove('active');
+                    gsap.to(tab.querySelector('.accordion-tab-content'), {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: 'power3.inOut'
+                    });
+                }
+                return;
+            }
 
             const activeTab = document.querySelector('.accordion-tab.active');
 
