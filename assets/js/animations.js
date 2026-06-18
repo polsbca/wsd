@@ -504,6 +504,14 @@ function initAnimations() {
     
     // Initialize Principal Dentist Tabs for both desktop and mobile
     initDentistTabs();
+
+    // ----------------------------------------------------
+    // 9. Section Fade-Out on Scroll (Desktop only)
+    //    Each section fades + lifts out as the next scrolls in
+    // ----------------------------------------------------
+    if (isDesktop) {
+        initSectionFadeOut();
+    }
 }
 
 function initTreatmentsAccordion() {
@@ -955,5 +963,41 @@ function initPrincipalDentistAnimation() {
             ease: 'back.out(1.7)'
         }, '-=0.5');
     }
+}
+
+function initSectionFadeOut() {
+    // Sections that get a fade-out as they scroll away.
+    // The sticky About & Gallery sections are excluded because they manage
+    // their own scroll-bound ScrollTrigger behaviour.
+    const fadeOutSections = [
+        '.hero-section',
+        '.key-treatments-section',
+        '.testimonials-section',
+        '.principal-dentist-section',
+        '.payment-options-section',
+        '.book-appointment-section',
+    ];
+
+    fadeOutSections.forEach(selector => {
+        const el = document.querySelector(selector);
+        if (!el) return;
+
+        gsap.to(el, {
+            opacity: 0,
+            y: -50,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: el,
+                // Start fading when the bottom edge of the section is 65% down the viewport
+                start: 'bottom 65%',
+                // Fully faded out when the section's bottom reaches the top of the viewport
+                end: 'bottom top',
+                scrub: 1.2,
+                onEnterBack: () => {
+                    gsap.set(el, { clearProps: 'opacity,y' });
+                },
+            },
+        });
+    });
 }
 
