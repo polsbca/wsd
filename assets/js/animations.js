@@ -16,75 +16,123 @@ window.addEventListener('load', () => {
 });
 
 function initAnimations() {
+    const isDesktop = window.innerWidth >= 992;
+
     // ----------------------------------------------------
     // 1. Initial State Setup (Prevents abrupt jumps on load)
+    //    Desktop only — mobile uses CSS transitions via .mobile-visible
     // ----------------------------------------------------
-    gsap.set('.header-top, #masthead.site-header, .mobile-header', { y: -50, opacity: 0 });
-    gsap.set('.hero-title, .hero-description', { y: 30, opacity: 0 });
-    gsap.set('.hero-buttons .btn', { y: 20, opacity: 0 });
-    gsap.set('.stat', { y: 20, opacity: 0 });
-    gsap.set('.hero-image-wrapper', { x: 50, opacity: 0, scale: 0.95 });
-    gsap.set('.call-us-tab', { x: 50, opacity: 0 });
+    if (isDesktop) {
+        gsap.set('.header-top, #masthead.site-header', { y: -50, opacity: 0 });
+        gsap.set('.hero-title, .hero-description', { y: 30, opacity: 0 });
+        gsap.set('.hero-buttons .btn', { y: 20, opacity: 0 });
+        gsap.set('.stat', { y: 20, opacity: 0 });
+        gsap.set('.hero-image-wrapper', { x: 50, opacity: 0, scale: 0.95 });
+        gsap.set('.call-us-tab', { x: 50, opacity: 0 });
+    }
 
     // ----------------------------------------------------
     // 2. Entrance Animation Timeline (Page Load)
+    //    Desktop: full GSAP timeline. Mobile: lightweight fade-in.
     // ----------------------------------------------------
-    const mainTimeline = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+    if (isDesktop) {
+        const mainTimeline = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
 
-    mainTimeline
-        // Fade & Slide in Header Top and Main Navigation
-        .to('.header-top, .mobile-header', { y: 0, opacity: 1, duration: 0.8 })
-        .to('#masthead.site-header', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
+        mainTimeline
+            // Fade & Slide in Header Top and Main Navigation
+            .to('.header-top', { y: 0, opacity: 1, duration: 0.8 })
+            .to('#masthead.site-header', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
 
-        // Reveal Hero Text
-        .to('.hero-title', { y: 0, opacity: 1, duration: 0.8 }, '-=0.4')
-        .to('.hero-description', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
+            // Reveal Hero Text
+            .to('.hero-title', { y: 0, opacity: 1, duration: 0.8 }, '-=0.4')
+            .to('.hero-description', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
 
-        // Stagger Hero Buttons
-        .to('.hero-buttons .btn', {
-            y: 0,
-            opacity: 1,
-            stagger: 0.15,
-            duration: 0.6,
-            ease: 'back.out(1.7)'
-        }, '-=0.5')
+            // Stagger Hero Buttons
+            .to('.hero-buttons .btn', {
+                y: 0,
+                opacity: 1,
+                stagger: 0.15,
+                duration: 0.6,
+                ease: 'back.out(1.7)'
+            }, '-=0.5')
 
-        // Stagger Stats wrapper and items
-        .to('.stat', {
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-            duration: 0.6
-        }, '-=0.4')
+            // Stagger Stats wrapper and items
+            .to('.stat', {
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                duration: 0.6
+            }, '-=0.4')
 
-        // Animate Hero Image and Call Tab
-        .to('.hero-image-wrapper', {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: 'power4.out'
-        }, '-=0.8')
-        .to('.call-us-tab', {
-            x: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'back.out(1.7)'
-        }, '-=0.6');
+            // Animate Hero Image and Call Tab
+            .to('.hero-image-wrapper', {
+                x: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 1.2,
+                ease: 'power4.out'
+            }, '-=0.8')
+            .to('.call-us-tab', {
+                x: 0,
+                opacity: 1,
+                duration: 0.6,
+                ease: 'back.out(1.7)'
+            }, '-=0.6');
+    } else {
+        // Mobile: simple entrance animation for hero elements
+        // Use a lightweight GSAP timeline that won't conflict with CSS mobile-visible transitions
+        gsap.set('.mobile-header', { y: -30, opacity: 0 });
+        gsap.set('.hero-title, .hero-description', { y: 20, opacity: 0 });
+        gsap.set('.hero-buttons .btn', { y: 15, opacity: 0 });
+        gsap.set('.stat', { y: 15, opacity: 0 });
+        gsap.set('.hero-image-wrapper', { y: 30, opacity: 0 });
+        gsap.set('.call-us-tab', { opacity: 0 });
+
+        const mobileTl = gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.6 } });
+
+        mobileTl
+            .to('.mobile-header', { y: 0, opacity: 1, duration: 0.5 })
+            .to('.hero-title', { y: 0, opacity: 1 }, '-=0.3')
+            .to('.hero-description', { y: 0, opacity: 1 }, '-=0.4')
+            .to('.hero-buttons .btn', {
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                duration: 0.4
+            }, '-=0.3')
+            .to('.stat', {
+                y: 0,
+                opacity: 1,
+                stagger: 0.08,
+                duration: 0.4
+            }, '-=0.3')
+            .to('.hero-image-wrapper', {
+                y: 0,
+                opacity: 1,
+                duration: 0.6
+            }, '-=0.3')
+            .to('.call-us-tab', {
+                opacity: 1,
+                duration: 0.4
+            }, '-=0.3');
+    }
 
     // ----------------------------------------------------
-    // 3. Floating Micro-interaction for Hero Image
+    // 3. Floating Micro-interaction for Hero Image (Desktop only)
+    //    On mobile this causes layout jitter and fights CSS transforms
     // ----------------------------------------------------
-    const heroImg = document.querySelector('.hero-img');
-    if (heroImg) {
-        gsap.to(heroImg, {
-            y: -15,
-            duration: 3,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            delay: 1.5 // Start after entrance animation finishes
-        });
+    if (isDesktop) {
+        const heroImg = document.querySelector('.hero-img');
+        if (heroImg) {
+            gsap.to(heroImg, {
+                y: -15,
+                duration: 3,
+                ease: 'sine.inOut',
+                repeat: -1,
+                yoyo: true,
+                delay: 1.5
+            });
+        }
     }
 
     // ----------------------------------------------------
@@ -142,7 +190,7 @@ function initAnimations() {
     // 7. Sticky About Waterside Section Image Scroll
     // ----------------------------------------------------
     const aboutSection = document.querySelector('.about-waterside-section');
-    if (aboutSection && window.innerWidth >= 992) {
+    if (aboutSection && isDesktop) {
         const handle = document.querySelector('.about-scroll-indicator-handle');
         const container = document.querySelector('.about-scroll-indicator-container');
         const images = document.querySelectorAll('.about-scroll-img');
@@ -305,7 +353,7 @@ function initAnimations() {
 
     // Entrance animation for treatments section elements in a single staggered timeline (same style as About section)
     // Only on desktop — mobile uses CSS transitions + IntersectionObserver in responsive.js
-    if (window.innerWidth >= 992) {
+    if (isDesktop) {
         const treatmentsTl = gsap.timeline({
             scrollTrigger: {
                 trigger: '.treatments-header-badge',
@@ -339,7 +387,7 @@ function initAnimations() {
     // 8. Sticky Smile Gallery Section Scroll
     // ----------------------------------------------------
     const gallerySection = document.querySelector('.smile-gallery-section');
-    if (gallerySection && window.innerWidth >= 992) {
+    if (gallerySection && isDesktop) {
         const handle = document.querySelector('.gallery-scroll-indicator-handle');
         const container = document.querySelector('.gallery-scroll-indicator-container');
         const slides = document.querySelectorAll('.gallery-slide');
