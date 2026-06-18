@@ -24,9 +24,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .px-lg-120 {
   padding-inline: 120px;
 }
+
 /* ============================================================
    HEADER STYLES
    ============================================================ */
@@ -139,14 +141,16 @@ body {
 }
 
 .main-navigation a:hover,
-.main-navigation .current-menu-item > a {
+.main-navigation .current-menu-item>a {
   color: var(--primary-color);
   font-weight: 700;
 }
+
 .main-navigation a:hover,
 .main-navigation a:focus {
   background-color: transparent;
 }
+
 .main-navigation .current-menu-item {
   display: flex;
   flex-direction: column;
@@ -789,9 +793,11 @@ body {
   text-transform: none;
   margin-top: 0;
 }
+
 .footer-nav-list {
   margin-bottom: 0;
 }
+
 .footer-nav-list li {
   margin-bottom: 20px;
   line-height: 100%;
@@ -853,6 +859,7 @@ body {
 .footer-brand {
   text-align: left;
 }
+
 /* Footer Middle Row */
 .footer-middle-row {
   padding: 0;
@@ -890,29 +897,30 @@ body {
 
 /* Prevent browser autofill white background override */
 #colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill,
-#colophon.site-footer
-  input[type="email"].subscribe-input:-webkit-autofill:hover,
-#colophon.site-footer
-  input[type="email"].subscribe-input:-webkit-autofill:focus,
-#colophon.site-footer
-  input[type="email"].subscribe-input:-webkit-autofill:active {
+#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:hover,
+#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:focus,
+#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 20px 20px #2b2b2c !important;
 }
+
 #colophon.site-footer input[type="email"].subscribe-input:focus {
   border-bottom-color: var(--primary-color) !important;
 }
+
 .subscribe-line-wrapper {
   width: 100%;
   max-width: 652px;
   margin-top: 4px;
 }
+
 .subscribe-input-wrapper {
   min-width: 490px;
   text-align: left;
 }
+
 .subscribe-line-img {
   width: 100%;
   height: auto;
@@ -1075,12 +1083,14 @@ body {
   display: flex;
   gap: 110px;
 }
+
 @media (min-width: 1800px) {
   .hero-img {
     max-height: 90%;
     max-width: 90%;
   }
 }
+
 @media (min-width: 992px) {
   .treatments-row {
     flex-wrap: nowrap !important;
@@ -1249,16 +1259,19 @@ body {
   letter-spacing: 1px;
   line-height: normal;
 }
+
 .includes-items span {
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
   transition: all 0.25s;
 }
+
 .includes-items span:hover {
   color: #d8a444;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
 .gold-underlined {
   color: #d8a444;
   text-decoration: underline;
@@ -2599,11 +2612,9 @@ body {
 .dentist-gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    270deg,
-    rgba(43, 43, 44, 0) 0%,
-    rgba(43, 43, 44, 0.8) 100%
-  );
+  background: linear-gradient(270deg,
+      rgba(43, 43, 44, 0) 0%,
+      rgba(43, 43, 44, 0.8) 100%);
   z-index: 3;
 }
 
@@ -2704,6 +2715,7 @@ body {
   color: #ffffff;
   font-weight: 700;
 }
+
 .dentist-tab-btn.active:hover {
   border-color: #d8a444;
   color: #d8a444;
@@ -2728,11 +2740,9 @@ body {
   }
 
   .dentist-gradient-overlay {
-    background: linear-gradient(
-      to top,
-      #faf3e6 0%,
-      rgba(250, 243, 230, 0) 100%
-    );
+    background: linear-gradient(to top,
+        #faf3e6 0%,
+        rgba(250, 243, 230, 0) 100%);
   }
 
   .principal-dentist-section {
@@ -2933,9 +2943,11 @@ body {
   color: #ffffff;
   text-decoration: none;
 }
+
 .payment-btn:hover {
   text-decoration: none;
 }
+
 /* Responsive adjustments */
 @media (max-width: 1440px) {
   .payment-options-container {
