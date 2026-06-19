@@ -247,6 +247,7 @@ get_header();
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 
 	<!-- Smile Gallery Section -->
@@ -668,7 +669,6 @@ get_header();
 				</div>
 			</div>
 		</div>
-	</section>
 	</section>
 
 	<!-- Book an Appointment CTA Section -->

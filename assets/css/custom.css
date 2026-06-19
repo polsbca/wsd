@@ -11,6 +11,12 @@
   --font-family-secondary: "Open Sans", sans-serif;
 }
 
+html,
+body {
+  overflow-x: clip;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-family-primary);
   color: var(--dark-color);
@@ -115,7 +121,8 @@ body {
   align-items: center;
   margin-bottom: 0;
   box-shadow: none;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 9999;
 }
 
@@ -3209,5 +3216,89 @@ body {
 
   .book-appointment-content {
     gap: 30px;
+  }
+}
+
+/* ============================================================
+   DESKTOP SECTION SCROLL PINNING (Same logic as mobile version)
+   ============================================================ */
+@media (min-width: 992px) {
+  .key-treatments-section,
+  .about-waterside-section,
+  .smile-gallery-section,
+  .testimonials-section,
+  .principal-dentist-section,
+  .payment-options-section {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .key-treatments-section {
+    height: 1800px !important;
+  }
+  .about-waterside-section {
+    height: 1800px !important;
+  }
+  .smile-gallery-section {
+    height: 2000px !important;
+  }
+  .testimonials-section {
+    height: 1600px !important;
+  }
+  .principal-dentist-section {
+    height: 1600px !important;
+    display: block !important;
+  }
+  .payment-options-section {
+    height: 1600px !important;
+    display: block !important;
+  }
+
+  .treatments-sticky-wrapper,
+  .about-sticky-wrapper,
+  .gallery-sticky-wrapper {
+    position: sticky !important;
+    top: 81px !important; /* height of sticky desktop navigation header */
+    height: calc(100vh - 81px) !important;
+    width: 100% !important;
+    z-index: 998 !important;
+  }
+
+  .dentist-sticky-wrapper {
+    position: sticky !important;
+    top: 81px !important;
+    height: calc(100vh - 81px) !important;
+    width: 100% !important;
+    z-index: 998 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .payment-sticky-wrapper {
+    position: sticky !important;
+    top: 81px !important;
+    height: calc(100vh - 81px) !important;
+    width: 100% !important;
+    z-index: 998 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .testimonials-sticky-wrapper {
+    position: sticky !important;
+    top: 81px !important;
+    height: calc(100vh - 81px) !important;
+    width: 100% !important;
+    z-index: 998 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .testimonials-container {
+    width: 100% !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
   }
 }
