@@ -2808,14 +2808,15 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background-color: #faf3e6;
+  border-radius: 58px;
+  overflow: hidden;
 }
 
 .payment-header {
   background-color: #faf3e6;
   border-bottom: 1px solid rgba(216, 164, 68, 0.2);
   padding: 80px 90px;
-  border-top-left-radius: 58px;
-  border-top-right-radius: 58px;
   display: flex;
   flex-direction: column;
   gap: 44px;
@@ -2865,7 +2866,7 @@ body {
   justify-content: space-between;
   gap: 90px;
   padding: 100px 60px;
-  height: 100%;
+  height: auto;
   box-sizing: border-box;
   border-right: 1px solid rgba(216, 164, 68, 0.2);
   transition: background-color 0.4s ease;
@@ -2873,14 +2874,6 @@ body {
 
 .payment-card:last-child {
   border-right: none;
-}
-
-.payment-card.border-left-round {
-  border-bottom-left-radius: 58px;
-}
-
-.payment-card.border-right-round {
-  border-bottom-right-radius: 58px;
 }
 
 /* Hover state for the card background (deeper cream) */
