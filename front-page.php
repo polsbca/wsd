@@ -73,120 +73,134 @@ get_header();
 
 	<!-- Our Key Treatments Section -->
 	<section class="key-treatments-section">
-		<div class="treatments-header-badge">
-			<h2 class="treatments-header-title">Our Key <span class="accent">Treatments</span></h2>
-		</div>
+		<div class="treatments-sticky-wrapper">
+			<div class="treatments-header-badge">
+				<h2 class="treatments-header-title">Our Key <span class="accent">Treatments</span></h2>
+			</div>
 
-		<div class="container-fluid px-lg-120 treatments-main-container">
-			<div class="row align-items-center treatments-row">
-				<!-- Left Column: Counter & Active Image -->
-				<div class="col-lg-6 treatments-left-col">
-					<div class="treatments-interactive-wrapper">
-						<div class="treatment-slide-counter">
-							<span class="active-slide">01</span>
-							<span class="total-slides">/ 04</span>
-						</div>
-						<div class="treatment-image-frame">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/general-dentistry.png' ); ?>" alt="General Dentistry" class="active-treatment-image">
+			<div class="container-fluid px-lg-120 treatments-main-container">
+				<div class="row align-items-center treatments-row">
+					<!-- Left Column: Counter & Active Image -->
+					<div class="col-lg-6 treatments-left-col">
+						<div class="treatments-interactive-wrapper">
+							<div class="treatment-slide-counter">
+								<span class="active-slide">01</span>
+								<span class="total-slides">/ 04</span>
+							</div>
+							<div class="treatment-image-frame">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/general-dentistry.png' ); ?>" alt="General Dentistry" class="active-treatment-image">
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- Right Column: Interactive Accordion/Tabs -->
-				<div class="col-lg-6 treatments-right-col">
-					<div class="treatment-accordion-wrapper">
-						
-						<!-- Tab 1: General Dentistry -->
-						<div class="accordion-tab active" data-index="01" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/general-dentistry.png' ); ?>">
-							<div class="accordion-tab-header">
-								<h3 class="accordion-tab-title">General Dentistry</h3>
-							</div>
-							<div class="accordion-tab-content">
-								<p class="tab-desc">From routine hygiene to nervous patient care — we provide everything you need to maintain a healthy, confident smile with our comfort-first approach.</p>
-								<div class="tab-includes-wrapper">
-									<p class="includes-label">General Dentistry Includes:</p>
-									<div class="includes-items">
-										<span>Hygiene</span>
-										<span>Oral Health</span>
-										<span>Nervous patients</span>
-										<span>Fillings</span>
-										<span>Crowns</span>
-										<span>Bridges</span>
-										<span class="gold-underlined">Dentures</span>
+					<!-- Right Column: Interactive Accordion/Tabs -->
+					<div class="col-lg-6 treatments-right-col">
+						<div class="treatment-accordion-wrapper">
+							
+							<!-- Tab 1: General Dentistry -->
+							<div class="accordion-tab active" data-index="01" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/general-dentistry.png' ); ?>">
+								<div class="accordion-tab-header">
+									<h3 class="accordion-tab-title">General Dentistry</h3>
+								</div>
+								<div class="accordion-tab-content">
+									<div class="mobile-treatment-image-wrapper d-lg-none">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/general-dentistry.png' ); ?>" alt="General Dentistry" class="mobile-treatment-img">
+									</div>
+									<p class="tab-desc">From routine hygiene to nervous patient care — we provide everything you need to maintain a healthy, confident smile with our comfort-first approach.</p>
+									<div class="tab-includes-wrapper">
+										<p class="includes-label">General Dentistry Includes:</p>
+										<div class="includes-items">
+											<span>Hygiene</span>
+											<span>Oral Health</span>
+											<span>Nervous patients</span>
+											<span>Fillings</span>
+											<span>Crowns</span>
+											<span>Bridges</span>
+											<span class="gold-underlined">Dentures</span>
+										</div>
+									</div>
+									<div class="tab-button-wrapper">
+										<a href="#general-dentistry" class="btn btn-primary tab-action-btn">View General Dentistry</a>
 									</div>
 								</div>
-								<div class="tab-button-wrapper">
-									<a href="#general-dentistry" class="btn btn-primary tab-action-btn">View General Dentistry</a>
-								</div>
 							</div>
-						</div>
 
-						<!-- Tab 2: Cosmetic Dentistry -->
-						<div class="accordion-tab" data-index="02" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cosmetic-dentistry.png' ); ?>">
-							<div class="accordion-tab-header">
-								<h3 class="accordion-tab-title">Cosmetic Dentistry</h3>
-							</div>
-							<div class="accordion-tab-content">
-								<p class="tab-desc">Transform your smile with our advanced cosmetic treatments. From teeth whitening to complete smile makeovers, we create natural-looking results that boost your confidence.</p>
-								<div class="tab-includes-wrapper">
-									<p class="includes-label">Cosmetic Dentistry Includes:</p>
-									<div class="includes-items">
-										<span>Whitening</span>
-										<span>Straightening</span>
-										<span>Smile Make Over</span>
-										<span class="gold-underlined">Veneers</span>
+							<!-- Tab 2: Cosmetic Dentistry -->
+							<div class="accordion-tab" data-index="02" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cosmetic-dentistry.png' ); ?>">
+								<div class="accordion-tab-header">
+									<h3 class="accordion-tab-title">Cosmetic Dentistry</h3>
+								</div>
+								<div class="accordion-tab-content">
+									<div class="mobile-treatment-image-wrapper d-lg-none">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cosmetic-dentistry.png' ); ?>" alt="Cosmetic Dentistry" class="mobile-treatment-img">
+									</div>
+									<p class="tab-desc">Transform your smile with our advanced cosmetic treatments. From teeth whitening to complete smile makeovers, we create natural-looking results that boost your confidence.</p>
+									<div class="tab-includes-wrapper">
+										<p class="includes-label">Cosmetic Dentistry Includes:</p>
+										<div class="includes-items">
+											<span>Whitening</span>
+											<span>Straightening</span>
+											<span>Smile Make Over</span>
+											<span class="gold-underlined">Veneers</span>
+										</div>
+									</div>
+									<div class="tab-button-wrapper">
+										<a href="#cosmetic-dentistry" class="btn btn-primary tab-action-btn">View Cosmetic Dentistry</a>
 									</div>
 								</div>
-								<div class="tab-button-wrapper">
-									<a href="#cosmetic-dentistry" class="btn btn-primary tab-action-btn">View Cosmetic Dentistry</a>
-								</div>
 							</div>
-						</div>
 
-						<!-- Tab 3: Dental Implants -->
-						<div class="accordion-tab" data-index="03" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dental-implants.png' ); ?>">
-							<div class="accordion-tab-header">
-								<h3 class="accordion-tab-title">Dental Implants</h3>
-							</div>
-							<div class="accordion-tab-content">
-								<p class="tab-desc">Restore your smile and chew with confidence again. Our premium dental implants provide a permanent, natural-looking solution for missing teeth, customized to your oral health.</p>
-								<div class="tab-includes-wrapper">
-									<p class="includes-label">Dental Implants Includes:</p>
-									<div class="includes-items">
-										<span>Single Implants</span>
-										<span>Multiple Implants</span>
-										<span>All-on-4</span>
-										<span class="gold-underlined">Implant Bridges</span>
+							<!-- Tab 3: Dental Implants -->
+							<div class="accordion-tab" data-index="03" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dental-implants.png' ); ?>">
+								<div class="accordion-tab-header">
+									<h3 class="accordion-tab-title">Dental Implants</h3>
+								</div>
+								<div class="accordion-tab-content">
+									<div class="mobile-treatment-image-wrapper d-lg-none">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dental-implants.png' ); ?>" alt="Dental Implants" class="mobile-treatment-img">
+									</div>
+									<p class="tab-desc">Restore your smile and chew with confidence again. Our premium dental implants provide a permanent, natural-looking solution for missing teeth, customized to your oral health.</p>
+									<div class="tab-includes-wrapper">
+										<p class="includes-label">Dental Implants Includes:</p>
+										<div class="includes-items">
+											<span>Single Implants</span>
+											<span>Multiple Implants</span>
+											<span>All-on-4</span>
+											<span class="gold-underlined">Implant Bridges</span>
+										</div>
+									</div>
+									<div class="tab-button-wrapper">
+										<a href="#dental-implants" class="btn btn-primary tab-action-btn">View Dental Implants</a>
 									</div>
 								</div>
-								<div class="tab-button-wrapper">
-									<a href="#dental-implants" class="btn btn-primary tab-action-btn">View Dental Implants</a>
-								</div>
 							</div>
-						</div>
 
-						<!-- Tab 4: Invisalign -->
-						<div class="accordion-tab" data-index="04" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/invisalign.png' ); ?>">
-							<div class="accordion-tab-header">
-								<h3 class="accordion-tab-title">Invisalign</h3>
-							</div>
-							<div class="accordion-tab-content">
-								<p class="tab-desc">Straighten your teeth discreetly with Invisalign clear aligners. Enjoy a comfortable, removable orthodontic solution designed to fit seamlessly into your active lifestyle.</p>
-								<div class="tab-includes-wrapper">
-									<p class="includes-label">Invisalign Includes:</p>
-									<div class="includes-items">
-										<span>Clear Aligners</span>
-										<span>Consultations</span>
-										<span>Teen Invisalign</span>
-										<span class="gold-underlined">Retainers</span>
+							<!-- Tab 4: Invisalign -->
+							<div class="accordion-tab" data-index="04" data-image="<?php echo esc_url( get_template_directory_uri() . '/assets/images/invisalign.png' ); ?>">
+								<div class="accordion-tab-header">
+									<h3 class="accordion-tab-title">Invisalign</h3>
+								</div>
+								<div class="accordion-tab-content">
+									<div class="mobile-treatment-image-wrapper d-lg-none">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/invisalign.png' ); ?>" alt="Invisalign" class="mobile-treatment-img">
+									</div>
+									<p class="tab-desc">Straighten your teeth discreetly with Invisalign clear aligners. Enjoy a comfortable, removable orthodontic solution designed to fit seamlessly into your active lifestyle.</p>
+									<div class="tab-includes-wrapper">
+										<p class="includes-label">Invisalign Includes:</p>
+										<div class="includes-items">
+											<span>Clear Aligners</span>
+											<span>Consultations</span>
+											<span>Teen Invisalign</span>
+											<span class="gold-underlined">Retainers</span>
+										</div>
+									</div>
+									<div class="tab-button-wrapper">
+										<a href="#invisalign" class="btn btn-primary tab-action-btn">View Invisalign</a>
 									</div>
 								</div>
-								<div class="tab-button-wrapper">
-									<a href="#invisalign" class="btn btn-primary tab-action-btn">View Invisalign</a>
-								</div>
 							</div>
-						</div>
 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -457,133 +471,137 @@ get_header();
 
 	<!-- Testimonials Section -->
 	<section class="testimonials-section" id="testimonials">
-		<div class="testimonials-container">
-			<!-- Header -->
-			<div class="testimonials-header">
-				<div class="testimonials-rating-badge">
-					<span class="google-logo-wrapper">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/google.svg' ); ?>" alt="Google" class="google-logo-img">
-					</span>
-					<a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="testimonials-rating-link">4.9/5 Rating</a>
-					<span class="testimonials-dot">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dot-sep.svg' ); ?>" alt="" class="dot-separator-img">
-					</span>
-					<span class="testimonials-header-title">What Our Patients think</span>
+		<div class="testimonials-sticky-wrapper">
+			<div class="testimonials-container">
+				<!-- Header -->
+				<div class="testimonials-header">
+					<div class="testimonials-rating-badge">
+						<span class="google-logo-wrapper">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/google.svg' ); ?>" alt="Google" class="google-logo-img">
+						</span>
+						<a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="testimonials-rating-link">4.9/5 Rating</a>
+						<span class="testimonials-dot">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dot-sep.svg' ); ?>" alt="" class="dot-separator-img">
+						</span>
+						<span class="testimonials-header-title">What Our Patients think</span>
+					</div>
+					<div class="testimonials-nav-buttons">
+						<button class="testimonials-nav-btn prev-btn" aria-label="Previous testimonial">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous" class="nav-btn-img">
+						</button>
+						<button class="testimonials-nav-btn next-btn" aria-label="Next testimonial">
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/right_arrow.svg' ); ?>" alt="Next" class="nav-btn-img">
+						</button>
+					</div>
 				</div>
-				<div class="testimonials-nav-buttons">
-					<button class="testimonials-nav-btn prev-btn" aria-label="Previous testimonial">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous" class="nav-btn-img">
-					</button>
-					<button class="testimonials-nav-btn next-btn" aria-label="Next testimonial">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/right_arrow.svg' ); ?>" alt="Next" class="nav-btn-img">
-					</button>
+
+				<!-- Testimonial Slider Body -->
+				<div class="testimonials-content-row">
+					<div class="testimonial-quote-mark left-quote">“</div>
+					
+					<div class="testimonials-slider">
+						<!-- Slide 1 -->
+						<div class="testimonial-slide active" data-index="0">
+							<h3 class="testimonial-title">A Confident Smile I’m Proud Of</h3>
+							<p class="testimonial-text">The care was exceptional from start to finish. I felt completely at ease, and my smile has never looked better.</p>
+							<div class="testimonial-stars">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+							</div>
+							<p class="testimonial-author">Emily Carter</p>
+						</div>
+
+						<!-- Slide 2 -->
+						<div class="testimonial-slide" data-index="1">
+							<h3 class="testimonial-title">A Smile I Finally Feel Proud Of</h3>
+							<p class="testimonial-text">I'd been hiding my teeth for years. After my treatment at Waterside, I genuinely cannot stop smiling. The results are beyond what I imagined.</p>
+							<div class="testimonial-stars">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+							</div>
+							<p class="testimonial-author">Sara Mitchel</p>
+						</div>
+
+						<!-- Slide 3 -->
+						<div class="testimonial-slide" data-index="2">
+							<h3 class="testimonial-title">The Most Relaxed I've Ever Felt at a Dentist</h3>
+							<p class="testimonial-text">I'm a nervous patient and have avoided dentists for years. The team at Waterside made me feel completely safe from the very first visit.</p>
+							<div class="testimonial-stars">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+							</div>
+							<p class="testimonial-author">James Thornton</p>
+						</div>
+
+						<!-- Slide 4 -->
+						<div class="testimonial-slide" data-index="3">
+							<h3 class="testimonial-title">Worth Every Single Penny</h3>
+							<p class="testimonial-text">I saved up for my Invisalign and I would do it all over again. Dr Andrew is exceptional — professional, patient and genuinely passionate about his work.</p>
+							<div class="testimonial-stars">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+							</div>
+							<p class="testimonial-author">Priya Sharma</p>
+						</div>
+					</div>
+
+					<div class="testimonial-quote-mark right-quote">”</div>
 				</div>
 			</div>
 
-			<!-- Testimonial Slider Body -->
-			<div class="testimonials-content-row">
-				<div class="testimonial-quote-mark left-quote">“</div>
-				
-				<div class="testimonials-slider">
-					<!-- Slide 1 -->
-					<div class="testimonial-slide active" data-index="0">
-						<h3 class="testimonial-title">My Confidence Has Completely Changed</h3>
-						<p class="testimonial-text">The composite bonding took one appointment. One. I walked out looking like a completely different person — in the best possible way.</p>
-						<div class="testimonial-stars">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-						</div>
-						<p class="testimonial-author">Tom Hargreaves</p>
-					</div>
-
-					<!-- Slide 2 -->
-					<div class="testimonial-slide" data-index="1">
-						<h3 class="testimonial-title">A Smile I Finally Feel Proud Of</h3>
-						<p class="testimonial-text">I'd been hiding my teeth for years. After my treatment at Waterside, I genuinely cannot stop smiling. The results are beyond what I imagined.</p>
-						<div class="testimonial-stars">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-						</div>
-						<p class="testimonial-author">Sara Mitchel</p>
-					</div>
-
-					<!-- Slide 3 -->
-					<div class="testimonial-slide" data-index="2">
-						<h3 class="testimonial-title">The Most Relaxed I've Ever Felt at a Dentist</h3>
-						<p class="testimonial-text">I'm a nervous patient and have avoided dentists for years. The team at Waterside made me feel completely safe from the very first visit.</p>
-						<div class="testimonial-stars">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-						</div>
-						<p class="testimonial-author">James Thornton</p>
-					</div>
-
-					<!-- Slide 4 -->
-					<div class="testimonial-slide" data-index="3">
-						<h3 class="testimonial-title">Worth Every Single Penny</h3>
-						<p class="testimonial-text">I saved up for my Invisalign and I would do it all over again. Dr Andrew is exceptional — professional, patient and genuinely passionate about his work.</p>
-						<div class="testimonial-stars">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-						</div>
-						<p class="testimonial-author">Priya Sharma</p>
-					</div>
-				</div>
-
-				<div class="testimonial-quote-mark right-quote">”</div>
+			<!-- Progress Bar Indicator at bottom -->
+			<div class="testimonials-progress-track">
+				<div class="testimonials-progress-bar"></div>
 			</div>
-		</div>
-
-		<!-- Progress Bar Indicator at bottom -->
-		<div class="testimonials-progress-track">
-			<div class="testimonials-progress-bar"></div>
 		</div>
 	</section>
 
 	<!-- Principal Dentist Section -->
 	<section class="principal-dentist-section" id="principal-dentist">
-		<!-- Background Images for Tabs -->
-		<div class="dentist-bg-wrapper">
-			<div class="dentist-bg-img active" data-tab="1">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/anddruw.webp' ); ?>" alt="Dr Andrew Parashchak" class="dentist-img-tag tab1-img">
-			</div>
-			<div class="dentist-bg-img" data-tab="2">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/team.webp' ); ?>" alt="Waterside Team" class="dentist-img-tag tab2-img">
-			</div>
-			<div class="dentist-gradient-overlay"></div>
-		</div>
-
-		<!-- Content Wrapper -->
-		<div class="dentist-content-container">
-			<div class="dentist-content-inner">
-				<h2 class="dentist-section-title">Our Principal Dentist</h2>
-				
-				<!-- Description block that swaps contents -->
-				<div class="dentist-desc-wrapper">
-					<div class="dentist-desc-text active" data-tab="1">
-						<p>As the Principal Dentist at Waterside Dental Care, Dr Andrew Parashchak brings over 15 years of experience in cosmetic and restorative dentistry. Known for his calm approach and attention to detail, he is dedicated to providing expert, personalised care that patients can trust.</p>
-					</div>
-					<div class="dentist-desc-text" data-tab="2">
-						<p>At Waterside, great dentistry is a team effort. From our treatment coordinator Kim who puts nervous patients at ease, to our skilled hygienists and support staff — every member of our team is here to make your experience as comfortable and positive as it can be.</p>
-					</div>
+		<div class="dentist-sticky-wrapper">
+			<!-- Background Images for Tabs -->
+			<div class="dentist-bg-wrapper">
+				<div class="dentist-bg-img active" data-tab="1">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/anddruw.webp' ); ?>" alt="Dr Andrew Parashchak" class="dentist-img-tag tab1-img">
 				</div>
+				<div class="dentist-bg-img" data-tab="2">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/team.webp' ); ?>" alt="Waterside Team" class="dentist-img-tag tab2-img">
+				</div>
+				<div class="dentist-gradient-overlay"></div>
+			</div>
 
-				<!-- Tab Navigation Buttons -->
-				<div class="dentist-tabs-nav">
-					<button class="dentist-tab-btn active" data-target="1">More about Andrew</button>
-					<button class="dentist-tab-btn" data-target="2">Meet the Team</button>
+			<!-- Content Wrapper -->
+			<div class="dentist-content-container">
+				<div class="dentist-content-inner">
+					<h2 class="dentist-section-title">Our Principal Dentist</h2>
+					
+					<!-- Description block that swaps contents -->
+					<div class="dentist-desc-wrapper">
+						<div class="dentist-desc-text active" data-tab="1">
+							<p>As the Principal Dentist at Waterside Dental Care, Dr Andrew Parashchak brings over 15 years of experience in cosmetic and restorative dentistry. Known for his calm approach and attention to detail, he is dedicated to providing expert, personalised care that patients can trust.</p>
+						</div>
+						<div class="dentist-desc-text" data-tab="2">
+							<p>At Waterside, great dentistry is a team effort. From our treatment coordinator Kim who puts nervous patients at ease, to our skilled hygienists and support staff — every member of our team is here to make your experience as comfortable and positive as it can be.</p>
+						</div>
+					</div>
+
+					<!-- Tab Navigation Buttons -->
+					<div class="dentist-tabs-nav">
+						<button class="dentist-tab-btn active" data-target="1">More about Andrew</button>
+						<button class="dentist-tab-btn" data-target="2">Meet the Team</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -591,52 +609,70 @@ get_header();
 
 	<!-- Flexible Payment Options Section -->
 	<section class="payment-options-section" id="payment-options">
-		<div class="payment-options-container">
-			<!-- Header -->
-			<div class="payment-header">
-				<h2 class="payment-title">Flexible <span class="accent">Payment Options</span></h2>
-				<p class="payment-desc">Choose how you'd like to pay for your dental care at Waterside Dental Care — we offer a range of plans to suit every budget.</p>
+		<style>
+			@media (max-width: 991.98px) {
+				.payment-options-section .payment-card {
+					min-height: 158px !important;
+					height: auto !important;
+					display: flex !important;
+					align-items: center !important;
+				}
+				.payment-options-section .payment-card.active {
+					min-height: 158px !important;
+					height: auto !important;
+				}
+			}
+		</style>
+		<div class="payment-sticky-wrapper">
+			<div class="payment-options-container">
+				<!-- Header -->
+				<div class="payment-header">
+					<h2 class="payment-title">Flexible <span class="accent">Payment Options</span></h2>
+					<p class="payment-desc">Choose how you'd like to pay for your dental care at Waterside Dental Care — we offer a range of plans to suit every budget.</p>
+				</div>
+
+				<!-- Options Grid -->
+				<div class="payment-grid">
+					<!-- Option 1: Interest Free Finance -->
+					<div class="payment-card border-left-round">
+						<div class="payment-card-content">
+							<h3 class="payment-card-title">Interest Free Finance</h3>
+							<p class="payment-card-text">We are able to arrange finance for your dental treatment at Waterside Dental Care.</p>
+						</div>
+						<div class="payment-card-button-wrapper">
+							<a href="#finance-calculator" class="payment-btn btn-primary-calc">Calculate My Rate</a>
+						</div>
+					</div>
+
+					<!-- Option 2: Dental Plans -->
+					<div class="payment-card">
+						<div class="payment-card-content">
+							<h3 class="payment-card-title">Dental Plans</h3>
+							<p class="payment-card-text">Patients get monthly dental checks and hygienist visits for routine care.</p>
+						</div>
+						<div class="payment-card-button-wrapper">
+							<a href="#dental-plans" class="payment-btn btn-secondary-plan">View All plan</a>
+						</div>
+					</div>
+
+					<!-- Option 3: Treatment Pricing -->
+					<div class="payment-card border-right-round">
+						<div class="payment-card-content">
+							<h3 class="payment-card-title">Treatment Pricing</h3>
+							<p class="payment-card-text">Quality care with transparent and budget-friendly costs for every smile</p>
+						</div>
+						<div class="payment-card-button-wrapper">
+							<a href="#pricing" class="payment-btn btn-secondary-price">view All Pricing</a>
+						</div>
+					</div>
+				</div>
 			</div>
-
-			<!-- Options Grid -->
-			<div class="payment-grid">
-				<!-- Option 1: Interest Free Finance -->
-				<div class="payment-card border-left-round">
-					<div class="payment-card-content">
-						<h3 class="payment-card-title">Interest Free Finance</h3>
-						<p class="payment-card-text">We are able to arrange finance for your dental treatment at Waterside Dental Care.</p>
-					</div>
-					<div class="payment-card-button-wrapper">
-						<a href="#finance-calculator" class="payment-btn btn-primary-calc">Calculate My Rate</a>
-					</div>
-				</div>
-
-				<!-- Option 2: Dental Plans -->
-				<div class="payment-card">
-					<div class="payment-card-content">
-						<h3 class="payment-card-title">Dental Plans</h3>
-						<p class="payment-card-text">Patients get monthly dental checks and hygienist visits for routine care.</p>
-					</div>
-					<div class="payment-card-button-wrapper">
-						<a href="#dental-plans" class="payment-btn btn-secondary-plan">View All plan</a>
-					</div>
-				</div>
-
-				<!-- Option 3: Treatment Pricing -->
-				<div class="payment-card border-right-round">
-					<div class="payment-card-content">
-						<h3 class="payment-card-title">Treatment Pricing</h3>
-						<p class="payment-card-text">Quality care with transparent and budget-friendly costs for every smile</p>
-					</div>
-					<div class="payment-card-button-wrapper">
-						<a href="#pricing" class="payment-btn btn-secondary-price">view All Pricing</a>
-					</div>
-				</div>
-			</div>
+		</div>
+	</section>
 	</section>
 
 	<!-- Book an Appointment CTA Section -->
-	<section class="book-appointment-section" id="book-appointment">
+	<!-- <section class="book-appointment-section" id="book-appointment">
 		<div class="book-appointment-bg-wrapper">
 			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/book-bg.webp' ); ?>" alt="" class="book-appointment-bg">
 		</div>
@@ -651,7 +687,7 @@ get_header();
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<!-- <section class="services-section container">
 		<h2 class="section-title">Our Services</h2>

@@ -73,6 +73,26 @@ jQuery(document).ready(function($) {
             $content.slideToggle(300);
         }
     });
+
+    // Mobile Header Hide on Scroll Down, Show on Scroll Up
+    var lastScrollTop = 0;
+    var $mobileHeader = $('.mobile-header');
+    var scrollThreshold = 10; // Minimum scroll difference to trigger action
+    
+    $(window).on('scroll', function() {
+        if ($(window).width() < 992) {
+            var scrollTop = $(this).scrollTop();
+            
+            // If near top, keep header in default state (no shadow, fully visible)
+            if (scrollTop <= 50) {
+                $mobileHeader.removeClass('header-scrolled');
+                return;
+            }
+            
+            // Scrolled down - show sticky header always
+            $mobileHeader.addClass('header-scrolled');
+        }
+    });
 });
 
 /**

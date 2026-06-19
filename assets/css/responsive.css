@@ -33,7 +33,13 @@
         position: sticky !important;
         top: 0 !important;
         z-index: 9999 !important;
-        box-shadow: 0 2px 10px rgba(94, 93, 95, 0.05) !important;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out !important;
+        box-shadow: none !important;
+    }
+
+    .mobile-header.header-scrolled {
+        background-color: #fefdf6 !important;
+        box-shadow: 0px 4px 12.55px rgba(0, 0, 0, 0.06) !important;
     }
 
     .mobile-header-container {
@@ -715,6 +721,7 @@
 
     .hero-content {
         padding-left: 0 !important;
+        padding-bottom: 0 !important;
         margin-top: 0 !important;
         display: block !important;
     }
@@ -790,7 +797,7 @@
         flex-direction: column !important;
         gap: 20px !important;
         margin-top: 0 !important;
-        margin-bottom: 30px !important;
+        margin-bottom: 20px !important;
         width: 280px !important;
         max-width: 100% !important;
     }
@@ -886,6 +893,19 @@
     .key-treatments-section {
         margin-top: 60px !important;
         margin-bottom: 60px !important;
+        overflow: visible !important;
+        position: relative !important;
+        height: 1600px !important;
+        /* taller parent defines scroll/sticky duration */
+    }
+
+    .treatments-sticky-wrapper {
+        position: sticky !important;
+        top: 94px !important;
+        /* stays sticky below mobile header */
+        z-index: 998 !important;
+        width: 100% !important;
+        height: auto !important;
     }
 
     /* Mobile Entrance Animations: Start Hidden and Animate on .mobile-visible */
@@ -1098,6 +1118,7 @@
         border-top-right-radius: 20px !important;
         border-bottom-right-radius: 20px !important;
         border-bottom: 1px solid rgba(216, 164, 68, 0.37) !important;
+        display: inline-block !important;
     }
 
     .treatments-header-title {
@@ -1124,28 +1145,21 @@
     }
 
     .treatments-left-col {
-        width: 100% !important;
-        padding: 0 !important;
-        display: block !important;
-    }
-
-    .treatments-interactive-wrapper {
-        display: block !important;
-    }
-
-    .treatment-slide-counter {
         display: none !important;
     }
 
-    .treatment-image-frame {
+    .mobile-treatment-image-wrapper {
         width: 100% !important;
-        height: 343px !important;
-        border-radius: 13px !important;
-        margin-bottom: 0 !important;
+        height: 277px !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        margin-bottom: 20px !important;
     }
 
-    .active-treatment-image {
-        border-radius: 13px !important;
+    .mobile-treatment-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 
     .treatments-right-col {
@@ -1269,18 +1283,20 @@
 
     /* About Waterside Section Mobile Layout */
     .about-waterside-section {
-        height: auto !important;
-        position: static !important;
+        height: 1500px !important;
+        position: relative !important;
         background-color: #faf3e6 !important;
         padding: 40px 0 !important;
+        overflow: visible !important;
     }
 
     .about-sticky-wrapper {
-        position: static !important;
+        position: sticky !important;
+        top: 94px !important;
         height: auto !important;
         width: 100% !important;
         display: block !important;
-        overflow: visible !important;
+        z-index: 998 !important;
     }
 
     .about-container {
@@ -1288,22 +1304,26 @@
         flex-direction: column !important;
         width: 100% !important;
         height: auto !important;
-        padding: 0 24px !important;
-        gap: 30px !important;
+        padding: 0 !important;
+        gap: 20px !important;
     }
 
     .about-left-col {
         width: 100% !important;
         padding: 0 !important;
         gap: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
         align-items: center !important;
     }
 
     .about-header-badge {
-        border-bottom: none !important;
-        padding: 0 !important;
+        background-color: #faf3e6 !important;
+        border-bottom: 1px solid rgba(216, 164, 68, 0.37) !important;
+        padding: 24px !important;
         width: 100% !important;
         text-align: center !important;
+        margin-bottom: 0 !important;
     }
 
     .about-header-title {
@@ -1313,6 +1333,7 @@
         letter-spacing: normal !important;
         color: #5e5d5f !important;
         text-align: center !important;
+        margin: 0 !important;
     }
 
     .about-header-title .light,
@@ -1325,7 +1346,10 @@
     }
 
     .about-text-content {
-        gap: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+        padding: 0 24px !important;
         text-align: center !important;
         align-items: center !important;
     }
@@ -1334,24 +1358,26 @@
         font-family: 'Montserrat', sans-serif !important;
         font-size: 18px !important;
         font-weight: 600 !important;
-        line-height: 28px !important;
+        line-height: normal !important;
         color: #5e5d5f !important;
-        letter-spacing: -0.5px !important;
+        letter-spacing: -1px !important;
         text-align: center !important;
+        margin: 0 !important;
     }
 
     .about-description {
         font-family: 'Montserrat', sans-serif !important;
-        font-size: 11px !important;
+        font-size: 12px !important;
         line-height: 24px !important;
         color: #5e5d5f !important;
         text-align: center !important;
+        margin: 0 !important;
     }
 
     .about-right-col {
-        width: calc(100% + 48px) !important;
-        margin-left: -24px !important;
-        margin-right: -24px !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
         height: auto !important;
         padding: 0 !important;
         display: block !important;
@@ -1370,7 +1396,7 @@
 
     .about-image-frame-container {
         width: 100% !important;
-        height: 520px !important;
+        height: 501px !important;
         border-radius: 0 !important;
         flex: none !important;
     }
@@ -1507,18 +1533,20 @@
 
     /* Smile Gallery Mobile Layout */
     .smile-gallery-section {
-        height: auto !important;
-        position: static !important;
+        height: 1800px !important;
+        position: relative !important;
         background-color: #ffffff !important;
         padding: 60px 0 !important;
+        overflow: visible !important;
     }
 
     .gallery-sticky-wrapper {
-        position: static !important;
+        position: sticky !important;
+        top: 94px !important;
         height: auto !important;
         width: 100% !important;
         display: block !important;
-        overflow: visible !important;
+        z-index: 998 !important;
     }
 
     .gallery-container {
@@ -1839,20 +1867,35 @@
     .smile-gallery-section.mobile-visible .gallery-right-col {
         transition-delay: 0.45s !important;
     }
-}
 
-/* ============================================================
+    /* ============================================================
    TESTIMONIALS MOBILE DESIGN UPDATE (Figma Spec)
    ============================================================ */
-@media (max-width: 768px) {
     .testimonials-section {
+        display: block;
+        justify-content: center;
+        align-items: flex-start !important;
+        height: 1500px !important;
+        position: relative !important;
         background-color: #faf3e6 !important;
         border-bottom: 2px solid #e9e6df !important;
         padding: 60px 0 !important;
+        overflow: visible !important;
+    }
+
+    .testimonials-sticky-wrapper {
+        position: sticky !important;
+        top: 94px !important;
+        height: calc(100vh - 94px) !important;
+        width: 100% !important;
+        z-index: 998 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
     }
 
     .testimonials-container {
-        padding: 0 24px !important;
+        padding: 60px 24px !important;
     }
 
     .testimonials-header {
@@ -1867,20 +1910,16 @@
     }
 
     .testimonials-rating-badge {
-        display: grid !important;
-        grid-template-columns: max-content max-content !important;
-        grid-template-areas:
-            "logo link"
-            "title title";
+        display: flex !important;
+        flex-wrap: wrap !important;
         justify-content: center !important;
         align-items: center !important;
-        column-gap: 6px !important;
+        column-gap: 10px !important;
         row-gap: 20px !important;
         width: 100% !important;
     }
 
     .google-logo-wrapper {
-        grid-area: logo !important;
         display: flex !important;
         align-items: center !important;
     }
@@ -1891,7 +1930,6 @@
     }
 
     .testimonials-rating-link {
-        grid-area: link !important;
         font-family: 'Montserrat', sans-serif !important;
         font-size: 12px !important;
         font-weight: 600 !important;
@@ -1906,7 +1944,8 @@
     }
 
     .testimonials-header-title {
-        grid-area: title !important;
+        width: 100% !important;
+        text-align: center !important;
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 500 !important;
         font-size: 14px !important;
@@ -1914,7 +1953,6 @@
         line-height: normal !important;
         letter-spacing: -1px !important;
         margin: 0 !important;
-        text-align: center !important;
     }
 
     .testimonials-nav-buttons {
@@ -1937,34 +1975,32 @@
         font-weight: 600 !important;
         font-size: 150px !important;
         color: rgba(94, 93, 95, 0.24) !important;
-        opacity: 0.2 !important;
-        line-height: 44px !important;
-        width: 92px !important;
+        opacity: 1 !important;
+        line-height: 44.1px !important;
         height: 57px !important;
         position: absolute !important;
         z-index: 1 !important;
         pointer-events: none !important;
-        overflow: hidden !important;
     }
 
     .testimonial-quote-mark.left-quote {
-        left: calc(50% - 150px) !important;
+        left: 20px !important;
         top: -10px !important;
         margin-top: 0 !important;
         align-self: auto !important;
     }
 
     .testimonial-quote-mark.right-quote {
-        right: calc(50% - 150px) !important;
-        bottom: 65px !important;
+        right: 20px !important;
+        bottom: 0px !important;
         margin-bottom: 0 !important;
         align-self: auto !important;
         transform: rotate(180deg) !important;
     }
 
     .testimonials-slider {
-        max-width: 270px !important;
-        min-height: 200px !important;
+        max-width: 354px !important;
+        min-height: 350px !important;
         position: relative !important;
         z-index: 2 !important;
         width: 100% !important;
@@ -1977,14 +2013,15 @@
         position: absolute !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
+        width: 100% !important;
     }
 
     .testimonial-title {
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 500 !important;
         font-style: italic !important;
-        font-size: 18px !important;
-        line-height: 32px !important;
+        font-size: 24px !important;
+        line-height: 39px !important;
         color: #5e5d5f !important;
         margin: 0 0 44px 0 !important;
         letter-spacing: 0.42px !important;
@@ -1995,8 +2032,8 @@
         font-family: 'Montserrat', sans-serif !important;
         font-style: italic !important;
         font-weight: 400 !important;
-        font-size: 14px !important;
-        line-height: 24px !important;
+        font-size: 16px !important;
+        line-height: 31px !important;
         color: #5e5d5f !important;
         margin: 0 0 28px 0 !important;
         letter-spacing: 0.42px !important;
@@ -2188,15 +2225,40 @@
         color: #ffffff !important;
     }
 
+    .principal-dentist-section {
+        height: 1500px !important;
+        position: relative !important;
+        overflow: visible !important;
+    }
+
+    .dentist-sticky-wrapper {
+        position: sticky !important;
+        top: 94px !important;
+        height: calc(100vh - 94px) !important;
+        width: 100% !important;
+        z-index: 998 !important;
+    }
+
     /* ============================================================
        FLEXIBLE PAYMENT OPTIONS ACCORDION MOBILE (Figma Spec)
        ============================================================ */
     .payment-options-section {
         background-color: #fefdf6 !important;
         margin: 60px 0 !important;
-        padding: 0 24px !important;
+        padding: 34px 24px !important;
         box-sizing: border-box !important;
         display: block !important;
+        height: 1500px !important;
+        position: relative !important;
+        overflow: visible !important;
+    }
+
+    .payment-sticky-wrapper {
+        position: sticky !important;
+        top: 104px !important;
+        height: auto !important;
+        width: 100% !important;
+        z-index: 998 !important;
     }
 
     .payment-options-container {
@@ -2214,19 +2276,19 @@
     .payment-header {
         background-color: #faf3e6 !important;
         border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
-        padding: 34px 20px !important;
+        padding: 20px !important;
         border-radius: 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 30px !important;
         box-sizing: border-box !important;
         width: 100% !important;
     }
 
-    .payment-title {
+    .payment-options-section .payment-title {
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 600 !important;
-        font-size: 18px !important;
+        font-size: 20px !important;
         line-height: normal !important;
         color: #000000 !important;
         margin: 0 !important;
@@ -2235,15 +2297,15 @@
         display: block !important;
     }
 
-    .payment-title .accent {
+    .payment-options-section .payment-title .accent {
         color: #d8a444 !important;
     }
 
-    .payment-desc {
+    .payment-options-section .payment-desc {
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 400 !important;
-        font-size: 12px !important;
-        line-height: 20px !important;
+        font-size: 14px !important;
+        line-height: 24px !important;
         color: #5e5d5f !important;
         margin: 0 !important;
     }
@@ -2256,13 +2318,13 @@
         gap: 0 !important;
     }
 
-    .payment-card {
+    .payment-options-section .payment-card {
         background-color: #faf3e6 !important;
         border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
-        border-top: 1px solid rgba(216, 164, 68, 0.2) !important;
+        border-top: none !important;
         border-right: none !important;
         border-radius: 0 !important;
-        padding: 30px !important;
+        min-height: 158px !important;
         height: auto !important;
         box-sizing: border-box !important;
         display: flex !important;
@@ -2274,18 +2336,18 @@
         transition: background-color 0.3s ease, padding 0.3s ease !important;
     }
 
-    .payment-card:last-child {
+    .payment-options-section .payment-card:last-child {
         border-bottom: none !important;
     }
 
-    .payment-card-content {
+    .payment-options-section .payment-card-content {
         display: flex !important;
         flex-direction: column !important;
         gap: 20px !important;
         width: 100% !important;
     }
 
-    .payment-card-title {
+    .payment-options-section .payment-card-title {
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 600 !important;
         font-size: 16px !important;
@@ -2295,7 +2357,7 @@
         line-height: normal !important;
     }
 
-    .payment-card-text {
+    .payment-options-section .payment-card-text {
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 400 !important;
         font-size: 14px !important;
@@ -2305,12 +2367,12 @@
         display: none;
     }
 
-    .payment-card-button-wrapper {
+    .payment-options-section .payment-card-button-wrapper {
         display: none;
         width: 100% !important;
     }
 
-    .payment-card::after {
+    .payment-options-section .payment-card::after {
         content: "+" !important;
         font-family: 'Montserrat', sans-serif !important;
         font-size: 24px !important;
@@ -2323,10 +2385,11 @@
         height: 17px !important;
         position: absolute !important;
         right: 20px !important;
-        top: 20px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
     }
 
-    .payment-card.active {
+    .payment-options-section .payment-card.active {
         background-color: #f6e9d2 !important;
         border-top: 1px solid #f7edda !important;
         border-bottom: 1px solid #f7edda !important;
@@ -2336,13 +2399,14 @@
         justify-content: center !important;
         gap: 30px !important;
         cursor: default !important;
+        height: auto !important;
     }
 
-    .payment-card.active::after {
+    .payment-options-section .payment-card.active::after {
         display: none !important;
     }
 
-    .payment-card.active .payment-btn {
+    .payment-options-section .payment-card.active .payment-btn {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;

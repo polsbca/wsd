@@ -118,9 +118,9 @@ function initAnimations() {
     }
 
     // ----------------------------------------------------
-    // 3. Floating Micro-interaction for Hero Image (Desktop only)
-    //    On mobile this causes layout jitter and fights CSS transforms
+    // 3. Floating Micro-interaction for Hero Image (Desktop only) - DISABLED
     // ----------------------------------------------------
+    /*
     if (isDesktop) {
         const heroImg = document.querySelector('.hero-img');
         if (heroImg) {
@@ -134,6 +134,7 @@ function initAnimations() {
             });
         }
     }
+    */
 
     // ----------------------------------------------------
     // 4. Scroll-Triggered Counters for Numeric Stats
