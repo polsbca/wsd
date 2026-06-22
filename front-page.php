@@ -218,9 +218,19 @@ get_header();
 							<span class="light">About </span><span class="accent">Waterside Dental Care</span>
 						</h2>
 					</div>
-					<div class="about-text-content">
-						<h3 class="about-subtitle">Built on trust, Driven by results</h3>
-						<p class="about-description">At Waterside Dental Care, we believe every patient deserves expert, personal care. Our skilled team takes time to listen, making every visit comfortable, precise and life-changing — from routine hygiene to advanced cosmetic dentistry.</p>
+					<div class="about-text-content-wrapper">
+						<div class="about-text-content active" data-index="1">
+							<h3 class="about-subtitle">Built on trust, Driven by results</h3>
+							<p class="about-description">At Waterside Dental Care, we believe every patient deserves expert, personal care. Our skilled team takes time to listen, making every visit comfortable, precise and life-changing — from routine hygiene to advanced cosmetic dentistry.</p>
+						</div>
+						<div class="about-text-content" data-index="2">
+							<h3 class="about-subtitle">Modern facilities, Exceptional care</h3>
+							<p class="about-description">Our modern surgery is equipped with the latest dental technology, ensuring you receive the highest standard of treatment. We focus on prevention and education to keep your smile healthy for life.</p>
+						</div>
+						<div class="about-text-content" data-index="3">
+							<h3 class="about-subtitle">Transforming smiles, Boosting confidence</h3>
+							<p class="about-description">Whether you want a simple refresh or a complete smile makeover, our cosmetic dental services are customized to your unique needs. We create natural, beautiful results that you will love to show off.</p>
+						</div>
 					</div>
 				</div>
 

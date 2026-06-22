@@ -196,12 +196,19 @@ function initAnimations() {
         const container = document.querySelector('.about-scroll-indicator-container');
         const images = document.querySelectorAll('.about-scroll-img');
         const leftCol = document.querySelector('.about-left-col');
+        const textContents = document.querySelectorAll('.about-text-content');
 
         if (handle && container && images.length >= 3) {
             // Set initial state
             gsap.set(images[0], { opacity: 1, visibility: 'visible' });
             gsap.set(images[1], { opacity: 0, visibility: 'hidden' });
             gsap.set(images[2], { opacity: 0, visibility: 'hidden' });
+            
+            if (textContents.length >= 3) {
+                gsap.set(textContents[0], { opacity: 1, visibility: 'visible' });
+                gsap.set(textContents[1], { opacity: 0, visibility: 'hidden' });
+                gsap.set(textContents[2], { opacity: 0, visibility: 'hidden' });
+            }
             gsap.set(handle, { y: 0 });
 
             const updateHandleY = () => {
@@ -226,86 +233,98 @@ function initAnimations() {
                 duration: 1
             }, 0);
 
-            // 2. Cross-fade images
-            aboutTl.to(images[0], {
-                opacity: 0,
-                duration: 0.2,
-                onStart: () => gsap.set(images[0], { visibility: 'visible' }),
-                onComplete: () => gsap.set(images[0], { visibility: 'hidden' }),
-                onReverseComplete: () => gsap.set(images[0], { visibility: 'visible' })
-            }, 0.25)
-                .to(images[1], {
-                    opacity: 1,
+            // Helper function to update active class on text blocks
+            const updateActiveText = (activeIndex) => {
+                textContents.forEach((tc, idx) => {
+                    if (idx === activeIndex) {
+                        tc.classList.add('active');
+                    } else {
+                        tc.classList.remove('active');
+                    }
+                });
+            };
+
+            // 2. Cross-fade images & texts
+            if (textContents.length >= 3) {
+                aboutTl.to([images[0], textContents[0]], {
+                    opacity: 0,
+                    duration: 0.2,
+                    onStart: () => gsap.set([images[0], textContents[0]], { visibility: 'visible' }),
+                    onComplete: () => {
+                        gsap.set([images[0], textContents[0]], { visibility: 'hidden' });
+                        updateActiveText(1);
+                    },
+                    onReverseComplete: () => {
+                        gsap.set([images[0], textContents[0]], { visibility: 'visible' });
+                        updateActiveText(0);
+                    }
+                }, 0.25)
+                    .to([images[1], textContents[1]], {
+                        opacity: 1,
+                        duration: 0.2,
+                        onStart: () => gsap.set([images[1], textContents[1]], { visibility: 'visible' }),
+                        onComplete: () => gsap.set([images[1], textContents[1]], { visibility: 'visible' }),
+                        onReverseComplete: () => gsap.set([images[1], textContents[1]], { visibility: 'hidden' })
+                    }, 0.25);
+
+                aboutTl.to([images[1], textContents[1]], {
+                    opacity: 0,
+                    duration: 0.2,
+                    onStart: () => gsap.set([images[1], textContents[1]], { visibility: 'visible' }),
+                    onComplete: () => {
+                        gsap.set([images[1], textContents[1]], { visibility: 'hidden' });
+                        updateActiveText(2);
+                    },
+                    onReverseComplete: () => {
+                        gsap.set([images[1], textContents[1]], { visibility: 'visible' });
+                        updateActiveText(1);
+                    }
+                }, 0.6)
+                    .to([images[2], textContents[2]], {
+                        opacity: 1,
+                        duration: 0.2,
+                        onStart: () => gsap.set([images[2], textContents[2]], { visibility: 'visible' }),
+                        onComplete: () => gsap.set([images[2], textContents[2]], { visibility: 'visible' }),
+                        onReverseComplete: () => gsap.set([images[2], textContents[2]], { visibility: 'hidden' })
+                    }, 0.6);
+            } else {
+                aboutTl.to(images[0], {
+                    opacity: 0,
+                    duration: 0.2,
+                    onStart: () => gsap.set(images[0], { visibility: 'visible' }),
+                    onComplete: () => gsap.set(images[0], { visibility: 'hidden' }),
+                    onReverseComplete: () => gsap.set(images[0], { visibility: 'visible' })
+                }, 0.25)
+                    .to(images[1], {
+                        opacity: 1,
+                        duration: 0.2,
+                        onStart: () => gsap.set(images[1], { visibility: 'visible' }),
+                        onComplete: () => gsap.set(images[1], { visibility: 'visible' }),
+                        onReverseComplete: () => gsap.set(images[1], { visibility: 'hidden' })
+                    }, 0.25);
+
+                aboutTl.to(images[1], {
+                    opacity: 0,
                     duration: 0.2,
                     onStart: () => gsap.set(images[1], { visibility: 'visible' }),
-                    onComplete: () => gsap.set(images[1], { visibility: 'visible' }),
-                    onReverseComplete: () => gsap.set(images[1], { visibility: 'hidden' })
-                }, 0.25);
-
-            aboutTl.to(images[1], {
-                opacity: 0,
-                duration: 0.2,
-                onStart: () => gsap.set(images[1], { visibility: 'visible' }),
-                onComplete: () => gsap.set(images[1], { visibility: 'hidden' }),
-                onReverseComplete: () => gsap.set(images[1], { visibility: 'visible' })
-            }, 0.6)
-                .to(images[2], {
-                    opacity: 1,
-                    duration: 0.2,
-                    onStart: () => gsap.set(images[2], { visibility: 'visible' }),
-                    onComplete: () => gsap.set(images[2], { visibility: 'visible' }),
-                    onReverseComplete: () => gsap.set(images[2], { visibility: 'hidden' })
-                }, 0.6);
-
-            // Bypass ScrollTrigger track immediately when scrolling on the left side text content
-            if (leftCol) {
-                leftCol.addEventListener('wheel', (e) => {
-                    if (e.deltaY > 0) {
-                        const smileGallery = document.querySelector('.smile-gallery-section');
-                        if (smileGallery) {
-                            e.preventDefault();
-                            smileGallery.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    } else if (e.deltaY < 0) {
-                        const keyTreatments = document.querySelector('.key-treatments-section');
-                        if (keyTreatments) {
-                            e.preventDefault();
-                            keyTreatments.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                }, { passive: false });
-
-                let touchStartYLeft = 0;
-                leftCol.addEventListener('touchstart', (e) => {
-                    touchStartYLeft = e.touches[0].clientY;
-                }, { passive: true });
-
-                leftCol.addEventListener('touchmove', (e) => {
-                    const touchEndYLeft = e.touches[0].clientY;
-                    const diffYLeft = touchStartYLeft - touchEndYLeft;
-                    if (Math.abs(diffYLeft) > 50) {
-                        if (diffYLeft > 0) {
-                            const smileGallery = document.querySelector('.smile-gallery-section');
-                            if (smileGallery) {
-                                e.preventDefault();
-                                smileGallery.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        } else {
-                            const keyTreatments = document.querySelector('.key-treatments-section');
-                            if (keyTreatments) {
-                                e.preventDefault();
-                                keyTreatments.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }
-                    }
-                }, { passive: false });
+                    onComplete: () => gsap.set(images[1], { visibility: 'hidden' }),
+                    onReverseComplete: () => gsap.set(images[1], { visibility: 'visible' })
+                }, 0.6)
+                    .to(images[2], {
+                        opacity: 1,
+                        duration: 0.2,
+                        onStart: () => gsap.set(images[2], { visibility: 'visible' }),
+                        onComplete: () => gsap.set(images[2], { visibility: 'visible' }),
+                        onReverseComplete: () => gsap.set(images[2], { visibility: 'hidden' })
+                    }, 0.6);
             }
+
         }
 
         // Entrance animation for About section elements when it starts entering the viewport
         const aboutEntranceTl = gsap.timeline({
             scrollTrigger: {
-                trigger: '.about-text-content',
+                trigger: '.about-text-content-wrapper',
                 start: 'top 70%',
                 toggleActions: 'play none none none'
             }

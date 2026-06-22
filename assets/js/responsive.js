@@ -144,6 +144,8 @@ jQuery(document).ready(function($) {
         var $images = $wrapper.find('.about-scroll-img');
         if ($images.length <= 1) return;
 
+        var $texts = jQuery('.about-text-content');
+
         // Create dots container if it doesn't exist yet
         var $dotsContainer = $wrapper.find('.about-slider-dots');
         if ($dotsContainer.length === 0) {
@@ -171,20 +173,30 @@ jQuery(document).ready(function($) {
 
             var $currentImg = $images.eq(currentIndex);
             var $nextImg = $images.eq(index);
+            var $currentText = $texts.eq(currentIndex);
+            var $nextText = $texts.eq(index);
 
             // Clean previous transition classes
             $images.removeClass('slide-exit-left slide-exit-right slide-enter-left slide-enter-right');
+            if ($texts.length > 0) {
+                $texts.removeClass('slide-exit-left slide-exit-right slide-enter-left slide-enter-right');
+            }
 
-            // 1. Instantly position the next image off-screen
+            // 1. Instantly position the next image and text off-screen
             if (direction === 'next') {
                 $nextImg.addClass('slide-enter-right');
+                if ($texts.length > 0) $nextText.addClass('slide-enter-right');
             } else {
                 $nextImg.addClass('slide-enter-left');
+                if ($texts.length > 0) $nextText.addClass('slide-enter-left');
             }
 
             // Force reflow
             if ($nextImg[0]) {
                 $nextImg[0].offsetHeight;
+            }
+            if ($texts.length > 0 && $nextText[0]) {
+                $nextText[0].offsetHeight;
             }
 
             // 2. Remove active from current and add exit class
@@ -195,8 +207,20 @@ jQuery(document).ready(function($) {
                 $currentImg.addClass('slide-exit-right');
             }
 
-            // 3. Remove entry class and add active to next image (triggering transition)
+            if ($texts.length > 0) {
+                $currentText.removeClass('active');
+                if (direction === 'next') {
+                    $currentText.addClass('slide-exit-left');
+                } else {
+                    $currentText.addClass('slide-exit-right');
+                }
+            }
+
+            // 3. Remove entry class and add active to next image and text (triggering transition)
             $nextImg.removeClass('slide-enter-right slide-enter-left').addClass('active');
+            if ($texts.length > 0) {
+                $nextText.removeClass('slide-enter-right slide-enter-left').addClass('active');
+            }
 
             // Update indicators
             $dots.removeClass('active');

@@ -1352,6 +1352,50 @@
         padding: 0 24px !important;
         text-align: center !important;
         align-items: center !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateX(0) !important;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, visibility 0.6s ease !important;
+        will-change: transform, opacity !important;
+    }
+
+    .about-text-content.active {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(0) !important;
+    }
+
+    /* Outgoing slide exiting to the left (next) or right (prev) */
+    .about-text-content.slide-exit-left {
+        opacity: 0 !important;
+        visibility: visible !important;
+        transform: translateX(-100%) !important;
+    }
+
+    .about-text-content.slide-exit-right {
+        opacity: 0 !important;
+        visibility: visible !important;
+        transform: translateX(100%) !important;
+    }
+
+    /* Incoming slide entering from the right (next) or left (prev) */
+    .about-text-content.slide-enter-right {
+        opacity: 0 !important;
+        visibility: visible !important;
+        transform: translateX(100%) !important;
+        transition: none !important;
+    }
+
+    .about-text-content.slide-enter-left {
+        opacity: 0 !important;
+        visibility: visible !important;
+        transform: translateX(-100%) !important;
+        transition: none !important;
     }
 
     .about-subtitle {
