@@ -49,8 +49,8 @@ function wsd_scripts() {
 	// Mobile responsive stylesheet
 	wp_enqueue_style( 'wsd-responsive', get_stylesheet_directory_uri() . '/assets/css/responsive.css', array( 'wsd-custom' ), time() );
 
-	// GSAP & ScrollTrigger for front-page animations
-	if ( is_front_page() ) {
+	// GSAP & ScrollTrigger for front-page, services template, and single services animations
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), '3.12.5', true );
 		wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.12.5', true );
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
@@ -102,3 +102,84 @@ function wsd_excerpt_more( $more ) {
 	return ' ... <a href="' . get_permalink() . '">' . esc_html__( 'Read More', 'wsd' ) . '</a>';
 }
 add_filter( 'excerpt_more', 'wsd_excerpt_more' );
+
+/**
+ * Register Custom Post Type "services" and custom taxonomy
+ */
+function wsd_register_services_cpt() {
+	// Register Custom Taxonomy "service_category"
+	$taxonomy_labels = array(
+		'name'              => _x( 'Service Categories', 'taxonomy general name', 'wsd' ),
+		'singular_name'     => _x( 'Service Category', 'taxonomy singular name', 'wsd' ),
+		'search_items'      => __( 'Search Service Categories', 'wsd' ),
+		'all_items'         => __( 'All Service Categories', 'wsd' ),
+		'parent_item'       => __( 'Parent Service Category', 'wsd' ),
+		'parent_item_colon' => __( 'Parent Service Category:', 'wsd' ),
+		'edit_item'         => __( 'Edit Service Category', 'wsd' ),
+		'update_item'       => __( 'Update Service Category', 'wsd' ),
+		'add_new_item'      => __( 'Add New Service Category', 'wsd' ),
+		'new_item_name'     => __( 'New Service Category Name', 'wsd' ),
+		'menu_name'         => __( 'Service Categories', 'wsd' ),
+	);
+
+	$taxonomy_args = array(
+		'hierarchical'      => true,
+		'labels'            => $taxonomy_labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'service-category' ),
+		'show_in_rest'      => true,
+	);
+
+	register_taxonomy( 'service_category', array( 'services' ), $taxonomy_args );
+
+	// Register Custom Post Type "services"
+	$labels = array(
+		'name'               => _x( 'Services', 'post type general name', 'wsd' ),
+		'singular_name'      => _x( 'Service', 'post type singular name', 'wsd' ),
+		'menu_name'          => _x( 'Services', 'admin menu', 'wsd' ),
+		'name_admin_bar'     => _x( 'Service', 'add new on admin bar', 'wsd' ),
+		'add_new'            => _x( 'Add New', 'service', 'wsd' ),
+		'add_new_item'       => __( 'Add New Service', 'wsd' ),
+		'new_item'           => __( 'New Service', 'wsd' ),
+		'edit_item'          => __( 'Edit Service', 'wsd' ),
+		'view_item'          => __( 'View Service', 'wsd' ),
+		'all_items'          => __( 'All Services', 'wsd' ),
+		'search_items'       => __( 'Search Services', 'wsd' ),
+		'parent_item_colon'  => __( 'Parent Services:', 'wsd' ),
+		'not_found'          => __( 'No services found.', 'wsd' ),
+		'not_found_in_trash' => __( 'No services found in Trash.', 'wsd' ),
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'services' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 5,
+		'menu_icon'          => 'dashicons-admin-tools',
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+		'show_in_rest'       => true,
+	);
+
+	register_post_type( 'services', $args );
+
+	// Pre-populate terms if they don't exist
+	if ( ! term_exists( 'cosmetic-dentistry', 'service_category' ) ) {
+		wp_insert_term( 'Cosmetic Dentistry', 'service_category', array( 'slug' => 'cosmetic-dentistry' ) );
+	}
+	if ( ! term_exists( 'general-dentistry', 'service_category' ) ) {
+		wp_insert_term( 'General Dentistry', 'service_category', array( 'slug' => 'general-dentistry' ) );
+	}
+
+	// Flush rewrite rules on CPT registration
+	flush_rewrite_rules();
+}
+add_action( 'init', 'wsd_register_services_cpt' );
