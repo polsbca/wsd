@@ -22,13 +22,17 @@ function initAnimations() {
     // 1. Initial State Setup (Prevents abrupt jumps on load)
     //    Desktop only — mobile uses CSS transitions via .mobile-visible
     // ----------------------------------------------------
+    const hasHero = document.querySelector('.hero-title') !== null;
+
     if (isDesktop) {
         gsap.set('.header-top, #masthead.site-header', { y: -50, opacity: 0 });
-        gsap.set('.hero-title, .hero-description', { y: 30, opacity: 0 });
-        gsap.set('.hero-buttons .btn', { y: 20, opacity: 0 });
-        gsap.set('.stat', { y: 20, opacity: 0 });
-        gsap.set('.hero-image-wrapper', { x: 50, opacity: 0, scale: 0.95 });
-        gsap.set('.call-us-tab', { x: 50, opacity: 0 });
+        if (hasHero) {
+            gsap.set('.hero-title, .hero-description', { y: 30, opacity: 0 });
+            gsap.set('.hero-buttons .btn', { y: 20, opacity: 0 });
+            gsap.set('.stat', { y: 20, opacity: 0 });
+            gsap.set('.hero-image-wrapper', { x: 50, opacity: 0, scale: 0.95 });
+            gsap.set('.call-us-tab', { x: 50, opacity: 0 });
+        }
     }
 
     // ----------------------------------------------------
@@ -41,80 +45,90 @@ function initAnimations() {
         mainTimeline
             // Fade & Slide in Header Top and Main Navigation
             .to('.header-top', { y: 0, opacity: 1, duration: 0.8 })
-            .to('#masthead.site-header', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
+            .to('#masthead.site-header', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6');
 
-            // Reveal Hero Text
-            .to('.hero-title', { y: 0, opacity: 1, duration: 0.8 }, '-=0.4')
-            .to('.hero-description', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
+        if (hasHero) {
+            mainTimeline
+                // Reveal Hero Text
+                .to('.hero-title', { y: 0, opacity: 1, duration: 0.8 }, '-=0.4')
+                .to('.hero-description', { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
 
-            // Stagger Hero Buttons
-            .to('.hero-buttons .btn', {
-                y: 0,
-                opacity: 1,
-                stagger: 0.15,
-                duration: 0.6,
-                ease: 'back.out(1.7)'
-            }, '-=0.5')
+                // Stagger Hero Buttons
+                .to('.hero-buttons .btn', {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.15,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)'
+                }, '-=0.5')
 
-            // Stagger Stats wrapper and items
-            .to('.stat', {
-                y: 0,
-                opacity: 1,
-                stagger: 0.1,
-                duration: 0.6
-            }, '-=0.4')
+                // Stagger Stats wrapper and items
+                .to('.stat', {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.1,
+                    duration: 0.6
+                }, '-=0.4')
 
-            // Animate Hero Image and Call Tab
-            .to('.hero-image-wrapper', {
-                x: 0,
-                opacity: 1,
-                scale: 1,
-                duration: 1.2,
-                ease: 'power4.out'
-            }, '-=0.8')
-            .to('.call-us-tab', {
-                x: 0,
-                opacity: 1,
-                duration: 0.6,
-                ease: 'back.out(1.7)'
-            }, '-=0.6');
+                // Animate Hero Image and Call Tab
+                .to('.hero-image-wrapper', {
+                    x: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
+                    ease: 'power4.out'
+                }, '-=0.8')
+                .to('.call-us-tab', {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)'
+                }, '-=0.6');
+        }
     } else {
         // Mobile: simple entrance animation for hero elements
-        // Use a lightweight GSAP timeline that won't conflict with CSS mobile-visible transitions
-        gsap.set('.mobile-header', { y: -30, opacity: 0 });
-        gsap.set('.hero-title, .hero-description', { y: 20, opacity: 0 });
-        gsap.set('.hero-buttons .btn', { y: 15, opacity: 0 });
-        gsap.set('.stat', { y: 15, opacity: 0 });
-        gsap.set('.hero-image-wrapper', { y: 30, opacity: 0 });
-        gsap.set('.call-us-tab', { opacity: 0 });
+        const hasMobileHeader = document.querySelector('.mobile-header') !== null;
+        if (hasMobileHeader) {
+            gsap.set('.mobile-header', { y: -30, opacity: 0 });
+            if (hasHero) {
+                gsap.set('.hero-title, .hero-description', { y: 20, opacity: 0 });
+                gsap.set('.hero-buttons .btn', { y: 15, opacity: 0 });
+                gsap.set('.stat', { y: 15, opacity: 0 });
+                gsap.set('.hero-image-wrapper', { y: 30, opacity: 0 });
+                gsap.set('.call-us-tab', { opacity: 0 });
+            }
 
-        const mobileTl = gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.6 } });
+            const mobileTl = gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.6 } });
 
-        mobileTl
-            .to('.mobile-header', { y: 0, opacity: 1, duration: 0.5 })
-            .to('.hero-title', { y: 0, opacity: 1 }, '-=0.3')
-            .to('.hero-description', { y: 0, opacity: 1 }, '-=0.4')
-            .to('.hero-buttons .btn', {
-                y: 0,
-                opacity: 1,
-                stagger: 0.1,
-                duration: 0.4
-            }, '-=0.3')
-            .to('.stat', {
-                y: 0,
-                opacity: 1,
-                stagger: 0.08,
-                duration: 0.4
-            }, '-=0.3')
-            .to('.hero-image-wrapper', {
-                y: 0,
-                opacity: 1,
-                duration: 0.6
-            }, '-=0.3')
-            .to('.call-us-tab', {
-                opacity: 1,
-                duration: 0.4
-            }, '-=0.3');
+            mobileTl.to('.mobile-header', { y: 0, opacity: 1, duration: 0.5 });
+            
+            if (hasHero) {
+                mobileTl
+                    .to('.hero-title', { y: 0, opacity: 1 }, '-=0.3')
+                    .to('.hero-description', { y: 0, opacity: 1 }, '-=0.4')
+                    .to('.hero-buttons .btn', {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.1,
+                        duration: 0.4
+                    }, '-=0.3')
+                    .to('.stat', {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.08,
+                        duration: 0.4
+                    }, '-=0.3')
+                    .to('.hero-image-wrapper', {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.6
+                    }, '-=0.3')
+                    .to('.call-us-tab', {
+                        opacity: 1,
+                        duration: 0.4
+                    }, '-=0.3');
+            }
+        }
     }
 
     // ----------------------------------------------------
@@ -373,7 +387,7 @@ function initAnimations() {
 
     // Entrance animation for treatments section elements in a single staggered timeline (same style as About section)
     // Only on desktop — mobile uses CSS transitions + IntersectionObserver in responsive.js
-    if (isDesktop) {
+    if (isDesktop && document.querySelector('.treatments-header-badge')) {
         const treatmentsTl = gsap.timeline({
             scrollTrigger: {
                 trigger: '.treatments-header-badge',
@@ -525,13 +539,45 @@ function initAnimations() {
     // Initialize Principal Dentist Tabs for both desktop and mobile
     initDentistTabs();
 
-    // ----------------------------------------------------
-    // 9. Section Fade-Out on Scroll (Desktop only)
-    //    Each section fades + lifts out as the next scrolls in
-    // ----------------------------------------------------
     if (isDesktop) {
         initSectionFadeOut();
     }
+
+    // ----------------------------------------------------
+    // 10. Modal Smile Gallery Animations
+    // ----------------------------------------------------
+    const galleryModals = document.querySelectorAll('.cosmetic-full-modal');
+    galleryModals.forEach(modal => {
+        modal.addEventListener('show.bs.modal', () => {
+            gsap.set(modal.querySelectorAll('.gallery-header-badge'), { y: 30, opacity: 0 });
+            gsap.set(modal.querySelectorAll('.gallery-header-desc'), { y: 30, opacity: 0 });
+            gsap.set(modal.querySelectorAll('.gallery-detail-card'), { y: 30, opacity: 0 });
+            gsap.set(modal.querySelectorAll('.btn-gallery-action'), { y: 30, opacity: 0 });
+            gsap.set(modal.querySelectorAll('.gallery-image-pair-container'), { clipPath: 'inset(50% 0% 50% 0%)' });
+            gsap.set(modal.querySelectorAll('.gallery-img'), { scale: 1.15 });
+            gsap.set(modal.querySelectorAll('.gallery-scroll-indicator-container'), { clipPath: 'inset(50% 0% 50% 0%)' });
+            gsap.set(modal.querySelectorAll('.gallery-scroll-indicator-handle'), { y: 0 });
+        });
+
+        modal.addEventListener('shown.bs.modal', () => {
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
+            tl.to(modal.querySelectorAll('.gallery-header-badge'), { y: 0, opacity: 1 })
+              .to(modal.querySelectorAll('.gallery-header-desc'), { y: 0, opacity: 1 }, '-=0.6')
+              .to(modal.querySelectorAll('.gallery-detail-card'), { y: 0, opacity: 1, stagger: 0.1 }, '-=0.6')
+              .to(modal.querySelectorAll('.btn-gallery-action'), { y: 0, opacity: 1 }, '-=0.6')
+              .to(modal.querySelectorAll('.gallery-image-pair-container'), { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: 'power2.inOut' }, '-=0.8')
+              .to(modal.querySelectorAll('.gallery-img'), { scale: 1, duration: 0.8, ease: 'power2.out' }, '-=0.8')
+              .to(modal.querySelectorAll('.gallery-scroll-indicator-container'), { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: 'power2.inOut' });
+        });
+    });
+
+    // ----------------------------------------------------
+    // 11. Initialize Modal More Services Slider
+    // ----------------------------------------------------
+    const allModals = document.querySelectorAll('.cosmetic-full-modal');
+    allModals.forEach(modal => {
+        initMoreServicesSliders(modal);
+    });
 }
 
 function initTreatmentsAccordion() {
@@ -1032,4 +1078,53 @@ function initSectionFadeOut() {
         });
     });
 }
+function initMoreServicesSliders(modalElement) {
+    const container = modalElement.querySelector('.more-services-slider-container');
+    const prevBtn = modalElement.querySelector('.more-services-nav-btn.prev-btn');
+    const nextBtn = modalElement.querySelector('.more-services-nav-btn.next-btn');
+    const progressBar = modalElement.querySelector('.more-services-progress-bar');
 
+    if (!container || !progressBar) return;
+
+    const updateSliderUI = () => {
+        const scrollLeft = container.scrollLeft;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        // Update progress bar
+        const progressPct = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
+        // Start handle width at 30% and grow to 100%
+        const barWidth = 30 + (progressPct * 0.7);
+        progressBar.style.width = `${barWidth}%`;
+
+        // Update button states
+        if (scrollLeft <= 5) {
+            prevBtn.classList.remove('active');
+        } else {
+            prevBtn.classList.add('active');
+        }
+
+        if (scrollLeft >= maxScroll - 5) {
+            nextBtn.classList.remove('active');
+        } else {
+            nextBtn.classList.add('active');
+        }
+    };
+
+    container.addEventListener('scroll', updateSliderUI);
+    window.addEventListener('resize', updateSliderUI);
+
+    // Initial run
+    updateSliderUI();
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            container.scrollBy({ left: -350, behavior: 'smooth' });
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            container.scrollBy({ left: 350, behavior: 'smooth' });
+        });
+    }
+}

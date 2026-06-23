@@ -40,6 +40,9 @@ function wsd_scripts() {
 	// Bootstrap 5 CSS
 	wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', array(), '5.3.3' );
 
+	// Bootstrap 5 JS
+	wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), '5.3.3', true );
+
 	// Main stylesheet
 	wp_enqueue_style( 'wsd-style', get_stylesheet_uri(), array( 'bootstrap' ), wp_get_theme()->get( 'Version' ) );
 
@@ -162,10 +165,10 @@ function wsd_register_services_cpt() {
 		'rewrite'            => array( 'slug' => 'services' ),
 		'capability_type'    => 'post',
 		'has_archive'        => true,
-		'hierarchical'       => false,
+		'hierarchical'       => true,
 		'menu_position'      => 5,
 		'menu_icon'          => 'dashicons-admin-tools',
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'page-attributes' ),
 		'show_in_rest'       => true,
 	);
 
@@ -183,3 +186,8 @@ function wsd_register_services_cpt() {
 	flush_rewrite_rules();
 }
 add_action( 'init', 'wsd_register_services_cpt' );
+
+
+
+
+

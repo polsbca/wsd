@@ -82,11 +82,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<!-- Treatments Dropdown Menu -->
 									<div class="treatments-dropdown-container">
 										<div class="dropdown-item active">
-											<a href="#general-dentistry">General Dentistry</a>
+											<a href="/services/all-about-general-dentistry-services/">General Dentistry</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
-											<a href="#cosmetic-dentistry">Cosmetic Dentistry</a>
+											<a href="/services/all-about-cosmetic-dentistry-services">Cosmetic Dentistry</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
