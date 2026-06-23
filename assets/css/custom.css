@@ -3248,7 +3248,6 @@ body {
    DESKTOP SECTION SCROLL PINNING (Same logic as mobile version)
    ============================================================ */
 @media (min-width: 992px) {
-
   .key-treatments-section,
   .about-waterside-section,
   .smile-gallery-section,
@@ -3339,7 +3338,6 @@ body {
    BUTTON HOVER TRANSITIONS (DESKTOP ONLY)
    ============================================================ */
 @media (min-width: 992px) {
-
   .btn,
   .payment-btn,
   .dentist-tab-btn,
@@ -3586,1267 +3584,6 @@ body {
 
 .service-content-body li {
   margin-bottom: 12px;
-<<<<<<< .mine
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 }
 
 /* ============================================================
@@ -4864,7 +3601,7 @@ body {
 }
 
 .cosmetic-hero-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 60px;
   line-height: 1.1;
@@ -4877,7 +3614,7 @@ body {
 }
 
 .cosmetic-hero-desc {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 36px;
@@ -4922,7 +3659,7 @@ body {
   border-radius: 30px 30px 0 0;
   color: #ffffff;
   text-decoration: none;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 24px;
   white-space: nowrap;
@@ -4973,7 +3710,7 @@ body {
 }
 
 .cosmetic-treatment-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 34px;
   letter-spacing: -1px;
@@ -5050,7 +3787,7 @@ body {
 }
 
 .cosmetic-membership-badge-text {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #5e5d5f;
@@ -5073,7 +3810,7 @@ body {
 }
 
 .cosmetic-membership-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 48px;
   line-height: 1.1;
@@ -5086,7 +3823,7 @@ body {
 }
 
 .cosmetic-membership-desc {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 24px;
   line-height: 43px;
@@ -5095,7 +3832,7 @@ body {
 }
 
 .cosmetic-membership-price {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 18px;
   color: #5e5d5f;
@@ -5127,7 +3864,7 @@ body {
 }
 
 .cosmetic-membership-benefit-text {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -5151,7 +3888,7 @@ body {
   border: 1px solid #d8a444;
   border-radius: 32px;
   color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 20px;
   letter-spacing: 1px;
@@ -5176,7 +3913,7 @@ body {
   border: 1px solid rgba(94, 93, 95, 0.52);
   border-radius: 32px;
   color: rgba(94, 93, 95, 0.52);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 20px;
   letter-spacing: 1px;
@@ -5339,7 +4076,7 @@ body {
 }
 
 .cosmetic-modal-nav .modal-nav-link {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 18px;
   color: #5e5d5f;
@@ -5363,7 +4100,7 @@ body {
 }
 
 .cosmetic-modal-title-badge h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 48px;
   letter-spacing: -1px;
@@ -5390,7 +4127,7 @@ body {
 }
 
 .cosmetic-modal-desc-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 24px;
   line-height: 40px;
   color: rgba(94, 93, 95, 0.5);
@@ -5403,7 +4140,7 @@ body {
   border-radius: 40px;
   padding: 20px 60px;
   color: #5e5d5f;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 18px;
   background-color: transparent;
@@ -5439,13 +4176,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 12px;
 }
 
 .step-card-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
@@ -5454,7 +4191,7 @@ body {
 }
 
 .step-card-desc {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -5503,7 +4240,7 @@ body {
   border-radius: 0 16px 0 0;
   padding: 8px 24px;
   color: #d8a444;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 20px;
   position: absolute;
@@ -5524,7 +4261,7 @@ body {
 }
 
 .gallery-stat-card .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 22px;
   color: #5e5d5f;
@@ -5533,7 +4270,7 @@ body {
 }
 
 .gallery-stat-card .stat-val {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: #5e5d5f;
@@ -5554,7 +4291,7 @@ body {
 }
 
 .fees-box-header h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 48px;
   color: #5e5d5f;
@@ -5566,7 +4303,7 @@ body {
 }
 
 .fees-box-header p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 28px;
@@ -5583,14 +4320,14 @@ body {
 }
 
 .fee-row .fee-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 24px;
   color: #5e5d5f;
 }
 
 .fee-row .fee-price {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 28px;
   color: #d8a444;
@@ -5620,7 +4357,11 @@ body {
 .symptom-card-overlay {
   width: 100%;
   height: 137px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
   position: relative;
   z-index: 2;
   display: flex;
@@ -5632,7 +4373,7 @@ body {
 }
 
 .symptom-card-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 28px;
@@ -5640,7 +4381,7 @@ body {
 }
 
 .symptom-card-desc {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-size: 16px;
   line-height: 20px;
@@ -5662,7 +4403,7 @@ body {
 }
 
 .benefits-card-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
@@ -5671,7 +4412,7 @@ body {
 }
 
 .benefits-card-desc {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -5703,7 +4444,7 @@ body {
 }
 
 .reviews-rating-link {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 24px;
   color: #d8a444;
@@ -5720,7 +4461,7 @@ body {
 }
 
 .reviews-header-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 24px;
   color: #5e5d5f;
@@ -5767,7 +4508,7 @@ body {
 }
 
 .review-quote-mark {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 350px;
   line-height: 1;
@@ -5796,7 +4537,7 @@ body {
 }
 
 .review-slide-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-style: italic;
   font-size: 40px;
@@ -5806,7 +4547,7 @@ body {
 }
 
 .review-slide-text {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-style: italic;
   font-size: 24px;
@@ -5829,7 +4570,7 @@ body {
 }
 
 .review-slide-author {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-style: italic;
   font-size: 16px;
@@ -5851,7 +4592,6 @@ body {
 }
 
 @media (max-width: 1440px) {
-
   .cosmetic-modal-header,
   .cosmetic-modal-body {
     padding-left: 60px;
@@ -5952,7 +4692,7 @@ body {
 }
 
 .more-services-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 38px;
   letter-spacing: 1px;
@@ -6038,7 +4778,7 @@ body {
 }
 
 .more-service-card-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 24px;
   color: #5e5d5f;
@@ -6071,7 +4811,9 @@ body {
   height: 100%;
   width: 30%;
   border-radius: 10px;
-  transition: width 0.2s ease, left 0.2s ease;
+  transition:
+    width 0.2s ease,
+    left 0.2s ease;
   position: absolute;
   left: 0;
   top: 0;
@@ -6106,4 +4848,3 @@ body {
     font-size: 20px;
   }
 }
->>>>>>> .theirs
