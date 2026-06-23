@@ -148,7 +148,7 @@ body {
 }
 
 .main-navigation a:hover,
-.main-navigation .current-menu-item>a {
+.main-navigation .current-menu-item > a {
   color: var(--primary-color);
   font-weight: 700;
 }
@@ -904,9 +904,12 @@ body {
 
 /* Prevent browser autofill white background override */
 #colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill,
-#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:hover,
-#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:focus,
-#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:active {
+#colophon.site-footer
+  input[type="email"].subscribe-input:-webkit-autofill:hover,
+#colophon.site-footer
+  input[type="email"].subscribe-input:-webkit-autofill:focus,
+#colophon.site-footer
+  input[type="email"].subscribe-input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s;
@@ -1596,7 +1599,9 @@ body {
   left: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
 }
 
 .about-text-content.active {
@@ -2248,7 +2253,7 @@ body {
 
 .testimonials-section {
   background-color: #faf3e6;
-  padding: 133px 0;
+  padding: 0;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -2638,9 +2643,11 @@ body {
 .dentist-gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(270deg,
-      rgba(43, 43, 44, 0) 0%,
-      rgba(43, 43, 44, 0.8) 100%);
+  background: linear-gradient(
+    270deg,
+    rgba(43, 43, 44, 0) 0%,
+    rgba(43, 43, 44, 0.8) 100%
+  );
   z-index: 3;
 }
 
@@ -2766,9 +2773,11 @@ body {
   }
 
   .dentist-gradient-overlay {
-    background: linear-gradient(to top,
-        #faf3e6 0%,
-        rgba(250, 243, 230, 0) 100%);
+    background: linear-gradient(
+      to top,
+      #faf3e6 0%,
+      rgba(250, 243, 230, 0) 100%
+    );
   }
 
   .principal-dentist-section {
@@ -3326,7 +3335,10 @@ body {
     position: relative !important;
     overflow: hidden !important;
     z-index: 1 !important;
-    transition: color 0.5s ease, border-color 0.5s ease, background-color 0.5s ease !important;
+    transition:
+      color 0.5s ease,
+      border-color 0.5s ease,
+      background-color 0.5s ease !important;
   }
 
   .btn::before,
@@ -3334,7 +3346,7 @@ body {
   .dentist-tab-btn::before,
   .book-appointment-btn::before,
   .testimonials-nav-btn::before {
-    content: '' !important;
+    content: "" !important;
     position: absolute !important;
     top: 0 !important;
     left: -15% !important;
@@ -3442,7 +3454,9 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid rgba(94, 93, 95, 0.08);
 }
 

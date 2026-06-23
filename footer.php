@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<!-- Top Row -->
 				<div class="row footer-top-row">
 					<!-- Col 1: Logo & Socials -->
-					<div class="col-xl-3 col-lg-4 col-12 mb-5 mb-lg-0">
+					<div class="col-xl-3 col-lg-4 col-12 mb-5 mb-lg-0 logo-socials-col">
 						<div class="footer-brand">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link d-inline-block">
 								<div class="logo-wrapper">
@@ -141,6 +141,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/lang-arrow.svg' ); ?>" alt="" class="lang-arrow">
 							</div>
 						</div>
+						<!-- ipad only -->
+						 <div class=" last-updated-text ipad-updated-text d-lg-none d-xl-none d-xxl-none">
+						<span>Last updated: June 10, 2025 - 12:55 pm</span>
+					</div>
 					</div>
 				</div>
 
