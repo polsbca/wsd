@@ -17,6 +17,11 @@ body {
   width: 100%;
 }
 
+body.modal-open,
+html:has(body.modal-open) {
+  overflow: hidden !important;
+}
+
 body {
   font-family: var(--font-family-primary);
   color: var(--dark-color);
@@ -3234,6 +3239,7 @@ body {
    DESKTOP SECTION SCROLL PINNING (Same logic as mobile version)
    ============================================================ */
 @media (min-width: 992px) {
+
   .key-treatments-section,
   .about-waterside-section,
   .smile-gallery-section,
@@ -3247,19 +3253,24 @@ body {
   .key-treatments-section {
     height: 1800px !important;
   }
+
   .about-waterside-section {
     height: 1800px !important;
   }
+
   .smile-gallery-section {
     height: 2000px !important;
   }
+
   .testimonials-section {
     height: 1600px !important;
   }
+
   .principal-dentist-section {
     height: 1600px !important;
     display: block !important;
   }
+
   .payment-options-section {
     height: 1600px !important;
     display: block !important;
@@ -3269,7 +3280,8 @@ body {
   .about-sticky-wrapper,
   .gallery-sticky-wrapper {
     position: sticky !important;
-    top: 81px !important; /* height of sticky desktop navigation header */
+    top: 81px !important;
+    /* height of sticky desktop navigation header */
     height: calc(100vh - 81px) !important;
     width: 100% !important;
     z-index: 998 !important;
@@ -3318,6 +3330,7 @@ body {
    BUTTON HOVER TRANSITIONS (DESKTOP ONLY)
    ============================================================ */
 @media (min-width: 992px) {
+
   .btn,
   .payment-btn,
   .dentist-tab-btn,
@@ -3505,7 +3518,7 @@ body {
    SINGLE SERVICE PAGE STYLING
    ============================================================ */
 .single-service-main {
-  background-color: #faf3e6;
+  background-color: #fefdf6;
 }
 
 .service-category-badge {
@@ -3559,4 +3572,1262 @@ body {
 
 .service-content-body li {
   margin-bottom: 12px;
+}
+
+/* ============================================================
+   COSMETIC DENTISTRY CATEGORY LAYOUT
+   ============================================================ */
+.cosmetic-service-hero {
+  background-color: #faf3e6;
+  position: relative;
+  padding: 100px 120px 180px;
+  overflow: visible;
+}
+
+.cosmetic-hero-content {
+  max-width: 600px;
+}
+
+.cosmetic-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 1.1;
+  color: #5e5d5f;
+  margin-bottom: 30px;
+}
+
+.cosmetic-hero-title span.accent {
+  color: #d8a444;
+}
+
+.cosmetic-hero-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 36px;
+  color: #5e5d5f;
+  margin-bottom: 0;
+}
+
+.cosmetic-hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cosmetic-hero-image-wrapper img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Call Us Badge Floating on the Right */
+.floating-call-badge {
+  position: fixed;
+  right: -59.5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center center;
+  z-index: 9999;
+  width: 181px;
+  height: 62px;
+}
+
+.floating-call-badge-content {
+  background-color: #d8a444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px 30px 0 0;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.floating-call-badge-content:hover {
+  background-color: #c79333;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Treatment List Cards Section */
+.cosmetic-treatments-container {
+  max-width: 1679px;
+  width: calc(100% - 240px);
+  margin: -182px auto 0;
+  position: relative;
+  z-index: 10;
+  background-color: #ffffff;
+  border: 1px solid rgba(94, 93, 95, 0.08);
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.04);
+}
+
+.cosmetic-treatment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 60px;
+  border-bottom: 1px solid rgba(216, 164, 68, 0.5);
+  background-color: #faf3e6;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cosmetic-treatment-row:last-child {
+  border-bottom: none;
+}
+
+.cosmetic-treatment-row.active {
+  background-color: #efdab2;
+}
+
+.cosmetic-treatment-row:hover {
+  background-color: #efdab2;
+  text-decoration: none;
+}
+
+.cosmetic-treatment-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 34px;
+  letter-spacing: -1px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.cosmetic-treatment-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d8a444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.cosmetic-treatment-row:hover .cosmetic-treatment-arrow {
+  transform: translateX(5px);
+}
+
+.cosmetic-treatment-arrow img {
+  width: 25px;
+  height: 25px;
+  transform: rotate(180deg);
+}
+
+/* Membership Section */
+.cosmetic-membership-section {
+  padding: 100px 120px 160px;
+  background-color: #fefdf6;
+}
+
+.cosmetic-membership-card {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  position: relative;
+  width: 100%;
+}
+
+.cosmetic-membership-img-col {
+  flex-shrink: 0;
+  width: 673px;
+  position: relative;
+}
+
+.cosmetic-membership-img-col img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.cosmetic-membership-badge {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  border: 1px solid #d8a444;
+  background-color: #fefdf6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 32px;
+  z-index: 5;
+}
+
+.cosmetic-membership-badge-dot {
+  width: 11px;
+  height: 11px;
+  background-color: #d8a444;
+  border-radius: 50%;
+}
+
+.cosmetic-membership-badge-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #5e5d5f;
+  letter-spacing: 1px;
+}
+
+.cosmetic-membership-content-col {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 600px;
+}
+
+.cosmetic-membership-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cosmetic-membership-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.1;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.cosmetic-membership-title span.accent {
+  color: #d8a444;
+}
+
+.cosmetic-membership-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 43px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.cosmetic-membership-price {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.cosmetic-membership-price span.price-amount {
+  color: #d8a444;
+  font-size: 28px;
+}
+
+.cosmetic-membership-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 40px 0;
+}
+
+.cosmetic-membership-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.cosmetic-membership-benefit-icon {
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
+}
+
+.cosmetic-membership-benefit-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.cosmetic-membership-ctas {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.cosmetic-membership-ctas .btn-view-plan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 356px;
+  height: 68px;
+  background-color: #d8a444;
+  border: 1px solid #d8a444;
+  border-radius: 32px;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cosmetic-membership-ctas .btn-view-plan:hover {
+  background-color: #5e5d5f;
+  border-color: #5e5d5f;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.cosmetic-membership-ctas .btn-book-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 420px;
+  height: 68px;
+  background-color: transparent;
+  border: 1px solid rgba(94, 93, 95, 0.52);
+  border-radius: 32px;
+  color: rgba(94, 93, 95, 0.52);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cosmetic-membership-ctas .btn-book-outline:hover {
+  background-color: #d8a444;
+  border-color: #d8a444;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+  .cosmetic-service-hero {
+    padding: 80px 40px 140px;
+  }
+
+  .cosmetic-hero-title {
+    font-size: 48px;
+  }
+
+  .cosmetic-treatments-container {
+    width: calc(100% - 80px);
+    margin-top: -80px;
+  }
+
+  .cosmetic-membership-section {
+    padding: 100px 40px;
+  }
+
+  .cosmetic-membership-card {
+    gap: 50px;
+  }
+
+  .cosmetic-membership-img-col {
+    width: 45%;
+  }
+}
+
+@media (max-width: 991px) {
+  .cosmetic-service-hero {
+    padding: 60px 20px 100px;
+  }
+
+  .cosmetic-hero-title {
+    font-size: 36px;
+  }
+
+  .cosmetic-treatments-container {
+    width: calc(100% - 40px);
+    margin-top: -60px;
+  }
+
+  .cosmetic-treatment-title {
+    font-size: 26px;
+  }
+
+  .cosmetic-membership-section {
+    padding: 80px 20px;
+  }
+
+  .cosmetic-membership-card {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .cosmetic-membership-img-col {
+    width: 100%;
+    max-width: 673px;
+  }
+
+  .cosmetic-membership-badge {
+    position: static;
+    margin-bottom: 20px;
+    display: inline-flex;
+  }
+
+  .cosmetic-membership-content-col {
+    min-height: auto;
+  }
+
+  .cosmetic-membership-ctas {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cosmetic-membership-ctas .btn-view-plan,
+  .cosmetic-membership-ctas .btn-book-outline {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   SINGLE SERVICES CONTENT LAYOUT OVERRIDES
+   ============================================================ */
+.single-services .site-content,
+.single-service-services .site-content,
+.single-service .site-content {
+  display: block !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ============================================================
+   COSMETIC SERVICE FULL SCREEN MODAL STYLING
+   ============================================================ */
+.cosmetic-full-modal {
+  padding-right: 0 !important;
+  z-index: 100000 !important;
+}
+
+.modal-backdrop {
+  z-index: 99999 !important;
+}
+
+.cosmetic-full-modal .modal-dialog {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.cosmetic-modal-content {
+  background-color: #fefdf6;
+  border: none;
+  border-radius: 0;
+  min-height: 100vh;
+  box-shadow: none;
+}
+
+/* Modal Header Bar */
+.cosmetic-modal-header {
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+  padding: 40px 120px;
+  background-color: #fefdf6;
+}
+
+.btn-close-circle {
+  background-color: #d8a444;
+  border: 1px solid #d8a444;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  line-height: 0;
+  padding: 0;
+}
+
+.btn-close-circle:hover {
+  background-color: #c79333;
+}
+
+.cosmetic-modal-nav .modal-nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #5e5d5f;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.cosmetic-modal-nav .modal-nav-link.active,
+.cosmetic-modal-nav .modal-nav-link:hover {
+  color: #d8a444;
+}
+
+.cosmetic-modal-nav .modal-nav-link.text-gold {
+  color: #d8a444;
+  font-weight: 600;
+}
+
+/* Modal Body */
+.cosmetic-modal-body {
+  padding: 80px 120px;
+}
+
+.cosmetic-modal-title-badge h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  letter-spacing: -1px;
+  color: #5e5d5f;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cosmetic-modal-title-badge h2 .accent {
+  color: #d8a444;
+}
+
+.cosmetic-modal-title-badge {
+  background-color: #faf3e6;
+  border-bottom: 1px solid rgba(216, 164, 68, 0.37);
+  padding: 40px 120px;
+  border-radius: 0 30px 30px 0;
+  display: inline-block;
+}
+
+.cosmetic-modal-title-col {
+  margin-left: -120px;
+  /* Aligns the badge to the left edge of screen */
+}
+
+.cosmetic-modal-desc-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  line-height: 40px;
+  color: rgba(94, 93, 95, 0.5);
+  margin: 0;
+}
+
+/* Process tabs buttons */
+.btn-process-tab {
+  border: 1px solid #5e5d5f;
+  border-radius: 40px;
+  padding: 20px 60px;
+  color: #5e5d5f;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-process-tab.active,
+.btn-process-tab:hover {
+  background-color: #d8a444;
+  border-color: #d88c00;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Process step cards */
+.process-step-card {
+  background-color: #faf3e6;
+  border-radius: 16px;
+  padding: 24px;
+  height: 308px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+.step-number-circle {
+  background-color: #d8a444;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.step-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #757575;
+  margin: 0;
+}
+
+.step-card-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 26, 26, 0.5);
+  margin: 0;
+}
+
+/* Before After Images */
+.before-after-wrapper {
+  position: relative;
+  height: 540px;
+  width: 100%;
+}
+
+.before-img-container,
+.after-img-container {
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 40px;
+  width: 533px;
+  position: absolute;
+}
+
+.before-img-container {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.after-img-container {
+  top: 159px;
+  left: 457px;
+  z-index: 2;
+}
+
+.before-img-container img,
+.after-img-container img {
+  width: 100%;
+  height: 349px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.before-after-label {
+  background-color: #ffffff;
+  border-radius: 0 16px 0 0;
+  padding: 8px 24px;
+  color: #d8a444;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+/* Stats */
+.gallery-stat-card {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(94, 93, 95, 0.24);
+  border-radius: 16px;
+  padding: 40px 30px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gallery-stat-card .stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #5e5d5f;
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.gallery-stat-card .stat-val {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #5e5d5f;
+  line-height: 1.2;
+}
+
+/* Fees Box inside modal */
+.cosmetic-fees-box {
+  background-color: #faf3e6;
+  border-radius: 58px;
+  width: 1131px;
+  max-width: 100%;
+}
+
+.fees-box-header {
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+  padding: 100px;
+}
+
+.fees-box-header h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  color: #5e5d5f;
+  margin-bottom: 30px;
+}
+
+.fees-box-header h3 .accent {
+  color: #d8a444;
+}
+
+.fees-box-header p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.fees-box-body {
+  padding: 0 100px 100px;
+}
+
+.fee-row {
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+}
+
+.fee-row .fee-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #5e5d5f;
+}
+
+.fee-row .fee-price {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: #d8a444;
+}
+
+/* Symptoms Cards */
+.symptom-card {
+  height: 311px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.symptom-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.symptom-card-overlay {
+  width: 100%;
+  height: 137px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 10px 30px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.symptom-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0 0 5px 0;
+}
+
+.symptom-card-desc {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Key Benefits step cards */
+.benefits-step-card {
+  background-color: #faf3e6;
+  border: 1px solid rgba(216, 164, 68, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  height: 309px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+.benefits-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.benefits-card-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 26, 26, 0.5);
+  margin: 0;
+}
+
+/* Reviews Section inside Modal */
+.cosmetic-modal-reviews-section {
+  background-color: #faf3e6;
+  padding: 80px 120px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+}
+
+.reviews-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  width: 100%;
+}
+
+.reviews-rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.reviews-rating-link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #d8a444;
+  text-decoration: underline;
+  letter-spacing: 0.96px;
+}
+
+.reviews-dot {
+  width: 5px;
+  height: 5px;
+  background-color: #5e5d5f;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.reviews-header-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #5e5d5f;
+}
+
+.reviews-nav-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.reviews-nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.reviews-nav-btn.prev-btn {
+  background-color: #ffffff;
+  border: 1px solid #5e5d5f;
+}
+
+.reviews-nav-btn.next-btn {
+  background-color: #d8a444;
+}
+
+.reviews-nav-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.reviews-content-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.review-quote-mark {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 350px;
+  line-height: 1;
+  color: rgba(94, 93, 95, 0.08);
+  user-select: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.review-quote-mark.left-quote {
+  left: -40px;
+}
+
+.review-quote-mark.right-quote {
+  right: -40px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.reviews-slider-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+.review-slide-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 56px;
+  color: #5e5d5f;
+  margin-bottom: 30px;
+}
+
+.review-slide-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 44px;
+  color: #5e5d5f;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+.review-slide-stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.review-slide-stars img {
+  width: 14px;
+  height: 14px;
+}
+
+.review-slide-author {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 16px;
+  color: #5e5d5f;
+}
+
+.reviews-progress-track {
+  width: 100%;
+  height: 5px;
+  background-color: rgba(217, 217, 217, 0.51);
+  position: relative;
+  margin-top: 60px;
+}
+
+.reviews-progress-bar {
+  height: 100%;
+  background-color: #d8a444;
+  width: 33.33%;
+}
+
+@media (max-width: 1440px) {
+
+  .cosmetic-modal-header,
+  .cosmetic-modal-body {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .cosmetic-modal-title-col {
+    margin-left: -60px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .after-img-container {
+    left: 200px;
+  }
+
+  .before-img-container,
+  .after-img-container {
+    width: 450px;
+  }
+
+  .before-after-wrapper {
+    height: 480px;
+  }
+
+  .cosmetic-fees-box {
+    width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  .cosmetic-modal-header {
+    padding: 30px 24px;
+  }
+
+  .cosmetic-modal-body {
+    padding: 40px 24px;
+  }
+
+  .cosmetic-modal-title-col {
+    margin-left: 0;
+  }
+
+  .cosmetic-modal-title-badge {
+    padding: 20px 40px;
+    border-radius: 20px;
+  }
+
+  .cosmetic-modal-title-badge h2 {
+    font-size: 32px;
+    white-space: normal;
+  }
+
+  .before-after-wrapper {
+    height: 380px;
+  }
+
+  .before-img-container,
+  .after-img-container {
+    width: 320px;
+  }
+
+  .before-img-container img,
+  .after-img-container img {
+    height: 220px;
+  }
+
+  .after-img-container {
+    left: 100px;
+    top: 100px;
+  }
+
+  .btn-process-tab {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+
+  .fees-box-header,
+  .fees-box-body {
+    padding: 40px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cosmetic-modal-gallery-section .gallery-content-layout {
+    height: 540px;
+  }
+}
+
+/* More Services Section inside Sub-service Modal */
+.cosmetic-modal-more-services-section {
+  background-color: #f6ebd2;
+  margin-left: -120px;
+  margin-right: -120px;
+  margin-bottom: -80px;
+  padding: 80px 120px;
+  box-sizing: border-box;
+}
+
+.more-services-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 38px;
+  letter-spacing: 1px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.more-services-nav-btn {
+  width: 50.4px;
+  height: 50.4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid #5e5d5f;
+}
+
+.more-services-nav-btn img {
+  width: 25.2px;
+  height: 25.2px;
+  filter: brightness(0) invert(0.36);
+  transition: filter 0.3s ease;
+}
+
+.more-services-nav-btn.active {
+  background-color: #d8a444;
+  border-color: #d8a444;
+}
+
+.more-services-nav-btn.active img {
+  filter: brightness(0) invert(1);
+}
+
+.more-services-slider-container {
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+.more-services-slider-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.more-services-slider-track {
+  display: flex;
+  gap: 60px;
+  padding: 10px 0;
+}
+
+.more-service-card-wrapper {
+  flex: 0 0 566px;
+  width: 566px;
+}
+
+.more-service-card {
+  text-decoration: none;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.more-service-card:hover {
+  transform: translateY(-8px);
+  text-decoration: none;
+}
+
+.more-service-card-image {
+  height: 336px;
+  border-radius: 20px;
+  border: 1px solid #d8a444;
+  overflow: hidden;
+  position: relative;
+}
+
+.more-service-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.more-service-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #5e5d5f;
+  letter-spacing: 1px;
+}
+
+.more-service-card-arrow img {
+  transition: transform 0.3s ease;
+}
+
+.more-service-card:hover .more-service-card-arrow img {
+  transform: translateX(4px);
+}
+
+.more-services-progress-wrapper {
+  width: 100%;
+}
+
+.more-services-progress-track {
+  background-color: #d9d9d9;
+  height: 5px;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.more-services-progress-bar {
+  background-color: #d8a444;
+  height: 100%;
+  width: 30%;
+  border-radius: 10px;
+  transition: width 0.2s ease, left 0.2s ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+@media (max-width: 991px) {
+  .cosmetic-modal-more-services-section {
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-bottom: -40px;
+    padding: 40px 24px;
+  }
+
+  .more-services-title {
+    font-size: 28px;
+  }
+
+  .more-services-slider-track {
+    gap: 30px;
+  }
+
+  .more-service-card-wrapper {
+    flex: 0 0 300px;
+    width: 300px;
+  }
+
+  .more-service-card-image {
+    height: 200px;
+  }
+
+  .more-service-card-title {
+    font-size: 20px;
+  }
 }
