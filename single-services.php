@@ -186,6 +186,103 @@ get_header();
 					$gallery_treatment = get_field('gallery_treatment') ?: get_the_title();
 					$gallery_concern = get_field('gallery_concern') ?: 'Worn & Discoloured Teeth';
 					$gallery_visits = get_field('gallery_visits') ?: '2 visits';
+
+					// Fees Group
+					$fees = get_field('fees');
+					$fees = is_array( $fees ) ? $fees : array();
+					$fee_rows = array();
+					for ( $fee_index = 1; $fee_index <= 4; $fee_index++ ) {
+						$fee_title = ! empty( $fees[ 'fee_title_' . $fee_index ] ) ? $fees[ 'fee_title_' . $fee_index ] : '';
+						$fee_value = ! empty( $fees[ 'fee_value_' . $fee_index ] ) ? $fees[ 'fee_value_' . $fee_index ] : '';
+
+						if ( $fee_title || $fee_value ) {
+							$fee_rows[] = array(
+								'title' => $fee_title,
+								'value' => $fee_value,
+							);
+						}
+					}
+
+					// Accordion Section Group
+					$accordion_section = get_field('accordion_section');
+					$accordion_section = is_array( $accordion_section ) ? $accordion_section : array();
+					$accordion_title_part_1 = ! empty( $accordion_section['acc_section_title_part_1'] ) ? $accordion_section['acc_section_title_part_1'] : '';
+					$accordion_title_part_2 = ! empty( $accordion_section['acc_section_title_part_2'] ) ? $accordion_section['acc_section_title_part_2'] : '';
+					$accordion_sub_title = ! empty( $accordion_section['acc_section_sub_title'] ) ? $accordion_section['acc_section_sub_title'] : '';
+					$accordion_rows = array();
+					for ( $accordion_index = 1; $accordion_index <= 4; $accordion_index++ ) {
+						$accordion_title = ! empty( $accordion_section[ 'acc_title_' . $accordion_index ] ) ? $accordion_section[ 'acc_title_' . $accordion_index ] : '';
+						$accordion_content = ! empty( $accordion_section[ 'acc_content_' . $accordion_index ] ) ? $accordion_section[ 'acc_content_' . $accordion_index ] : '';
+
+						if ( $accordion_title || $accordion_content ) {
+							$accordion_rows[] = array(
+								'title'   => $accordion_title,
+								'content' => $accordion_content,
+							);
+						}
+					}
+
+					// Reviews CPT slides.
+					$review_slides = array();
+					if ( post_type_exists( 'review' ) ) {
+						$review_posts = get_posts(
+							array(
+								'post_type'      => 'review',
+								'post_status'    => 'publish',
+								'posts_per_page' => -1,
+								'orderby'        => array(
+									'menu_order' => 'ASC',
+									'date'       => 'DESC',
+								),
+							)
+						);
+
+						$get_review_field = function ( $review_id, $field_names ) {
+							foreach ( $field_names as $field_name ) {
+								$field_value = function_exists( 'get_field' ) ? get_field( $field_name, $review_id ) : get_post_meta( $review_id, $field_name, true );
+
+								if ( is_string( $field_value ) && '' !== trim( $field_value ) ) {
+									return $field_value;
+								}
+
+								if ( is_numeric( $field_value ) ) {
+									return $field_value;
+								}
+							}
+
+							return '';
+						};
+
+						foreach ( $review_posts as $review_post ) {
+							$review_post_id = $review_post->ID;
+							$review_title   = $get_review_field( $review_post_id, array( 'review_title', 'testimonial_title', 'patient_review_title', 'review_heading' ) );
+							$review_text    = $get_review_field( $review_post_id, array( 'review_text', 'review_content', 'testimonial_text', 'patient_review', 'review_description' ) );
+							$review_author  = $get_review_field( $review_post_id, array( 'review_author', 'reviewer_name', 'patient_name', 'testimonial_author', 'author_name' ) );
+							$review_rating  = $get_review_field( $review_post_id, array( 'review_rating', 'rating', 'testimonial_rating', 'star_rating' ) );
+
+							if ( ! $review_title ) {
+								$review_title = get_the_title( $review_post_id );
+							}
+
+							if ( ! $review_text ) {
+								$review_text = has_excerpt( $review_post_id ) ? get_the_excerpt( $review_post_id ) : wp_strip_all_tags( apply_filters( 'the_content', $review_post->post_content ) );
+							}
+
+							if ( ! $review_author && $review_title !== get_the_title( $review_post_id ) ) {
+								$review_author = get_the_title( $review_post_id );
+							}
+
+							if ( $review_title || $review_text || $review_author ) {
+								$review_slides[] = array(
+									'title'  => wp_strip_all_tags( $review_title ),
+									'text'   => wp_strip_all_tags( $review_text ),
+									'author' => wp_strip_all_tags( $review_author ),
+									'rating' => max( 0, min( 5, intval( $review_rating ?: 5 ) ) ),
+								);
+							}
+						}
+					}
+
 					?>
 					<!-- Full-Screen Modal for <?php the_title(); ?> -->
 					<!-- DEBUG: show_smile_gallery for ID <?php the_ID(); ?>: Parent: <?php var_dump($parent_show_gallery); ?>, Child: <?php var_dump($child_show_gallery); ?>, Resolved: <?php var_dump($show_smile_gallery); ?> -->
@@ -199,7 +296,9 @@ get_header();
 									</button>
 									<div class="cosmetic-modal-nav d-none d-md-flex align-items-center gap-4">
 										<a href="#modal-about-<?php the_ID(); ?>" class="modal-nav-link active">About <?php the_title(); ?></a>
-										<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo $show_smile_gallery ? 'Results' : 'Reviews'; ?></a>
+										<?php if ( $show_smile_gallery || ! empty( $review_slides ) ) : ?>
+											<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo $show_smile_gallery ? 'Results' : 'Reviews'; ?></a>
+										<?php endif; ?>
 										<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link text-gold underline">Treatment fees</a>
 									</div>
 								</div>
@@ -432,15 +531,8 @@ get_header();
 												</div>
 											</div>
 										</div>
-									<?php else : ?>
+									<?php elseif ( ! empty( $review_slides ) ) : ?>
 										<!-- Review Design Section -->
-										<?php
-										// Fetch testimonials from ACF or use dynamic placeholders
-										$review_title = get_field('review_title') ?: 'My Confidence Has Completely Changed';
-										$review_text = get_field('review_text') ?: 'The composite bonding took one appointment. One. I walked out looking like a completely different person — in the best possible way.';
-										$review_author = get_field('review_author') ?: 'Tom Hargreaves';
-										$review_rating = get_field('review_rating') ?: 5;
-										?>
 										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-reviews-section py-5 my-5">
 											<div class="reviews-header-row">
 												<div class="reviews-rating-badge">
@@ -451,61 +543,111 @@ get_header();
 													<span class="reviews-dot"></span>
 													<span class="reviews-header-title">What Our Patients think</span>
 												</div>
-												<div class="reviews-nav-buttons">
-													<button class="reviews-nav-btn prev-btn" aria-label="Previous testimonial" type="button">
-														<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous">
-													</button>
-													<button class="reviews-nav-btn next-btn" aria-label="Next testimonial" type="button">
-														<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/right_arrow.svg' ); ?>" alt="Next">
-													</button>
-												</div>
+												<?php if ( count( $review_slides ) > 1 ) : ?>
+													<div class="reviews-nav-buttons">
+														<button class="reviews-nav-btn prev-btn" aria-label="Previous testimonial" type="button">
+															<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous">
+														</button>
+														<button class="reviews-nav-btn next-btn" aria-label="Next testimonial" type="button">
+															<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/right_arrow.svg' ); ?>" alt="Next">
+														</button>
+													</div>
+												<?php endif; ?>
 											</div>
 
 											<div class="reviews-content-row">
 												<div class="review-quote-mark left-quote">“</div>
 												
 												<div class="reviews-slider-container">
-													<h3 class="review-slide-title">“<?php echo esc_html($review_title); ?>”</h3>
-													<p class="review-slide-text"><?php echo esc_html($review_text); ?></p>
-													<div class="review-slide-stars">
-														<?php for ($i = 0; $i < intval($review_rating); $i++) : ?>
-															<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="Star">
-														<?php endfor; ?>
-													</div>
-													<p class="review-slide-author"><?php echo esc_html($review_author); ?></p>
+													<?php foreach ( $review_slides as $review_slide_index => $review_slide ) : ?>
+														<div class="modal-review-slide <?php echo ( 0 === $review_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $review_slide_index ); ?>">
+															<h3 class="review-slide-title">“<?php echo esc_html( $review_slide['title'] ); ?>”</h3>
+															<p class="review-slide-text"><?php echo esc_html( $review_slide['text'] ); ?></p>
+															<div class="review-slide-stars">
+																<?php for ( $i = 0; $i < intval( $review_slide['rating'] ); $i++ ) : ?>
+																	<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="">
+																<?php endfor; ?>
+															</div>
+															<?php if ( $review_slide['author'] ) : ?>
+																<p class="review-slide-author"><?php echo esc_html( $review_slide['author'] ); ?></p>
+															<?php endif; ?>
+														</div>
+													<?php endforeach; ?>
 												</div>
 
 												<div class="review-quote-mark right-quote">”</div>
 											</div>
 
-											<div class="reviews-progress-track">
-												<div class="reviews-progress-bar"></div>
-											</div>
+											<?php if ( count( $review_slides ) > 1 ) : ?>
+												<div class="reviews-progress-track">
+													<div class="reviews-progress-bar"></div>
+												</div>
+											<?php endif; ?>
 										</div>
 									<?php endif; ?>
 
 									<!-- Fees Section -->
 									<div id="modal-fees-<?php the_ID(); ?>" class="modal-section cosmetic-modal-fees-section pt-5 mt-5 pb-0 mb-0">
-										<div class="cosmetic-fees-box mx-auto">
-											<div class="fees-box-header">
-												<h3><?php the_title(); ?> <span class="accent">fees</span></h3>
-												<p>Smile makeovers are tailored to each patient's needs and may involve a combination of cosmetic treatments. Following your consultation, a personalised treatment plan and fee estimate will be provided.</p>
-											</div>
-											<div class="fees-box-body">
-												<div class="fee-row d-flex justify-content-between align-items-center py-4 border-bottom">
-													<span class="fee-name">Cosmetic Consultation</span>
-													<span class="fee-price"><?php echo esc_html( $price ); ?></span>
+										<?php if ( ! empty( $fee_rows ) ) : ?>
+											<div class="cosmetic-fees-box mx-auto">
+												<div class="fees-box-header">
+													<h3><?php the_title(); ?> <span class="accent">Fees</span></h3>
+													<p>Smile makeovers are tailored to each patient's needs and may involve a combination of cosmetic treatments. Following your consultation, a personalised treatment plan and fee estimate will be provided.</p>
 												</div>
-												<div class="fee-row d-flex justify-content-between align-items-center py-4 border-bottom">
-													<span class="fee-name">Smile Assessment</span>
-													<span class="fee-price"><?php echo esc_html( $price ); ?></span>
-												</div>
-												<div class="fee-row d-flex justify-content-between align-items-center py-4">
-													<span class="fee-name">Personalised Treatment Plan</span>
-													<span class="fee-price">Following Consultation</span>
+												<div class="fees-box-body">
+													<?php foreach ( $fee_rows as $fee_row_index => $fee_row ) : ?>
+														<div class="fee-row d-flex justify-content-between align-items-center py-4 <?php echo ( $fee_row_index < count( $fee_rows ) - 1 ) ? 'border-bottom' : ''; ?>">
+															<span class="fee-name"><?php echo esc_html( $fee_row['title'] ); ?></span>
+															<span class="fee-price"><?php echo esc_html( $fee_row['value'] ); ?></span>
+														</div>
+													<?php endforeach; ?>
 												</div>
 											</div>
-									</div>
+										<?php elseif ( ! empty( $accordion_rows ) ) : ?>
+											<div class="cosmetic-accordion-box mx-auto">
+												<?php if ( $accordion_title_part_1 || $accordion_title_part_2 || $accordion_sub_title ) : ?>
+													<div class="cosmetic-accordion-section-header">
+														<?php if ( $accordion_title_part_1 || $accordion_title_part_2 ) : ?>
+															<h3>
+																<?php echo esc_html( $accordion_title_part_1 ); ?>
+																<?php if ( $accordion_title_part_2 ) : ?>
+																	<span class="accent"><?php echo esc_html( $accordion_title_part_2 ); ?></span>
+																<?php endif; ?>
+															</h3>
+														<?php endif; ?>
+														<?php if ( $accordion_sub_title ) : ?>
+															<p><?php echo esc_html( $accordion_sub_title ); ?></p>
+														<?php endif; ?>
+													</div>
+												<?php endif; ?>
+
+												<div class="cosmetic-accordion-list" id="modal-accordion-<?php the_ID(); ?>">
+													<?php foreach ( $accordion_rows as $accordion_row_index => $accordion_row ) : 
+														$accordion_collapse_id = 'modal-accordion-' . get_the_ID() . '-' . $accordion_row_index;
+														$is_first_accordion_row = ( 0 === $accordion_row_index );
+														?>
+														<div class="cosmetic-accordion-item">
+															<button class="cosmetic-accordion-trigger <?php echo $is_first_accordion_row ? '' : 'collapsed'; ?>" type="button" aria-expanded="<?php echo $is_first_accordion_row ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr( $accordion_collapse_id ); ?>">
+																<span><?php echo esc_html( $accordion_row['title'] ); ?></span>
+																<span class="cosmetic-accordion-icon" aria-hidden="true">
+																	<svg class="cosmetic-accordion-icon-svg accordion-icon-up" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																		<path d="M12.854 7.35463C12.8076 7.40112 12.7524 7.438 12.6917 7.46316C12.631 7.48832 12.566 7.50127 12.5003 7.50127C12.4346 7.50127 12.3695 7.48832 12.3088 7.46316C12.2481 7.438 12.193 7.40112 12.1465 7.35463L8.50028 3.70776L8.50028 13.5009C8.50028 13.6335 8.4476 13.7607 8.35383 13.8544C8.26007 13.9482 8.13289 14.0009 8.00028 14.0009C7.86767 14.0009 7.74049 13.9482 7.64673 13.8544C7.55296 13.7607 7.50028 13.6335 7.50028 13.5009L7.50028 3.70776L3.85403 7.35463C3.76021 7.44845 3.63296 7.50116 3.50028 7.50116C3.3676 7.50116 3.24035 7.44845 3.14653 7.35463C3.05271 7.26081 3 7.13356 3 7.00088C3 6.8682 3.05271 6.74095 3.14653 6.64713L7.64653 2.14713C7.69296 2.10064 7.74811 2.06376 7.80881 2.0386C7.86951 2.01344 7.93457 2.00049 8.00028 2.00049C8.06599 2.00049 8.13105 2.01344 8.19175 2.0386C8.25245 2.06376 8.30759 2.10064 8.35403 2.14713L12.854 6.64713C12.9005 6.69357 12.9374 6.74871 12.9626 6.80941C12.9877 6.87011 13.0007 6.93517 13.0007 7.00088C13.0007 7.06659 12.9877 7.13165 12.9626 7.19235C12.9374 7.25305 12.9005 7.30819 12.854 7.35463Z" fill="currentColor"/>
+																	</svg>
+																	<svg class="cosmetic-accordion-icon-svg accordion-icon-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																		<path d="M3.12797 8.49969C3.17578 8.45462 3.23201 8.41941 3.29344 8.39609C3.35487 8.37277 3.42029 8.36178 3.48597 8.36376C3.55165 8.36573 3.61629 8.38064 3.67621 8.40761C3.73612 8.43459 3.79013 8.47311 3.83515 8.52098L7.37 12.2759L7.66471 2.48724C7.6687 2.35469 7.72518 2.22916 7.82173 2.13826C7.91828 2.04735 8.04698 1.99852 8.17953 2.00251C8.31208 2.00651 8.43761 2.06299 8.52852 2.15953C8.61942 2.25608 8.66825 2.38479 8.66426 2.51734L8.36954 12.306L12.1239 8.77053C12.2205 8.67958 12.3493 8.63072 12.4819 8.63471C12.6145 8.63871 12.7401 8.69522 12.8311 8.79182C12.922 8.88842 12.9709 9.0172 12.9669 9.14982C12.9629 9.28244 12.9064 9.40805 12.8098 9.499L8.1764 13.8615C8.12858 13.9066 8.07235 13.9418 8.01092 13.9651C7.94949 13.9885 7.88407 13.9994 7.81839 13.9975C7.75272 13.9955 7.68807 13.9806 7.62816 13.9536C7.56824 13.9266 7.51423 13.8881 7.46922 13.8402L3.10668 9.20687C3.06161 9.15905 3.0264 9.10282 3.00308 9.04139C2.97975 8.97997 2.96877 8.91454 2.97074 8.84886C2.97272 8.78319 2.98763 8.71854 3.0146 8.65863C3.04158 8.59871 3.0801 8.5447 3.12797 8.49969Z" fill="currentColor"/>
+																	</svg>
+																</span>
+															</button>
+															<div id="<?php echo esc_attr( $accordion_collapse_id ); ?>" class="cosmetic-accordion-panel <?php echo $is_first_accordion_row ? 'active' : ''; ?>">
+																<div class="cosmetic-accordion-content">
+																	<?php echo esc_html( $accordion_row['content'] ); ?>
+																</div>
+															</div>
+														</div>
+													<?php endforeach; ?>
+												</div>
+											</div>
+										<?php endif; ?>
 									</div>
 
 									<!-- More Services Section -->
@@ -540,13 +682,14 @@ get_header();
 												foreach ( $other_services_query->posts as $other_post ) :
 													$card_img = get_the_post_thumbnail_url( $other_post->ID, 'large' );
 													if ( !$card_img ) {
-														$card_img = esc_url( get_template_directory_uri() . '/assets/images/stained-teeth.png' );
+														$card_img = get_template_directory_uri() . '/assets/images/cosmetic-hero.png';
 													}
+													$fallback_card_img = get_template_directory_uri() . '/assets/images/cosmetic-hero.png';
 												?>
 												<div class="more-service-card-wrapper">
 													<a href="javascript:void(0)" class="more-service-card" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#sub-service-modal-<?php echo $other_post->ID; ?>">
 														<div class="more-service-card-image">
-															<img src="<?php echo esc_url( $card_img ); ?>" alt="<?php echo esc_attr( $other_post->post_title ); ?>">
+															<img src="<?php echo esc_url( $card_img ); ?>" alt="<?php echo esc_attr( $other_post->post_title ); ?>" onerror="this.onerror=null;this.src='<?php echo esc_url( $fallback_card_img ); ?>';">
 														</div>
 														<div class="more-service-card-footer d-flex align-items-center justify-content-between mt-3">
 															<span class="more-service-card-title"><?php echo esc_html( $other_post->post_title ); ?></span>

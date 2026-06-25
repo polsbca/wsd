@@ -2354,31 +2354,35 @@ body {
   box-sizing: border-box;
 }
 
-.testimonials-nav-btn.prev-btn {
-  background-color: #ffffff;
-  border: 1px solid #5e5d5f;
-  padding: 8.4px;
-}
-
-.testimonials-nav-btn.prev-btn:hover {
-  background-color: #fefdf6;
-  transform: scale(1.05);
-}
-
+.testimonials-nav-btn.prev-btn,
 .testimonials-nav-btn.next-btn {
-  background-color: #d8a444;
-  border: none;
+  background-color: transparent;
+  border: 1px solid rgba(94, 93, 95, 0.5);
   padding: 8.4px;
 }
 
-.testimonials-nav-btn.next-btn:hover {
-  background-color: #c79333;
+.testimonials-nav-btn.prev-btn:hover,
+.testimonials-nav-btn.prev-btn:focus,
+.testimonials-nav-btn.prev-btn:active,
+.testimonials-nav-btn.next-btn:hover,
+.testimonials-nav-btn.next-btn:focus,
+.testimonials-nav-btn.next-btn:active {
+  background-color: #d8a444;
+  border-color: #d8a444;
   transform: scale(1.05);
 }
 
 .nav-btn-img {
   width: 25.2px;
   height: 25.2px;
+  filter: brightness(0) invert(0.36);
+  transition: filter 0.3s ease;
+}
+
+.testimonials-nav-btn:hover .nav-btn-img,
+.testimonials-nav-btn:focus .nav-btn-img,
+.testimonials-nav-btn:active .nav-btn-img {
+  filter: brightness(0) invert(1);
 }
 
 .testimonials-content-row {
@@ -3342,7 +3346,11 @@ body {
   .payment-btn,
   .dentist-tab-btn,
   .book-appointment-btn,
-  .testimonials-nav-btn {
+  .testimonials-nav-btn,
+  .btn-close-circle,
+  .btn-process-tab,
+  .reviews-nav-btn,
+  .more-services-nav-btn {
     position: relative !important;
     overflow: hidden !important;
     z-index: 1 !important;
@@ -3356,7 +3364,11 @@ body {
   .payment-btn::before,
   .dentist-tab-btn::before,
   .book-appointment-btn::before,
-  .testimonials-nav-btn::before {
+  .testimonials-nav-btn::before,
+  .btn-close-circle::before,
+  .btn-process-tab::before,
+  .reviews-nav-btn::before,
+  .more-services-nav-btn::before {
     content: "" !important;
     position: absolute !important;
     top: 0 !important;
@@ -3374,21 +3386,27 @@ body {
   .payment-btn:hover::before,
   .dentist-tab-btn:hover::before,
   .book-appointment-btn:hover::before,
-  .testimonials-nav-btn:hover::before {
+  .testimonials-nav-btn:hover::before,
+  .btn-close-circle:hover::before,
+  .btn-process-tab:hover::before,
+  .reviews-nav-btn:hover::before,
+  .more-services-nav-btn:hover::before {
     transform: skewX(-25deg) scaleX(1) !important;
   }
 
   .btn-primary,
   .tab-action-btn,
   .book-appointment-btn,
-  .testimonials-nav-btn.next-btn {
+  .btn-close-circle,
+  .btn-process-tab.active {
     --hover-sweep-bg: #5e5d5f !important;
   }
 
   .btn-primary:hover,
   .tab-action-btn:hover,
   .book-appointment-btn:hover,
-  .testimonials-nav-btn.next-btn:hover {
+  .btn-close-circle:hover,
+  .btn-process-tab.active:hover {
     color: #ffffff !important;
     background-color: var(--primary-color) !important;
     border-color: #5e5d5f !important;
@@ -3397,14 +3415,22 @@ body {
   .btn-secondary,
   .btn-gallery-action,
   .payment-btn,
-  .testimonials-nav-btn.prev-btn {
+  .testimonials-nav-btn.prev-btn,
+  .testimonials-nav-btn.next-btn,
+  .btn-process-tab:not(.active),
+  .reviews-nav-btn,
+  .more-services-nav-btn {
     --hover-sweep-bg: #d8a444 !important;
   }
 
   .btn-secondary:hover,
   .btn-gallery-action:hover,
   .payment-btn:hover,
-  .testimonials-nav-btn.prev-btn:hover {
+  .testimonials-nav-btn.prev-btn:hover,
+  .testimonials-nav-btn.next-btn:hover,
+  .btn-process-tab:not(.active):hover,
+  .reviews-nav-btn:hover,
+  .more-services-nav-btn:hover {
     color: #ffffff !important;
     border-color: #d8a444 !important;
     background-color: transparent !important;
@@ -4096,7 +4122,7 @@ body {
 
 /* Modal Body */
 .cosmetic-modal-body {
-  padding: 80px 120px;
+  padding: 80px 120px 0;
 }
 
 .cosmetic-modal-title-badge h2 {
@@ -4333,6 +4359,147 @@ body {
   color: #d8a444;
 }
 
+/* Accordion box inside modal */
+.cosmetic-accordion-box {
+  background-color: #faf3e6;
+  border-radius: 58px;
+  width: 1131px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.cosmetic-accordion-section-header {
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+  padding: 80px 100px;
+}
+
+.cosmetic-accordion-section-header h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.15;
+  color: #5e5d5f;
+  margin: 0 0 30px;
+}
+
+.cosmetic-accordion-section-header h3 .accent {
+  color: #d8a444;
+}
+
+.cosmetic-accordion-section-header p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #5e5d5f;
+  margin: 0;
+}
+
+.cosmetic-accordion-list {
+  padding: 0 100px 80px;
+}
+
+.cosmetic-accordion-item {
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+}
+
+.cosmetic-accordion-item:last-child {
+  border-bottom: none;
+}
+
+.cosmetic-accordion-trigger {
+  width: 100%;
+  min-height: 88px;
+  padding: 28px 0;
+  border: 0;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.35;
+  color: #5e5d5f;
+}
+
+.cosmetic-accordion-trigger:hover,
+.cosmetic-accordion-trigger:focus,
+.cosmetic-accordion-trigger:active {
+  outline: none;
+  background: transparent !important;
+  color: #5e5d5f;
+}
+
+.cosmetic-accordion-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(94, 93, 95, 0.5);
+  position: relative;
+  background-color: transparent;
+  color: #5e5d5f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.cosmetic-accordion-icon-svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.cosmetic-accordion-trigger:not(.collapsed) .cosmetic-accordion-icon {
+  background-color: #d8a444;
+  border-color: #d8a444;
+  color: #ffffff;
+}
+
+.cosmetic-accordion-trigger.collapsed:hover .cosmetic-accordion-icon,
+.cosmetic-accordion-trigger.collapsed:focus .cosmetic-accordion-icon,
+.cosmetic-accordion-trigger.collapsed:active .cosmetic-accordion-icon {
+  background-color: transparent;
+  border-color: rgba(94, 93, 95, 0.5);
+  color: #5e5d5f;
+}
+
+.cosmetic-accordion-trigger .accordion-icon-up {
+  display: block;
+}
+
+.cosmetic-accordion-trigger .accordion-icon-down {
+  display: none;
+}
+
+.cosmetic-accordion-trigger.collapsed .accordion-icon-up {
+  display: none;
+}
+
+.cosmetic-accordion-trigger.collapsed .accordion-icon-down {
+  display: block;
+}
+
+.cosmetic-accordion-panel {
+  overflow: hidden;
+}
+
+.cosmetic-accordion-content {
+  padding: 0 64px 32px 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  color: rgba(94, 93, 95, 0.72);
+}
+
 /* Symptoms Cards */
 .symptom-card {
   height: 311px;
@@ -4485,17 +4652,34 @@ body {
 }
 
 .reviews-nav-btn.prev-btn {
-  background-color: #ffffff;
-  border: 1px solid #5e5d5f;
+  background-color: transparent !important;
+  border: 1px solid rgba(94, 93, 95, 0.5);
 }
 
 .reviews-nav-btn.next-btn {
-  background-color: #d8a444;
+  background-color: transparent !important;
+  border: 1px solid rgba(94, 93, 95, 0.5);
 }
 
 .reviews-nav-btn img {
   width: 16px;
   height: 16px;
+  filter: brightness(0) invert(0.36);
+  transition: filter 0.3s ease;
+}
+
+.reviews-nav-btn:hover,
+.reviews-nav-btn:focus,
+.reviews-nav-btn:active {
+  background-color: #d8a444 !important;
+  border-color: #d8a444;
+  outline: none;
+}
+
+.reviews-nav-btn:hover img,
+.reviews-nav-btn:focus img,
+.reviews-nav-btn:active img {
+  filter: brightness(0) invert(1);
 }
 
 .reviews-content-row {
@@ -4534,6 +4718,25 @@ body {
   text-align: center;
   z-index: 2;
   position: relative;
+  min-height: 420px;
+  width: 100%;
+}
+
+.modal-review-slide {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 420px;
+  opacity: 0;
+}
+
+.modal-review-slide.active {
+  display: flex;
+  opacity: 1;
 }
 
 .review-slide-title {
@@ -4620,6 +4823,18 @@ body {
   .cosmetic-fees-box {
     width: 100%;
   }
+
+  .cosmetic-accordion-box {
+    width: 100%;
+  }
+
+  .cosmetic-accordion-section-header {
+    padding: 60px;
+  }
+
+  .cosmetic-accordion-list {
+    padding: 0 60px 60px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -4673,6 +4888,35 @@ body {
   .fees-box-body {
     padding: 40px;
   }
+
+  .cosmetic-accordion-section-header {
+    padding: 40px;
+  }
+
+  .cosmetic-accordion-section-header h3 {
+    font-size: 32px;
+  }
+
+  .cosmetic-accordion-section-header p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .cosmetic-accordion-list {
+    padding: 0 40px 40px;
+  }
+
+  .cosmetic-accordion-trigger {
+    min-height: 72px;
+    padding: 22px 0;
+    font-size: 18px;
+  }
+
+  .cosmetic-accordion-content {
+    padding-right: 0;
+    font-size: 15px;
+    line-height: 26px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -4689,6 +4933,29 @@ body {
   margin-bottom: -80px;
   padding: 80px 120px;
   box-sizing: border-box;
+}
+
+@media (min-width: 992px) {
+  .cosmetic-modal-fees-section {
+    margin-bottom: 80px !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cosmetic-modal-fees-section + .cosmetic-modal-more-services-section {
+    margin-top: 0;
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 992px) {
+  .cosmetic-modal-more-services-section {
+    margin-left: -60px;
+    margin-right: -60px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
 }
 
 .more-services-title {
@@ -4743,13 +5010,14 @@ body {
 
 .more-services-slider-track {
   display: flex;
-  gap: 60px;
+  gap: 24px;
   padding: 10px 0;
 }
 
 .more-service-card-wrapper {
-  flex: 0 0 566px;
-  width: 566px;
+  flex: 0 0 calc((100% - 48px) / 3);
+  width: calc((100% - 48px) / 3);
+  max-width: 566px;
 }
 
 .more-service-card {
@@ -4764,7 +5032,8 @@ body {
 }
 
 .more-service-card-image {
-  height: 336px;
+  aspect-ratio: 566 / 336;
+  height: auto;
   border-radius: 20px;
   border: 1px solid #d8a444;
   overflow: hidden;
@@ -4819,6 +5088,153 @@ body {
   top: 0;
 }
 
+@media (min-width: 992px) {
+  .cosmetic-modal-more-services-section {
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  .more-services-header {
+    margin-bottom: 56px !important;
+  }
+
+  .more-services-title {
+    font-size: clamp(24px, 2vw, 34px);
+    line-height: 1.25;
+    letter-spacing: 0.2px;
+  }
+
+  .more-services-nav {
+    gap: 16px !important;
+  }
+
+  .more-services-nav-btn {
+    width: clamp(32px, 2.8vw, 44px);
+    height: clamp(32px, 2.8vw, 44px);
+  }
+
+  .more-services-nav-btn img {
+    width: 55%;
+    height: 55%;
+  }
+
+  .more-services-nav-btn.prev-btn {
+    background-color: transparent;
+    border: 1px solid rgba(94, 93, 95, 0.5);
+  }
+
+  .more-services-nav-btn.prev-btn img,
+  .more-services-nav-btn.next-btn img {
+    filter: brightness(0) invert(0.36);
+  }
+
+  .more-services-nav-btn.next-btn {
+    background-color: transparent;
+    border: 1px solid rgba(94, 93, 95, 0.5);
+  }
+
+  .more-services-nav-btn.prev-btn.active,
+  .more-services-nav-btn.next-btn.active {
+    background-color: transparent;
+    border-color: rgba(94, 93, 95, 0.5);
+  }
+
+  .more-services-nav-btn.prev-btn.active img,
+  .more-services-nav-btn.next-btn.active img {
+    filter: brightness(0) invert(0.36);
+  }
+
+  .more-services-nav-btn:hover,
+  .more-services-nav-btn:focus,
+  .more-services-nav-btn.active:hover,
+  .more-services-nav-btn.active:focus {
+    background-color: #d8a444;
+    border-color: #d8a444;
+  }
+
+  .more-services-nav-btn:hover img,
+  .more-services-nav-btn:focus img,
+  .more-services-nav-btn.active:hover img,
+  .more-services-nav-btn.active:focus img {
+    filter: brightness(0) invert(1);
+  }
+
+  .more-services-slider-track {
+    gap: 40px;
+    padding: 0;
+  }
+
+  .more-service-card-wrapper {
+    flex-basis: calc((100% - 80px) / 3);
+    width: calc((100% - 80px) / 3);
+  }
+
+  .more-service-card:hover {
+    transform: none;
+  }
+
+  .more-service-card-image {
+    border-radius: 12px;
+    background-color: #fefdf6;
+  }
+
+  .more-service-card-image img {
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .more-service-card:hover .more-service-card-image img {
+    transform: scale(1.03);
+  }
+
+  .more-service-card-footer {
+    margin-top: 20px !important;
+    gap: 16px;
+  }
+
+  .more-service-card-title {
+    font-size: clamp(16px, 1.15vw, 20px);
+    line-height: 1.35;
+    letter-spacing: 0.2px;
+  }
+
+  .more-service-card-arrow {
+    width: clamp(28px, 2.7vw, 40px);
+    height: clamp(28px, 2.7vw, 40px);
+    min-width: clamp(28px, 2.7vw, 40px);
+    border-radius: 50%;
+    background-color: #d8a444;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .more-service-card-arrow img {
+    width: 56% !important;
+    height: 56% !important;
+    display: block;
+    filter: none;
+    transform: rotate(135deg) !important;
+  }
+
+  .more-service-card:hover .more-service-card-arrow {
+    background-color: #c79333;
+    transform: translateX(4px);
+  }
+
+  .more-services-progress-wrapper {
+    margin-top: 36px !important;
+  }
+
+  .more-services-progress-track {
+    height: 4px;
+    background-color: rgba(217, 217, 217, 0.65);
+  }
+}
+
 @media (max-width: 991px) {
   .cosmetic-modal-more-services-section {
     margin-left: -24px;
@@ -4846,5 +5262,87 @@ body {
 
   .more-service-card-title {
     font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cosmetic-full-modal .btn-close-circle,
+  .cosmetic-full-modal .btn-process-tab,
+  .cosmetic-full-modal .reviews-nav-btn,
+  .cosmetic-full-modal .more-services-nav-btn,
+  .cosmetic-full-modal .more-service-card-arrow {
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+    transition:
+      color 0.5s ease,
+      border-color 0.5s ease,
+      background-color 0.5s ease,
+      transform 0.3s ease !important;
+  }
+
+  .cosmetic-full-modal .btn-close-circle::before,
+  .cosmetic-full-modal .btn-process-tab::before,
+  .cosmetic-full-modal .reviews-nav-btn::before,
+  .cosmetic-full-modal .more-services-nav-btn::before,
+  .cosmetic-full-modal .more-service-card-arrow::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -15% !important;
+    width: 130% !important;
+    height: 100% !important;
+    background-color: var(--hover-sweep-bg, #d8a444) !important;
+    transform: skewX(-25deg) scaleX(0) !important;
+    transform-origin: left !important;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: -1 !important;
+  }
+
+  .cosmetic-full-modal .btn-close-circle:hover::before,
+  .cosmetic-full-modal .btn-process-tab:hover::before,
+  .cosmetic-full-modal .reviews-nav-btn:hover::before,
+  .cosmetic-full-modal .more-services-nav-btn:hover::before,
+  .cosmetic-full-modal .more-service-card:hover .more-service-card-arrow::before {
+    transform: skewX(-25deg) scaleX(1) !important;
+  }
+
+  .cosmetic-full-modal .btn-close-circle,
+  .cosmetic-full-modal .btn-process-tab.active,
+  .cosmetic-full-modal .more-service-card-arrow {
+    --hover-sweep-bg: #5e5d5f !important;
+  }
+
+  .cosmetic-full-modal .btn-process-tab:not(.active),
+  .cosmetic-full-modal .reviews-nav-btn,
+  .cosmetic-full-modal .more-services-nav-btn {
+    --hover-sweep-bg: #d8a444 !important;
+  }
+
+  .cosmetic-full-modal .btn-process-tab:not(.active):hover,
+  .cosmetic-full-modal .reviews-nav-btn:hover,
+  .cosmetic-full-modal .reviews-nav-btn:focus,
+  .cosmetic-full-modal .reviews-nav-btn:active,
+  .cosmetic-full-modal .more-services-nav-btn:hover,
+  .cosmetic-full-modal .more-services-nav-btn:focus,
+  .cosmetic-full-modal .more-services-nav-btn.active:hover,
+  .cosmetic-full-modal .more-services-nav-btn.active:focus {
+    background-color: transparent !important;
+    border-color: #d8a444 !important;
+    color: #ffffff !important;
+  }
+
+  .cosmetic-full-modal .btn-close-circle:hover,
+  .cosmetic-full-modal .btn-process-tab.active:hover,
+  .cosmetic-full-modal .more-service-card:hover .more-service-card-arrow {
+    background-color: #d8a444 !important;
+    border-color: #5e5d5f !important;
+    color: #ffffff !important;
+  }
+
+  .cosmetic-full-modal .close-x,
+  .cosmetic-full-modal .more-service-card-arrow img {
+    position: relative;
+    z-index: 1;
   }
 }

@@ -538,6 +538,7 @@ function initAnimations() {
     
     // Initialize Principal Dentist Tabs for both desktop and mobile
     initDentistTabs();
+    initServicePageTextAnimations();
 
     if (isDesktop) {
         initSectionFadeOut();
@@ -577,6 +578,332 @@ function initAnimations() {
     const allModals = document.querySelectorAll('.cosmetic-full-modal');
     allModals.forEach(modal => {
         initMoreServicesSliders(modal);
+        initModalAccordions(modal);
+        initModalReviewsSlider(modal);
+        initModalTextAppearances(modal);
+    });
+}
+
+function initServicePageTextAnimations() {
+    const serviceMain = document.querySelector('.single-service-main');
+    if (!serviceMain) return;
+
+    const animateIn = (elements, vars = {}) => {
+        const targets = gsap.utils.toArray(elements).filter(Boolean);
+        if (!targets.length) return null;
+
+        const toVars = {
+            y: 0,
+            opacity: 1,
+            stagger: vars.stagger || 0.12,
+            duration: vars.duration || 0.8,
+            ease: vars.ease || 'power3.out',
+        };
+
+        if (vars.trigger) {
+            toVars.scrollTrigger = {
+                trigger: vars.trigger,
+                start: vars.start || 'top 80%',
+                toggleActions: 'play none none none',
+            };
+        }
+
+        return gsap.fromTo(targets, { y: vars.yStart || 30, opacity: 0 }, toVars);
+    };
+
+    const cosmeticHero = serviceMain.querySelector('.cosmetic-service-hero');
+    if (cosmeticHero) {
+        const heroTitle = cosmeticHero.querySelector('.cosmetic-hero-title');
+        const heroDesc = cosmeticHero.querySelector('.cosmetic-hero-desc');
+        const heroImage = cosmeticHero.querySelector('.cosmetic-hero-image-wrapper');
+        const callBadge = cosmeticHero.querySelector('.floating-call-badge');
+
+        gsap.set([heroTitle, heroDesc].filter(Boolean), { y: 30, opacity: 0 });
+        if (heroImage) gsap.set(heroImage, { x: 50, opacity: 0, scale: 0.95 });
+        if (callBadge) gsap.set(callBadge, { x: 50, opacity: 0 });
+
+        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
+        if (heroTitle) heroTl.to(heroTitle, { y: 0, opacity: 1 });
+        if (heroDesc) heroTl.to(heroDesc, { y: 0, opacity: 1 }, '-=0.6');
+        if (heroImage) {
+            heroTl.to(heroImage, {
+                    x: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
+                    ease: 'power4.out',
+                }, '-=0.6');
+        }
+        if (callBadge) {
+            heroTl.to(callBadge, {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)',
+                }, '-=0.7');
+        }
+    }
+
+    const treatments = serviceMain.querySelector('.cosmetic-treatments-container');
+    if (treatments) {
+        animateIn(treatments.querySelectorAll('.cosmetic-treatment-row'), {
+            trigger: treatments,
+            stagger: 0.1,
+        });
+    }
+
+    const membership = serviceMain.querySelector('.cosmetic-membership-section');
+    if (membership) {
+        animateIn([
+            membership.querySelector('.cosmetic-membership-badge'),
+            membership.querySelector('.cosmetic-membership-title'),
+            membership.querySelector('.cosmetic-membership-desc'),
+            membership.querySelector('.cosmetic-membership-price'),
+            ...membership.querySelectorAll('.cosmetic-membership-benefit-item'),
+            membership.querySelector('.cosmetic-membership-ctas'),
+        ], {
+            trigger: membership,
+            start: 'top 80%',
+            stagger: 0.12,
+        });
+
+        const membershipImage = membership.querySelector('.cosmetic-membership-img-col img');
+        if (membershipImage) {
+            gsap.fromTo(membershipImage,
+                { x: -40, opacity: 0, scale: 0.96 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: membership,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+        }
+    }
+
+    const serviceDetails = serviceMain.querySelector('.service-details-section');
+    if (serviceDetails) {
+        animateIn(serviceDetails.querySelectorAll('.entry-content > *'), {
+            trigger: serviceDetails,
+            start: 'top 85%',
+            stagger: 0.1,
+        });
+    }
+}
+
+function initModalTextAppearances(modalElement) {
+    if (!modalElement) return;
+
+    const getTextTargets = () => modalElement.querySelectorAll([
+        '.cosmetic-modal-title-badge',
+        '.cosmetic-modal-desc-text',
+        '.btn-process-tab',
+        '.process-step-card',
+        '.symptom-card',
+        '.benefits-step-card',
+        '.gallery-header-badge',
+        '.gallery-header-desc',
+        '.gallery-detail-card',
+        '.btn-gallery-action',
+        '.reviews-rating-badge',
+        '.reviews-nav-buttons',
+        '.modal-review-slide.active .review-slide-title',
+        '.modal-review-slide.active .review-slide-text',
+        '.modal-review-slide.active .review-slide-stars',
+        '.modal-review-slide.active .review-slide-author',
+        '.fees-box-header',
+        '.fee-row',
+        '.cosmetic-accordion-section-header',
+        '.cosmetic-accordion-trigger',
+        '.more-services-title',
+        '.more-services-nav',
+        '.more-service-card-wrapper',
+    ].join(', '));
+
+    modalElement.addEventListener('show.bs.modal', () => {
+        gsap.set(getTextTargets(), { y: 30, opacity: 0 });
+    });
+
+    modalElement.addEventListener('shown.bs.modal', () => {
+        const targets = gsap.utils.toArray(getTextTargets());
+        if (!targets.length) return;
+
+        gsap.to(targets, {
+            y: 0,
+            opacity: 1,
+            stagger: 0.06,
+            duration: 0.8,
+            ease: 'power3.out',
+        });
+    });
+}
+
+function initModalReviewsSlider(modalElement) {
+    const section = modalElement.querySelector('.cosmetic-modal-reviews-section');
+    if (!section) return;
+
+    const slides = section.querySelectorAll('.modal-review-slide');
+    const prevBtn = section.querySelector('.reviews-nav-btn.prev-btn');
+    const nextBtn = section.querySelector('.reviews-nav-btn.next-btn');
+    const progressBar = section.querySelector('.reviews-progress-bar');
+
+    if (slides.length <= 1) return;
+
+    let currentIndex = 0;
+    let isTransitioning = false;
+
+    slides.forEach((slide, index) => {
+        const isActive = index === currentIndex;
+        slide.classList.toggle('active', isActive);
+        gsap.set(slide, { opacity: isActive ? 1 : 0 });
+    });
+
+    const updateProgress = () => {
+        if (!progressBar) return;
+
+        const widthPct = ((currentIndex + 1) / slides.length) * 100;
+        gsap.to(progressBar, {
+            width: `${widthPct}%`,
+            duration: 0.45,
+            ease: 'power2.out',
+        });
+    };
+
+    const goToSlide = (newIndex) => {
+        if (isTransitioning || newIndex === currentIndex) return;
+        isTransitioning = true;
+
+        const currentSlide = slides[currentIndex];
+        const nextSlide = slides[newIndex];
+        const currentParts = currentSlide.querySelectorAll('.review-slide-title, .review-slide-text, .review-slide-stars, .review-slide-author');
+        const nextParts = nextSlide.querySelectorAll('.review-slide-title, .review-slide-text, .review-slide-stars, .review-slide-author');
+
+        const timeline = gsap.timeline({
+            onComplete: () => {
+                currentSlide.classList.remove('active');
+                nextSlide.classList.add('active');
+                gsap.set(currentSlide, { opacity: 0, clearProps: 'transform' });
+                gsap.set(currentParts, { clearProps: 'all' });
+                gsap.set(nextSlide, { opacity: 1, clearProps: 'transform' });
+                gsap.set(nextParts, { clearProps: 'all' });
+                currentIndex = newIndex;
+                updateProgress();
+                isTransitioning = false;
+            },
+        });
+
+        timeline
+            .to(currentParts, {
+                y: -20,
+                opacity: 0,
+                stagger: 0.04,
+                duration: 0.25,
+                ease: 'power2.in',
+            })
+            .call(() => {
+                nextSlide.classList.add('active');
+                gsap.set(nextSlide, { opacity: 1 });
+            })
+            .fromTo(nextParts,
+                { y: 22, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.06,
+                    duration: 0.38,
+                    ease: 'power2.out',
+                }
+            );
+    };
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            goToSlide((currentIndex - 1 + slides.length) % slides.length);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            goToSlide((currentIndex + 1) % slides.length);
+        });
+    }
+
+    updateProgress();
+}
+
+function initModalAccordions(modalElement) {
+    const accordions = modalElement.querySelectorAll('.cosmetic-accordion-list');
+    if (!accordions.length) return;
+
+    accordions.forEach(accordion => {
+        const items = accordion.querySelectorAll('.cosmetic-accordion-item');
+
+        items.forEach(item => {
+            const trigger = item.querySelector('.cosmetic-accordion-trigger');
+            const panel = item.querySelector('.cosmetic-accordion-panel');
+            if (!trigger || !panel) return;
+
+            const isActive = panel.classList.contains('active');
+            trigger.classList.toggle('collapsed', !isActive);
+            trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            gsap.set(panel, {
+                height: isActive ? 'auto' : 0,
+                opacity: isActive ? 1 : 0,
+                overflow: 'hidden',
+            });
+
+            trigger.addEventListener('click', () => {
+                const currentlyOpen = panel.classList.contains('active');
+
+                items.forEach(otherItem => {
+                    const otherTrigger = otherItem.querySelector('.cosmetic-accordion-trigger');
+                    const otherPanel = otherItem.querySelector('.cosmetic-accordion-panel');
+                    if (!otherTrigger || !otherPanel || otherPanel === panel || !otherPanel.classList.contains('active')) return;
+
+                    otherPanel.classList.remove('active');
+                    otherTrigger.classList.add('collapsed');
+                    otherTrigger.setAttribute('aria-expanded', 'false');
+                    gsap.to(otherPanel, {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.45,
+                        ease: 'power3.inOut',
+                    });
+                });
+
+                if (currentlyOpen) {
+                    panel.classList.remove('active');
+                    trigger.classList.add('collapsed');
+                    trigger.setAttribute('aria-expanded', 'false');
+                    gsap.to(panel, {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.45,
+                        ease: 'power3.inOut',
+                    });
+                    return;
+                }
+
+                panel.classList.add('active');
+                trigger.classList.remove('collapsed');
+                trigger.setAttribute('aria-expanded', 'true');
+                gsap.fromTo(panel,
+                    { height: 0, opacity: 0 },
+                    {
+                        height: 'auto',
+                        opacity: 1,
+                        duration: 0.55,
+                        ease: 'power3.inOut',
+                    }
+                );
+            });
+        });
     });
 }
 

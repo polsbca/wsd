@@ -480,6 +480,70 @@ get_header();
 		</div>
 	</section>
 
+	<?php
+	// Reviews CPT slides.
+	$review_slides = array();
+	if ( post_type_exists( 'review' ) ) {
+		$review_posts = get_posts(
+			array(
+				'post_type'      => 'review',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'date'       => 'DESC',
+				),
+			)
+		);
+
+		$get_review_field = function ( $review_id, $field_names ) {
+			foreach ( $field_names as $field_name ) {
+				$field_value = function_exists( 'get_field' ) ? get_field( $field_name, $review_id ) : get_post_meta( $review_id, $field_name, true );
+
+				if ( is_string( $field_value ) && '' !== trim( $field_value ) ) {
+					return $field_value;
+				}
+
+				if ( is_numeric( $field_value ) ) {
+					return $field_value;
+				}
+			}
+
+			return '';
+		};
+
+		foreach ( $review_posts as $review_post ) {
+			$review_post_id = $review_post->ID;
+			$review_title   = $get_review_field( $review_post_id, array( 'review_title', 'testimonial_title', 'patient_review_title', 'review_heading' ) );
+			$review_text    = $get_review_field( $review_post_id, array( 'review_text', 'review_content', 'testimonial_text', 'patient_review', 'review_description' ) );
+			$review_author  = $get_review_field( $review_post_id, array( 'review_author', 'reviewer_name', 'patient_name', 'testimonial_author', 'author_name' ) );
+			$review_rating  = $get_review_field( $review_post_id, array( 'review_rating', 'rating', 'testimonial_rating', 'star_rating' ) );
+
+			if ( ! $review_title ) {
+				$review_title = get_the_title( $review_post_id );
+			}
+
+			if ( ! $review_text ) {
+				$review_text = has_excerpt( $review_post_id ) ? get_the_excerpt( $review_post_id ) : wp_strip_all_tags( apply_filters( 'the_content', $review_post->post_content ) );
+			}
+
+			if ( ! $review_author && $review_title !== get_the_title( $review_post_id ) ) {
+				$review_author = get_the_title( $review_post_id );
+			}
+
+			if ( $review_title || $review_text || $review_author ) {
+				$review_slides[] = array(
+					'title'  => wp_strip_all_tags( $review_title ),
+					'text'   => wp_strip_all_tags( $review_text ),
+					'author' => wp_strip_all_tags( $review_author ),
+					'rating' => max( 0, min( 5, intval( $review_rating ?: 5 ) ) ),
+				);
+			}
+		}
+	}
+	?>
+
+	<?php if ( ! empty( $review_slides ) ) : ?>
 	<!-- Testimonials Section -->
 	<section class="testimonials-section" id="testimonials">
 		<div class="testimonials-sticky-wrapper">
@@ -496,14 +560,16 @@ get_header();
 						</span>
 						<span class="testimonials-header-title">What Our Patients think</span>
 					</div>
-					<div class="testimonials-nav-buttons">
-						<button class="testimonials-nav-btn prev-btn" aria-label="Previous testimonial">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous" class="nav-btn-img">
-						</button>
-						<button class="testimonials-nav-btn next-btn" aria-label="Next testimonial">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/right_arrow.svg' ); ?>" alt="Next" class="nav-btn-img">
-						</button>
-					</div>
+					<?php if ( count( $review_slides ) > 1 ) : ?>
+						<div class="testimonials-nav-buttons">
+							<button class="testimonials-nav-btn prev-btn" aria-label="Previous testimonial">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous" class="nav-btn-img">
+							</button>
+							<button class="testimonials-nav-btn next-btn" aria-label="Next testimonial">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/right_arrow.svg' ); ?>" alt="Next" class="nav-btn-img">
+							</button>
+						</div>
+					<?php endif; ?>
 				</div>
 
 				<!-- Testimonial Slider Body -->
@@ -511,61 +577,18 @@ get_header();
 					<div class="testimonial-quote-mark left-quote">“</div>
 					
 					<div class="testimonials-slider">
-						<!-- Slide 1 -->
-						<div class="testimonial-slide active" data-index="0">
-							<h3 class="testimonial-title">A Confident Smile I’m Proud Of</h3>
-							<p class="testimonial-text">The care was exceptional from start to finish. I felt completely at ease, and my smile has never looked better.</p>
-							<div class="testimonial-stars">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+						<?php foreach ( $review_slides as $review_slide_index => $review_slide ) : ?>
+							<div class="testimonial-slide <?php echo ( 0 === $review_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $review_slide_index ); ?>">
+								<h3 class="testimonial-title"><?php echo esc_html( $review_slide['title'] ); ?></h3>
+								<p class="testimonial-text"><?php echo esc_html( $review_slide['text'] ); ?></p>
+								<div class="testimonial-stars">
+									<?php for ( $i = 0; $i < intval( $review_slide['rating'] ); $i++ ) : ?>
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
+									<?php endfor; ?>
+								</div>
+								<p class="testimonial-author"><?php echo esc_html( $review_slide['author'] ); ?></p>
 							</div>
-							<p class="testimonial-author">Emily Carter</p>
-						</div>
-
-						<!-- Slide 2 -->
-						<div class="testimonial-slide" data-index="1">
-							<h3 class="testimonial-title">A Smile I Finally Feel Proud Of</h3>
-							<p class="testimonial-text">I'd been hiding my teeth for years. After my treatment at Waterside, I genuinely cannot stop smiling. The results are beyond what I imagined.</p>
-							<div class="testimonial-stars">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							</div>
-							<p class="testimonial-author">Sara Mitchel</p>
-						</div>
-
-						<!-- Slide 3 -->
-						<div class="testimonial-slide" data-index="2">
-							<h3 class="testimonial-title">The Most Relaxed I've Ever Felt at a Dentist</h3>
-							<p class="testimonial-text">I'm a nervous patient and have avoided dentists for years. The team at Waterside made me feel completely safe from the very first visit.</p>
-							<div class="testimonial-stars">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							</div>
-							<p class="testimonial-author">James Thornton</p>
-						</div>
-
-						<!-- Slide 4 -->
-						<div class="testimonial-slide" data-index="3">
-							<h3 class="testimonial-title">Worth Every Single Penny</h3>
-							<p class="testimonial-text">I saved up for my Invisalign and I would do it all over again. Dr Andrew is exceptional — professional, patient and genuinely passionate about his work.</p>
-							<div class="testimonial-stars">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="" class="star-icon-img">
-							</div>
-							<p class="testimonial-author">Priya Sharma</p>
-						</div>
+						<?php endforeach; ?>
 					</div>
 
 					<div class="testimonial-quote-mark right-quote">”</div>
@@ -573,11 +596,14 @@ get_header();
 			</div>
 
 			<!-- Progress Bar Indicator at bottom -->
-			<div class="testimonials-progress-track">
-				<div class="testimonials-progress-bar"></div>
-			</div>
+			<?php if ( count( $review_slides ) > 1 ) : ?>
+				<div class="testimonials-progress-track">
+					<div class="testimonials-progress-bar"></div>
+				</div>
+			<?php endif; ?>
 		</div>
 	</section>
+	<?php endif; ?>
 
 	<!-- Principal Dentist Section -->
 	<section class="principal-dentist-section" id="principal-dentist">
