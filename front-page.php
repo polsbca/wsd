@@ -56,7 +56,7 @@ get_header();
 
 				<div class="col-lg-6 hero-image-col">
 					<div class="hero-image-wrapper">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-woman.png' ); ?>" alt="Professional dental care" class="hero-img">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-woman.webp' ); ?>" alt="Professional dental care" class="hero-img">
 					</div>
 				</div>
 			</div>
