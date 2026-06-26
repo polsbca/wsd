@@ -5068,6 +5068,11 @@ body {
 }
 
 @media (min-width: 992px) {
+  .cosmetic-modal-gallery-section {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
   .cosmetic-modal-gallery-section.has-gallery-slides {
     min-height: calc((var(--modal-gallery-slides, 1) * 80vh) + 100vh);
     position: relative;
@@ -5075,7 +5080,7 @@ body {
 
   .cosmetic-modal-gallery-section.has-gallery-slides .modal-gallery-sticky-wrapper {
     position: sticky;
-    top: 0;
+    top: -80px;
     min-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;

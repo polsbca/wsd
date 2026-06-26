@@ -110,6 +110,28 @@ function wsd_excerpt_more( $more ) {
 add_filter( 'excerpt_more', 'wsd_excerpt_more' );
 
 /**
+ * Force Smile Gallery Category taxonomy to use checkbox UI in admin.
+ *
+ * ACF-created taxonomies default to tag-style input when non-hierarchical.
+ */
+function wsd_smile_gallery_category_checkbox_ui( $args, $taxonomy ) {
+	$smile_gallery_taxonomies = array(
+		'smile_gallery_category',
+		'smile-gallery-category',
+	);
+
+	if ( in_array( $taxonomy, $smile_gallery_taxonomies, true ) ) {
+		$args['hierarchical']      = true;
+		$args['meta_box_cb']       = 'post_categories_meta_box';
+		$args['show_admin_column'] = true;
+		$args['show_in_rest']      = true;
+	}
+
+	return $args;
+}
+add_filter( 'register_taxonomy_args', 'wsd_smile_gallery_category_checkbox_ui', 10, 2 );
+
+/**
  * Register Custom Post Type "services" and custom taxonomy
  */
 function wsd_register_services_cpt() {

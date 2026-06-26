@@ -594,6 +594,51 @@ function initAnimations() {
         initModalTextAppearances(modal);
         initModalSmileGallery(modal);
         initModalTabContentAnimations(modal);
+        initModalNavScroll(modal);
+    });
+}
+
+function initModalNavScroll(modalElement) {
+    const navLinks = modalElement.querySelectorAll('.cosmetic-modal-nav .modal-nav-link[href^="#"]');
+    const scrollContainer = modalElement.querySelector('.cosmetic-modal-body');
+
+    if (!navLinks.length || !scrollContainer) return;
+
+    const getTargetTop = (target) => {
+        const targetRect = target.getBoundingClientRect();
+        const containerRect = scrollContainer.getBoundingClientRect();
+
+        return scrollContainer.scrollTop + targetRect.top - containerRect.top;
+    };
+
+    const setActiveLink = (activeLink) => {
+        navLinks.forEach((link) => {
+            link.classList.toggle('active', link === activeLink);
+        });
+    };
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const targetSelector = link.getAttribute('href');
+            const target = targetSelector ? modalElement.querySelector(targetSelector) : null;
+
+            if (!target) return;
+
+            event.preventDefault();
+            setActiveLink(link);
+
+            gsap.to(scrollContainer, {
+                scrollTop: getTargetTop(target),
+                duration: 0.85,
+                ease: 'power3.inOut',
+                overwrite: true,
+                onUpdate: () => {
+                    if (typeof ScrollTrigger !== 'undefined') {
+                        ScrollTrigger.update();
+                    }
+                },
+            });
+        });
     });
 }
 
