@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<!-- Top Row -->
 				<div class="row footer-top-row">
 					<!-- Col 1: Logo & Socials -->
-					<div class="col-xl-3 col-lg-4 col-12 mb-5 mb-lg-0 logo-socials-col">
+					<div class="col-xl-3 col-12 mb-5 mb-lg-0 logo-socials-col">
 						<div class="footer-brand">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link d-inline-block">
 								<div class="logo-wrapper">
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
 
 					<!-- Col 2: Navigation Links, Opening Hours, Contact Info -->
-					<div class="col-xl-9 col-lg-8 col-12">
+					<div class="col-xl-9 col-12">
 						<div class="row g-4 footer-links-grid">
 							<!-- Column 1: Cosmetic & Finance -->
 							<div class="col-md-3 col-sm-6 col-12">
@@ -56,7 +56,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<li><a href="#veneers">Veneers</a></li>
 									</ul>
 								</div>
-								<div class="footer-nav-col">
+
+								<div class="footer-nav-col d-md-none d-xl-block">
 									<h4 class="footer-nav-title">Finance</h4>
 									<ul class="footer-nav-list list-unstyled">
 										<li><a href="#fees">Fees</a></li>
@@ -76,7 +77,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<li><a href="#emergency">Emergency</a></li>
 									</ul>
 								</div>
-								<div class="footer-nav-col">
+
+								<div class="footer-nav-col d-md-none d-xl-block">
 									<h4 class="footer-nav-title">Legal Links</h4>
 									<ul class="footer-nav-list list-unstyled">
 										<li><a href="#privacy">Privacy Policy</a></li>
@@ -89,25 +91,78 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 							<!-- Column 3: Opening Hours -->
 							<div class="col-md-3 col-sm-6 col-12 footer-nav-col">
-								<h4 class="footer-nav-title">Opening Hours</h4>
-								<div class="opening-hours-list">
-									<p>Mon: 8.45am – 1pm</p>
-									<p>Tue: 8.45am – 6pm</p>
-									<p>Wed: 8.45am – 6pm</p>
-									<p>Thu: 8.45am – 7pm</p>
-									<p>Fri: 8.45am – 1pm</p>
-									<p>Sat: Saturdays by Appointment</p>
+								<div class="d-md-none d-xl-block">
+									<h4 class="footer-nav-title">Opening Hours</h4>
+									<div class="opening-hours-list">
+										<p>Mon: 8.45am – 1pm</p>
+										<p>Tue: 8.45am – 6pm</p>
+										<p>Wed: 8.45am – 6pm</p>
+										<p>Thu: 8.45am – 7pm</p>
+										<p>Fri: 8.45am – 1pm</p>
+										<p>Sat: Saturdays by Appointment</p>
+									</div>
+								</div>
+
+								<!-- iPad only -->
+								 <div class="footer-nav-col d-none d-md-block d-xl-none">
+									<h4 class="footer-nav-title">Finance</h4>
+									<ul class="footer-nav-list list-unstyled">
+										<li><a href="#fees">Fees</a></li>
+										<li><a href="#calculator">Finance Calculator</a></li>
+										<li><a href="#plans">Dental Plans</a></li>
+									</ul>
 								</div>
 							</div>
 
 							<!-- Column 4: Contact Us -->
 							<div class="col-md-3 col-sm-6 col-12 footer-nav-col">
-								<h4 class="footer-nav-title">Contact Us</h4>
-								<div class="footer-contact-details">
-									<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
-									<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
-									<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
-									<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+								<div class="d-md-none d-xl-block">
+									<h4 class="footer-nav-title">Contact Us</h4>
+									<div class="footer-contact-details">
+										<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
+										<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
+										<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
+										<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+									</div>
+								</div>
+
+								<!-- iPad only -->
+								 <div class="footer-nav-col d-none d-md-block d-xl-none">
+									<h4 class="footer-nav-title">Legal Links</h4>
+									<ul class="footer-nav-list list-unstyled">
+										<li><a href="#privacy">Privacy Policy</a></li>
+										<li><a href="#gdc">GDC Regulations</a></li>
+										<li><a href="#complaints">Complaints Procedure</a></li>
+										<li><a href="#terms">Terms of Use</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- iPad only -->
+						<div class="row g-4 my-5 justify-content-between footer-links-grid d-none d-md-flex d-xl-none">
+							<div class=" col-6 footer-nav-col">
+								<div class="ipad-continfo">
+									<h4 class="footer-nav-title">Contact Us</h4>
+									<div class="footer-contact-details">
+										<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
+										<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
+										<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
+										<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-4 footer-nav-col">
+								<div class="ipad-continfo">
+									<h4 class="footer-nav-title">Opening Hours</h4>
+									<div class="opening-hours-list">
+										<p>Mon: 8.45am – 1pm</p>
+										<p>Tue: 8.45am – 6pm</p>
+										<p>Wed: 8.45am – 6pm</p>
+										<p>Thu: 8.45am – 7pm</p>
+										<p>Fri: 8.45am – 1pm</p>
+										<p>Sat: Saturdays by Appointment</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -117,7 +172,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<!-- Middle Row: Subscribe & Language -->
 				<div class="row align-items-end justify-content-between footer-middle-row">
 					<!-- Subscribe -->
-					<div class="col-lg-7 col-12 mb-4 mb-lg-0 subscribe-col">
+					<div class="col-xl-7 col-12 mb-4 mb-xl-0 subscribe-col">
 						<div class="footer-subscribe d-flex flex-wrap align-items-end gap-4">
 							<div class="subscribe-input-wrapper">
 								<label for="subscribe-email" class="subscribe-label">Get to know our updates:</label>
@@ -134,7 +189,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<!-- Language Selector -->
 					<div class="col-lg-3 col-md-4 col-12 language-col">
-						<div class="footer-language text-lg-end">
+						<div class="footer-language text-center text-xl-end">
 							<p class="lang-label">Language</p>
 							<div class="lang-dropdown">
 								<span class="lang-text">English (UK)</span>
@@ -142,7 +197,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</div>
 						</div>
 						<!-- ipad only -->
-						 <div class=" last-updated-text ipad-updated-text d-lg-none d-xl-none d-xxl-none">
+						 <div class="last-updated-text ipad-updated-text d-none d-md-block d-xl-none">
 						<span>Last updated: June 10, 2025 - 12:55 pm</span>
 					</div>
 					</div>
@@ -153,7 +208,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="col-md-6 col-12 mb-2 mb-md-0 text-center text-md-start last-updated-text">
 						<span>Last updated: June 10, 2025 - 12:55 pm</span>
 					</div>
-					<div class="col-md-6 col-12 text-center text-md-end copyright-text">
+					<div class="col-md-6 col-12 text-center text-xl-end copyright-text">
 						<span>Copyright 2026 watersidedentalcare | Crafted by Funky Vibes Marketing</span>
 					</div>
 				</div>

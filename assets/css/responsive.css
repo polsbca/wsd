@@ -2449,7 +2449,15 @@
     }
   }
 }
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (max-width: 1200px) and (min-width: 992px) {
+  #masthead.site-header {
+    padding: 24px 40px;
+  }
+  .header-top {
+    padding: 24px 40px;
+  }
+}
+@media (max-width: 1200px) and (min-width: 768px) {
   .mobile-header {
     padding: 40px 40px;
   }
@@ -2501,6 +2509,7 @@
   }
   .hero-buttons .btn {
     padding: 20px !important;
+    line-height: 100%;
   }
   .treatments-main-container {
     padding: 0 40px !important;
@@ -2759,6 +2768,13 @@
   .dentist-desc-text p {
     font-size: 16px !important;
   }
+  .dentist-tab-btn {
+    line-height: 100%;
+  }
+  .hero-section .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
   .payment-grid {
     flex-direction: row !important;
   }
@@ -2862,6 +2878,20 @@
   }
   .last-updated-text {
     display: none;
+  }
+  .footer-nav-title {
+    font-size: 12px;
+    margin-bottom: 19px;
+    line-height: 100%;
+  }
+  .footer-nav-list li {
+    margin-bottom: 11px;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
+  }
+  .btn {
+    font-weight: 400;
+    letter-spacing: 0;
   }
 }
 @media (max-width: 767.98px) {
