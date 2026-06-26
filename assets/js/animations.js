@@ -593,6 +593,66 @@ function initAnimations() {
         initModalReviewsSlider(modal);
         initModalTextAppearances(modal);
         initModalSmileGallery(modal);
+        initModalTabContentAnimations(modal);
+    });
+}
+
+function initModalTabContentAnimations(modalElement) {
+    const tabButtons = modalElement.querySelectorAll('.btn-process-tab[data-bs-toggle="pill"]');
+    if (!tabButtons.length) return;
+
+    const getPaneItems = (pane) => {
+        if (!pane) return [];
+
+        return pane.querySelectorAll([
+            '.process-step-card',
+            '.symptom-card',
+            '.benefits-step-card',
+            '.step-number-circle',
+            '.step-card-title',
+            '.step-card-desc',
+            '.symptom-card-title',
+            '.symptom-card-desc',
+            '.benefits-card-title',
+            '.benefits-card-desc',
+        ].join(', '));
+    };
+
+    const animatePane = (pane) => {
+        const items = getPaneItems(pane);
+        if (!items.length) return;
+
+        gsap.killTweensOf(items);
+        gsap.fromTo(items,
+            { y: 28, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                stagger: 0.045,
+                duration: 0.5,
+                ease: 'power3.out',
+                overwrite: true,
+            }
+        );
+    };
+
+    const animateTargetPane = (button) => {
+        const targetSelector = button.getAttribute('data-bs-target');
+        if (!targetSelector) return;
+
+        window.setTimeout(() => {
+            animatePane(modalElement.querySelector(targetSelector));
+        }, 60);
+    };
+
+    tabButtons.forEach((button) => {
+        button.addEventListener('shown.bs.tab', (event) => {
+            animateTargetPane(event.target);
+        });
+
+        button.addEventListener('click', () => {
+            animateTargetPane(button);
+        });
     });
 }
 
