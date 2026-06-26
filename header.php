@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+	<script>document.documentElement.classList.add('wsd-js');</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

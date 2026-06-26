@@ -7,7 +7,6 @@
     if (typeof gsap === 'undefined') return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const desktopQuery = window.matchMedia('(min-width: 992px)');
     const scrollState = { y: window.scrollY };
     let targetY = window.scrollY;
     let scrollTween = null;
@@ -18,32 +17,6 @@
 
     const getMaxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
     const clampY = (value) => gsap.utils.clamp(0, getMaxScroll(), value);
-    const hasScrollDrivenStickySections = () => Boolean(document.querySelector([
-        '.treatments-sticky-wrapper',
-        '.about-sticky-wrapper',
-        '.gallery-sticky-wrapper',
-        '.testimonials-sticky-wrapper',
-        '.dentist-sticky-wrapper',
-        '.payment-sticky-wrapper',
-    ].join(', ')));
-
-    const isModalOpen = () => document.body.classList.contains('modal-open');
-
-    const isInteractiveTarget = (element) => {
-        if (!element) return false;
-
-        return Boolean(element.closest([
-            '.modal',
-            '.offcanvas',
-            '.dropdown-menu',
-            '.more-services-slider-container',
-            'input',
-            'textarea',
-            'select',
-            'button',
-            '[contenteditable="true"]',
-        ].join(', ')));
-    };
 
     const syncScrollState = () => {
         if (scrollTween && scrollTween.isActive()) return;
@@ -75,22 +48,6 @@
                 targetY = window.scrollY;
             },
         });
-    };
-
-    const handleWheel = (event) => {
-        if (
-            !desktopQuery.matches ||
-            prefersReducedMotion.matches ||
-            isModalOpen() ||
-            isInteractiveTarget(event.target) ||
-            hasScrollDrivenStickySections()
-        ) {
-            return;
-        }
-
-        event.preventDefault();
-        const multiplier = event.deltaMode === 1 ? 32 : event.deltaMode === 2 ? window.innerHeight : 1;
-        tweenTo(targetY + (event.deltaY * multiplier * 1.45), 0.38);
     };
 
     const getAnchorTarget = (anchor) => {
@@ -137,6 +94,5 @@
 
     window.addEventListener('scroll', syncScrollState, { passive: true });
     window.addEventListener('resize', syncScrollState);
-    window.addEventListener('wheel', handleWheel, { passive: false });
     document.addEventListener('click', handleAnchorClick);
 })();

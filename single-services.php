@@ -187,6 +187,65 @@ get_header();
 					$gallery_concern = get_field('gallery_concern') ?: 'Worn & Discoloured Teeth';
 					$gallery_visits = get_field('gallery_visits') ?: '2 visits';
 
+					// Smile gallery slides use the same structure as the front-page gallery.
+					$gallery_slides = array();
+					$gallery_image_fallback = esc_url( get_template_directory_uri() . '/assets/images/about1.png' );
+					$normalize_gallery_image = function ( $image ) use ( $gallery_image_fallback ) {
+						if ( is_array( $image ) && ! empty( $image['url'] ) ) {
+							return $image['url'];
+						}
+
+						if ( is_string( $image ) && '' !== trim( $image ) ) {
+							return $image;
+						}
+
+						return $gallery_image_fallback;
+					};
+
+					$gallery_post_ids = array( get_the_ID() );
+					if ( $parent_id ) {
+						$sibling_gallery_posts = get_posts(
+							array(
+								'post_type'      => 'services',
+								'post_parent'    => $parent_id,
+								'post_status'    => 'publish',
+								'posts_per_page' => -1,
+								'post__not_in'   => array( get_the_ID() ),
+								'orderby'        => 'menu_order',
+								'order'          => 'ASC',
+								'fields'         => 'ids',
+							)
+						);
+						$gallery_post_ids = array_merge( $gallery_post_ids, $sibling_gallery_posts );
+					}
+
+					foreach ( $gallery_post_ids as $gallery_post_id ) {
+						$gallery_post_show_gallery = get_field( 'show_smile_gallery', $gallery_post_id );
+						if ( false === $gallery_post_show_gallery ) {
+							continue;
+						}
+
+						$gallery_slides[] = array(
+							'before_image' => $normalize_gallery_image( get_field( 'before_image', $gallery_post_id ) ),
+							'after_image'  => $normalize_gallery_image( get_field( 'after_image', $gallery_post_id ) ),
+							'treatment'    => get_field( 'gallery_treatment', $gallery_post_id ) ?: get_the_title( $gallery_post_id ),
+							'concern'      => get_field( 'gallery_concern', $gallery_post_id ) ?: 'Worn & Discoloured Teeth',
+							'duration'     => get_field( 'service_duration', $gallery_post_id ) ?: '3 months',
+							'visits'       => get_field( 'gallery_visits', $gallery_post_id ) ?: '2 visits',
+						);
+					}
+
+					if ( empty( $gallery_slides ) ) {
+						$gallery_slides[] = array(
+							'before_image' => $normalize_gallery_image( $before_img ),
+							'after_image'  => $normalize_gallery_image( $after_img ),
+							'treatment'    => $gallery_treatment,
+							'concern'      => $gallery_concern,
+							'duration'     => $duration,
+							'visits'       => $gallery_visits,
+						);
+					}
+
 					// Fees Group
 					$fees = get_field('fees');
 					$fees = is_array( $fees ) ? $fees : array();
@@ -456,78 +515,84 @@ get_header();
 									<!-- Results / Reviews Section -->
 									<?php if ( $show_smile_gallery ) : ?>
 										<!-- Smile Gallery Section -->
-										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-gallery-section py-5 my-5">
-											<div class="gallery-header-row mb-5">
-												<div class="gallery-header-badge">
-													<h2 class="gallery-header-title">
-														<span class="light">Smile </span><span class="accent">Gallery</span>
-													</h2>
+										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-gallery-section <?php echo ( count( $gallery_slides ) > 1 ) ? 'has-gallery-slides' : ''; ?> py-5 my-5" style="--modal-gallery-slides: <?php echo esc_attr( max( 1, count( $gallery_slides ) ) ); ?>;">
+											<div class="modal-gallery-sticky-wrapper">
+												<div class="gallery-header-row mb-5">
+													<div class="gallery-header-badge">
+														<h2 class="gallery-header-title">
+															<span class="light">Smile </span><span class="accent">Gallery</span>
+														</h2>
+													</div>
+													<p class="gallery-header-desc">These joyful smiles from our patients truly reflect their trust in the services provided by Waterside Dental.</p>
 												</div>
-												<p class="gallery-header-desc">These joyful smiles from our patients truly reflect their trust in the services provided by Waterside Dental.</p>
-											</div>
 
-											<div class="gallery-content-layout">
-												<div class="gallery-left-col">
-													<div class="gallery-interactive-wrapper">
-														<div class="gallery-slide active" data-index="1">
-															<div class="gallery-image-pair-container">
-																<!-- Before Card -->
-																<div class="gallery-card before-card">
-																	<div class="gallery-card-image-wrapper">
-																		<img src="<?php echo esc_url( $before_img ); ?>" alt="Before treatment" class="gallery-img before-img-crop1">
+												<div class="gallery-content-layout">
+													<div class="gallery-left-col">
+														<div class="gallery-interactive-wrapper">
+															<?php foreach ( $gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+																<div class="gallery-slide <?php echo ( 0 === $gallery_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $gallery_slide_index + 1 ); ?>">
+																	<div class="gallery-image-pair-container">
+																		<!-- Before Card -->
+																		<div class="gallery-card before-card">
+																			<div class="gallery-card-image-wrapper">
+																				<img src="<?php echo esc_url( $gallery_slide['before_image'] ); ?>" alt="Before treatment" class="gallery-img before-img-crop1">
+																			</div>
+																			<div class="gallery-card-label">Before</div>
+																		</div>
+																		<!-- Connecting Arrow Vector -->
+																		<div class="gallery-connecting-arrow">
+																			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
+																		</div>
+																		<!-- After Card -->
+																		<div class="gallery-card after-card">
+																			<div class="gallery-card-image-wrapper">
+																				<img src="<?php echo esc_url( $gallery_slide['after_image'] ); ?>" alt="After treatment" class="gallery-img after-img-crop1">
+																			</div>
+																			<div class="gallery-card-label">After</div>
+																		</div>
 																	</div>
-																	<div class="gallery-card-label">Before</div>
 																</div>
-																<!-- Connecting Arrow Vector -->
-																<div class="gallery-connecting-arrow">
-																	<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
-																</div>
-																<!-- After Card -->
-																<div class="gallery-card after-card">
-																	<div class="gallery-card-image-wrapper">
-																		<img src="<?php echo esc_url( $after_img ); ?>" alt="After treatment" class="gallery-img after-img-crop1">
-																	</div>
-																	<div class="gallery-card-label">After</div>
-																</div>
-															</div>
+															<?php endforeach; ?>
 														</div>
 													</div>
-												</div>
 
-												<!-- Right Column: Detail Cards & Button & Scroll Indicator -->
-												<div class="gallery-right-col">
-													<div class="gallery-info-wrapper">
-														<!-- Detail Cards Grid -->
-														<div class="gallery-details-grid">
-															<div class="gallery-details-data active" data-index="1">
-																<div class="gallery-detail-card">
-																	<span class="detail-label">Treatment</span>
-																	<span class="detail-value"><?php echo esc_html( $gallery_treatment ); ?></span>
-																</div>
-																<div class="gallery-detail-card">
-																	<span class="detail-label">Main Concern</span>
-																	<span class="detail-value"><?php echo esc_html( $gallery_concern ); ?></span>
-																</div>
-																<div class="gallery-detail-card">
-																	<span class="detail-label">Duration</span>
-																	<span class="detail-value"><?php echo esc_html( $duration ); ?></span>
-																</div>
-																<div class="gallery-detail-card">
-																	<span class="detail-label">Visits</span>
-																	<span class="detail-value"><?php echo esc_html( $gallery_visits ); ?></span>
-																</div>
+													<!-- Right Column: Detail Cards & Button & Scroll Indicator -->
+													<div class="gallery-right-col">
+														<div class="gallery-info-wrapper">
+															<!-- Detail Cards Grid -->
+															<div class="gallery-details-grid">
+																<?php foreach ( $gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+																	<div class="gallery-details-data <?php echo ( 0 === $gallery_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $gallery_slide_index + 1 ); ?>">
+																		<div class="gallery-detail-card">
+																			<span class="detail-label">Treatment</span>
+																			<span class="detail-value"><?php echo esc_html( $gallery_slide['treatment'] ); ?></span>
+																		</div>
+																		<div class="gallery-detail-card">
+																			<span class="detail-label">Main Concern</span>
+																			<span class="detail-value"><?php echo esc_html( $gallery_slide['concern'] ); ?></span>
+																		</div>
+																		<div class="gallery-detail-card">
+																			<span class="detail-label">Duration</span>
+																			<span class="detail-value"><?php echo esc_html( $gallery_slide['duration'] ); ?></span>
+																		</div>
+																		<div class="gallery-detail-card">
+																			<span class="detail-label">Visits</span>
+																			<span class="detail-value"><?php echo esc_html( $gallery_slide['visits'] ); ?></span>
+																		</div>
+																	</div>
+																<?php endforeach; ?>
+															</div>
+															<div class="gallery-btn-wrapper">
+																<a href="<?php echo esc_url( home_url( '/smile-gallery/' ) ); ?>" class="btn btn-gallery-action">View Smile Gallery</a>
 															</div>
 														</div>
-														<div class="gallery-btn-wrapper">
-															<a href="<?php echo esc_url( home_url( '/smile-gallery/' ) ); ?>" class="btn btn-gallery-action">View Smile Gallery</a>
+
+														<!-- Scroll Indicator vertical track/handle -->
+														<div class="gallery-scroll-indicator-container">
+															<div class="gallery-scroll-indicator-track"></div>
+															<div class="gallery-scroll-indicator-handle"></div>
 														</div>
 													</div>
-												</div>
-
-												<!-- Scroll Indicator vertical track/handle -->
-												<div class="gallery-scroll-indicator-container">
-													<div class="gallery-scroll-indicator-track"></div>
-													<div class="gallery-scroll-indicator-handle"></div>
 												</div>
 											</div>
 										</div>

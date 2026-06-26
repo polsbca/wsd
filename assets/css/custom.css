@@ -28,6 +28,67 @@ body {
   background-color: #fefdf6;
 }
 
+@media (min-width: 992px) {
+  html.wsd-js body.home .header-top,
+  html.wsd-js body.home #masthead.site-header,
+  html.wsd-js body.page-template-template-services .header-top,
+  html.wsd-js body.page-template-template-services #masthead.site-header,
+  html.wsd-js body.single-services .header-top,
+  html.wsd-js body.single-services #masthead.site-header {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  html.wsd-js body.home .hero-title,
+  html.wsd-js body.home .hero-description,
+  html.wsd-js body.page-template-template-services .hero-title,
+  html.wsd-js body.page-template-template-services .hero-description,
+  html.wsd-js body.single-services .hero-title,
+  html.wsd-js body.single-services .hero-description,
+  html.wsd-js body.single-services .cosmetic-hero-title,
+  html.wsd-js body.single-services .cosmetic-hero-desc {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  html.wsd-js body.home .hero-buttons .btn,
+  html.wsd-js body.home .stat,
+  html.wsd-js body.page-template-template-services .hero-buttons .btn,
+  html.wsd-js body.single-services .hero-buttons .btn,
+  html.wsd-js body.single-services .cosmetic-treatment-row,
+  html.wsd-js body.single-services .cosmetic-membership-badge,
+  html.wsd-js body.single-services .cosmetic-membership-title,
+  html.wsd-js body.single-services .cosmetic-membership-desc,
+  html.wsd-js body.single-services .cosmetic-membership-price,
+  html.wsd-js body.single-services .cosmetic-membership-benefit-item,
+  html.wsd-js body.single-services .cosmetic-membership-ctas {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  html.wsd-js body.home .hero-image-wrapper,
+  html.wsd-js body.page-template-template-services .hero-image-wrapper,
+  html.wsd-js body.single-services .hero-image-wrapper,
+  html.wsd-js body.single-services .cosmetic-hero-image-wrapper {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+  }
+
+  html.wsd-js body.home .call-us-tab {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  html.wsd-js body.single-services .floating-call-badge {
+    opacity: 0;
+  }
+
+  html.wsd-js body.single-services .cosmetic-membership-img-col img {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.96);
+  }
+}
+
 /* Override standard constrained site-content layout on homepage */
 .home .site-content {
   display: block;
@@ -3350,7 +3411,9 @@ body {
   .btn-close-circle,
   .btn-process-tab,
   .reviews-nav-btn,
-  .more-services-nav-btn {
+  .more-services-nav-btn,
+  .btn-view-plan,
+  .btn-book-outline {
     position: relative !important;
     overflow: hidden !important;
     z-index: 1 !important;
@@ -3368,7 +3431,9 @@ body {
   .btn-close-circle::before,
   .btn-process-tab::before,
   .reviews-nav-btn::before,
-  .more-services-nav-btn::before {
+  .more-services-nav-btn::before,
+  .btn-view-plan::before,
+  .btn-book-outline::before {
     content: "" !important;
     position: absolute !important;
     top: 0 !important;
@@ -3390,7 +3455,9 @@ body {
   .btn-close-circle:hover::before,
   .btn-process-tab:hover::before,
   .reviews-nav-btn:hover::before,
-  .more-services-nav-btn:hover::before {
+  .more-services-nav-btn:hover::before,
+  .btn-view-plan:hover::before,
+  .btn-book-outline:hover::before {
     transform: skewX(-25deg) scaleX(1) !important;
   }
 
@@ -3398,7 +3465,8 @@ body {
   .tab-action-btn,
   .book-appointment-btn,
   .btn-close-circle,
-  .btn-process-tab.active {
+  .btn-process-tab.active,
+  .btn-view-plan {
     --hover-sweep-bg: #5e5d5f !important;
   }
 
@@ -3406,7 +3474,8 @@ body {
   .tab-action-btn:hover,
   .book-appointment-btn:hover,
   .btn-close-circle:hover,
-  .btn-process-tab.active:hover {
+  .btn-process-tab.active:hover,
+  .btn-view-plan:hover {
     color: #ffffff !important;
     background-color: var(--primary-color) !important;
     border-color: #5e5d5f !important;
@@ -3419,7 +3488,8 @@ body {
   .testimonials-nav-btn.next-btn,
   .btn-process-tab:not(.active),
   .reviews-nav-btn,
-  .more-services-nav-btn {
+  .more-services-nav-btn,
+  .btn-book-outline {
     --hover-sweep-bg: #d8a444 !important;
   }
 
@@ -3430,7 +3500,8 @@ body {
   .testimonials-nav-btn.next-btn:hover,
   .btn-process-tab:not(.active):hover,
   .reviews-nav-btn:hover,
-  .more-services-nav-btn:hover {
+  .more-services-nav-btn:hover,
+  .btn-book-outline:hover {
     color: #ffffff !important;
     border-color: #d8a444 !important;
     background-color: transparent !important;
@@ -4920,8 +4991,46 @@ body {
 }
 
 @media (min-width: 992px) {
+  .cosmetic-modal-gallery-section.has-gallery-slides {
+    min-height: calc((var(--modal-gallery-slides, 1) * 80vh) + 100vh);
+    position: relative;
+  }
+
+  .cosmetic-modal-gallery-section.has-gallery-slides .modal-gallery-sticky-wrapper {
+    position: sticky;
+    top: 0;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+
   .cosmetic-modal-gallery-section .gallery-content-layout {
     height: 540px;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .cosmetic-modal-gallery-section .gallery-right-col {
+    align-self: stretch;
+    height: 540px;
+    max-height: none;
+    align-items: stretch;
+  }
+
+  .cosmetic-modal-gallery-section .gallery-scroll-indicator-container {
+    height: 100%;
+    min-height: 540px;
+    flex: 0 0 5px;
+    clip-path: inset(0% 0% 0% 0%) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .cosmetic-modal-gallery-section .gallery-scroll-indicator-track,
+  .cosmetic-modal-gallery-section .gallery-scroll-indicator-handle {
+    display: block;
   }
 }
 
@@ -5344,5 +5453,32 @@ body {
   .cosmetic-full-modal .more-service-card-arrow img {
     position: relative;
     z-index: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .cosmetic-membership-ctas .btn-view-plan,
+  .cosmetic-membership-ctas .btn-book-outline {
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+  }
+
+  .cosmetic-membership-ctas .btn-view-plan {
+    --hover-sweep-bg: #5e5d5f !important;
+  }
+
+  .cosmetic-membership-ctas .btn-book-outline {
+    --hover-sweep-bg: #d8a444 !important;
+  }
+
+  .cosmetic-membership-ctas .btn-view-plan:hover {
+    background-color: #d8a444 !important;
+    border-color: #5e5d5f !important;
+  }
+
+  .cosmetic-membership-ctas .btn-book-outline:hover {
+    background-color: transparent !important;
+    border-color: #d8a444 !important;
   }
 }

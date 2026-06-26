@@ -4,14 +4,25 @@
  * Waterside Dental Design Theme
  */
 
+let wsdAnimationsInitialized = false;
+
+function bootAnimations() {
+    if (wsdAnimationsInitialized || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    wsdAnimationsInitialized = true;
+    gsap.registerPlugin(ScrollTrigger);
+    initAnimations();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootAnimations);
+} else {
+    bootAnimations();
+}
+
 window.addEventListener('load', () => {
-    // Register ScrollTrigger plugin
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-        setTimeout(() => {
-            initAnimations();
-            ScrollTrigger.refresh();
-        }, 500);
+    if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
     }
 });
 
@@ -556,7 +567,7 @@ function initAnimations() {
             gsap.set(modal.querySelectorAll('.btn-gallery-action'), { y: 30, opacity: 0 });
             gsap.set(modal.querySelectorAll('.gallery-image-pair-container'), { clipPath: 'inset(50% 0% 50% 0%)' });
             gsap.set(modal.querySelectorAll('.gallery-img'), { scale: 1.15 });
-            gsap.set(modal.querySelectorAll('.gallery-scroll-indicator-container'), { clipPath: 'inset(50% 0% 50% 0%)' });
+            gsap.set(modal.querySelectorAll('.gallery-scroll-indicator-container'), { clipPath: 'inset(0% 0% 0% 0%)' });
             gsap.set(modal.querySelectorAll('.gallery-scroll-indicator-handle'), { y: 0 });
         });
 
@@ -568,7 +579,7 @@ function initAnimations() {
               .to(modal.querySelectorAll('.btn-gallery-action'), { y: 0, opacity: 1 }, '-=0.6')
               .to(modal.querySelectorAll('.gallery-image-pair-container'), { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: 'power2.inOut' }, '-=0.8')
               .to(modal.querySelectorAll('.gallery-img'), { scale: 1, duration: 0.8, ease: 'power2.out' }, '-=0.8')
-              .to(modal.querySelectorAll('.gallery-scroll-indicator-container'), { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: 'power2.inOut' });
+              .set(modal.querySelectorAll('.gallery-scroll-indicator-container'), { clipPath: 'inset(0% 0% 0% 0%)' });
         });
     });
 
@@ -581,6 +592,79 @@ function initAnimations() {
         initModalAccordions(modal);
         initModalReviewsSlider(modal);
         initModalTextAppearances(modal);
+        initModalSmileGallery(modal);
+    });
+}
+
+function initModalSmileGallery(modalElement) {
+    const gallery = modalElement.querySelector('.cosmetic-modal-gallery-section');
+    if (!gallery) return;
+
+    const scrollContainer = modalElement.querySelector('.cosmetic-modal-body') || modalElement;
+    const slides = gallery.querySelectorAll('.gallery-slide');
+    const details = gallery.querySelectorAll('.gallery-details-data');
+    const handle = gallery.querySelector('.gallery-scroll-indicator-handle');
+    const handleContainer = gallery.querySelector('.gallery-scroll-indicator-container');
+
+    if (!slides.length || !details.length) return;
+
+    let ticking = false;
+
+    const setActiveIndex = (activeIndex) => {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === activeIndex);
+        });
+
+        details.forEach((detail, index) => {
+            detail.classList.toggle('active', index === activeIndex);
+        });
+    };
+
+    const updateHandle = (progress) => {
+        if (!handle || !handleContainer) return;
+
+        const maxY = Math.max(0, handleContainer.clientHeight - handle.clientHeight);
+        gsap.set(handle, { y: maxY * progress });
+    };
+
+    const updateGallery = () => {
+        ticking = false;
+
+        if (slides.length <= 1) {
+            setActiveIndex(0);
+            updateHandle(0);
+            return;
+        }
+
+        const galleryRect = gallery.getBoundingClientRect();
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const stickyWrapper = gallery.querySelector('.modal-gallery-sticky-wrapper');
+        const stickyHeight = stickyWrapper ? stickyWrapper.offsetHeight : (scrollContainer.clientHeight || window.innerHeight);
+        const galleryHeight = gallery.offsetHeight;
+        const scrollTop = scrollContainer.scrollTop;
+        const galleryTop = galleryRect.top - containerRect.top + scrollTop;
+        const start = galleryTop;
+        const end = galleryTop + galleryHeight - stickyHeight;
+        const progress = gsap.utils.clamp(0, 1, (scrollTop - start) / Math.max(1, end - start));
+        const activeIndex = Math.min(Math.floor(progress * slides.length), slides.length - 1);
+
+        setActiveIndex(activeIndex);
+        updateHandle(progress);
+    };
+
+    const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateGallery);
+    };
+
+    scrollContainer.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+
+    modalElement.addEventListener('shown.bs.modal', () => {
+        setActiveIndex(0);
+        updateHandle(0);
+        requestUpdate();
     });
 }
 
