@@ -180,71 +180,11 @@ get_header();
 					$b_title4 = (!empty($key_benefits['key_benefits_title_4'])) ? $key_benefits['key_benefits_title_4'] : 'Long-Lasting Results';
 					$b_desc4 = (!empty($key_benefits['key_benefits_sub_title_4'])) ? $key_benefits['key_benefits_sub_title_4'] : 'Maintain results with good oral hygiene habits.';
 
-					$before_img = get_field('before_image') ?: esc_url( get_template_directory_uri() . '/assets/images/about1.png' );
-					$after_img = get_field('after_image') ?: esc_url( get_template_directory_uri() . '/assets/images/about1.png' );
- 
-					$gallery_treatment = get_field('gallery_treatment') ?: get_the_title();
-					$gallery_concern = get_field('gallery_concern') ?: 'Worn & Discoloured Teeth';
-					$gallery_visits = get_field('gallery_visits') ?: '2 visits';
-
-					// Smile gallery slides use the same structure as the front-page gallery.
-					$gallery_slides = array();
-					$gallery_image_fallback = esc_url( get_template_directory_uri() . '/assets/images/about1.png' );
-					$normalize_gallery_image = function ( $image ) use ( $gallery_image_fallback ) {
-						if ( is_array( $image ) && ! empty( $image['url'] ) ) {
-							return $image['url'];
-						}
-
-						if ( is_string( $image ) && '' !== trim( $image ) ) {
-							return $image;
-						}
-
-						return $gallery_image_fallback;
-					};
-
-					$gallery_post_ids = array( get_the_ID() );
+					$gallery_page_ids = array( get_the_ID() );
 					if ( $parent_id ) {
-						$sibling_gallery_posts = get_posts(
-							array(
-								'post_type'      => 'services',
-								'post_parent'    => $parent_id,
-								'post_status'    => 'publish',
-								'posts_per_page' => -1,
-								'post__not_in'   => array( get_the_ID() ),
-								'orderby'        => 'menu_order',
-								'order'          => 'ASC',
-								'fields'         => 'ids',
-							)
-						);
-						$gallery_post_ids = array_merge( $gallery_post_ids, $sibling_gallery_posts );
+						$gallery_page_ids[] = $parent_id;
 					}
-
-					foreach ( $gallery_post_ids as $gallery_post_id ) {
-						$gallery_post_show_gallery = get_field( 'show_smile_gallery', $gallery_post_id );
-						if ( false === $gallery_post_show_gallery ) {
-							continue;
-						}
-
-						$gallery_slides[] = array(
-							'before_image' => $normalize_gallery_image( get_field( 'before_image', $gallery_post_id ) ),
-							'after_image'  => $normalize_gallery_image( get_field( 'after_image', $gallery_post_id ) ),
-							'treatment'    => get_field( 'gallery_treatment', $gallery_post_id ) ?: get_the_title( $gallery_post_id ),
-							'concern'      => get_field( 'gallery_concern', $gallery_post_id ) ?: 'Worn & Discoloured Teeth',
-							'duration'     => get_field( 'service_duration', $gallery_post_id ) ?: '3 months',
-							'visits'       => get_field( 'gallery_visits', $gallery_post_id ) ?: '2 visits',
-						);
-					}
-
-					if ( empty( $gallery_slides ) ) {
-						$gallery_slides[] = array(
-							'before_image' => $normalize_gallery_image( $before_img ),
-							'after_image'  => $normalize_gallery_image( $after_img ),
-							'treatment'    => $gallery_treatment,
-							'concern'      => $gallery_concern,
-							'duration'     => $duration,
-							'visits'       => $gallery_visits,
-						);
-					}
+					$gallery_slides = function_exists( 'wsd_get_smile_gallery_slides' ) ? wsd_get_smile_gallery_slides( $gallery_page_ids ) : array();
 
 					// Fees Group
 					$fees = get_field('fees');
@@ -344,7 +284,6 @@ get_header();
 
 					?>
 					<!-- Full-Screen Modal for <?php the_title(); ?> -->
-					<!-- DEBUG: show_smile_gallery for ID <?php the_ID(); ?>: Parent: <?php var_dump($parent_show_gallery); ?>, Child: <?php var_dump($child_show_gallery); ?>, Resolved: <?php var_dump($show_smile_gallery); ?> -->
 					<div class="modal fade cosmetic-full-modal" id="<?php echo esc_attr( $modal_id ); ?>" tabindex="-1" aria-hidden="true">
 						<div class="modal-dialog modal-fullscreen">
 							<div class="modal-content cosmetic-modal-content">
@@ -355,8 +294,8 @@ get_header();
 									</button>
 									<div class="cosmetic-modal-nav d-none d-md-flex align-items-center gap-4">
 										<a href="#modal-about-<?php the_ID(); ?>" class="modal-nav-link active">About <?php the_title(); ?></a>
-										<?php if ( $show_smile_gallery || ! empty( $review_slides ) ) : ?>
-											<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo $show_smile_gallery ? 'Results' : 'Reviews'; ?></a>
+										<?php if ( ( $show_smile_gallery && ! empty( $gallery_slides ) ) || ! empty( $review_slides ) ) : ?>
+											<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo ( $show_smile_gallery && ! empty( $gallery_slides ) ) ? 'Results' : 'Reviews'; ?></a>
 										<?php endif; ?>
 										<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link text-gold underline">Treatment fees</a>
 									</div>
@@ -513,7 +452,7 @@ get_header();
 									</div>
 
 									<!-- Results / Reviews Section -->
-									<?php if ( $show_smile_gallery ) : ?>
+									<?php if ( $show_smile_gallery && ! empty( $gallery_slides ) ) : ?>
 										<!-- Smile Gallery Section -->
 										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-gallery-section <?php echo ( count( $gallery_slides ) > 1 ) ? 'has-gallery-slides' : ''; ?>" style="--modal-gallery-slides: <?php echo esc_attr( max( 1, count( $gallery_slides ) ) ); ?>;">
 											<div class="modal-gallery-sticky-wrapper">

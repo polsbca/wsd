@@ -92,7 +92,71 @@
         }
     };
 
+    const initMainMenuActiveState = () => {
+        const menu = document.querySelector('#primary-menu');
+        if (!menu) return;
+
+        const topLevelItems = Array.from(menu.querySelectorAll(':scope > .menu-item'));
+        const homeItem = topLevelItems.find((item) => {
+            const link = item.querySelector(':scope > a');
+            if (!link) return false;
+
+            const url = new URL(link.getAttribute('href'), window.location.href);
+            return url.pathname === window.location.pathname && !url.hash;
+        });
+
+        const sectionItems = topLevelItems
+            .map((item) => {
+                const link = item.querySelector(':scope > a[href*="#"]');
+                if (!link) return null;
+
+                const url = new URL(link.getAttribute('href'), window.location.href);
+                if (url.origin !== window.location.origin || url.pathname !== window.location.pathname || !url.hash) return null;
+
+                const section = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+                return section ? { item, section } : null;
+            })
+            .filter(Boolean)
+            .sort((a, b) => a.section.offsetTop - b.section.offsetTop);
+
+        if (!sectionItems.length) return;
+
+        const setActiveItem = (activeItem) => {
+            topLevelItems.forEach((item) => item.classList.toggle('current-menu-item', item === activeItem));
+        };
+
+        const updateActiveItem = () => {
+            const headerOffset = getHeaderOffset();
+            const markerY = window.scrollY + headerOffset + Math.round(window.innerHeight * 0.28);
+            let activeItem = homeItem;
+
+            sectionItems.forEach(({ item, section }) => {
+                if (markerY >= section.offsetTop) {
+                    activeItem = item;
+                }
+            });
+
+            setActiveItem(activeItem);
+        };
+
+        let ticking = false;
+        const requestActiveUpdate = () => {
+            if (ticking) return;
+
+            ticking = true;
+            window.requestAnimationFrame(() => {
+                updateActiveItem();
+                ticking = false;
+            });
+        };
+
+        updateActiveItem();
+        window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+        window.addEventListener('resize', requestActiveUpdate);
+    };
+
     window.addEventListener('scroll', syncScrollState, { passive: true });
     window.addEventListener('resize', syncScrollState);
     document.addEventListener('click', handleAnchorClick);
+    initMainMenuActiveState();
 })();

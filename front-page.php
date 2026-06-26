@@ -16,7 +16,7 @@ get_header();
 
 <main id="main" class="site-main">
 
-	<section class="hero-section">
+	<section class="hero-section" id="home">
 		<!-- Background waves vector -->
 		<div class="hero-bg-waves-wrapper">
 			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-bg-waves.svg' ); ?>" alt="" class="hero-bg-waves">
@@ -72,7 +72,7 @@ get_header();
 	</section>
 
 	<!-- Our Key Treatments Section -->
-	<section class="key-treatments-section">
+	<section class="key-treatments-section" id="treatments">
 		<div class="treatments-sticky-wrapper">
 			<div class="treatments-header-badge">
 				<h2 class="treatments-header-title">Our Key <span class="accent">Treatments</span></h2>
@@ -208,7 +208,7 @@ get_header();
 	</section>
 
 	<!-- About Waterside Dental Care Section -->
-	<section class="about-waterside-section">
+	<section class="about-waterside-section" id="our-practice">
 		<div class="about-sticky-wrapper">
 			<div class="about-container">
 				<!-- Left Column: Content -->
@@ -260,8 +260,10 @@ get_header();
 		</div>
 	</section>
 
+	<?php $smile_gallery_slides = function_exists( 'wsd_get_smile_gallery_slides' ) ? wsd_get_smile_gallery_slides( get_queried_object_id() ) : array(); ?>
+	<?php if ( ! empty( $smile_gallery_slides ) ) : ?>
 	<!-- Smile Gallery Section -->
-	<section class="smile-gallery-section">
+	<section class="smile-gallery-section" id="smile-gallery" style="--smile-gallery-track-height: <?php echo esc_attr( max( 1, count( $smile_gallery_slides ) ) * 75 ); ?>vh;">
 		<div class="gallery-sticky-wrapper">
 			<div class="gallery-container">
 				<!-- Header Row -->
@@ -279,101 +281,30 @@ get_header();
 					<!-- Left Column: Before/After Images -->
 					<div class="gallery-left-col">
 						<div class="gallery-interactive-wrapper">
-							<!-- Slide 1 -->
-							<div class="gallery-slide active" data-index="1">
-								<div class="gallery-image-pair-container">
-									<!-- Before Card -->
-									<div class="gallery-card before-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/BeforeImage_1.png' ); ?>" alt="Before treatment" class="gallery-img before-img-crop1">
+							<?php foreach ( $smile_gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+								<div class="gallery-slide <?php echo ( 0 === $gallery_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $gallery_slide_index + 1 ); ?>">
+									<div class="gallery-image-pair-container">
+										<!-- Before Card -->
+										<div class="gallery-card before-card">
+											<div class="gallery-card-image-wrapper">
+												<img src="<?php echo esc_url( $gallery_slide['before_image'] ); ?>" alt="Before treatment" class="gallery-img before-img-crop1">
+											</div>
+											<div class="gallery-card-label">Before</div>
 										</div>
-										<div class="gallery-card-label">Before</div>
-									</div>
-									<!-- Connecting Arrow Vector -->
-									<div class="gallery-connecting-arrow">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
-									</div>
-									<!-- After Card -->
-									<div class="gallery-card after-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/AfterImage_1.png' ); ?>" alt="After treatment" class="gallery-img after-img-crop1">
+										<!-- Connecting Arrow Vector -->
+										<div class="gallery-connecting-arrow">
+											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
 										</div>
-										<div class="gallery-card-label">After</div>
+										<!-- After Card -->
+										<div class="gallery-card after-card">
+											<div class="gallery-card-image-wrapper">
+												<img src="<?php echo esc_url( $gallery_slide['after_image'] ); ?>" alt="After treatment" class="gallery-img after-img-crop1">
+											</div>
+											<div class="gallery-card-label">After</div>
+										</div>
 									</div>
 								</div>
-							</div>
-
-							<!-- Slide 2 -->
-							<div class="gallery-slide" data-index="2">
-								<div class="gallery-image-pair-container">
-									<!-- Before Card -->
-									<div class="gallery-card before-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/BeforeImage_2.png' ); ?>" alt="Before treatment" class="gallery-img">
-										</div>
-										<div class="gallery-card-label">Before</div>
-									</div>
-									<!-- Connecting Arrow Vector -->
-									<div class="gallery-connecting-arrow">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
-									</div>
-									<!-- After Card -->
-									<div class="gallery-card after-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/AfterImage_2.png' ); ?>" alt="After treatment" class="gallery-img">
-										</div>
-										<div class="gallery-card-label">After</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Slide 3 -->
-							<div class="gallery-slide" data-index="3">
-								<div class="gallery-image-pair-container">
-									<!-- Before Card -->
-									<div class="gallery-card before-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/BeforeImage_3.png' ); ?>" alt="Before treatment" class="gallery-img">
-										</div>
-										<div class="gallery-card-label">Before</div>
-									</div>
-									<!-- Connecting Arrow Vector -->
-									<div class="gallery-connecting-arrow">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
-									</div>
-									<!-- After Card -->
-									<div class="gallery-card after-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/AfterImage_3.png' ); ?>" alt="After treatment" class="gallery-img after-img-crop1">
-										</div>
-										<div class="gallery-card-label">After</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Slide 4 -->
-							<div class="gallery-slide" data-index="4">
-								<div class="gallery-image-pair-container">
-									<!-- Before Card -->
-									<div class="gallery-card before-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/BeforeImage_4.png' ); ?>" alt="Before treatment" class="gallery-img">
-										</div>
-										<div class="gallery-card-label">Before</div>
-									</div>
-									<!-- Connecting Arrow Vector -->
-									<div class="gallery-connecting-arrow">
-										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
-									</div>
-									<!-- After Card -->
-									<div class="gallery-card after-card">
-										<div class="gallery-card-image-wrapper">
-											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/smile_gallery/AfterImage_4.png' ); ?>" alt="After treatment" class="gallery-img after-img-crop1">
-										</div>
-										<div class="gallery-card-label">After</div>
-									</div>
-								</div>
-							</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 
@@ -382,85 +313,26 @@ get_header();
 						<div class="gallery-info-wrapper">
 							<!-- Detail Cards Grid (Changes dynamically or stays synced with active slide) -->
 							<div class="gallery-details-grid">
-								<!-- Slide 1 Data -->
-								<div class="gallery-details-data active" data-index="1">
-									<div class="gallery-detail-card">
-										<span class="detail-label">Treatment</span>
-										<span class="detail-value">Dental Implant</span>
+								<?php foreach ( $smile_gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+									<div class="gallery-details-data <?php echo ( 0 === $gallery_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $gallery_slide_index + 1 ); ?>">
+										<div class="gallery-detail-card">
+											<span class="detail-label">Treatment</span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['treatment'] ); ?></span>
+										</div>
+										<div class="gallery-detail-card">
+											<span class="detail-label">Main Concern</span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['concern'] ); ?></span>
+										</div>
+										<div class="gallery-detail-card">
+											<span class="detail-label">Duration</span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['duration'] ); ?></span>
+										</div>
+										<div class="gallery-detail-card">
+											<span class="detail-label">Visits</span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['visits'] ); ?></span>
+										</div>
 									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Main Concern</span>
-										<span class="detail-value">Worn & Discoloured Teeth</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Duration</span>
-										<span class="detail-value">Effective results in 3 months</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Visits</span>
-										<span class="detail-value">2 visits in 5 months</span>
-									</div>
-								</div>
-								
-								<!-- Slide 2 Data -->
-								<div class="gallery-details-data" data-index="2">
-									<div class="gallery-detail-card">
-										<span class="detail-label">Treatment</span>
-										<span class="detail-value">Cosmetic Smile Makeover</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Main Concern</span>
-										<span class="detail-value">Crooked & Uneven Teeth</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Duration</span>
-										<span class="detail-value">Stunning results in 6 months</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Visits</span>
-										<span class="detail-value">4 visits in 6 months</span>
-									</div>
-								</div>
-
-								<!-- Slide 3 Data -->
-								<div class="gallery-details-data" data-index="3">
-									<div class="gallery-detail-card">
-										<span class="detail-label">Treatment</span>
-										<span class="detail-value">Invisalign Clear Aligners</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Main Concern</span>
-										<span class="detail-value">Gaps & Spaced Teeth</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Duration</span>
-										<span class="detail-value">Perfect alignment in 9 months</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Visits</span>
-										<span class="detail-value">6 visits in 9 months</span>
-									</div>
-								</div>
-
-								<!-- Slide 4 Data -->
-								<div class="gallery-details-data" data-index="4">
-									<div class="gallery-detail-card">
-										<span class="detail-label">Treatment</span>
-										<span class="detail-value">Composite Bonding</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Main Concern</span>
-										<span class="detail-value">Chipped & Misaligned Teeth</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Duration</span>
-										<span class="detail-value">Completed in 1 day</span>
-									</div>
-									<div class="gallery-detail-card">
-										<span class="detail-label">Visits</span>
-										<span class="detail-value">1 visit</span>
-									</div>
-								</div>
+								<?php endforeach; ?>
 							</div>
 
 							<!-- Button -->
@@ -479,6 +351,7 @@ get_header();
 			</div>
 		</div>
 	</section>
+	<?php endif; ?>
 
 	<?php
 	// Reviews CPT slides.
@@ -645,7 +518,7 @@ get_header();
 	</section>
 
 	<!-- Flexible Payment Options Section -->
-	<section class="payment-options-section" id="payment-options">
+	<section class="payment-options-section" id="fees-membership">
 		<style>
 			@media (max-width: 991.98px) {
 				.payment-options-section .payment-card {

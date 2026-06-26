@@ -8,6 +8,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$is_home_active       = is_front_page();
+$is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -59,27 +62,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<nav id="site-navigation" class="main-navigation text-center">
 							<button class="menu-toggle d-md-none" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'wsd' ); ?></button>
 							<ul id="primary-menu" class="menu d-none d-md-flex justify-content-center align-items-center">
-								<li class="menu-item current-menu-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+								<li class="menu-item <?php echo $is_home_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
 								<li class="menu-item menu-item-has-children">
-									<a href="#our-practice" class="our-practice-trigger">Our Practice</a>
+									<a href="<?php echo esc_url( home_url( '/#our-practice' ) ); ?>" class="our-practice-trigger">Our Practice</a>
 									<!-- Our Practice Dropdown Menu -->
 									<div class="our-practice-dropdown-container">
 										<div class="dropdown-item active">
-											<a href="#blog-advice">Blog & Advice</a>
+											<a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
-											<a href="#team">Meet the Team</a>
+											<a href="<?php echo esc_url( home_url( '/#team' ) ); ?>">Meet the Team</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
-											<a href="#smile-gallery">Smile Gallery</a>
+											<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>">Smile Gallery</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-item-has-children">
-									<a href="#treatments" class="treatments-trigger">Treatments</a>
+								<li class="menu-item menu-item-has-children <?php echo $is_treatments_active ? 'current-menu-item' : ''; ?>">
+									<a href="<?php echo esc_url( home_url( '/#treatments' ) ); ?>" class="treatments-trigger">Treatments</a>
 									<!-- Treatments Dropdown Menu -->
 									<div class="treatments-dropdown-container">
 										<div class="dropdown-item active">
@@ -91,18 +94,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
-											<a href="#dental-implants">Dental Implants</a>
+											<a href="<?php echo esc_url( home_url( '/#dental-implants' ) ); ?>">Dental Implants</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
-											<a href="#invisalign">Invisalign</a>
+											<a href="<?php echo esc_url( home_url( '/#invisalign' ) ); ?>">Invisalign</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 									</div>
 								</li>
-								<li class="menu-item"><a href="#fees-membership">Fees & Membership</a></li>
-								<li class="menu-item"><a href="#referrals">Referrals</a></li>
-								<li class="menu-item"><a href="#contact-us">Contact Us</a></li>
+								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>">Fees & Membership</a></li>
+								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#referrals' ) ); ?>">Referrals</a></li>
+								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#contact-us' ) ); ?>">Contact Us</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -191,10 +194,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<nav class="mobile-nav-menu">
 					<ul class="mobile-menu">
-						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+						<li class="menu-item <?php echo $is_home_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
 						<li class="menu-item menu-item-has-children-mobile">
 							<div class="menu-item-row">
-								<a href="#our-practice">Our Practice</a>
+								<a href="<?php echo esc_url( home_url( '/#our-practice' ) ); ?>">Our Practice</a>
 								<button class="submenu-toggle-btn" aria-label="Toggle Submenu">
 									<!-- plus icon -->
 									<svg class="plus-icon" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,15 +211,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</div>
 							<div class="sub-menu-container">
 								<ul class="sub-menu">
-									<li><a href="#blog-advice">Blog & Advice</a></li>
-									<li><a href="#team">Meet the Team</a></li>
-									<li><a href="#smile-gallery">Smile Gallery</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#team' ) ); ?>">Meet the Team</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>">Smile Gallery</a></li>
 								</ul>
 							</div>
 						</li>
-						<li class="menu-item menu-item-has-children-mobile">
+						<li class="menu-item menu-item-has-children-mobile <?php echo $is_treatments_active ? 'current-menu-item' : ''; ?>">
 							<div class="menu-item-row">
-								<a href="#treatments">Treatments</a>
+								<a href="<?php echo esc_url( home_url( '/#treatments' ) ); ?>">Treatments</a>
 								<button class="submenu-toggle-btn" aria-label="Toggle Submenu">
 									<!-- plus icon -->
 									<svg class="plus-icon" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -230,16 +233,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</div>
 							<div class="sub-menu-container">
 								<ul class="sub-menu">
-									<li><a href="#general-dentistry">General Dentistry</a></li>
-									<li><a href="#cosmetic-dentistry">Cosmetic Dentistry</a></li>
-									<li><a href="#dental-implants">Dental Implants</a></li>
-									<li><a href="#invisalign">Invisalign</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#general-dentistry' ) ); ?>">General Dentistry</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#cosmetic-dentistry' ) ); ?>">Cosmetic Dentistry</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#dental-implants' ) ); ?>">Dental Implants</a></li>
+									<li><a href="<?php echo esc_url( home_url( '/#invisalign' ) ); ?>">Invisalign</a></li>
 								</ul>
 							</div>
 						</li>
-						<li class="menu-item"><a href="#fees-membership">Fees & Membership</a></li>
-						<li class="menu-item"><a href="#referrals">Referrals</a></li>
-						<li class="menu-item"><a href="#contact-us">Contact Us</a></li>
+						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>">Fees & Membership</a></li>
+						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#referrals' ) ); ?>">Referrals</a></li>
+						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#contact-us' ) ); ?>">Contact Us</a></li>
 					</ul>
 				</nav>
 			</div>

@@ -132,6 +132,78 @@ function wsd_smile_gallery_category_checkbox_ui( $args, $taxonomy ) {
 add_filter( 'register_taxonomy_args', 'wsd_smile_gallery_category_checkbox_ui', 10, 2 );
 
 /**
+ * Get Smile Gallery CPT slides assigned to one or more pages/services.
+ */
+function wsd_get_smile_gallery_slides( $page_ids = array() ) {
+	$page_ids = array_filter( array_map( 'absint', (array) $page_ids ) );
+
+	$base_args = array(
+		'post_type'      => 'smile-gallery',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => array(
+			'menu_order' => 'ASC',
+			'date'       => 'DESC',
+		),
+	);
+
+	$meta_query = array( 'relation' => 'OR' );
+	foreach ( $page_ids as $page_id ) {
+		$meta_query[] = array(
+			'key'     => 'shown_in_page',
+			'value'   => '"' . $page_id . '"',
+			'compare' => 'LIKE',
+		);
+		$meta_query[] = array(
+			'key'     => 'shown_in_page',
+			'value'   => 'i:' . $page_id . ';',
+			'compare' => 'LIKE',
+		);
+	}
+
+	if ( count( $meta_query ) > 1 ) {
+		$base_args['meta_query'] = $meta_query;
+	}
+
+	$gallery_posts = get_posts( $base_args );
+
+	if ( empty( $gallery_posts ) && ! empty( $page_ids ) ) {
+		unset( $base_args['meta_query'] );
+		$gallery_posts = get_posts( $base_args );
+	}
+
+	$image_fallback = get_template_directory_uri() . '/assets/images/about1.png';
+	$normalize_image = function ( $image ) use ( $image_fallback ) {
+		if ( is_array( $image ) && ! empty( $image['url'] ) ) {
+			return $image['url'];
+		}
+
+		if ( is_string( $image ) && '' !== trim( $image ) ) {
+			return $image;
+		}
+
+		return $image_fallback;
+	};
+	$slides = array();
+
+	foreach ( $gallery_posts as $gallery_post ) {
+		$before_image = get_field( 'before_image', $gallery_post->ID );
+		$after_image  = get_field( 'after_image', $gallery_post->ID );
+
+		$slides[] = array(
+			'before_image' => $normalize_image( $before_image ),
+			'after_image'  => $normalize_image( $after_image ),
+			'treatment'    => get_field( 'treatment', $gallery_post->ID ) ?: get_the_title( $gallery_post->ID ),
+			'concern'      => get_field( 'main_concern', $gallery_post->ID ) ?: 'Worn & Discoloured Teeth',
+			'duration'     => get_field( 'duration', $gallery_post->ID ) ?: '3 months',
+			'visits'       => get_field( 'visits', $gallery_post->ID ) ?: '2 visits',
+		);
+	}
+
+	return $slides;
+}
+
+/**
  * Register Custom Post Type "services" and custom taxonomy
  */
 function wsd_register_services_cpt() {
@@ -211,6 +283,12 @@ function wsd_register_services_cpt() {
 	flush_rewrite_rules();
 }
 add_action( 'init', 'wsd_register_services_cpt' );
+
+
+add_filter( 'wp_image_editors', 'wpse_prefer_gd_over_imagick' );
+function wpse_prefer_gd_over_imagick($array) {
+    return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
+}
 
 
 

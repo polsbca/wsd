@@ -1924,7 +1924,7 @@ body {
    SMILE GALLERY SECTION
    ============================================================ */
 .smile-gallery-section {
-  height: 300vh;
+  height: var(--smile-gallery-track-height, 300vh);
   /* Scroll track for sticky scroll */
   position: relative;
   background-color: #ffffff;
@@ -3386,7 +3386,7 @@ body {
   }
 
   .smile-gallery-section {
-    height: 2000px !important;
+    height: var(--smile-gallery-track-height, 2000px) !important;
   }
 
   .testimonials-section {

@@ -230,9 +230,12 @@ function initAnimations() {
             gsap.set(images[2], { opacity: 0, visibility: 'hidden' });
             
             if (textContents.length >= 3) {
-                gsap.set(textContents[0], { opacity: 1, visibility: 'visible' });
-                gsap.set(textContents[1], { opacity: 0, visibility: 'hidden' });
-                gsap.set(textContents[2], { opacity: 0, visibility: 'hidden' });
+                textContents.forEach((textContent, index) => {
+                    const textParts = textContent.querySelectorAll('.about-subtitle, .about-description');
+                    textContent.classList.toggle('active', index === 0);
+                    gsap.set(textContent, { autoAlpha: index === 0 ? 1 : 0 });
+                    gsap.set(textParts, { y: 0, autoAlpha: index === 0 ? 1 : 0 });
+                });
             }
             gsap.set(handle, { y: 0 });
 
@@ -242,12 +245,60 @@ function initAnimations() {
                 return scrollBarHeight - handleHeight;
             };
 
+            // Helper function to reveal the next text block from the bottom like the rest of the page.
+            let currentTextIndex = 0;
+            const updateActiveText = (activeIndex) => {
+                if (activeIndex === currentTextIndex || !textContents[activeIndex]) return;
+
+                const currentText = textContents[currentTextIndex];
+                const nextText = textContents[activeIndex];
+                const currentParts = currentText ? currentText.querySelectorAll('.about-subtitle, .about-description') : [];
+                const nextParts = nextText.querySelectorAll('.about-subtitle, .about-description');
+
+                gsap.killTweensOf([currentText, nextText, currentParts, nextParts]);
+
+                if (currentText) {
+                    currentText.classList.remove('active');
+                    gsap.set(currentText, { autoAlpha: 0 });
+                    gsap.set(currentParts, { clearProps: 'transform' });
+                }
+
+                nextText.classList.add('active');
+                gsap.set(nextText, { autoAlpha: 1 });
+                gsap.fromTo(
+                    nextParts,
+                    { y: 34, autoAlpha: 0 },
+                    {
+                        y: 0,
+                        autoAlpha: 1,
+                        duration: 0.65,
+                        ease: 'power3.out',
+                        stagger: 0.1,
+                        overwrite: true,
+                    }
+                );
+
+                currentTextIndex = activeIndex;
+            };
+
             const aboutTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: aboutSection,
                     start: 'top top',
                     end: 'bottom bottom',
                     scrub: 0.5,
+                    onUpdate: (self) => {
+                        if (textContents.length < 3) return;
+
+                        let activeIndex = 0;
+                        if (self.progress >= 0.6) {
+                            activeIndex = 2;
+                        } else if (self.progress >= 0.25) {
+                            activeIndex = 1;
+                        }
+
+                        updateActiveText(activeIndex);
+                    },
                 }
             });
 
@@ -258,59 +309,44 @@ function initAnimations() {
                 duration: 1
             }, 0);
 
-            // Helper function to update active class on text blocks
-            const updateActiveText = (activeIndex) => {
-                textContents.forEach((tc, idx) => {
-                    if (idx === activeIndex) {
-                        tc.classList.add('active');
-                    } else {
-                        tc.classList.remove('active');
-                    }
-                });
-            };
-
-            // 2. Cross-fade images & texts
+            // 2. Cross-fade images while text uses a bottom-up reveal.
             if (textContents.length >= 3) {
-                aboutTl.to([images[0], textContents[0]], {
+                aboutTl.to(images[0], {
                     opacity: 0,
                     duration: 0.2,
-                    onStart: () => gsap.set([images[0], textContents[0]], { visibility: 'visible' }),
+                    onStart: () => gsap.set(images[0], { visibility: 'visible' }),
                     onComplete: () => {
-                        gsap.set([images[0], textContents[0]], { visibility: 'hidden' });
-                        updateActiveText(1);
+                        gsap.set(images[0], { visibility: 'hidden' });
                     },
                     onReverseComplete: () => {
-                        gsap.set([images[0], textContents[0]], { visibility: 'visible' });
-                        updateActiveText(0);
+                        gsap.set(images[0], { visibility: 'visible' });
                     }
                 }, 0.25)
-                    .to([images[1], textContents[1]], {
+                    .to(images[1], {
                         opacity: 1,
                         duration: 0.2,
-                        onStart: () => gsap.set([images[1], textContents[1]], { visibility: 'visible' }),
-                        onComplete: () => gsap.set([images[1], textContents[1]], { visibility: 'visible' }),
-                        onReverseComplete: () => gsap.set([images[1], textContents[1]], { visibility: 'hidden' })
+                        onStart: () => gsap.set(images[1], { visibility: 'visible' }),
+                        onComplete: () => gsap.set(images[1], { visibility: 'visible' }),
+                        onReverseComplete: () => gsap.set(images[1], { visibility: 'hidden' })
                     }, 0.25);
 
-                aboutTl.to([images[1], textContents[1]], {
+                aboutTl.to(images[1], {
                     opacity: 0,
                     duration: 0.2,
-                    onStart: () => gsap.set([images[1], textContents[1]], { visibility: 'visible' }),
+                    onStart: () => gsap.set(images[1], { visibility: 'visible' }),
                     onComplete: () => {
-                        gsap.set([images[1], textContents[1]], { visibility: 'hidden' });
-                        updateActiveText(2);
+                        gsap.set(images[1], { visibility: 'hidden' });
                     },
                     onReverseComplete: () => {
-                        gsap.set([images[1], textContents[1]], { visibility: 'visible' });
-                        updateActiveText(1);
+                        gsap.set(images[1], { visibility: 'visible' });
                     }
                 }, 0.6)
-                    .to([images[2], textContents[2]], {
+                    .to(images[2], {
                         opacity: 1,
                         duration: 0.2,
-                        onStart: () => gsap.set([images[2], textContents[2]], { visibility: 'visible' }),
-                        onComplete: () => gsap.set([images[2], textContents[2]], { visibility: 'visible' }),
-                        onReverseComplete: () => gsap.set([images[2], textContents[2]], { visibility: 'hidden' })
+                        onStart: () => gsap.set(images[2], { visibility: 'visible' }),
+                        onComplete: () => gsap.set(images[2], { visibility: 'visible' }),
+                        onReverseComplete: () => gsap.set(images[2], { visibility: 'hidden' })
                     }, 0.6);
             } else {
                 aboutTl.to(images[0], {
