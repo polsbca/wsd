@@ -233,8 +233,8 @@ $is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'serv
 							</div>
 							<div class="sub-menu-container">
 								<ul class="sub-menu">
-									<li><a href="<?php echo esc_url( home_url( '/#general-dentistry' ) ); ?>">General Dentistry</a></li>
-									<li><a href="<?php echo esc_url( home_url( '/#cosmetic-dentistry' ) ); ?>">Cosmetic Dentistry</a></li>
+									<li><a href="/services/all-about-general-dentistry-services/">General Dentistry</a></li>
+									<li><a href="/services/all-about-cosmetic-dentistry-services/">Cosmetic Dentistry</a></li>
 									<li><a href="<?php echo esc_url( home_url( '/#dental-implants' ) ); ?>">Dental Implants</a></li>
 									<li><a href="<?php echo esc_url( home_url( '/#invisalign' ) ); ?>">Invisalign</a></li>
 								</ul>
