@@ -742,23 +742,66 @@ function initModalSmileGallery(modalElement) {
     if (!gallery) return;
 
     const scrollContainer = modalElement.querySelector('.cosmetic-modal-body') || modalElement;
-    const slides = gallery.querySelectorAll('.gallery-slide');
-    const details = gallery.querySelectorAll('.gallery-details-data');
+    const slides = Array.from(gallery.querySelectorAll('.gallery-slide'));
+    const details = Array.from(gallery.querySelectorAll('.gallery-details-data'));
     const handle = gallery.querySelector('.gallery-scroll-indicator-handle');
     const handleContainer = gallery.querySelector('.gallery-scroll-indicator-container');
+    const mediaQuery = window.matchMedia('(max-width: 991.98px)');
 
     if (!slides.length || !details.length) return;
 
     let ticking = false;
+    let currentIndex = 0;
+    let dots = [];
 
     const setActiveIndex = (activeIndex) => {
+        currentIndex = gsap.utils.wrap(0, slides.length, activeIndex);
+
         slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === activeIndex);
+            slide.classList.toggle('active', index === currentIndex);
         });
 
         details.forEach((detail, index) => {
-            detail.classList.toggle('active', index === activeIndex);
+            detail.classList.toggle('active', index === currentIndex);
         });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    };
+
+    const animateActiveSlide = (direction = 1) => {
+        if (!mediaQuery.matches) return;
+
+        const activeSlide = slides[currentIndex];
+        const activeDetails = details[currentIndex];
+        if (!activeSlide) return;
+
+        const targets = gsap.utils.toArray([
+            activeSlide.querySelector('.before-card'),
+            activeSlide.querySelector('.after-card'),
+            activeSlide.querySelector('.gallery-connecting-arrow'),
+            activeDetails ? activeDetails.querySelectorAll('.gallery-detail-card') : [],
+        ]).filter(Boolean);
+
+        gsap.fromTo(
+            targets,
+            { x: direction * 18, opacity: 0 },
+            {
+                x: 0,
+                opacity: 1,
+                duration: 0.45,
+                stagger: 0.04,
+                ease: 'power2.out',
+                overwrite: true,
+            }
+        );
+    };
+
+    const goToSlide = (nextIndex, direction = 1) => {
+        setActiveIndex(nextIndex);
+        updateHandle(slides.length > 1 ? currentIndex / (slides.length - 1) : 0);
+        animateActiveSlide(direction);
     };
 
     const updateHandle = (progress) => {
@@ -799,13 +842,80 @@ function initModalSmileGallery(modalElement) {
         requestAnimationFrame(updateGallery);
     };
 
-    scrollContainer.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
+    const initMobileSwipe = () => {
+        const wrapper = gallery.querySelector('.gallery-interactive-wrapper');
+        const infoWrapper = gallery.querySelector('.gallery-info-wrapper');
+        const actionButton = gallery.querySelector('.btn-gallery-action');
+        if (!wrapper || !infoWrapper || slides.length <= 1) return;
+
+        let dotsContainer = gallery.querySelector('.gallery-slider-dots');
+        if (!dotsContainer) {
+            dotsContainer = document.createElement('div');
+            dotsContainer.className = 'gallery-slider-dots modal-gallery-slider-dots';
+
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = 'gallery-dot';
+                dot.type = 'button';
+                dot.setAttribute('aria-label', `Go to gallery slide ${index + 1}`);
+                dot.addEventListener('click', () => goToSlide(index, index > currentIndex ? 1 : -1));
+                dotsContainer.appendChild(dot);
+            });
+
+            if (actionButton) {
+                actionButton.insertAdjacentElement('beforebegin', dotsContainer);
+            } else {
+                infoWrapper.appendChild(dotsContainer);
+            }
+        }
+
+        dots = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        wrapper.addEventListener('touchstart', (event) => {
+            if (!mediaQuery.matches || !event.touches.length) return;
+
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        wrapper.addEventListener('touchend', (event) => {
+            if (!mediaQuery.matches || !event.changedTouches.length) return;
+
+            const deltaX = event.changedTouches[0].clientX - touchStartX;
+            const deltaY = event.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+            if (deltaX < 0) {
+                goToSlide(currentIndex + 1, 1);
+            } else {
+                goToSlide(currentIndex - 1, -1);
+            }
+        }, { passive: true });
+    };
+
+    initMobileSwipe();
+
+    scrollContainer.addEventListener('scroll', () => {
+        if (mediaQuery.matches) return;
+        requestUpdate();
+    }, { passive: true });
+    window.addEventListener('resize', () => {
+        if (mediaQuery.matches) {
+            setActiveIndex(currentIndex);
+            return;
+        }
+        requestUpdate();
+    });
 
     modalElement.addEventListener('shown.bs.modal', () => {
         setActiveIndex(0);
         updateHandle(0);
-        requestUpdate();
+        if (!mediaQuery.matches) {
+            requestUpdate();
+        }
     });
 }
 
@@ -1634,9 +1744,50 @@ function initMoreServicesSliders(modalElement) {
     const container = modalElement.querySelector('.more-services-slider-container');
     const prevBtn = modalElement.querySelector('.more-services-nav-btn.prev-btn');
     const nextBtn = modalElement.querySelector('.more-services-nav-btn.next-btn');
+    const cards = Array.from(modalElement.querySelectorAll('.more-service-card-wrapper'));
+    const progressTrack = modalElement.querySelector('.more-services-progress-track');
     const progressBar = modalElement.querySelector('.more-services-progress-bar');
 
-    if (!container || !progressBar) return;
+    if (!container || !progressTrack || !progressBar) return;
+
+    let progressDots = [];
+
+    const initMobileDots = () => {
+        if (!window.matchMedia('(max-width: 991.98px)').matches || !cards.length) return;
+
+        progressTrack.querySelectorAll('.more-services-progress-dot').forEach((dot) => dot.remove());
+        cards.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = 'more-services-progress-dot';
+            dot.setAttribute('aria-hidden', 'true');
+            dot.addEventListener('click', () => {
+                const target = cards[index];
+                if (!target) return;
+
+                container.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+            });
+            progressTrack.appendChild(dot);
+        });
+        progressDots = Array.from(progressTrack.querySelectorAll('.more-services-progress-dot'));
+    };
+
+    const getActiveCardIndex = () => {
+        if (!cards.length) return 0;
+
+        const scrollLeft = container.scrollLeft;
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+
+        cards.forEach((card, index) => {
+            const distance = Math.abs(card.offsetLeft - scrollLeft);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        return closestIndex;
+    };
 
     const updateSliderUI = () => {
         const scrollLeft = container.scrollLeft;
@@ -1648,35 +1799,53 @@ function initMoreServicesSliders(modalElement) {
         const barWidth = 30 + (progressPct * 0.7);
         progressBar.style.width = `${barWidth}%`;
 
+        progressDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === getActiveCardIndex());
+        });
+
         // Update button states
-        if (scrollLeft <= 5) {
+        if (prevBtn && scrollLeft <= 5) {
             prevBtn.classList.remove('active');
-        } else {
+        } else if (prevBtn) {
             prevBtn.classList.add('active');
         }
 
-        if (scrollLeft >= maxScroll - 5) {
+        if (nextBtn && scrollLeft >= maxScroll - 5) {
             nextBtn.classList.remove('active');
-        } else {
+        } else if (nextBtn) {
             nextBtn.classList.add('active');
         }
     };
 
+    initMobileDots();
     container.addEventListener('scroll', updateSliderUI);
-    window.addEventListener('resize', updateSliderUI);
+    window.addEventListener('resize', () => {
+        initMobileDots();
+        updateSliderUI();
+    });
 
     // Initial run
     updateSliderUI();
 
+    const getScrollAmount = () => {
+        if (window.matchMedia('(max-width: 991.98px)').matches && cards.length) {
+            const firstCard = cards[0];
+            const secondCard = cards[1];
+            return secondCard ? (secondCard.offsetLeft - firstCard.offsetLeft) : firstCard.offsetWidth;
+        }
+
+        return 350;
+    };
+
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            container.scrollBy({ left: -350, behavior: 'smooth' });
+            container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
         });
     }
 
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            container.scrollBy({ left: 350, behavior: 'smooth' });
+            container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
         });
     }
 }
