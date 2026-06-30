@@ -840,6 +840,7 @@ function initAnimations() {
   // ----------------------------------------------------
   const allModals = document.querySelectorAll(".cosmetic-full-modal");
   allModals.forEach((modal) => {
+    initModalHorizontalReset(modal);
     initMoreServicesSliders(modal);
     initModalAccordions(modal);
     initModalReviewsSlider(modal);
@@ -848,6 +849,24 @@ function initAnimations() {
     initModalTabContentAnimations(modal);
     initModalNavScroll(modal);
   });
+}
+
+function initModalHorizontalReset(modalElement) {
+  const resetScroll = () => {
+    const scrollTargets = [
+      modalElement,
+      modalElement.querySelector(".modal-dialog"),
+      modalElement.querySelector(".cosmetic-modal-content"),
+      modalElement.querySelector(".cosmetic-modal-body"),
+    ].filter(Boolean);
+
+    scrollTargets.forEach((target) => {
+      target.scrollLeft = 0;
+    });
+  };
+
+  modalElement.addEventListener("show.bs.modal", resetScroll);
+  modalElement.addEventListener("shown.bs.modal", resetScroll);
 }
 
 function initModalNavScroll(modalElement) {
@@ -968,24 +987,33 @@ function initModalSmileGallery(modalElement) {
 
   const scrollContainer =
     modalElement.querySelector(".cosmetic-modal-body") || modalElement;
-  const slides = gallery.querySelectorAll(".gallery-slide");
-  const details = gallery.querySelectorAll(".gallery-details-data");
+  const slides = Array.from(gallery.querySelectorAll(".gallery-slide"));
+  const details = Array.from(gallery.querySelectorAll(".gallery-details-data"));
   const handle = gallery.querySelector(".gallery-scroll-indicator-handle");
   const handleContainer = gallery.querySelector(
     ".gallery-scroll-indicator-container",
   );
+  const mediaQuery = window.matchMedia("(max-width: 991.98px)");
 
   if (!slides.length || !details.length) return;
 
   let ticking = false;
+  let currentIndex = 0;
+  let dots = [];
 
   const setActiveIndex = (activeIndex) => {
+    currentIndex = gsap.utils.wrap(0, slides.length, activeIndex);
+
     slides.forEach((slide, index) => {
-      slide.classList.toggle("active", index === activeIndex);
+      slide.classList.toggle("active", index === currentIndex);
     });
 
     details.forEach((detail, index) => {
-      detail.classList.toggle("active", index === activeIndex);
+      detail.classList.toggle("active", index === currentIndex);
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentIndex);
     });
   };
 
@@ -997,6 +1025,42 @@ function initModalSmileGallery(modalElement) {
       handleContainer.clientHeight - handle.clientHeight,
     );
     gsap.set(handle, { y: maxY * progress });
+  };
+
+  const animateActiveSlide = (direction = 1) => {
+    if (!mediaQuery.matches) return;
+
+    const activeSlide = slides[currentIndex];
+    const activeDetails = details[currentIndex];
+    if (!activeSlide) return;
+
+    const targets = gsap.utils
+      .toArray([
+        activeSlide.querySelector(".before-card"),
+        activeSlide.querySelector(".after-card"),
+        activeSlide.querySelector(".gallery-connecting-arrow"),
+        activeDetails ? activeDetails.querySelectorAll(".gallery-detail-card") : [],
+      ])
+      .filter(Boolean);
+
+    gsap.fromTo(
+      targets,
+      { x: direction * 18, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.45,
+        stagger: 0.04,
+        ease: "power2.out",
+        overwrite: true,
+      },
+    );
+  };
+
+  const goToSlide = (nextIndex, direction = 1) => {
+    setActiveIndex(nextIndex);
+    updateHandle(slides.length > 1 ? currentIndex / (slides.length - 1) : 0);
+    animateActiveSlide(direction);
   };
 
   const updateGallery = () => {
@@ -1041,106 +1105,124 @@ function initModalSmileGallery(modalElement) {
     requestAnimationFrame(updateGallery);
   };
 
-    const initMobileSwipe = () => {
-        const wrapper = gallery.querySelector('.gallery-interactive-wrapper');
-        const infoWrapper = gallery.querySelector('.gallery-info-wrapper');
-        const actionButton = gallery.querySelector('.btn-gallery-action');
-        if (!wrapper || !infoWrapper || slides.length <= 1) return;
+  const initMobileSwipe = () => {
+    const wrapper = gallery.querySelector(".gallery-interactive-wrapper");
+    const infoWrapper = gallery.querySelector(".gallery-info-wrapper");
+    const actionButton = gallery.querySelector(".btn-gallery-action");
+    if (!wrapper || !infoWrapper || slides.length <= 1) return;
 
-        const removeDots = () => {
-            const dotsContainer = gallery.querySelector('.gallery-slider-dots');
-            if (dotsContainer) {
-                dotsContainer.remove();
-            }
-            dots = [];
-        };
-
-        const ensureDots = () => {
-            let dotsContainer = gallery.querySelector('.gallery-slider-dots');
-            if (dotsContainer) {
-                dots = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
-                return;
-            }
-
-            dotsContainer = document.createElement('div');
-            dotsContainer.className = 'gallery-slider-dots modal-gallery-slider-dots';
-
-            slides.forEach((_, index) => {
-                const dot = document.createElement('button');
-                dot.className = 'gallery-dot';
-                dot.type = 'button';
-                dot.setAttribute('aria-label', `Go to gallery slide ${index + 1}`);
-                dot.addEventListener('click', () => goToSlide(index, index > currentIndex ? 1 : -1));
-                dotsContainer.appendChild(dot);
-            });
-
-            if (actionButton) {
-                actionButton.insertAdjacentElement('beforebegin', dotsContainer);
-            } else {
-                infoWrapper.appendChild(dotsContainer);
-            }
-
-            dots = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
-            setActiveIndex(currentIndex);
-        };
-
-        const syncDotsForViewport = () => {
-            if (mediaQuery.matches) {
-                ensureDots();
-            } else {
-                removeDots();
-            }
-        };
-
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        syncDotsForViewport();
-
-        wrapper.addEventListener('touchstart', (event) => {
-            if (!mediaQuery.matches || !event.touches.length) return;
-
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-        }, { passive: true });
-
-        wrapper.addEventListener('touchend', (event) => {
-            if (!mediaQuery.matches || !event.changedTouches.length) return;
-
-            const deltaX = event.changedTouches[0].clientX - touchStartX;
-            const deltaY = event.changedTouches[0].clientY - touchStartY;
-            if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
-
-            if (deltaX < 0) {
-                goToSlide(currentIndex + 1, 1);
-            } else {
-                goToSlide(currentIndex - 1, -1);
-            }
-        }, { passive: true });
-
-        mediaQuery.addEventListener('change', syncDotsForViewport);
+    const removeDots = () => {
+      const dotsContainer = gallery.querySelector(".gallery-slider-dots");
+      if (dotsContainer) {
+        dotsContainer.remove();
+      }
+      dots = [];
     };
 
-    initMobileSwipe();
+    const ensureDots = () => {
+      let dotsContainer = gallery.querySelector(".gallery-slider-dots");
+      if (dotsContainer) {
+        dots = Array.from(dotsContainer.querySelectorAll(".gallery-dot"));
+        setActiveIndex(currentIndex);
+        return;
+      }
 
-    scrollContainer.addEventListener('scroll', () => {
-        if (mediaQuery.matches) return;
-        requestUpdate();
-    }, { passive: true });
-    window.addEventListener('resize', () => {
-        if (mediaQuery.matches) {
-            setActiveIndex(currentIndex);
-            return;
+      dotsContainer = document.createElement("div");
+      dotsContainer.className = "gallery-slider-dots modal-gallery-slider-dots";
+
+      slides.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.className = "gallery-dot";
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Go to gallery slide ${index + 1}`);
+        dot.addEventListener("click", () =>
+          goToSlide(index, index > currentIndex ? 1 : -1),
+        );
+        dotsContainer.appendChild(dot);
+      });
+
+      if (actionButton) {
+        actionButton.insertAdjacentElement("beforebegin", dotsContainer);
+      } else {
+        infoWrapper.appendChild(dotsContainer);
+      }
+
+      dots = Array.from(dotsContainer.querySelectorAll(".gallery-dot"));
+      setActiveIndex(currentIndex);
+    };
+
+    const syncDotsForViewport = () => {
+      if (mediaQuery.matches) {
+        ensureDots();
+      } else {
+        removeDots();
+      }
+    };
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    syncDotsForViewport();
+
+    wrapper.addEventListener(
+      "touchstart",
+      (event) => {
+        if (!mediaQuery.matches || !event.touches.length) return;
+
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+      },
+      { passive: true },
+    );
+
+    wrapper.addEventListener(
+      "touchend",
+      (event) => {
+        if (!mediaQuery.matches || !event.changedTouches.length) return;
+
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) {
+          return;
         }
-        requestUpdate();
-    });
-  scrollContainer.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
+
+        if (deltaX < 0) {
+          goToSlide(currentIndex + 1, 1);
+        } else {
+          goToSlide(currentIndex - 1, -1);
+        }
+      },
+      { passive: true },
+    );
+
+    mediaQuery.addEventListener("change", syncDotsForViewport);
+  };
+
+  initMobileSwipe();
+
+  scrollContainer.addEventListener(
+    "scroll",
+    () => {
+      if (mediaQuery.matches) return;
+      requestUpdate();
+    },
+    { passive: true },
+  );
+
+  window.addEventListener("resize", () => {
+    if (mediaQuery.matches) {
+      setActiveIndex(currentIndex);
+      return;
+    }
+    requestUpdate();
+  });
 
   modalElement.addEventListener("shown.bs.modal", () => {
     setActiveIndex(0);
     updateHandle(0);
-    requestUpdate();
+    if (!mediaQuery.matches) {
+      requestUpdate();
+    }
   });
 }
 
@@ -2145,16 +2227,46 @@ function initMoreServicesSliders(modalElement) {
   const prevBtn = modalElement.querySelector(".more-services-nav-btn.prev-btn");
   const nextBtn = modalElement.querySelector(".more-services-nav-btn.next-btn");
   const progressBar = modalElement.querySelector(".more-services-progress-bar");
+  const progressTrack = modalElement.querySelector(".more-services-progress-track");
 
-  if (!container || !progressBar) return;
+  if (!container || !progressBar || !progressTrack) return;
 
-  // Add left and right spacing
   const cards = container.querySelectorAll(".more-service-card-wrapper");
+  const compactMediaQuery = window.matchMedia("(max-width: 991.98px)");
+  let progressDots = [];
 
-  if (cards.length) {
-    cards[0].style.marginLeft = "120px";
-    cards[cards.length - 1].style.marginRight = "120px";
-  }
+  const applyEdgeSpacing = () => {
+    if (!cards.length) return;
+
+    cards[0].style.marginLeft = compactMediaQuery.matches ? "0" : "120px";
+    cards[cards.length - 1].style.marginRight = compactMediaQuery.matches
+      ? "0"
+      : "120px";
+  };
+
+  const setupMobileDots = () => {
+    progressDots.forEach((dot) => dot.remove());
+    progressDots = [];
+
+    if (!compactMediaQuery.matches) {
+      progressBar.style.display = "";
+      return;
+    }
+
+    progressBar.style.display = "none";
+
+    cards.forEach((_, index) => {
+      const dot = document.createElement("span");
+      dot.className = "more-services-progress-dot";
+      dot.setAttribute("aria-hidden", "true");
+      if (index === 0) dot.classList.add("active");
+      progressTrack.appendChild(dot);
+      progressDots.push(dot);
+    });
+  };
+
+  applyEdgeSpacing();
+  setupMobileDots();
 
   const updateSliderUI = () => {
     const scrollLeft = container.scrollLeft;
@@ -2162,8 +2274,26 @@ function initMoreServicesSliders(modalElement) {
 
     const progressPct = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
 
-    const barWidth = 30 + progressPct * 0.7;
-    progressBar.style.width = `${barWidth}%`;
+    if (compactMediaQuery.matches && progressDots.length) {
+      const activeIndex = Math.min(
+        progressDots.length - 1,
+        Math.max(
+          0,
+          Math.round(
+            scrollLeft /
+              ((cards[0]?.getBoundingClientRect().width || container.clientWidth) +
+                20),
+          ),
+        ),
+      );
+
+      progressDots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === activeIndex);
+      });
+    } else {
+      const barWidth = 30 + progressPct * 0.7;
+      progressBar.style.width = `${barWidth}%`;
+    }
 
     if (prevBtn) {
       prevBtn.classList.toggle("active", scrollLeft > 5);
@@ -2175,19 +2305,29 @@ function initMoreServicesSliders(modalElement) {
   };
 
   container.addEventListener("scroll", updateSliderUI);
-  window.addEventListener("resize", updateSliderUI);
+  window.addEventListener("resize", () => {
+    applyEdgeSpacing();
+    setupMobileDots();
+    updateSliderUI();
+  });
 
   updateSliderUI();
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      container.scrollBy({ left: -569, behavior: "smooth" });
+      const scrollAmount = compactMediaQuery.matches
+        ? (cards[0]?.getBoundingClientRect().width || container.clientWidth) + 20
+        : 569;
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      container.scrollBy({ left: 569, behavior: "smooth" });
+      const scrollAmount = compactMediaQuery.matches
+        ? (cards[0]?.getBoundingClientRect().width || container.clientWidth) + 20
+        : 569;
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
   }
 }

@@ -575,7 +575,7 @@ get_header();
 												<div class="reviews-slider-container">
 													<?php foreach ( $review_slides as $review_slide_index => $review_slide ) : ?>
 														<div class="modal-review-slide <?php echo ( 0 === $review_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $review_slide_index ); ?>">
-															<h3 class="review-slide-title">“<?php echo esc_html( $review_slide['title'] ); ?>”</h3>
+															<h3 class="review-slide-title"><?php echo esc_html( $review_slide['title'] ); ?></h3>
 															<p class="review-slide-text"><?php echo esc_html( $review_slide['text'] ); ?></p>
 															<div class="review-author">
 																<div class="review-slide-stars">

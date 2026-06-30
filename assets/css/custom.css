@@ -9,6 +9,7 @@
   --text-light: #5e5d5f;
   --font-family-primary: "Montserrat", sans-serif;
   --font-family-secondary: "Open Sans", sans-serif;
+  --wsd-scrollbar-width: 12px;
 }
 
 html,
@@ -18,13 +19,14 @@ body {
 }
 
 html {
+  overflow-y: scroll;
   scrollbar-gutter: stable;
   scrollbar-color: #5e5d5f #fefdf6;
   scrollbar-width: auto;
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: var(--wsd-scrollbar-width);
 }
 
 ::-webkit-scrollbar-track {
