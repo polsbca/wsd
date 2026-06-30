@@ -299,6 +299,16 @@ get_header();
 										<?php endif; ?>
 										<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link">Treatment fees</a>
 									</div>
+									<details class="cosmetic-modal-nav cosmetic-modal-mobile-nav d-md-none">
+										<summary>Scroll Navigation</summary>
+										<div class="cosmetic-modal-mobile-nav-menu">
+											<a href="#modal-about-<?php the_ID(); ?>" class="modal-nav-link active">About <?php the_title(); ?></a>
+											<?php if ( ( $show_smile_gallery && ! empty( $gallery_slides ) ) || ! empty( $review_slides ) ) : ?>
+												<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo ( $show_smile_gallery && ! empty( $gallery_slides ) ) ? 'Results' : 'Reviews'; ?></a>
+											<?php endif; ?>
+											<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link text-gold underline">Treatment fees</a>
+										</div>
+									</details>
 								</div>
  
 								<div class="modal-body cosmetic-modal-body">
@@ -671,7 +681,7 @@ get_header();
 									?>
 									<div class="cosmetic-modal-more-services-section">
 										<div class="more-services-header d-flex align-items-center justify-content-between mb-5">
-											<h3 class="more-services-title">More <?php echo esc_html( $category_name ); ?> services</h3>
+											<h3 class="more-services-title" data-mobile-title="<?php echo esc_attr( 'Explore More ' . $category_name . ' services' ); ?>">More <?php echo esc_html( $category_name ); ?> services</h3>
 											<div class="more-services-nav d-flex gap-3">
 												<button class="more-services-nav-btn prev-btn" aria-label="Previous service" type="button">
 													<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/left_arrow.svg' ); ?>" alt="Previous">
@@ -700,7 +710,10 @@ get_header();
 														<div class="more-service-card-footer d-flex align-items-center justify-content-between mt-3">
 															<span class="more-service-card-title"><?php echo esc_html( $other_post->post_title ); ?></span>
 															<div class="more-service-card-arrow">
-																<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-gold-circle.svg' ); ?>" alt="" style="width: 40px; height: 40px;">
+																<img class="more-service-card-arrow-img d-none d-md-block" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-gold-circle.svg' ); ?>" alt="" style="width: 40px; height: 40px;">
+																<svg class="more-service-card-arrow-svg d-md-none" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false">
+																	<path d="M11.5277 12.1892C11.4781 12.176 11.4315 12.153 11.3908 12.1218C11.35 12.0905 11.3158 12.0515 11.2901 12.007C11.2644 11.9625 11.2477 11.9134 11.241 11.8624C11.2343 11.8115 11.2377 11.7597 11.2511 11.7101L12.2952 7.8146L5.66267 11.6439C5.57286 11.6958 5.46613 11.7098 5.36596 11.683C5.26579 11.6561 5.18038 11.5906 5.12853 11.5008C5.07668 11.411 5.06263 11.3042 5.08947 11.2041C5.11631 11.1039 5.18184 11.0185 5.27165 10.9666L11.9042 7.13734L8.00854 6.09385C7.90832 6.067 7.82286 6.00143 7.77098 5.91157C7.7191 5.82171 7.70504 5.71492 7.7319 5.61469C7.75875 5.51446 7.82432 5.42901 7.91418 5.37713C8.00405 5.32525 8.11084 5.31119 8.21106 5.33804L13.0183 6.62615C13.068 6.63942 13.1145 6.66235 13.1553 6.69362C13.1961 6.72489 13.2303 6.76389 13.256 6.80839C13.2817 6.8529 13.2984 6.90202 13.305 6.95297C13.3117 7.00392 13.3083 7.05569 13.295 7.10532L12.0069 11.9126C11.9936 11.9622 11.9707 12.0088 11.9394 12.0496C11.9081 12.0903 11.8691 12.1245 11.8246 12.1502C11.7801 12.1759 11.731 12.1926 11.6801 12.1993C11.6291 12.206 11.5773 12.2026 11.5277 12.1892Z" fill="white"/>
+																</svg>
 															</div>
 														</div>
 													</a>

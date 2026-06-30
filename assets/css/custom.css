@@ -5333,6 +5333,9 @@ body {
   width: calc((100% - 48px) / 3);
   max-width: 566px;
 }
+.more-service-card-wrapper:first-child{
+  margin-left: 120px;
+}
 
 .more-service-card {
   text-decoration: none;

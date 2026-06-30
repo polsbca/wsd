@@ -288,17 +288,18 @@ jQuery(document).ready(function($) {
     function initMobileGallerySlider() {
         if (window.innerWidth >= 992) return; // Only run on mobile
         
-        var $wrapper = jQuery('.gallery-interactive-wrapper');
+        var $wrapper = jQuery('.smile-gallery-section .gallery-interactive-wrapper');
         if ($wrapper.length === 0) return;
 
         var $slides = $wrapper.find('.gallery-slide');
         if ($slides.length <= 1) return;
 
-        var $detailsContainer = jQuery('.gallery-details-grid');
+        var $gallerySection = $wrapper.closest('.smile-gallery-section');
+        var $detailsContainer = $gallerySection.find('.gallery-details-grid');
         var $details = $detailsContainer.find('.gallery-details-data');
 
         // Create dots container below the slider
-        var $infoWrapper = jQuery('.gallery-info-wrapper');
+        var $infoWrapper = $gallerySection.find('.gallery-info-wrapper');
         var $dotsContainer = $infoWrapper.find('.gallery-slider-dots');
         
         // Find action button

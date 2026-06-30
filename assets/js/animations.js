@@ -2023,69 +2023,49 @@ function initMoreServicesSliders(modalElement) {
   const prevBtn = modalElement.querySelector(".more-services-nav-btn.prev-btn");
   const nextBtn = modalElement.querySelector(".more-services-nav-btn.next-btn");
   const progressBar = modalElement.querySelector(".more-services-progress-bar");
-  const slides = container
-    ? container.querySelectorAll(".more-service-card-wrapper")
-    : [];
 
   if (!container || !progressBar) return;
 
-  const updateSlideOffsets = () => {
-    if (!slides.length) return;
+  // Add left and right spacing
+  const cards = container.querySelectorAll(".more-service-card-wrapper");
 
-    slides.forEach((slide) => {
-      slide.style.marginLeft = "";
-      slide.style.marginRight = "";
-    });
-
-    slides[0].style.marginLeft = "120px";
-
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    if (container.scrollLeft >= maxScroll - 5) {
-      slides[slides.length - 1].style.marginRight = "120px";
-    }
-  };
+  if (cards.length) {
+    cards[0].style.marginLeft = "120px";
+    cards[cards.length - 1].style.marginRight = "120px";
+  }
 
   const updateSliderUI = () => {
     const scrollLeft = container.scrollLeft;
     const maxScroll = container.scrollWidth - container.clientWidth;
 
-    // Update progress bar
     const progressPct = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
-    // Start handle width at 30% and grow to 100%
+
     const barWidth = 30 + progressPct * 0.7;
     progressBar.style.width = `${barWidth}%`;
 
-    // Update button states
-    if (scrollLeft <= 5) {
-      prevBtn.classList.remove("active");
-    } else {
-      prevBtn.classList.add("active");
+    if (prevBtn) {
+      prevBtn.classList.toggle("active", scrollLeft > 5);
     }
 
-    if (scrollLeft >= maxScroll - 5) {
-      nextBtn.classList.remove("active");
-    } else {
-      nextBtn.classList.add("active");
+    if (nextBtn) {
+      nextBtn.classList.toggle("active", scrollLeft < maxScroll - 5);
     }
-
-    updateSlideOffsets();
   };
 
   container.addEventListener("scroll", updateSliderUI);
   window.addEventListener("resize", updateSliderUI);
 
-  // Initial run
   updateSliderUI();
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      container.scrollBy({ left: -560, behavior: "smooth" });
+      container.scrollBy({ left: -569, behavior: "smooth" });
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      container.scrollBy({ left: 560, behavior: "smooth" });
+      container.scrollBy({ left: 569, behavior: "smooth" });
     });
   }
 }
