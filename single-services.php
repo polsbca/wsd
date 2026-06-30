@@ -33,7 +33,7 @@ get_header();
 
 			<!-- Custom Cosmetic Service Hero Section -->
 			<section class="cosmetic-service-hero">
-				<div class="container-fluid px-lg-120 position-relative z-3">
+				<div class="container-fluid px-lg-0 position-relative z-3">
 					<div class="row">
 						<div class="col-lg-6 hero-content-col align-self-center">
 							<div class="cosmetic-hero-content">
@@ -297,20 +297,20 @@ get_header();
 										<?php if ( ( $show_smile_gallery && ! empty( $gallery_slides ) ) || ! empty( $review_slides ) ) : ?>
 											<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo ( $show_smile_gallery && ! empty( $gallery_slides ) ) ? 'Results' : 'Reviews'; ?></a>
 										<?php endif; ?>
-										<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link text-gold underline">Treatment fees</a>
+										<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link">Treatment fees</a>
 									</div>
 								</div>
  
 								<div class="modal-body cosmetic-modal-body">
 									<!-- About Section -->
-									<div id="modal-about-<?php the_ID(); ?>" class="modal-section cosmetic-modal-about-section mb-5">
-										<div class="d-flex flex-column flex-lg-row align-items-lg-center mb-5" style="gap: 100px;">
+									<div id="modal-about-<?php the_ID(); ?>" class="modal-section cosmetic-modal-about-section">
+										<div class="d-flex flex-column flex-lg-row align-items-lg-center" style="gap: 100px;">
 											<div class="cosmetic-modal-title-col shrink-0">
 												<div class="cosmetic-modal-title-badge">
 													<h2>All About <span class="accent"><?php the_title(); ?></span></h2>
 												</div>
 											</div>
-											<div class="flex-grow-1 mt-4 mt-lg-0 pe-lg-5">
+											<div class="flex-grow-1 mt-4 mt-lg-0">
 												<p class="cosmetic-modal-desc-text">
 													<?php echo esc_html( $subtitle ); ?>
 												</p>
@@ -318,8 +318,8 @@ get_header();
 										</div>
  
 										<!-- Process Steps Tabs & Cards -->
-										<div class="cosmetic-modal-process-tabs mt-5">
-											<div class="d-flex flex-wrap gap-3 mb-4" id="modal-tabs-<?php the_ID(); ?>" role="tablist">
+										<div class="cosmetic-modal-process-tabs">
+											<div class="d-flex flex-wrap cosmetic-tab-grp" id="modal-tabs-<?php the_ID(); ?>" role="tablist">
 												<button class="btn btn-process-tab active" id="process-tab-<?php the_ID(); ?>" data-bs-toggle="pill" data-bs-target="#process-content-<?php the_ID(); ?>" type="button" role="tab" aria-controls="process-content-<?php the_ID(); ?>" aria-selected="true">Process</button>
 												<button class="btn btn-process-tab" id="symptoms-tab-<?php the_ID(); ?>" data-bs-toggle="pill" data-bs-target="#symptoms-content-<?php the_ID(); ?>" type="button" role="tab" aria-controls="symptoms-content-<?php the_ID(); ?>" aria-selected="false">Symptoms</button>
 												<button class="btn btn-process-tab" id="benefits-tab-<?php the_ID(); ?>" data-bs-toggle="pill" data-bs-target="#benefits-content-<?php the_ID(); ?>" type="button" role="tab" aria-controls="benefits-content-<?php the_ID(); ?>" aria-selected="false">Key Benefits</button>
@@ -537,7 +537,7 @@ get_header();
 										</div>
 									<?php elseif ( ! empty( $review_slides ) ) : ?>
 										<!-- Review Design Section -->
-										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-reviews-section py-5 my-5">
+										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-reviews-section">
 											<div class="reviews-header-row">
 												<div class="reviews-rating-badge">
 													<span class="google-logo-wrapper">
@@ -567,14 +567,16 @@ get_header();
 														<div class="modal-review-slide <?php echo ( 0 === $review_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $review_slide_index ); ?>">
 															<h3 class="review-slide-title">“<?php echo esc_html( $review_slide['title'] ); ?>”</h3>
 															<p class="review-slide-text"><?php echo esc_html( $review_slide['text'] ); ?></p>
-															<div class="review-slide-stars">
-																<?php for ( $i = 0; $i < intval( $review_slide['rating'] ); $i++ ) : ?>
-																	<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="">
-																<?php endfor; ?>
-															</div>
-															<?php if ( $review_slide['author'] ) : ?>
-																<p class="review-slide-author"><?php echo esc_html( $review_slide['author'] ); ?></p>
-															<?php endif; ?>
+															<div class="review-author">
+																<div class="review-slide-stars">
+																	<?php for ( $i = 0; $i < intval( $review_slide['rating'] ); $i++ ) : ?>
+																		<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/star.svg' ); ?>" alt="">
+																	<?php endfor; ?>
+																</div>
+																<?php if ( $review_slide['author'] ) : ?>
+																	<p class="review-slide-author"><?php echo esc_html( $review_slide['author'] ); ?></p>
+																<?php endif; ?>
+																</div>
 														</div>
 													<?php endforeach; ?>
 												</div>
@@ -591,7 +593,7 @@ get_header();
 									<?php endif; ?>
 
 									<!-- Fees Section -->
-									<div id="modal-fees-<?php the_ID(); ?>" class="modal-section cosmetic-modal-fees-section pt-5 mt-5 pb-0 mb-0">
+									<div id="modal-fees-<?php the_ID(); ?>" class="modal-section cosmetic-modal-fees-section">
 										<?php if ( ! empty( $fee_rows ) ) : ?>
 											<div class="cosmetic-fees-box mx-auto">
 												<div class="fees-box-header">
@@ -600,7 +602,7 @@ get_header();
 												</div>
 												<div class="fees-box-body">
 													<?php foreach ( $fee_rows as $fee_row_index => $fee_row ) : ?>
-														<div class="fee-row d-flex justify-content-between align-items-center py-4 <?php echo ( $fee_row_index < count( $fee_rows ) - 1 ) ? 'border-bottom' : ''; ?>">
+														<div class="fee-row d-flex justify-content-between align-items-center <?php echo ( $fee_row_index < count( $fee_rows ) - 1 ) ? 'border-bottom' : ''; ?>">
 															<span class="fee-name"><?php echo esc_html( $fee_row['title'] ); ?></span>
 															<span class="fee-price"><?php echo esc_html( $fee_row['value'] ); ?></span>
 														</div>
@@ -728,7 +730,7 @@ get_header();
 
 			<!-- Custom Membership Section -->
 			<section class="cosmetic-membership-section">
-				<div class="container-fluid px-lg-120">
+				<div class="container-fluid px-lg-0">
 					<div class="cosmetic-membership-card">
 						<div class="cosmetic-membership-img-col">
 							<!-- 2 visits / year included Badge -->
@@ -747,7 +749,7 @@ get_header();
 									Members save 15% on hygiene visits. Our monthly plan includes two hygiene appointments per year plus routine examinations — all for one simple monthly payment.
 								</p>
 								<p class="cosmetic-membership-price">
-									From <span class="price-amount">£14.95/</span><span class="price-amount" style="font-size: 28px;">month</span>
+									From <span class="price-amount">£14.95/</span><span class="price-amount">month</span>
 								</p>
 							</div>
 
