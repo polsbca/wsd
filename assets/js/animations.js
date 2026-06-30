@@ -848,8 +848,21 @@ function initModalSmileGallery(modalElement) {
         const actionButton = gallery.querySelector('.btn-gallery-action');
         if (!wrapper || !infoWrapper || slides.length <= 1) return;
 
-        let dotsContainer = gallery.querySelector('.gallery-slider-dots');
-        if (!dotsContainer) {
+        const removeDots = () => {
+            const dotsContainer = gallery.querySelector('.gallery-slider-dots');
+            if (dotsContainer) {
+                dotsContainer.remove();
+            }
+            dots = [];
+        };
+
+        const ensureDots = () => {
+            let dotsContainer = gallery.querySelector('.gallery-slider-dots');
+            if (dotsContainer) {
+                dots = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
+                return;
+            }
+
             dotsContainer = document.createElement('div');
             dotsContainer.className = 'gallery-slider-dots modal-gallery-slider-dots';
 
@@ -867,12 +880,23 @@ function initModalSmileGallery(modalElement) {
             } else {
                 infoWrapper.appendChild(dotsContainer);
             }
-        }
 
-        dots = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
+            dots = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
+            setActiveIndex(currentIndex);
+        };
+
+        const syncDotsForViewport = () => {
+            if (mediaQuery.matches) {
+                ensureDots();
+            } else {
+                removeDots();
+            }
+        };
 
         let touchStartX = 0;
         let touchStartY = 0;
+
+        syncDotsForViewport();
 
         wrapper.addEventListener('touchstart', (event) => {
             if (!mediaQuery.matches || !event.touches.length) return;
@@ -894,6 +918,8 @@ function initModalSmileGallery(modalElement) {
                 goToSlide(currentIndex - 1, -1);
             }
         }, { passive: true });
+
+        mediaQuery.addEventListener('change', syncDotsForViewport);
     };
 
     initMobileSwipe();
@@ -1092,6 +1118,7 @@ function initModalReviewsSlider(modalElement) {
 
     let currentIndex = 0;
     let isTransitioning = false;
+    const mobileQuery = window.matchMedia('(max-width: 991.98px)');
 
     slides.forEach((slide, index) => {
         const isActive = index === currentIndex;
@@ -1110,7 +1137,10 @@ function initModalReviewsSlider(modalElement) {
         });
     };
 
+    const getWrappedIndex = (index) => (index + slides.length) % slides.length;
+
     const goToSlide = (newIndex) => {
+        newIndex = getWrappedIndex(newIndex);
         if (isTransitioning || newIndex === currentIndex) return;
         isTransitioning = true;
 
@@ -1165,9 +1195,34 @@ function initModalReviewsSlider(modalElement) {
 
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            goToSlide((currentIndex + 1) % slides.length);
+            goToSlide(currentIndex + 1);
         });
     }
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    section.addEventListener('touchstart', (event) => {
+        if (!mobileQuery.matches || !event.touches.length) return;
+
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    section.addEventListener('touchend', (event) => {
+        if (!mobileQuery.matches || !event.changedTouches.length) return;
+
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        if (deltaX < 0) {
+            goToSlide(currentIndex + 1);
+        } else {
+            goToSlide(currentIndex - 1);
+        }
+    }, { passive: true });
 
     updateProgress();
 }

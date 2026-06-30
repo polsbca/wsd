@@ -17,6 +17,30 @@ body {
   width: 100%;
 }
 
+html {
+  scrollbar-gutter: stable;
+  scrollbar-color: #5e5d5f #fefdf6;
+  scrollbar-width: auto;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fefdf6;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #5e5d5f;
+  border: 3px solid #fefdf6;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d8a444;
+}
+
 body.modal-open,
 html:has(body.modal-open) {
   overflow: hidden !important;
@@ -2250,6 +2274,10 @@ body {
   background-color: #d8a444;
   border-radius: 2.5px;
   will-change: transform;
+}
+
+.cosmetic-modal-gallery-section .modal-gallery-slider-dots {
+  display: none;
 }
 
 /* Animating elements start hidden in CSS to prevent flash of content */

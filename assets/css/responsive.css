@@ -3674,6 +3674,206 @@
     display: none !important;
   }
 
+  body.single-services .cosmetic-modal-reviews-section {
+    width: 100% !important;
+    min-height: 491px !important;
+    margin: 60px 0 0 !important;
+    padding: 30px 24px 0 !important;
+    background-color: #faf3e6 !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid #e9e6df !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 58px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    touch-action: pan-y !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-header-row {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-rating-badge {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 10px !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper {
+    display: inline-flex !important;
+    width: 12px !important;
+    height: 12px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper img,
+  body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper img[style] {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-rating-link {
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 44px !important;
+    letter-spacing: 0.48px !important;
+    color: #d8a444 !important;
+    text-decoration: underline !important;
+    text-transform: capitalize !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-dot {
+    display: none !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-header-title {
+    flex: 0 0 100% !important;
+    margin-top: 20px !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 44.1px !important;
+    letter-spacing: -1px !important;
+    color: #5e5d5f !important;
+    text-align: center !important;
+    text-transform: capitalize !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-nav-buttons {
+    display: none !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-content-row {
+    width: 100% !important;
+    min-height: 255px !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark {
+    position: absolute !important;
+    top: 0 !important;
+    z-index: 1 !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 150px !important;
+    line-height: 44.1px !important;
+    color: rgba(94, 93, 95, 0.24) !important;
+    opacity: 0.2 !important;
+    pointer-events: none !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark.left-quote {
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark.right-quote {
+    right: -22px !important;
+    transform: rotate(180deg) !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-slider-container {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 255px !important;
+    margin: 0 !important;
+    padding: 0 24px !important;
+    text-align: center !important;
+    position: relative !important;
+    z-index: 2 !important;
+    touch-action: pan-y !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .modal-review-slide {
+    position: absolute !important;
+    inset: 0 !important;
+    min-height: 255px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-slide-title {
+    width: 100% !important;
+    margin: 0 0 44px !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 500 !important;
+    font-style: italic !important;
+    font-size: 18px !important;
+    line-height: 32px !important;
+    letter-spacing: 0.42px !important;
+    color: #5e5d5f !important;
+    text-align: center !important;
+    text-transform: none !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-slide-text {
+    width: 100% !important;
+    margin: 0 0 34px !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: italic !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    letter-spacing: 0.42px !important;
+    color: #5e5d5f !important;
+    opacity: 1 !important;
+    text-align: center !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-slide-stars {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 4.2px !important;
+    margin: 0 0 10px !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-slide-stars img {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .review-slide-author {
+    width: 100% !important;
+    margin: 0 !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    font-size: 12px !important;
+    line-height: 32px !important;
+    letter-spacing: 0.42px !important;
+    color: #5e5d5f !important;
+    text-align: center !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-progress-track {
+    position: absolute !important;
+    left: 0 !important;
+    bottom: -2px !important;
+    width: 100% !important;
+    height: 2px !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+  }
+
+  body.single-services .cosmetic-modal-reviews-section .reviews-progress-bar {
+    height: 2px !important;
+    background-color: #d8a444 !important;
+  }
+
   body.single-services .cosmetic-modal-fees-section {
     padding: 0 !important;
     margin: 60px 0 0 !important;
