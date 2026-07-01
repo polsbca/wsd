@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
 
     function initMobileEntranceAnimations() {
         var $sections = jQuery(
-            '.key-treatments-section, .about-waterside-section, .smile-gallery-section, .testimonials-section, .principal-dentist-section, .payment-options-section, .book-appointment-section'
+            '.key-treatments-section, .about-waterside-section, .smile-gallery-section, .testimonials-section, .principal-dentist-section, .payment-options-section, .book-appointment-section, .contact-page-layout'
         );
         if ($sections.length === 0) return;
 

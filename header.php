@@ -11,6 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $is_home_active       = is_front_page();
 $is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' );
+$is_contact_active    = is_page_template( 'template-contact.php' );
+$contact_pages        = get_pages(
+	array(
+		'meta_key'   => '_wp_page_template',
+		'meta_value' => 'template-contact.php',
+		'number'     => 1,
+	)
+);
+$contact_url          = ! empty( $contact_pages ) ? get_permalink( $contact_pages[0]->ID ) : home_url( '/#contact-us' );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -105,7 +114,7 @@ $is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'serv
 								</li>
 								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>">Fees & Membership</a></li>
 								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#referrals' ) ); ?>">Referrals</a></li>
-								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#contact-us' ) ); ?>">Contact Us</a></li>
+								<li class="menu-item <?php echo $is_contact_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $contact_url ); ?>">Contact Us</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -242,7 +251,7 @@ $is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'serv
 						</li>
 						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>">Fees & Membership</a></li>
 						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#referrals' ) ); ?>">Referrals</a></li>
-						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#contact-us' ) ); ?>">Contact Us</a></li>
+						<li class="menu-item <?php echo $is_contact_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $contact_url ); ?>">Contact Us</a></li>
 					</ul>
 				</nav>
 			</div>

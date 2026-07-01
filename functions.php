@@ -57,9 +57,9 @@ function wsd_scripts() {
 	wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.12.5', true );
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
-	// Front-page, services template, and single services animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_singular( 'services' ) ) {
-		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
+	// Front-page, services template, single services, and contact page animations.
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_singular( 'services' ) ) {
+		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
 	// jQuery (WordPress default)

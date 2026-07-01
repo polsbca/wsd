@@ -33,21 +33,36 @@ window.addEventListener("load", () => {
 
 function initAnimations() {
   const isDesktop = window.innerWidth >= 992;
+  const hasContactPage = document.querySelector(".contact-page-main") !== null;
+  const hasHero = document.querySelector(".hero-title") !== null;
+  const hasStandardHero =
+    document.querySelector(".hero-section .hero-title") !== null &&
+    !hasContactPage;
 
   // ----------------------------------------------------
   // 1. Initial State Setup (Prevents abrupt jumps on load)
   //    Desktop only — mobile uses CSS transitions via .mobile-visible
   // ----------------------------------------------------
-  const hasHero = document.querySelector(".hero-title") !== null;
-
   if (isDesktop) {
     gsap.set(".header-top, #masthead.site-header", { y: -50, opacity: 0 });
     if (hasHero) {
       gsap.set(".hero-title, .hero-description", { y: 30, opacity: 0 });
+    }
+    if (hasStandardHero) {
       gsap.set(".hero-buttons .btn", { y: 20, opacity: 0 });
       gsap.set(".stat", { y: 20, opacity: 0 });
       gsap.set(".hero-image-wrapper", { x: 50, opacity: 0, scale: 0.95 });
+    }
+    if (hasStandardHero || hasContactPage) {
       gsap.set(".call-us-tab", { x: 50, opacity: 0 });
+    }
+    if (hasContactPage) {
+      gsap.set(".contact-sidebar", { y: 30, opacity: 0 });
+      gsap.set(".contact-main-panel", { x: 50, opacity: 0 });
+      gsap.set(
+        ".contact-form-block .contact-panel-title, .contact-form-block .contact-field, .contact-form-block .contact-consent, .contact-form-block .contact-submit-btn",
+        { y: 30, opacity: 0 },
+      );
     }
   }
 
@@ -73,8 +88,54 @@ function initAnimations() {
       mainTimeline
         // Reveal Hero Text
         .to(".hero-title", { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
-        .to(".hero-description", { y: 0, opacity: 1, duration: 0.8 }, "-=0.6")
+        .to(".hero-description", { y: 0, opacity: 1, duration: 0.8 }, "-=0.6");
+    }
 
+    if (hasContactPage) {
+      mainTimeline
+        .to(".contact-sidebar", { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
+        .to(
+          ".contact-main-panel",
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.6",
+        )
+        .to(
+          ".contact-form-block .contact-panel-title",
+          { y: 0, opacity: 1, duration: 0.6 },
+          "-=0.8",
+        )
+        .to(
+          ".contact-form-block .contact-field",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.08,
+            duration: 0.5,
+          },
+          "-=0.4",
+        )
+        .to(
+          ".contact-form-block .contact-consent",
+          { y: 0, opacity: 1, duration: 0.5 },
+          "-=0.25",
+        )
+        .to(
+          ".contact-form-block .contact-submit-btn",
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+          },
+          "-=0.35",
+        );
+    } else if (hasStandardHero) {
+      mainTimeline
         // Stagger Hero Buttons
         .to(
           ".hero-buttons .btn",
@@ -100,7 +161,7 @@ function initAnimations() {
           "-=0.4",
         )
 
-        // Animate Hero Image and Call Tab
+        // Animate Hero Image
         .to(
           ".hero-image-wrapper",
           {
@@ -111,17 +172,20 @@ function initAnimations() {
             ease: "power4.out",
           },
           "-=0.8",
-        )
-        .to(
-          ".call-us-tab",
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          },
-          "-=0.6",
         );
+    }
+
+    if (hasStandardHero || hasContactPage) {
+      mainTimeline.to(
+        ".call-us-tab",
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+        "-=0.6",
+      );
     }
   } else {
     // Mobile: simple entrance animation for hero elements
@@ -130,10 +194,17 @@ function initAnimations() {
       gsap.set(".mobile-header", { y: -30, opacity: 0 });
       if (hasHero) {
         gsap.set(".hero-title, .hero-description", { y: 20, opacity: 0 });
+      }
+      if (hasStandardHero) {
         gsap.set(".hero-buttons .btn", { y: 15, opacity: 0 });
         gsap.set(".stat", { y: 15, opacity: 0 });
         gsap.set(".hero-image-wrapper", { y: 30, opacity: 0 });
+      }
+      if (hasStandardHero || hasContactPage) {
         gsap.set(".call-us-tab", { opacity: 0 });
+      }
+      if (hasContactPage) {
+        gsap.set(".contact-sidebar, .contact-main-panel", { y: 20, opacity: 0 });
       }
 
       const mobileTl = gsap.timeline({
@@ -145,7 +216,19 @@ function initAnimations() {
       if (hasHero) {
         mobileTl
           .to(".hero-title", { y: 0, opacity: 1 }, "-=0.3")
-          .to(".hero-description", { y: 0, opacity: 1 }, "-=0.4")
+          .to(".hero-description", { y: 0, opacity: 1 }, "-=0.4");
+      }
+
+      if (hasContactPage) {
+        mobileTl
+          .to(".contact-sidebar", { y: 0, opacity: 1, duration: 0.5 }, "-=0.3")
+          .to(
+            ".contact-main-panel",
+            { y: 0, opacity: 1, duration: 0.6 },
+            "-=0.35",
+          );
+      } else if (hasStandardHero) {
+        mobileTl
           .to(
             ".hero-buttons .btn",
             {
@@ -174,15 +257,18 @@ function initAnimations() {
               duration: 0.6,
             },
             "-=0.3",
-          )
-          .to(
-            ".call-us-tab",
-            {
-              opacity: 1,
-              duration: 0.4,
-            },
-            "-=0.3",
           );
+      }
+
+      if (hasStandardHero || hasContactPage) {
+        mobileTl.to(
+          ".call-us-tab",
+          {
+            opacity: 1,
+            duration: 0.4,
+          },
+          "-=0.3",
+        );
       }
     }
   }
@@ -753,6 +839,7 @@ function initAnimations() {
   // Initialize Principal Dentist Tabs for both desktop and mobile
   initDentistTabs();
   initServicePageTextAnimations();
+  initContactPageAnimations();
 
   if (isDesktop) {
     initSectionFadeOut();
@@ -1356,6 +1443,133 @@ function initServicePageTextAnimations() {
       start: "top 85%",
       stagger: 0.1,
     });
+  }
+}
+
+function initContactPageAnimations() {
+  const contactMain = document.querySelector(".contact-page-main");
+  if (!contactMain) return;
+
+  const isDesktop = window.innerWidth >= 992;
+  const $ = window.jQuery;
+
+  if ($) {
+    const $links = $(".contact-page-main .contact-section-link");
+    const $sections = $(
+      "#contact-form, #quick-information, #availability-timings",
+    );
+
+    if ($links.length && $sections.length) {
+      const setActiveSection = (sectionId) => {
+        $links.removeClass("is-active");
+        $links
+          .filter('[data-contact-section="' + sectionId + '"]')
+          .addClass("is-active");
+      };
+
+      $links.on("click", function (event) {
+        const targetId = $(this).data("contact-section");
+        const $target = $("#" + targetId);
+
+        if (!$target.length) {
+          return;
+        }
+
+        event.preventDefault();
+        $("html, body").animate(
+          {
+            scrollTop: $target.offset().top - 120,
+          },
+          500,
+        );
+        setActiveSection(targetId);
+      });
+
+      const onScroll = () => {
+        const scrollPos = $(window).scrollTop() + 160;
+        let currentId = "contact-form";
+
+        $sections.each(function () {
+          if ($(this).offset().top <= scrollPos) {
+            currentId = this.id;
+          }
+        });
+
+        setActiveSection(currentId);
+      };
+
+      $(window).on("scroll.contactPage", onScroll);
+      onScroll();
+    }
+  }
+
+  if (!isDesktop || typeof gsap === "undefined") {
+    return;
+  }
+
+  const animateIn = (elements, vars = {}) => {
+    const targets = gsap.utils.toArray(elements).filter(Boolean);
+    if (!targets.length) return null;
+
+    const toVars = {
+      y: 0,
+      opacity: 1,
+      stagger: vars.stagger || 0.12,
+      duration: vars.duration || 0.8,
+      ease: vars.ease || "power3.out",
+    };
+
+    if (vars.trigger) {
+      toVars.scrollTrigger = {
+        trigger: vars.trigger,
+        start: vars.start || "top 80%",
+        toggleActions: "play none none none",
+      };
+    }
+
+    return gsap.fromTo(
+      targets,
+      { y: vars.yStart || 30, opacity: 0 },
+      toVars,
+    );
+  };
+
+  const infoBlock = contactMain.querySelector(".contact-info-block");
+  if (infoBlock) {
+    animateIn(infoBlock.querySelector(".contact-panel-title"), {
+      trigger: infoBlock,
+      start: "top 82%",
+      stagger: 0,
+    });
+    animateIn(infoBlock.querySelectorAll(".contact-info-item"), {
+      trigger: infoBlock,
+      start: "top 80%",
+      stagger: 0.12,
+    });
+    animateIn(infoBlock.querySelector(".contact-social-row"), {
+      trigger: infoBlock,
+      start: "top 75%",
+      stagger: 0,
+    });
+  }
+
+  const mapCard = contactMain.querySelector(".contact-map-card");
+  if (mapCard) {
+    gsap.fromTo(
+      mapCard,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: mapCard,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      },
+    );
   }
 }
 

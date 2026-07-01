@@ -914,6 +914,51 @@
     transition-delay: 0.2s !important;
   }
 
+  /* Contact Page Mobile Scroll Animations */
+  .contact-page-layout .contact-info-block .contact-panel-title,
+  .contact-page-layout .contact-info-item,
+  .contact-page-layout .contact-social-row,
+  .contact-page-layout .contact-map-card {
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    transition:
+      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: opacity, transform !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-info-block .contact-panel-title,
+  .contact-page-layout.mobile-visible .contact-info-item,
+  .contact-page-layout.mobile-visible .contact-social-row,
+  .contact-page-layout.mobile-visible .contact-map-card {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-info-block .contact-panel-title {
+    transition-delay: 0s !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-info-list .contact-info-item:nth-child(1) {
+    transition-delay: 0.1s !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-info-list .contact-info-item:nth-child(2) {
+    transition-delay: 0.2s !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-info-list .contact-info-item:nth-child(3) {
+    transition-delay: 0.3s !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-social-row {
+    transition-delay: 0.4s !important;
+  }
+
+  .contact-page-layout.mobile-visible .contact-map-card {
+    transition-delay: 0.5s !important;
+  }
+
   .treatments-header-badge {
     background-color: #faf3e6 !important;
     padding: 20px 40px 20px 24px !important;
