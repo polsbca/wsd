@@ -30,21 +30,9 @@ $phone     = wsd_format_phone_number( $phone_raw );
 $phone_tel = wsd_get_phone_tel_uri( $phone_raw );
 
 $opening_hours_default = "Mon: 8.45am – 1pm\nTue: 8.45am – 6pm\nWed: 8.45am – 6pm\nThu: 8.45am – 7pm\nFri: 8.45am – 1pm\nSat: Some Saturdays by Appointment";
-$opening_hours_lines   = wsd_parse_opening_hours_lines(
+$all_hours_lines       = wsd_parse_opening_hours_lines(
 	wsd_get_contact_page_field( 'opening_hours', $opening_hours_default )
 );
-
-$saturday_line = '';
-$weekday_lines = $opening_hours_lines;
-
-if ( ! empty( $opening_hours_lines ) ) {
-	$last_line = end( $opening_hours_lines );
-
-	if ( preg_match( '/^sat\b/i', $last_line ) ) {
-		$saturday_line = array_pop( $opening_hours_lines );
-		$weekday_lines = $opening_hours_lines;
-	}
-}
 
 $instagram_url = wsd_get_contact_page_field( 'instagram', '' );
 $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
@@ -70,6 +58,7 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 					<button type="button" class="contact-mobile-tab" data-contact-slide="1">Information</button>
 					<span class="contact-mobile-tab-divider" aria-hidden="true"></span>
 					<button type="button" class="contact-mobile-tab" data-contact-slide="2">timings</button>
+					<span class="contact-mobile-tab-divider" aria-hidden="true"></span>
 				</nav>
 				<div class="contact-mobile-dots" aria-hidden="true">
 					<button type="button" class="contact-mobile-dot is-active" data-contact-slide="0" aria-label="<?php esc_attr_e( 'Contact form slide', 'wsd' ); ?>"></button>
@@ -149,14 +138,14 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 							<div class="contact-panel-divider contact-panel-divider--form-info" aria-hidden="true"></div>
 
 							<div class="contact-mobile-slide" data-contact-slide="1">
-								<div class="contact-panel-block contact-info-block contact-info-block--quick" id="quick-information">
+								<div class="contact-panel-block contact-info-block contact-info-block--information" id="quick-information">
 									<h2 class="contact-panel-title">Contact Information</h2>
 
 									<div class="contact-info-list">
 										<?php if ( $email ) : ?>
 											<div class="contact-info-item">
 												<span class="contact-info-icon" aria-hidden="true">
-													<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<svg width="18" height="18" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path d="M5 6.25H25V23.75H5V6.25Z" stroke="#D8A444" stroke-width="1.5" stroke-linejoin="round"/>
 														<path d="M5 8.75L15 15.625L25 8.75" stroke="#D8A444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 													</svg>
@@ -173,7 +162,7 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 										<?php if ( $phone ) : ?>
 											<div class="contact-info-item">
 												<span class="contact-info-icon" aria-hidden="true">
-													<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<svg width="18" height="18" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path d="M8.75 5H12.5L14.375 10.625L11.5625 12.1875C12.6719 14.5156 14.4844 16.3281 16.8125 17.4375L18.375 14.625L24 16.5V20.25C24 20.913 23.7366 21.5489 23.2678 22.0178C22.7989 22.4866 22.163 22.75 21.5 22.75C17.4493 22.5225 13.5627 20.8909 10.6094 17.9375C7.65603 14.9841 6.02446 11.0975 5.79688 7.04688C5.79688 6.38386 6.06027 5.74799 6.52911 5.27915C6.99795 4.81031 7.63382 4.54688 8.29688 4.54688H8.75Z" stroke="#D8A444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 													</svg>
 												</span>
@@ -189,19 +178,11 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 												</div>
 											</div>
 										<?php endif; ?>
-									</div>
-								</div>
-							</div>
 
-							<div class="contact-mobile-slide" data-contact-slide="2">
-								<?php if ( ! empty( $weekday_lines ) || $saturday_line ) : ?>
-									<div class="contact-panel-block contact-info-block contact-info-block--hours" id="availability-timings">
-										<h2 class="contact-panel-title contact-panel-title--hours">Opening Hours</h2>
-
-										<div class="contact-info-list">
+										<?php if ( ! empty( $all_hours_lines ) ) : ?>
 											<div class="contact-info-item contact-info-hours">
 												<span class="contact-info-icon" aria-hidden="true">
-													<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<svg width="18" height="18" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<circle cx="15" cy="15" r="10" stroke="#D8A444" stroke-width="1.5"/>
 														<path d="M15 9.375V15L18.75 17.8125" stroke="#D8A444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 													</svg>
@@ -209,47 +190,54 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 												<div class="contact-info-copy">
 													<p class="contact-info-label">Opening Hours</p>
 													<div class="contact-hours-list">
-														<?php foreach ( $weekday_lines as $hours_line ) : ?>
+														<?php foreach ( $all_hours_lines as $hours_line ) : ?>
 															<p><?php echo esc_html( $hours_line ); ?></p>
 														<?php endforeach; ?>
-
-														<?php if ( $saturday_line || $instagram_url || $facebook_url ) : ?>
-															<div class="contact-hours-sat-row">
-																<?php if ( $saturday_line ) : ?>
-																	<p class="contact-sat-hours"><?php echo esc_html( $saturday_line ); ?></p>
-																<?php endif; ?>
-
-																<?php if ( $instagram_url || $facebook_url ) : ?>
-																	<div class="contact-social-row">
-																		<span class="contact-social-label">Follow Us On:</span>
-																		<div class="contact-social-icons">
-																			<?php if ( $instagram_url ) : ?>
-																				<a href="<?php echo esc_url( $instagram_url ); ?>" class="contact-social-link contact-social-link--instagram" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Instagram', 'wsd' ); ?>">
-																					<img src="<?php echo esc_url( $theme_uri . '/assets/images/instagram-icon-gold.svg' ); ?>" alt="" width="37" height="37">
-																				</a>
-																			<?php endif; ?>
-
-																			<?php if ( $facebook_url ) : ?>
-																				<a href="<?php echo esc_url( $facebook_url ); ?>" class="contact-social-link contact-social-link--facebook" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Facebook', 'wsd' ); ?>">
-																					<img src="<?php echo esc_url( $theme_uri . '/assets/images/facebook-icon-gold.svg' ); ?>" alt="" width="35" height="35">
-																				</a>
-																			<?php endif; ?>
-																		</div>
-																	</div>
-																<?php endif; ?>
-															</div>
-														<?php endif; ?>
 													</div>
 												</div>
 											</div>
-										</div>
+										<?php endif; ?>
 									</div>
-								<?php endif; ?>
+
+									<?php if ( $instagram_url || $facebook_url ) : ?>
+										<div class="contact-social-row contact-social-row--information">
+											<span class="contact-social-label">Follow Us On:</span>
+											<div class="contact-social-icons">
+												<?php if ( $instagram_url ) : ?>
+													<a href="<?php echo esc_url( $instagram_url ); ?>" class="contact-social-link contact-social-link--instagram" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Instagram', 'wsd' ); ?>">
+														<img src="<?php echo esc_url( $theme_uri . '/assets/images/instagram-icon-gold.svg' ); ?>" alt="" width="30" height="30">
+													</a>
+												<?php endif; ?>
+
+												<?php if ( $facebook_url ) : ?>
+													<a href="<?php echo esc_url( $facebook_url ); ?>" class="contact-social-link contact-social-link--facebook" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Facebook', 'wsd' ); ?>">
+														<img src="<?php echo esc_url( $theme_uri . '/assets/images/facebook-icon-gold.svg' ); ?>" alt="" width="26" height="26">
+													</a>
+												<?php endif; ?>
+											</div>
+										</div>
+									<?php endif; ?>
+								</div>
+							</div>
+
+							<div class="contact-mobile-slide" data-contact-slide="2">
+								<div class="contact-map-card contact-map-card--timings">
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/contact-clinic.jpg' ); ?>" alt="" class="contact-map-image">
+									<div class="contact-map-overlay" aria-hidden="true"></div>
+									<div class="contact-map-content">
+										<p class="contact-map-brand">Waterside Dental</p>
+										<div class="contact-map-center">
+											<p class="contact-map-label">Clinic Address</p>
+											<p class="contact-map-address"><?php echo esc_html( $address ); ?></p>
+										</div>
+										<a href="<?php echo esc_url( $maps_url ); ?>" class="contact-direction-btn" target="_blank" rel="noopener noreferrer">GET DIRECTION</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="contact-map-card">
+					<div class="contact-map-card contact-map-card--desktop" id="availability-timings">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/contact-clinic.jpg' ); ?>" alt="" class="contact-map-image">
 						<div class="contact-map-overlay" aria-hidden="true"></div>
 						<div class="contact-map-content">

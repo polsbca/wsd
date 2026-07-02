@@ -6256,7 +6256,18 @@ body {
   display: none;
 }
 
-.contact-panel-divider--form-info {
+.contact-map-center {
+  display: none;
+}
+
+.contact-social-row--information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1027px;
+  margin-top: 0;
+}
   width: 100%;
   max-width: 1027px;
   height: 1px;
@@ -6278,11 +6289,24 @@ body {
     margin-bottom: 0;
   }
 
-  .contact-info-block--hours {
-    padding-top: 0;
+  .contact-info-block--information {
+    margin-bottom: 0;
   }
 
-  .contact-info-block--hours .contact-info-list {
+  .contact-info-block--information .contact-info-list {
+    margin-bottom: 60px;
+  }
+
+  .contact-info-block--information .contact-social-row--information {
+    margin-top: 0;
     margin-bottom: 80px;
+  }
+
+  .contact-map-card--timings {
+    display: none;
+  }
+
+  .contact-map-card--desktop {
+    display: block;
   }
 }

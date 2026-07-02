@@ -1541,7 +1541,7 @@ function initContactPageAnimations() {
     );
   };
 
-  const infoBlock = contactMain.querySelector(".contact-info-block");
+  const infoBlock = contactMain.querySelector(".contact-info-block--information");
   if (infoBlock) {
     animateIn(infoBlock.querySelector(".contact-panel-title"), {
       trigger: infoBlock,
@@ -1553,14 +1553,14 @@ function initContactPageAnimations() {
       start: "top 80%",
       stagger: 0.12,
     });
-    animateIn(infoBlock.querySelector(".contact-social-row"), {
+    animateIn(infoBlock.querySelector(".contact-social-row--information"), {
       trigger: infoBlock,
       start: "top 75%",
       stagger: 0,
     });
   }
 
-  const mapCard = contactMain.querySelector(".contact-map-card");
+  const mapCard = contactMain.querySelector(".contact-map-card--desktop");
   if (mapCard) {
     gsap.fromTo(
       mapCard,
