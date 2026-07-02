@@ -546,6 +546,10 @@ jQuery(document).ready(function($) {
 
     // Initialize Mobile Contact Carousel
     function initContactMobileCarousel() {
+        if (window.innerWidth >= 768) {
+            return;
+        }
+
         var $carousel = jQuery('.contact-mobile-carousel');
         if ($carousel.length === 0) return;
 
@@ -565,6 +569,15 @@ jQuery(document).ready(function($) {
             $tabs.filter('[data-contact-slide="' + index + '"]').addClass('is-active');
             $dots.removeClass('is-active');
             $dots.filter('[data-contact-slide="' + index + '"]').addClass('is-active');
+
+            if (index === 2) {
+                jQuery('.contact-page-layout').addClass('mobile-visible');
+                $slides.eq(index).find('.contact-map-card--timings').css({
+                    opacity: 1,
+                    transform: 'none',
+                    visibility: 'visible'
+                });
+            }
         }
 
         $tabs.on('click', function() {
@@ -597,6 +610,108 @@ jQuery(document).ready(function($) {
         goToSlide(0);
     }
 
+    // Initialize Tablet scroll navigation (single-column stacked content)
+    function initContactTabletScrollNav() {
+        if (window.innerWidth < 768 || window.innerWidth >= 992) {
+            return;
+        }
+
+        var $tabs = jQuery('.contact-tablet-tabs .contact-section-link');
+        var $sections = jQuery('#contact-form, #quick-information, #availability-timings');
+        var $trackFill = jQuery('.contact-panel-track-fill');
+        var $panel = jQuery('.contact-main-panel');
+        var $track = jQuery('.contact-panel-track');
+
+        if ($tabs.length === 0 || $sections.length === 0 || !$panel.length) {
+            return;
+        }
+
+        function getHeaderOffset() {
+            var $header = jQuery('.mobile-header');
+            return $header.length ? $header.outerHeight() + 20 : 100;
+        }
+
+        function scrollToTarget(targetEl) {
+            if (!targetEl) {
+                return;
+            }
+
+            var headerOffset = getHeaderOffset();
+            var targetY = targetEl.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: Math.max(0, targetY),
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+            });
+        }
+
+        function syncTrackHeight() {
+            var $panelInner = jQuery('.contact-panel-inner');
+            if ($track.length && $panelInner.length) {
+                $track.css('min-height', $panelInner.outerHeight() + 'px');
+            }
+        }
+
+        function updateTrackByScroll() {
+            if (!$trackFill.length || !$track.length || !$panel.length) {
+                return;
+            }
+
+            var trackHeight = $track.outerHeight();
+            var panelTop = $panel.offset().top;
+            var panelHeight = $panel.outerHeight();
+            var scrollMarker = jQuery(window).scrollTop() + getHeaderOffset() + 40;
+            var progress = (scrollMarker - panelTop) / Math.max(panelHeight, 1);
+
+            progress = Math.max(0, Math.min(1, progress));
+            $trackFill.css('height', (progress * trackHeight) + 'px');
+        }
+
+        function setActiveSection(sectionId) {
+            $tabs.removeClass('is-active');
+            $tabs.filter('[data-contact-section="' + sectionId + '"]').addClass('is-active');
+        }
+
+        $tabs.on('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var targetId = jQuery(this).attr('data-contact-section');
+            var targetEl = document.getElementById(targetId);
+
+            if (!targetEl) {
+                return;
+            }
+
+            setActiveSection(targetId);
+            scrollToTarget(targetEl);
+        });
+
+        var onScroll = function() {
+            var scrollPos = jQuery(window).scrollTop() + getHeaderOffset() + 40;
+            var currentId = 'contact-form';
+
+            $sections.each(function() {
+                if (jQuery(this).offset().top <= scrollPos) {
+                    currentId = this.id;
+                }
+            });
+
+            setActiveSection(currentId);
+            syncTrackHeight();
+            updateTrackByScroll();
+        };
+
+        jQuery(window).off('scroll.contactTablet').on('scroll.contactTablet', onScroll);
+        jQuery(window).off('resize.contactTablet').on('resize.contactTablet', onScroll);
+
+        jQuery('.contact-mobile-carousel-track').css('transform', 'none');
+        jQuery('.contact-mobile-carousel').css('overflow', 'visible');
+
+        syncTrackHeight();
+        onScroll();
+    }
+
     // Initialize when DOM is ready
     jQuery(document).ready(function() {
         initMobileEntranceAnimations();
@@ -605,6 +720,7 @@ jQuery(document).ready(function($) {
         initMobileTestimonialsSlider();
         initMobilePaymentAccordion();
         initContactMobileCarousel();
+        initContactTabletScrollNav();
     });
 })();
 

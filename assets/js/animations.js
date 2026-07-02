@@ -204,7 +204,11 @@ function initAnimations() {
         gsap.set(".call-us-tab", { opacity: 0 });
       }
       if (hasContactPage) {
-        gsap.set(".contact-mobile-controls, .contact-main-panel", {
+        const contactTabTarget =
+          window.innerWidth < 768
+            ? ".contact-mobile-controls"
+            : ".contact-tablet-tabs";
+        gsap.set(contactTabTarget + ", .contact-main-panel", {
           y: 20,
           opacity: 0,
         });
@@ -223,9 +227,13 @@ function initAnimations() {
       }
 
       if (hasContactPage) {
+        const contactTabTarget =
+          window.innerWidth < 768
+            ? ".contact-mobile-controls"
+            : ".contact-tablet-tabs";
         mobileTl
           .to(
-            ".contact-mobile-controls",
+            contactTabTarget,
             { y: 0, opacity: 1, duration: 0.5 },
             "-=0.3",
           )
@@ -1461,7 +1469,7 @@ function initContactPageAnimations() {
   const $ = window.jQuery;
 
   if ($ && window.innerWidth >= 992) {
-    const $links = $(".contact-page-main .contact-section-link");
+    const $links = $(".contact-page-main .contact-sidebar .contact-section-link");
     const $sections = $(
       "#contact-form, #quick-information, #availability-timings",
     );
@@ -1475,7 +1483,7 @@ function initContactPageAnimations() {
       };
 
       $links.on("click", function (event) {
-        const targetId = $(this).data("contact-section");
+        const targetId = $(this).attr("data-contact-section");
         const $target = $("#" + targetId);
 
         if (!$target.length) {

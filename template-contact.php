@@ -51,6 +51,12 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 				<p class="contact-parking-text"><?php echo esc_html( $parking_note ); ?></p>
 			</div>
 
+			<nav class="contact-tablet-tabs" aria-label="<?php esc_attr_e( 'Contact page sections', 'wsd' ); ?>">
+				<a href="#contact-form" class="contact-section-link is-active" data-contact-section="contact-form"><?php esc_html_e( 'Contact Us form', 'wsd' ); ?></a>
+				<a href="#quick-information" class="contact-section-link" data-contact-section="quick-information"><?php esc_html_e( 'Quick information', 'wsd' ); ?></a>
+				<a href="#availability-timings" class="contact-section-link" data-contact-section="availability-timings"><?php esc_html_e( 'Availability timings', 'wsd' ); ?></a>
+			</nav>
+
 			<div class="contact-mobile-controls">
 				<nav class="contact-mobile-tabs" aria-label="<?php esc_attr_e( 'Contact page sections', 'wsd' ); ?>">
 					<button type="button" class="contact-mobile-tab is-active" data-contact-slide="0">Contact Us form</button>
@@ -86,6 +92,7 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 						<span class="contact-panel-track-fill"></span>
 					</div>
 
+					<div class="contact-panel-inner">
 					<div class="contact-mobile-carousel">
 						<div class="contact-mobile-carousel-track">
 							<div class="contact-mobile-slide" data-contact-slide="0">
@@ -98,14 +105,16 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 												<span class="screen-reader-text"><?php esc_html_e( 'Your Name', 'wsd' ); ?></span>
 												<input type="text" name="contact_name" placeholder="Your Name" autocomplete="name" required>
 											</label>
-											<label class="contact-field">
-												<span class="screen-reader-text"><?php esc_html_e( 'Email Address', 'wsd' ); ?></span>
-												<input type="email" name="contact_email" placeholder="Email Address" autocomplete="email" required>
-											</label>
-											<label class="contact-field">
-												<span class="screen-reader-text"><?php esc_html_e( 'Subject', 'wsd' ); ?></span>
-												<input type="text" name="contact_subject" placeholder="Subject" required>
-											</label>
+											<div class="contact-form-row">
+												<label class="contact-field">
+													<span class="screen-reader-text"><?php esc_html_e( 'Email Address', 'wsd' ); ?></span>
+													<input type="email" name="contact_email" placeholder="Email Address" autocomplete="email" required>
+												</label>
+												<label class="contact-field">
+													<span class="screen-reader-text"><?php esc_html_e( 'Subject', 'wsd' ); ?></span>
+													<input type="text" name="contact_subject" placeholder="Subject" required>
+												</label>
+											</div>
 											<label class="contact-field contact-field-message">
 												<span class="screen-reader-text"><?php esc_html_e( 'Message', 'wsd' ); ?></span>
 												<textarea name="contact_message" placeholder="Message" rows="4" required></textarea>
@@ -126,6 +135,13 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 											</label>
 											<label class="contact-consent">
 												<input type="checkbox" name="contact_consent_privacy_2" required>
+												<span>I consent to my data being used in accordance to the Privacy Policy</span>
+											</label>
+										</div>
+
+										<div class="contact-consent-group contact-consent-group--tablet">
+											<label class="contact-consent">
+												<input type="checkbox" name="contact_consent_tablet" required>
 												<span>I consent to my data being used in accordance to the Privacy Policy</span>
 											</label>
 										</div>
@@ -237,6 +253,8 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 						</div>
 					</div>
 
+					<div class="contact-panel-divider contact-panel-divider--info-map" aria-hidden="true"></div>
+
 					<div class="contact-map-card contact-map-card--desktop" id="availability-timings">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/contact-clinic.jpg' ); ?>" alt="" class="contact-map-image">
 						<div class="contact-map-overlay" aria-hidden="true"></div>
@@ -246,6 +264,7 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 							<p class="contact-map-address"><?php echo esc_html( $address ); ?></p>
 							<a href="<?php echo esc_url( $maps_url ); ?>" class="contact-direction-btn" target="_blank" rel="noopener noreferrer">GET DIRECTION</a>
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>

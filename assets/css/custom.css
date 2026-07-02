@@ -5946,6 +5946,12 @@ body {
   max-width: 1027px;
 }
 
+.contact-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 .contact-field {
   display: block;
   margin: 0;
@@ -6034,6 +6040,10 @@ body {
   height: 1px;
   margin: 80px 0;
   background-color: rgba(94, 93, 95, 0.2);
+}
+
+.contact-panel-divider--info-map {
+  display: none;
 }
 
 .contact-info-block {
@@ -6248,8 +6258,20 @@ body {
   display: none;
 }
 
+.contact-tablet-tabs {
+  display: none;
+}
+
 .contact-consent-group--mobile {
   display: none;
+}
+
+.contact-consent-group--tablet {
+  display: none;
+}
+
+.contact-panel-inner {
+  width: 100%;
 }
 
 .contact-panel-title--hours {
@@ -6267,12 +6289,6 @@ body {
   width: 100%;
   max-width: 1027px;
   margin-top: 0;
-}
-  width: 100%;
-  max-width: 1027px;
-  height: 1px;
-  margin: 80px 0;
-  background-color: rgba(94, 93, 95, 0.2);
 }
 
 @media (min-width: 992px) {
@@ -6308,5 +6324,28 @@ body {
 
   .contact-map-card--desktop {
     display: block;
+  }
+
+  .contact-panel-divider--info-map {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .contact-mobile-carousel-track {
+    display: block;
+  }
+
+  .contact-mobile-slide {
+    display: block;
+    width: 100%;
+  }
+
+  .contact-map-card--timings {
+    display: none !important;
+  }
+
+  .contact-map-card--desktop {
+    display: block !important;
   }
 }

@@ -79,6 +79,10 @@
         const anchor = event.target.closest('a[href*="#"]');
         if (!anchor || anchor.hasAttribute('data-bs-toggle') || anchor.hasAttribute('data-bs-target')) return;
 
+        if (anchor.closest('.contact-tablet-tabs')) {
+            return;
+        }
+
         const target = getAnchorTarget(anchor);
         if (!target || target.closest('.modal')) return;
 
