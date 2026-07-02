@@ -290,6 +290,108 @@ function wpse_prefer_gd_over_imagick($array) {
     return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
 }
 
+/**
+ * Save ACF field groups to theme acf-json directory.
+ */
+function wsd_acf_json_save_point( $path ) {
+	return get_stylesheet_directory() . '/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'wsd_acf_json_save_point' );
+
+/**
+ * Load ACF field groups from theme acf-json directory.
+ */
+function wsd_acf_json_load_point( $paths ) {
+	$paths[] = get_stylesheet_directory() . '/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'wsd_acf_json_load_point' );
+
+/**
+ * Get a contact page ACF field with a fallback default.
+ *
+ * @param string $field_name ACF field name.
+ * @param mixed  $default    Default value when field is empty.
+ * @return mixed
+ */
+function wsd_get_contact_page_field( $field_name, $default = '' ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return $default;
+	}
+
+	$value = get_field( $field_name );
+
+	if ( null === $value || false === $value || '' === $value ) {
+		return $default;
+	}
+
+	return $value;
+}
+
+/**
+ * Format a phone number for display.
+ *
+ * @param string|int $phone Raw phone value.
+ * @return string
+ */
+function wsd_format_phone_number( $phone ) {
+	$raw = trim( (string) $phone );
+
+	if ( '' === $raw ) {
+		return '';
+	}
+
+	if ( preg_match( '/\s/', $raw ) ) {
+		return $raw;
+	}
+
+	$digits = preg_replace( '/\D+/', '', $raw );
+
+	if ( str_starts_with( $digits, '44' ) ) {
+		$digits = '0' . substr( $digits, 2 );
+	}
+
+	if ( 11 === strlen( $digits ) && str_starts_with( $digits, '0' ) ) {
+		return substr( $digits, 0, 5 ) . ' ' . substr( $digits, 5, 3 ) . ' ' . substr( $digits, 8 );
+	}
+
+	return $raw;
+}
+
+/**
+ * Build a tel: URI from a phone number.
+ *
+ * @param string|int $phone Raw phone value.
+ * @return string
+ */
+function wsd_get_phone_tel_uri( $phone ) {
+	$digits = preg_replace( '/\D+/', '', (string) $phone );
+
+	if ( '' === $digits ) {
+		return '';
+	}
+
+	if ( str_starts_with( $digits, '0' ) ) {
+		$digits = '44' . substr( $digits, 1 );
+	}
+
+	return 'tel:+' . $digits;
+}
+
+/**
+ * Parse opening hours textarea into trimmed lines.
+ *
+ * @param string $textarea Opening hours field value.
+ * @return string[]
+ */
+function wsd_parse_opening_hours_lines( $textarea ) {
+	$lines = preg_split( '/\r\n|\r|\n/', (string) $textarea );
+	$lines = array_map( 'trim', $lines );
+	$lines = array_filter( $lines, 'strlen' );
+
+	return array_values( $lines );
+}
+
 
 
 
