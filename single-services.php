@@ -464,7 +464,7 @@ get_header();
 									<!-- Results / Reviews Section -->
 									<?php if ( $show_smile_gallery && ! empty( $gallery_slides ) ) : ?>
 										<!-- Smile Gallery Section -->
-										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-gallery-section <?php echo ( count( $gallery_slides ) > 1 ) ? 'has-gallery-slides' : ''; ?>" style="--modal-gallery-slides: <?php echo esc_attr( max( 1, count( $gallery_slides ) ) ); ?>;">
+										<div id="modal-gallery-<?php the_ID(); ?>" class="modal-section cosmetic-modal-gallery-section modal-smile-gallery <?php echo ( count( $gallery_slides ) > 1 ) ? 'has-gallery-slides' : ''; ?>" style="--modal-gallery-slides: <?php echo esc_attr( max( 1, count( $gallery_slides ) ) ); ?>;">
 											<div class="modal-gallery-sticky-wrapper">
 												<div class="gallery-header-row mb-5">
 													<div class="gallery-header-badge">

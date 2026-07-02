@@ -867,6 +867,8 @@ function initAnimations() {
   const galleryModals = document.querySelectorAll(".cosmetic-full-modal");
   galleryModals.forEach((modal) => {
     modal.addEventListener("show.bs.modal", () => {
+      const isMobileModal = window.matchMedia("(max-width: 991.98px)").matches;
+
       gsap.set(modal.querySelectorAll(".gallery-header-badge"), {
         y: 30,
         opacity: 0,
@@ -883,10 +885,19 @@ function initAnimations() {
         y: 30,
         opacity: 0,
       });
-      gsap.set(modal.querySelectorAll(".gallery-image-pair-container"), {
-        clipPath: "inset(50% 0% 50% 0%)",
-      });
-      gsap.set(modal.querySelectorAll(".gallery-img"), { scale: 1.15 });
+
+      if (isMobileModal) {
+        gsap.set(modal.querySelectorAll(".gallery-image-pair-container"), {
+          clipPath: "inset(50% 0% 50% 0%)",
+        });
+        gsap.set(modal.querySelectorAll(".gallery-img"), { scale: 1.15 });
+      } else {
+        gsap.set(modal.querySelectorAll(".gallery-image-pair-container"), {
+          clipPath: "inset(0% 0% 0% 0%)",
+        });
+        gsap.set(modal.querySelectorAll(".gallery-img"), { scale: 1 });
+      }
+
       gsap.set(modal.querySelectorAll(".gallery-scroll-indicator-container"), {
         clipPath: "inset(0% 0% 0% 0%)",
       });
@@ -896,6 +907,7 @@ function initAnimations() {
     });
 
     modal.addEventListener("shown.bs.modal", () => {
+      const isMobileModal = window.matchMedia("(max-width: 991.98px)").matches;
       const tl = gsap.timeline({
         defaults: { ease: "power3.out", duration: 0.8 },
       });
@@ -917,8 +929,10 @@ function initAnimations() {
           modal.querySelectorAll(".btn-gallery-action"),
           { y: 0, opacity: 1 },
           "-=0.6",
-        )
-        .to(
+        );
+
+      if (isMobileModal) {
+        tl.to(
           modal.querySelectorAll(".gallery-image-pair-container"),
           {
             clipPath: "inset(0% 0% 0% 0%)",
@@ -926,15 +940,20 @@ function initAnimations() {
             ease: "power2.inOut",
           },
           "-=0.8",
-        )
-        .to(
+        ).to(
           modal.querySelectorAll(".gallery-img"),
           { scale: 1, duration: 0.8, ease: "power2.out" },
           "-=0.8",
-        )
-        .set(modal.querySelectorAll(".gallery-scroll-indicator-container"), {
-          clipPath: "inset(0% 0% 0% 0%)",
-        });
+        );
+      }
+
+      tl.set(modal.querySelectorAll(".gallery-scroll-indicator-container"), {
+        clipPath: "inset(0% 0% 0% 0%)",
+      });
+
+      requestAnimationFrame(() => {
+        syncModalGalleryScale(modal);
+      });
     });
   });
 
@@ -1015,6 +1034,9 @@ function initModalNavScroll(modalElement) {
             ScrollTrigger.update();
           }
         },
+        onComplete: () => {
+          scrollContainer.dispatchEvent(new Event("scroll"));
+        },
       });
     });
   });
@@ -1081,6 +1103,33 @@ function initModalTabContentAnimations(modalElement) {
     button.addEventListener("click", () => {
       animateTargetPane(button);
     });
+  });
+}
+
+function syncModalGalleryScale(modalElement) {
+  const gallery = modalElement.querySelector(".modal-smile-gallery");
+  if (!gallery) return;
+
+  const mediaQuery = window.matchMedia("(max-width: 991.98px)");
+  const pairContainers = gallery.querySelectorAll(
+    ".gallery-image-pair-container",
+  );
+
+  if (mediaQuery.matches) {
+    pairContainers.forEach((container) => {
+      container.style.transform = "";
+    });
+    return;
+  }
+
+  const wrapper = gallery.querySelector(".gallery-interactive-wrapper");
+  if (!wrapper) return;
+
+  const designWidth = 990;
+  const scale = wrapper.clientWidth / designWidth;
+
+  pairContainers.forEach((container) => {
+    container.style.transform = scale === 1 ? "" : `scale(${scale})`;
   });
 }
 
@@ -1303,6 +1352,12 @@ function initModalSmileGallery(modalElement) {
 
   initMobileSwipe();
 
+  const requestScaleSync = () => {
+    requestAnimationFrame(() => {
+      syncModalGalleryScale(modalElement);
+    });
+  };
+
   scrollContainer.addEventListener(
     "scroll",
     () => {
@@ -1313,6 +1368,7 @@ function initModalSmileGallery(modalElement) {
   );
 
   window.addEventListener("resize", () => {
+    requestScaleSync();
     if (mediaQuery.matches) {
       setActiveIndex(currentIndex);
       return;
@@ -1323,10 +1379,16 @@ function initModalSmileGallery(modalElement) {
   modalElement.addEventListener("shown.bs.modal", () => {
     setActiveIndex(0);
     updateHandle(0);
+    requestScaleSync();
     if (!mediaQuery.matches) {
-      requestUpdate();
+      requestAnimationFrame(() => {
+        requestUpdate();
+      });
     }
   });
+
+  mediaQuery.addEventListener("change", requestScaleSync);
+  requestScaleSync();
 }
 
 function initServicePageTextAnimations() {

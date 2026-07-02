@@ -3203,38 +3203,38 @@
     text-align: left !important;
     font-weight: 400;
   }
-  .gallery-content-layout {
+  .smile-gallery-section .gallery-content-layout {
     gap: 64px !important;
   }
-  .before-card {
+  .smile-gallery-section .before-card {
     left: 13% !important;
   }
-  .after-card {
+  .smile-gallery-section .after-card {
     left: 45% !important;
     top: 104px !important;
   }
-  .gallery-card {
+  .smile-gallery-section .gallery-card {
     width: 285px !important;
     height: 186px !important;
     border-radius: 14px !important;
   }
-  .gallery-card-image-wrapper,
-  .gallery-img {
+  .smile-gallery-section .gallery-card-image-wrapper,
+  .smile-gallery-section .gallery-img {
     border-radius: 8px !important;
   }
-  .gallery-card-label {
+  .smile-gallery-section .gallery-card-label {
     bottom: 3px !important;
     font-size: 12px !important;
     border-radius: 0 4px !important;
   }
-  .gallery-connecting-arrow {
+  .smile-gallery-section .gallery-connecting-arrow {
     left: 27% !important;
     top: 168px !important;
     transform: rotate(0deg) !important;
     width: 91px !important;
     height: 41px !important;
   }
-  .gallery-info-wrapper {
+  .smile-gallery-section .gallery-info-wrapper {
     gap: 23px !important;
     flex-direction: row !important;
   }
@@ -3854,12 +3854,21 @@
     width: 100% !important;
     max-width: none !important;
     height: 100% !important;
+    max-height: 100dvh !important;
     margin: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   body.single-services .cosmetic-modal-content {
     background-color: #fefdf6 !important;
-    min-height: 100vh !important;
+    height: 100% !important;
+    max-height: 100dvh !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
   }
 
   body.single-services .cosmetic-modal-header {
@@ -3952,6 +3961,10 @@
   body.single-services .cosmetic-modal-body {
     padding: 48px 0 0 !important;
     overflow-x: hidden !important;
+    overflow-y: auto !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overscroll-behavior: contain !important;
   }
 
   body.single-services .cosmetic-modal-about-section {
@@ -5519,7 +5532,12 @@
   body.single-services .cosmetic-full-modal .modal-dialog {
     width: 100% !important;
     max-width: none !important;
+    height: 100% !important;
+    max-height: 100dvh !important;
     margin: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   body.single-services .cosmetic-modal-header {
@@ -5550,6 +5568,11 @@
 
   body.single-services .cosmetic-modal-body {
     padding: 80px 0 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overscroll-behavior: contain !important;
   }
 
   body.single-services .cosmetic-modal-about-section {
@@ -6313,13 +6336,22 @@
 @media (max-width: 767.98px) {
   body.single-services .cosmetic-full-modal,
   body.single-services .cosmetic-full-modal .modal-dialog,
-  body.single-services .cosmetic-modal-content,
-  body.single-services .cosmetic-modal-body {
+  body.single-services .cosmetic-modal-content {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: clip !important;
     left: 0 !important;
     right: auto !important;
+  }
+
+  body.single-services .cosmetic-modal-body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overscroll-behavior: contain !important;
   }
 
   body.single-services .cosmetic-full-modal.show .modal-dialog {
@@ -7003,5 +7035,99 @@
     font-size: 16px !important;
     line-height: 24px !important;
     margin-bottom: 24px !important;
+  }
+}
+
+/* ============================================================
+   MODAL SMILE GALLERY — desktop layout (loads last)
+   ============================================================ */
+@media (min-width: 992px) {
+  .cosmetic-full-modal .modal-smile-gallery {
+    overflow: visible !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .modal-gallery-sticky-wrapper {
+    overflow: visible !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-header-badge {
+    margin-left: -120px !important;
+    padding: 40px 120px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-content-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 1fr) !important;
+    gap: 48px !important;
+    align-items: center !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-left-col {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    contain: layout paint;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-interactive-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 990 / 540 !important;
+    overflow: hidden !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-image-pair-container {
+    width: 990px !important;
+    height: 540px !important;
+    transform-origin: top left !important;
+    clip-path: none !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-card {
+    width: 533px !important;
+    height: auto !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .before-card {
+    left: 9px !important;
+    top: 9px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .after-card {
+    left: 450px !important;
+    top: 155px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-card-image-wrapper {
+    height: 349px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-connecting-arrow {
+    left: 261px !important;
+    top: 389px !important;
+    width: 179px !important;
+    height: 81px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-img {
+    transform: none !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-right-col {
+    min-width: 0 !important;
+    z-index: 2 !important;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 992px) {
+  .cosmetic-full-modal .modal-smile-gallery .gallery-header-badge {
+    margin-left: -60px !important;
+    padding: 40px 60px !important;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .cosmetic-full-modal .modal-smile-gallery .gallery-header-badge {
+    margin-left: -40px !important;
+    padding: 30px 40px !important;
   }
 }
