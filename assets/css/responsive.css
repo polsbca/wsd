@@ -931,10 +931,16 @@
   }
 
   /* ============================================================
-     CONTACT PAGE MOBILE (FIGMA 4086:49536)
+     CONTACT PAGE MOBILE (FIGMA 4086:50029)
      ============================================================ */
+  .page-template-template-contact-php .site-content,
+  .page-template-template-contact .site-content {
+    background-color: #faf3e6 !important;
+    padding: 0 !important;
+  }
+
   .contact-page-main {
-    background-color: #fefdf6 !important;
+    background-color: #faf3e6 !important;
   }
 
   .contact-page-layout {
@@ -1004,9 +1010,9 @@
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 18px !important;
+    gap: 14px !important;
     width: 100% !important;
-    margin: 0 0 29px !important;
+    margin: 0 0 33px !important;
   }
 
   .contact-mobile-tabs {
@@ -1074,6 +1080,7 @@
     gap: 0 !important;
     width: 100% !important;
     margin: 0 !important;
+    background-color: #faf3e6 !important;
   }
 
   .contact-main-panel {
@@ -1093,6 +1100,7 @@
     width: calc(100% + 48px) !important;
     margin: 0 -24px !important;
     overflow: hidden !important;
+    background: transparent !important;
   }
 
   .contact-mobile-carousel-track {
@@ -1106,12 +1114,18 @@
     flex: 0 0 100% !important;
     min-width: 100% !important;
     width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact-mobile-slide[data-contact-slide="2"] {
+    padding: 0 24px !important;
   }
 
   .contact-mobile-slide .contact-panel-block {
     background: #ffffff !important;
     padding: 10px 14px !important;
     width: 100% !important;
+    margin: 0 !important;
     box-sizing: border-box !important;
   }
 
@@ -1229,25 +1243,34 @@
   .contact-mobile-slide[data-contact-slide="2"] .contact-panel-block {
     padding: 0 !important;
     background: transparent !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
   .contact-map-card--timings {
     position: relative !important;
     width: 100% !important;
-    min-height: 559px !important;
+    max-width: 354px !important;
+    height: 563px !important;
+    min-height: 563px !important;
     border-radius: 20px !important;
     overflow: hidden !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+  }
+
+  .contact-map-card--timings .contact-map-image,
+  .contact-map-card--timings .contact-map-overlay {
+    border-radius: 20px !important;
   }
 
   .contact-map-card--timings .contact-map-content {
     position: relative !important;
-    min-height: 559px !important;
-    padding: 24px 20px 80px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
+    height: 563px !important;
+    min-height: 563px !important;
+    padding: 0 !important;
+    display: block !important;
+    background: transparent !important;
   }
 
   .contact-map-card--timings .contact-map-brand {
@@ -1270,7 +1293,11 @@
     gap: 35px !important;
     width: 226px !important;
     max-width: calc(100% - 40px) !important;
-    margin: 88px auto 0 !important;
+    position: absolute !important;
+    top: calc(50% - 139.5px) !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
     text-align: center !important;
   }
 
@@ -1295,14 +1322,15 @@
     position: absolute !important;
     left: 50% !important;
     right: auto !important;
-    bottom: 20px !important;
+    top: 499px !important;
+    bottom: auto !important;
     transform: translateX(-50%) !important;
     width: 313px !important;
     max-width: calc(100% - 40px) !important;
     min-width: 0 !important;
     min-height: 40px !important;
     height: 40px !important;
-    padding: 18px 20px !important;
+    padding: 0 20px !important;
     border-radius: 32px !important;
     font-size: 14px !important;
     font-weight: 700 !important;
@@ -1355,6 +1383,14 @@
     font-size: 12px !important;
     line-height: 17px !important;
     align-items: flex-start !important;
+    min-width: 0 !important;
+  }
+
+  .contact-consent span {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
   }
 
   .contact-consent input {
