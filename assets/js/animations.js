@@ -204,7 +204,10 @@ function initAnimations() {
         gsap.set(".call-us-tab", { opacity: 0 });
       }
       if (hasContactPage) {
-        gsap.set(".contact-sidebar, .contact-main-panel", { y: 20, opacity: 0 });
+        gsap.set(".contact-mobile-controls, .contact-main-panel", {
+          y: 20,
+          opacity: 0,
+        });
       }
 
       const mobileTl = gsap.timeline({
@@ -221,7 +224,11 @@ function initAnimations() {
 
       if (hasContactPage) {
         mobileTl
-          .to(".contact-sidebar", { y: 0, opacity: 1, duration: 0.5 }, "-=0.3")
+          .to(
+            ".contact-mobile-controls",
+            { y: 0, opacity: 1, duration: 0.5 },
+            "-=0.3",
+          )
           .to(
             ".contact-main-panel",
             { y: 0, opacity: 1, duration: 0.6 },
@@ -1453,7 +1460,7 @@ function initContactPageAnimations() {
   const isDesktop = window.innerWidth >= 992;
   const $ = window.jQuery;
 
-  if ($) {
+  if ($ && window.innerWidth >= 992) {
     const $links = $(".contact-page-main .contact-section-link");
     const $sections = $(
       "#contact-form, #quick-information, #availability-timings",

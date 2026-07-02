@@ -544,6 +544,59 @@ jQuery(document).ready(function($) {
         });
     }
 
+    // Initialize Mobile Contact Carousel
+    function initContactMobileCarousel() {
+        var $carousel = jQuery('.contact-mobile-carousel');
+        if ($carousel.length === 0) return;
+
+        var $track = $carousel.find('.contact-mobile-carousel-track');
+        var $slides = $track.find('.contact-mobile-slide');
+        var $tabs = jQuery('.contact-mobile-tab');
+        var $dots = jQuery('.contact-mobile-dot');
+        var currentIndex = 0;
+        var startX = 0;
+        var isDragging = false;
+
+        function goToSlide(index) {
+            if (index < 0 || index >= $slides.length) return;
+            currentIndex = index;
+            $track.css('transform', 'translateX(' + (-100 * index) + '%)');
+            $tabs.removeClass('is-active');
+            $tabs.filter('[data-contact-slide="' + index + '"]').addClass('is-active');
+            $dots.removeClass('is-active');
+            $dots.filter('[data-contact-slide="' + index + '"]').addClass('is-active');
+        }
+
+        $tabs.on('click', function() {
+            goToSlide(parseInt(jQuery(this).attr('data-contact-slide'), 10));
+        });
+
+        $dots.on('click', function() {
+            goToSlide(parseInt(jQuery(this).attr('data-contact-slide'), 10));
+        });
+
+        $carousel.on('touchstart', function(e) {
+            startX = e.originalEvent.touches[0].clientX;
+            isDragging = true;
+        });
+
+        $carousel.on('touchend', function(e) {
+            if (!isDragging) return;
+            var endX = e.originalEvent.changedTouches[0].clientX;
+            var diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < $slides.length - 1) {
+                    goToSlide(currentIndex + 1);
+                } else if (diff < 0 && currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                }
+            }
+            isDragging = false;
+        });
+
+        goToSlide(0);
+    }
+
     // Initialize when DOM is ready
     jQuery(document).ready(function() {
         initMobileEntranceAnimations();
@@ -551,6 +604,7 @@ jQuery(document).ready(function($) {
         initMobileGallerySlider();
         initMobileTestimonialsSlider();
         initMobilePaymentAccordion();
+        initContactMobileCarousel();
     });
 })();
 
