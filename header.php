@@ -29,7 +29,27 @@ $contact_url          = ! empty( $contact_pages ) ? get_permalink( $contact_page
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-	<script>document.documentElement.classList.add('wsd-js');</script>
+	<script>
+		document.documentElement.classList.add('wsd-js');
+		(function() {
+			function adjustZoom() {
+				var width = window.innerWidth;
+				if (width > 1920) {
+					var zoomFactor = width / 1920;
+					document.documentElement.style.zoom = zoomFactor;
+				} else {
+					document.documentElement.style.zoom = '';
+				}
+				if (typeof ScrollTrigger !== 'undefined') {
+					ScrollTrigger.refresh();
+				}
+			}
+			adjustZoom();
+			window.addEventListener('resize', adjustZoom);
+			window.addEventListener('DOMContentLoaded', adjustZoom);
+			window.addEventListener('load', adjustZoom);
+		})();
+	</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
