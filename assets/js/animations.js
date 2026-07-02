@@ -855,6 +855,7 @@ function initAnimations() {
   initDentistTabs();
   initServicePageTextAnimations();
   initContactPageAnimations();
+  initPrivacyPolicyAnimations();
 
   if (isDesktop) {
     initSectionFadeOut();
@@ -1586,6 +1587,43 @@ function initContactPageAnimations() {
       },
     );
   }
+}
+
+function initPrivacyPolicyAnimations() {
+  const privacyMain = document.querySelector(".privacy-policy-main");
+  if (!privacyMain || window.innerWidth < 992 || typeof gsap === "undefined") {
+    return;
+  }
+
+  const heroTitle = privacyMain.querySelector(".privacy-policy-hero-title");
+  if (heroTitle) {
+    gsap.fromTo(
+      heroTitle,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.3 },
+    );
+  }
+
+  const sections = privacyMain.querySelectorAll(
+    ".privacy-policy-intro, .privacy-policy-section",
+  );
+  sections.forEach((section) => {
+    gsap.fromTo(
+      section,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      },
+    );
+  });
 }
 
 function initModalTextAppearances(modalElement) {

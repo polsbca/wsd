@@ -81,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="footer-nav-col d-md-none d-xl-block">
 									<h4 class="footer-nav-title">Legal Links</h4>
 									<ul class="footer-nav-list list-unstyled">
-										<li><a href="#privacy">Privacy Policy</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
 										<li><a href="#gdc">GDC Regulations</a></li>
 										<li><a href="#complaints">Complaints Procedure</a></li>
 										<li><a href="#terms">Terms of Use</a></li>
@@ -130,7 +130,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								 <div class="footer-nav-col d-none d-md-block d-xl-none">
 									<h4 class="footer-nav-title">Legal Links</h4>
 									<ul class="footer-nav-list list-unstyled">
-										<li><a href="#privacy">Privacy Policy</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
 										<li><a href="#gdc">GDC Regulations</a></li>
 										<li><a href="#complaints">Complaints Procedure</a></li>
 										<li><a href="#terms">Terms of Use</a></li>
