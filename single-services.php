@@ -67,8 +67,8 @@ get_header();
 				<!-- Floating Call Us Badge -->
 				<div class="floating-call-badge">
 					<a href="tel:01706632661" class="floating-call-badge-content">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/phone-icon.svg' ); ?>" alt="" style="width: 24px; height: 19px; filter: brightness(0) invert(1);">
-						Call Us
+						Contact us
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/phone-icon1.svg' ); ?>" alt="" style="width: 24px; height: 24px; filter: brightness(0) invert(1); transform: rotate(90deg);">
 					</a>
 				</div>
 			</section>
@@ -376,9 +376,9 @@ get_header();
 
 												<!-- Symptoms Tab Content -->
 												<div class="tab-pane fade" id="symptoms-content-<?php the_ID(); ?>" role="tabpanel" aria-labelledby="symptoms-tab-<?php the_ID(); ?>">
-													<div class="row g-4">
+													<div class="row g-lg-4">
 														<!-- Symptom 1 -->
-														<div class="col-xl-3 col-md-6">
+														<div class="col-xl-3 col-md-6 col-6">
 															<div class="symptom-card">
 																<img src="<?php echo esc_url($s_img1); ?>" alt="<?php echo esc_attr($s_title1); ?>">
 																<div class="symptom-card-overlay">
@@ -388,7 +388,7 @@ get_header();
 															</div>
 														</div>
 														<!-- Symptom 2 -->
-														<div class="col-xl-3 col-md-6">
+														<div class="col-xl-3 col-md-6 col-6">
 															<div class="symptom-card">
 																<img src="<?php echo esc_url($s_img2); ?>" alt="<?php echo esc_attr($s_title2); ?>">
 																<div class="symptom-card-overlay">
@@ -398,7 +398,7 @@ get_header();
 															</div>
 														</div>
 														<!-- Symptom 3 -->
-														<div class="col-xl-3 col-md-6">
+														<div class="col-xl-3 col-md-6 col-6">
 															<div class="symptom-card">
 																<img src="<?php echo esc_url($s_img3); ?>" alt="<?php echo esc_attr($s_title3); ?>">
 																<div class="symptom-card-overlay">
@@ -408,7 +408,7 @@ get_header();
 															</div>
 														</div>
 														<!-- Symptom 4 -->
-														<div class="col-xl-3 col-md-6">
+														<div class="col-xl-3 col-md-6 col-6">
 															<div class="symptom-card">
 																<img src="<?php echo esc_url($s_img4); ?>" alt="<?php echo esc_attr($s_title4); ?>">
 																<div class="symptom-card-overlay">

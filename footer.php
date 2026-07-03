@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<!-- Col 2: Navigation Links, Opening Hours, Contact Info -->
 					<div class="col-xl-9 col-12">
-						<div class="row g-4 footer-links-grid">
+						<div class="row g-lg-4 footer-links-grid">
 							<!-- Column 1: Cosmetic & Finance -->
 							<div class="col-md-3 col-sm-6 col-12">
 								<div class="footer-nav-col mb-5">

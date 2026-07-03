@@ -96,7 +96,7 @@ $contact_url          = ! empty( $contact_pages ) ? get_permalink( $contact_page
 									<a href="<?php echo esc_url( home_url( '/#our-practice' ) ); ?>" class="our-practice-trigger">Our Practice</a>
 									<!-- Our Practice Dropdown Menu -->
 									<div class="our-practice-dropdown-container">
-										<div class="dropdown-item active">
+										<div class="dropdown-item">
 											<a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
@@ -114,7 +114,7 @@ $contact_url          = ! empty( $contact_pages ) ? get_permalink( $contact_page
 									<a href="<?php echo esc_url( home_url( '/#treatments' ) ); ?>" class="treatments-trigger">Treatments</a>
 									<!-- Treatments Dropdown Menu -->
 									<div class="treatments-dropdown-container">
-										<div class="dropdown-item active">
+										<div class="dropdown-item">
 											<a href="/services/all-about-general-dentistry-services/">General Dentistry</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>

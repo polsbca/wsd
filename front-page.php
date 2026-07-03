@@ -65,8 +65,8 @@ get_header();
 		<!-- Call Us Side Tab -->
 		<div class="call-us-tab">
 			<a href="tel:+441234567890" class="btn-call-us">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/phone-icon.svg' ); ?>" alt="" class="phone-icon">
-				<span class="call-text">Call Us</span>
+				<span class="call-text">Contact us</span>
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/phone-icon1.svg' ); ?>" alt="" class="phone-icon">
 			</a>
 		</div>
 	</section>
