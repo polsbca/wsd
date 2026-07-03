@@ -236,7 +236,7 @@ function initAnimations() {
         });
       }
       if (hasDentalReferralsPage) {
-        gsap.set(".dental-referrals-form-panel", { y: 20, opacity: 0 });
+        gsap.set(".dental-referrals-form-panel", { x: 0, y: 20, opacity: 0 });
       }
 
       const mobileTl = gsap.timeline({
@@ -270,7 +270,7 @@ function initAnimations() {
       } else if (hasDentalReferralsPage) {
         mobileTl.to(
           ".dental-referrals-form-panel",
-          { y: 0, opacity: 1, duration: 0.6 },
+          { x: 0, y: 0, opacity: 1, duration: 0.6 },
           "-=0.3",
         );
       } else if (hasStandardHero) {
@@ -1824,29 +1824,56 @@ function initDentalReferralsAnimations() {
     );
   }
 
-  if (isDesktop) {
-    const trackFill = referralsMain.querySelector(
-      ".dental-referrals-panel-track-fill",
-    );
-    const formPanel = referralsMain.querySelector(
-      ".dental-referrals-form-panel",
-    );
-
-    if (trackFill && formPanel) {
-      gsap.to(trackFill, {
-        height: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: formPanel,
-          start: "top top+=80",
-          end: "bottom bottom",
-          scrub: 0.3,
-        },
-      });
-    }
-  }
+  initDentalReferralsTrackFill(referralsMain);
 
   ScrollTrigger.refresh();
+}
+
+function initDentalReferralsTrackFill(referralsMain) {
+  const trackFill = referralsMain.querySelector(
+    ".dental-referrals-panel-track-fill",
+  );
+  const formPanel = referralsMain.querySelector(".dental-referrals-form-panel");
+  const track = referralsMain.querySelector(".dental-referrals-panel-track");
+  const form = referralsMain.querySelector(".dental-referrals-form");
+
+  if (!trackFill || !formPanel || !track) {
+    return;
+  }
+
+  const viewportWidth = window.innerWidth;
+  const isDesktop = viewportWidth >= 992;
+  const isTablet = viewportWidth >= 768 && viewportWidth < 992;
+
+  if (!isDesktop && !isTablet) {
+    return;
+  }
+
+  const syncTrackHeight = () => {
+    if (isTablet && form) {
+      track.style.minHeight = `${form.offsetHeight}px`;
+    }
+    ScrollTrigger.refresh();
+  };
+
+  gsap.set(trackFill, { height: isDesktop ? 527 : 193.5 });
+
+  syncTrackHeight();
+  window.addEventListener("resize", syncTrackHeight);
+  window.addEventListener("load", syncTrackHeight);
+  setTimeout(syncTrackHeight, 800);
+
+  gsap.to(trackFill, {
+    height: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: formPanel,
+      start: isDesktop ? "top top+=80" : "top top+=100",
+      end: "bottom bottom",
+      scrub: 0.3,
+      invalidateOnRefresh: true,
+    },
+  });
 }
 
 function initModalTextAppearances(modalElement) {

@@ -192,6 +192,14 @@ body {
   }
 }
 
+@media (max-width: 991.98px) {
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-form-panel,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-form-panel {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
 /* Override standard constrained site-content layout on homepage */
 .home .site-content {
   display: block;
@@ -7150,7 +7158,7 @@ body {
   transform: translateY(-2px);
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1440px) and (min-width: 992px) {
   .dental-referrals-layout {
     padding-left: 60px;
   }
@@ -7165,7 +7173,7 @@ body {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 992px) {
   .dental-referrals-layout {
     padding-left: 40px;
   }
