@@ -1744,6 +1744,11 @@ function initDentalReferralsAnimations() {
     return;
   }
 
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) {
+    return;
+  }
+
   const isDesktop = window.innerWidth >= 992;
   const sections = referralsMain.querySelectorAll(
     ".dental-referrals-form-section",

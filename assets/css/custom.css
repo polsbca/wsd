@@ -7158,6 +7158,22 @@ body {
   transform: translateY(-2px);
 }
 
+.dental-referrals-mobile-progress {
+  display: none;
+}
+
+.dental-referrals-section-header {
+  display: contents;
+}
+
+.dental-referrals-accordion-toggle {
+  display: none;
+}
+
+.dental-referrals-section-title-short {
+  display: none;
+}
+
 @media (max-width: 1440px) and (min-width: 992px) {
   .dental-referrals-layout {
     padding-left: 60px;

@@ -7384,93 +7384,379 @@
   }
 }
 
-/* Dental Referrals — phone fallbacks */
+/* Dental Referrals — phone (FIGMA 4084:45962) */
 @media (max-width: 767.98px) {
-  .dental-referrals-layout {
-    padding: 48px 24px 80px !important;
+  .page-template-template-dental-referrals-php .site-content,
+  .page-template-template-dental-referrals .site-content {
+    background-color: #faf3e6 !important;
+    padding: 0 !important;
   }
 
-  .dental-referrals-intro {
-    padding-right: 0 !important;
-    margin-bottom: 32px !important;
-    gap: 24px !important;
+  .page-template-template-dental-referrals-php .dental-referrals-main,
+  .page-template-template-dental-referrals .dental-referrals-main {
+    background-color: #faf3e6 !important;
   }
 
-  .dental-referrals-title {
-    font-size: 28px !important;
-    line-height: 40px !important;
-  }
-
-  .dental-referrals-intro-text p {
-    font-size: 16px !important;
-    line-height: 24px !important;
-    margin-bottom: 24px !important;
-  }
-
-  .dental-referrals-form-panel {
-    margin-right: -24px !important;
-    padding: 40px 24px 60px !important;
-    padding-right: 24px !important;
-  }
-
-  .dental-referrals-form-row {
-    flex-direction: column !important;
-    gap: 0 !important;
-  }
-
-  .dental-referrals-field {
-    padding: 20px 0 !important;
-  }
-
-  .dental-referrals-field input {
-    font-size: 16px !important;
-    line-height: 24px !important;
-  }
-
-  .dental-referrals-section-title {
-    font-size: 20px !important;
-    line-height: 24px !important;
-  }
-
-  .dental-referrals-form-section {
-    gap: 32px !important;
-  }
-
-  .dental-referrals-section-divider {
-    margin: 48px 0 !important;
-  }
-
-  .dental-referrals-treatments-grid {
-    grid-template-columns: 1fr !important;
-    max-width: none !important;
-  }
-
-  .dental-referrals-checkbox {
-    font-size: 16px !important;
-  }
-
-  .dental-referrals-other-field {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 12px !important;
-  }
-
-  .dental-referrals-other-label {
-    font-size: 16px !important;
-    white-space: normal !important;
-  }
-
-  .dental-referrals-media-uploads {
-    flex-direction: column !important;
-  }
-
-  .dental-referrals-form-footer {
-    margin-top: 48px !important;
-    gap: 32px !important;
+  .page-template-template-dental-referrals-php .dental-referrals-layout,
+  .page-template-template-dental-referrals .dental-referrals-layout {
+    padding: 0 0 40px !important;
+    overflow: visible !important;
+    background-color: #faf3e6 !important;
   }
 
   body.page-template-template-dental-referrals-php .call-us-tab,
   body.page-template-template-dental-referrals .call-us-tab {
     display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-layout-inner,
+  .page-template-template-dental-referrals .dental-referrals-layout-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 32px 24px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-intro,
+  .page-template-template-dental-referrals .dental-referrals-intro {
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-title,
+  .page-template-template-dental-referrals .dental-referrals-title,
+  .page-template-template-dental-referrals-php .dental-referrals-main .hero-title,
+  .page-template-template-dental-referrals .dental-referrals-main .hero-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
+    letter-spacing: 0 !important;
+    margin: 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-intro-text,
+  .page-template-template-dental-referrals .dental-referrals-intro-text,
+  .page-template-template-dental-referrals-php .dental-referrals-main .hero-description,
+  .page-template-template-dental-referrals .dental-referrals-main .hero-description {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-intro-text p,
+  .page-template-template-dental-referrals .dental-referrals-intro-text p {
+    font-size: 12px !important;
+    line-height: 17px !important;
+    margin: 0 0 17px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-intro-text p:last-child,
+  .page-template-template-dental-referrals .dental-referrals-intro-text p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-form-panel,
+  .page-template-template-dental-referrals .dental-referrals-form-panel {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 344px !important;
+    margin: 0 auto !important;
+    padding: 0 16px 40px !important;
+    background-color: #ffffff !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-panel-track,
+  .page-template-template-dental-referrals .dental-referrals-panel-track {
+    display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-mobile-progress,
+  .page-template-template-dental-referrals .dental-referrals-mobile-progress {
+    display: block !important;
+    position: relative !important;
+    width: calc(100% + 32px) !important;
+    max-width: none !important;
+    height: 2px !important;
+    margin: 0 -16px !important;
+    background-color: #d9d9d9 !important;
+    overflow: hidden !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-mobile-progress-fill,
+  .page-template-template-dental-referrals .dental-referrals-mobile-progress-fill {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 41.35%;
+    height: 2px !important;
+    background-color: #d8a444 !important;
+    transition: width 0.25s ease !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-form,
+  .page-template-template-dental-referrals .dental-referrals-form {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 2px 0 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-section-divider,
+  .page-template-template-dental-referrals .dental-referrals-section-divider {
+    display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-form-section,
+  .page-template-template-dental-referrals .dental-referrals-form-section {
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-section-header,
+  .page-template-template-dental-referrals .dental-referrals-section-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded .dental-referrals-section-header,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded .dental-referrals-section-header {
+    padding: 20px 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-header,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-header {
+    padding: 24px 0 !important;
+    margin: 0 -16px !important;
+    width: calc(100% + 32px) !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+    background-color: #fefdf6 !important;
+    border-top: 1px solid rgba(216, 164, 68, 0.2) !important;
+    border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-toggle,
+  .page-template-template-dental-referrals .dental-referrals-accordion-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 15px !important;
+    width: 15px !important;
+    height: 15px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    cursor: pointer !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-icon,
+  .page-template-template-dental-referrals .dental-referrals-accordion-icon {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 15px !important;
+    height: 15px !important;
+    color: #d8a444 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-icon-svg,
+  .page-template-template-dental-referrals .dental-referrals-accordion-icon-svg {
+    display: block !important;
+    flex: 0 0 auto !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-icon-cross,
+  .page-template-template-dental-referrals .dental-referrals-accordion-icon-cross {
+    display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-plus,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-plus {
+    display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-cross,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-cross {
+    display: block !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-accordion-icon,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-accordion-icon {
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-section-title,
+  .page-template-template-dental-referrals .dental-referrals-section-title {
+    margin: 0 !important;
+    font-size: 13px !important;
+    line-height: 28px !important;
+    font-weight: 600 !important;
+    color: #d8a444 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-title,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-title {
+    font-weight: 400 !important;
+    color: #5e5d5f !important;
+    text-transform: capitalize !important;
+    letter-spacing: 1.2px !important;
+    line-height: normal !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-section-title-full,
+  .page-template-template-dental-referrals .dental-referrals-section-title-full {
+    display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-section-title-short,
+  .page-template-template-dental-referrals .dental-referrals-section-title-short {
+    display: inline !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-body,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-body {
+    display: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-fields,
+  .page-template-template-dental-referrals .dental-referrals-fields {
+    gap: 10px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-form-row,
+  .page-template-template-dental-referrals .dental-referrals-form-row {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-field,
+  .page-template-template-dental-referrals .dental-referrals-field {
+    padding: 14px 0 !important;
+    min-height: 38px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-field input,
+  .page-template-template-dental-referrals-php .dental-referrals-field textarea,
+  .page-template-template-dental-referrals .dental-referrals-field input,
+  .page-template-template-dental-referrals .dental-referrals-field textarea {
+    font-size: 14px !important;
+    line-height: 28px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-treatments-grid,
+  .page-template-template-dental-referrals .dental-referrals-treatments-grid {
+    grid-template-columns: 1fr !important;
+    row-gap: 20px !important;
+    max-width: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-checkbox,
+  .page-template-template-dental-referrals .dental-referrals-checkbox {
+    gap: 14px !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-checkbox input,
+  .page-template-template-dental-referrals .dental-referrals-checkbox input {
+    flex: 0 0 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-other-field,
+  .page-template-template-dental-referrals .dental-referrals-other-field {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+    margin-top: 20px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-other-label,
+  .page-template-template-dental-referrals .dental-referrals-other-label {
+    font-size: 14px !important;
+    line-height: 22px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-media-uploads,
+  .page-template-template-dental-referrals .dental-referrals-media-uploads {
+    flex-direction: column !important;
+    gap: 11px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-media-btn,
+  .page-template-template-dental-referrals .dental-referrals-media-btn {
+    min-height: 0 !important;
+    padding: 18px 20px !important;
+    border-radius: 32px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-media-btn-text,
+  .page-template-template-dental-referrals .dental-referrals-media-btn-text {
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-form-footer,
+  .page-template-template-dental-referrals .dental-referrals-form-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 30px !important;
+    margin-top: 30px !important;
+    max-width: none !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-consent,
+  .page-template-template-dental-referrals .dental-referrals-consent {
+    gap: 10px !important;
+    font-size: 12px !important;
+    line-height: 17px !important;
+    align-items: flex-start !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-consent input,
+  .page-template-template-dental-referrals .dental-referrals-consent input {
+    flex: 0 0 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin-top: 2px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded + .dental-referrals-accordion,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded + .dental-referrals-accordion {
+    margin-top: 30px !important;
+  }
+
+  .page-template-template-dental-referrals-php .dental-referrals-submit-btn,
+  .page-template-template-dental-referrals .dental-referrals-submit-btn {
+    width: 100% !important;
+    max-width: 287px !important;
+    min-height: 51px !important;
+    padding: 18px 20px !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
   }
 }
