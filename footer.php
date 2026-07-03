@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 		</div><!-- #content -->
 
+		<?php wsd_render_call_us_tab(); ?>
+
 		<footer id="colophon" class="site-footer">
 			<div class="container-fluid px-lg-5">
 				<!-- Top Row -->

@@ -29,11 +29,11 @@ $referral_treatments = array(
 	<section class="dental-referrals-layout" aria-labelledby="dental-referrals-heading">
 		<div class="dental-referrals-layout-inner">
 			<div class="dental-referrals-intro">
-				<h1 id="dental-referrals-heading" class="dental-referrals-title">
+				<h1 id="dental-referrals-heading" class="dental-referrals-title hero-title">
 					<span class="dental-referrals-title-main">Dental</span>
 					<span class="dental-referrals-title-accent">Referrals</span>
 				</h1>
-				<div class="dental-referrals-intro-text">
+				<div class="dental-referrals-intro-text hero-description">
 					<p>We welcome referrals from other dental practices in our region and beyond. Perhaps you would like to discuss a problem with a case or maybe you would like us to offer advice or a full treatment option? We are here to help and will care for your patient with due diligence.</p>
 					<p>We will keep you updated and informed as to treatment options and progression. At the end of treatment we will return your patient to you for your continued care and review</p>
 					<p>If you would like to refer please complete the form below and we will be in touch.</p>
@@ -186,13 +186,6 @@ $referral_treatments = array(
 					</div>
 				</form>
 			</div>
-		</div>
-
-		<div class="call-us-tab dental-referrals-contact-tab">
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn-call-us">
-				<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon.svg' ); ?>" alt="" class="phone-icon">
-				<span class="call-text">Contact us</span>
-			</a>
 		</div>
 	</section>
 </main>

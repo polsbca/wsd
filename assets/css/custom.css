@@ -68,6 +68,10 @@ body {
   html.wsd-js body.page-template-template-contact-php #masthead.site-header,
   html.wsd-js body.page-template-template-contact .header-top,
   html.wsd-js body.page-template-template-contact #masthead.site-header,
+  html.wsd-js body.page-template-template-dental-referrals-php .header-top,
+  html.wsd-js body.page-template-template-dental-referrals-php #masthead.site-header,
+  html.wsd-js body.page-template-template-dental-referrals .header-top,
+  html.wsd-js body.page-template-template-dental-referrals #masthead.site-header,
   html.wsd-js body.single-services .header-top,
   html.wsd-js body.single-services #masthead.site-header {
     opacity: 0;
@@ -82,6 +86,10 @@ body {
   html.wsd-js body.page-template-template-contact-php .hero-description,
   html.wsd-js body.page-template-template-contact .hero-title,
   html.wsd-js body.page-template-template-contact .hero-description,
+  html.wsd-js body.page-template-template-dental-referrals-php .hero-title,
+  html.wsd-js body.page-template-template-dental-referrals-php .hero-description,
+  html.wsd-js body.page-template-template-dental-referrals .hero-title,
+  html.wsd-js body.page-template-template-dental-referrals .hero-description,
   html.wsd-js body.single-services .hero-title,
   html.wsd-js body.single-services .hero-description,
   html.wsd-js body.single-services .cosmetic-hero-title,
@@ -113,9 +121,9 @@ body {
     transform: translateX(50px) scale(0.95);
   }
 
-  html.wsd-js body.home .call-us-tab {
+  html.wsd-js .call-us-tab {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateX(70px);
   }
 
   html.wsd-js body.page-template-template-contact-php .contact-sidebar,
@@ -138,10 +146,28 @@ body {
     transform: translateX(50px);
   }
 
-  html.wsd-js body.page-template-template-contact-php .call-us-tab,
-  html.wsd-js body.page-template-template-contact .call-us-tab {
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-form-panel,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-form-panel {
     opacity: 0;
     transform: translateX(50px);
+  }
+
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-section-title,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-section-title,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-field,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-field,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-checkbox,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-checkbox,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-other-field,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-other-field,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-media-uploads,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-media-uploads,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-consent,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-consent,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-submit-btn,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-submit-btn {
+    opacity: 0;
+    transform: translateY(30px);
   }
 
   html.wsd-js body.page-template-template-contact-php .contact-info-item,
@@ -645,10 +671,18 @@ body {
 
 /* Call Us Side Tab */
 .call-us-tab {
-  position: absolute;
+  position: fixed;
   right: 0;
-  top: 310px;
+  top: 50%;
+  width: 62px;
+  height: 181px;
+  margin-top: -90px;
   z-index: 999;
+  pointer-events: none;
+}
+
+.call-us-tab .btn-call-us {
+  pointer-events: auto;
 }
 
 .btn-call-us {
@@ -903,8 +937,12 @@ body {
     max-width: 400px;
   }
 
-  .btn-call-us {
+  .call-us-tab {
     display: none;
+  }
+
+  body.home .call-us-tab {
+    display: block;
   }
 }
 
@@ -6046,12 +6084,6 @@ body {
   overflow-x: clip;
 }
 
-.contact-page-layout .call-us-tab {
-  position: absolute;
-  right: 0;
-  top: 433px;
-  z-index: 20;
-}
 
 .contact-layout-inner {
   width: 100%;
@@ -6769,6 +6801,7 @@ body {
 }
 
 .dental-referrals-main {
+  position: relative;
   background-color: #fefdf6;
 }
 
@@ -6829,6 +6862,12 @@ body {
 
 .dental-referrals-intro-text p:last-child {
   margin-bottom: 0;
+}
+
+.dental-referrals-main .hero-description {
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .dental-referrals-form-panel {
@@ -7109,13 +7148,6 @@ body {
 .dental-referrals-submit-btn:hover {
   background-color: #c59435;
   transform: translateY(-2px);
-}
-
-.dental-referrals-layout .call-us-tab {
-  position: absolute;
-  right: 0;
-  top: 433px;
-  z-index: 20;
 }
 
 @media (max-width: 1440px) {

@@ -58,7 +58,7 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
@@ -390,6 +390,28 @@ function wsd_parse_opening_hours_lines( $textarea ) {
 	$lines = array_filter( $lines, 'strlen' );
 
 	return array_values( $lines );
+}
+
+/**
+ * Render the global floating Call Us side tab.
+ */
+function wsd_render_call_us_tab() {
+	$phone_raw = wsd_get_contact_page_field( 'contact_phone_number', '01706 632 661' );
+	$phone_tel = wsd_get_phone_tel_uri( $phone_raw );
+
+	if ( ! $phone_tel ) {
+		return;
+	}
+
+	$theme_uri = get_template_directory_uri();
+	?>
+	<div class="call-us-tab">
+		<a href="<?php echo esc_url( $phone_tel ); ?>" class="btn-call-us">
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon.svg' ); ?>" alt="" class="phone-icon">
+			<span class="call-text"><?php esc_html_e( 'Call Us', 'wsd' ); ?></span>
+		</a>
+	</div>
+	<?php
 }
 
 

@@ -628,15 +628,18 @@
   }
 
   /* Floating call button */
-  .hero-section .call-us-tab {
-    position: absolute !important;
+  body.home .call-us-tab {
+    position: fixed !important;
     right: 24px !important;
     bottom: 30px !important;
     top: auto !important;
+    margin-top: 0 !important;
+    width: 49px !important;
+    height: 49px !important;
     z-index: 10 !important;
   }
 
-  .hero-section .btn-call-us {
+  body.home .call-us-tab .btn-call-us {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -650,13 +653,13 @@
     padding: 0 !important;
   }
 
-  .hero-section .btn-call-us .phone-icon {
+  body.home .call-us-tab .btn-call-us .phone-icon {
     width: 20px !important;
     height: 16px !important;
     transform: none !important;
   }
 
-  .hero-section .btn-call-us .call-text {
+  body.home .call-us-tab .btn-call-us .call-text {
     display: none !important;
   }
 
@@ -949,7 +952,8 @@
     background-color: #faf3e6 !important;
   }
 
-  .contact-page-layout .call-us-tab {
+  body.page-template-template-contact-php .call-us-tab,
+  body.page-template-template-contact .call-us-tab {
     display: none !important;
   }
 
@@ -4752,7 +4756,8 @@
     background-color: #faf3e6 !important;
   }
 
-  .contact-page-layout .call-us-tab {
+  body.page-template-template-contact-php .call-us-tab,
+  body.page-template-template-contact .call-us-tab {
     display: none !important;
   }
 
@@ -7217,7 +7222,8 @@
     gap: 32px !important;
   }
 
-  .dental-referrals-layout .call-us-tab {
+  body.page-template-template-dental-referrals-php .call-us-tab,
+  body.page-template-template-dental-referrals .call-us-tab {
     display: none !important;
   }
 }

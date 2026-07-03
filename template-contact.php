@@ -269,15 +269,6 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 				</div>
 			</div>
 		</div>
-
-		<?php if ( $phone_tel ) : ?>
-			<div class="call-us-tab">
-				<a href="<?php echo esc_url( $phone_tel ); ?>" class="btn-call-us">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon.svg' ); ?>" alt="" class="phone-icon">
-					<span class="call-text">Call Us</span>
-				</a>
-			</div>
-		<?php endif; ?>
 	</section>
 </main>
 
