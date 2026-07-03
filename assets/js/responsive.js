@@ -712,6 +712,87 @@ jQuery(document).ready(function($) {
         onScroll();
     }
 
+    function initDentalReferralsMobile() {
+        if (window.innerWidth >= 768) {
+            return;
+        }
+
+        var main = document.querySelector('.dental-referrals-main');
+        if (!main) {
+            return;
+        }
+
+        var sections = main.querySelectorAll('.dental-referrals-accordion');
+        var toggles = main.querySelectorAll('.dental-referrals-accordion-toggle');
+        var progressFill = main.querySelector('.dental-referrals-mobile-progress-fill');
+        var progressTrack = main.querySelector('.dental-referrals-mobile-progress');
+        var formPanel = main.querySelector('.dental-referrals-form-panel');
+
+        if (!sections.length) {
+            return;
+        }
+
+        function setExpanded(targetSection) {
+            sections.forEach(function(section) {
+                var isTarget = section === targetSection;
+                section.classList.toggle('is-expanded', isTarget);
+                var button = section.querySelector('.dental-referrals-accordion-toggle');
+                if (button) {
+                    button.setAttribute('aria-expanded', isTarget ? 'true' : 'false');
+                }
+            });
+        }
+
+        toggles.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var section = button.closest('.dental-referrals-accordion');
+                if (!section) {
+                    return;
+                }
+
+                if (section.classList.contains('is-expanded')) {
+                    return;
+                }
+
+                setExpanded(section);
+                window.setTimeout(updateProgress, 50);
+            });
+        });
+
+        function getHeaderOffset() {
+            var header = document.querySelector('.mobile-header');
+            return header ? header.offsetHeight + 20 : 94;
+        }
+
+        function updateProgress() {
+            if (!progressFill || !progressTrack || !formPanel) {
+                return;
+            }
+
+            var trackWidth = progressTrack.offsetWidth;
+            var panelTop = formPanel.getBoundingClientRect().top + window.pageYOffset;
+            var panelHeight = formPanel.offsetHeight;
+            var scrollMarker = window.pageYOffset + getHeaderOffset() + 40;
+            var progress = (scrollMarker - panelTop) / Math.max(panelHeight, 1);
+
+            progress = Math.max(0, Math.min(1, progress));
+
+            if (progress <= 0 && panelTop > scrollMarker) {
+                progress = 129 / Math.max(trackWidth, 312);
+            }
+
+            progressFill.style.width = (progress * trackWidth) + 'px';
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress);
+        window.addEventListener('load', function() {
+            window.setTimeout(updateProgress, 100);
+            window.setTimeout(updateProgress, 800);
+        });
+        updateProgress();
+    }
+
     // Initialize when DOM is ready
     jQuery(document).ready(function() {
         initMobileEntranceAnimations();
@@ -721,6 +802,7 @@ jQuery(document).ready(function($) {
         initMobilePaymentAccordion();
         initContactMobileCarousel();
         initContactTabletScrollNav();
+        initDentalReferralsMobile();
     });
 })();
 

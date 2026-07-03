@@ -58,7 +58,7 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
@@ -390,6 +390,44 @@ function wsd_parse_opening_hours_lines( $textarea ) {
 	$lines = array_filter( $lines, 'strlen' );
 
 	return array_values( $lines );
+}
+
+/**
+ * Render the global floating Call Us side tab.
+ */
+function wsd_render_call_us_tab() {
+	$phone_raw = wsd_get_contact_page_field( 'contact_phone_number', '01706 632 661' );
+	$phone_tel = wsd_get_phone_tel_uri( $phone_raw );
+
+	if ( ! $phone_tel ) {
+		return;
+	}
+
+	$theme_uri = get_template_directory_uri();
+	?>
+	<div class="call-us-tab">
+		<a href="<?php echo esc_url( $phone_tel ); ?>" class="btn-call-us">
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon.svg' ); ?>" alt="" class="phone-icon">
+			<span class="call-text"><?php esc_html_e( 'Call Us', 'wsd' ); ?></span>
+		</a>
+	</div>
+	<?php
+}
+
+/**
+ * Render the dental referrals mobile accordion toggle icons.
+ */
+function wsd_dental_referrals_accordion_icon() {
+	?>
+	<span class="dental-referrals-accordion-icon" aria-hidden="true">
+		<svg class="dental-referrals-accordion-icon-svg dental-referrals-accordion-icon-plus" xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true" focusable="false">
+			<path d="M3.75 3.75V0H5V3.75H8.75V5H5V8.75H3.75V5H0V3.75H3.75Z" fill="currentColor"/>
+		</svg>
+		<svg class="dental-referrals-accordion-icon-svg dental-referrals-accordion-icon-cross" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+			<path d="M6.6158 7.5L3.96415 4.84835L4.84803 3.96447L7.49968 6.61612L10.1513 3.96447L11.0352 4.84835L8.38357 7.5L11.0352 10.1517L10.1513 11.0355L7.49968 8.38388L4.84803 11.0355L3.96415 10.1517L6.6158 7.5Z" fill="currentColor"/>
+		</svg>
+	</span>
+	<?php
 }
 
 

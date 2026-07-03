@@ -34,10 +34,14 @@ window.addEventListener("load", () => {
 function initAnimations() {
   const isDesktop = window.innerWidth >= 992;
   const hasContactPage = document.querySelector(".contact-page-main") !== null;
+  const hasDentalReferralsPage =
+    document.querySelector(".dental-referrals-main") !== null;
   const hasHero = document.querySelector(".hero-title") !== null;
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
-    !hasContactPage;
+    !hasContactPage &&
+    !hasDentalReferralsPage;
+  const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
 
   // ----------------------------------------------------
   // 1. Initial State Setup (Prevents abrupt jumps on load)
@@ -53,14 +57,21 @@ function initAnimations() {
       gsap.set(".stat", { y: 20, opacity: 0 });
       gsap.set(".hero-image-wrapper", { x: 50, opacity: 0, scale: 0.95 });
     }
-    if (hasStandardHero || hasContactPage) {
-      gsap.set(".call-us-tab", { x: 50, opacity: 0 });
+    if (hasCallUsTab) {
+      gsap.set(".call-us-tab", { x: 70, opacity: 0 });
     }
     if (hasContactPage) {
       gsap.set(".contact-sidebar", { y: 30, opacity: 0 });
       gsap.set(".contact-main-panel", { x: 50, opacity: 0 });
       gsap.set(
         ".contact-form-block .contact-panel-title, .contact-form-block .contact-field, .contact-form-block .contact-consent, .contact-form-block .contact-submit-btn",
+        { y: 30, opacity: 0 },
+      );
+    }
+    if (hasDentalReferralsPage) {
+      gsap.set(".dental-referrals-form-panel", { x: 50, opacity: 0 });
+      gsap.set(
+        ".dental-referrals-section-title, .dental-referrals-field, .dental-referrals-checkbox, .dental-referrals-other-field, .dental-referrals-media-uploads, .dental-referrals-consent, .dental-referrals-submit-btn",
         { y: 30, opacity: 0 },
       );
     }
@@ -134,6 +145,17 @@ function initAnimations() {
           },
           "-=0.35",
         );
+    } else if (hasDentalReferralsPage) {
+      mainTimeline.to(
+        ".dental-referrals-form-panel",
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power4.out",
+        },
+        "-=0.6",
+      );
     } else if (hasStandardHero) {
       mainTimeline
         // Stagger Hero Buttons
@@ -175,13 +197,13 @@ function initAnimations() {
         );
     }
 
-    if (hasStandardHero || hasContactPage) {
+    if (hasCallUsTab) {
       mainTimeline.to(
         ".call-us-tab",
         {
           x: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.7,
           ease: "back.out(1.7)",
         },
         "-=0.6",
@@ -200,8 +222,8 @@ function initAnimations() {
         gsap.set(".stat", { y: 15, opacity: 0 });
         gsap.set(".hero-image-wrapper", { y: 30, opacity: 0 });
       }
-      if (hasStandardHero || hasContactPage) {
-        gsap.set(".call-us-tab", { opacity: 0 });
+      if (hasCallUsTab) {
+        gsap.set(".call-us-tab", { x: 40, opacity: 0 });
       }
       if (hasContactPage) {
         const contactTabTarget =
@@ -212,6 +234,9 @@ function initAnimations() {
           y: 20,
           opacity: 0,
         });
+      }
+      if (hasDentalReferralsPage) {
+        gsap.set(".dental-referrals-form-panel", { x: 0, y: 20, opacity: 0 });
       }
 
       const mobileTl = gsap.timeline({
@@ -242,6 +267,12 @@ function initAnimations() {
             { y: 0, opacity: 1, duration: 0.6 },
             "-=0.35",
           );
+      } else if (hasDentalReferralsPage) {
+        mobileTl.to(
+          ".dental-referrals-form-panel",
+          { x: 0, y: 0, opacity: 1, duration: 0.6 },
+          "-=0.3",
+        );
       } else if (hasStandardHero) {
         mobileTl
           .to(
@@ -275,12 +306,14 @@ function initAnimations() {
           );
       }
 
-      if (hasStandardHero || hasContactPage) {
+      if (hasCallUsTab) {
         mobileTl.to(
           ".call-us-tab",
           {
+            x: 0,
             opacity: 1,
-            duration: 0.4,
+            duration: 0.5,
+            ease: "back.out(1.7)",
           },
           "-=0.3",
         );
@@ -856,6 +889,7 @@ function initAnimations() {
   initServicePageTextAnimations();
   initContactPageAnimations();
   initPrivacyPolicyAnimations();
+  initDentalReferralsAnimations();
 
   if (isDesktop) {
     initSectionFadeOut();
@@ -1685,6 +1719,165 @@ function initPrivacyPolicyAnimations() {
         },
       },
     );
+  });
+}
+
+function initDentalReferralsAnimations() {
+  const referralsMain = document.querySelector(".dental-referrals-main");
+  if (!referralsMain) {
+    return;
+  }
+
+  const revealWithoutGsap = () => {
+    referralsMain
+      .querySelectorAll(
+        ".dental-referrals-form-panel, .dental-referrals-section-title, .dental-referrals-field, .dental-referrals-checkbox, .dental-referrals-other-field, .dental-referrals-media-uploads, .dental-referrals-consent, .dental-referrals-submit-btn",
+      )
+      .forEach((element) => {
+        element.style.opacity = "1";
+        element.style.transform = "none";
+      });
+  };
+
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    revealWithoutGsap();
+    return;
+  }
+
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) {
+    return;
+  }
+
+  const isDesktop = window.innerWidth >= 992;
+  const sections = referralsMain.querySelectorAll(
+    ".dental-referrals-form-section",
+  );
+  const footer = referralsMain.querySelector(".dental-referrals-form-footer");
+
+  const animateSection = (section, index) => {
+    const title = section.querySelector(".dental-referrals-section-title");
+    const fields = section.querySelectorAll(
+      ".dental-referrals-field, .dental-referrals-checkbox, .dental-referrals-other-field, .dental-referrals-media-uploads",
+    );
+    const isFirstSection = index === 0;
+
+    if (title) {
+      gsap.fromTo(
+        title,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: isFirstSection
+            ? undefined
+            : {
+                trigger: section,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+          delay: isFirstSection ? 0.45 : 0,
+        },
+      );
+    }
+
+    if (fields.length) {
+      gsap.fromTo(
+        fields,
+        { y: 25, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: isFirstSection
+            ? undefined
+            : {
+                trigger: section,
+                start: "top 82%",
+                toggleActions: "play none none none",
+              },
+          delay: isFirstSection ? 0.55 : 0,
+        },
+      );
+    }
+  };
+
+  sections.forEach(animateSection);
+
+  if (footer) {
+    gsap.fromTo(
+      footer.querySelectorAll(
+        ".dental-referrals-consent, .dental-referrals-submit-btn",
+      ),
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footer,
+          start: "top 88%",
+          toggleActions: "play none none none",
+        },
+      },
+    );
+  }
+
+  initDentalReferralsTrackFill(referralsMain);
+
+  ScrollTrigger.refresh();
+}
+
+function initDentalReferralsTrackFill(referralsMain) {
+  const trackFill = referralsMain.querySelector(
+    ".dental-referrals-panel-track-fill",
+  );
+  const formPanel = referralsMain.querySelector(".dental-referrals-form-panel");
+  const track = referralsMain.querySelector(".dental-referrals-panel-track");
+  const form = referralsMain.querySelector(".dental-referrals-form");
+
+  if (!trackFill || !formPanel || !track) {
+    return;
+  }
+
+  const viewportWidth = window.innerWidth;
+  const isDesktop = viewportWidth >= 992;
+  const isTablet = viewportWidth >= 768 && viewportWidth < 992;
+
+  if (!isDesktop && !isTablet) {
+    return;
+  }
+
+  const syncTrackHeight = () => {
+    if (isTablet && form) {
+      track.style.minHeight = `${form.offsetHeight}px`;
+    }
+    ScrollTrigger.refresh();
+  };
+
+  gsap.set(trackFill, { height: isDesktop ? 527 : 193.5 });
+
+  syncTrackHeight();
+  window.addEventListener("resize", syncTrackHeight);
+  window.addEventListener("load", syncTrackHeight);
+  setTimeout(syncTrackHeight, 800);
+
+  gsap.to(trackFill, {
+    height: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: formPanel,
+      start: isDesktop ? "top top+=80" : "top top+=100",
+      end: "bottom bottom",
+      scrub: 0.3,
+      invalidateOnRefresh: true,
+    },
   });
 }
 

@@ -61,14 +61,6 @@ get_header();
 				</div>
 			</div>
 		</div>
-
-		<!-- Call Us Side Tab -->
-		<div class="call-us-tab">
-			<a href="tel:+441234567890" class="btn-call-us">
-				<span class="call-text">Contact us</span>
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/phone-icon1.svg' ); ?>" alt="" class="phone-icon">
-			</a>
-		</div>
 	</section>
 
 	<!-- Our Key Treatments Section -->
