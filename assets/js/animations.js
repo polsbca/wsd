@@ -1459,11 +1459,9 @@ function initServicePageTextAnimations() {
     const heroImage = cosmeticHero.querySelector(
       ".cosmetic-hero-image-wrapper",
     );
-    const callBadge = cosmeticHero.querySelector(".floating-call-badge");
 
     gsap.set([heroTitle, heroDesc].filter(Boolean), { y: 30, opacity: 0 });
     if (heroImage) gsap.set(heroImage, { x: 50, opacity: 0, scale: 0.95 });
-    if (callBadge) gsap.set(callBadge, { x: 50, opacity: 0 });
 
     const heroTl = gsap.timeline({
       defaults: { ease: "power3.out", duration: 0.8 },
@@ -1481,18 +1479,6 @@ function initServicePageTextAnimations() {
           ease: "power4.out",
         },
         "-=0.6",
-      );
-    }
-    if (callBadge) {
-      heroTl.to(
-        callBadge,
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-        },
-        "-=0.7",
       );
     }
   }

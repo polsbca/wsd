@@ -63,14 +63,6 @@ get_header();
 						</div>
 					</div>
 				</div>
-
-				<!-- Floating Call Us Badge -->
-				<div class="floating-call-badge">
-					<a href="tel:01706632661" class="floating-call-badge-content">
-						Contact us
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/phone-icon1.svg' ); ?>" alt="" style="width: 24px; height: 24px; filter: brightness(0) invert(1); transform: rotate(90deg);">
-					</a>
-				</div>
 			</section>
 
 			<?php

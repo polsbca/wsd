@@ -627,46 +627,6 @@
     object-position: bottom center !important;
   }
 
-  /* Floating call button */
-  body.home .call-us-tab {
-    position: fixed !important;
-    right: 24px !important;
-    bottom: 30px !important;
-    top: auto !important;
-    margin-top: 0 !important;
-    width: 49px !important;
-    height: 49px !important;
-    z-index: 10 !important;
-  }
-
-  body.home .call-us-tab .btn-call-us {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 49px !important;
-    height: 49px !important;
-    border-radius: 50% !important;
-    background-color: #d8a444 !important;
-    box-shadow: 0 4px 12px rgba(216, 164, 68, 0.3) !important;
-    transform: none !important;
-    position: static !important;
-    padding: 0 !important;
-  }
-
-  .hero-section .btn-call-us .phone-icon {
-    width: 24px !important;
-    height: 24px !important;
-  }
-  body.home .call-us-tab .btn-call-us .phone-icon {
-    width: 20px !important;
-    height: 16px !important;
-    transform: none !important;
-  }
-
-  body.home .call-us-tab .btn-call-us .call-text {
-    display: none !important;
-  }
-
   /* Key Treatments Mobile Styling */
   .key-treatments-section {
     margin-top: 60px !important;
@@ -3584,35 +3544,6 @@
     display: block !important;
   }
 
-  body.single-services .floating-call-badge {
-    position: absolute !important;
-    right: 34px !important;
-    top: auto !important;
-    bottom: 100px !important;
-    width: 46px !important;
-    height: 46px !important;
-    transform: none !important;
-    z-index: 12 !important;
-    opacity: 1 !important;
-  }
-
-  body.single-services .floating-call-badge-content {
-    width: 46px !important;
-    height: 46px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    background-color: #d8a444 !important;
-    box-shadow: 0 8px 18px rgba(216, 164, 68, 0.35) !important;
-    font-size: 0 !important;
-    gap: 0 !important;
-  }
-
-  body.single-services .floating-call-badge-content img {
-    width: 20px !important;
-    height: 16px !important;
-    margin: 0 !important;
-  }
-
   body.single-services .cosmetic-treatments-container {
     width: calc(100% - 48px) !important;
     max-width: 353px !important;
@@ -5434,52 +5365,6 @@
     object-position: center bottom !important;
   }
 
-  body.single-services .floating-call-badge {
-    position: absolute !important;
-    right: 0 !important;
-    top: 420px !important;
-    bottom: auto !important;
-    width: 54px !important;
-    height: 163px !important;
-    transform: none !important;
-    z-index: 30 !important;
-    opacity: 1 !important;
-  }
-
-  body.single-services .floating-call-badge-content {
-    width: 54px !important;
-    height: 163px !important;
-    padding: 15px 12px !important;
-    border-radius: 20px 0 0 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 15px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 0 !important;
-    line-height: 1 !important;
-  }
-
-  body.single-services .floating-call-badge-content::after {
-    content: "Contact us";
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-family: "Open Sans", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 0.2px;
-    color: #ffffff;
-    white-space: nowrap;
-  }
-
-  body.single-services .floating-call-badge-content img,
-  body.single-services .floating-call-badge-content img[style] {
-    width: 24px !important;
-    height: 24px !important;
-    margin: 0 !important;
-    transform: rotate(0deg) !important;
-  }
-
   body.single-services .cosmetic-treatments-container {
     width: calc(100% - 108px) !important;
     max-width: 660px !important;
@@ -6425,6 +6310,52 @@
 }
 
 @media (max-width: 767.98px) {
+  .call-us-tab {
+    display: none !important;
+  }
+
+  body.home .call-us-tab,
+  body.single-services .call-us-tab {
+    display: block !important;
+    position: fixed !important;
+    right: 24px !important;
+    bottom: 30px !important;
+    top: auto !important;
+    margin-top: 0 !important;
+    width: 49px !important;
+    height: 49px !important;
+    z-index: 10 !important;
+  }
+
+  body.home .call-us-tab .btn-call-us,
+  body.single-services .call-us-tab .btn-call-us {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 49px !important;
+    height: 49px !important;
+    min-height: 0 !important;
+    border-radius: 50% !important;
+    background-color: #d8a444 !important;
+    box-shadow: 0 4px 12px rgba(216, 164, 68, 0.3) !important;
+    transform: none !important;
+    position: static !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  body.home .call-us-tab .btn-call-us .phone-icon,
+  body.single-services .call-us-tab .btn-call-us .phone-icon {
+    width: 20px !important;
+    height: 20px !important;
+    transform: none !important;
+  }
+
+  body.home .call-us-tab .btn-call-us .call-text,
+  body.single-services .call-us-tab .btn-call-us .call-text {
+    display: none !important;
+  }
+
   .payment-options-section .payment-card {
     flex-direction: column !important;
     align-items: center !important;
@@ -6522,12 +6453,6 @@
   }
   body.single-services .cosmetic-hero-content {
     row-gap: 20px;
-  }
-  body.single-services .floating-call-badge-content img {
-    width: 24px !important;
-    height: 24px !important;
-    margin: 0 !important;
-    transform: rotate(0deg) !important;
   }
   body.single-services .cosmetic-membership-img-col img {
     object-position: top center !important;

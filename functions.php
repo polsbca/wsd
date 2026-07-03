@@ -329,6 +329,27 @@ function wsd_get_contact_page_field( $field_name, $default = '' ) {
 }
 
 /**
+ * Get the permalink for the Contact page template.
+ *
+ * @return string
+ */
+function wsd_get_contact_page_url() {
+	$contact_pages = get_pages(
+		array(
+			'meta_key'   => '_wp_page_template',
+			'meta_value' => 'template-contact.php',
+			'number'     => 1,
+		)
+	);
+
+	if ( ! empty( $contact_pages ) ) {
+		return get_permalink( $contact_pages[0]->ID );
+	}
+
+	return home_url( '/#contact-us' );
+}
+
+/**
  * Format a phone number for display.
  *
  * @param string|int $phone Raw phone value.
@@ -393,22 +414,20 @@ function wsd_parse_opening_hours_lines( $textarea ) {
 }
 
 /**
- * Render the global floating Call Us side tab.
+ * Render the global floating Contact us side tab.
  */
 function wsd_render_call_us_tab() {
-	$phone_raw = wsd_get_contact_page_field( 'contact_phone_number', '01706 632 661' );
-	$phone_tel = wsd_get_phone_tel_uri( $phone_raw );
-
-	if ( ! $phone_tel ) {
+	if ( is_page_template( 'template-contact.php' ) || is_page_template( 'template-dental-referrals.php' ) ) {
 		return;
 	}
 
-	$theme_uri = get_template_directory_uri();
+	$contact_url = wsd_get_contact_page_url();
+	$theme_uri   = get_template_directory_uri();
 	?>
 	<div class="call-us-tab">
-		<a href="<?php echo esc_url( $phone_tel ); ?>" class="btn-call-us">
-			<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon.svg' ); ?>" alt="" class="phone-icon">
-			<span class="call-text"><?php esc_html_e( 'Call Us', 'wsd' ); ?></span>
+		<a href="<?php echo esc_url( $contact_url ); ?>" class="btn-call-us">
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon1.svg' ); ?>" alt="" class="phone-icon" width="24" height="24">
+			<span class="call-text"><?php esc_html_e( 'Contact us', 'wsd' ); ?></span>
 		</a>
 	</div>
 	<?php
