@@ -7131,3 +7131,93 @@
     padding: 30px 40px !important;
   }
 }
+
+/* Dental Referrals — mobile/tablet fallbacks (desktop Figma in custom.css) */
+@media (max-width: 991.98px) {
+  .dental-referrals-layout {
+    padding: 48px 24px 80px !important;
+  }
+
+  .dental-referrals-intro {
+    padding-right: 0 !important;
+    margin-bottom: 32px !important;
+    gap: 24px !important;
+  }
+
+  .dental-referrals-title {
+    font-size: 28px !important;
+    line-height: 40px !important;
+  }
+
+  .dental-referrals-intro-text p {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .dental-referrals-form-panel {
+    margin-right: -24px !important;
+    padding: 40px 24px 60px !important;
+    padding-right: 24px !important;
+  }
+
+  .dental-referrals-form-row {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  .dental-referrals-field {
+    padding: 20px 0 !important;
+  }
+
+  .dental-referrals-field input {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+
+  .dental-referrals-section-title {
+    font-size: 20px !important;
+    line-height: 24px !important;
+  }
+
+  .dental-referrals-form-section {
+    gap: 32px !important;
+  }
+
+  .dental-referrals-section-divider {
+    margin: 48px 0 !important;
+  }
+
+  .dental-referrals-treatments-grid {
+    grid-template-columns: 1fr !important;
+    max-width: none !important;
+  }
+
+  .dental-referrals-checkbox {
+    font-size: 16px !important;
+  }
+
+  .dental-referrals-other-field {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .dental-referrals-other-label {
+    font-size: 16px !important;
+    white-space: normal !important;
+  }
+
+  .dental-referrals-media-uploads {
+    flex-direction: column !important;
+  }
+
+  .dental-referrals-form-footer {
+    margin-top: 48px !important;
+    gap: 32px !important;
+  }
+
+  .dental-referrals-layout .call-us-tab {
+    display: none !important;
+  }
+}
