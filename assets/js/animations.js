@@ -7,12 +7,13 @@
 let wsdAnimationsInitialized = false;
 
 function bootAnimations() {
-  if (
-    wsdAnimationsInitialized ||
-    typeof gsap === "undefined" ||
-    typeof ScrollTrigger === "undefined"
-  )
+  if (wsdAnimationsInitialized) {
     return;
+  }
+
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    return;
+  }
 
   wsdAnimationsInitialized = true;
   gsap.registerPlugin(ScrollTrigger);
@@ -78,7 +79,6 @@ function initAnimations() {
     }
     if (hasTeamsPage) {
       gsap.set(".teams-hero-actions .btn", { y: 20, opacity: 0 });
-      gsap.set(".teams-hero-image-wrap", { x: 50, opacity: 0, scale: 0.95 });
     }
   }
 
@@ -108,29 +108,17 @@ function initAnimations() {
     }
 
     if (hasTeamsPage) {
-      mainTimeline
-        .to(
-          ".teams-hero-actions .btn",
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.12,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          },
-          "-=0.5",
-        )
-        .to(
-          ".teams-hero-image-wrap",
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power4.out",
-          },
-          "-=0.6",
-        );
+      mainTimeline.to(
+        ".teams-hero-actions .btn",
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.12,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+        "-=0.5",
+      );
     }
 
     if (hasContactPage) {

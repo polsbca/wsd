@@ -374,6 +374,32 @@ function wsd_get_referrals_page_url() {
 }
 
 /**
+ * Get the Teams page hero image URL (featured image, then theme fallback).
+ *
+ * @param int $page_id Optional page ID.
+ * @return string
+ */
+function wsd_get_teams_hero_image_url( $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+
+	if ( $page_id && has_post_thumbnail( $page_id ) ) {
+		$featured_url = get_the_post_thumbnail_url( $page_id, 'full' );
+		if ( $featured_url ) {
+			return $featured_url;
+		}
+	}
+
+	$fallback_path = get_theme_file_path( 'assets/images/teams-hero.png' );
+	$fallback_url  = get_theme_file_uri( 'assets/images/teams-hero.png' );
+
+	if ( file_exists( $fallback_path ) ) {
+		$fallback_url .= '?ver=' . filemtime( $fallback_path );
+	}
+
+	return $fallback_url;
+}
+
+/**
  * Get the permalink for the Teams page template.
  *
  * @return string

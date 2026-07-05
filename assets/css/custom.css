@@ -124,9 +124,7 @@ body {
   html.wsd-js body.home .hero-image-wrapper,
   html.wsd-js body.page-template-template-services .hero-image-wrapper,
   html.wsd-js body.single-services .hero-image-wrapper,
-  html.wsd-js body.single-services .cosmetic-hero-image-wrapper,
-  html.wsd-js body.page-template-template-teams-php .teams-hero-image-wrap,
-  html.wsd-js body.page-template-template-teams .teams-hero-image-wrap {
+  html.wsd-js body.single-services .cosmetic-hero-image-wrapper {
     opacity: 0;
     transform: translateX(50px) scale(0.95);
   }
@@ -7239,31 +7237,36 @@ body {
   display: flex;
   flex-direction: column;
   gap: 160px;
-  overflow-x: clip;
+  overflow-x: visible;
 }
 
 .teams-hero {
   background-color: #faf3e6;
-  overflow: hidden;
+  padding: 100px 0 0;
+  overflow: visible;
 }
 
-.teams-hero-inner {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 80px;
+.teams-hero-container {
+  position: relative;
+  z-index: 1;
+}
+
+.teams-hero-row {
   min-height: 888px;
-  padding: 100px 0 0 120px;
-  box-sizing: border-box;
+}
+
+.teams-hero-content-col {
+  display: flex;
+  align-items: center;
 }
 
 .teams-hero-content {
-  flex: 1 1 0;
-  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 80px;
+  width: 100%;
+  max-width: 760px;
   min-height: 888px;
   padding-bottom: 80px;
 }
@@ -7272,7 +7275,41 @@ body {
   display: flex;
   flex-direction: column;
   gap: 60px;
-  max-width: 760px;
+}
+
+.teams-hero-image-col {
+  position: relative;
+  z-index: 1;
+}
+
+.teams-hero .hero-image-wrapper.teams-hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1027px;
+  height: auto;
+  max-height: none;
+  min-height: 0;
+  aspect-ratio: 1027 / 889;
+  margin-left: auto;
+  background-color: #faf3e6;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  overflow: hidden;
+}
+
+.teams-hero .teams-hero-image {
+  position: absolute;
+  inset: 0;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover;
+  object-position: center bottom;
 }
 
 .teams-hero-title,
@@ -7347,21 +7384,6 @@ body {
   border-color: #d8a444;
   color: #d8a444;
   background-color: transparent;
-}
-
-.teams-hero-image-wrap {
-  flex: 0 0 auto;
-  width: min(1027px, 53.5vw);
-  height: 889px;
-  position: relative;
-}
-
-.teams-hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom center;
-  display: block;
 }
 
 .teams-clinical-section {
@@ -7850,8 +7872,12 @@ body {
 }
 
 @media (max-width: 1440px) and (min-width: 992px) {
-  .teams-hero-inner {
-    padding-left: 60px;
+  .teams-hero-row {
+    min-height: 720px;
+  }
+
+  .teams-hero-content {
+    min-height: 720px;
     gap: 40px;
   }
 
@@ -7864,9 +7890,9 @@ body {
     min-width: 340px;
   }
 
-  .teams-hero-image-wrap {
-    width: min(760px, 48vw);
-    height: 720px;
+  .teams-hero .hero-image-wrapper.teams-hero-image-wrapper {
+    max-width: min(1027px, 100%);
+    aspect-ratio: 1027 / 889;
   }
 
   .teams-clinical-heading-wrap,
