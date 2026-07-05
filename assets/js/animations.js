@@ -42,7 +42,8 @@ function initAnimations() {
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
     !hasContactPage &&
-    !hasDentalReferralsPage;
+    !hasDentalReferralsPage &&
+    !hasTeamsPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
 
   // ----------------------------------------------------

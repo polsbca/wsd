@@ -89,41 +89,32 @@ $support_members = array(
 
 <main id="main" class="site-main teams-page-main">
 
-	<section class="teams-hero" aria-labelledby="teams-hero-heading">
-		<div class="container-fluid px-lg-120 teams-hero-container">
-			<div class="row align-items-end teams-hero-row">
-				<div class="col-lg-5 teams-hero-content-col">
-					<div class="teams-hero-content">
-						<div class="teams-hero-copy">
-							<h1 id="teams-hero-heading" class="teams-hero-title hero-title">
-								<span class="teams-hero-title-main">Meet The </span>
-								<span class="teams-hero-title-accent">Team</span>
-							</h1>
-							<p class="teams-hero-description hero-description">Our team combines clinical expertise with patient-focused care to create healthy, confident smiles in a calm and welcoming environment.</p>
-						</div>
-						<div class="teams-hero-actions">
-							<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-hero-btn"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
-							<a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>" class="btn btn-secondary teams-hero-btn teams-hero-btn--outline"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
-						</div>
-					</div>
+	<section class="teams-hero-page" aria-labelledby="teams-hero-heading">
+		<div class="teams-hero-inner">
+			<div class="teams-hero-content-col">
+				<div class="teams-hero-copy">
+					<h1 id="teams-hero-heading" class="teams-hero-title hero-title">
+						<span class="teams-hero-title-main">Meet The </span>
+						<span class="teams-hero-title-accent">Team</span>
+					</h1>
+					<p class="teams-hero-description hero-description">Our team combines clinical expertise with patient-focused care to create healthy, confident smiles in a calm and welcoming environment.</p>
 				</div>
-				<div class="col-12 col-lg-7 hero-image-col teams-hero-image-col align-self-end">
-					<?php if ( $teams_hero_image ) : ?>
-						<div
-							class="hero-image-wrapper teams-hero-image-wrapper"
-							style="background-image: url('<?php echo esc_url( $teams_hero_image ); ?>');"
-						>
-							<img
-								src="<?php echo esc_url( $teams_hero_image ); ?>"
-								alt="<?php echo esc_attr( $teams_hero_alt ); ?>"
-								class="hero-img teams-hero-image"
-								width="1027"
-								height="889"
-								loading="eager"
-								decoding="async"
-							>
-						</div>
-					<?php endif; ?>
+				<div class="teams-hero-actions">
+					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-hero-btn"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>" class="btn btn-secondary teams-hero-btn teams-hero-btn--outline"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
+				</div>
+			</div>
+			<div class="teams-hero-image-col">
+				<div class="teams-hero-image-frame">
+					<img
+						src="<?php echo esc_url( $teams_hero_image ); ?>"
+						alt="<?php echo esc_attr( $teams_hero_alt ); ?>"
+						class="teams-hero-img"
+						width="1027"
+						height="889"
+						loading="eager"
+						decoding="async"
+					>
 				</div>
 			</div>
 		</div>
