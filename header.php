@@ -13,22 +13,10 @@ $is_home_active       = is_front_page();
 $is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' );
 $is_contact_active    = is_page_template( 'template-contact.php' );
 $is_referrals_active  = is_page_template( 'template-dental-referrals.php' );
-$contact_pages        = get_pages(
-	array(
-		'meta_key'   => '_wp_page_template',
-		'meta_value' => 'template-contact.php',
-		'number'     => 1,
-	)
-);
-$referrals_pages      = get_pages(
-	array(
-		'meta_key'   => '_wp_page_template',
-		'meta_value' => 'template-dental-referrals.php',
-		'number'     => 1,
-	)
-);
-$contact_url          = ! empty( $contact_pages ) ? get_permalink( $contact_pages[0]->ID ) : home_url( '/#contact-us' );
-$referrals_url        = ! empty( $referrals_pages ) ? get_permalink( $referrals_pages[0]->ID ) : home_url( '/#referrals' );
+$is_teams_active      = is_page_template( 'template-teams.php' );
+$contact_url          = wsd_get_contact_page_url();
+$referrals_url        = wsd_get_referrals_page_url();
+$teams_url            = wsd_get_teams_page_url();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -101,7 +89,7 @@ $referrals_url        = ! empty( $referrals_pages ) ? get_permalink( $referrals_
 							<button class="menu-toggle d-md-none" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'wsd' ); ?></button>
 							<ul id="primary-menu" class="menu d-none d-md-flex justify-content-center align-items-center">
 								<li class="menu-item <?php echo $is_home_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-								<li class="menu-item menu-item-has-children">
+								<li class="menu-item menu-item-has-children <?php echo $is_teams_active ? 'current-menu-item' : ''; ?>">
 									<a href="<?php echo esc_url( home_url( '/#our-practice' ) ); ?>" class="our-practice-trigger">Our Practice</a>
 									<!-- Our Practice Dropdown Menu -->
 									<div class="our-practice-dropdown-container">
@@ -109,8 +97,8 @@ $referrals_url        = ! empty( $referrals_pages ) ? get_permalink( $referrals_
 											<a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
-										<div class="dropdown-item">
-											<a href="<?php echo esc_url( home_url( '/#team' ) ); ?>">Meet the Team</a>
+										<div class="dropdown-item <?php echo $is_teams_active ? 'active' : ''; ?>">
+											<a href="<?php echo esc_url( $teams_url ); ?>">Meet the Team</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
@@ -250,7 +238,7 @@ $referrals_url        = ! empty( $referrals_pages ) ? get_permalink( $referrals_
 							<div class="sub-menu-container">
 								<ul class="sub-menu">
 									<li><a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a></li>
-									<li><a href="<?php echo esc_url( home_url( '/#team' ) ); ?>">Meet the Team</a></li>
+									<li class="<?php echo $is_teams_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $teams_url ); ?>">Meet the Team</a></li>
 									<li><a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>">Smile Gallery</a></li>
 								</ul>
 							</div>

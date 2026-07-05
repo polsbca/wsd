@@ -36,6 +36,7 @@ function initAnimations() {
   const hasContactPage = document.querySelector(".contact-page-main") !== null;
   const hasDentalReferralsPage =
     document.querySelector(".dental-referrals-main") !== null;
+  const hasTeamsPage = document.querySelector(".teams-page-main") !== null;
   const hasHero = document.querySelector(".hero-title") !== null;
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
@@ -75,6 +76,10 @@ function initAnimations() {
         { y: 30, opacity: 0 },
       );
     }
+    if (hasTeamsPage) {
+      gsap.set(".teams-hero-actions .btn", { y: 20, opacity: 0 });
+      gsap.set(".teams-hero-image-wrap", { x: 50, opacity: 0, scale: 0.95 });
+    }
   }
 
   // ----------------------------------------------------
@@ -100,6 +105,32 @@ function initAnimations() {
         // Reveal Hero Text
         .to(".hero-title", { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
         .to(".hero-description", { y: 0, opacity: 1, duration: 0.8 }, "-=0.6");
+    }
+
+    if (hasTeamsPage) {
+      mainTimeline
+        .to(
+          ".teams-hero-actions .btn",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.5",
+        )
+        .to(
+          ".teams-hero-image-wrap",
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.6",
+        );
     }
 
     if (hasContactPage) {

@@ -58,8 +58,12 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
+	}
+
+	if ( is_page_template( 'template-teams.php' ) ) {
+		wp_enqueue_script( 'wsd-teams', get_stylesheet_directory_uri() . '/assets/js/teams.js', array( 'jquery' ), time(), true );
 	}
 
 	// jQuery (WordPress default)
@@ -329,24 +333,53 @@ function wsd_get_contact_page_field( $field_name, $default = '' ) {
 }
 
 /**
+ * Get the permalink for a page using a given template file.
+ *
+ * @param string $template Template filename.
+ * @param string $fallback Fallback URL.
+ * @return string
+ */
+function wsd_get_page_url_by_template( $template, $fallback = '' ) {
+	$pages = get_pages(
+		array(
+			'meta_key'   => '_wp_page_template',
+			'meta_value' => $template,
+			'number'     => 1,
+		)
+	);
+
+	if ( ! empty( $pages ) ) {
+		return get_permalink( $pages[0]->ID );
+	}
+
+	return $fallback;
+}
+
+/**
  * Get the permalink for the Contact page template.
  *
  * @return string
  */
 function wsd_get_contact_page_url() {
-	$contact_pages = get_pages(
-		array(
-			'meta_key'   => '_wp_page_template',
-			'meta_value' => 'template-contact.php',
-			'number'     => 1,
-		)
-	);
+	return wsd_get_page_url_by_template( 'template-contact.php', home_url( '/#contact-us' ) );
+}
 
-	if ( ! empty( $contact_pages ) ) {
-		return get_permalink( $contact_pages[0]->ID );
-	}
+/**
+ * Get the permalink for the Dental Referrals page template.
+ *
+ * @return string
+ */
+function wsd_get_referrals_page_url() {
+	return wsd_get_page_url_by_template( 'template-dental-referrals.php', home_url( '/#referrals' ) );
+}
 
-	return home_url( '/#contact-us' );
+/**
+ * Get the permalink for the Teams page template.
+ *
+ * @return string
+ */
+function wsd_get_teams_page_url() {
+	return wsd_get_page_url_by_template( 'template-teams.php', home_url( '/#team' ) );
 }
 
 /**
