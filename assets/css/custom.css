@@ -8376,6 +8376,23 @@ body {
   color: #5e5d5f;
 }
 
+.teams-doctor-journey-text > :first-child {
+  margin-top: 0;
+}
+
+.teams-doctor-journey-text > :last-child {
+  margin-bottom: 0;
+}
+
+.teams-clinical-empty {
+  margin: 0;
+  padding: 0 120px;
+  font-family: var(--font-family-primary);
+  font-size: 20px;
+  line-height: 32px;
+  color: #5e5d5f;
+}
+
 .teams-doctor-results {
   display: flex;
   flex-direction: column;

@@ -409,6 +409,354 @@ function wsd_get_teams_page_url() {
 }
 
 /**
+ * Normalize an ACF image field or URL string to a URL.
+ *
+ * @param mixed  $image    Image field value.
+ * @param string $fallback Fallback URL.
+ * @return string
+ */
+function wsd_normalize_media_url( $image, $fallback = '' ) {
+	if ( is_array( $image ) && ! empty( $image['url'] ) ) {
+		return $image['url'];
+	}
+
+	if ( is_numeric( $image ) ) {
+		$url = wp_get_attachment_image_url( (int) $image, 'full' );
+		if ( $url ) {
+			return $url;
+		}
+	}
+
+	if ( is_string( $image ) && '' !== trim( $image ) ) {
+		return $image;
+	}
+
+	return $fallback;
+}
+
+/**
+ * Split a doctor or team member title into prefix and name.
+ *
+ * @param string $title          Post title.
+ * @param string $default_prefix Default prefix when none is present.
+ * @return array{prefix:string,name:string}
+ */
+function wsd_parse_team_name_parts( $title, $default_prefix = 'Dr' ) {
+	$title = trim( wp_strip_all_tags( (string) $title ) );
+
+	foreach ( array( 'Dr', 'Mr', 'Mrs', 'Ms', 'Miss' ) as $prefix ) {
+		if ( 0 === stripos( $title, $prefix . ' ' ) ) {
+			return array(
+				'prefix' => $prefix,
+				'name'   => trim( substr( $title, strlen( $prefix ) ) ),
+			);
+		}
+	}
+
+	return array(
+		'prefix' => $default_prefix,
+		'name'   => $title,
+	);
+}
+
+/**
+ * Parse a clinical focus string into tag labels.
+ *
+ * @param mixed $focus_text Focus field value.
+ * @return string[]
+ */
+function wsd_parse_focus_tags( $focus_text ) {
+	if ( empty( $focus_text ) ) {
+		return array();
+	}
+
+	if ( is_array( $focus_text ) ) {
+		return array_values(
+			array_filter(
+				array_map(
+					static function ( $item ) {
+						return trim( (string) $item );
+					},
+					$focus_text
+				)
+			)
+		);
+	}
+
+	$parts = preg_split( '/\s*[,;|]\s*|\r\n|\n/', (string) $focus_text );
+
+	return array_values(
+		array_filter(
+			array_map( 'trim', is_array( $parts ) ? $parts : array() )
+		)
+	);
+}
+
+/**
+ * Parse an experience label for the modal progress meter width.
+ *
+ * @param string $experience_text Experience label.
+ * @return float
+ */
+function wsd_parse_experience_meter_percent( $experience_text ) {
+	if ( preg_match( '/(\d+(?:\.\d+)?)\s*%/', (string) $experience_text, $matches ) ) {
+		return min( 100, max( 0, (float) $matches[1] ) );
+	}
+
+	return 37;
+}
+
+/**
+ * Build modal clinical focus cards from the ACF group field.
+ *
+ * @param int $post_id Clinical specialist post ID.
+ * @return array<int, array{title:string,content:string,experience:string,meter_percent:float}>
+ */
+function wsd_get_clinical_specialist_focus_cards( $post_id ) {
+	$group = function_exists( 'get_field' ) ? get_field( 'our_clinical_specialist', $post_id ) : array();
+	$cards = array();
+
+	if ( ! is_array( $group ) ) {
+		return $cards;
+	}
+
+	for ( $index = 1; $index <= 4; $index++ ) {
+		$title       = trim( (string) ( $group[ "ocs_title_{$index}" ] ?? '' ) );
+		$content     = trim( (string) ( $group[ "ocs_content_{$index}" ] ?? '' ) );
+		$experience  = trim( (string) ( $group[ "ocs_exp_{$index}" ] ?? '' ) );
+
+		if ( '' === $title && '' === $content && '' === $experience ) {
+			continue;
+		}
+
+		$cards[] = array(
+			'title'         => $title,
+			'content'       => $content,
+			'experience'    => $experience,
+			'meter_percent' => wsd_parse_experience_meter_percent( $experience ),
+		);
+	}
+
+	return $cards;
+}
+
+/**
+ * Format one clinical specialist post for the Teams page.
+ *
+ * @param WP_Post $post Clinical specialist post.
+ * @return array<string, mixed>
+ */
+function wsd_format_clinical_specialist( $post ) {
+	$post_id       = $post->ID;
+	$name_parts    = wsd_parse_team_name_parts( get_the_title( $post ) );
+	$image_fallback = get_template_directory_uri() . '/assets/images/team-andrew.png';
+	$image         = get_the_post_thumbnail_url( $post, 'full' ) ?: $image_fallback;
+	$feature_image = wsd_normalize_media_url(
+		function_exists( 'get_field' ) ? get_field( 'doctor_details_middle_image', $post_id ) : '',
+		$image
+	);
+	$bio_raw       = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_strip_all_tags( $post->post_content );
+	$bio           = wp_trim_words( $bio_raw, 45, '...' );
+	$trusted       = function_exists( 'get_field' ) ? (string) get_field( 'trusted_expertise', $post_id ) : '';
+	$journey_raw   = function_exists( 'get_field' ) ? (string) get_field( 'qualifications_&_professional', $post_id ) : '';
+
+	if ( '' !== trim( $journey_raw ) ) {
+		$journey_html = wpautop( wp_kses_post( $journey_raw ) );
+	} else {
+		$journey_html = apply_filters( 'the_content', $post->post_content );
+	}
+
+	return array(
+		'image'                  => $image,
+		'feature_image'          => $feature_image,
+		'role'                   => function_exists( 'get_field' ) ? (string) get_field( 'positions_title', $post_id ) : '',
+		'prefix'                 => $name_parts['prefix'],
+		'name'                   => $name_parts['name'],
+		'gdc'                    => function_exists( 'get_field' ) ? (string) get_field( 'gdc_number', $post_id ) : '',
+		'bio'                    => $bio,
+		'qualifications'         => function_exists( 'get_field' ) ? (string) get_field( 'doctor_degere', $post_id ) : '',
+		'focus'                  => wsd_parse_focus_tags( function_exists( 'get_field' ) ? get_field( 'clinical_focus', $post_id ) : '' ),
+		'trusted_expertise_html' => $trusted ? wpautop( wp_kses_post( $trusted ) ) : '',
+		'journey_html'           => $journey_html,
+		'clinical_focus_cards'   => wsd_get_clinical_specialist_focus_cards( $post_id ),
+	);
+}
+
+/**
+ * Get published clinical specialists for the Teams page.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function wsd_get_clinical_specialists() {
+	if ( ! post_type_exists( 'clinical-specialist' ) ) {
+		return array();
+	}
+
+	$posts = get_posts(
+		array(
+			'post_type'      => 'clinical-specialist',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+			'order'          => 'ASC',
+		)
+	);
+
+	if ( empty( $posts ) ) {
+		return array();
+	}
+
+	return array_map( 'wsd_format_clinical_specialist', $posts );
+}
+
+/**
+ * Format one support team post for the Teams page.
+ *
+ * @param WP_Post $post Support team post.
+ * @return array<string, string>
+ */
+function wsd_format_support_team_member( $post ) {
+	$post_id      = $post->ID;
+	$terms        = get_the_terms( $post, 'support-team-category' );
+	$category     = '';
+	$image_fallback = get_template_directory_uri() . '/assets/images/team-kim.png';
+
+	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+		$category = $terms[0]->slug;
+	}
+
+	$bio_raw = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_strip_all_tags( $post->post_content );
+
+	return array(
+		'category' => $category,
+		'image'    => get_the_post_thumbnail_url( $post, 'full' ) ?: $image_fallback,
+		'role'     => function_exists( 'get_field' ) ? (string) get_field( 'position_name', $post_id ) : '',
+		'name'     => get_the_title( $post ),
+		'gdc'      => function_exists( 'get_field' ) ? (string) get_field( 'gdc_number', $post_id ) : '',
+		'bio'      => wp_trim_words( $bio_raw, 45, '...' ),
+		'focus'    => function_exists( 'get_field' ) ? (string) get_field( 'clinical_focus', $post_id ) : '',
+	);
+}
+
+/**
+ * Get support team category tabs.
+ *
+ * @return array<string, string> Slug => label.
+ */
+function wsd_get_support_team_categories() {
+	$categories = array();
+
+	if ( taxonomy_exists( 'support-team-category' ) ) {
+		$terms = get_terms(
+			array(
+				'taxonomy'   => 'support-team-category',
+				'hide_empty' => false,
+				'orderby'    => 'menu_order',
+				'order'      => 'ASC',
+			)
+		);
+
+		if ( ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$categories[ $term->slug ] = $term->name;
+			}
+		}
+	}
+
+	return $categories;
+}
+
+/**
+ * Get published support team members for the Teams page.
+ *
+ * @return array<int, array<string, string>>
+ */
+function wsd_get_support_team_members() {
+	if ( ! post_type_exists( 'support-team' ) ) {
+		return array();
+	}
+
+	$posts = get_posts(
+		array(
+			'post_type'      => 'support-team',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+			'order'          => 'ASC',
+		)
+	);
+
+	if ( empty( $posts ) ) {
+		return array();
+	}
+
+	return array_map( 'wsd_format_support_team_member', $posts );
+}
+
+/**
+ * Get the Teams page hero description from ACF or the page excerpt.
+ *
+ * @param int $page_id Teams page ID.
+ * @return string
+ */
+function wsd_get_teams_hero_description( $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+	$default = __( 'Our team combines clinical expertise with patient-focused care to create healthy, confident smiles in a calm and welcoming environment.', 'wsd' );
+
+	if ( $page_id && function_exists( 'get_field' ) ) {
+		foreach ( array( 'teams_hero_description', 'hero_description' ) as $field_name ) {
+			$value = trim( (string) get_field( $field_name, $page_id ) );
+			if ( '' !== $value ) {
+				return $value;
+			}
+		}
+	}
+
+	if ( $page_id ) {
+		$excerpt = trim( (string) get_post_field( 'post_excerpt', $page_id ) );
+		if ( '' !== $excerpt ) {
+			return $excerpt;
+		}
+	}
+
+	return $default;
+}
+
+/**
+ * Build the doctor modal JSON payload from clinical specialists.
+ *
+ * @param array<int, array<string, mixed>> $clinical_specialists Formatted specialists.
+ * @return array<int, array<string, mixed>>
+ */
+function wsd_get_teams_doctor_modal_payload( $clinical_specialists ) {
+	return array_map(
+		static function ( $doctor ) {
+			return array(
+				'image'                  => $doctor['image'] ?? '',
+				'feature_image'          => $doctor['feature_image'] ?? ( $doctor['image'] ?? '' ),
+				'role'                   => $doctor['role'] ?? '',
+				'prefix'                 => $doctor['prefix'] ?? '',
+				'name'                   => $doctor['name'] ?? '',
+				'gdc'                    => $doctor['gdc'] ?? '',
+				'bio'                    => $doctor['bio'] ?? '',
+				'qualifications'         => $doctor['qualifications'] ?? '',
+				'focus'                  => $doctor['focus'] ?? array(),
+				'trusted_expertise_html' => $doctor['trusted_expertise_html'] ?? '',
+				'journey_html'           => $doctor['journey_html'] ?? '',
+				'clinical_focus_cards'   => $doctor['clinical_focus_cards'] ?? array(),
+			);
+		},
+		$clinical_specialists
+	);
+}
+
+/**
  * Format a phone number for display.
  *
  * @param string|int $phone Raw phone value.

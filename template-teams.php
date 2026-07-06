@@ -44,66 +44,23 @@ if ( empty( $smile_gallery_slides ) ) {
 	);
 }
 
-$clinical_specialists = array(
-	array(
-		'image'    => $theme_uri . '/assets/images/team-andrew.png',
-		'role'     => 'Principal Dentist & Founder',
-		'prefix'   => 'Dr',
-		'name'     => 'Andrew Parashchak',
-		'gdc'      => '229709',
-		'bio'      => 'Dr Andrew Parashchak founded Waterside Dental Care to deliver expert, patient-focused care, specialising in cosmetic and implant dentistry.',
-		'qualifications' => 'BSch, Msc, BDS, MJDF RCS (Eng), Dip Rest Dent RCS (Eng)',
-		'focus'    => array( 'Dental Implants', 'Cosmetic Dentistry', 'Smile Makeovers', 'Sedation Dentistry' ),
-	),
-	array(
-		'image'    => $theme_uri . '/assets/images/team-tom.png',
-		'role'     => 'Dental Implantologist',
-		'prefix'   => 'Dr',
-		'name'     => 'Tom Owen',
-		'gdc'      => '265375',
-		'bio'      => 'Thomas specialises in oral surgery and dental implants, with expertise in complex extractions. He delivers clear, patient-focused care with a calm and professional approach.',
-		'qualifications' => '',
-		'focus'    => array( 'Dental Implants', 'Cosmetic Dentistry', 'Smile Makeovers', 'Sedation Dentistry' ),
-	),
-	array(
-		'image'    => $theme_uri . '/assets/images/team-emmanuel.png',
-		'role'     => 'Oral Surgeon',
-		'prefix'   => 'Dr',
-		'name'     => 'Emmanuel Egbase',
-		'gdc'      => '230459',
-		'bio'      => 'Emmanuel specialises in oral surgery and dental implants, with expertise in complex extractions. He delivers clear, patient-focused care with a calm and professional approach.',
-		'qualifications' => '',
-		'focus'    => array( 'Dental Implants', 'Cosmetic Dentistry', 'Smile Makeovers', 'Sedation Dentistry' ),
-	),
-);
+$clinical_specialists = wsd_get_clinical_specialists();
+$support_members      = wsd_get_support_team_members();
+$support_categories   = wsd_get_support_team_categories();
 
-$support_categories = array(
-	'general'      => 'General Dentistry',
-	'hygiene'      => 'Hygiene & Preventive Care',
-	'clinical'     => 'Clinical Support',
-	'admin'        => 'Patient Care & Administration',
-);
+if ( empty( $support_categories ) && ! empty( $support_members ) ) {
+	foreach ( $support_members as $support_member ) {
+		if ( empty( $support_member['category'] ) ) {
+			continue;
+		}
 
-$support_members = array(
-	array(
-		'category' => 'clinical',
-		'image'    => $theme_uri . '/assets/images/team-kim.png',
-		'role'     => 'Practice Manager',
-		'name'     => 'Kim',
-		'gdc'      => '171510',
-		'bio'      => 'Kim O\'Connor plays a key role in managing patient relationships, ensuring every individual feels supported, informed, and at ease throughout their dental journey.',
-		'focus'    => 'Ensure the smooth running of the Practice',
-	),
-	array(
-		'category' => 'clinical',
-		'image'    => $theme_uri . '/assets/images/team-kim.png',
-		'role'     => 'Practice Manager',
-		'name'     => 'Kim',
-		'gdc'      => '171510',
-		'bio'      => 'Kim O\'Connor plays a key role in managing patient relationships, ensuring every individual feels supported, informed, and at ease throughout their dental journey.',
-		'focus'    => 'Ensure the smooth running of the Practice',
-	),
-);
+		$support_categories[ $support_member['category'] ] = ucwords( str_replace( array( '-', '_' ), ' ', $support_member['category'] ) );
+	}
+}
+
+$default_support_category = ! empty( $support_categories ) ? (string) array_key_first( $support_categories ) : '';
+$teams_hero_description   = wsd_get_teams_hero_description( $teams_page_id );
+$teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specialists );
 ?>
 
 <main id="main" class="site-main teams-page-main">
@@ -116,7 +73,7 @@ $support_members = array(
 						<span class="teams-hero-title-main">Meet The </span>
 						<span class="teams-hero-title-accent">Team</span>
 					</h1>
-					<p class="teams-hero-description hero-description">Our team combines clinical expertise with patient-focused care to create healthy, confident smiles in a calm and welcoming environment.</p>
+					<p class="teams-hero-description hero-description"><?php echo esc_html( $teams_hero_description ); ?></p>
 				</div>
 				<div class="hero-buttons">
 					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
@@ -150,42 +107,56 @@ $support_members = array(
 		<div class="teams-slider teams-clinical-slider" data-teams-slider="clinical">
 			<div class="teams-slider-viewport">
 				<div class="teams-slider-track">
-					<?php foreach ( $clinical_specialists as $index => $member ) : ?>
-						<article class="teams-member-card teams-member-card--clinical<?php echo 0 === $index ? ' is-active' : ''; ?>" data-slide-index="<?php echo esc_attr( (string) $index ); ?>">
-							<div class="teams-member-photo">
-								<img src="<?php echo esc_url( $member['image'] ); ?>" alt="<?php echo esc_attr( $member['prefix'] . ' ' . $member['name'] ); ?>">
-							</div>
-							<div class="teams-member-info">
-								<p class="teams-member-role"><?php echo esc_html( $member['role'] ); ?></p>
-								<div class="teams-member-identity">
-									<h3 class="teams-member-name">
-										<span class="teams-member-prefix"><?php echo esc_html( $member['prefix'] ); ?></span>
-										<span class="teams-member-fullname"><?php echo esc_html( ' ' . $member['name'] ); ?></span>
-									</h3>
-									<p class="teams-member-gdc"><?php echo esc_html( 'GDC Number: ' . $member['gdc'] ); ?></p>
-									<p class="teams-member-bio"><?php echo esc_html( $member['bio'] ); ?></p>
+					<?php if ( ! empty( $clinical_specialists ) ) : ?>
+						<?php foreach ( $clinical_specialists as $index => $member ) : ?>
+							<article class="teams-member-card teams-member-card--clinical<?php echo 0 === $index ? ' is-active' : ''; ?>" data-slide-index="<?php echo esc_attr( (string) $index ); ?>">
+								<div class="teams-member-photo">
+									<img src="<?php echo esc_url( $member['image'] ); ?>" alt="<?php echo esc_attr( trim( $member['prefix'] . ' ' . $member['name'] ) ); ?>">
 								</div>
-								<div class="teams-member-focus">
-									<p class="teams-member-focus-label"><?php esc_html_e( 'Clinical Focus', 'wsd' ); ?></p>
-									<ul class="teams-member-tags">
-										<?php foreach ( $member['focus'] as $tag ) : ?>
-											<li class="teams-member-tag"><?php echo esc_html( $tag ); ?></li>
-										<?php endforeach; ?>
-									</ul>
+								<div class="teams-member-info">
+									<?php if ( ! empty( $member['role'] ) ) : ?>
+										<p class="teams-member-role"><?php echo esc_html( $member['role'] ); ?></p>
+									<?php endif; ?>
+									<div class="teams-member-identity">
+										<h3 class="teams-member-name">
+											<?php if ( ! empty( $member['prefix'] ) ) : ?>
+												<span class="teams-member-prefix"><?php echo esc_html( $member['prefix'] ); ?></span>
+											<?php endif; ?>
+											<span class="teams-member-fullname"><?php echo esc_html( ' ' . $member['name'] ); ?></span>
+										</h3>
+										<?php if ( ! empty( $member['gdc'] ) ) : ?>
+											<p class="teams-member-gdc"><?php echo esc_html( 'GDC Number: ' . $member['gdc'] ); ?></p>
+										<?php endif; ?>
+										<?php if ( ! empty( $member['bio'] ) ) : ?>
+											<p class="teams-member-bio"><?php echo esc_html( $member['bio'] ); ?></p>
+										<?php endif; ?>
+									</div>
+									<?php if ( ! empty( $member['focus'] ) ) : ?>
+										<div class="teams-member-focus">
+											<p class="teams-member-focus-label"><?php esc_html_e( 'Clinical Focus', 'wsd' ); ?></p>
+											<ul class="teams-member-tags">
+												<?php foreach ( $member['focus'] as $tag ) : ?>
+													<li class="teams-member-tag"><?php echo esc_html( $tag ); ?></li>
+												<?php endforeach; ?>
+											</ul>
+										</div>
+									<?php endif; ?>
+									<div class="teams-member-actions">
+										<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-member-btn teams-member-btn--outline"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
+										<button
+											type="button"
+											class="btn btn-primary teams-member-btn teams-member-btn--solid js-doctor-modal-open"
+											data-doctor-index="<?php echo esc_attr( (string) $index ); ?>"
+											data-bs-toggle="modal"
+											data-bs-target="#teamsDoctorModal"
+										><?php esc_html_e( 'Read more', 'wsd' ); ?></button>
+									</div>
 								</div>
-								<div class="teams-member-actions">
-									<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-member-btn teams-member-btn--outline"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
-					<button
-						type="button"
-						class="btn btn-primary teams-member-btn teams-member-btn--solid js-doctor-modal-open"
-						data-doctor-index="<?php echo esc_attr( (string) $index ); ?>"
-						data-bs-toggle="modal"
-						data-bs-target="#teamsDoctorModal"
-					><?php esc_html_e( 'Read more', 'wsd' ); ?></button>
-								</div>
-							</div>
-						</article>
-					<?php endforeach; ?>
+							</article>
+						<?php endforeach; ?>
+					<?php else : ?>
+						<p class="teams-clinical-empty"><?php esc_html_e( 'Clinical specialists will be added soon.', 'wsd' ); ?></p>
+					<?php endif; ?>
 				</div>
 			</div>
 
@@ -217,9 +188,9 @@ $support_members = array(
 				<?php foreach ( $support_categories as $slug => $label ) : ?>
 					<button
 						type="button"
-						class="teams-support-tab teams-support-tab--<?php echo esc_attr( $slug ); ?><?php echo 'clinical' === $slug ? ' is-active' : ''; ?>"
+						class="teams-support-tab teams-support-tab--<?php echo esc_attr( $slug ); ?><?php echo $slug === $default_support_category ? ' is-active' : ''; ?>"
 						role="tab"
-						aria-selected="<?php echo 'clinical' === $slug ? 'true' : 'false'; ?>"
+						aria-selected="<?php echo $slug === $default_support_category ? 'true' : 'false'; ?>"
 						data-support-category="<?php echo esc_attr( $slug ); ?>"
 					>
 						<?php echo esc_html( $label ); ?>
@@ -228,29 +199,47 @@ $support_members = array(
 			</div>
 		</div>
 
-		<div class="teams-slider teams-support-slider" data-teams-slider="support" data-active-category="clinical">
+		<div class="teams-slider teams-support-slider" data-teams-slider="support" data-active-category="<?php echo esc_attr( $default_support_category ); ?>">
 			<div class="teams-slider-viewport">
 				<div class="teams-slider-track">
-					<?php foreach ( $support_members as $index => $member ) : ?>
+					<?php
+					$support_active_set = false;
+					foreach ( $support_members as $index => $member ) :
+						$is_member_visible = $member['category'] === $default_support_category;
+						$is_member_active  = $is_member_visible && ! $support_active_set;
+
+						if ( $is_member_active ) {
+							$support_active_set = true;
+						}
+						?>
 						<article
-							class="teams-member-card teams-member-card--support<?php echo 0 === $index ? ' is-active' : ''; ?>"
+							class="teams-member-card teams-member-card--support<?php echo $is_member_active ? ' is-active' : ''; ?>"
 							data-slide-index="<?php echo esc_attr( (string) $index ); ?>"
 							data-support-category="<?php echo esc_attr( $member['category'] ); ?>"
+							<?php echo ! $is_member_visible ? ' hidden' : ''; ?>
 						>
 							<div class="teams-member-photo teams-member-photo--support">
 								<img src="<?php echo esc_url( $member['image'] ); ?>" alt="<?php echo esc_attr( $member['name'] ); ?>">
 							</div>
 							<div class="teams-member-info teams-member-info--support">
-								<p class="teams-member-role teams-member-role--support"><?php echo esc_html( $member['role'] ); ?></p>
+								<?php if ( ! empty( $member['role'] ) ) : ?>
+									<p class="teams-member-role teams-member-role--support"><?php echo esc_html( $member['role'] ); ?></p>
+								<?php endif; ?>
 								<div class="teams-member-details">
 									<h3 class="teams-member-name teams-member-name--support"><?php echo esc_html( $member['name'] ); ?></h3>
-									<p class="teams-member-gdc teams-member-gdc--support"><?php echo esc_html( 'GDC Number: ' . $member['gdc'] ); ?></p>
+									<?php if ( ! empty( $member['gdc'] ) ) : ?>
+										<p class="teams-member-gdc teams-member-gdc--support"><?php echo esc_html( 'GDC Number: ' . $member['gdc'] ); ?></p>
+									<?php endif; ?>
 									<div class="teams-member-copy">
-										<p class="teams-member-bio teams-member-bio--support"><?php echo esc_html( $member['bio'] ); ?></p>
-										<div class="teams-member-focus teams-member-focus--support">
-											<p class="teams-member-focus-label teams-member-focus-label--support"><?php esc_html_e( 'Clinical Focus', 'wsd' ); ?></p>
-											<p class="teams-member-focus-text"><?php echo esc_html( $member['focus'] ); ?></p>
-										</div>
+										<?php if ( ! empty( $member['bio'] ) ) : ?>
+											<p class="teams-member-bio teams-member-bio--support"><?php echo esc_html( $member['bio'] ); ?></p>
+										<?php endif; ?>
+										<?php if ( ! empty( $member['focus'] ) ) : ?>
+											<div class="teams-member-focus teams-member-focus--support">
+												<p class="teams-member-focus-label teams-member-focus-label--support"><?php esc_html_e( 'Clinical Focus', 'wsd' ); ?></p>
+												<p class="teams-member-focus-text"><?php echo esc_html( $member['focus'] ); ?></p>
+											</div>
+										<?php endif; ?>
 									</div>
 								</div>
 							</div>
@@ -279,24 +268,6 @@ $support_members = array(
 	</section>
 
 </main>
-
-<?php
-$teams_doctor_payload = array_map(
-	static function ( $doctor ) {
-		return array(
-			'image'          => $doctor['image'] ?? '',
-			'role'           => $doctor['role'] ?? '',
-			'prefix'         => $doctor['prefix'] ?? '',
-			'name'           => $doctor['name'] ?? '',
-			'gdc'            => $doctor['gdc'] ?? '',
-			'bio'            => $doctor['bio'] ?? '',
-			'qualifications' => $doctor['qualifications'] ?? '',
-			'focus'          => $doctor['focus'] ?? array(),
-		);
-	},
-	$clinical_specialists
-);
-?>
 
 <script>
 window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
@@ -362,10 +333,7 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 							<span><?php esc_html_e( 'Trusted Expertise with', 'wsd' ); ?></span>
 							<span class="teams-doctor-about-heading-accent"><?php esc_html_e( ' National Recognition', 'wsd' ); ?></span>
 						</h4>
-						<div class="teams-doctor-about-text">
-							<p>Andrew is a Rochdale-based dentist focused on private cosmetic and restorative care. He is known for delivering high-quality, patient-focused treatments using advanced digital techniques.</p>
-							<p>He also contributes to the profession at a national level and has gained recognition for his work, including a featured smile makeover on ITV’s This Morning.</p>
-						</div>
+						<div class="teams-doctor-about-text"></div>
 					</div>
 				</section>
 
@@ -378,50 +346,19 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 					</div>
 
 					<div class="teams-doctor-clinical-focus-grid" aria-label="<?php esc_attr_e( 'Clinical focus areas', 'wsd' ); ?>">
-						<article class="teams-doctor-focus-card">
-							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Invisalign', 'wsd' ); ?></h4>
-							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Straighten your teeth discretely with our invisalign treatment', 'wsd' ); ?></p>
-							<div class="teams-doctor-focus-card-meta">
-								<div class="teams-doctor-focus-meter" aria-hidden="true">
-									<span class="teams-doctor-focus-meter-track"></span>
-									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
+						<?php for ( $focus_card_index = 0; $focus_card_index < 4; $focus_card_index++ ) : ?>
+							<article class="teams-doctor-focus-card" data-doctor-focus-card hidden>
+								<h4 class="teams-doctor-focus-card-title"></h4>
+								<p class="teams-doctor-focus-card-desc"></p>
+								<div class="teams-doctor-focus-card-meta">
+									<div class="teams-doctor-focus-meter" aria-hidden="true">
+										<span class="teams-doctor-focus-meter-track"></span>
+										<span class="teams-doctor-focus-meter-fill"></span>
+									</div>
+									<p class="teams-doctor-focus-card-level"></p>
 								</div>
-								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
-							</div>
-						</article>
-						<article class="teams-doctor-focus-card">
-							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Cosmetic Dentistry', 'wsd' ); ?></h4>
-							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Enhance the appearance of your smile with tailored treatments', 'wsd' ); ?></p>
-							<div class="teams-doctor-focus-card-meta">
-								<div class="teams-doctor-focus-meter" aria-hidden="true">
-									<span class="teams-doctor-focus-meter-track"></span>
-									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
-								</div>
-								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
-							</div>
-						</article>
-						<article class="teams-doctor-focus-card">
-							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Smile Makeovers', 'wsd' ); ?></h4>
-							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Transform your smile with a personalised treatment plan', 'wsd' ); ?></p>
-							<div class="teams-doctor-focus-card-meta">
-								<div class="teams-doctor-focus-meter" aria-hidden="true">
-									<span class="teams-doctor-focus-meter-track"></span>
-									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
-								</div>
-								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
-							</div>
-						</article>
-						<article class="teams-doctor-focus-card">
-							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Sedation', 'wsd' ); ?></h4>
-							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Comfortable, stress-free care for nervous patients', 'wsd' ); ?></p>
-							<div class="teams-doctor-focus-card-meta">
-								<div class="teams-doctor-focus-meter" aria-hidden="true">
-									<span class="teams-doctor-focus-meter-track"></span>
-									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
-								</div>
-								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
-							</div>
-						</article>
+							</article>
+						<?php endfor; ?>
 					</div>
 				</section>
 
@@ -438,9 +375,7 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 							<span class="teams-doctor-journey-heading-accent"><?php esc_html_e( 'Journey', 'wsd' ); ?></span>
 						</h3>
 
-						<p class="teams-doctor-journey-text">
-							<?php esc_html_e( 'Dr Andrew completed his BSc (Hons) Biomedical Sciences in 2007 — Durham University, followed by an MSc in Immunology & Immunogenetics in 2008 — University of Manchester. He went on to qualify with a BDS in 2012 — Peninsula Dental School, Exeter, before achieving the MJDF in 2013 — Royal College of Surgeons. In 2017 — Royal College of Surgeons, he completed a Diploma in Restorative Dentistry and has since contributed to professional standards at a national level. His work was also recognised in 2017 — ITV This Morning, where he demonstrated a live smile makeover.', 'wsd' ); ?>
-						</p>
+						<div class="teams-doctor-journey-text"></div>
 					</div>
 				</section>
 

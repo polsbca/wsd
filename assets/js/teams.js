@@ -301,9 +301,15 @@
     var roleEl = modalEl.querySelector(".teams-doctor-role");
     var qualificationsEl = modalEl.querySelector(".teams-doctor-qualifications");
     var aboutNameEl = modalEl.querySelector(".teams-doctor-about-name");
+    var aboutTextEl = modalEl.querySelector(".teams-doctor-about-text");
+    var journeyTextEl = modalEl.querySelector(".teams-doctor-journey-text");
+    var focusCards = Array.prototype.slice.call(
+      modalEl.querySelectorAll("[data-doctor-focus-card]"),
+    );
     var featureMediaImg = modalEl.querySelector(
       ".teams-doctor-feature-media-img",
     );
+    var featureMediaSection = modalEl.querySelector("#teamsDoctorFeatureMedia");
     var navLinks = Array.prototype.slice.call(
       modalEl.querySelectorAll(".teams-doctor-modal-link"),
     );
@@ -311,6 +317,36 @@
     function setActiveNav(link) {
       navLinks.forEach(function (item) {
         item.classList.toggle("is-active", item === link);
+      });
+    }
+
+    function fillFocusCards(cards) {
+      focusCards.forEach(function (cardEl, cardIndex) {
+        var cardData = cards && cards[cardIndex] ? cards[cardIndex] : null;
+        var titleEl = cardEl.querySelector(".teams-doctor-focus-card-title");
+        var descEl = cardEl.querySelector(".teams-doctor-focus-card-desc");
+        var levelEl = cardEl.querySelector(".teams-doctor-focus-card-level");
+        var fillEl = cardEl.querySelector(".teams-doctor-focus-meter-fill");
+
+        if (!cardData) {
+          cardEl.hidden = true;
+          return;
+        }
+
+        cardEl.hidden = false;
+
+        if (titleEl) {
+          titleEl.textContent = cardData.title || "";
+        }
+        if (descEl) {
+          descEl.textContent = cardData.content || "";
+        }
+        if (levelEl) {
+          levelEl.textContent = cardData.experience || "";
+        }
+        if (fillEl) {
+          fillEl.style.width = (cardData.meter_percent || 37) + "%";
+        }
       });
     }
 
@@ -331,9 +367,11 @@
       }
       if (gdcEl) {
         gdcEl.textContent = doctor.gdc ? "GDC Number: " + doctor.gdc : "";
+        gdcEl.hidden = !doctor.gdc;
       }
       if (roleEl) {
         roleEl.textContent = doctor.role || "";
+        roleEl.hidden = !doctor.role;
       }
       if (qualificationsEl) {
         qualificationsEl.textContent = doctor.qualifications || "";
@@ -344,9 +382,25 @@
         aboutNameEl.textContent = (doctor.name || "") + "\u2019s";
       }
 
+      if (aboutTextEl) {
+        aboutTextEl.innerHTML = doctor.trusted_expertise_html || "";
+        aboutTextEl.hidden = !doctor.trusted_expertise_html;
+      }
+
+      if (journeyTextEl) {
+        journeyTextEl.innerHTML = doctor.journey_html || "";
+        journeyTextEl.hidden = !doctor.journey_html;
+      }
+
+      fillFocusCards(doctor.clinical_focus_cards || []);
+
+      var featureImage = doctor.feature_image || doctor.image || "";
       if (featureMediaImg) {
-        featureMediaImg.src = doctor.image || "";
+        featureMediaImg.src = featureImage;
         featureMediaImg.alt = "";
+      }
+      if (featureMediaSection) {
+        featureMediaSection.hidden = !featureImage;
       }
     }
 
