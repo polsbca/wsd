@@ -27,6 +27,22 @@ if ( $teams_page_id && has_post_thumbnail( $teams_page_id ) ) {
 	}
 }
 $referrals_url = function_exists( 'wsd_get_referrals_page_url' ) ? wsd_get_referrals_page_url() : home_url( '/#referrals' );
+$smile_gallery_slides = function_exists( 'wsd_get_smile_gallery_slides' )
+	? wsd_get_smile_gallery_slides( array( $teams_page_id, (int) get_option( 'page_on_front' ) ) )
+	: array();
+
+if ( empty( $smile_gallery_slides ) ) {
+	$smile_gallery_placeholder = $theme_uri . '/assets/images/team-andrew.png';
+	$smile_gallery_slides      = array_fill(
+		0,
+		3,
+		array(
+			'before_image' => $smile_gallery_placeholder,
+			'after_image'  => $smile_gallery_placeholder,
+			'treatment'    => '',
+		)
+	);
+}
 
 $clinical_specialists = array(
 	array(
@@ -36,6 +52,7 @@ $clinical_specialists = array(
 		'name'     => 'Andrew Parashchak',
 		'gdc'      => '229709',
 		'bio'      => 'Dr Andrew Parashchak founded Waterside Dental Care to deliver expert, patient-focused care, specialising in cosmetic and implant dentistry.',
+		'qualifications' => 'BSch, Msc, BDS, MJDF RCS (Eng), Dip Rest Dent RCS (Eng)',
 		'focus'    => array( 'Dental Implants', 'Cosmetic Dentistry', 'Smile Makeovers', 'Sedation Dentistry' ),
 	),
 	array(
@@ -45,6 +62,7 @@ $clinical_specialists = array(
 		'name'     => 'Tom Owen',
 		'gdc'      => '265375',
 		'bio'      => 'Thomas specialises in oral surgery and dental implants, with expertise in complex extractions. He delivers clear, patient-focused care with a calm and professional approach.',
+		'qualifications' => '',
 		'focus'    => array( 'Dental Implants', 'Cosmetic Dentistry', 'Smile Makeovers', 'Sedation Dentistry' ),
 	),
 	array(
@@ -54,6 +72,7 @@ $clinical_specialists = array(
 		'name'     => 'Emmanuel Egbase',
 		'gdc'      => '230459',
 		'bio'      => 'Emmanuel specialises in oral surgery and dental implants, with expertise in complex extractions. He delivers clear, patient-focused care with a calm and professional approach.',
+		'qualifications' => '',
 		'focus'    => array( 'Dental Implants', 'Cosmetic Dentistry', 'Smile Makeovers', 'Sedation Dentistry' ),
 	),
 );
@@ -99,13 +118,13 @@ $support_members = array(
 					</h1>
 					<p class="teams-hero-description hero-description">Our team combines clinical expertise with patient-focused care to create healthy, confident smiles in a calm and welcoming environment.</p>
 				</div>
-				<div class="teams-hero-actions">
-					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-hero-btn"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
-					<a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>" class="btn btn-secondary teams-hero-btn teams-hero-btn--outline"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
+				<div class="hero-buttons">
+					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
 				</div>
 			</div>
 			<div class="teams-hero-image-col">
-				<div class="teams-hero-image-frame">
+				<div class="teams-hero-image-frame hero-image-wrapper">
 					<img
 						src="<?php echo esc_url( $teams_hero_image ); ?>"
 						alt="<?php echo esc_attr( $teams_hero_alt ); ?>"
@@ -155,8 +174,14 @@ $support_members = array(
 									</ul>
 								</div>
 								<div class="teams-member-actions">
-									<a href="<?php echo esc_url( $referrals_url ); ?>" class="teams-member-btn teams-member-btn--outline"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
-									<a href="#teams-clinical-heading" class="teams-member-btn teams-member-btn--solid"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
+									<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-member-btn teams-member-btn--outline"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
+					<button
+						type="button"
+						class="btn btn-primary teams-member-btn teams-member-btn--solid js-doctor-modal-open"
+						data-doctor-index="<?php echo esc_attr( (string) $index ); ?>"
+						data-bs-toggle="modal"
+						data-bs-target="#teamsDoctorModal"
+					><?php esc_html_e( 'Read more', 'wsd' ); ?></button>
 								</div>
 							</div>
 						</article>
@@ -254,6 +279,230 @@ $support_members = array(
 	</section>
 
 </main>
+
+<?php
+$teams_doctor_payload = array_map(
+	static function ( $doctor ) {
+		return array(
+			'image'          => $doctor['image'] ?? '',
+			'role'           => $doctor['role'] ?? '',
+			'prefix'         => $doctor['prefix'] ?? '',
+			'name'           => $doctor['name'] ?? '',
+			'gdc'            => $doctor['gdc'] ?? '',
+			'bio'            => $doctor['bio'] ?? '',
+			'qualifications' => $doctor['qualifications'] ?? '',
+			'focus'          => $doctor['focus'] ?? array(),
+		);
+	},
+	$clinical_specialists
+);
+?>
+
+<script>
+window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
+</script>
+
+<div class="modal fade teams-doctor-modal" id="teamsDoctorModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-fullscreen">
+		<div class="modal-content teams-doctor-modal-content">
+			<div class="teams-doctor-modal-header">
+				<button type="button" class="btn-close-circle" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Close', 'wsd' ); ?>">
+					<span class="close-x" aria-hidden="true">&times;</span>
+				</button>
+
+				<nav class="teams-doctor-modal-nav" aria-label="<?php esc_attr_e( 'Doctor sections', 'wsd' ); ?>">
+					<a class="teams-doctor-modal-link is-active" href="#teamsDoctorAbout"><?php esc_html_e( 'About', 'wsd' ); ?></a>
+					<a class="teams-doctor-modal-link" href="#teamsDoctorClinicalFocus"><?php esc_html_e( 'Clinical Focus', 'wsd' ); ?></a>
+					<a class="teams-doctor-modal-link" href="#teamsDoctorQualificationsJourney"><?php esc_html_e( 'Qualifications', 'wsd' ); ?></a>
+					<a class="teams-doctor-modal-link" href="#teamsDoctorResultsGallery"><?php esc_html_e( 'Results', 'wsd' ); ?></a>
+				</nav>
+			</div>
+
+			<div class="teams-doctor-modal-body">
+				<section class="teams-doctor-hero" id="teamsDoctorAbout">
+					<div class="teams-doctor-hero-inner">
+						<div class="teams-doctor-photo">
+							<img src="" alt="" class="teams-doctor-photo-img" loading="lazy" decoding="async">
+						</div>
+						<div class="teams-doctor-hero-details">
+							<div class="teams-doctor-hero-identity">
+								<h2 class="teams-doctor-name"><span class="teams-doctor-prefix"></span> <span class="teams-doctor-fullname"></span></h2>
+								<p class="teams-doctor-gdc"></p>
+							</div>
+
+							<div class="teams-doctor-hero-meta">
+								<p class="teams-doctor-role"></p>
+								<p class="teams-doctor-qualifications"></p>
+							</div>
+
+							<div class="teams-doctor-hero-ctas">
+								<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Book Appointment', 'wsd' ); ?></a>
+								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="teams-doctor-about" id="teamsDoctorAboutDetails" aria-label="<?php esc_attr_e( 'Doctor biography', 'wsd' ); ?>">
+					<div class="teams-doctor-about-header">
+						<div class="teams-doctor-about-badge">
+							<h3 class="teams-doctor-about-badge-title">
+								<span><?php esc_html_e( 'About Dr', 'wsd' ); ?></span>
+								<span class="teams-doctor-about-name"></span>
+							</h3>
+						</div>
+						<div class="teams-doctor-about-rating" aria-label="<?php esc_attr_e( 'Google rating', 'wsd' ); ?>">
+							<p class="teams-doctor-about-rating-count"><?php esc_html_e( '200+ Google reviews', 'wsd' ); ?></p>
+							<p class="teams-doctor-about-rating-score"><?php esc_html_e( '4.9 Rating', 'wsd' ); ?></p>
+						</div>
+					</div>
+
+					<div class="teams-doctor-about-content">
+						<h4 class="teams-doctor-about-heading">
+							<span><?php esc_html_e( 'Trusted Expertise with', 'wsd' ); ?></span>
+							<span class="teams-doctor-about-heading-accent"><?php esc_html_e( ' National Recognition', 'wsd' ); ?></span>
+						</h4>
+						<div class="teams-doctor-about-text">
+							<p>Andrew is a Rochdale-based dentist focused on private cosmetic and restorative care. He is known for delivering high-quality, patient-focused treatments using advanced digital techniques.</p>
+							<p>He also contributes to the profession at a national level and has gained recognition for his work, including a featured smile makeover on ITV’s This Morning.</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="teams-doctor-clinical-focus" id="teamsDoctorClinicalFocus" aria-label="<?php esc_attr_e( 'Clinical focus', 'wsd' ); ?>">
+					<div class="teams-doctor-clinical-focus-heading-wrap">
+						<h3 class="teams-doctor-clinical-focus-heading">
+							<span><?php esc_html_e( 'Our Clinical ', 'wsd' ); ?></span>
+							<span class="teams-doctor-clinical-focus-heading-accent"><?php esc_html_e( 'specialist', 'wsd' ); ?></span>
+						</h3>
+					</div>
+
+					<div class="teams-doctor-clinical-focus-grid" aria-label="<?php esc_attr_e( 'Clinical focus areas', 'wsd' ); ?>">
+						<article class="teams-doctor-focus-card">
+							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Invisalign', 'wsd' ); ?></h4>
+							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Straighten your teeth discretely with our invisalign treatment', 'wsd' ); ?></p>
+							<div class="teams-doctor-focus-card-meta">
+								<div class="teams-doctor-focus-meter" aria-hidden="true">
+									<span class="teams-doctor-focus-meter-track"></span>
+									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
+								</div>
+								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
+							</div>
+						</article>
+						<article class="teams-doctor-focus-card">
+							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Cosmetic Dentistry', 'wsd' ); ?></h4>
+							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Enhance the appearance of your smile with tailored treatments', 'wsd' ); ?></p>
+							<div class="teams-doctor-focus-card-meta">
+								<div class="teams-doctor-focus-meter" aria-hidden="true">
+									<span class="teams-doctor-focus-meter-track"></span>
+									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
+								</div>
+								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
+							</div>
+						</article>
+						<article class="teams-doctor-focus-card">
+							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Smile Makeovers', 'wsd' ); ?></h4>
+							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Transform your smile with a personalised treatment plan', 'wsd' ); ?></p>
+							<div class="teams-doctor-focus-card-meta">
+								<div class="teams-doctor-focus-meter" aria-hidden="true">
+									<span class="teams-doctor-focus-meter-track"></span>
+									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
+								</div>
+								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
+							</div>
+						</article>
+						<article class="teams-doctor-focus-card">
+							<h4 class="teams-doctor-focus-card-title"><?php esc_html_e( 'Sedation', 'wsd' ); ?></h4>
+							<p class="teams-doctor-focus-card-desc"><?php esc_html_e( 'Comfortable, stress-free care for nervous patients', 'wsd' ); ?></p>
+							<div class="teams-doctor-focus-card-meta">
+								<div class="teams-doctor-focus-meter" aria-hidden="true">
+									<span class="teams-doctor-focus-meter-track"></span>
+									<span class="teams-doctor-focus-meter-fill" style="width: 37%;"></span>
+								</div>
+								<p class="teams-doctor-focus-card-level"><?php esc_html_e( 'Expert · 10 yrs', 'wsd' ); ?></p>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="teams-doctor-feature-media" id="teamsDoctorFeatureMedia">
+					<div class="teams-doctor-feature-media-frame">
+						<img src="" alt="" class="teams-doctor-feature-media-img" loading="lazy" decoding="async">
+					</div>
+				</section>
+
+				<section class="teams-doctor-journey" id="teamsDoctorQualificationsJourney" aria-label="<?php esc_attr_e( 'Qualifications and professional journey', 'wsd' ); ?>">
+					<div class="teams-doctor-journey-inner">
+						<h3 class="teams-doctor-journey-heading">
+							<span><?php esc_html_e( 'Qualifications & Professional ', 'wsd' ); ?></span>
+							<span class="teams-doctor-journey-heading-accent"><?php esc_html_e( 'Journey', 'wsd' ); ?></span>
+						</h3>
+
+						<p class="teams-doctor-journey-text">
+							<?php esc_html_e( 'Dr Andrew completed his BSc (Hons) Biomedical Sciences in 2007 — Durham University, followed by an MSc in Immunology & Immunogenetics in 2008 — University of Manchester. He went on to qualify with a BDS in 2012 — Peninsula Dental School, Exeter, before achieving the MJDF in 2013 — Royal College of Surgeons. In 2017 — Royal College of Surgeons, he completed a Diploma in Restorative Dentistry and has since contributed to professional standards at a national level. His work was also recognised in 2017 — ITV This Morning, where he demonstrated a live smile makeover.', 'wsd' ); ?>
+						</p>
+					</div>
+				</section>
+
+				<section class="teams-doctor-results" id="teamsDoctorResultsGallery" aria-label="<?php esc_attr_e( 'Smile Gallery', 'wsd' ); ?>">
+					<div class="teams-doctor-results-heading-wrap">
+						<h3 class="teams-doctor-results-heading">
+							<span><?php esc_html_e( 'Smile ', 'wsd' ); ?></span>
+							<span class="teams-doctor-results-heading-accent"><?php esc_html_e( 'Gallery', 'wsd' ); ?></span>
+						</h3>
+					</div>
+
+					<div class="teams-doctor-results-gallery" data-teams-results-slider role="region" aria-label="<?php esc_attr_e( 'Before and after gallery', 'wsd' ); ?>">
+						<div class="teams-doctor-results-viewport">
+							<div class="teams-doctor-results-track">
+								<?php foreach ( $smile_gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+									<article class="teams-doctor-result-card" aria-label="<?php echo esc_attr( sprintf( __( 'Smile gallery slide %d', 'wsd' ), $gallery_slide_index + 1 ) ); ?>">
+										<div class="teams-doctor-result-pair">
+											<div class="teams-doctor-result-image teams-doctor-result-image--before">
+												<div class="teams-doctor-result-image-frame">
+													<img src="<?php echo esc_url( $gallery_slide['before_image'] ); ?>" alt="<?php esc_attr_e( 'Before treatment', 'wsd' ); ?>" loading="lazy" decoding="async">
+												</div>
+												<span class="teams-doctor-result-label"><?php esc_html_e( 'Before', 'wsd' ); ?></span>
+											</div>
+
+											<div class="teams-doctor-result-arrow" aria-hidden="true">
+												<img src="<?php echo esc_url( $theme_uri . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="teams-doctor-result-arrow-img">
+											</div>
+
+											<div class="teams-doctor-result-image teams-doctor-result-image--after">
+												<div class="teams-doctor-result-image-frame">
+													<img src="<?php echo esc_url( $gallery_slide['after_image'] ); ?>" alt="<?php esc_attr_e( 'After treatment', 'wsd' ); ?>" loading="lazy" decoding="async">
+												</div>
+												<span class="teams-doctor-result-label"><?php esc_html_e( 'After', 'wsd' ); ?></span>
+											</div>
+
+											<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>" class="teams-doctor-result-readmore"><?php esc_html_e( 'Read More', 'wsd' ); ?></a>
+										</div>
+									</article>
+								<?php endforeach; ?>
+							</div>
+						</div>
+
+						<div class="teams-doctor-results-controls">
+							<div class="teams-doctor-results-progress" aria-hidden="true">
+								<span class="teams-doctor-results-progress-track"></span>
+								<span class="teams-doctor-results-progress-fill"></span>
+							</div>
+							<div class="teams-doctor-results-nav">
+								<button type="button" class="teams-slider-nav-btn teams-slider-nav-btn--prev is-disabled" aria-label="<?php esc_attr_e( 'Previous smile gallery slide', 'wsd' ); ?>" aria-disabled="true" tabindex="-1">
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/left_arrow.svg' ); ?>" alt="">
+								</button>
+								<button type="button" class="teams-slider-nav-btn teams-slider-nav-btn--next is-active" aria-label="<?php esc_attr_e( 'Next smile gallery slide', 'wsd' ); ?>">
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/left_arrow.svg' ); ?>" alt="">
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
 
 <?php
 get_footer();

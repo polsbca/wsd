@@ -79,7 +79,12 @@ function initAnimations() {
       );
     }
     if (hasTeamsPage) {
-      gsap.set(".teams-hero-actions .btn", { y: 20, opacity: 0 });
+      gsap.set(".teams-page-main .hero-buttons .btn", { y: 20, opacity: 0 });
+      gsap.set(".teams-page-main .hero-image-wrapper", {
+        x: 50,
+        opacity: 0,
+        scale: 0.95,
+      });
     }
   }
 
@@ -109,17 +114,29 @@ function initAnimations() {
     }
 
     if (hasTeamsPage) {
-      mainTimeline.to(
-        ".teams-hero-actions .btn",
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.12,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-        },
-        "-=0.5",
-      );
+      mainTimeline
+        .to(
+          ".teams-page-main .hero-buttons .btn",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.5",
+        )
+        .to(
+          ".teams-page-main .hero-image-wrapper",
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.8",
+        );
     }
 
     if (hasContactPage) {
@@ -258,6 +275,10 @@ function initAnimations() {
       if (hasDentalReferralsPage) {
         gsap.set(".dental-referrals-form-panel", { x: 0, y: 20, opacity: 0 });
       }
+      if (hasTeamsPage) {
+        gsap.set(".teams-page-main .hero-buttons .btn", { y: 15, opacity: 0 });
+        gsap.set(".teams-page-main .hero-image-wrapper", { y: 30, opacity: 0 });
+      }
 
       const mobileTl = gsap.timeline({
         defaults: { ease: "power2.out", duration: 0.6 },
@@ -293,6 +314,27 @@ function initAnimations() {
           { x: 0, y: 0, opacity: 1, duration: 0.6 },
           "-=0.3",
         );
+      } else if (hasTeamsPage) {
+        mobileTl
+          .to(
+            ".teams-page-main .hero-buttons .btn",
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.4,
+            },
+            "-=0.3",
+          )
+          .to(
+            ".teams-page-main .hero-image-wrapper",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+            },
+            "-=0.3",
+          );
       } else if (hasStandardHero) {
         mobileTl
           .to(
