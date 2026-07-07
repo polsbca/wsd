@@ -9712,6 +9712,433 @@ body {
   }
 }
 
+/* Teams page — tablet (Figma 4084:43870, 768px–991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .teams-page-main {
+    gap: 100px;
+  }
+
+  .teams-hero-page {
+    height: auto;
+    padding: 60px 0 0;
+    background-color: #faf3e6;
+    align-items: stretch;
+    overflow: visible;
+  }
+
+  .teams-hero-inner {
+    flex: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 62px;
+    height: auto;
+  }
+
+  .teams-hero-content-col {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+    gap: 48px;
+    justify-content: flex-start;
+  }
+
+  .teams-hero-copy {
+    gap: 30px;
+    padding-right: clamp(40px, 16vw, 120px);
+    box-sizing: border-box;
+  }
+
+  .teams-hero-title,
+  .teams-page-main .hero-title {
+    font-size: 28px;
+    line-height: normal;
+    letter-spacing: 0;
+  }
+
+  .teams-hero-description,
+  .teams-page-main .hero-description {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  .teams-page-main .hero-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .teams-page-main .hero-buttons .btn {
+    width: 223px;
+    max-width: calc(50% - 8px);
+    flex: 0 0 auto;
+    padding: 20px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .teams-hero-image-col {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .teams-hero-page .teams-hero-image-frame.hero-image-wrapper,
+  .teams-page-main .hero-image-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    display: block !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    position: relative !important;
+  }
+
+  .teams-hero-image-frame {
+    display: block !important;
+    width: 100% !important;
+    aspect-ratio: 525 / 493;
+    min-height: 0;
+    margin: 0 !important;
+    overflow: hidden;
+    background-color: #faf3e6;
+  }
+
+  .teams-hero-image-frame .teams-hero-img {
+    display: block;
+    width: 129.69%;
+    max-width: none;
+    height: 100%;
+    margin-left: -7.75%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .teams-clinical-section {
+    gap: 80px;
+  }
+
+  .teams-clinical-heading-wrap {
+    padding: 32px 40px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .teams-clinical-heading {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1px;
+    white-space: nowrap;
+  }
+
+  .teams-clinical-slider {
+    padding-left: 0;
+  }
+
+  .teams-clinical-slider.teams-slider {
+    gap: 36px;
+  }
+
+  .teams-clinical-slider .teams-slider-viewport {
+    padding: 0 40px;
+    height: auto !important;
+    overflow: hidden;
+  }
+
+  .teams-clinical-slider .teams-slider-track {
+    align-items: center;
+    gap: 160px;
+  }
+
+  .teams-clinical-slider .teams-member-card:not(.is-active) {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .teams-clinical-slider .teams-member-card {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 21px;
+    width: min(660px, calc(100vw - 80px));
+    max-width: none;
+    flex-shrink: 0;
+  }
+
+  .teams-clinical-slider .teams-member-photo {
+    flex: 0 0 395px;
+    width: 395px;
+    max-width: 59.8%;
+    height: auto;
+    min-height: 100%;
+    aspect-ratio: auto;
+    align-self: stretch;
+    border-radius: 20px;
+  }
+
+  .teams-clinical-slider .teams-member-photo img {
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .teams-clinical-slider .teams-member-info {
+    flex: 0 0 244px;
+    width: 244px;
+    max-width: 37%;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .teams-member-role {
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.64px;
+  }
+
+  .teams-clinical-slider .teams-member-identity {
+    gap: 35px;
+  }
+
+  .teams-clinical-slider .teams-member-name {
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: 0.96px;
+    white-space: normal;
+  }
+
+  .teams-clinical-slider .teams-member-prefix,
+  .teams-clinical-slider .teams-member-fullname {
+    white-space: normal;
+  }
+
+  .teams-clinical-slider .teams-member-gdc {
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 0.64px;
+  }
+
+  .teams-clinical-slider .teams-member-bio {
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.32px;
+  }
+
+  .teams-clinical-slider .teams-member-focus {
+    gap: 12px;
+  }
+
+  .teams-clinical-slider .teams-member-focus-label {
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 0.64px;
+  }
+
+  .teams-clinical-slider .teams-member-tag {
+    font-size: 12px;
+    padding: 12px 10px;
+    letter-spacing: 0.16px;
+  }
+
+  .teams-clinical-slider .teams-member-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .teams-clinical-slider .teams-member-actions .btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 20px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .teams-clinical-slider .teams-slider-controls {
+    padding: 0 40px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .teams-support-section {
+    padding: 40px;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .teams-support-header {
+    width: 100%;
+    max-width: none;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .teams-support-heading {
+    order: 1;
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .teams-support-dropdown {
+    order: 2;
+    width: 340px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .teams-support-select {
+    width: 100%;
+    padding: 20px 54px 20px 30px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 32px;
+  }
+
+  .teams-support-slider {
+    width: 100%;
+    max-width: 700px;
+    padding-left: 0;
+  }
+
+  .teams-support-slider.teams-slider {
+    gap: 40px;
+  }
+
+  .teams-support-slider .teams-slider-viewport {
+    padding: 0;
+    height: auto !important;
+    overflow: hidden;
+  }
+
+  .teams-support-slider .teams-slider-track {
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .teams-support-slider .teams-member-card:not(.is-active) {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .teams-support-slider .teams-member-card:not(.is-active) * {
+    display: revert !important;
+  }
+
+  .teams-member-card--support {
+    flex: 0 0 min(602px, calc(100vw - 80px));
+    width: min(602px, calc(100vw - 80px));
+    max-width: none;
+    gap: 40px;
+  }
+
+  .teams-member-photo--support {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    aspect-ratio: 408 / 404;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .teams-member-photo--support img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .teams-member-info--support {
+    gap: 30px !important;
+  }
+
+  .teams-support-slider .teams-member-details {
+    gap: 0;
+  }
+
+  .teams-support-slider .teams-member-role--support {
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 0.64px;
+    margin-bottom: 20px !important;
+  }
+
+  .teams-support-slider .teams-member-name--support {
+    font-size: 30px;
+    line-height: 44px;
+    letter-spacing: 1.2px;
+    margin: 0 0 14px !important;
+  }
+
+  .teams-support-slider .teams-member-gdc--support {
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 0.64px;
+    margin: 0 0 30px !important;
+  }
+
+  .teams-member-bio--support {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.32px;
+  }
+
+  .teams-support-slider .teams-member-copy {
+    gap: 30px;
+  }
+
+  .teams-member-focus--support {
+    max-width: none;
+    gap: 20px;
+  }
+
+  .teams-member-focus-label--support {
+    font-size: 20px;
+    line-height: 33px;
+    letter-spacing: 0.4px;
+  }
+
+  .teams-member-focus-text {
+    font-size: 16px;
+    line-height: 33px;
+    letter-spacing: 0.32px;
+  }
+
+  .teams-support-slider .teams-slider-controls {
+    padding: 0;
+    width: 100%;
+  }
+}
+
 @media (min-width: 992px) {
   .teams-support-dropdown {
     display: none !important;

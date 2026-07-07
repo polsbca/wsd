@@ -573,6 +573,11 @@
     max-width: 100% !important;
   }
 
+  body.page-template-template-teams-php .teams-page-main .hero-buttons,
+  body.page-template-template-teams .teams-page-main .hero-buttons {
+    margin-bottom: 0 !important;
+  }
+
   .hero-buttons .btn {
     display: flex !important;
     align-items: center !important;
@@ -3058,6 +3063,12 @@
   .hero-image-wrapper {
     margin-top: 62px !important;
     justify-content: flex-end !important;
+  }
+
+  body.page-template-template-teams-php .teams-hero-page .hero-image-wrapper,
+  body.page-template-template-teams .teams-hero-page .hero-image-wrapper {
+    margin-top: 0 !important;
+    justify-content: flex-start !important;
   }
   .hero-content {
     max-width: 540px;
@@ -8115,5 +8126,369 @@
     font-size: 14px !important;
     font-weight: 700 !important;
     letter-spacing: 0.5px !important;
+  }
+}
+
+/* ============================================================
+   FOOTER TABLET (FIGMA 4084:44103)
+   Tablet-only overrides; desktop and phone styles remain unchanged.
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #colophon.site-footer {
+    padding: 40px !important;
+    background-color: #2b2b2c !important;
+  }
+
+  #colophon.site-footer .container-fluid {
+    padding: 0 !important;
+  }
+
+  #colophon.site-footer .footer-top-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 60px;
+    margin: 0;
+  }
+
+  #colophon.site-footer .logo-socials-col {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  #colophon.site-footer .footer-brand {
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
+  #colophon.site-footer .logo-wrapper {
+    gap: 12px !important;
+  }
+
+  #colophon.site-footer .logo-mark {
+    height: 47px !important;
+    width: 40px !important;
+  }
+
+  #colophon.site-footer .logo-text-top {
+    height: 16px !important;
+    width: 130px !important;
+  }
+
+  #colophon.site-footer .logo-text-bottom {
+    height: 9.68px !important;
+    width: 130px !important;
+  }
+
+  #colophon.site-footer .logo-text-group {
+    gap: 3.9px !important;
+  }
+
+  #colophon.site-footer .footer-socials {
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    margin: 0 !important;
+    gap: 19px !important;
+  }
+
+  #colophon.site-footer .social-icons-wrapper {
+    gap: 15px !important;
+    justify-content: flex-end !important;
+  }
+
+  #colophon.site-footer .social-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  #colophon.site-footer .footer-socials .follow-text {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
+    text-align: right !important;
+  }
+
+  #colophon.site-footer .footer-mobile-accordion {
+    display: none !important;
+  }
+
+  #colophon.site-footer .footer-desktop-nav {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  #colophon.site-footer .footer-desktop-nav > .footer-links-grid:first-of-type {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin: 0 !important;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    gap: 0 !important;
+  }
+
+  #colophon.site-footer .footer-desktop-nav > .footer-links-grid:first-of-type > [class*="col-"] {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  #colophon.site-footer .footer-nav-col {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 0 !important;
+  }
+
+  #colophon.site-footer .footer-nav-col.mb-5 {
+    margin-bottom: 0 !important;
+  }
+
+  #colophon.site-footer .footer-nav-title {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
+    margin: 0 !important;
+  }
+
+  #colophon.site-footer .footer-nav-list li {
+    margin-bottom: 11px !important;
+    line-height: normal !important;
+    text-box-trim: none !important;
+    text-box-edge: auto !important;
+  }
+
+  #colophon.site-footer .footer-nav-list li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  #colophon.site-footer .footer-nav-list a {
+    font-size: 11px !important;
+    line-height: normal !important;
+  }
+
+  #colophon.site-footer .footer-desktop-nav > .footer-links-grid.d-md-flex {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    gap: 163px !important;
+    margin: 80px 0 0 !important;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+  }
+
+  #colophon.site-footer .footer-desktop-nav > .footer-links-grid.d-md-flex > [class*="col-"] {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  #colophon.site-footer .ipad-continfo {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 19px !important;
+    width: 290px;
+    max-width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  #colophon.site-footer .footer-desktop-nav > .footer-links-grid.d-md-flex .col-4 {
+    width: 208px !important;
+    max-width: 100%;
+  }
+
+  #colophon.site-footer .footer-desktop-nav > .footer-links-grid.d-md-flex .footer-nav-col {
+    align-self: flex-start !important;
+    height: auto !important;
+  }
+
+  #colophon.site-footer .footer-contact-details,
+  #colophon.site-footer .opening-hours-list {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  #colophon.site-footer .footer-contact-details p,
+  #colophon.site-footer .opening-hours-list p {
+    text-box-trim: none !important;
+    text-box-edge: auto !important;
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 30.48px !important;
+    white-space: normal !important;
+  }
+
+  #colophon.site-footer .footer-contact-details p {
+    font-size: 13.33px !important;
+  }
+
+  #colophon.site-footer .footer-contact-details .address-text {
+    margin: 38px 0 0 !important;
+    max-width: none !important;
+    font-size: 13.33px !important;
+    line-height: normal !important;
+  }
+
+  #colophon.site-footer .footer-contact-details .btn-directions {
+    display: inline-block !important;
+    margin-top: 24px !important;
+    font-size: 15.24px !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
+  }
+
+  #colophon.site-footer .opening-hours-list p {
+    font-size: 11px !important;
+  }
+
+  #colophon.site-footer .footer-middle-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 60px !important;
+    margin: 80px 0 0 !important;
+    padding: 0 !important;
+  }
+
+  #colophon.site-footer .subscribe-col {
+    flex: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #colophon.site-footer .footer-subscribe {
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  #colophon.site-footer .subscribe-input-wrapper {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+  }
+
+  #colophon.site-footer .subscribe-label {
+    font-size: 16px !important;
+    color: #ffffff !important;
+    line-height: normal !important;
+    margin-bottom: 0 !important;
+  }
+
+  #colophon.site-footer .subscribe-input {
+    font-size: 16px !important;
+    padding: 4px 0 5px !important;
+    border-bottom: 1px solid #ffffff !important;
+  }
+
+  #colophon.site-footer .subscribe-btn-wrapper {
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+
+  #colophon.site-footer .btn-subscribe {
+    height: 51px !important;
+    padding: 12.38px 22.86px !important;
+    font-size: 19.05px !important;
+    font-weight: 400 !important;
+    border-radius: 30.48px !important;
+    width: auto !important;
+    letter-spacing: 0 !important;
+  }
+
+  #colophon.site-footer .language-col {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    flex: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 20px !important;
+  }
+
+  #colophon.site-footer .footer-language {
+    flex: 0 0 auto !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 5px !important;
+  }
+
+  #colophon.site-footer .lang-label {
+    font-size: 15.24px !important;
+    line-height: 30.48px !important;
+    margin: 0 !important;
+    color: #ffffff !important;
+  }
+
+  #colophon.site-footer .lang-dropdown {
+    width: 148.57px !important;
+    height: 51.43px !important;
+    padding: 13.33px 6.67px !important;
+    border-radius: 38.1px !important;
+    justify-content: center !important;
+    gap: 3.81px !important;
+  }
+
+  #colophon.site-footer .lang-text {
+    font-size: 15.24px !important;
+  }
+
+  #colophon.site-footer .ipad-updated-text {
+    display: block !important;
+    font-size: 10px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    line-height: normal !important;
+    margin: 0 !important;
+    align-self: flex-end !important;
+    white-space: nowrap !important;
+  }
+
+  #colophon.site-footer .footer-bottom-row {
+    margin-top: 60px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  #colophon.site-footer .footer-bottom-row .last-updated-text {
+    display: none !important;
+  }
+
+  #colophon.site-footer .copyright-text {
+    font-size: 10px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 }

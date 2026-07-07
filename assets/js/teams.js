@@ -229,7 +229,7 @@
         track.style.transform = "translateX(-" + offset + "px)";
 
         if (
-          window.matchMedia("(max-width: 991.98px)").matches &&
+          window.matchMedia("(max-width: 767.98px)").matches &&
           !isSupport
         ) {
           viewport.style.height = activeSlide.offsetHeight + "px";

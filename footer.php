@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
 
 					<!-- Mobile accordion navigation (Figma 4084:43766) -->
-					<div class="col-12 footer-mobile-accordion d-lg-none">
+					<div class="col-12 footer-mobile-accordion d-md-none">
 						<div class="footer-nav-col footer-accordion-item">
 							<h4 class="footer-nav-title">Cosmetic Dentistry</h4>
 							<ul class="footer-nav-list list-unstyled">
@@ -108,7 +108,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
 
 					<!-- Col 2: Navigation Links, Opening Hours, Contact Info -->
-					<div class="col-xl-9 col-12 d-none d-lg-block">
+					<div class="col-xl-9 col-12 d-none d-md-block footer-desktop-nav">
 						<div class="row g-lg-4 footer-links-grid">
 							<!-- Column 1: Cosmetic & Finance -->
 							<div class="col-md-3 col-sm-6 col-12">
