@@ -7982,6 +7982,7 @@ body {
 }
 
 .teams-doctor-photo {
+  order: 1;
   width: 863px;
   max-width: 100%;
   flex: 0 0 auto;
@@ -7994,6 +7995,7 @@ body {
 }
 
 .teams-doctor-hero-details {
+  order: 2;
   width: 682px;
   max-width: 100%;
   display: flex;
@@ -8664,7 +8666,7 @@ body {
   gap: 40px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
   .teams-doctor-modal-header {
     height: 74px;
     min-height: 74px;
@@ -8819,7 +8821,7 @@ body {
     justify-content: center;
   }
 
-  .teams-doctor-hero-cta-book {
+  .teams-doctor-hero-cta-book-mobile {
     font-weight: 700;
   }
 
@@ -9144,6 +9146,602 @@ body {
     width: 64px;
     min-height: 10px;
     padding: 0;
+  }
+
+  .teams-doctor-results-dots .teams-slider-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Teams doctor modal — tablet (Figma 4084:43100, 768px–991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .teams-doctor-modal-header {
+    height: 114px;
+    min-height: 114px;
+    padding: 40px;
+    gap: 40px;
+  }
+
+  .teams-doctor-modal .btn-close-circle {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .teams-doctor-modal-close-icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .teams-doctor-modal-nav {
+    gap: 40px;
+    flex-wrap: nowrap;
+  }
+
+  .teams-doctor-modal-link {
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .teams-doctor-modal-body {
+    gap: 100px;
+    padding-bottom: 40px;
+  }
+
+  .teams-doctor-hero {
+    min-height: 640px;
+    height: 640px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .teams-doctor-hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(488px, 59.5%);
+    grid-template-rows: 1fr;
+    align-items: end;
+    height: 100%;
+    min-height: 640px;
+    padding: 60px 0 0 40px;
+    box-sizing: border-box;
+    column-gap: 0;
+    overflow: hidden;
+  }
+
+  .teams-doctor-hero-details {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    align-self: start;
+    width: 100%;
+    max-width: 367px;
+    z-index: 2;
+    align-items: flex-start;
+    gap: 30px;
+    text-align: left;
+  }
+
+  .teams-doctor-photo {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    align-self: end;
+    justify-self: end;
+    width: 100%;
+    max-width: 488px;
+    height: 480px;
+    overflow: visible;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .teams-doctor-photo-img {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    margin: 0 0 0 auto;
+    object-fit: contain;
+    object-position: bottom right;
+    pointer-events: none;
+  }
+
+  .teams-doctor-hero-identity {
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: none;
+  }
+
+  .teams-doctor-hero-meta {
+    gap: 14px;
+    height: auto;
+    align-items: flex-start;
+    width: 100%;
+    max-width: none;
+  }
+
+  .teams-doctor-name {
+    font-size: 20px;
+    line-height: 1.1;
+    letter-spacing: 0.8px;
+    text-align: left;
+    width: 100%;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .teams-doctor-gdc {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.48px;
+    text-align: left;
+    width: 100%;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .teams-doctor-role {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 0.48px;
+    text-align: left;
+    width: 100%;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .teams-doctor-qualifications {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    width: 100%;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .teams-doctor-hero-ctas {
+    position: static;
+    flex-direction: column;
+    gap: 24px;
+    width: 287px;
+    max-width: 100%;
+  }
+
+  .teams-doctor-hero-ctas .btn {
+    flex: none;
+    width: 100%;
+    min-height: 48px;
+    height: auto;
+    padding: 20px;
+    border-radius: 32px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .teams-doctor-hero-cta-refer {
+    background-color: #d8a444 !important;
+    border-color: #d8a444 !important;
+    color: #ffffff !important;
+    min-height: 48px !important;
+    order: 1;
+  }
+
+  .teams-doctor-hero-cta-readmore {
+    background-color: transparent !important;
+    border: 0.952px solid rgba(94, 93, 95, 0.52) !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+    font-weight: 500 !important;
+    min-height: 50px !important;
+    order: 2;
+  }
+
+  .teams-doctor-about {
+    gap: 40px;
+  }
+
+  .teams-doctor-about-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 0;
+    min-height: 0;
+  }
+
+  .teams-doctor-about-badge {
+    border-radius: 0 20px 20px 0;
+    border-bottom: 0;
+    padding: 32px 40px;
+    margin: 0;
+    max-width: none;
+    align-self: flex-start;
+  }
+
+  .teams-doctor-about-badge-title {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1px;
+  }
+
+  .teams-doctor-about-rating {
+    width: 100%;
+    padding: 0 40px;
+    gap: 20px;
+    margin: 0;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .teams-doctor-about-rating-count {
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 0.64px;
+  }
+
+  .teams-doctor-about-rating-score {
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 0.64px;
+  }
+
+  .teams-doctor-about-content {
+    padding: 0 40px;
+    gap: 30px;
+  }
+
+  .teams-doctor-about-heading {
+    font-size: 20px;
+    line-height: 44px;
+    letter-spacing: 0.8px;
+  }
+
+  .teams-doctor-about-text {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(94, 93, 95, 0.5);
+  }
+
+  .teams-doctor-about-text p {
+    text-box-trim: none !important;
+    text-box-edge: auto !important;
+  }
+
+  .teams-doctor-clinical-focus {
+    gap: 80px;
+  }
+
+  .teams-doctor-clinical-focus-heading-wrap {
+    justify-content: flex-start;
+    padding-right: 40px;
+    box-sizing: border-box;
+  }
+
+  .teams-doctor-clinical-focus-heading {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1px;
+    padding: 32px 40px;
+    border-radius: 0 20px 20px 0;
+    border-bottom: 0;
+  }
+
+  .teams-doctor-clinical-focus-slider {
+    gap: 36px;
+    width: 100%;
+  }
+
+  .teams-doctor-clinical-focus-viewport {
+    overflow: hidden;
+    padding: 0 40px;
+    box-sizing: border-box;
+    touch-action: pan-y;
+  }
+
+  .teams-doctor-clinical-focus-grid {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 40px;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.45s ease;
+    will-change: transform;
+  }
+
+  .teams-doctor-focus-card {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 320px;
+    max-width: none;
+    height: 258px;
+    border-radius: 20px;
+    padding: 38px 28px;
+    gap: 40px;
+    box-sizing: border-box;
+  }
+
+  .teams-doctor-focus-card-title {
+    font-size: 24px;
+    line-height: 40px;
+  }
+
+  .teams-doctor-focus-card-desc {
+    font-size: 16px;
+    line-height: 23px;
+    min-height: 0;
+    width: 319px;
+    max-width: 100%;
+  }
+
+  .teams-doctor-focus-meter {
+    width: 191px;
+  }
+
+  .teams-doctor-focus-card-level {
+    font-size: 14px;
+    line-height: 23px;
+  }
+
+  .teams-doctor-focus-dots {
+    display: none !important;
+  }
+
+  .teams-doctor-focus-progress {
+    display: flex !important;
+    position: relative;
+    width: min(660px, calc(100% - 80px));
+    height: 3px;
+    margin: 0 auto;
+  }
+
+  .teams-doctor-focus-progress-track,
+  .teams-doctor-focus-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 3px;
+  }
+
+  .teams-doctor-focus-progress-track {
+    width: 100%;
+    background-color: #d9d9d9;
+  }
+
+  .teams-doctor-focus-progress-fill {
+    width: 24%;
+    background-color: #d8a444;
+    transition: width 0.35s ease;
+  }
+
+  .teams-doctor-feature-media {
+    padding: 0;
+    justify-content: center;
+  }
+
+  .teams-doctor-feature-media-frame {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 362 / 221;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .teams-doctor-journey {
+    margin: 0;
+    width: 100%;
+    padding: 20px;
+    min-height: 376px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .teams-doctor-journey-inner {
+    gap: 40px;
+    width: 100%;
+  }
+
+  .teams-doctor-journey-heading {
+    font-size: 20px;
+    line-height: 40px;
+    letter-spacing: 0.8px;
+  }
+
+  .teams-doctor-journey-text {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .teams-doctor-journey-text p {
+    text-box-trim: none !important;
+    text-box-edge: auto !important;
+  }
+
+  .teams-doctor-results {
+    gap: 80px;
+  }
+
+  .teams-doctor-results-heading-wrap {
+    min-height: 85px;
+    padding-right: 40px;
+    box-sizing: border-box;
+  }
+
+  .teams-doctor-results-heading {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1px;
+    padding: 32px 40px;
+    border-radius: 0 20px 20px 0;
+    border-bottom: 0;
+  }
+
+  .teams-doctor-results-gallery {
+    padding: 0 40px;
+    gap: 36px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .teams-doctor-results-viewport {
+    touch-action: pan-y;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .teams-doctor-results-track {
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .teams-doctor-result-card {
+    flex: 0 0 512px;
+    width: 512px;
+    height: 303px;
+    min-height: 303px;
+  }
+
+  .teams-doctor-result-pair {
+    position: relative;
+    display: block;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .teams-doctor-result-image {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 194px;
+    padding: 4px 4px 5px;
+    border-radius: 14px;
+    box-shadow: 0 1.433px 2.867px rgba(0, 0, 0, 0.12);
+    margin: 0;
+  }
+
+  .teams-doctor-result-image--before {
+    left: 0;
+    top: 0;
+    right: 220px;
+    width: auto;
+  }
+
+  .teams-doctor-result-image--after {
+    left: 220px;
+    top: 109px;
+    right: 0;
+    width: auto;
+  }
+
+  .teams-doctor-result-image-frame {
+    width: 100%;
+    height: calc(100% - 28px);
+    min-height: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .teams-doctor-result-image-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .teams-doctor-result-arrow {
+    display: block;
+    position: absolute;
+    left: 83px;
+    top: 176px;
+    width: 91px;
+    height: 41px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .teams-doctor-result-label {
+    position: absolute;
+    left: 4px;
+    top: auto;
+    bottom: auto;
+    padding: 4px 6px;
+    border-radius: 0 4px 0 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #d8a444;
+  }
+
+  .teams-doctor-result-image--before .teams-doctor-result-label {
+    top: 165px;
+  }
+
+  .teams-doctor-result-image--after .teams-doctor-result-label {
+    top: 166px;
+  }
+
+  .teams-doctor-result-readmore {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 8px;
+    right: 228px;
+    z-index: 4;
+    min-height: 0;
+    padding: 8px 16px;
+    border-radius: 32px;
+    border: 1px solid #d8a444;
+    background: rgba(216, 164, 68, 0.13);
+    color: #d8a444;
+    font-family: var(--font-family-primary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: normal;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .teams-doctor-result-readmore:hover {
+    background: #d8a444;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .teams-doctor-results-dots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 92px;
+    min-height: 14px;
   }
 
   .teams-doctor-results-dots .teams-slider-dot {

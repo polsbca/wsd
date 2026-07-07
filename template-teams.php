@@ -324,14 +324,14 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 					<span class="close-x d-none d-lg-inline" aria-hidden="true">&times;</span>
 				</button>
 
-				<nav class="teams-doctor-modal-nav d-none d-lg-flex" aria-label="<?php esc_attr_e( 'Doctor sections', 'wsd' ); ?>">
+				<nav class="teams-doctor-modal-nav d-none d-md-flex" aria-label="<?php esc_attr_e( 'Doctor sections', 'wsd' ); ?>">
 					<a class="teams-doctor-modal-link is-active" href="#teamsDoctorAbout"><?php esc_html_e( 'About', 'wsd' ); ?></a>
 					<a class="teams-doctor-modal-link" href="#teamsDoctorClinicalFocus"><?php esc_html_e( 'Clinical Focus', 'wsd' ); ?></a>
 					<a class="teams-doctor-modal-link" href="#teamsDoctorQualificationsJourney"><?php esc_html_e( 'Qualifications', 'wsd' ); ?></a>
 					<a class="teams-doctor-modal-link" href="#teamsDoctorResultsGallery"><?php esc_html_e( 'Results', 'wsd' ); ?></a>
 				</nav>
 
-				<div class="teams-doctor-scroll-nav d-lg-none">
+				<div class="teams-doctor-scroll-nav d-md-none">
 					<label class="visually-hidden" for="teamsDoctorScrollNav"><?php esc_html_e( 'Scroll Navigation', 'wsd' ); ?></label>
 					<select id="teamsDoctorScrollNav" class="teams-doctor-scroll-select" aria-label="<?php esc_attr_e( 'Scroll Navigation', 'wsd' ); ?>">
 						<option value="" selected disabled><?php esc_html_e( 'Scroll Navigation', 'wsd' ); ?></option>
@@ -346,9 +346,6 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 			<div class="teams-doctor-modal-body">
 				<section class="teams-doctor-hero" id="teamsDoctorAbout">
 					<div class="teams-doctor-hero-inner">
-						<div class="teams-doctor-photo">
-							<img src="" alt="" class="teams-doctor-photo-img" loading="lazy" decoding="async">
-						</div>
 						<div class="teams-doctor-hero-details">
 							<div class="teams-doctor-hero-identity">
 								<h2 class="teams-doctor-name">
@@ -364,13 +361,19 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 							</div>
 
 							<div class="teams-doctor-hero-ctas">
-								<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-doctor-hero-cta-book">
-									<span class="d-none d-lg-inline"><?php esc_html_e( 'Book Appointment', 'wsd' ); ?></span>
-									<span class="d-lg-none"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span>
+								<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-doctor-hero-cta-book d-none d-lg-inline-flex">
+									<?php esc_html_e( 'Book Appointment', 'wsd' ); ?>
 								</a>
-								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-refer d-none d-lg-inline"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
-								<a href="#teamsDoctorResultsGallery" class="btn btn-secondary teams-doctor-hero-cta-gallery d-lg-none"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
+								<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile d-md-none">
+									<?php esc_html_e( 'Book an appointment', 'wsd' ); ?>
+								</a>
+								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-refer d-none d-md-inline-flex"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
+								<a href="#teamsDoctorAboutDetails" class="btn btn-secondary teams-doctor-hero-cta-readmore d-none d-md-inline-flex d-lg-none"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
+								<a href="#teamsDoctorResultsGallery" class="btn btn-secondary teams-doctor-hero-cta-gallery d-md-none"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
 							</div>
+						</div>
+						<div class="teams-doctor-photo">
+							<img src="" alt="" class="teams-doctor-photo-img" loading="lazy" decoding="async">
 						</div>
 					</div>
 				</section>
@@ -379,11 +382,11 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 					<div class="teams-doctor-about-header">
 						<div class="teams-doctor-about-badge">
 							<h3 class="teams-doctor-about-badge-title">
-								<span class="teams-doctor-about-badge-desktop d-none d-lg-inline">
+								<span class="teams-doctor-about-badge-desktop d-none d-md-inline">
 									<span><?php esc_html_e( 'About Dr', 'wsd' ); ?></span>
 									<span class="teams-doctor-about-name"></span>
 								</span>
-								<span class="teams-doctor-about-badge-mobile d-lg-none">
+								<span class="teams-doctor-about-badge-mobile d-md-none">
 									<span class="teams-doctor-about-badge-mobile-prefix"></span>
 									<span class="teams-doctor-about-badge-mobile-accent"><?php esc_html_e( 'Patient Results', 'wsd' ); ?></span>
 								</span>
@@ -436,6 +439,10 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 								<?php endfor; ?>
 							</div>
 						</div>
+						<div class="teams-doctor-focus-progress d-none d-md-flex d-lg-none" aria-hidden="true">
+							<span class="teams-doctor-focus-progress-track"></span>
+							<span class="teams-doctor-focus-progress-fill"></span>
+						</div>
 						<div class="teams-slider-dots teams-doctor-focus-dots" aria-hidden="true"></div>
 					</div>
 				</section>
@@ -464,7 +471,7 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 								<span><?php esc_html_e( 'Smile ', 'wsd' ); ?></span>
 								<span class="teams-doctor-results-heading-accent"><?php esc_html_e( 'Gallery', 'wsd' ); ?></span>
 							</span>
-							<span class="teams-doctor-results-heading-mobile d-lg-none">
+							<span class="teams-doctor-results-heading-mobile d-md-inline d-lg-none">
 								<span class="teams-doctor-results-heading-mobile-prefix"></span>
 								<span class="teams-doctor-results-heading-accent"><?php esc_html_e( 'Patient Results', 'wsd' ); ?></span>
 							</span>

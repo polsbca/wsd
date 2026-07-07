@@ -454,10 +454,18 @@
     var nextBtn = slider.querySelector(".teams-slider-nav-btn--next");
     var dotsContainer = slider.querySelector(".teams-doctor-results-dots");
     var index = 0;
-    var gap = 30;
     var dotCount = -1;
 
-    function isMobile() {
+    function getTrackGap() {
+      if (!track) {
+        return 30;
+      }
+
+      var styles = window.getComputedStyle(track);
+      return parseFloat(styles.columnGap || styles.gap) || 30;
+    }
+
+    function isMobileSlider() {
       return window.matchMedia("(max-width: 991.98px)").matches;
     }
 
@@ -468,7 +476,7 @@
     }
 
     function syncDots(slides) {
-      if (!dotsContainer || !isMobile()) {
+      if (!dotsContainer || !isMobileSlider()) {
         if (dotsContainer) {
           dotsContainer.hidden = true;
         }
@@ -515,7 +523,7 @@
         return 0;
       }
 
-      if (isMobile()) {
+      if (isMobileSlider()) {
         return Math.max(0, slides.length - 1);
       }
 
@@ -527,7 +535,7 @@
 
       var visibleCount = Math.max(
         1,
-        Math.floor((viewportWidth + gap) / (slideWidth + gap)),
+        Math.floor((viewportWidth + getTrackGap()) / (slideWidth + getTrackGap())),
       );
       return Math.max(0, slides.length - visibleCount);
     }
@@ -607,7 +615,7 @@
     }
 
     bindHorizontalSwipe(viewport, {
-      isEnabled: isMobile,
+      isEnabled: isMobileSlider,
       getCount: function () {
         return getSlides().length;
       },
@@ -638,10 +646,19 @@
     var viewport = slider.querySelector(".teams-doctor-clinical-focus-viewport");
     var track = slider.querySelector(".teams-doctor-clinical-focus-grid");
     var dotsContainer = slider.querySelector(".teams-doctor-focus-dots");
+    var progressFill = slider.querySelector(".teams-doctor-focus-progress-fill");
     var index = 0;
     var dotCount = -1;
 
-    function isMobile() {
+    function isPhone() {
+      return window.matchMedia("(max-width: 767.98px)").matches;
+    }
+
+    function isTablet() {
+      return window.matchMedia("(min-width: 768px) and (max-width: 991.98px)").matches;
+    }
+
+    function isMobileSlider() {
       return window.matchMedia("(max-width: 991.98px)").matches;
     }
 
@@ -654,11 +671,11 @@
     }
 
     function syncDots(cards) {
-      if (!dotsContainer || !isMobile()) {
+      if (!dotsContainer || !isPhone()) {
         if (dotsContainer) {
           dotsContainer.hidden = true;
         }
-        if (track) {
+        if (track && !isMobileSlider()) {
           track.style.transform = "";
         }
         return;
@@ -701,23 +718,51 @@
       );
     }
 
+    function syncProgress(cards) {
+      if (!progressFill || !isTablet()) {
+        if (progressFill) {
+          progressFill.style.width = cards.length ? "24%" : "0%";
+        }
+        return;
+      }
+
+      if (!cards.length || !track || !viewport) {
+        progressFill.style.width = "0%";
+        return;
+      }
+
+      var trackWidth = track.scrollWidth;
+      var viewportWidth = viewport.clientWidth;
+      if (trackWidth <= viewportWidth) {
+        progressFill.style.width = "100%";
+        return;
+      }
+
+      var activeCard = cards[index];
+      var viewedEnd = activeCard.offsetLeft + viewportWidth;
+      var progress = Math.min(1, viewedEnd / trackWidth);
+      progressFill.style.width = progress * 100 + "%";
+    }
+
     function update() {
       var cards = getCards();
       if (!cards.length) {
         syncDots([]);
+        syncProgress([]);
         return;
       }
 
       index = Math.max(0, Math.min(index, cards.length - 1));
       var activeCard = cards[index];
 
-      if (isMobile() && track && activeCard) {
+      if (isMobileSlider() && track && activeCard) {
         track.style.transform = "translateX(-" + activeCard.offsetLeft + "px)";
       } else if (track) {
         track.style.transform = "";
       }
 
       syncDots(cards);
+      syncProgress(cards);
     }
 
     if (dotsContainer) {
@@ -732,7 +777,7 @@
     }
 
     bindHorizontalSwipe(viewport, {
-      isEnabled: isMobile,
+      isEnabled: isMobileSlider,
       getCount: function () {
         return getCards().length;
       },
@@ -789,6 +834,7 @@
     );
     var scrollSelect = modalEl.querySelector(".teams-doctor-scroll-select");
     var galleryCta = modalEl.querySelector(".teams-doctor-hero-cta-gallery");
+    var readmoreCta = modalEl.querySelector(".teams-doctor-hero-cta-readmore");
     var focusSlider = modalEl.querySelector("[data-teams-focus-slider]");
 
     function scrollToSection(targetSelector, activeLink) {
@@ -994,6 +1040,13 @@
       galleryCta.addEventListener("click", function (e) {
         e.preventDefault();
         scrollToSection("#teamsDoctorResultsGallery", null);
+      });
+    }
+
+    if (readmoreCta && bodyEl) {
+      readmoreCta.addEventListener("click", function (e) {
+        e.preventDefault();
+        scrollToSection("#teamsDoctorAboutDetails", null);
       });
     }
   }
