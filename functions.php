@@ -381,11 +381,12 @@ function wsd_get_referrals_page_url() {
  */
 function wsd_get_teams_hero_image_url( $page_id = 0 ) {
 	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+	$scheme  = is_ssl() ? 'https' : 'http';
 
 	if ( $page_id && has_post_thumbnail( $page_id ) ) {
 		$featured_url = get_the_post_thumbnail_url( $page_id, 'full' );
 		if ( $featured_url ) {
-			return $featured_url;
+			return set_url_scheme( $featured_url, $scheme );
 		}
 	}
 
@@ -396,7 +397,7 @@ function wsd_get_teams_hero_image_url( $page_id = 0 ) {
 		$fallback_url .= '?ver=' . filemtime( $fallback_path );
 	}
 
-	return $fallback_url;
+	return set_url_scheme( $fallback_url, $scheme );
 }
 
 /**

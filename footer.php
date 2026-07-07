@@ -34,18 +34,81 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<div class="footer-socials d-flex flex-column gap-3">
 							<div class="social-icons-wrapper d-flex align-items-center gap-3">
 								<a href="#" class="social-icon">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/instagram-icon.svg' ); ?>" alt="Instagram">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/facebook-icon.svg' ); ?>" alt="Facebook">
 								</a>
 								<a href="#" class="social-icon">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/facebook-icon.svg' ); ?>" alt="Facebook">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/instagram-icon.svg' ); ?>" alt="Instagram">
 								</a>
 							</div>
 							<span class="follow-text">Follow Us On:</span>
 						</div>
 					</div>
 
+					<!-- Mobile accordion navigation (Figma 4084:43766) -->
+					<div class="col-12 footer-mobile-accordion d-lg-none">
+						<div class="footer-nav-col footer-accordion-item">
+							<h4 class="footer-nav-title">Cosmetic Dentistry</h4>
+							<ul class="footer-nav-list list-unstyled">
+								<li><a href="#whitening">Whitening</a></li>
+								<li><a href="#straightening">Straightening</a></li>
+								<li><a href="#smile-makeover">Smile Make Over</a></li>
+								<li><a href="#veneers">Veneers</a></li>
+							</ul>
+						</div>
+
+						<div class="footer-nav-col footer-accordion-item">
+							<h4 class="footer-nav-title">General Dentistry</h4>
+							<ul class="footer-nav-list list-unstyled">
+								<li><a href="#dental-implants">Dental Implants</a></li>
+								<li><a href="#checkups">Monthly Checkups</a></li>
+								<li><a href="#emergency">Emergency</a></li>
+							</ul>
+						</div>
+
+						<div class="footer-nav-col footer-accordion-item">
+							<h4 class="footer-nav-title">Finance</h4>
+							<ul class="footer-nav-list list-unstyled">
+								<li><a href="#fees">Fees</a></li>
+								<li><a href="#calculator">Finance Calculator</a></li>
+								<li><a href="#plans">Dental Plans</a></li>
+							</ul>
+						</div>
+
+						<div class="footer-nav-col footer-accordion-item">
+							<h4 class="footer-nav-title">Legal Links</h4>
+							<ul class="footer-nav-list list-unstyled">
+								<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
+								<li><a href="#gdc">GDC Regulations</a></li>
+								<li><a href="#complaints">Complaints Procedure</a></li>
+								<li><a href="#terms">Terms of Use</a></li>
+							</ul>
+						</div>
+
+						<div class="footer-nav-col footer-accordion-item">
+							<h4 class="footer-nav-title">Contact Us</h4>
+							<div class="footer-contact-details">
+								<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
+								<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
+								<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
+								<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+							</div>
+						</div>
+
+						<div class="footer-nav-col footer-accordion-item">
+							<h4 class="footer-nav-title">Opening Hours</h4>
+							<div class="opening-hours-list">
+								<p>Mon: 8.45am – 1pm</p>
+								<p>Tue: 8.45am – 6pm</p>
+								<p>Wed: 8.45am – 6pm</p>
+								<p>Thu: 8.45am – 7pm</p>
+								<p>Fri: 8.45am – 1pm</p>
+								<p>Sat: Saturdays by Appointment</p>
+							</div>
+						</div>
+					</div>
+
 					<!-- Col 2: Navigation Links, Opening Hours, Contact Info -->
-					<div class="col-xl-9 col-12">
+					<div class="col-xl-9 col-12 d-none d-lg-block">
 						<div class="row g-lg-4 footer-links-grid">
 							<!-- Column 1: Cosmetic & Finance -->
 							<div class="col-md-3 col-sm-6 col-12">
@@ -172,9 +235,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 
 				<!-- Middle Row: Subscribe & Language -->
-				<div class="row align-items-end justify-content-between footer-middle-row">
+				<div class="row align-items-end justify-content-between footer-middle-row flex-column flex-lg-row">
 					<!-- Subscribe -->
-					<div class="col-xl-7 col-12 mb-4 mb-xl-0 subscribe-col">
+					<div class="col-xl-7 col-12 subscribe-col">
 						<div class="footer-subscribe d-flex flex-wrap align-items-end gap-4">
 							<div class="subscribe-input-wrapper">
 								<label for="subscribe-email" class="subscribe-label">Get to know our updates:</label>

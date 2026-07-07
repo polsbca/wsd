@@ -11,9 +11,16 @@
     var progressFill = slider.querySelector(".teams-slider-progress-fill");
     var prevBtn = slider.querySelector(".teams-slider-nav-btn--prev");
     var nextBtn = slider.querySelector(".teams-slider-nav-btn--next");
+    var dotsContainer = slider.querySelector(".teams-slider-dots");
     var emptyMessage = slider.querySelector(".teams-support-empty");
     var isSupport = slider.getAttribute("data-teams-slider") === "support";
     var index = 0;
+    var supportDotCount = -1;
+    var swipeStartX = 0;
+    var swipeStartY = 0;
+    var swipeActive = false;
+    var swipeLocked = false;
+    var swipeIsHorizontal = false;
 
     function getSlides() {
       if (!isSupport) {
@@ -28,6 +35,47 @@
         .filter(function (card) {
           return card.getAttribute("data-support-category") === category;
         });
+    }
+
+    function syncDots(slides) {
+      if (!dotsContainer) {
+        return;
+      }
+
+      if (isSupport) {
+        if (!slides.length || slides.length <= 1) {
+          dotsContainer.hidden = true;
+          dotsContainer.innerHTML = "";
+          supportDotCount = slides.length;
+          return;
+        }
+
+        dotsContainer.hidden = false;
+
+        if (slides.length !== supportDotCount) {
+          dotsContainer.innerHTML = "";
+          slides.forEach(function (unusedSlide, slideIndex) {
+            var dotBtn = document.createElement("button");
+            dotBtn.type = "button";
+            dotBtn.className = "teams-slider-dot";
+            dotBtn.setAttribute("data-slide-dot", String(slideIndex));
+            dotBtn.setAttribute(
+              "aria-label",
+              "Go to support team member " + (slideIndex + 1),
+            );
+            dotsContainer.appendChild(dotBtn);
+          });
+          supportDotCount = slides.length;
+        }
+      }
+
+      Array.prototype.forEach.call(
+        dotsContainer.querySelectorAll(".teams-slider-dot[data-slide-dot]"),
+        function (dotBtn) {
+          var dotIndex = parseInt(dotBtn.getAttribute("data-slide-dot") || "0", 10);
+          dotBtn.classList.toggle("is-active", dotIndex === index);
+        },
+      );
     }
 
     function update() {
@@ -61,6 +109,7 @@
           nextBtn.setAttribute("aria-disabled", "true");
           nextBtn.classList.remove("is-active");
         }
+        syncDots([]);
         return;
       }
 
@@ -79,6 +128,12 @@
       if (track && activeSlide && viewport) {
         var offset = activeSlide.offsetLeft;
         track.style.transform = "translateX(-" + offset + "px)";
+
+        if (window.matchMedia("(max-width: 991.98px)").matches) {
+          viewport.style.height = activeSlide.offsetHeight + "px";
+        } else {
+          viewport.style.height = "";
+        }
       }
 
       var progress;
@@ -118,6 +173,8 @@
         nextBtn.setAttribute("aria-disabled", canGoNext ? "false" : "true");
         nextBtn.classList.toggle("is-active", canGoNext);
       }
+
+      syncDots(slides);
     }
 
     if (prevBtn) {
@@ -140,8 +197,94 @@
       });
     }
 
+    if (dotsContainer) {
+      dotsContainer.addEventListener("click", function (event) {
+        var dotBtn = event.target.closest(".teams-slider-dot[data-slide-dot]");
+        if (!dotBtn) {
+          return;
+        }
+
+        index = parseInt(dotBtn.getAttribute("data-slide-dot") || "0", 10);
+        update();
+      });
+    }
+
+    if (viewport) {
+      viewport.addEventListener(
+        "touchstart",
+        function (e) {
+          if (!e.touches || !e.touches.length) {
+            return;
+          }
+          swipeStartX = e.touches[0].clientX;
+          swipeStartY = e.touches[0].clientY;
+          swipeActive = true;
+          swipeLocked = false;
+          swipeIsHorizontal = false;
+        },
+        { passive: true },
+      );
+
+      viewport.addEventListener(
+        "touchmove",
+        function (e) {
+          if (!swipeActive || !e.touches || !e.touches.length) {
+            return;
+          }
+          var dx = e.touches[0].clientX - swipeStartX;
+          var dy = e.touches[0].clientY - swipeStartY;
+
+          if (!swipeLocked && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+            swipeLocked = true;
+            swipeIsHorizontal = Math.abs(dx) > Math.abs(dy);
+          }
+
+          if (swipeLocked && swipeIsHorizontal) {
+            e.preventDefault();
+          }
+        },
+        { passive: false },
+      );
+
+      viewport.addEventListener(
+        "touchend",
+        function (e) {
+          if (!swipeActive) {
+            return;
+          }
+          swipeActive = false;
+
+          var touch =
+            e.changedTouches && e.changedTouches.length ? e.changedTouches[0] : null;
+          if (!touch) {
+            return;
+          }
+
+          var slides = getSlides();
+          if (slides.length <= 1) {
+            return;
+          }
+
+          var dx = touch.clientX - swipeStartX;
+          var threshold = 50;
+
+          if (dx > threshold) {
+            index = Math.max(0, index - 1);
+            update();
+          } else if (dx < -threshold) {
+            index = Math.min(slides.length - 1, index + 1);
+            update();
+          }
+        },
+        { passive: true },
+      );
+    }
+
     slider._teamsGoTo = function (nextIndex) {
       index = nextIndex || 0;
+      if (isSupport) {
+        supportDotCount = -1;
+      }
       update();
     };
 
@@ -156,27 +299,45 @@
     var supportSlider = document.querySelector(
       '.teams-slider[data-teams-slider="support"]',
     );
+    var select = document.querySelector(".teams-support-select");
 
-    if (!tabs.length || !supportSlider) {
+    if ((!tabs.length && !select) || !supportSlider) {
       return;
+    }
+
+    function setCategory(category) {
+      if (!category) {
+        return;
+      }
+
+      tabs.forEach(function (item) {
+        var isActive = item.getAttribute("data-support-category") === category;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      if (select) {
+        select.value = category;
+      }
+
+      supportSlider.setAttribute("data-active-category", category);
+      if (typeof supportSlider._teamsGoTo === "function") {
+        supportSlider._teamsGoTo(0);
+      }
     }
 
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
         var category = tab.getAttribute("data-support-category");
-
-        tabs.forEach(function (item) {
-          var isActive = item === tab;
-          item.classList.toggle("is-active", isActive);
-          item.setAttribute("aria-selected", isActive ? "true" : "false");
-        });
-
-        supportSlider.setAttribute("data-active-category", category);
-        if (typeof supportSlider._teamsGoTo === "function") {
-          supportSlider._teamsGoTo(0);
-        }
+        setCategory(category);
       });
     });
+
+    if (select) {
+      select.addEventListener("change", function () {
+        setCategory(select.value);
+      });
+    }
   }
 
   function initDoctorResultsSlider(slider) {

@@ -62,8 +62,8 @@ jQuery(document).ready(function($) {
         $('.search-field-active').focus();
     });
 
-    // Toggle Mobile Footer Accordions
-    $('.footer-nav-title').on('click', function(e) {
+    // Toggle Mobile Footer Accordions (Figma mobile footer)
+    $('.footer-mobile-accordion .footer-nav-title').on('click', function(e) {
         if ($(window).width() < 992) {
             e.preventDefault();
             var $title = $(this);

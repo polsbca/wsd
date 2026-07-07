@@ -59,6 +59,12 @@ if ( empty( $support_categories ) && ! empty( $support_members ) ) {
 }
 
 $default_support_category = ! empty( $support_categories ) ? (string) array_key_first( $support_categories ) : '';
+$default_support_slide_count = 0;
+foreach ( $support_members as $support_member ) {
+	if ( $support_member['category'] === $default_support_category ) {
+		$default_support_slide_count++;
+	}
+}
 $teams_hero_description   = wsd_get_teams_hero_description( $teams_page_id );
 $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specialists );
 ?>
@@ -173,6 +179,18 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/left_arrow.svg' ); ?>" alt="" width="26" height="26">
 					</button>
 				</div>
+				<?php if ( ! empty( $clinical_specialists ) && count( $clinical_specialists ) > 1 ) : ?>
+					<div class="teams-slider-dots" aria-label="<?php esc_attr_e( 'Clinical specialist slides', 'wsd' ); ?>">
+						<?php foreach ( $clinical_specialists as $dot_index => $unused_member ) : ?>
+							<button
+								type="button"
+								class="teams-slider-dot<?php echo 0 === $dot_index ? ' is-active' : ''; ?>"
+								aria-label="<?php echo esc_attr( sprintf( __( 'Go to specialist %d', 'wsd' ), $dot_index + 1 ) ); ?>"
+								data-slide-dot="<?php echo esc_attr( (string) $dot_index ); ?>"
+							></button>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>
@@ -183,6 +201,16 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 				<span class="teams-support-heading-main">Meet Our</span>
 				<span class="teams-support-heading-accent"> Support Team</span>
 			</h2>
+
+			<div class="teams-support-dropdown" aria-label="<?php esc_attr_e( 'Support team categories', 'wsd' ); ?>">
+				<select class="teams-support-select" aria-label="<?php esc_attr_e( 'Select support team category', 'wsd' ); ?>">
+					<?php foreach ( $support_categories as $slug => $label ) : ?>
+						<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( $slug, $default_support_category ); ?>>
+							<?php echo esc_html( $label ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</div>
 
 			<div class="teams-support-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Support team categories', 'wsd' ); ?>">
 				<?php foreach ( $support_categories as $slug => $label ) : ?>
@@ -263,6 +291,20 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/left_arrow.svg' ); ?>" alt="" width="26" height="26">
 					</button>
 				</div>
+				<?php if ( $default_support_slide_count > 1 ) : ?>
+					<div class="teams-slider-dots" aria-label="<?php esc_attr_e( 'Support team slides', 'wsd' ); ?>">
+						<?php for ( $dot_index = 0; $dot_index < $default_support_slide_count; $dot_index++ ) : ?>
+							<button
+								type="button"
+								class="teams-slider-dot<?php echo 0 === $dot_index ? ' is-active' : ''; ?>"
+								aria-label="<?php echo esc_attr( sprintf( __( 'Go to support team member %d', 'wsd' ), $dot_index + 1 ) ); ?>"
+								data-slide-dot="<?php echo esc_attr( (string) $dot_index ); ?>"
+							></button>
+						<?php endfor; ?>
+					</div>
+				<?php else : ?>
+					<div class="teams-slider-dots" aria-label="<?php esc_attr_e( 'Support team slides', 'wsd' ); ?>" hidden></div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>

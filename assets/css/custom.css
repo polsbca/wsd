@@ -7443,6 +7443,9 @@ body {
   gap: 60px;
   flex: 0 0 auto;
   width: min(1233px, calc(100vw - 240px));
+  background: transparent;
+  box-shadow: none;
+  border: 0;
 }
 
 .teams-member-photo {
@@ -7467,6 +7470,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  background: transparent;
+  box-shadow: none;
 }
 
 .teams-member-role {
@@ -7694,6 +7699,25 @@ body {
 
 .teams-slider-nav-btn--next img {
   transform: rotate(180deg);
+}
+
+.teams-slider-dots {
+  display: none;
+}
+
+.teams-slider-dot {
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 0;
+  background-color: rgba(94, 93, 95, 0.25);
+  cursor: pointer;
+}
+
+.teams-slider-dot.is-active {
+  background-color: #d8a444;
 }
 
 .teams-support-section {
@@ -8753,39 +8777,87 @@ body {
 @media (max-width: 991.98px) {
   .teams-hero-page {
     height: auto;
-    padding: 40px 24px;
+    padding: 40px 24px 0;
     overflow: visible;
+  }
+
+  /* On some templates the mobile GSAP entry sequence is skipped (no .mobile-header),
+     so we must not keep the hero image hidden on mobile. */
+  html.wsd-js body.page-template-template-teams-php .teams-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-teams .teams-page-main .hero-image-wrapper {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .teams-hero-image-col {
+    display: block;
+  }
+
+  .teams-hero-image-frame,
+  .teams-hero-image-frame .teams-hero-img {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .teams-hero-inner {
     flex: none;
     flex-wrap: wrap;
     height: auto;
-    gap: 40px;
+    gap: 24px;
   }
 
   .teams-hero-content-col {
     flex: 1 1 100%;
     height: auto;
     max-width: none;
-    gap: 40px;
+    gap: 32px;
   }
 
   .teams-hero-copy {
     gap: 32px;
   }
 
+  .teams-hero-title,
+  .teams-page-main .hero-title {
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: -1px;
+  }
+
+  .teams-hero-description,
+  .teams-page-main .hero-description {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
   .teams-hero-image-col {
     flex: 1 1 100%;
-    width: 100%;
+    width: 100% !important;
     height: auto;
+    min-width: 0;
+    max-width: none !important;
+    margin-left: -24px;
+    margin-right: -24px;
   }
 
   .teams-hero-image-frame {
-    width: 100%;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0;
     height: auto;
     max-height: none;
     aspect-ratio: 1027 / 889;
+    background-color: #faf3e6;
+    min-height: 260px;
+    overflow: hidden;
+  }
+
+  .teams-hero-image-frame,
+  .teams-hero-image-frame .teams-hero-img {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .teams-hero-image-frame .teams-hero-img {
@@ -8797,6 +8869,329 @@ body {
 
   .teams-page-main .hero-buttons {
     width: 100%;
+  }
+
+  .teams-page-main .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .teams-page-main {
+    gap: 24px;
+  }
+
+  .teams-clinical-section {
+    gap: 32px;
+  }
+
+  .teams-clinical-heading-wrap {
+    padding: 24px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .teams-clinical-heading {
+    font-size: 32px;
+    white-space: normal;
+  }
+
+  .teams-clinical-slider {
+    padding-left: 0;
+  }
+
+  .teams-clinical-slider .teams-slider-viewport {
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .teams-clinical-slider.teams-slider,
+  .teams-support-slider.teams-slider {
+    gap: 24px;
+  }
+
+  .teams-slider {
+    gap: 24px;
+  }
+
+  .teams-clinical-slider .teams-slider-track {
+    align-items: flex-start;
+  }
+
+  .teams-clinical-slider .teams-member-card:not(.is-active) {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .teams-clinical-slider .teams-slider-controls {
+    align-items: center;
+    gap: 0;
+  }
+
+  .teams-slider-track {
+    gap: 40px;
+  }
+
+  .teams-member-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .teams-clinical-slider .teams-member-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+
+  .teams-clinical-slider .teams-member-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  .teams-member-info {
+    max-width: none;
+    gap: 24px;
+  }
+
+  .teams-member-role {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.64px;
+  }
+
+  .teams-member-name {
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: 1px;
+  }
+
+  .teams-member-gdc {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.56px;
+  }
+
+  .teams-member-bio {
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+  }
+
+  .teams-member-focus-label--support,
+  .teams-member-focus-text {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .teams-member-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .teams-member-actions .btn {
+    width: 100%;
+  }
+
+  .teams-slider-controls {
+    padding: 0 24px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .teams-clinical-slider .teams-slider-nav,
+  .teams-clinical-slider .teams-slider-progress {
+    display: none;
+  }
+
+  .teams-clinical-slider .teams-slider-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .teams-support-slider .teams-slider-nav,
+  .teams-support-slider .teams-slider-progress {
+    display: none;
+  }
+
+  .teams-support-slider .teams-slider-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .teams-support-slider .teams-slider-controls {
+    align-items: center;
+    gap: 0;
+    width: 100%;
+  }
+
+  .teams-support-slider .teams-slider-track {
+    align-items: flex-start;
+  }
+
+  .teams-support-slider .teams-member-card:not(.is-active) {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .teams-slider-progress {
+    width: 100%;
+    max-width: none;
+  }
+
+  .teams-slider-nav {
+    gap: 16px;
+  }
+
+  .teams-support-section {
+    padding: 24px 0 40px;
+    gap: 32px;
+  }
+
+  .teams-support-header {
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+    gap: 40px;
+  }
+
+  .teams-support-heading {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 1px;
+  }
+
+  /* Mobile Figma: dropdown instead of pill categories */
+  .teams-support-dropdown {
+    display: block;
+    width: 100%;
+  }
+
+  .teams-support-select {
+    width: 100%;
+    min-height: 58px;
+    padding: 19px 56px 19px 32px;
+    border-radius: 32px;
+    border: 1px solid #d8a444;
+    background-color: #d8a444;
+    font-family: var(--font-family-primary);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: 1px;
+    color: #ffffff;
+    appearance: none;
+    background-image: url("../images/lang-arrow.svg");
+    background-repeat: no-repeat;
+    background-size: 14px 12px;
+    background-position: right 32px center;
+  }
+
+  .teams-support-select:focus {
+    outline: none;
+    border-color: #d8a444;
+    box-shadow: 0 0 0 3px rgba(216, 164, 68, 0.25);
+  }
+
+  .teams-support-tabs {
+    display: none;
+  }
+
+  .teams-support-tabs::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .teams-support-tab {
+    flex: 0 0 auto;
+  }
+
+  .teams-support-slider {
+    padding-left: 0;
+  }
+
+  .teams-support-slider .teams-slider-viewport {
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .teams-support-tab:nth-child(1),
+  .teams-support-tab:nth-child(3),
+  .teams-support-tab:nth-child(2),
+  .teams-support-tab:nth-child(4) {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .teams-member-card--support {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .teams-member-photo--support {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #faf3e6;
+  }
+
+  .teams-member-photo--support img {
+    object-position: center bottom;
+  }
+
+  .teams-member-info--support {
+    width: 100%;
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  /* Remove any white card/shadow on support section (mobile) */
+  .teams-member-card--support,
+  .teams-member-info--support {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .teams-member-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .teams-member-gdc--support {
+    margin-top: 0;
+  }
+
+  .teams-member-copy {
+    margin-top: 0;
   }
 }
 

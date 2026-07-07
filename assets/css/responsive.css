@@ -6787,54 +6787,76 @@
     flex-direction: column !important;
     gap: 26px !important;
   }
-  /* Mobile Footer Layout */
+  /* Mobile Footer Layout (Figma 4084:43766) */
   #colophon.site-footer {
-    padding: 40px 12px 30px 12px !important;
+    padding: 20px 24px 30px !important;
     background-color: #2b2b2c !important;
   }
+
+  #colophon.site-footer .footer-top-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 21px;
+    margin: 0;
+  }
+
   .footer-middle-row {
-    margin-top: 40px;
-    padding-inline: 12px;
-  }
-  .mb-5.mb-lg-0.logo-socials-col {
+    margin-top: 40px !important;
     margin-bottom: 0 !important;
+    padding-inline: 0 !important;
+    gap: 30px;
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
+
+  #colophon.site-footer .logo-socials-col {
+    margin-bottom: 0 !important;
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 30px;
+    padding-top: 0;
+  }
+
   #colophon.site-footer .footer-brand {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 32px !important;
+    margin-bottom: 0 !important;
   }
 
   #colophon.site-footer .footer-brand .logo-wrapper {
     justify-content: center;
+    gap: 12px;
   }
 
   #colophon.site-footer .footer-brand .logo-mark {
-    height: 46.84px;
-    width: 39.82px;
+    height: 39.78px;
+    width: 33.81px;
   }
 
   #colophon.site-footer .footer-brand .logo-text-group {
-    gap: 3.6px;
+    gap: 3.15px;
   }
 
   #colophon.site-footer .footer-brand .logo-text-top {
-    height: 15.91px;
-    width: 129.5px;
+    height: 13.51px;
+    width: 109.97px;
   }
 
   #colophon.site-footer .footer-brand .logo-text-bottom {
-    height: 9.64px;
-    width: 129.5px;
+    height: 8.19px;
+    width: 109.96px;
   }
 
   #colophon.site-footer .footer-socials {
-    flex-direction: column-reverse !important;
+    flex-direction: column !important;
     align-items: center !important;
     gap: 12px !important;
     margin-top: 0 !important;
-    margin-bottom: 21px !important;
+    margin-bottom: 0 !important;
   }
 
   #colophon.site-footer .footer-socials .follow-text {
@@ -6842,6 +6864,7 @@
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 0 !important;
+    line-height: normal;
   }
 
   #colophon.site-footer .social-icons-wrapper {
@@ -6853,23 +6876,26 @@
     height: 20px !important;
   }
 
-  /* Accordion Columns */
-  #colophon.site-footer .footer-links-grid {
-    margin: 0 !important;
+  /* Mobile accordion */
+  .footer-mobile-accordion {
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  #colophon.site-footer .footer-nav-col {
-    width: 100% !important;
+  .footer-mobile-accordion .footer-accordion-item {
+    width: 100%;
     margin-bottom: 0 !important;
+    min-height: 0;
   }
 
-  #colophon.site-footer .footer-nav-title {
+  .footer-mobile-accordion .footer-nav-title {
     font-size: 12px !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     margin-bottom: 0 !important;
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.4) !important;
-    padding: 30px 0 !important;
+    border-bottom: 0.5px solid #ffffff !important;
+    padding: 26px 0 !important;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -6878,50 +6904,70 @@
     text-transform: none;
   }
 
-  #colophon.site-footer .footer-nav-title::after {
+  .footer-mobile-accordion .footer-nav-title::after {
     content: "+";
     font-family: "Montserrat", sans-serif;
-    font-size: 18px;
-    color: #fffffe;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
     transition: transform 0.3s ease;
     line-height: 1;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  #colophon.site-footer .footer-nav-title.active {
+  .footer-mobile-accordion .footer-nav-title.active {
     border-bottom: none !important;
   }
 
-  #colophon.site-footer .footer-nav-title.active::after {
+  .footer-mobile-accordion .footer-nav-title.active::after {
     content: "\2013";
-    font-size: 18px;
+    font-size: 14px;
   }
 
-  #colophon.site-footer .footer-nav-list,
-  #colophon.site-footer .opening-hours-list,
-  #colophon.site-footer .footer-contact-details {
+  .footer-mobile-accordion .footer-nav-list,
+  .footer-mobile-accordion .opening-hours-list,
+  .footer-mobile-accordion .footer-contact-details {
     display: none;
     padding: 20px 0 !important;
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.4);
+    margin: 0;
   }
 
-  #colophon.site-footer .footer-nav-list li {
+  .footer-mobile-accordion .footer-nav-list li {
     margin-bottom: 15px !important;
   }
 
-  #colophon.site-footer .footer-nav-list li:last-child {
+  .footer-mobile-accordion .footer-nav-list li:last-child {
     margin-bottom: 0 !important;
   }
 
-  #colophon.site-footer .footer-nav-list a,
-  #colophon.site-footer .opening-hours-list p,
-  #colophon.site-footer .footer-contact-details p {
+  .footer-mobile-accordion .footer-nav-list a,
+  .footer-mobile-accordion .opening-hours-list p,
+  .footer-mobile-accordion .footer-contact-details p {
+    font-size: 13px !important;
+    line-height: normal;
+  }
+
+  .footer-mobile-accordion .footer-contact-details .address-text {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    max-width: none;
+  }
+
+  .footer-mobile-accordion .footer-contact-details .btn-directions {
     font-size: 13px !important;
   }
 
   /* Subscribe section */
   #colophon.site-footer .subscribe-col {
-    margin-top: 0px !important;
-    margin-bottom: 30px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 100%;
   }
 
   #colophon.site-footer .footer-subscribe {
@@ -6933,13 +6979,18 @@
 
   #colophon.site-footer .subscribe-input-wrapper {
     width: 100% !important;
-    min-width: fit-content;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   #colophon.site-footer .subscribe-label {
     font-size: 12px !important;
     color: #ffffff !important;
     font-weight: 400;
+    line-height: normal;
+    margin: 0;
   }
 
   #colophon.site-footer .subscribe-input {
@@ -6948,6 +6999,7 @@
     width: 100% !important;
     padding-top: 0 !important;
     line-height: 100%;
+    border-bottom: 0.95px solid #ffffff !important;
   }
 
   #colophon.site-footer .subscribe-btn-wrapper {
@@ -6962,21 +7014,25 @@
     background: transparent !important;
     font-size: 14px !important;
     font-weight: 400 !important;
-    letter-spacing: 0px !important;
+    letter-spacing: 0 !important;
     width: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    padding: 12.38px 22.86px !important;
   }
 
   #colophon.site-footer .btn-subscribe:hover {
     background-color: rgba(216, 164, 68, 0.1) !important;
     box-shadow: none !important;
+    color: #d8a444 !important;
   }
 
   /* Language section */
   #colophon.site-footer .language-col {
     width: 100% !important;
+    margin: 0 !important;
+    display: block !important;
   }
 
   #colophon.site-footer .footer-language {
@@ -6985,14 +7041,16 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    width: 100%;
   }
 
   #colophon.site-footer .lang-label {
     font-size: 14px !important;
+    line-height: 30.48px !important;
     color: #ffffff !important;
-    margin-bottom: 0 !important;
-    margin-right: 0 !important;
-    margin-top: 0;
+    margin: 0 !important;
+    width: 100%;
+    text-align: center;
   }
 
   #colophon.site-footer .lang-dropdown {
@@ -7000,20 +7058,29 @@
     border-radius: 38.095px !important;
     height: 40px !important;
     color: #ffffff !important;
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
     padding: 0 20px !important;
-    min-width: 160px;
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
     background: transparent !important;
+    box-sizing: border-box;
   }
-  .footer-middle-row {
-    margin-top: 40px;
-    padding-inline: 12px;
-    margin-bottom: 30px;
+
+  #colophon.site-footer .lang-text {
+    font-size: 14px !important;
+    line-height: normal;
+  }
+
+  #colophon.site-footer .lang-arrow {
+    width: 8.57px;
+    height: 6.67px;
+  }
+
+  #colophon.site-footer .ipad-updated-text {
+    display: none !important;
   }
 
   /* Bottom Copyright details */
@@ -7022,8 +7089,14 @@
     align-items: center !important;
     text-align: center !important;
     gap: 10px !important;
-    padding-top: 0px !important;
+    padding-top: 30px !important;
+    margin: 0 !important;
     border-top: none;
+  }
+
+  #colophon.site-footer .footer-bottom-row .last-updated-text {
+    display: block !important;
+    width: 100%;
   }
 
   #colophon.site-footer .last-updated-text,
@@ -7031,8 +7104,9 @@
     font-size: 10px !important;
     color: rgba(255, 255, 255, 0.6) !important;
     text-align: center !important;
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
+    margin: 0 !important;
+    line-height: normal;
+    width: 100%;
   }
   body.single-services .more-services-progress-dot {
     width: 10px !important;
