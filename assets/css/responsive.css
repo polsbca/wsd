@@ -897,6 +897,33 @@
     transition-delay: 0.2s !important;
   }
 
+  /* Teams Page Mobile Entrance Animations */
+  .teams-clinical-section .teams-clinical-heading-wrap,
+  .teams-clinical-section .teams-clinical-slider,
+  .teams-support-section .teams-support-header,
+  .teams-support-section .teams-support-slider {
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    transition:
+      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: opacity, transform !important;
+  }
+
+  .teams-clinical-section.mobile-visible .teams-clinical-heading-wrap,
+  .teams-support-section.mobile-visible .teams-support-header {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition-delay: 0s !important;
+  }
+
+  .teams-clinical-section.mobile-visible .teams-clinical-slider,
+  .teams-support-section.mobile-visible .teams-support-slider {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition-delay: 0.15s !important;
+  }
+
   /* ============================================================
      CONTACT PAGE MOBILE (FIGMA 4086:50029)
      ============================================================ */

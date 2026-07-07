@@ -85,6 +85,14 @@ function initAnimations() {
         opacity: 0,
         scale: 0.95,
       });
+      gsap.set(
+        ".teams-clinical-section .teams-clinical-heading-wrap, .teams-clinical-section .teams-clinical-slider",
+        { y: 40, opacity: 0 },
+      );
+      gsap.set(
+        ".teams-support-section .teams-support-header, .teams-support-section .teams-support-slider",
+        { y: 40, opacity: 0 },
+      );
     }
   }
 
@@ -952,6 +960,10 @@ function initAnimations() {
   initContactPageAnimations();
   initPrivacyPolicyAnimations();
   initDentalReferralsAnimations();
+
+  if (hasTeamsPage && isDesktop) {
+    initTeamsPageAnimations();
+  }
 
   if (isDesktop) {
     initSectionFadeOut();
@@ -2753,6 +2765,77 @@ function initPrincipalDentistAnimation() {
         "-=0.5",
       );
   }
+}
+
+function initTeamsPageAnimations() {
+  const teamsMain = document.querySelector(".teams-page-main");
+  if (!teamsMain || window.innerWidth < 992) {
+    return;
+  }
+
+  const heroSection = teamsMain.querySelector(".teams-hero-page");
+  const clinicalSection = teamsMain.querySelector(".teams-clinical-section");
+  const supportSection = teamsMain.querySelector(".teams-support-section");
+
+  const animateSectionEntrance = (section, selectors) => {
+    if (!section) {
+      return;
+    }
+
+    const elements = selectors
+      .flatMap((selector) => Array.from(section.querySelectorAll(selector)))
+      .filter(Boolean);
+
+    if (!elements.length) {
+      return;
+    }
+
+    gsap.set(elements, { y: 40, opacity: 0 });
+
+    gsap.to(elements, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  };
+
+  animateSectionEntrance(clinicalSection, [
+    ".teams-clinical-heading-wrap",
+    ".teams-clinical-slider",
+  ]);
+
+  animateSectionEntrance(supportSection, [
+    ".teams-support-header",
+    ".teams-support-slider",
+  ]);
+
+  [heroSection, clinicalSection].forEach((section) => {
+    if (!section) {
+      return;
+    }
+
+    gsap.to(section, {
+      opacity: 0,
+      y: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "bottom 65%",
+        end: "bottom top",
+        scrub: 1.2,
+        onEnterBack: () => {
+          gsap.set(section, { clearProps: "opacity,y" });
+        },
+      },
+    });
+  });
 }
 
 function initSectionFadeOut() {
