@@ -48,7 +48,7 @@ get_header();
 						</div>
 
 						<div class="hero-buttons">
-							<a href="#book-appointment" class="btn btn-primary">Book an appointment</a>
+							<a href="#book-appointment" class="btn btn-primary hero-book-appointment-btn"><span>Book an appointment</span></a>
 							<a href="#fees" class="btn btn-secondary">Fees & Membership</a>
 						</div>
 					</div>
@@ -501,8 +501,8 @@ get_header();
 
 					<!-- Tab Navigation Buttons -->
 					<div class="dentist-tabs-nav">
-						<button class="dentist-tab-btn active" data-target="1">More about Andrew</button>
-						<button class="dentist-tab-btn" data-target="2">Meet the Team</button>
+						<button class="dentist-tab-btn active" data-target="1"><span>More about Andrew</span></button>
+						<button class="dentist-tab-btn" data-target="2"><span>Meet the Team</span></button>
 					</div>
 				</div>
 			</div>

@@ -1330,6 +1330,7 @@ body {
   position: relative;
   width: 100%;
   overflow: hidden;
+  background-color: #fefdf6;
 }
 
 /* Animating elements start hidden in CSS to prevent flash of content */
@@ -1506,12 +1507,40 @@ body {
   transition:
     opacity 0.4s ease,
     padding 0.4s ease;
+  will-change: height, opacity;
+}
+
+/* GSAP owns height/opacity when JS is present — CSS height:auto on .active causes section jerk */
+html.wsd-js .accordion-tab-content {
+  transition: none !important;
+}
+
+html.wsd-js .accordion-tab.active .accordion-tab-content {
+  height: 0;
+  opacity: 0;
 }
 
 .accordion-tab.active .accordion-tab-content {
   height: auto;
   opacity: 1;
   padding-bottom: 40px;
+}
+
+@media (min-width: 992px) {
+  html.wsd-js .treatment-accordion-wrapper {
+    min-height: var(--treatments-accordion-min-height, auto);
+  }
+
+  html.wsd-js .treatment-image-frame {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  html.wsd-js .active-treatment-image {
+    transition: none;
+    will-change: opacity;
+    backface-visibility: hidden;
+  }
 }
 
 .tab-desc {
@@ -3064,6 +3093,10 @@ body {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 1;
 }
 
 .dentist-tab-btn:hover {
@@ -3081,8 +3114,9 @@ body {
 
 .dentist-tab-btn.active:hover {
   border-color: #d8a444;
-  color: #d8a444;
-  background-color: #fff;
+  color: #ffffff;
+  /* Keep gold base so grey sweep can visibly cover it (don't go transparent on dark BG) */
+  background-color: #d8a444;
 }
 
 @media (max-width: 991px) {
@@ -3614,10 +3648,12 @@ body {
 
   .key-treatments-section {
     height: 1800px !important;
+    background-color: #fefdf6 !important;
   }
 
   .about-waterside-section {
     height: 1800px !important;
+    background-color: #faf3e6 !important;
   }
 
   .smile-gallery-section {
@@ -3645,10 +3681,74 @@ body {
     /* height of sticky desktop navigation header */
     height: calc(100vh - 81px) !important;
     width: 100% !important;
-    z-index: 998 !important;
+    z-index: 2 !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .treatments-sticky-wrapper {
+    overflow: visible !important;
+    justify-content: flex-start !important;
+    padding-top: 20px !important;
+    /* Page cream — badge stays #faf3e6 for contrast */
+    background-color: #fefdf6 !important;
+  }
+
+  .about-sticky-wrapper {
+    overflow: hidden !important;
+    background-color: #faf3e6 !important;
+  }
+
+  .treatments-sticky-wrapper .treatments-header-badge {
+    position: relative !important;
+    z-index: 2 !important;
+    flex-shrink: 0 !important;
+    background-color: #faf3e6 !important;
+  }
+
+  /* Fill any sub-pixel seam under the sticky masthead */
+  .treatments-sticky-wrapper::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: -2px !important;
+    height: 4px !important;
+    background-color: #fefdf6 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+  }
+
+  .about-sticky-wrapper::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: -2px !important;
+    height: 4px !important;
+    background-color: #faf3e6 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+  }
+
+  .about-sticky-wrapper::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: -2px !important;
+    height: 4px !important;
+    background-color: #faf3e6 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+  }
+
+  .treatments-sticky-wrapper > *,
+  .about-sticky-wrapper > * {
+    position: relative !important;
+    z-index: 1 !important;
   }
 
   .gallery-sticky-wrapper {
@@ -3657,7 +3757,7 @@ body {
     /* height of sticky desktop navigation header */
     height: calc(100vh - 81px) !important;
     width: 100% !important;
-    z-index: 998 !important;
+    z-index: 2 !important;
   }
 
   .dentist-sticky-wrapper {
@@ -3665,7 +3765,7 @@ body {
     top: 81px !important;
     height: calc(100vh - 81px) !important;
     width: 100% !important;
-    z-index: 998 !important;
+    z-index: 2 !important;
     display: flex !important;
     align-items: center !important;
   }
@@ -3675,7 +3775,7 @@ body {
     top: 81px !important;
     height: calc(100vh - 81px) !important;
     width: 100% !important;
-    z-index: 998 !important;
+    z-index: 2 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -3686,7 +3786,7 @@ body {
     top: 81px !important;
     height: calc(100vh - 81px) !important;
     width: 100% !important;
-    z-index: 998 !important;
+    z-index: 2 !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
@@ -3720,6 +3820,7 @@ body {
     position: relative !important;
     overflow: hidden !important;
     z-index: 1 !important;
+    isolation: isolate !important;
     transition:
       color 0.5s ease,
       border-color 0.5s ease,
@@ -3746,11 +3847,13 @@ body {
     left: -15% !important;
     width: 130% !important;
     height: 100% !important;
-    background-color: var(--hover-sweep-bg, #5e5d5f) !important;
+    background-color: var(--hover-sweep-bg, #837257) !important;
     transform: skewX(-25deg) scaleX(0) !important;
     transform-origin: left !important;
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    /* Stay above button background, below label text */
     z-index: -1 !important;
+    pointer-events: none !important;
   }
 
   .btn:hover::before,
@@ -3777,8 +3880,10 @@ body {
   .btn-process-tab.active,
   .btn-view-plan,
   .teams-support-tab.is-active,
-  .teams-slider-nav-btn--next.is-active {
-    --hover-sweep-bg: #5e5d5f !important;
+  .teams-slider-nav-btn--next.is-active,
+  .dentist-tab-btn.active {
+    /* Warm goldish-gray (not flat #5e5d5f) */
+    --hover-sweep-bg: #837257 !important;
   }
 
   .btn-primary:hover,
@@ -3788,10 +3893,23 @@ body {
   .btn-process-tab.active:hover,
   .btn-view-plan:hover,
   .teams-support-tab.is-active:hover,
-  .teams-slider-nav-btn--next.is-active:hover {
+  .teams-slider-nav-btn--next.is-active:hover,
+  .dentist-tab-btn.active:hover {
     color: #ffffff !important;
-    background-color: var(--primary-color) !important;
-    border-color: #5e5d5f !important;
+    /* Keep gold base so grey sweep covers fill without hiding label */
+    background-color: #d8a444 !important;
+    border-color: #d8a444 !important;
+  }
+
+  /* Label above sweep */
+  .btn > span,
+  .btn-primary > span,
+  .tab-action-btn > span,
+  .dentist-tab-btn > span,
+  .btn-view-plan > span,
+  .book-appointment-btn > span {
+    position: relative !important;
+    z-index: 1 !important;
   }
 
   .btn-secondary,
@@ -3826,11 +3944,12 @@ body {
     background-color: transparent !important;
   }
 
-  .dentist-tab-btn {
+  /* Outline dentist tab keeps gold sweep */
+  .dentist-tab-btn:not(.active) {
     --hover-sweep-bg: #d8a444 !important;
   }
 
-  .dentist-tab-btn:hover {
+  .dentist-tab-btn:not(.active):hover {
     color: #ffffff !important;
     border-color: #d8a444 !important;
     background-color: transparent !important;
@@ -6018,7 +6137,7 @@ body {
   .cosmetic-full-modal .btn-close-circle,
   .cosmetic-full-modal .btn-process-tab.active,
   .cosmetic-full-modal .more-service-card-arrow {
-    --hover-sweep-bg: #5e5d5f !important;
+    --hover-sweep-bg: #837257 !important;
   }
 
   .cosmetic-full-modal .btn-process-tab:not(.active),
@@ -6071,7 +6190,7 @@ body {
   }
 
   .cosmetic-membership-ctas .btn-view-plan {
-    --hover-sweep-bg: #5e5d5f !important;
+    --hover-sweep-bg: #837257 !important;
   }
 
   .cosmetic-membership-ctas .btn-book-outline {
@@ -10914,4 +11033,50 @@ body {
     max-width: 631px;
     min-width: 0;
   }
+}
+
+/* ------------------------------------------------------------
+   Home hero: Book button hover
+   Grey sweep over gold — label stays above fill
+   ------------------------------------------------------------ */
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"] {
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  isolation: isolate !important;
+  --hover-sweep-bg: #837257 !important;
+}
+
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:hover,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:focus-visible,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:active {
+  background-color: #d8a444 !important;
+  color: #ffffff !important;
+  border-color: #d8a444 !important;
+}
+
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"] > span {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -15% !important;
+  width: 130% !important;
+  height: 100% !important;
+  background-color: var(--hover-sweep-bg, #837257) !important;
+  transform: skewX(-25deg) scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:hover::before,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:focus-visible::before,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:active::before {
+  transform: skewX(-25deg) scaleX(1) !important;
 }

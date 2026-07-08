@@ -545,6 +545,8 @@ function initAnimations() {
           start: "top top",
           end: "bottom bottom",
           scrub: 0.5,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (textContents.length < 3) return;
 
@@ -967,6 +969,20 @@ function initAnimations() {
 
   if (isDesktop) {
     initSectionFadeOut();
+  }
+
+  // Recalculate all ScrollTriggers after sticky section heights settle
+  if (typeof ScrollTrigger !== "undefined") {
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+    window.addEventListener(
+      "load",
+      () => {
+        ScrollTrigger.refresh();
+      },
+      { once: true },
+    );
   }
 
   // ----------------------------------------------------
@@ -2200,111 +2216,292 @@ function initModalAccordions(modalElement) {
 }
 
 function initTreatmentsAccordion() {
-  const tabs = document.querySelectorAll(".accordion-tab");
+  const tabs = Array.prototype.slice.call(
+    document.querySelectorAll(".accordion-tab"),
+  );
   if (tabs.length === 0) return;
 
-  // Initialize content heights
+  const accordionWrapper = document.querySelector(
+    ".treatment-accordion-wrapper",
+  );
+  const imgFrame = document.querySelector(".treatment-image-frame");
+  const activeSlideNum = document.querySelector(".active-slide");
+  let isTransitioning = false;
+  let accordionTween = null;
+  let imageTween = null;
+
+  // Preload treatment images to prevent jerk/flicker on swap
   tabs.forEach((tab) => {
-    const content = tab.querySelector(".accordion-tab-content");
+    const url = tab.getAttribute("data-image");
+    if (!url) return;
+    const img = new Image();
+    img.src = url;
+  });
+
+  function getContent(tab) {
+    return tab ? tab.querySelector(".accordion-tab-content") : null;
+  }
+
+  function measureOpenHeight(content) {
+    if (!content) return 0;
+
+    const tab = content.closest(".accordion-tab");
+    const wasActive = tab && tab.classList.contains("active");
+    if (tab && !wasActive) {
+      tab.classList.add("active");
+    }
+
+    const clone = content.cloneNode(true);
+    clone.style.setProperty("position", "absolute", "important");
+    clone.style.setProperty("visibility", "hidden", "important");
+    clone.style.setProperty("pointer-events", "none", "important");
+    clone.style.setProperty("height", "auto", "important");
+    clone.style.setProperty("opacity", "1", "important");
+    clone.style.setProperty("overflow", "visible", "important");
+    clone.style.setProperty("left", "-9999px", "important");
+    clone.style.setProperty("top", "0", "important");
+    clone.style.setProperty(
+      "width",
+      Math.max(content.offsetWidth, content.parentNode.clientWidth) + "px",
+      "important",
+    );
+
+    content.parentNode.appendChild(clone);
+    const height = clone.scrollHeight;
+    clone.remove();
+
+    if (tab && !wasActive) {
+      tab.classList.remove("active");
+    }
+
+    return height;
+  }
+
+  function lockAccordionMinHeight() {
+    if (!accordionWrapper || window.innerWidth < 992) {
+      if (accordionWrapper) {
+        accordionWrapper.style.removeProperty("--treatments-accordion-min-height");
+      }
+      return;
+    }
+
+    // Headers always show; only one content panel is open
+    let headerTotal = 0;
+    let tallestContent = 0;
+    tabs.forEach((tab) => {
+      const header = tab.querySelector(".accordion-tab-header");
+      headerTotal += header ? header.offsetHeight : 0;
+      tallestContent = Math.max(
+        tallestContent,
+        measureOpenHeight(getContent(tab)),
+      );
+    });
+
+    accordionWrapper.style.setProperty(
+      "--treatments-accordion-min-height",
+      headerTotal + tallestContent + "px",
+    );
+  }
+
+  // Initialize content heights (GSAP-owned; CSS owns padding)
+  tabs.forEach((tab) => {
+    const content = getContent(tab);
+    if (!content) return;
+
     if (tab.classList.contains("active")) {
-      gsap.set(content, { height: "auto", opacity: 1 });
+      const openHeight = measureOpenHeight(content);
+      gsap.set(content, {
+        height: openHeight,
+        opacity: 1,
+      });
     } else {
-      gsap.set(content, { height: 0, opacity: 0 });
+      gsap.set(content, {
+        height: 0,
+        opacity: 0,
+      });
     }
   });
 
+  lockAccordionMinHeight();
+  window.addEventListener("resize", lockAccordionMinHeight);
+
+  function swapImage(tab) {
+    if (!imgFrame) return;
+
+    const activeImg = imgFrame.querySelector(".active-treatment-image");
+    const newImgUrl = tab.getAttribute("data-image");
+    const newImgAlt =
+      (tab.querySelector(".accordion-tab-title") || {}).textContent || "";
+
+    if (!activeImg || activeImg.getAttribute("src") === newImgUrl) return;
+
+    if (imageTween) {
+      imageTween.kill();
+      imageTween = null;
+    }
+
+    // Remove leftover overlays from interrupted swaps
+    Array.prototype.slice
+      .call(imgFrame.querySelectorAll(".active-treatment-image"))
+      .forEach((img, index) => {
+        if (index > 0) img.remove();
+      });
+
+    const currentImg = imgFrame.querySelector(".active-treatment-image");
+    if (!currentImg) return;
+
+    const tempImg = document.createElement("img");
+    tempImg.alt = newImgAlt;
+    tempImg.className = "active-treatment-image";
+    tempImg.src = newImgUrl;
+    gsap.set(tempImg, {
+      opacity: 0,
+      position: "absolute",
+      left: 0,
+      top: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+    });
+    imgFrame.appendChild(tempImg);
+
+    const runSwap = () => {
+      imageTween = gsap
+        .timeline({
+          onComplete: () => {
+            currentImg.remove();
+            gsap.set(tempImg, { clearProps: "opacity" });
+            imageTween = null;
+          },
+        })
+        .to(
+          currentImg,
+          {
+            opacity: 0,
+            duration: 0.45,
+            ease: "power2.inOut",
+          },
+          0,
+        )
+        .to(
+          tempImg,
+          {
+            opacity: 1,
+            duration: 0.45,
+            ease: "power2.inOut",
+          },
+          0,
+        );
+    };
+
+    if (tempImg.complete && tempImg.naturalWidth) {
+      runSwap();
+    } else {
+      tempImg.addEventListener("load", runSwap, { once: true });
+    }
+  }
+
+  function updateCounter(tab) {
+    if (!activeSlideNum) return;
+    const targetIndex = tab.getAttribute("data-index");
+    if (!targetIndex || activeSlideNum.textContent === targetIndex) return;
+
+    gsap.killTweensOf(activeSlideNum);
+    gsap.to(activeSlideNum, {
+      y: -8,
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => {
+        activeSlideNum.textContent = targetIndex;
+        gsap.fromTo(
+          activeSlideNum,
+          { y: 8, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.2, ease: "power2.out" },
+        );
+      },
+    });
+  }
+
   tabs.forEach((tab) => {
     const header = tab.querySelector(".accordion-tab-header");
+    if (!header) return;
+
     header.addEventListener("click", () => {
       const isMobile = window.innerWidth < 992;
+
       if (tab.classList.contains("active")) {
-        if (isMobile) {
+        if (isMobile && !isTransitioning) {
+          isTransitioning = true;
           tab.classList.remove("active");
-          gsap.to(tab.querySelector(".accordion-tab-content"), {
+          const content = getContent(tab);
+          accordionTween = gsap.to(content, {
             height: 0,
             opacity: 0,
-            duration: 0.5,
-            ease: "power3.inOut",
+            duration: 0.45,
+            ease: "power2.inOut",
+            onComplete: () => {
+              isTransitioning = false;
+              accordionTween = null;
+            },
           });
         }
         return;
       }
 
-      const activeTab = document.querySelector(".accordion-tab.active");
+      if (isTransitioning) return;
+      isTransitioning = true;
 
-      // 1. Collapse active tab
+      if (accordionTween) {
+        accordionTween.kill();
+        accordionTween = null;
+      }
+
+      const activeTab = document.querySelector(".accordion-tab.active");
+      const closingContent = getContent(activeTab);
+      const openingContent = getContent(tab);
+      const openHeight = measureOpenHeight(openingContent);
+
       if (activeTab) {
         activeTab.classList.remove("active");
-        gsap.to(activeTab.querySelector(".accordion-tab-content"), {
+      }
+      tab.classList.add("active");
+
+      accordionTween = gsap.timeline({
+        defaults: { ease: "power2.inOut", duration: 0.45 },
+        onComplete: () => {
+          isTransitioning = false;
+          accordionTween = null;
+        },
+      });
+
+      // Close + open on the same timeline so total height stays stable
+      if (closingContent) {
+        accordionTween.to(
+          closingContent,
+          {
+            height: 0,
+            opacity: 0,
+          },
+          0,
+        );
+      }
+
+      accordionTween.fromTo(
+        openingContent,
+        {
           height: 0,
           opacity: 0,
-          duration: 0.5,
-          ease: "power3.inOut",
-        });
-      }
-
-      // 2. Expand clicked tab
-      tab.classList.add("active");
-      gsap.fromTo(
-        tab.querySelector(".accordion-tab-content"),
-        { height: 0, opacity: 0 },
-        {
-          height: "auto",
-          opacity: 1,
-          duration: 0.5,
-          ease: "power3.inOut",
         },
+        {
+          height: openHeight,
+          opacity: 1,
+        },
+        0,
       );
 
-      // 3. Update Left Column Image (Cross-fade)
-      const imgFrame = document.querySelector(".treatment-image-frame");
-      const activeImg = imgFrame.querySelector(".active-treatment-image");
-      const newImgUrl = tab.getAttribute("data-image");
-      const newImgAlt = tab.querySelector(".accordion-tab-title").textContent;
-
-      if (activeImg && activeImg.getAttribute("src") !== newImgUrl) {
-        // Create temporary overlay image
-        const tempImg = document.createElement("img");
-        tempImg.src = newImgUrl;
-        tempImg.alt = newImgAlt;
-        tempImg.className = "active-treatment-image";
-        tempImg.style.opacity = 0;
-        imgFrame.appendChild(tempImg);
-
-        // Fade out old, fade in new
-        gsap.to(activeImg, {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.inOut",
-          onComplete: () => activeImg.remove(),
-        });
-
-        gsap.to(tempImg, {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.inOut",
-        });
-      }
-
-      // 4. Update Left Slide Counter
-      const activeSlideNum = document.querySelector(".active-slide");
-      const targetIndex = tab.getAttribute("data-index");
-      if (activeSlideNum && activeSlideNum.textContent !== targetIndex) {
-        gsap.to(activeSlideNum, {
-          y: -10,
-          opacity: 0,
-          duration: 0.25,
-          ease: "power2.in",
-          onComplete: () => {
-            activeSlideNum.textContent = targetIndex;
-            gsap.fromTo(
-              activeSlideNum,
-              { y: 10, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.25, ease: "power2.out" },
-            );
-          },
-        });
-      }
+      swapImage(tab);
+      updateCounter(tab);
     });
   });
 }
@@ -2821,57 +3018,97 @@ function initTeamsPageAnimations() {
       return;
     }
 
-    gsap.to(section, {
-      opacity: 0,
-      y: -50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "bottom 65%",
-        end: "bottom top",
-        scrub: 1.2,
-        onEnterBack: () => {
-          gsap.set(section, { clearProps: "opacity,y" });
-        },
+    applySectionScrollOpacity(section);
+  });
+}
+
+function applySectionScrollOpacity(el, options) {
+  if (!el) return;
+
+  const opts = options || {};
+  const start = opts.start || "bottom 80%";
+  const end = opts.end || "bottom top";
+
+  // Clear any previous bottom-mask fade approach
+  el.style.removeProperty("mask-image");
+  el.style.removeProperty("-webkit-mask-image");
+  el.style.removeProperty("--wsd-bottom-fade");
+
+  // Never leave sticky panels stuck invisible after reloads / interrupted scrolls
+  gsap.set(el, { opacity: 1, clearProps: "maskImage,webkitMaskImage" });
+
+  gsap.to(el, {
+    opacity: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: el,
+      start: start,
+      end: end,
+      scrub: true,
+      invalidateOnRefresh: true,
+      onLeaveBack: () => {
+        gsap.set(el, { opacity: 1 });
       },
-    });
+      onRefresh: (self) => {
+        if (self.progress <= 0) {
+          gsap.set(el, { opacity: 1 });
+        }
+      },
+    },
   });
 }
 
 function initSectionFadeOut() {
-  // Sections that get a fade-out as they scroll away.
-  // The sticky About & Gallery sections are excluded because they manage
-  // their own scroll-bound ScrollTrigger behaviour.
-  const fadeOutSections = [
-    ".hero-section",
-    ".key-treatments-section",
-    ".testimonials-section",
-    ".principal-dentist-section",
-    ".payment-options-section",
-    ".book-appointment-section",
+  // IMPORTANT: Do NOT fade viewport-height sticky wrappers directly.
+  // Their bottom sits near the viewport bottom while sticky, so
+  // start:"bottom 80%" fires immediately and the whole UI goes to opacity 0.
+  // For pin/sticky sections, fade the outer track only near the end.
+  const fadeOutTargets = [
+    { selector: ".hero-section", start: "bottom 80%", end: "bottom top" },
+    {
+      selector: ".key-treatments-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".testimonials-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".principal-dentist-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".payment-options-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".book-appointment-section",
+      start: "bottom 80%",
+      end: "bottom top",
+    },
   ];
 
-  fadeOutSections.forEach((selector) => {
-    const el = document.querySelector(selector);
+  fadeOutTargets.forEach((target) => {
+    const el = document.querySelector(target.selector);
     if (!el) return;
 
-    gsap.to(el, {
-      opacity: 0,
-      y: -50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: el,
-        // Start fading when the bottom edge of the section is 65% down the viewport
-        start: "bottom 65%",
-        // Fully faded out when the section's bottom reaches the top of the viewport
-        end: "bottom top",
-        scrub: 1.2,
-        onEnterBack: () => {
-          gsap.set(el, { clearProps: "opacity,y" });
-        },
-      },
+    applySectionScrollOpacity(el, {
+      start: target.start,
+      end: target.end,
     });
   });
+
+  // Ensure Key Treatments sticky content itself never gets forced transparent
+  const treatmentsSticky = document.querySelector(
+    ".key-treatments-section .treatments-sticky-wrapper",
+  );
+  if (treatmentsSticky) {
+    gsap.set(treatmentsSticky, { opacity: 1, clearProps: "opacity" });
+  }
 }
 function initMoreServicesSliders(modalElement) {
   const container = modalElement.querySelector(

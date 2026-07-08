@@ -3146,6 +3146,12 @@
     padding: 20px !important;
     line-height: 100%;
   }
+  .accordion-tab.active .accordion-tab-content {
+    padding-bottom: 32px !important;
+  }
+  .tab-button-wrapper {
+    margin-bottom: 8px !important;
+  }
   .mobile-treatment-image-wrapper {
     display: none !important;
   }
