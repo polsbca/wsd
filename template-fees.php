@@ -15,9 +15,29 @@ if ( have_posts() ) {
 	the_post();
 }
 
-$theme_uri     = get_template_directory_uri();
-$fees_page_id  = get_the_ID();
-$fees_hero_alt = __( 'Family smiling after dental care', 'wsd' );
+$theme_uri                = get_template_directory_uri();
+$fees_page_id             = get_the_ID();
+$fees_hero_alt            = __( 'Family smiling after dental care', 'wsd' );
+$fees_categories          = wsd_get_fees_membership_categories();
+$fees_items_by_category   = wsd_get_fees_membership_items_grouped();
+
+if ( empty( $fees_categories ) && ! empty( $fees_items_by_category ) ) {
+	foreach ( array_keys( $fees_items_by_category ) as $slug ) {
+		$term = get_term_by( 'slug', $slug, 'fees-membership-category' );
+		if ( $term && ! is_wp_error( $term ) ) {
+			$fees_categories[] = $term;
+			continue;
+		}
+
+		$fees_categories[] = (object) array(
+			'term_id' => 0,
+			'slug'    => $slug,
+			'name'    => ucwords( str_replace( array( '-', '_' ), ' ', $slug ) ),
+		);
+	}
+}
+
+$fees_hero_image = wsd_get_fees_hero_image_url( $fees_page_id );
 
 if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 	$thumbnail_alt = get_post_meta( (int) get_post_thumbnail_id( $fees_page_id ), '_wp_attachment_image_alt', true );
@@ -26,88 +46,6 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 	}
 }
 
-$fees_hero_image = wsd_get_fees_hero_image_url( $fees_page_id );
-
-$service_fee_items = array(
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-	__( 'New Patient Examination', 'wsd' ),
-);
-
-$consultation_items = array(
-	__( 'New Patient Consultation', 'wsd' ),
-	__( 'Emergency Consultation', 'wsd' ),
-	__( 'Specialist Consultation', 'wsd' ),
-	__( 'Treatment Planning Appointment', 'wsd' ),
-);
-
-$membership_items = array(
-	__( 'Adult Membership Plan', 'wsd' ),
-	__( 'Child Membership Plan', 'wsd' ),
-	__( 'Family Membership Plan', 'wsd' ),
-	__( 'Hygiene Membership', 'wsd' ),
-);
-
-$finance_items = array(
-	__( '0% Finance Options', 'wsd' ),
-	__( 'Flexible Monthly Payments', 'wsd' ),
-	__( 'Treatment Finance Plans', 'wsd' ),
-	__( 'Finance Calculator', 'wsd' ),
-);
-
-/**
- * Render a fees accordion panel.
- *
- * @param string   $panel_id  Panel id.
- * @param string[] $items     Accordion titles.
- * @param bool     $is_active Whether this panel is visible.
- */
-if ( ! function_exists( 'wsd_render_fees_accordion_panel' ) ) {
-	/**
-	 * @param string   $panel_id  Panel id.
-	 * @param string[] $items     Accordion titles.
-	 * @param bool     $is_active Whether this panel is visible.
-	 */
-	function wsd_render_fees_accordion_panel( $panel_id, $items, $is_active = false ) {
-		$theme_uri = get_template_directory_uri();
-		?>
-		<div
-			class="fees-accordion-panel<?php echo $is_active ? ' is-active' : ''; ?>"
-			id="<?php echo esc_attr( $panel_id ); ?>"
-			role="tabpanel"
-			<?php echo $is_active ? '' : 'hidden'; ?>
-		>
-			<div class="fees-accordion-list">
-				<?php foreach ( $items as $title ) : ?>
-					<div class="fees-accordion-item">
-						<button
-							type="button"
-							class="fees-accordion-trigger"
-							aria-expanded="false"
-						>
-							<span class="fees-accordion-title"><?php echo esc_html( $title ); ?></span>
-							<span class="fees-accordion-icon" aria-hidden="true">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/fees-accordion-arrow.svg' ); ?>" alt="" width="25" height="25">
-							</span>
-						</button>
-						<div class="fees-accordion-content" hidden>
-							<div class="fees-accordion-content-inner">
-								<p><?php esc_html_e( 'A full written estimate will be provided before any treatment begins. Please speak to our team for the latest pricing.', 'wsd' ); ?></p>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-		<?php
-	}
-}
 ?>
 
 <main id="main" class="site-main fees-page-main">
@@ -175,42 +113,44 @@ if ( ! function_exists( 'wsd_render_fees_accordion_panel' ) ) {
 				</p>
 			</div>
 
-			<div class="fees-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Fees and membership categories', 'wsd' ); ?>">
-				<span class="fees-tabs-indicator" aria-hidden="true"></span>
-				<button type="button" class="fees-tab is-active" role="tab" aria-selected="true" aria-controls="fees-panel-service" id="fees-tab-service" data-fees-tab="service">
-					<span class="fees-tab-icon" aria-hidden="true">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/fees-icon-pound.svg' ); ?>" alt="" width="24" height="24">
-					</span>
-					<span class="fees-tab-label"><?php esc_html_e( 'Service Fees', 'wsd' ); ?></span>
-				</button>
-				<button type="button" class="fees-tab" role="tab" aria-selected="false" aria-controls="fees-panel-consultation" id="fees-tab-consultation" data-fees-tab="consultation" tabindex="-1">
-					<span class="fees-tab-icon" aria-hidden="true">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/fees-icon-calendar.svg' ); ?>" alt="" width="24" height="24">
-					</span>
-					<span class="fees-tab-label"><?php esc_html_e( 'Consultation Charges', 'wsd' ); ?></span>
-				</button>
-				<button type="button" class="fees-tab" role="tab" aria-selected="false" aria-controls="fees-panel-membership" id="fees-tab-membership" data-fees-tab="membership" tabindex="-1">
-					<span class="fees-tab-icon" aria-hidden="true">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/fees-icon-heart.svg' ); ?>" alt="" width="24" height="24">
-					</span>
-					<span class="fees-tab-label"><?php esc_html_e( 'Membership plan', 'wsd' ); ?></span>
-				</button>
-				<button type="button" class="fees-tab" role="tab" aria-selected="false" aria-controls="fees-panel-finance" id="fees-tab-finance" data-fees-tab="finance" tabindex="-1">
-					<span class="fees-tab-icon" aria-hidden="true">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/fees-icon-wallet.svg' ); ?>" alt="" width="24" height="24">
-					</span>
-					<span class="fees-tab-label"><?php esc_html_e( 'Finance options', 'wsd' ); ?></span>
-				</button>
-			</div>
+			<?php if ( ! empty( $fees_categories ) ) : ?>
+				<div class="fees-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Fees and membership categories', 'wsd' ); ?>">
+					<span class="fees-tabs-indicator" aria-hidden="true"></span>
+					<?php foreach ( $fees_categories as $index => $category ) : ?>
+						<?php
+						$is_active = ( 0 === $index );
+						$tab_id    = 'fees-tab-' . $category->slug;
+						$panel_id  = 'fees-panel-' . $category->slug;
+						$icon_url  = wsd_get_fees_membership_tab_icon_url( $category, $index );
+						?>
+						<button
+							type="button"
+							class="fees-tab<?php echo $is_active ? ' is-active' : ''; ?>"
+							role="tab"
+							aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
+							aria-controls="<?php echo esc_attr( $panel_id ); ?>"
+							id="<?php echo esc_attr( $tab_id ); ?>"
+							data-fees-tab="<?php echo esc_attr( $category->slug ); ?>"
+							<?php echo $is_active ? '' : 'tabindex="-1"'; ?>
+						>
+							<span class="fees-tab-icon" aria-hidden="true">
+								<img src="<?php echo esc_url( $icon_url ); ?>" alt="" width="24" height="24">
+							</span>
+							<span class="fees-tab-label"><?php echo esc_html( $category->name ); ?></span>
+						</button>
+					<?php endforeach; ?>
+				</div>
 
-			<div class="fees-panels">
-				<?php
-				wsd_render_fees_accordion_panel( 'fees-panel-service', $service_fee_items, true );
-				wsd_render_fees_accordion_panel( 'fees-panel-consultation', $consultation_items, false );
-				wsd_render_fees_accordion_panel( 'fees-panel-membership', $membership_items, false );
-				wsd_render_fees_accordion_panel( 'fees-panel-finance', $finance_items, false );
-				?>
-			</div>
+				<div class="fees-panels">
+					<?php foreach ( $fees_categories as $index => $category ) : ?>
+						<?php
+						$panel_id = 'fees-panel-' . $category->slug;
+						$items    = $fees_items_by_category[ $category->slug ] ?? array();
+						wsd_render_fees_accordion_panel( $panel_id, $items, 0 === $index );
+						?>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</section>
 

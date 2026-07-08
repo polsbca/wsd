@@ -450,6 +450,210 @@ function wsd_get_fees_hero_image_url( $page_id = 0 ) {
 }
 
 /**
+ * Get fees membership category terms for the Fees page tabs.
+ *
+ * @return WP_Term[]
+ */
+function wsd_get_fees_membership_categories() {
+	if ( ! taxonomy_exists( 'fees-membership-category' ) ) {
+		return array();
+	}
+
+	$terms = get_terms(
+		array(
+			'taxonomy'   => 'fees-membership-category',
+			'hide_empty' => false,
+			'orderby'    => 'term_id',
+			'order'      => 'ASC',
+		)
+	);
+
+	if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		return array();
+	}
+
+	return $terms;
+}
+
+/**
+ * Format one fees-and-membership post for the accordion.
+ *
+ * @param WP_Post $post Fees post.
+ * @return array<string, mixed>
+ */
+function wsd_format_fees_membership_item( $post ) {
+	$content = '';
+
+	if ( ! empty( $post->post_content ) ) {
+		$content = apply_filters( 'the_content', $post->post_content );
+	} elseif ( has_excerpt( $post ) ) {
+		$content = '<p>' . esc_html( get_the_excerpt( $post ) ) . '</p>';
+	}
+
+	if ( '' === trim( wp_strip_all_tags( $content ) ) ) {
+		$content = '<p>' . esc_html__( 'A full written estimate will be provided before any treatment begins. Please speak to our team for the latest pricing.', 'wsd' ) . '</p>';
+	}
+
+	return array(
+		'id'      => $post->ID,
+		'title'   => get_the_title( $post ),
+		'content' => $content,
+	);
+}
+
+/**
+ * Get published fees-and-membership posts grouped by category slug.
+ *
+ * @return array<string, array<int, array<string, mixed>>>
+ */
+function wsd_get_fees_membership_items_grouped() {
+	if ( ! post_type_exists( 'fees-and-membership' ) ) {
+		return array();
+	}
+
+	$posts = get_posts(
+		array(
+			'post_type'      => 'fees-and-membership',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+			'order'          => 'ASC',
+		)
+	);
+
+	if ( empty( $posts ) ) {
+		return array();
+	}
+
+	$grouped = array();
+
+	foreach ( $posts as $post ) {
+		$terms = get_the_terms( $post, 'fees-membership-category' );
+		$slug  = 'uncategorized';
+
+		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			$slug = $terms[0]->slug;
+		}
+
+		if ( ! isset( $grouped[ $slug ] ) ) {
+			$grouped[ $slug ] = array();
+		}
+
+		$grouped[ $slug ][] = wsd_format_fees_membership_item( $post );
+	}
+
+	return $grouped;
+}
+
+/**
+ * Get tab icon URL for a fees membership category.
+ *
+ * @param WP_Term $term  Category term.
+ * @param int     $index Tab index fallback.
+ * @return string
+ */
+function wsd_get_fees_membership_tab_icon_url( $term, $index = 0 ) {
+	$theme_uri = get_template_directory_uri();
+	$slug      = is_object( $term ) ? $term->slug : (string) $term;
+
+	if ( function_exists( 'get_field' ) && is_object( $term ) ) {
+		$icon_field = get_field( 'tab_icon', 'fees-membership-category_' . $term->term_id );
+		if ( empty( $icon_field ) ) {
+			$icon_field = get_field( 'category_icon', 'fees-membership-category_' . $term->term_id );
+		}
+
+		$icon_url = wsd_normalize_media_url( $icon_field, '' );
+		if ( $icon_url ) {
+			return $icon_url;
+		}
+	}
+
+	$icon_map = array(
+		'service-fees'         => 'fees-icon-pound.svg',
+		'service'              => 'fees-icon-pound.svg',
+		'consultation-charges' => 'fees-icon-calendar.svg',
+		'consultation'         => 'fees-icon-calendar.svg',
+		'membership-plan'      => 'fees-icon-heart.svg',
+		'membership'           => 'fees-icon-heart.svg',
+		'finance-options'      => 'fees-icon-wallet.svg',
+		'finance'              => 'fees-icon-wallet.svg',
+	);
+
+	if ( isset( $icon_map[ $slug ] ) ) {
+		return $theme_uri . '/assets/images/' . $icon_map[ $slug ];
+	}
+
+	foreach ( $icon_map as $map_slug => $icon_file ) {
+		if ( false !== strpos( $slug, strtok( $map_slug, '-' ) ) ) {
+			return $theme_uri . '/assets/images/' . $icon_file;
+		}
+	}
+
+	$fallback_icons = array(
+		'fees-icon-pound.svg',
+		'fees-icon-calendar.svg',
+		'fees-icon-heart.svg',
+		'fees-icon-wallet.svg',
+	);
+
+	$icon_file = $fallback_icons[ $index % count( $fallback_icons ) ];
+
+	return $theme_uri . '/assets/images/' . $icon_file;
+}
+
+/**
+ * Render a fees accordion panel.
+ *
+ * @param string                             $panel_id  Panel id.
+ * @param array<int, array<string, mixed>>   $items     Accordion items.
+ * @param bool                               $is_active Whether this panel is visible.
+ */
+function wsd_render_fees_accordion_panel( $panel_id, $items, $is_active = false ) {
+	$theme_uri = get_template_directory_uri();
+	?>
+	<div
+		class="fees-accordion-panel<?php echo $is_active ? ' is-active' : ''; ?>"
+		id="<?php echo esc_attr( $panel_id ); ?>"
+		role="tabpanel"
+		<?php echo $is_active ? '' : 'hidden'; ?>
+	>
+		<div class="fees-accordion-list">
+			<?php if ( ! empty( $items ) ) : ?>
+				<?php foreach ( $items as $item ) : ?>
+					<div class="fees-accordion-item">
+						<button
+							type="button"
+							class="fees-accordion-trigger"
+							aria-expanded="false"
+						>
+							<span class="fees-accordion-title"><?php echo esc_html( $item['title'] ); ?></span>
+							<span class="fees-accordion-icon" aria-hidden="true">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/fees-accordion-arrow.svg' ); ?>" alt="" width="25" height="25">
+							</span>
+						</button>
+						<div class="fees-accordion-content" hidden>
+							<div class="fees-accordion-content-inner">
+								<?php echo wp_kses_post( $item['content'] ); ?>
+							</div>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<div class="fees-accordion-item fees-accordion-item--empty">
+					<div class="fees-accordion-content-inner">
+						<p><?php esc_html_e( 'No items are available in this category yet.', 'wsd' ); ?></p>
+					</div>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php
+}
+
+/**
  * Get the permalink for the Teams page template.
  *
  * @return string
