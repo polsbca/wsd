@@ -58,12 +58,16 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
 	if ( is_page_template( 'template-teams.php' ) ) {
 		wp_enqueue_script( 'wsd-teams', get_stylesheet_directory_uri() . '/assets/js/teams.js', array( 'jquery' ), time(), true );
+	}
+
+	if ( is_page_template( 'template-fees.php' ) ) {
+		wp_enqueue_script( 'wsd-fees', get_stylesheet_directory_uri() . '/assets/js/fees.js', array( 'jquery' ), time(), true );
 	}
 
 	// jQuery (WordPress default)
@@ -392,6 +396,33 @@ function wsd_get_teams_hero_image_url( $page_id = 0 ) {
 
 	$fallback_path = get_theme_file_path( 'assets/images/teams-hero.png' );
 	$fallback_url  = get_theme_file_uri( 'assets/images/teams-hero.png' );
+
+	if ( file_exists( $fallback_path ) ) {
+		$fallback_url .= '?ver=' . filemtime( $fallback_path );
+	}
+
+	return set_url_scheme( $fallback_url, $scheme );
+}
+
+/**
+ * Get the Fees page hero image URL (featured image, then theme fallback).
+ *
+ * @param int $page_id Optional page ID.
+ * @return string
+ */
+function wsd_get_fees_hero_image_url( $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+	$scheme  = is_ssl() ? 'https' : 'http';
+
+	if ( $page_id && has_post_thumbnail( $page_id ) ) {
+		$featured_url = get_the_post_thumbnail_url( $page_id, 'full' );
+		if ( $featured_url ) {
+			return set_url_scheme( $featured_url, $scheme );
+		}
+	}
+
+	$fallback_path = get_theme_file_path( 'assets/images/fees-hero.png' );
+	$fallback_url  = get_theme_file_uri( 'assets/images/fees-hero.png' );
 
 	if ( file_exists( $fallback_path ) ) {
 		$fallback_url .= '?ver=' . filemtime( $fallback_path );

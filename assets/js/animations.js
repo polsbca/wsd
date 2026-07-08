@@ -38,12 +38,14 @@ function initAnimations() {
   const hasDentalReferralsPage =
     document.querySelector(".dental-referrals-main") !== null;
   const hasTeamsPage = document.querySelector(".teams-page-main") !== null;
+  const hasFeesPage = document.querySelector(".fees-page-main") !== null;
   const hasHero = document.querySelector(".hero-title") !== null;
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
     !hasContactPage &&
     !hasDentalReferralsPage &&
-    !hasTeamsPage;
+    !hasTeamsPage &&
+    !hasFeesPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
 
   // ----------------------------------------------------
@@ -94,6 +96,14 @@ function initAnimations() {
         { y: 40, opacity: 0 },
       );
     }
+    if (hasFeesPage) {
+      gsap.set(".fees-page-main .hero-buttons .btn", { y: 20, opacity: 0 });
+      gsap.set(".fees-page-main .hero-image-wrapper", {
+        x: 50,
+        opacity: 0,
+        scale: 0.95,
+      });
+    }
   }
 
   // ----------------------------------------------------
@@ -136,6 +146,32 @@ function initAnimations() {
         )
         .to(
           ".teams-page-main .hero-image-wrapper",
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.8",
+        );
+    }
+
+    if (hasFeesPage) {
+      mainTimeline
+        .to(
+          ".fees-page-main .hero-buttons .btn",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.5",
+        )
+        .to(
+          ".fees-page-main .hero-image-wrapper",
           {
             x: 0,
             opacity: 1,
@@ -287,6 +323,10 @@ function initAnimations() {
         gsap.set(".teams-page-main .hero-buttons .btn", { y: 15, opacity: 0 });
         gsap.set(".teams-page-main .hero-image-wrapper", { y: 30, opacity: 0 });
       }
+      if (hasFeesPage) {
+        gsap.set(".fees-page-main .hero-buttons .btn", { y: 15, opacity: 0 });
+        gsap.set(".fees-page-main .hero-image-wrapper", { y: 30, opacity: 0 });
+      }
 
       const mobileTl = gsap.timeline({
         defaults: { ease: "power2.out", duration: 0.6 },
@@ -336,6 +376,27 @@ function initAnimations() {
           )
           .to(
             ".teams-page-main .hero-image-wrapper",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+            },
+            "-=0.3",
+          );
+      } else if (hasFeesPage) {
+        mobileTl
+          .to(
+            ".fees-page-main .hero-buttons .btn",
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.4,
+            },
+            "-=0.3",
+          )
+          .to(
+            ".fees-page-main .hero-image-wrapper",
             {
               y: 0,
               opacity: 1,
@@ -965,6 +1026,10 @@ function initAnimations() {
 
   if (hasTeamsPage && isDesktop) {
     initTeamsPageAnimations();
+  }
+
+  if (hasFeesPage && isDesktop) {
+    initFeesPageAnimations();
   }
 
   if (isDesktop) {
@@ -3023,6 +3088,65 @@ function initTeamsPageAnimations() {
 
     applySectionScrollOpacity(section);
   });
+}
+
+function initFeesPageAnimations() {
+  const feesMain = document.querySelector(".fees-page-main");
+  if (!feesMain || window.innerWidth < 992) {
+    return;
+  }
+
+  const heroSection = feesMain.querySelector(".fees-hero-page");
+  const infoSection = feesMain.querySelector(".fees-info-section");
+
+  const animateSectionEntrance = (section, selectors) => {
+    if (!section) {
+      return;
+    }
+
+    const elements = selectors
+      .flatMap((selector) => Array.from(section.querySelectorAll(selector)))
+      .filter(Boolean);
+
+    if (!elements.length) {
+      return;
+    }
+
+    gsap.set(elements, { y: 40, opacity: 0 });
+
+    gsap.to(elements, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  };
+
+  animateSectionEntrance(infoSection, [
+    ".fees-info-header",
+    ".fees-tabs",
+    ".fees-panels",
+  ]);
+
+  if (heroSection) {
+    applySectionScrollOpacity(heroSection, {
+      start: "bottom 80%",
+      end: "bottom top",
+    });
+  }
+
+  if (infoSection) {
+    applySectionScrollOpacity(infoSection, {
+      start: "bottom bottom",
+      end: "bottom top",
+    });
+  }
 }
 
 function applySectionScrollOpacity(el, options) {

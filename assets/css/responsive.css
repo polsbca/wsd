@@ -965,6 +965,36 @@
     transition-delay: 0.15s !important;
   }
 
+  /* Fees Page Mobile Entrance Animations */
+  .fees-info-section .fees-info-header,
+  .fees-info-section .fees-tabs,
+  .fees-info-section .fees-panels {
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    transition:
+      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: opacity, transform !important;
+  }
+
+  .fees-info-section.mobile-visible .fees-info-header {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition-delay: 0s !important;
+  }
+
+  .fees-info-section.mobile-visible .fees-tabs {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition-delay: 0.1s !important;
+  }
+
+  .fees-info-section.mobile-visible .fees-panels {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition-delay: 0.2s !important;
+  }
+
   /* ============================================================
      CONTACT PAGE MOBILE (FIGMA 4086:50029)
      ============================================================ */
