@@ -943,9 +943,6 @@ function initAnimations() {
         "-=0.8",
       );
 
-    // Initialize Testimonials Slider
-    initTestimonialsSlider();
-
     // Initialize Book an Appointment animation
     initBookAppointmentAnimation();
 
@@ -955,6 +952,9 @@ function initAnimations() {
     // Initialize Principal Dentist animation
     initPrincipalDentistAnimation();
   }
+
+  // Testimonials arrows + slider (desktop + tablet; mobile also uses swipe in responsive.js)
+  initTestimonialsSlider();
 
   // Initialize Principal Dentist Tabs for both desktop and mobile
   initDentistTabs();
@@ -2427,7 +2427,7 @@ function initTreatmentsAccordion() {
     const header = tab.querySelector(".accordion-tab-header");
     if (!header) return;
 
-    header.addEventListener("click", () => {
+    const toggleTab = () => {
       const isMobile = window.innerWidth < 992;
 
       if (tab.classList.contains("active")) {
@@ -2502,7 +2502,20 @@ function initTreatmentsAccordion() {
 
       swapImage(tab);
       updateCounter(tab);
-    });
+    };
+
+    header.addEventListener("click", toggleTab);
+
+    // Phone layout: active title sits under the image — tap it to collapse
+    const inContentTitle = tab.querySelector(".accordion-tab-title--in-content");
+    if (inContentTitle) {
+      inContentTitle.style.cursor = "pointer";
+      inContentTitle.addEventListener("click", () => {
+        if (window.innerWidth >= 768) return;
+        if (!tab.classList.contains("active")) return;
+        toggleTab();
+      });
+    }
   });
 }
 
@@ -2520,6 +2533,12 @@ function initTestimonialsSlider() {
   let currentIndex = 0;
   const totalSlides = slides.length;
   let isTransitioning = false;
+  let activeTween = null;
+
+  const slideParts = (slide) =>
+    slide.querySelectorAll(
+      ".testimonial-title, .testimonial-text, .testimonial-stars, .testimonial-author",
+    );
 
   // Set initial progress bar width
   const updateProgress = () => {
@@ -2536,86 +2555,70 @@ function initTestimonialsSlider() {
   updateProgress();
 
   const goToSlide = (newIndex) => {
+    // Keep in sync with swipe changes from responsive.js
+    const activeEl = section.querySelector(".testimonial-slide.active");
+    const activeIdx = Array.prototype.indexOf.call(slides, activeEl);
+    if (activeIdx >= 0) {
+      currentIndex = activeIdx;
+    }
+
     if (isTransitioning || newIndex === currentIndex) return;
     isTransitioning = true;
 
     const currentSlide = slides[currentIndex];
     const nextSlide = slides[newIndex];
+    const currentParts = slideParts(currentSlide);
+    const nextParts = slideParts(nextSlide);
 
-    const timeline = gsap.timeline({
+    if (activeTween) {
+      activeTween.kill();
+      activeTween = null;
+    }
+
+    // Tablet/phone: CSS forces opacity with !important — swap .active only
+    // (never two absolute slides visible at once; that stacks overlapping text)
+    if (window.innerWidth < 992) {
+      currentSlide.classList.remove("active");
+      nextSlide.classList.add("active");
+      currentIndex = newIndex;
+      updateProgress();
+      isTransitioning = false;
+      return;
+    }
+
+    activeTween = gsap.timeline({
       onComplete: () => {
-        // Clean up classes and inline styles
-        currentSlide.classList.remove("active");
-        nextSlide.classList.add("active");
-
-        // Clear inline styles applied by GSAP so CSS handles it
-        gsap.set(currentSlide, { clearProps: "all" });
-        gsap.set(
-          currentSlide.querySelectorAll(
-            ".testimonial-title, .testimonial-text, .testimonial-stars, .testimonial-author",
-          ),
-          { clearProps: "all" },
-        );
-
+        gsap.set([currentParts, nextParts], {
+          clearProps: "opacity,transform,y,scale",
+        });
         currentIndex = newIndex;
         updateProgress();
         isTransitioning = false;
+        activeTween = null;
       },
     });
 
-    // Fade/slide out current slide elements
-    timeline
-      .to(currentSlide.querySelector(".testimonial-title"), {
-        y: -20,
+    activeTween
+      .to(currentParts, {
         opacity: 0,
-        duration: 0.3,
+        y: -12,
+        duration: 0.28,
+        stagger: 0.02,
         ease: "power2.in",
       })
-      .to(
-        currentSlide.querySelector(".testimonial-text"),
-        { y: -20, opacity: 0, duration: 0.3, ease: "power2.in" },
-        "-=0.25",
-      )
-      .to(
-        currentSlide.querySelector(".testimonial-stars"),
-        { scale: 0.8, opacity: 0, duration: 0.2, ease: "power2.in" },
-        "-=0.25",
-      )
-      .to(
-        currentSlide.querySelector(".testimonial-author"),
-        { y: -10, opacity: 0, duration: 0.2, ease: "power2.in" },
-        "-=0.2",
-      )
-
-      // Set next slide to display: flex (by adding active) during transition
       .call(() => {
+        currentSlide.classList.remove("active");
+        gsap.set(currentParts, { clearProps: "opacity,transform,y,scale" });
         nextSlide.classList.add("active");
+        gsap.set(nextParts, { opacity: 0, y: 14 });
       })
-
-      // Fade/slide in next slide elements using fromTo to force exact start states
-      .fromTo(
-        nextSlide.querySelector(".testimonial-title"),
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
-      )
-      .fromTo(
-        nextSlide.querySelector(".testimonial-text"),
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
-        "-=0.3",
-      )
-      .fromTo(
-        nextSlide.querySelector(".testimonial-stars"),
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.5)" },
-        "-=0.3",
-      )
-      .fromTo(
-        nextSlide.querySelector(".testimonial-author"),
-        { y: 10, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" },
-        "-=0.2",
-      );
+      .to(nextParts, {
+        opacity: 1,
+        y: 0,
+        duration: 0.35,
+        stagger: 0.03,
+        ease: "power2.out",
+      });
   };
 
   if (prevBtn) {

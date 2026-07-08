@@ -98,6 +98,7 @@ get_header();
 									<div class="mobile-treatment-image-wrapper d-lg-none">
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/general-dentistry.png' ); ?>" alt="General Dentistry" class="mobile-treatment-img">
 									</div>
+									<h3 class="accordion-tab-title accordion-tab-title--in-content d-md-none">General Dentistry</h3>
 									<p class="tab-desc">From routine hygiene to nervous patient care — we provide everything you need to maintain a healthy, confident smile with our comfort-first approach.</p>
 									<div class="tab-includes-wrapper">
 										<p class="includes-label">General Dentistry Includes:</p>
@@ -126,6 +127,7 @@ get_header();
 									<div class="mobile-treatment-image-wrapper d-lg-none">
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/cosmetic-dentistry.png' ); ?>" alt="Cosmetic Dentistry" class="mobile-treatment-img">
 									</div>
+									<h3 class="accordion-tab-title accordion-tab-title--in-content d-md-none">Cosmetic Dentistry</h3>
 									<p class="tab-desc">Transform your smile with our advanced cosmetic treatments. From teeth whitening to complete smile makeovers, we create natural-looking results that boost your confidence.</p>
 									<div class="tab-includes-wrapper">
 										<p class="includes-label">Cosmetic Dentistry Includes:</p>
@@ -151,6 +153,7 @@ get_header();
 									<div class="mobile-treatment-image-wrapper d-lg-none">
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/dental-implants.png' ); ?>" alt="Dental Implants" class="mobile-treatment-img">
 									</div>
+									<h3 class="accordion-tab-title accordion-tab-title--in-content d-md-none">Dental Implants</h3>
 									<p class="tab-desc">Restore your smile and chew with confidence again. Our premium dental implants provide a permanent, natural-looking solution for missing teeth, customized to your oral health.</p>
 									<div class="tab-includes-wrapper">
 										<p class="includes-label">Dental Implants Includes:</p>
@@ -176,8 +179,9 @@ get_header();
 									<div class="mobile-treatment-image-wrapper d-lg-none">
 										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/invisalign.png' ); ?>" alt="Invisalign" class="mobile-treatment-img">
 									</div>
-									<p class="tab-desc">Straighten your teeth discreetly with Invisalign clear aligners. Enjoy a comfortable, removable orthodontic solution designed to fit seamlessly into your active lifestyle.</p>
-									<div class="tab-includes-wrapper">
+									<h3 class="accordion-tab-title accordion-tab-title--in-content d-md-none">Invisalign</h3>
+									<p class="tab-desc">From routine hygiene to nervous patient care — we provide everything you need to maintain a healthy, confident smile with our comfort-first approach.</p>
+									<!--<div class="tab-includes-wrapper">
 										<p class="includes-label">Invisalign Includes:</p>
 										<div class="includes-items">
 											<span>Clear Aligners</span>
@@ -185,7 +189,7 @@ get_header();
 											<span>Teen Invisalign</span>
 											<span class="gold-underlined">Retainers</span>
 										</div>
-									</div>
+									</div> -->
 									<div class="tab-button-wrapper">
 										<a href="#invisalign" class="btn btn-primary tab-action-btn">View Invisalign</a>
 									</div>

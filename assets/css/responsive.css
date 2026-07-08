@@ -737,6 +737,42 @@
     transform: translateY(0) !important;
   }
 
+  /* Tablet: one visible slide only; don’t leave inactive slides in the layout stack */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .testimonials-section .testimonial-slide.active .testimonial-title,
+    .testimonials-section .testimonial-slide.active .testimonial-text,
+    .testimonials-section .testimonial-slide.active .testimonial-stars,
+    .testimonials-section .testimonial-slide.active .testimonial-author,
+    .testimonials-section.mobile-visible
+      .testimonial-slide.active
+      .testimonial-title,
+    .testimonials-section.mobile-visible
+      .testimonial-slide.active
+      .testimonial-text,
+    .testimonials-section.mobile-visible
+      .testimonial-slide.active
+      .testimonial-stars,
+    .testimonials-section.mobile-visible
+      .testimonial-slide.active
+      .testimonial-author {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .testimonials-section .testimonial-slide:not(.active) {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    .testimonials-section .testimonial-slide.active {
+      display: flex !important;
+      visibility: visible !important;
+      z-index: 2;
+    }
+  }
+
   .testimonials-section.mobile-visible .left-quote,
   .testimonials-section.mobile-visible .right-quote {
     opacity: 0.2 !important;
@@ -1614,6 +1650,62 @@
     color: #5e5d5f !important;
     margin: 0 !important;
     letter-spacing: -0.2px !important;
+  }
+
+  /* Phone: title below image, no +/- */
+  @media (max-width: 767.98px) {
+    .key-treatments-section .accordion-tab-header::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    .key-treatments-section .accordion-tab.active .accordion-tab-header {
+      display: none !important;
+      padding: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .key-treatments-section .accordion-tab-title--in-content {
+      display: block !important;
+      font-family: "Montserrat", sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 600 !important;
+      color: #5e5d5f !important;
+      line-height: 1.3 !important;
+      letter-spacing: -0.2px !important;
+      margin: 0 0 16px !important;
+      cursor: pointer;
+      /* Avoid trim colliding with .tab-desc */
+      text-box-trim: none !important;
+      text-box-edge: auto !important;
+    }
+
+    .key-treatments-section .accordion-tab-title--in-content + .tab-desc {
+      margin-top: 0 !important;
+      text-box-trim: none !important;
+      text-box-edge: auto !important;
+    }
+
+    .key-treatments-section .includes-label,
+    .key-treatments-section .includes-items span {
+      text-box-trim: none !important;
+      text-box-edge: auto !important;
+    }
+
+    .key-treatments-section .includes-items {
+      gap: 12px 16px !important;
+    }
+
+    .key-treatments-section .mobile-treatment-image-wrapper {
+      margin-bottom: 16px !important;
+    }
+
+    .key-treatments-section .accordion-tab.active .accordion-tab-content {
+      padding-top: 0 !important;
+    }
   }
 
   .accordion-tab-content {
@@ -3314,6 +3406,8 @@
   }
   .testimonials-nav-buttons {
     display: flex !important;
+    position: relative !important;
+    z-index: 5 !important;
   }
   .testimonials-slider {
     max-width: 420px !important;
