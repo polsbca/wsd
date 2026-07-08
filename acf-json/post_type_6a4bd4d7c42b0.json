@@ -72,7 +72,9 @@
         "thumbnail",
         "custom-fields"
     ],
-    "taxonomies": "",
+    "taxonomies": [
+        "support-team-category"
+    ],
     "has_archive": false,
     "has_archive_slug": "",
     "rewrite": {

@@ -292,6 +292,24 @@ function wsd_register_services_cpt() {
 }
 add_action( 'init', 'wsd_register_services_cpt' );
 
+/**
+ * Show custom taxonomy columns in CPT admin list tables.
+ */
+function wsd_enable_acf_taxonomy_admin_columns() {
+	$taxonomies = array(
+		'fees-membership-category',
+		'support-team-category',
+	);
+
+	foreach ( $taxonomies as $taxonomy_slug ) {
+		$taxonomy = get_taxonomy( $taxonomy_slug );
+		if ( $taxonomy ) {
+			$taxonomy->show_admin_column = true;
+		}
+	}
+}
+add_action( 'init', 'wsd_enable_acf_taxonomy_admin_columns', 99 );
+
 
 add_filter( 'wp_image_editors', 'wpse_prefer_gd_over_imagick' );
 function wpse_prefer_gd_over_imagick($array) {
