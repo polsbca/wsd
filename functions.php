@@ -605,6 +605,41 @@ function wsd_get_fees_membership_tab_icon_url( $term, $index = 0 ) {
 }
 
 /**
+ * Get a short mobile tab label for a fees membership category.
+ *
+ * @param WP_Term|object $term Category term.
+ * @return string
+ */
+function wsd_get_fees_membership_tab_short_label( $term ) {
+	$slug = is_object( $term ) && isset( $term->slug ) ? $term->slug : '';
+	$name = is_object( $term ) && isset( $term->name ) ? $term->name : '';
+
+	$short_map = array(
+		'service-fees'         => __( 'Service', 'wsd' ),
+		'service'              => __( 'Service', 'wsd' ),
+		'consultation-charges' => __( 'Consultation', 'wsd' ),
+		'consultation'         => __( 'Consultation', 'wsd' ),
+		'membership-plan'      => __( 'Membership', 'wsd' ),
+		'membership'           => __( 'Membership', 'wsd' ),
+		'finance-options'      => __( 'Finance', 'wsd' ),
+		'finance'              => __( 'Finance', 'wsd' ),
+	);
+
+	if ( $slug && isset( $short_map[ $slug ] ) ) {
+		return $short_map[ $slug ];
+	}
+
+	if ( $name ) {
+		$parts = preg_split( '/\s+/', trim( $name ) );
+		if ( ! empty( $parts[0] ) ) {
+			return $parts[0];
+		}
+	}
+
+	return $name;
+}
+
+/**
  * Render a fees accordion panel.
  *
  * @param string                             $panel_id  Panel id.

@@ -64,7 +64,12 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 				</div>
 				<div class="hero-buttons">
 					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
-					<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>" class="btn btn-secondary fees-hero-cta fees-hero-cta--desktop">
+						<span><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>
+					</a>
+					<a href="#fees-info-heading" class="btn btn-secondary fees-hero-cta fees-hero-cta--mobile">
+						<span><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></span>
+					</a>
 				</div>
 			</div>
 			<div class="fees-hero-image-col">
@@ -121,7 +126,8 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 						$is_active = ( 0 === $index );
 						$tab_id    = 'fees-tab-' . $category->slug;
 						$panel_id  = 'fees-panel-' . $category->slug;
-						$icon_url  = wsd_get_fees_membership_tab_icon_url( $category, $index );
+						$icon_url    = wsd_get_fees_membership_tab_icon_url( $category, $index );
+						$short_label = wsd_get_fees_membership_tab_short_label( $category );
 						?>
 						<button
 							type="button"
@@ -136,7 +142,8 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 							<span class="fees-tab-icon" aria-hidden="true">
 								<img src="<?php echo esc_url( $icon_url ); ?>" alt="" width="24" height="24">
 							</span>
-							<span class="fees-tab-label"><?php echo esc_html( $category->name ); ?></span>
+							<span class="fees-tab-label fees-tab-label--desktop"><?php echo esc_html( $category->name ); ?></span>
+							<span class="fees-tab-label fees-tab-label--mobile" aria-hidden="true"><?php echo esc_html( $short_label ); ?></span>
 						</button>
 					<?php endforeach; ?>
 				</div>

@@ -9990,105 +9990,6 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     width: 100%;
   }
 
-  .fees-hero-page {
-    height: auto;
-    padding: 40px 24px 0;
-    overflow: visible;
-  }
-
-  html.wsd-js body.page-template-template-fees-php .fees-page-main .hero-image-wrapper,
-  html.wsd-js body.page-template-template-fees .fees-page-main .hero-image-wrapper {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-  }
-
-  .fees-hero-inner {
-    flex: none;
-    flex-wrap: wrap;
-    height: auto;
-    gap: 24px;
-  }
-
-  .fees-hero-content-col {
-    flex: 1 1 100%;
-    height: auto;
-    max-width: none;
-    gap: 32px;
-    padding-bottom: 0;
-  }
-
-  .fees-hero-copy {
-    gap: 32px;
-  }
-
-  .fees-hero-title,
-  .fees-page-main .hero-title {
-    font-size: 36px;
-    line-height: 42px;
-    letter-spacing: -1px;
-    white-space: normal;
-  }
-
-  .fees-hero-description,
-  .fees-page-main .hero-description {
-    font-size: 16px;
-    line-height: 28px;
-  }
-
-  .fees-hero-image-col {
-    flex: 1 1 100%;
-    width: 100% !important;
-    height: auto;
-    min-width: 0;
-    max-width: none !important;
-    margin-left: -24px;
-    margin-right: -24px;
-  }
-
-  .fees-hero-image-frame {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0;
-    height: auto;
-    max-height: none;
-    aspect-ratio: 840 / 788;
-    background-color: #faf3e6;
-    min-height: 260px;
-    overflow: hidden;
-  }
-
-  .fees-hero-image-frame,
-  .fees-hero-image-frame .fees-hero-img {
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  .fees-hero-image-frame .fees-hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center bottom;
-  }
-
-  .fees-page-main .hero-buttons {
-    width: 100%;
-  }
-
-  .fees-page-main .hero-buttons .btn {
-    width: 100%;
-  }
-
-  .fees-page-main {
-    gap: 60px;
-    padding-bottom: 60px;
-  }
-
-  .fees-info-section {
-    padding: 0 24px;
-  }
-
   .teams-page-main {
     gap: 24px;
   }
@@ -11508,6 +11409,14 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.fees-tab-label--mobile {
+  display: none;
+}
+
+.fees-page-main .hero-buttons .fees-hero-cta--mobile {
+  display: none;
 }
 
 .fees-tab-icon img {
