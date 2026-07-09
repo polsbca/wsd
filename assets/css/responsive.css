@@ -998,6 +998,7 @@
   /* ============================================================
      FEES PAGE MOBILE (FIGMA 4078:39343)
      ============================================================ */
+  @media (max-width: 767.98px) {
   .page-template-template-fees-php .site-content,
   .page-template-template-fees .site-content {
     background-color: #fefdf6 !important;
@@ -1106,6 +1107,7 @@
 
   .fees-hero-image-frame {
     display: block !important;
+    position: relative !important;
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
@@ -1114,12 +1116,19 @@
     max-height: none !important;
     background-color: #faf3e6 !important;
     overflow: hidden !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
   }
 
   .fees-hero-image-frame .fees-hero-img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
     width: 100% !important;
     height: 100% !important;
+    max-width: none !important;
     max-height: none !important;
+    margin: 0 !important;
     object-fit: cover !important;
     object-position: center bottom !important;
   }
@@ -1264,6 +1273,261 @@
   .fees-accordion-content-inner p {
     font-size: 14px !important;
     line-height: 24px !important;
+  }
+  }
+
+  /* ============================================================
+     FEES PAGE TABLET (FIGMA 4078:39596)
+     ============================================================ */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+  .page-template-template-fees-php .site-content,
+  .page-template-template-fees .site-content {
+    background-color: #fefdf6 !important;
+    padding: 0 !important;
+  }
+
+  .fees-page-main {
+    background-color: #fefdf6 !important;
+    gap: 100px !important;
+    padding-bottom: 100px !important;
+  }
+
+  .fees-hero-page {
+    background-color: #faf3e6 !important;
+    padding: 60px 0 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  html.wsd-js body.page-template-template-fees-php .fees-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-fees .fees-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-fees-php .fees-hero-image-frame,
+  html.wsd-js body.page-template-template-fees .fees-hero-image-frame,
+  html.wsd-js body.page-template-template-fees-php .fees-hero-image-frame .fees-hero-img,
+  html.wsd-js body.page-template-template-fees .fees-hero-image-frame .fees-hero-img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .fees-hero-inner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 62px !important;
+    height: auto !important;
+  }
+
+  .fees-hero-content-col {
+    flex: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    padding: 0 40px !important;
+    gap: 0 !important;
+  }
+
+  .fees-hero-copy {
+    gap: 30px !important;
+    padding: 0 clamp(40px, 16vw, 120px) 0 0 !important;
+  }
+
+  .fees-hero-title,
+  .fees-page-main .hero-title {
+    font-size: 28px !important;
+    line-height: normal !important;
+    letter-spacing: 0 !important;
+    white-space: normal !important;
+  }
+
+  .fees-hero-description,
+  .fees-page-main .hero-description {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    letter-spacing: 0 !important;
+    max-width: none !important;
+  }
+
+  .fees-page-main .hero-buttons {
+    display: none !important;
+  }
+
+  .fees-hero-image-col {
+    flex: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 40px !important;
+    box-sizing: border-box !important;
+  }
+
+  .fees-hero-image-frame {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    aspect-ratio: 525 / 493 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    background-color: #faf3e6 !important;
+    overflow: hidden !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+  }
+
+  .fees-hero-image-frame .fees-hero-img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    object-fit: cover !important;
+    object-position: center bottom !important;
+  }
+
+  .fees-info-section {
+    padding: 0 40px !important;
+  }
+
+  .fees-info-inner {
+    gap: 40px !important;
+    padding: 0 !important;
+  }
+
+  .fees-info-header {
+    gap: 30px !important;
+    padding: 0 24px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .fees-info-title {
+    font-size: 30px !important;
+    line-height: 41px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .fees-info-subtitle {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    color: rgba(94, 93, 95, 0.5) !important;
+  }
+
+  .fees-tabs {
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(94, 93, 95, 0.08) !important;
+    padding: 10px !important;
+    gap: 0 !important;
+    box-shadow: 0 4px 2px rgba(94, 93, 95, 0.08) !important;
+    overflow: hidden !important;
+  }
+
+  .fees-tab {
+    flex: 1 1 0% !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 20px 5px !important;
+    border-radius: 20px !important;
+    font-size: 16px !important;
+    letter-spacing: 1px !important;
+    overflow: visible !important;
+  }
+
+  .fees-tabs-indicator {
+    border-radius: 20px !important;
+  }
+
+  .fees-tab-label--desktop {
+    display: none !important;
+  }
+
+  .fees-tab-label--mobile {
+    display: block !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    line-height: normal !important;
+  }
+
+  .fees-tab-icon,
+  .fees-tab-icon img {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .fees-panels {
+    width: 100% !important;
+    max-width: 660px !important;
+    margin: 0 auto !important;
+  }
+
+  .fees-accordion-list {
+    border-radius: 30px !important;
+    background: #faf3e6 !important;
+    border: 1px solid rgba(94, 93, 95, 0.08) !important;
+    box-shadow: 0 0 14px 5px rgba(0, 0, 0, 0.04) !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .fees-accordion-item,
+  .fees-accordion-item.is-open,
+  .fees-accordion-item:not(.is-open):hover {
+    background: #faf3e6 !important;
+  }
+
+  .fees-accordion-item {
+    border-bottom-color: rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .fees-accordion-item:first-child {
+    border-radius: 0 !important;
+  }
+
+  .fees-accordion-trigger {
+    min-height: 0 !important;
+    padding: 40px 20px !important;
+    gap: 16px !important;
+  }
+
+  .fees-accordion-title {
+    font-size: 24px !important;
+    letter-spacing: -1px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .fees-accordion-icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .fees-accordion-icon img {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .fees-accordion-content-inner {
+    padding: 0 20px 32px !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+
+  .fees-accordion-content-inner p {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
   }
 
   /* ============================================================
