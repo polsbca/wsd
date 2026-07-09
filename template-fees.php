@@ -63,7 +63,7 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 					</p>
 				</div>
 				<div class="hero-buttons">
-					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
+					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
 					<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>" class="btn btn-secondary fees-hero-cta fees-hero-cta--desktop">
 						<span><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>
 					</a>

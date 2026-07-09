@@ -14,9 +14,11 @@ $is_treatments_active = is_singular( 'services' ) || is_post_type_archive( 'serv
 $is_contact_active    = is_page_template( 'template-contact.php' );
 $is_referrals_active  = is_page_template( 'template-dental-referrals.php' );
 $is_teams_active      = is_page_template( 'template-teams.php' );
+$is_fees_active       = is_page_template( 'template-fees.php' );
 $contact_url          = wsd_get_contact_page_url();
 $referrals_url        = wsd_get_referrals_page_url();
 $teams_url            = wsd_get_teams_page_url();
+$fees_url             = wsd_get_fees_page_url();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -129,7 +131,7 @@ $teams_url            = wsd_get_teams_page_url();
 										</div>
 									</div>
 								</li>
-								<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>">Fees & Membership</a></li>
+								<li class="menu-item <?php echo $is_fees_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $fees_url ); ?>">Fees & Membership</a></li>
 								<li class="menu-item <?php echo $is_referrals_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $referrals_url ); ?>">Referrals</a></li>
 								<li class="menu-item <?php echo $is_contact_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $contact_url ); ?>">Contact Us</a></li>
 							</ul>
@@ -266,7 +268,7 @@ $teams_url            = wsd_get_teams_page_url();
 								</ul>
 							</div>
 						</li>
-						<li class="menu-item"><a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>">Fees & Membership</a></li>
+						<li class="menu-item <?php echo $is_fees_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $fees_url ); ?>">Fees & Membership</a></li>
 						<li class="menu-item <?php echo $is_referrals_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $referrals_url ); ?>">Referrals</a></li>
 						<li class="menu-item <?php echo $is_contact_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $contact_url ); ?>">Contact Us</a></li>
 					</ul>

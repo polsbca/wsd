@@ -396,6 +396,15 @@ function wsd_get_referrals_page_url() {
 }
 
 /**
+ * Get the permalink for the Fees page template.
+ *
+ * @return string
+ */
+function wsd_get_fees_page_url() {
+	return wsd_get_page_url_by_template( 'template-fees.php', home_url( '/fees-membership-plans/' ) );
+}
+
+/**
  * Get the Teams page hero image URL (featured image, then theme fallback).
  *
  * @param int $page_id Optional page ID.

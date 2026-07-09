@@ -5,6 +5,282 @@
   .mobile-header {
     display: none !important;
   }
+
+  /* Fees page — restore desktop layout after mobile/tablet overrides */
+  .page-template-template-fees-php .fees-hero-inner,
+  .page-template-template-fees .fees-hero-inner {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-end !important;
+    gap: 0 80px !important;
+    height: 100% !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-page,
+  .page-template-template-fees .fees-hero-page {
+    display: flex !important;
+    align-items: flex-end !important;
+    height: 888px !important;
+    padding: 0 0 0 120px !important;
+    overflow: hidden !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-content-col,
+  .page-template-template-fees .fees-hero-content-col {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 100% !important;
+    padding: 0 !important;
+    gap: 80px !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-copy,
+  .page-template-template-fees .fees-hero-copy {
+    gap: 60px !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-title,
+  .page-template-template-fees .fees-hero-title,
+  .page-template-template-fees-php .fees-page-main .hero-title,
+  .page-template-template-fees .fees-page-main .hero-title {
+    font-size: 60px !important;
+    white-space: nowrap !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-description,
+  .page-template-template-fees .fees-hero-description,
+  .page-template-template-fees-php .fees-page-main .hero-description,
+  .page-template-template-fees .fees-page-main .hero-description {
+    font-size: 20px !important;
+    line-height: 36px !important;
+    max-width: 760px !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main .hero-buttons,
+  .page-template-template-fees .fees-page-main .hero-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 420px !important;
+    max-width: 100% !important;
+    gap: 24px !important;
+    margin: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main .hero-buttons .btn,
+  .page-template-template-fees .fees-page-main .hero-buttons .btn {
+    display: flex !important;
+    width: 100% !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    padding: 0 !important;
+    border-radius: 32px !important;
+    font-size: 20px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main .hero-buttons .btn-primary,
+  .page-template-template-fees .fees-page-main .hero-buttons .btn-primary {
+    background-color: #d8a444 !important;
+    border: 1px solid #d8a444 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main .hero-buttons .btn-secondary,
+  .page-template-template-fees .fees-page-main .hero-buttons .btn-secondary {
+    background-color: #faf3e6 !important;
+    border: 1px solid rgba(94, 93, 95, 0.52) !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+    font-weight: 500 !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main .hero-buttons .fees-hero-cta--mobile,
+  .page-template-template-fees .fees-page-main .hero-buttons .fees-hero-cta--mobile {
+    display: none !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main .hero-buttons .fees-hero-cta--desktop,
+  .page-template-template-fees .fees-page-main .hero-buttons .fees-hero-cta--desktop {
+    display: flex !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-image-col,
+  .page-template-template-fees .fees-hero-image-col {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: 840px !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-image-frame,
+  .page-template-template-fees .fees-hero-image-frame {
+    position: static !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    max-height: 100% !important;
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .page-template-template-fees-php .fees-hero-image-frame .fees-hero-img,
+  .page-template-template-fees .fees-hero-image-frame .fees-hero-img {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 840px !important;
+    max-height: 788px !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+    object-position: bottom right !important;
+  }
+
+  .page-template-template-fees-php .fees-info-section,
+  .page-template-template-fees .fees-info-section {
+    padding: 0 120px !important;
+  }
+
+  .page-template-template-fees-php .fees-info-inner,
+  .page-template-template-fees .fees-info-inner {
+    gap: 60px !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-info-title,
+  .page-template-template-fees .fees-info-title {
+    font-size: 48px !important;
+    line-height: normal !important;
+  }
+
+  .page-template-template-fees-php .fees-info-subtitle,
+  .page-template-template-fees .fees-info-subtitle {
+    font-size: 24px !important;
+    line-height: 46px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-tabs,
+  .page-template-template-fees .fees-tabs {
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 60px !important;
+    border: 1px solid rgba(94, 93, 95, 0.08) !important;
+    box-shadow: 0 8px 14px rgba(216, 164, 68, 0.1) !important;
+  }
+
+  .page-template-template-fees-php .fees-tab,
+  .page-template-template-fees .fees-tab {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    min-height: 70px !important;
+    padding: 23px 20px !important;
+    border-radius: 40px !important;
+    font-size: clamp(14px, 1vw, 20px) !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .page-template-template-fees-php .fees-tabs-indicator,
+  .page-template-template-fees .fees-tabs-indicator {
+    border-radius: 40px !important;
+  }
+
+  .page-template-template-fees-php .fees-tab-label--desktop,
+  .page-template-template-fees .fees-tab-label--desktop {
+    display: inline !important;
+  }
+
+  .page-template-template-fees-php .fees-tab-label--mobile,
+  .page-template-template-fees .fees-tab-label--mobile {
+    display: none !important;
+  }
+
+  .page-template-template-fees-php .fees-tab-icon,
+  .page-template-template-fees .fees-tab-icon,
+  .page-template-template-fees-php .fees-tab-icon img,
+  .page-template-template-fees .fees-tab-icon img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .page-template-template-fees-php .fees-panels,
+  .page-template-template-fees .fees-panels {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-list,
+  .page-template-template-fees .fees-accordion-list {
+    border-radius: 32px !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.04) !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-item,
+  .page-template-template-fees .fees-accordion-item,
+  .page-template-template-fees-php .fees-accordion-item.is-open,
+  .page-template-template-fees .fees-accordion-item.is-open,
+  .page-template-template-fees-php .fees-accordion-item:not(.is-open):hover,
+  .page-template-template-fees .fees-accordion-item:not(.is-open):hover {
+    background: #faf3e6 !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-item.is-open,
+  .page-template-template-fees .fees-accordion-item.is-open {
+    background: #efdab2 !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-item,
+  .page-template-template-fees .fees-accordion-item {
+    border-bottom-color: rgba(216, 164, 68, 0.5) !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-item:first-child,
+  .page-template-template-fees .fees-accordion-item:first-child {
+    border-radius: 30px 30px 0 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-trigger,
+  .page-template-template-fees .fees-accordion-trigger {
+    min-height: 127px !important;
+    padding: 30px 60px !important;
+    gap: 24px !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-title,
+  .page-template-template-fees .fees-accordion-title {
+    font-size: 34px !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-content-inner,
+  .page-template-template-fees .fees-accordion-content-inner {
+    padding: 0 60px 36px !important;
+    font-size: 18px !important;
+    line-height: 30px !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main,
+  .page-template-template-fees .fees-page-main {
+    gap: 160px !important;
+    padding-bottom: 160px !important;
+  }
 }
 
 /* Breakpoint: Mobile/Tablet (<992px) */
@@ -1066,6 +1342,8 @@
   }
 
   .fees-page-main .hero-buttons {
+    display: flex !important;
+    flex-direction: column !important;
     width: 250px !important;
     max-width: 100% !important;
     gap: 20px !important;
@@ -1138,6 +1416,9 @@
   }
 
   .fees-info-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     gap: 30px !important;
     padding: 0 24px !important;
   }
@@ -1161,6 +1442,8 @@
   }
 
   .fees-tabs {
+    position: relative !important;
+    display: flex !important;
     width: calc(100% + 48px) !important;
     margin-left: -24px !important;
     margin-right: -24px !important;
@@ -1394,6 +1677,9 @@
   }
 
   .fees-info-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     gap: 40px !important;
     padding: 0 !important;
   }
@@ -1418,6 +1704,8 @@
   }
 
   .fees-tabs {
+    position: relative !important;
+    display: flex !important;
     width: 100% !important;
     margin: 0 !important;
     border-radius: 20px !important;
