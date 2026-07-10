@@ -1,5 +1,5 @@
 /**
- * Smile Gallery page — filters + sticky scroll case navigation
+ * Smile Gallery page — filters + sticky scroll (desktop) / slider (mobile)
  */
 (function ($) {
   "use strict";
@@ -19,11 +19,23 @@
     var $indicator = $root.find(".smile-gallery-page-indicator");
     var $handle = $indicator.find(".gallery-scroll-indicator-handle");
     var $container = $indicator;
+    var $wrapper = $root.find(".smile-gallery-page-interactive");
+    var $dotsContainer = $root.find(".smile-gallery-page-dots");
+    var $filterPanel = $root.find("#smile-gallery-filter-panel");
+    var $browseBtn = $root.find(".smile-gallery-mobile-browse");
+    var $mobileAllBtn = $root.find(".smile-gallery-mobile-all");
+    var $panelOptions = $root.find(".smile-gallery-filter-panel-option");
     var activeFilter = "all";
     var scrollTimeline = null;
     var isDesktop = window.innerWidth >= 992;
     var rowResizeObserver = null;
     var fitScaleRaf = null;
+    var mobileSlider = {
+      currentIndex: 0,
+      interval: null,
+      touchStartX: 0,
+      bound: false,
+    };
 
     function resetGalleryRowScale() {
       if (!$casesRow.length) {
@@ -129,6 +141,10 @@
       $details.removeClass("active");
 
       var $activeSlide = $visibleSlides.eq(activeIndex);
+      if (!$activeSlide.length) {
+        return;
+      }
+
       var slideIndex = $activeSlide.attr("data-index");
 
       $activeSlide.addClass("active");
@@ -154,13 +170,80 @@
         setActiveByIndex(0, $visibleSlides);
       }
 
-      if ($section.length) {
+      if ($section.length && isDesktop) {
         var trackMultiplier = Math.max($visibleSlides.length, 1);
         $section.css(
           "--smile-gallery-track-height",
           trackMultiplier * 75 + "vh",
         );
+      } else if ($section.length) {
+        $section.css("--smile-gallery-track-height", "auto");
       }
+    }
+
+    function syncMobileFilterUi($activeFilterEl) {
+      var filterValue = activeFilter;
+
+      $filters.removeClass("is-active").attr({
+        "aria-selected": "false",
+        "aria-pressed": "false",
+      });
+      $panelOptions.removeClass("is-active");
+
+      if ($activeFilterEl && $activeFilterEl.length) {
+        $activeFilterEl.addClass("is-active");
+        if ($activeFilterEl.is('[role="tab"]')) {
+          $activeFilterEl.attr("aria-selected", "true");
+        } else {
+          $activeFilterEl.attr("aria-pressed", "true");
+        }
+      }
+
+      if ("all" !== filterValue) {
+        $panelOptions
+          .filter('[data-filter="' + filterValue + '"]')
+          .addClass("is-active");
+      }
+
+      if ($browseBtn.length) {
+        if ("all" === filterValue) {
+          $browseBtn.removeClass("is-active");
+          $browseBtn
+            .find(".smile-gallery-mobile-browse-label")
+            .text($browseBtn.data("default-label") || "Browse by Filters");
+        } else {
+          var $option = $panelOptions.filter(
+            '[data-filter="' + filterValue + '"]',
+          );
+          var label =
+            ($option.length && $option.data("label")) ||
+            ($option.length && $option.text().trim()) ||
+            filterValue;
+
+          $browseBtn.addClass("is-active");
+          $browseBtn.find(".smile-gallery-mobile-browse-label").text(label);
+        }
+      }
+    }
+
+    function openFilterPanel() {
+      if (!$filterPanel.length) {
+        return;
+      }
+
+      $filterPanel.removeAttr("hidden");
+      $browseBtn.attr("aria-expanded", "true");
+      document.body.classList.add("smile-gallery-filter-open");
+    }
+
+    function closeFilterPanel() {
+      if (!$filterPanel.length) {
+        return;
+      }
+
+      $filterPanel.attr("hidden", "hidden");
+      $browseBtn.attr("aria-expanded", "false");
+      document.body.classList.remove("smile-gallery-filter-open");
     }
 
     function destroyScrollTimeline() {
@@ -269,13 +352,143 @@
       }
     }
 
+    function clearMobileSliderTimer() {
+      if (mobileSlider.interval) {
+        window.clearInterval(mobileSlider.interval);
+        mobileSlider.interval = null;
+      }
+    }
+
+    function buildMobileDots($visibleSlides) {
+      if (!$dotsContainer.length) {
+        return $();
+      }
+
+      $dotsContainer.empty();
+
+      $visibleSlides.each(function (index) {
+        $dotsContainer.append(
+          $(
+            '<button type="button" class="gallery-dot" aria-label="Go to case ' +
+              (index + 1) +
+              '"></button>',
+          ),
+        );
+      });
+
+      return $dotsContainer.find(".gallery-dot");
+    }
+
+    function showMobileSlide(index, $visibleSlides, $dots) {
+      if (!$visibleSlides.length) {
+        return;
+      }
+
+      var safeIndex = Math.max(0, Math.min(index, $visibleSlides.length - 1));
+      setActiveByIndex(safeIndex, $visibleSlides);
+      mobileSlider.currentIndex = safeIndex;
+
+      if ($dots && $dots.length) {
+        $dots.removeClass("active");
+        $dots.eq(safeIndex).addClass("active");
+      }
+    }
+
+    function initMobileCaseSlider() {
+      clearMobileSliderTimer();
+
+      if (isDesktop || !$wrapper.length) {
+        $dotsContainer.empty();
+        return;
+      }
+
+      var $visibleSlides = getVisibleSlides();
+      var $dots = buildMobileDots($visibleSlides);
+
+      if ($visibleSlides.length <= 1) {
+        showMobileSlide(0, $visibleSlides, $dots);
+        return;
+      }
+
+      showMobileSlide(0, $visibleSlides, $dots);
+
+      $dots.off("click").on("click", function () {
+        showMobileSlide($(this).index(), $visibleSlides, $dots);
+        clearMobileSliderTimer();
+        mobileSlider.interval = window.setInterval(function () {
+          var nextIndex =
+            (mobileSlider.currentIndex + 1) % $visibleSlides.length;
+          showMobileSlide(nextIndex, $visibleSlides, $dots);
+        }, 5000);
+      });
+
+      if (!mobileSlider.bound) {
+        mobileSlider.bound = true;
+
+        $wrapper.on("touchstart", function (event) {
+          var touches =
+            event.touches ||
+            (event.originalEvent && event.originalEvent.touches);
+          if (touches && touches.length) {
+            mobileSlider.touchStartX = touches[0].clientX;
+          }
+        });
+
+        $wrapper.on("touchend", function (event) {
+          var touches =
+            event.changedTouches ||
+            (event.originalEvent && event.originalEvent.changedTouches);
+          if (!touches || !touches.length) {
+            return;
+          }
+
+          var touchEndX = touches[0].clientX;
+          var delta = mobileSlider.touchStartX - touchEndX;
+          var $currentVisible = getVisibleSlides();
+          var $currentDots = $dotsContainer.find(".gallery-dot");
+
+          if (Math.abs(delta) < 50 || $currentVisible.length <= 1) {
+            return;
+          }
+
+          var nextIndex = mobileSlider.currentIndex;
+
+          if (delta > 0) {
+            nextIndex = (mobileSlider.currentIndex + 1) % $currentVisible.length;
+          } else {
+            nextIndex =
+              (mobileSlider.currentIndex - 1 + $currentVisible.length) %
+              $currentVisible.length;
+          }
+
+          showMobileSlide(nextIndex, $currentVisible, $currentDots);
+          clearMobileSliderTimer();
+          mobileSlider.interval = window.setInterval(function () {
+            var autoIndex =
+              (mobileSlider.currentIndex + 1) % $currentVisible.length;
+            showMobileSlide(autoIndex, $currentVisible, $currentDots);
+          }, 5000);
+        });
+      }
+
+      mobileSlider.interval = window.setInterval(function () {
+        var $currentVisible = getVisibleSlides();
+        var $currentDots = $dotsContainer.find(".gallery-dot");
+        if ($currentVisible.length <= 1) {
+          return;
+        }
+        var nextIndex =
+          (mobileSlider.currentIndex + 1) % $currentVisible.length;
+        showMobileSlide(nextIndex, $currentVisible, $currentDots);
+      }, 5000);
+    }
+
     function activateFilter($filter) {
       activeFilter = $filter.attr("data-filter") || "all";
 
-      $filters.removeClass("is-active").attr("aria-selected", "false");
-      $filter.addClass("is-active").attr("aria-selected", "true");
-
       applyFilterState();
+      syncMobileFilterUi($filter);
+      closeFilterPanel();
 
       if ($section.length && isDesktop) {
         window.scrollTo({
@@ -287,16 +500,43 @@
       initStickyScroll();
       bindGalleryRowFit();
       resetGalleryScrollProgress();
+      initMobileCaseSlider();
 
       if (typeof ScrollTrigger !== "undefined") {
         ScrollTrigger.refresh();
       }
     }
 
-    $root.on("click", ".smile-gallery-filter", function (event) {
+    $root.on("click", ".smile-gallery-filters--desktop .smile-gallery-filter", function (event) {
       event.preventDefault();
       activateFilter($(this));
     });
+
+    $mobileAllBtn.on("click", function (event) {
+      event.preventDefault();
+      activateFilter($(this));
+    });
+
+    $panelOptions.on("click", function (event) {
+      event.preventDefault();
+      activateFilter($(this));
+    });
+
+    $browseBtn.on("click", function (event) {
+      event.preventDefault();
+      if ($filterPanel.is("[hidden]")) {
+        openFilterPanel();
+      } else {
+        closeFilterPanel();
+      }
+    });
+
+    $filterPanel
+      .find(".smile-gallery-filter-panel-backdrop, .smile-gallery-filter-panel-close")
+      .on("click", function (event) {
+        event.preventDefault();
+        closeFilterPanel();
+      });
 
     if ($indicator.length) {
       $indicator
@@ -330,9 +570,16 @@
       isDesktop = window.innerWidth >= 992;
 
       if (wasDesktop !== isDesktop) {
+        if (isDesktop) {
+          clearMobileSliderTimer();
+        } else {
+          destroyScrollTimeline();
+        }
+
         applyFilterState();
         initStickyScroll();
         bindGalleryRowFit();
+        initMobileCaseSlider();
       } else {
         scheduleGalleryRowFit();
       }
@@ -349,9 +596,18 @@
 
     $(window).on("load", scheduleGalleryRowFit);
 
+    if ($browseBtn.length) {
+      $browseBtn.data(
+        "default-label",
+        $browseBtn.find(".smile-gallery-mobile-browse-label").text(),
+      );
+    }
+
     applyFilterState();
+    syncMobileFilterUi($root.find(".smile-gallery-filter.is-active").first());
     initStickyScroll();
     bindGalleryRowFit();
+    initMobileCaseSlider();
 
     if (typeof ScrollTrigger !== "undefined") {
       ScrollTrigger.refresh();

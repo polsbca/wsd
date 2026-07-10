@@ -99,11 +99,16 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 				<div class="smile-gallery-cases-header">
 					<div class="smile-gallery-section-badge">
 						<h2 id="smile-gallery-section-heading" class="smile-gallery-section-title">
-							<span class="light"><?php esc_html_e( 'Smile ', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( 'Gallery', 'wsd' ); ?></span>
+							<span class="smile-gallery-section-heading-desktop">
+								<span class="light"><?php esc_html_e( 'Smile ', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( 'Gallery', 'wsd' ); ?></span>
+							</span>
+							<span class="smile-gallery-section-heading-mobile">
+								<span class="light"><?php esc_html_e( 'All Treatment', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( ' Results', 'wsd' ); ?></span>
+							</span>
 						</h2>
 					</div>
 
-					<div class="smile-gallery-filters" role="tablist" aria-label="<?php esc_attr_e( 'Smile gallery categories', 'wsd' ); ?>">
+					<div class="smile-gallery-filters smile-gallery-filters--desktop" role="tablist" aria-label="<?php esc_attr_e( 'Smile gallery categories', 'wsd' ); ?>">
 					<button type="button" class="smile-gallery-filter is-active" role="tab" aria-selected="true" data-filter="all">
 						<span><?php esc_html_e( 'All', 'wsd' ); ?></span>
 					</button>
@@ -118,6 +123,51 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 							<span><?php echo esc_html( $category->name ); ?></span>
 						</button>
 					<?php endforeach; ?>
+					</div>
+
+					<div class="smile-gallery-mobile-filters">
+						<button type="button" class="smile-gallery-filter smile-gallery-mobile-all is-active" data-filter="all" aria-pressed="true">
+							<span><?php esc_html_e( 'ALL', 'wsd' ); ?></span>
+						</button>
+						<button
+							type="button"
+							class="smile-gallery-mobile-browse"
+							aria-expanded="false"
+							aria-controls="smile-gallery-filter-panel"
+						>
+							<span class="smile-gallery-mobile-browse-label"><?php esc_html_e( 'Browse by Filters', 'wsd' ); ?></span>
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/filter-equalizer.svg' ); ?>" alt="" width="14" height="14" class="smile-gallery-mobile-browse-icon">
+						</button>
+					</div>
+				</div>
+
+				<div
+					id="smile-gallery-filter-panel"
+					class="smile-gallery-filter-panel"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby="smile-gallery-filter-panel-title"
+					hidden
+				>
+					<button type="button" class="smile-gallery-filter-panel-backdrop" aria-label="<?php esc_attr_e( 'Close filters', 'wsd' ); ?>"></button>
+					<div class="smile-gallery-filter-panel-sheet">
+						<div class="smile-gallery-filter-panel-header">
+							<h3 id="smile-gallery-filter-panel-title" class="smile-gallery-filter-panel-title"><?php esc_html_e( 'Browse by Filters', 'wsd' ); ?></h3>
+							<button type="button" class="smile-gallery-filter-panel-close" aria-label="<?php esc_attr_e( 'Close', 'wsd' ); ?>">&times;</button>
+						</div>
+						<div class="smile-gallery-filter-panel-options" role="listbox" aria-label="<?php esc_attr_e( 'Filter categories', 'wsd' ); ?>">
+							<?php foreach ( $gallery_categories as $category ) : ?>
+								<button
+									type="button"
+									class="smile-gallery-filter-panel-option"
+									role="option"
+									data-filter="<?php echo esc_attr( $category->slug ); ?>"
+									data-label="<?php echo esc_attr( $category->name ); ?>"
+								>
+									<span><?php echo esc_html( $category->name ); ?></span>
+								</button>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 
@@ -189,9 +239,11 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 										<?php endforeach; ?>
 									</div>
 
-									<div class="gallery-btn-wrapper">
+									<div class="gallery-btn-wrapper smile-gallery-view-btn-wrap">
 										<a href="#smile-gallery-cases" class="btn btn-gallery-action smile-gallery-view-btn"><?php esc_html_e( 'View Smile Gallery', 'wsd' ); ?></a>
 									</div>
+
+									<div class="gallery-slider-dots smile-gallery-page-dots" aria-hidden="true"></div>
 								</div>
 							</div>
 						</div>

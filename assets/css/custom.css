@@ -12402,6 +12402,17 @@ body.home
   pointer-events: auto;
 }
 
+.smile-gallery-mobile-filters,
+.smile-gallery-filter-panel,
+.smile-gallery-section-heading-mobile,
+.smile-gallery-page-dots {
+  display: none;
+}
+
+.smile-gallery-section-heading-desktop {
+  display: inline;
+}
+
 .smile-gallery-filter {
   appearance: none;
   border: 1px solid rgba(94, 93, 95, 0.52);
@@ -12872,6 +12883,607 @@ body.home
   .smile-gallery-filter {
     padding: 12px 18px;
     font-size: 14px;
+  }
+}
+
+/* ============================================================
+   SMILE GALLERY PAGE — MOBILE LAYOUT (Figma 4078:36621)
+   ============================================================ */
+@media (max-width: 991px) {
+  .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
+  .page-template-template-smile-gallery #main.smile-gallery-page-main {
+    gap: 94px;
+    padding: 0 0 60px;
+  }
+
+  .smile-gallery-hero-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .smile-gallery-hero-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    height: auto;
+  }
+
+  .smile-gallery-hero-content-col {
+    width: 100%;
+    gap: 20px;
+    padding: 30px 24px 0;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-hero-copy {
+    gap: 20px;
+  }
+
+  .smile-gallery-hero-title,
+  .smile-gallery-page-main .hero-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .smile-gallery-hero-description,
+  .smile-gallery-page-main .hero-description {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    max-width: none;
+  }
+
+  .smile-gallery-page-main .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .smile-gallery-page-main .hero-buttons .btn {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 16px;
+    border-radius: 32px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .smile-gallery-page-main .hero-buttons .btn-primary {
+    font-weight: 700;
+  }
+
+  .smile-gallery-page-main .hero-buttons .btn-secondary {
+    font-weight: 500;
+  }
+
+  .smile-gallery-hero-image-col {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .smile-gallery-hero-image-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 402 / 461;
+    min-height: 280px;
+    overflow: hidden;
+    background-color: #faf3e6;
+  }
+
+  .smile-gallery-hero-image-frame .smile-gallery-hero-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+
+  html.wsd-js
+    body.page-template-template-smile-gallery-php
+    .smile-gallery-page-main
+    .hero-image-wrapper,
+  html.wsd-js
+    body.page-template-template-smile-gallery
+    .smile-gallery-page-main
+    .hero-image-wrapper {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .smile-gallery-cases-section {
+    height: auto !important;
+    background-color: #fefdf6;
+  }
+
+  .smile-gallery-cases-sticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .smile-gallery-cases-inner {
+    gap: 30px;
+    margin: 0;
+  }
+
+  .smile-gallery-cases-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 30px;
+  }
+
+  .smile-gallery-section-badge {
+    align-self: flex-start;
+    padding: 20px 40px 20px 24px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-left: 0;
+  }
+
+  .smile-gallery-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    white-space: normal;
+    text-transform: capitalize;
+  }
+
+  .smile-gallery-section-heading-desktop {
+    display: none;
+  }
+
+  .smile-gallery-section-heading-mobile {
+    display: inline;
+  }
+
+  .smile-gallery-filters--desktop {
+    display: none;
+  }
+
+  .smile-gallery-mobile-filters {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-mobile-all {
+    flex: 0 0 auto;
+    width: 99px;
+    min-width: 99px;
+    padding: 16px;
+    border-radius: 32px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active),
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active):hover,
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active):focus-visible {
+    background-color: transparent;
+    color: rgba(94, 93, 95, 0.52);
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active):active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+
+  .smile-gallery-mobile-browse {
+    appearance: none;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid rgba(94, 93, 95, 0.52);
+    border-radius: 40px;
+    background-color: transparent;
+    font-family: var(--font-family-primary);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgba(94, 93, 95, 0.52);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-browse,
+  .smile-gallery-page-main button.smile-gallery-mobile-browse:hover,
+  .smile-gallery-page-main button.smile-gallery-mobile-browse:focus-visible {
+    background-color: transparent;
+    color: rgba(94, 93, 95, 0.52);
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-browse:active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+
+  .smile-gallery-mobile-browse.is-active {
+    border-color: #d8a444;
+    color: #5e5d5f;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-browse.is-active,
+  .smile-gallery-page-main button.smile-gallery-mobile-browse.is-active:hover,
+  .smile-gallery-page-main button.smile-gallery-mobile-browse.is-active:focus-visible {
+    background-color: transparent;
+    border-color: #d8a444;
+    color: #5e5d5f;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-browse.is-active:active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+
+  .smile-gallery-mobile-browse-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .smile-gallery-filter-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 10050;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .smile-gallery-filter-panel[hidden] {
+    display: none;
+  }
+
+  .smile-gallery-filter-panel-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(43, 43, 44, 0.45);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-filter-panel-backdrop,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-backdrop:hover,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-backdrop:active,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-backdrop:focus-visible {
+    background-color: rgba(43, 43, 44, 0.45);
+    color: inherit;
+  }
+
+  .smile-gallery-filter-panel-sheet {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-height: 70vh;
+    overflow: auto;
+    background: #fefdf6;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 24px 32px;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-filter-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .smile-gallery-filter-panel-title {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-size: 18px;
+    font-weight: 600;
+    color: #5e5d5f;
+  }
+
+  .smile-gallery-filter-panel-close {
+    appearance: none;
+    border: 0;
+    background-color: transparent;
+    font-size: 28px;
+    line-height: 1;
+    color: #5e5d5f;
+    cursor: pointer;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-filter-panel-close,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-close:hover,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-close:active,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-close:focus-visible {
+    background-color: transparent;
+    color: #5e5d5f;
+  }
+
+  .smile-gallery-filter-panel-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .smile-gallery-filter-panel-option {
+    appearance: none;
+    width: 100%;
+    border: 1px solid rgba(94, 93, 95, 0.52);
+    border-radius: 40px;
+    background-color: transparent;
+    padding: 16px 20px;
+    font-family: var(--font-family-primary);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: rgba(94, 93, 95, 0.52);
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option:hover,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option:focus-visible {
+    background-color: transparent;
+    color: rgba(94, 93, 95, 0.52);
+  }
+
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option:active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+
+  .smile-gallery-filter-panel-option.is-active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option.is-active,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option.is-active:hover,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option.is-active:focus-visible,
+  .smile-gallery-page-main button.smile-gallery-filter-panel-option.is-active:active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0 24px;
+    overflow: visible;
+  }
+
+  .smile-gallery-cases-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transform: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .smile-gallery-cases-main {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .smile-gallery-page-images,
+  .smile-gallery-page-info {
+    width: 100%;
+    max-width: 354px;
+  }
+
+  .smile-gallery-page-main .gallery-interactive-wrapper {
+    width: 100%;
+    max-width: 354px;
+    height: 279px;
+    margin: 0 auto;
+  }
+
+  .smile-gallery-page-main .gallery-card {
+    width: 215px;
+    height: 170px;
+    padding: 4px;
+    border-radius: 14px;
+    box-shadow: 0 1.433px 2.867px rgba(0, 0, 0, 0.12);
+  }
+
+  .smile-gallery-page-main .before-card {
+    left: 0;
+    top: -5px;
+  }
+
+  .smile-gallery-page-main .after-card {
+    left: 139px;
+    top: 109px;
+  }
+
+  .smile-gallery-page-main .gallery-card-image-wrapper {
+    height: 100%;
+    border-radius: 8px;
+  }
+
+  .smile-gallery-page-main .gallery-card-label {
+    bottom: 4px;
+    left: 4px;
+    padding: 4px 6px;
+    border-radius: 0 4px 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 87px;
+    top: 157px;
+    width: 82px;
+    height: 37px;
+    transform: none;
+    filter: none;
+  }
+
+  .smile-gallery-page-main .gallery-slide,
+  .smile-gallery-page-slide {
+    display: block !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  }
+
+  .smile-gallery-page-slide:not(.active) {
+    display: block !important;
+  }
+
+  .smile-gallery-page-main .gallery-slide.active,
+  .smile-gallery-page-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .smile-gallery-page-details.is-filtered-out {
+    display: none !important;
+  }
+
+  .smile-gallery-page-details-grid {
+    min-height: 0;
+    height: auto;
+  }
+
+  .smile-gallery-page-details {
+    position: relative;
+    inset: auto;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .smile-gallery-page-details.active {
+    display: flex;
+  }
+
+  .smile-gallery-page-main .gallery-detail-card {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(117, 117, 117, 0.24);
+    border-radius: 8px;
+    padding: 14px 20px;
+    height: auto;
+    min-height: 0;
+    gap: 10px;
+    opacity: 1;
+    transform: none;
+  }
+
+  .smile-gallery-page-main .detail-label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    color: #5e5d5f;
+    opacity: 0.4;
+    margin: 0;
+  }
+
+  .smile-gallery-page-main .detail-value {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .smile-gallery-view-btn-wrap,
+  .smile-gallery-page-indicator {
+    display: none !important;
+  }
+
+  .smile-gallery-page-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .smile-gallery-page-dots .gallery-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    background-color: rgba(216, 164, 68, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .smile-gallery-page-dots .gallery-dot.active {
+    background-color: #d8a444;
+  }
+
+  .smile-gallery-page-main .gallery-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  body.smile-gallery-filter-open {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 992px) {
+  .smile-gallery-section-heading-mobile,
+  .smile-gallery-mobile-filters,
+  .smile-gallery-filter-panel,
+  .smile-gallery-page-dots {
+    display: none !important;
+  }
+
+  .smile-gallery-section-heading-desktop {
+    display: inline;
   }
 }
 
