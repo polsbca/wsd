@@ -58,7 +58,7 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
@@ -68,6 +68,10 @@ function wsd_scripts() {
 
 	if ( is_page_template( 'template-fees.php' ) ) {
 		wp_enqueue_script( 'wsd-fees', get_stylesheet_directory_uri() . '/assets/js/fees.js', array( 'jquery' ), time(), true );
+	}
+
+	if ( is_page_template( 'template-smile-gallery.php' ) ) {
+		wp_enqueue_script( 'wsd-smile-gallery', get_stylesheet_directory_uri() . '/assets/js/smile-gallery.js', array( 'jquery', 'gsap', 'gsap-scrolltrigger' ), time(), true );
 	}
 
 	// jQuery (WordPress default)
@@ -198,13 +202,42 @@ function wsd_get_smile_gallery_slides( $page_ids = array() ) {
 		$before_image = get_field( 'before_image', $gallery_post->ID );
 		$after_image  = get_field( 'after_image', $gallery_post->ID );
 
+		$category_slugs = array();
+		$category_names = array();
+		$category_taxonomies = array(
+			'smile-gallery-category',
+			'smile_gallery_category',
+		);
+
+		foreach ( $category_taxonomies as $category_taxonomy ) {
+			if ( ! taxonomy_exists( $category_taxonomy ) ) {
+				continue;
+			}
+
+			$terms = get_the_terms( $gallery_post->ID, $category_taxonomy );
+			if ( is_wp_error( $terms ) || empty( $terms ) ) {
+				continue;
+			}
+
+			foreach ( $terms as $term ) {
+				$category_slugs[] = $term->slug;
+				$category_names[] = $term->name;
+			}
+			break;
+		}
+
 		$slides[] = array(
-			'before_image' => $normalize_image( $before_image ),
-			'after_image'  => $normalize_image( $after_image ),
-			'treatment'    => get_field( 'treatment', $gallery_post->ID ) ?: get_the_title( $gallery_post->ID ),
-			'concern'      => get_field( 'main_concern', $gallery_post->ID ) ?: 'Worn & Discoloured Teeth',
-			'duration'     => get_field( 'duration', $gallery_post->ID ) ?: '3 months',
-			'visits'       => get_field( 'visits', $gallery_post->ID ) ?: '2 visits',
+			'before_image'     => $normalize_image( $before_image ),
+			'after_image'      => $normalize_image( $after_image ),
+			'treatment'        => get_field( 'treatment', $gallery_post->ID ) ?: get_the_title( $gallery_post->ID ),
+			'concern'          => get_field( 'main_concern', $gallery_post->ID ) ?: 'Worn & Discoloured Teeth',
+			'duration'         => get_field( 'duration', $gallery_post->ID ) ?: '3 months',
+			'visits'           => get_field( 'visits', $gallery_post->ID ) ?: '2 visits',
+			'category_slugs'   => $category_slugs,
+			'category_names'   => $category_names,
+			'primary_category' => ! empty( $category_names ) ? $category_names[0] : '',
+			'post_id'          => $gallery_post->ID,
+			'permalink'        => get_permalink( $gallery_post->ID ),
 		);
 	}
 
@@ -402,6 +435,106 @@ function wsd_get_referrals_page_url() {
  */
 function wsd_get_fees_page_url() {
 	return wsd_get_page_url_by_template( 'template-fees.php', home_url( '/fees-membership-plans/' ) );
+}
+
+/**
+ * Get the permalink for the Smile Gallery page template.
+ *
+ * @return string
+ */
+function wsd_get_smile_gallery_page_url() {
+	return wsd_get_page_url_by_template( 'template-smile-gallery.php', home_url( '/smile-gallery/' ) );
+}
+
+/**
+ * Get Smile Gallery category terms for page filters.
+ *
+ * @return WP_Term[]
+ */
+function wsd_get_smile_gallery_categories() {
+	$taxonomies = array(
+		'smile-gallery-category',
+		'smile_gallery_category',
+	);
+
+	foreach ( $taxonomies as $taxonomy ) {
+		if ( ! taxonomy_exists( $taxonomy ) ) {
+			continue;
+		}
+
+		$terms = get_terms(
+			array(
+				'taxonomy'   => $taxonomy,
+				'hide_empty' => false,
+				'orderby'    => 'term_id',
+				'order'      => 'ASC',
+			)
+		);
+
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+			return $terms;
+		}
+	}
+
+	return array();
+}
+
+/**
+ * Split a category title into main and accent parts for the page badge.
+ *
+ * @param string $name Category name.
+ * @return array{main:string,accent:string}
+ */
+function wsd_split_smile_gallery_category_title( $name ) {
+	$name = trim( (string) $name );
+
+	if ( '' === $name ) {
+		return array(
+			'main'   => '',
+			'accent' => '',
+		);
+	}
+
+	$parts = preg_split( '/\s+/', $name, 2 );
+
+	if ( count( $parts ) === 2 ) {
+		return array(
+			'main'   => $parts[0] . ' ',
+			'accent' => $parts[1],
+		);
+	}
+
+	return array(
+		'main'   => $name,
+		'accent' => '',
+	);
+}
+
+/**
+ * Get the Smile Gallery page hero image URL (featured image, then theme fallback).
+ *
+ * @param int $page_id Optional page ID.
+ * @return string
+ */
+function wsd_get_smile_gallery_hero_image_url( $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+	$scheme  = is_ssl() ? 'https' : 'http';
+
+	if ( $page_id && has_post_thumbnail( $page_id ) ) {
+		$featured_url = get_the_post_thumbnail_url( $page_id, 'full' );
+		if ( $featured_url ) {
+			return set_url_scheme( $featured_url, $scheme );
+		}
+	}
+
+	$fallback_path = get_theme_file_path( 'assets/images/fees-hero.png' );
+	$fallback_url  = get_theme_file_uri( 'assets/images/fees-hero.png' );
+
+	if ( file_exists( $fallback_path ) ) {
+		$fallback_url .= '?ver=' . filemtime( $fallback_path );
+	}
+
+	return set_url_scheme( $fallback_url, $scheme );
 }
 
 /**

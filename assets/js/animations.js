@@ -39,13 +39,16 @@ function initAnimations() {
     document.querySelector(".dental-referrals-main") !== null;
   const hasTeamsPage = document.querySelector(".teams-page-main") !== null;
   const hasFeesPage = document.querySelector(".fees-page-main") !== null;
+  const hasSmileGalleryPage =
+    document.querySelector(".smile-gallery-page-main") !== null;
   const hasHero = document.querySelector(".hero-title") !== null;
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
     !hasContactPage &&
     !hasDentalReferralsPage &&
     !hasTeamsPage &&
-    !hasFeesPage;
+    !hasFeesPage &&
+    !hasSmileGalleryPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
 
   // ----------------------------------------------------
@@ -99,6 +102,17 @@ function initAnimations() {
     if (hasFeesPage) {
       gsap.set(".fees-page-main .hero-buttons .btn", { y: 20, opacity: 0 });
       gsap.set(".fees-page-main .hero-image-wrapper", {
+        x: 50,
+        opacity: 0,
+        scale: 0.95,
+      });
+    }
+    if (hasSmileGalleryPage) {
+      gsap.set(".smile-gallery-page-main .hero-buttons .btn", {
+        y: 20,
+        opacity: 0,
+      });
+      gsap.set(".smile-gallery-page-main .hero-image-wrapper", {
         x: 50,
         opacity: 0,
         scale: 0.95,
@@ -172,6 +186,32 @@ function initAnimations() {
         )
         .to(
           ".fees-page-main .hero-image-wrapper",
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.8",
+        );
+    }
+
+    if (hasSmileGalleryPage) {
+      mainTimeline
+        .to(
+          ".smile-gallery-page-main .hero-buttons .btn",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.5",
+        )
+        .to(
+          ".smile-gallery-page-main .hero-image-wrapper",
           {
             x: 0,
             opacity: 1,
@@ -327,6 +367,16 @@ function initAnimations() {
         gsap.set(".fees-page-main .hero-buttons .btn", { y: 15, opacity: 0 });
         gsap.set(".fees-page-main .hero-image-wrapper", { y: 30, opacity: 0 });
       }
+      if (hasSmileGalleryPage) {
+        gsap.set(".smile-gallery-page-main .hero-buttons .btn", {
+          y: 15,
+          opacity: 0,
+        });
+        gsap.set(".smile-gallery-page-main .hero-image-wrapper", {
+          y: 30,
+          opacity: 0,
+        });
+      }
 
       const mobileTl = gsap.timeline({
         defaults: { ease: "power2.out", duration: 0.6 },
@@ -397,6 +447,27 @@ function initAnimations() {
           )
           .to(
             ".fees-page-main .hero-image-wrapper",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+            },
+            "-=0.3",
+          );
+      } else if (hasSmileGalleryPage) {
+        mobileTl
+          .to(
+            ".smile-gallery-page-main .hero-buttons .btn",
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.4,
+            },
+            "-=0.3",
+          )
+          .to(
+            ".smile-gallery-page-main .hero-image-wrapper",
             {
               y: 0,
               opacity: 1,
@@ -1030,6 +1101,10 @@ function initAnimations() {
 
   if (hasFeesPage && isDesktop) {
     initFeesPageAnimations();
+  }
+
+  if (hasSmileGalleryPage && isDesktop) {
+    initSmileGalleryPageAnimations();
   }
 
   if (isDesktop) {
@@ -3149,6 +3224,49 @@ function initFeesPageAnimations() {
   }
 }
 
+function initSmileGalleryPageAnimations() {
+  const galleryMain = document.querySelector(".smile-gallery-page-main");
+  if (!galleryMain || window.innerWidth < 992) {
+    return;
+  }
+
+  const casesSection = galleryMain.querySelector(".smile-gallery-cases-section");
+
+  const animateSectionEntrance = (section, selectors) => {
+    if (!section) {
+      return;
+    }
+
+    const elements = selectors
+      .flatMap((selector) => Array.from(section.querySelectorAll(selector)))
+      .filter(Boolean);
+
+    if (!elements.length) {
+      return;
+    }
+
+    gsap.set(elements, { y: 40, opacity: 0 });
+
+    gsap.to(elements, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  };
+
+  animateSectionEntrance(casesSection, [
+    ".smile-gallery-section-badge",
+    ".smile-gallery-cases-body",
+  ]);
+}
+
 function applySectionScrollOpacity(el, options) {
   if (!el) return;
 
@@ -3173,6 +3291,9 @@ function applySectionScrollOpacity(el, options) {
       end: end,
       scrub: true,
       invalidateOnRefresh: true,
+      onEnterBack: () => {
+        gsap.set(el, { opacity: 1 });
+      },
       onLeaveBack: () => {
         gsap.set(el, { opacity: 1 });
       },

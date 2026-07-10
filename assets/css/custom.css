@@ -84,6 +84,10 @@ body {
   html.wsd-js body.page-template-template-fees-php #masthead.site-header,
   html.wsd-js body.page-template-template-fees .header-top,
   html.wsd-js body.page-template-template-fees #masthead.site-header,
+  html.wsd-js body.page-template-template-smile-gallery-php .header-top,
+  html.wsd-js body.page-template-template-smile-gallery-php #masthead.site-header,
+  html.wsd-js body.page-template-template-smile-gallery .header-top,
+  html.wsd-js body.page-template-template-smile-gallery #masthead.site-header,
   html.wsd-js body.single-services .header-top,
   html.wsd-js body.single-services #masthead.site-header {
     opacity: 0;
@@ -112,6 +116,10 @@ body {
   html.wsd-js body.page-template-template-fees-php .hero-description,
   html.wsd-js body.page-template-template-fees .hero-title,
   html.wsd-js body.page-template-template-fees .hero-description,
+  html.wsd-js body.page-template-template-smile-gallery-php .hero-title,
+  html.wsd-js body.page-template-template-smile-gallery-php .hero-description,
+  html.wsd-js body.page-template-template-smile-gallery .hero-title,
+  html.wsd-js body.page-template-template-smile-gallery .hero-description,
   html.wsd-js body.single-services .hero-title,
   html.wsd-js body.single-services .hero-description,
   html.wsd-js body.single-services .cosmetic-hero-title,
@@ -172,6 +180,32 @@ body {
   html.wsd-js
     body.page-template-template-fees
     .fees-page-main
+    .hero-image-wrapper {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+  }
+
+  html.wsd-js
+    body.page-template-template-smile-gallery-php
+    .smile-gallery-page-main
+    .hero-buttons
+    .btn,
+  html.wsd-js
+    body.page-template-template-smile-gallery
+    .smile-gallery-page-main
+    .hero-buttons
+    .btn {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  html.wsd-js
+    body.page-template-template-smile-gallery-php
+    .smile-gallery-page-main
+    .hero-image-wrapper,
+  html.wsd-js
+    body.page-template-template-smile-gallery
+    .smile-gallery-page-main
     .hero-image-wrapper {
     opacity: 0;
     transform: translateX(50px) scale(0.95);
@@ -3907,7 +3941,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .reviews-nav-btn,
   .more-services-nav-btn,
   .btn-view-plan,
-  .btn-book-outline {
+  .btn-book-outline,
+  .smile-gallery-filter {
     position: relative !important;
     overflow: hidden !important;
     z-index: 1 !important;
@@ -3931,7 +3966,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .reviews-nav-btn::before,
   .more-services-nav-btn::before,
   .btn-view-plan::before,
-  .btn-book-outline::before {
+  .btn-book-outline::before,
+  .smile-gallery-filter::before {
     content: "" !important;
     position: absolute !important;
     top: 0 !important;
@@ -3960,7 +3996,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .reviews-nav-btn:hover::before,
   .more-services-nav-btn:hover::before,
   .btn-view-plan:hover::before,
-  .btn-book-outline:hover::before {
+  .btn-book-outline:hover::before,
+  .smile-gallery-filter:hover::before {
     transform: skewX(-25deg) scaleX(1) !important;
   }
 
@@ -3972,7 +4009,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-view-plan,
   .teams-support-tab.is-active,
   .teams-slider-nav-btn--next.is-active,
-  .dentist-tab-btn.active {
+  .dentist-tab-btn.active,
+  .smile-gallery-filter.is-active {
     /* Warm goldish-gray (not flat #5e5d5f) */
     --hover-sweep-bg: #837257 !important;
   }
@@ -3985,7 +4023,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-view-plan:hover,
   .teams-support-tab.is-active:hover,
   .teams-slider-nav-btn--next.is-active:hover,
-  .dentist-tab-btn.active:hover {
+  .dentist-tab-btn.active:hover,
+  .smile-gallery-filter.is-active:hover {
     color: #ffffff !important;
     /* Keep gold base so grey sweep covers fill without hiding label */
     background-color: #d8a444 !important;
@@ -3998,7 +4037,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .tab-action-btn > span,
   .dentist-tab-btn > span,
   .btn-view-plan > span,
-  .book-appointment-btn > span {
+  .book-appointment-btn > span,
+  .smile-gallery-filter > span {
     position: relative !important;
     z-index: 1 !important;
   }
@@ -4014,7 +4054,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-book-outline,
   .teams-support-tab:not(.is-active),
   .teams-slider-nav-btn--prev,
-  .teams-slider-nav-btn--next:not(.is-active) {
+  .teams-slider-nav-btn--next:not(.is-active),
+  .smile-gallery-filter:not(.is-active) {
     --hover-sweep-bg: #d8a444 !important;
   }
 
@@ -4029,7 +4070,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-book-outline:hover,
   .teams-support-tab:not(.is-active):hover,
   .teams-slider-nav-btn--prev:hover,
-  .teams-slider-nav-btn--next:not(.is-active):hover {
+  .teams-slider-nav-btn--next:not(.is-active):hover,
+  .smile-gallery-filter:not(.is-active):hover {
     color: #ffffff !important;
     border-color: #d8a444 !important;
     background-color: transparent !important;
@@ -12120,5 +12162,726 @@ body.home
 
   .fees-accordion-content-inner {
     padding: 0 36px 28px;
+  }
+}
+
+/* ============================================================
+   SMILE GALLERY PAGE — SHARED (ALL BREAKPOINTS)
+   ============================================================ */
+.page-template-template-smile-gallery-php .site-content,
+.page-template-template-smile-gallery .site-content {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  background-color: #fefdf6;
+}
+
+.page-template-template-smile-gallery-php #main.smile-gallery-page-main,
+.page-template-template-smile-gallery #main.smile-gallery-page-main {
+  display: flex !important;
+  flex-direction: column;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0;
+  background-color: #fefdf6;
+}
+
+.smile-gallery-page-main {
+  background-color: #fefdf6;
+}
+
+.smile-gallery-hero-page {
+  background-color: #faf3e6;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+.smile-gallery-hero-inner {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+}
+
+.smile-gallery-hero-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.smile-gallery-hero-copy {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.smile-gallery-hero-image-col {
+  min-width: 0;
+}
+
+.smile-gallery-hero-image-frame {
+  line-height: 0;
+}
+
+.smile-gallery-hero-title,
+.smile-gallery-page-main .hero-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  line-height: normal;
+  color: #5e5d5f;
+}
+
+.smile-gallery-hero-description,
+.smile-gallery-page-main .hero-description {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  color: #5e5d5f;
+}
+
+.smile-gallery-hero-title-accent {
+  color: #d8a444;
+}
+
+.smile-gallery-cases-section {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fefdf6;
+}
+
+.smile-gallery-cases-sticky {
+  width: 100%;
+}
+
+.smile-gallery-page-main .gallery-card {
+  z-index: 1;
+}
+
+.smile-gallery-page-main .after-card {
+  z-index: 2;
+}
+
+.smile-gallery-page-main .gallery-connecting-arrow {
+  z-index: 3;
+}
+
+.smile-gallery-page-slide.is-filtered-out,
+.smile-gallery-page-details.is-filtered-out {
+  display: none !important;
+}
+
+.smile-gallery-cases-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.smile-gallery-cases-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+.smile-gallery-category-badge,
+.smile-gallery-section-badge {
+  background-color: #faf3e6;
+  border-bottom: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.smile-gallery-category-title,
+.smile-gallery-section-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: normal;
+  color: #5e5d5f;
+  white-space: nowrap;
+}
+
+.smile-gallery-category-title .light,
+.smile-gallery-section-title .light {
+  font-weight: 600;
+}
+
+.smile-gallery-category-title .accent,
+.smile-gallery-section-title .accent {
+  font-weight: 600;
+  color: #d8a444;
+}
+
+.smile-gallery-cases-body {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.smile-gallery-cases-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  min-width: 0;
+  transform: scale(var(--sg-row-scale, 1));
+  transform-origin: left top;
+  margin-bottom: var(--sg-row-margin-bottom, 0);
+  will-change: transform;
+}
+
+.smile-gallery-cases-main {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.smile-gallery-page-images {
+  flex: 0 0 auto;
+}
+
+.smile-gallery-page-info {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.smile-gallery-page-main .gallery-info-wrapper {
+  width: 100%;
+}
+
+.smile-gallery-page-main .gallery-interactive-wrapper,
+.smile-gallery-page-main .gallery-image-pair-container,
+.smile-gallery-page-main .smile-gallery-page-slide,
+.smile-gallery-page-main .gallery-slide {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+.smile-gallery-page-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.smile-gallery-page-slide:not(.active) {
+  display: none !important;
+}
+
+.smile-gallery-page-slide.active {
+  display: block;
+}
+
+.smile-gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 21px;
+  margin-left: auto;
+  position: relative;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+.smile-gallery-filter {
+  appearance: none;
+  border: 1px solid rgba(94, 93, 95, 0.52);
+  background-color: transparent;
+  border-radius: 40px;
+  padding: 20px 40px;
+  font-family: var(--font-family-primary);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: rgba(94, 93, 95, 0.52);
+  cursor: pointer;
+  position: relative;
+  z-index: 6;
+  pointer-events: auto;
+  transition:
+    color 0.5s ease,
+    border-color 0.5s ease,
+    background-color 0.5s ease;
+}
+
+.smile-gallery-filter > span {
+  position: relative;
+  z-index: 1;
+}
+
+.smile-gallery-filter.is-active {
+  background-color: #d8a444;
+  border-color: #d8a444;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.smile-gallery-page-main button.smile-gallery-filter,
+.smile-gallery-page-main button.smile-gallery-filter:hover,
+.smile-gallery-page-main button.smile-gallery-filter:focus-visible {
+  background-color: transparent;
+}
+
+.smile-gallery-page-main button.smile-gallery-filter.is-active,
+.smile-gallery-page-main button.smile-gallery-filter.is-active:hover,
+.smile-gallery-page-main button.smile-gallery-filter.is-active:focus-visible {
+  background-color: #d8a444;
+}
+
+@media (max-width: 991px) {
+  .smile-gallery-filter:not(.is-active):hover,
+  .smile-gallery-filter:not(.is-active):focus-visible {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+}
+
+.smile-gallery-page-main .gallery-image-pair-container {
+  clip-path: none;
+  overflow: visible;
+}
+
+.smile-gallery-page-main .gallery-interactive-wrapper {
+  overflow: visible;
+}
+
+.smile-gallery-page-main .gallery-img {
+  transform: none;
+}
+
+.smile-gallery-page-main .gallery-header-badge,
+.smile-gallery-page-main .gallery-header-desc,
+.smile-gallery-page-main .gallery-detail-card,
+.smile-gallery-page-main .btn-gallery-action {
+  opacity: 1;
+  transform: none;
+}
+
+.smile-gallery-page-details-grid {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+}
+
+.smile-gallery-page-details {
+  position: absolute;
+  inset: 0;
+  display: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.smile-gallery-page-details.active {
+  display: grid;
+}
+
+.smile-gallery-page-indicator {
+  clip-path: none;
+  flex-shrink: 0;
+}
+
+.smile-gallery-page-indicator .gallery-scroll-indicator-handle {
+  height: 103px;
+  will-change: transform;
+}
+
+/* ============================================================
+   SMILE GALLERY PAGE — DESKTOP LAYOUT
+   ============================================================ */
+@media (min-width: 992px) {
+  .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
+  .page-template-template-smile-gallery #main.smile-gallery-page-main {
+    gap: 160px;
+    padding: 0 0 160px;
+  }
+
+  .smile-gallery-cases-section {
+    height: var(--smile-gallery-track-height, 300vh);
+    position: relative;
+    background-color: #fefdf6;
+  }
+
+  .smile-gallery-cases-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: clip;
+    background-color: #fefdf6;
+  }
+
+  .smile-gallery-cases-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 0;
+    gap: 80px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    margin-bottom: auto;
+    flex-shrink: 0;
+  }
+
+  .smile-gallery-page-main .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 0;
+    width: 420px;
+    max-width: 100%;
+  }
+
+  .smile-gallery-page-main .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .smile-gallery-hero-page {
+    background-color: #faf3e6;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    height: 888px;
+    padding: 0 0 0 120px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .smile-gallery-hero-inner {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 0 80px;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+  }
+
+  .smile-gallery-hero-content-col {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 80px;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+    height: 100%;
+  }
+
+  .smile-gallery-hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 100%;
+  }
+
+  .smile-gallery-hero-image-col {
+    flex: 1 1 0;
+    width: auto;
+    max-width: 840px;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .smile-gallery-hero-image-frame {
+    width: 100%;
+    max-height: 100%;
+    line-height: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .smile-gallery-hero-image-frame .smile-gallery-hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 788px;
+    max-width: 840px;
+    object-fit: contain;
+    object-position: bottom right;
+  }
+
+  .smile-gallery-hero-title,
+  .smile-gallery-page-main .hero-title {
+    font-size: 60px;
+  }
+
+  .smile-gallery-hero-description,
+  .smile-gallery-page-main .hero-description {
+    font-size: 20px;
+    line-height: 36px;
+    max-width: 640px;
+  }
+
+  .smile-gallery-cases-header {
+    gap: 112px;
+    padding-right: 120px;
+  }
+
+  .smile-gallery-section-badge {
+    padding: 40px 120px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-left: 0;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0 120px;
+    container-type: inline-size;
+    container-name: sg-cases-body;
+  }
+
+  .smile-gallery-cases-row {
+    gap: 30px;
+    width: max-content;
+    max-width: none;
+    --sg-row-natural-width: 1709px;
+    --sg-row-natural-height: 540px;
+  }
+
+  .smile-gallery-cases-main {
+    gap: 23px;
+  }
+
+  .smile-gallery-page-main .gallery-interactive-wrapper {
+    width: 990px;
+    height: 540px;
+    flex-shrink: 0;
+  }
+
+  .smile-gallery-page-info {
+    width: 661px;
+    max-width: 100%;
+  }
+
+  .smile-gallery-page-main .gallery-details-grid {
+    height: 320px;
+  }
+
+  .smile-gallery-page-main .gallery-detail-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .smile-gallery-page-main .btn-gallery-action {
+    width: 489px;
+    max-width: 100%;
+  }
+
+  .smile-gallery-page-indicator {
+    flex: 0 0 5px;
+    height: 480px;
+    align-self: center;
+    margin-top: 60px;
+    margin-left: 0;
+  }
+
+  .smile-gallery-page-main .before-card {
+    left: 0;
+    top: 0;
+  }
+
+  .smile-gallery-page-main .after-card {
+    left: 457px;
+    top: 159px;
+  }
+
+  .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 261px;
+    top: 389px;
+  }
+}
+
+/* Laptop / sub-2100: tighter gutters (covers 75% zoom on 1080p @ 125% OS scale ≈ 2048px) */
+@media (min-width: 992px) and (max-width: 2100px) {
+  .smile-gallery-cases-header {
+    gap: 80px;
+    padding-right: 80px;
+  }
+
+  .smile-gallery-section-badge {
+    padding: 34px 80px;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0 80px;
+  }
+
+  .smile-gallery-cases-inner {
+    gap: 60px;
+  }
+
+  .smile-gallery-filters {
+    gap: 14px;
+    flex-wrap: nowrap;
+  }
+
+  .smile-gallery-filter {
+    padding: 16px 28px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+}
+
+/* Full Figma row needs ~1869px viewport at 80px gutters; scale down below that */
+@media (min-width: 992px) and (max-width: 1868px) {
+  .smile-gallery-cases-header {
+    gap: 56px;
+    padding-right: 60px;
+  }
+
+  .smile-gallery-section-badge {
+    padding: 30px 60px;
+  }
+
+  .smile-gallery-section-title {
+    font-size: 40px;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0 60px;
+  }
+
+  .smile-gallery-cases-row {
+    gap: 24px;
+    --sg-row-natural-width: 1368px;
+    --sg-row-natural-height: 432px;
+  }
+
+  .smile-gallery-cases-main {
+    gap: 18px;
+  }
+
+  .smile-gallery-page-main .gallery-interactive-wrapper {
+    width: 792px;
+    height: 432px;
+  }
+
+  .smile-gallery-page-info {
+    width: 529px;
+  }
+
+  .smile-gallery-page-main .gallery-card {
+    width: 426px;
+  }
+
+  .smile-gallery-page-main .gallery-card-image-wrapper {
+    height: 279px;
+  }
+
+  .smile-gallery-page-main .after-card {
+    left: 366px;
+    top: 127px;
+  }
+
+  .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 209px;
+    top: 311px;
+    width: 143px;
+    height: 65px;
+  }
+
+  .smile-gallery-page-main .gallery-details-grid {
+    height: 260px;
+  }
+
+  .smile-gallery-page-main .gallery-detail-card {
+    height: 120px;
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .smile-gallery-page-main .detail-label {
+    font-size: 18px;
+  }
+
+  .smile-gallery-page-main .detail-value {
+    font-size: 15px;
+  }
+
+  .smile-gallery-page-main .btn-gallery-action {
+    width: 390px;
+    padding: 22px;
+    font-size: 18px;
+  }
+
+  .smile-gallery-page-indicator {
+    height: 384px;
+    margin-top: 48px;
+  }
+
+  .smile-gallery-filter {
+    padding: 14px 22px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1440px) {
+  .smile-gallery-cases-header {
+    gap: 40px;
+    padding-right: 40px;
+  }
+
+  .smile-gallery-section-badge {
+    padding: 24px 40px;
+  }
+
+  .smile-gallery-section-title {
+    font-size: 36px;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0 40px;
+  }
+
+  .smile-gallery-filter {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+/* CSS fallback when JS is unavailable */
+@container sg-cases-body (inline-size < 1710px) {
+  .smile-gallery-cases-row {
+    --sg-row-scale: min(1, calc(100cqi / var(--sg-row-natural-width, 1709px)));
+    --sg-row-margin-bottom: calc(
+      var(--sg-row-natural-height, 540px) *
+        (var(--sg-row-scale, 1) - 1)
+    );
   }
 }
