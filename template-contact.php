@@ -161,10 +161,9 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 										<?php if ( $email ) : ?>
 											<div class="contact-info-item">
 												<span class="contact-info-icon" aria-hidden="true">
-													<svg width="18" height="18" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M5 6.25H25V23.75H5V6.25Z" stroke="#D8A444" stroke-width="1.5" stroke-linejoin="round"/>
-														<path d="M5 8.75L15 15.625L25 8.75" stroke="#D8A444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-													</svg>
+													<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  <path d="M3.75 3.75H26.25C26.9404 3.75 27.5 4.30965 27.5 5V25C27.5 25.6904 26.9404 26.25 26.25 26.25H3.75C3.05965 26.25 2.5 25.6904 2.5 25V5C2.5 4.30965 3.05965 3.75 3.75 3.75ZM25 9.0474L15.0898 17.9225L5 9.01993V23.75H25V9.0474ZM5.63932 6.25L15.0774 14.5775L24.3762 6.25H5.63932Z" fill="#D8A444"/>
+</svg>
 												</span>
 												<div class="contact-info-copy">
 													<p class="contact-info-label">Email address</p>
@@ -178,9 +177,9 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 										<?php if ( $phone ) : ?>
 											<div class="contact-info-item">
 												<span class="contact-info-icon" aria-hidden="true">
-													<svg width="18" height="18" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M8.75 5H12.5L14.375 10.625L11.5625 12.1875C12.6719 14.5156 14.4844 16.3281 16.8125 17.4375L18.375 14.625L24 16.5V20.25C24 20.913 23.7366 21.5489 23.2678 22.0178C22.7989 22.4866 22.163 22.75 21.5 22.75C17.4493 22.5225 13.5627 20.8909 10.6094 17.9375C7.65603 14.9841 6.02446 11.0975 5.79688 7.04688C5.79688 6.38386 6.06027 5.74799 6.52911 5.27915C6.99795 4.81031 7.63382 4.54688 8.29688 4.54688H8.75Z" stroke="#D8A444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-													</svg>
+													<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+													<path d="M11.7069 13.3526C12.8775 15.411 14.589 17.1225 16.6474 18.293L17.753 16.7451C18.1206 16.2306 18.8145 16.0716 19.3695 16.3748C21.128 17.3354 23.0714 17.9191 25.0986 18.0796C25.7487 18.1311 26.25 18.6736 26.25 19.3258V24.9043C26.25 25.5451 25.7652 26.0821 25.1278 26.1476C24.4654 26.2157 23.7971 26.25 23.125 26.25C12.4245 26.25 3.75 17.5755 3.75 6.875C3.75 6.20284 3.78428 5.53464 3.85236 4.8722C3.91788 4.23469 4.45493 3.75 5.09581 3.75H10.6743C11.3264 3.75 11.8689 4.2513 11.9204 4.90136C12.0808 6.9286 12.6646 8.87205 13.6252 10.6306C13.9284 11.1855 13.7694 11.8794 13.2549 12.247L11.7069 13.3526ZM8.55531 12.5315L10.9302 10.8351C10.2568 9.38142 9.79535 7.83979 9.55909 6.25H6.26134C6.25379 6.4579 6.25 6.66625 6.25 6.875C6.25 16.1947 13.8053 23.75 23.125 23.75C23.3337 23.75 23.5421 23.7463 23.75 23.7386V20.4409C22.1602 20.2046 20.6186 19.7431 19.1649 19.0697L17.4685 21.4447C16.7823 21.1781 16.1195 20.8644 15.4842 20.5076L15.4116 20.4662C12.9621 19.0734 10.9267 17.0379 9.53375 14.5884L9.49242 14.5158C9.13561 13.8805 8.82193 13.2177 8.55531 12.5315Z" fill="#D8A444"/>
+												</svg>
 												</span>
 												<div class="contact-info-copy">
 													<p class="contact-info-label">Phone number</p>
@@ -198,9 +197,8 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 										<?php if ( ! empty( $all_hours_lines ) ) : ?>
 											<div class="contact-info-item contact-info-hours">
 												<span class="contact-info-icon" aria-hidden="true">
-													<svg width="18" height="18" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<circle cx="15" cy="15" r="10" stroke="#D8A444" stroke-width="1.5"/>
-														<path d="M15 9.375V15L18.75 17.8125" stroke="#D8A444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+														<path d="M15 27.5C8.09644 27.5 2.5 21.9035 2.5 15C2.5 8.09644 8.09644 2.5 15 2.5C21.9035 2.5 27.5 8.09644 27.5 15C27.5 21.9035 21.9035 27.5 15 27.5ZM15 25C20.5229 25 25 20.5229 25 15C25 9.47715 20.5229 5 15 5C9.47715 5 5 9.47715 5 15C5 20.5229 9.47715 25 15 25ZM16.25 15H21.25V17.5H13.75V8.75H16.25V15Z" fill="#D8A444"/>
 													</svg>
 												</span>
 												<div class="contact-info-copy">
