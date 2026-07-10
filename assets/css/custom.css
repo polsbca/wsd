@@ -12405,6 +12405,7 @@ body.home
 .smile-gallery-mobile-filters,
 .smile-gallery-filter-panel,
 .smile-gallery-section-heading-mobile,
+.smile-gallery-section-heading-tablet,
 .smile-gallery-page-dots {
   display: none;
 }
@@ -12459,7 +12460,7 @@ body.home
   background-color: #d8a444;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
   .smile-gallery-filter:not(.is-active):hover,
   .smile-gallery-filter:not(.is-active):focus-visible {
     background-color: #d8a444;
@@ -12505,6 +12506,10 @@ body.home
 
 .smile-gallery-page-details.active {
   display: grid;
+}
+
+.smile-gallery-page-details-row {
+  display: contents;
 }
 
 .smile-gallery-page-indicator {
@@ -12889,7 +12894,7 @@ body.home
 /* ============================================================
    SMILE GALLERY PAGE — MOBILE LAYOUT (Figma 4078:36621)
    ============================================================ */
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
   .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
   .page-template-template-smile-gallery #main.smile-gallery-page-main {
     gap: 94px;
@@ -13404,6 +13409,17 @@ body.home
     display: flex;
   }
 
+  .smile-gallery-page-details-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .smile-gallery-page-details-row .gallery-detail-card {
+    width: 100%;
+  }
+
   .smile-gallery-page-main .gallery-detail-card {
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid rgba(117, 117, 117, 0.24);
@@ -13474,8 +13490,489 @@ body.home
   }
 }
 
+/* Phone-only refinements */
+@media (max-width: 767.98px) {
+  .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
+  .page-template-template-smile-gallery #main.smile-gallery-page-main {
+    gap: 94px;
+    padding: 0 0 60px;
+  }
+
+  .smile-gallery-hero-content-col {
+    padding: 30px 24px 0;
+  }
+
+  .smile-gallery-hero-title,
+  .smile-gallery-page-main .hero-title {
+    font-size: 24px;
+  }
+
+  .smile-gallery-hero-description,
+  .smile-gallery-page-main .hero-description {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .smile-gallery-page-main .hero-buttons {
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+  }
+
+  .smile-gallery-page-main .hero-buttons .btn {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .smile-gallery-hero-image-frame {
+    aspect-ratio: 402 / 461;
+  }
+
+  .smile-gallery-cases-inner {
+    gap: 30px;
+  }
+
+  .smile-gallery-section-badge {
+    padding: 20px 40px 20px 24px;
+  }
+
+  .smile-gallery-section-title {
+    font-size: 20px;
+  }
+
+  .smile-gallery-section-heading-tablet {
+    display: none;
+  }
+
+  .smile-gallery-section-heading-mobile {
+    display: inline;
+  }
+
+  .smile-gallery-mobile-filters {
+    gap: 13px;
+    padding: 0 24px;
+  }
+
+  .smile-gallery-mobile-all {
+    width: 99px;
+    min-width: 99px;
+    padding: 16px;
+    border-radius: 32px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .smile-gallery-mobile-browse {
+    min-height: 42px;
+    padding: 10px 16px;
+    font-size: 14px;
+    gap: 12px;
+  }
+
+  .smile-gallery-mobile-browse-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0 24px;
+  }
+
+  .smile-gallery-page-images,
+  .smile-gallery-page-info {
+    max-width: 354px;
+  }
+
+  .smile-gallery-page-main .gallery-interactive-wrapper {
+    max-width: 354px;
+    height: 279px;
+  }
+
+  .smile-gallery-page-main .gallery-card {
+    width: 215px;
+    height: 170px;
+  }
+
+  .smile-gallery-page-main .before-card {
+    top: -5px;
+  }
+
+  .smile-gallery-page-main .after-card {
+    left: 139px;
+    top: 109px;
+  }
+
+  .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 87px;
+    top: 157px;
+    width: 82px;
+    height: 37px;
+  }
+
+  .smile-gallery-page-details {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .smile-gallery-page-main .gallery-detail-card {
+    padding: 14px 20px;
+    gap: 10px;
+  }
+
+  .smile-gallery-page-main .detail-label {
+    font-size: 14px;
+  }
+
+  .smile-gallery-page-main .detail-value {
+    font-size: 11px;
+    line-height: 22px;
+  }
+}
+
+/* ============================================================
+   SMILE GALLERY PAGE — TABLET LAYOUT (Figma 4078:36846)
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
+  .page-template-template-smile-gallery #main.smile-gallery-page-main {
+    gap: 100px;
+    padding: 0 0 100px;
+  }
+
+  .smile-gallery-hero-page {
+    gap: 0;
+  }
+
+  .smile-gallery-hero-inner {
+    gap: 62px;
+    align-items: flex-end;
+  }
+
+  .smile-gallery-hero-content-col {
+    padding: 60px 40px 0;
+    gap: 48px;
+  }
+
+  .smile-gallery-hero-copy {
+    gap: 30px;
+    padding-right: clamp(40px, 16vw, 120px);
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-hero-title,
+  .smile-gallery-page-main .hero-title {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .smile-gallery-hero-description,
+  .smile-gallery-page-main .hero-description {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  .smile-gallery-page-main .hero-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: none;
+  }
+
+  .smile-gallery-page-main .hero-buttons .btn {
+    flex: 0 0 223px;
+    width: 223px;
+    padding: 20px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    border-radius: 32px;
+  }
+
+  .smile-gallery-hero-image-col {
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .smile-gallery-hero-image-frame {
+    width: min(594px, 100%);
+    margin-left: auto;
+    aspect-ratio: 594 / 558;
+    min-height: 360px;
+  }
+
+  .smile-gallery-cases-inner {
+    gap: 64px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .smile-gallery-cases-header {
+    gap: 64px;
+    width: 100%;
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .smile-gallery-section-badge {
+    align-self: flex-start;
+    width: 275px;
+    min-width: 275px;
+    height: 72px;
+    padding: 32px 40px;
+    margin-right: 40px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-section-title {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+
+  .smile-gallery-section-heading-mobile {
+    display: none;
+  }
+
+  .smile-gallery-section-heading-tablet {
+    display: inline;
+  }
+
+  .smile-gallery-mobile-filters {
+    gap: 21px;
+    padding: 0 40px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-mobile-all {
+    width: 252px;
+    min-width: 252px;
+    padding: 20px 40px;
+    border-radius: 40px;
+    border: 1px solid #d8a444;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: none;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-all.is-active,
+  .smile-gallery-page-main button.smile-gallery-mobile-all.is-active:hover,
+  .smile-gallery-page-main button.smile-gallery-mobile-all.is-active:focus-visible,
+  .smile-gallery-page-main button.smile-gallery-mobile-all.is-active:active {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
+
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active),
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active):hover,
+  .smile-gallery-page-main button.smile-gallery-mobile-all:not(.is-active):focus-visible {
+    background-color: transparent;
+    border-color: rgba(94, 93, 95, 0.52);
+    color: rgba(94, 93, 95, 0.52);
+  }
+
+  .smile-gallery-mobile-browse {
+    min-height: 0;
+    padding: 20px 40px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    gap: 12px;
+    border-radius: 40px;
+  }
+
+  .smile-gallery-mobile-browse-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .smile-gallery-cases-body {
+    padding: 0;
+    width: 100%;
+  }
+
+  .smile-gallery-cases-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    transform: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .smile-gallery-cases-main {
+    flex-direction: column;
+    align-items: stretch;
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    gap: 64px;
+  }
+
+  .smile-gallery-page-images,
+  .smile-gallery-page-info {
+    width: 100%;
+    max-width: 100%;
+    align-self: stretch;
+  }
+
+  .smile-gallery-page-images {
+    display: flex;
+    justify-content: center;
+  }
+
+  .smile-gallery-page-main .gallery-interactive-wrapper {
+    width: 512px;
+    max-width: calc(100% - 80px);
+    height: 303px;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+
+  .smile-gallery-page-main .gallery-card {
+    height: 194px;
+    padding: 4px;
+    border-radius: 14px;
+    box-shadow: 0 1.433px 2.867px rgba(0, 0, 0, 0.12);
+  }
+
+  .smile-gallery-page-main .before-card {
+    left: 0;
+    top: 0;
+    width: 292px;
+  }
+
+  .smile-gallery-page-main .after-card {
+    left: 220px;
+    top: 109px;
+    width: 292px;
+  }
+
+  .smile-gallery-page-main .gallery-card-image-wrapper {
+    height: 100%;
+    border-radius: 8px;
+  }
+
+  .smile-gallery-page-main .gallery-card-label {
+    bottom: 4px;
+    left: 4px;
+    padding: 4px 6px;
+    border-radius: 0 4px 0 0;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 83px;
+    top: 176px;
+    width: 91px;
+    height: 41px;
+  }
+
+  .smile-gallery-page-info {
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-page-details-grid {
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    height: auto;
+  }
+
+  .smile-gallery-page-main .gallery-details-data.smile-gallery-page-details {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .smile-gallery-page-details {
+    display: none;
+    width: 100%;
+  }
+
+  .smile-gallery-page-details.active {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .smile-gallery-page-details-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .smile-gallery-page-details-row .gallery-detail-card {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 98px;
+    padding: 22px;
+    gap: 6px;
+    box-sizing: border-box;
+  }
+
+  .smile-gallery-page-main .detail-label {
+    font-size: 14px;
+    line-height: 20px;
+    opacity: 0.4;
+  }
+
+  .smile-gallery-page-main .detail-value {
+    font-size: 11px;
+    line-height: 22px;
+  }
+
+  .smile-gallery-page-main .gallery-info-wrapper {
+    gap: 64px;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .smile-gallery-page-dots {
+    margin-top: 0;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .smile-gallery-page-dots .gallery-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .smile-gallery-filter-panel-sheet {
+    max-width: 660px;
+    margin: 0 auto;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .smile-gallery-filter-panel-option {
+    padding: 20px 40px;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+}
+
 @media (min-width: 992px) {
   .smile-gallery-section-heading-mobile,
+  .smile-gallery-section-heading-tablet,
   .smile-gallery-mobile-filters,
   .smile-gallery-filter-panel,
   .smile-gallery-page-dots {

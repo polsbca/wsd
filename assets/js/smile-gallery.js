@@ -190,16 +190,28 @@
       });
       $panelOptions.removeClass("is-active");
 
-      if ($activeFilterEl && $activeFilterEl.length) {
-        $activeFilterEl.addClass("is-active");
-        if ($activeFilterEl.is('[role="tab"]')) {
-          $activeFilterEl.attr("aria-selected", "true");
-        } else {
-          $activeFilterEl.attr("aria-pressed", "true");
-        }
-      }
+      if (isDesktop) {
+        var $desktopFilter = $root
+          .find(
+            '.smile-gallery-filters--desktop .smile-gallery-filter[data-filter="' +
+              filterValue +
+              '"]',
+          )
+          .first();
 
-      if ("all" !== filterValue) {
+        if (!$desktopFilter.length) {
+          $desktopFilter = $root
+            .find(".smile-gallery-filters--desktop .smile-gallery-filter")
+            .first();
+        }
+
+        if ($desktopFilter.length) {
+          $desktopFilter.addClass("is-active").attr("aria-selected", "true");
+        }
+      } else if ("all" === filterValue) {
+        $mobileAllBtn.addClass("is-active").attr("aria-pressed", "true");
+      } else if ($activeFilterEl && $activeFilterEl.length) {
+        $activeFilterEl.addClass("is-active").attr("aria-pressed", "true");
         $panelOptions
           .filter('[data-filter="' + filterValue + '"]')
           .addClass("is-active");
@@ -577,6 +589,7 @@
         }
 
         applyFilterState();
+        syncMobileFilterUi();
         initStickyScroll();
         bindGalleryRowFit();
         initMobileCaseSlider();
@@ -604,7 +617,7 @@
     }
 
     applyFilterState();
-    syncMobileFilterUi($root.find(".smile-gallery-filter.is-active").first());
+    syncMobileFilterUi();
     initStickyScroll();
     bindGalleryRowFit();
     initMobileCaseSlider();

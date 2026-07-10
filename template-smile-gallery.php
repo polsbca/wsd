@@ -105,6 +105,9 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 							<span class="smile-gallery-section-heading-mobile">
 								<span class="light"><?php esc_html_e( 'All Treatment', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( ' Results', 'wsd' ); ?></span>
 							</span>
+							<span class="smile-gallery-section-heading-tablet">
+								<span class="light"><?php esc_html_e( 'All ', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( 'Treatments', 'wsd' ); ?></span>
+							</span>
 						</h2>
 					</div>
 
@@ -127,7 +130,7 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 
 					<div class="smile-gallery-mobile-filters">
 						<button type="button" class="smile-gallery-filter smile-gallery-mobile-all is-active" data-filter="all" aria-pressed="true">
-							<span><?php esc_html_e( 'ALL', 'wsd' ); ?></span>
+							<span><?php esc_html_e( 'All', 'wsd' ); ?></span>
 						</button>
 						<button
 							type="button"
@@ -219,21 +222,25 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 												data-index="<?php echo esc_attr( $case_index ); ?>"
 												data-category-slugs="<?php echo esc_attr( $category_slugs ); ?>"
 											>
-												<div class="gallery-detail-card">
-													<span class="detail-label"><?php esc_html_e( 'Treatment', 'wsd' ); ?></span>
-													<span class="detail-value"><?php echo esc_html( $gallery_case['treatment'] ); ?></span>
+												<div class="smile-gallery-page-details-row">
+													<div class="gallery-detail-card">
+														<span class="detail-label"><?php esc_html_e( 'Treatment', 'wsd' ); ?></span>
+														<span class="detail-value"><?php echo esc_html( $gallery_case['treatment'] ); ?></span>
+													</div>
+													<div class="gallery-detail-card">
+														<span class="detail-label"><?php esc_html_e( 'Main Concern', 'wsd' ); ?></span>
+														<span class="detail-value"><?php echo esc_html( $gallery_case['concern'] ); ?></span>
+													</div>
 												</div>
-												<div class="gallery-detail-card">
-													<span class="detail-label"><?php esc_html_e( 'Main Concern', 'wsd' ); ?></span>
-													<span class="detail-value"><?php echo esc_html( $gallery_case['concern'] ); ?></span>
-												</div>
-												<div class="gallery-detail-card">
-													<span class="detail-label"><?php esc_html_e( 'Duration', 'wsd' ); ?></span>
-													<span class="detail-value"><?php echo esc_html( $gallery_case['duration'] ); ?></span>
-												</div>
-												<div class="gallery-detail-card">
-													<span class="detail-label"><?php esc_html_e( 'Visits', 'wsd' ); ?></span>
-													<span class="detail-value"><?php echo esc_html( $gallery_case['visits'] ); ?></span>
+												<div class="smile-gallery-page-details-row">
+													<div class="gallery-detail-card">
+														<span class="detail-label"><?php esc_html_e( 'Duration', 'wsd' ); ?></span>
+														<span class="detail-value"><?php echo esc_html( $gallery_case['duration'] ); ?></span>
+													</div>
+													<div class="gallery-detail-card">
+														<span class="detail-label"><?php esc_html_e( 'Visits', 'wsd' ); ?></span>
+														<span class="detail-value"><?php echo esc_html( $gallery_case['visits'] ); ?></span>
+													</div>
 												</div>
 											</div>
 										<?php endforeach; ?>

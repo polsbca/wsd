@@ -9512,3 +9512,290 @@
     padding-top: 0;
   }
 }
+
+/* ============================================================
+   SMILE GALLERY PAGE TEMPLATE — overrides global .gallery-* rules
+   (responsive.css loads after custom.css and uses !important)
+   ============================================================ */
+@media (max-width: 991.98px) {
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-info-wrapper,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-info-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-details-grid,
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details-grid,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-details-grid,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details-grid {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-details-data,
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-details-data,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details {
+    position: relative !important;
+    inset: auto !important;
+    display: none !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-details-data.active,
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details.active,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-details-data.active,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details.active {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details-row,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-detail-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-detail-card {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 14px 20px !important;
+    gap: 10px !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    border: 1px solid rgba(117, 117, 117, 0.24) !important;
+    border-radius: 8px !important;
+    justify-content: flex-start !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .detail-label,
+  .page-template-template-smile-gallery .smile-gallery-page-main .detail-label {
+    font-size: 14px !important;
+    color: #5e5d5f !important;
+    opacity: 0.4 !important;
+    line-height: normal !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .detail-value,
+  .page-template-template-smile-gallery .smile-gallery-page-main .detail-value {
+    font-size: 11px !important;
+    color: #1a1a1a !important;
+    line-height: 22px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-row,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    transform: none !important;
+    margin-bottom: 0 !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-main,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-main {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-images,
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-info,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-images,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-info {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-interactive-wrapper,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-interactive-wrapper {
+    width: 100% !important;
+    max-width: 354px !important;
+    height: 279px !important;
+    margin: 0 auto !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-card {
+    width: 215px !important;
+    height: 170px !important;
+    padding: 4px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 1.433px 2.867px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .before-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .before-card {
+    left: 0 !important;
+    top: -5px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .after-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .after-card {
+    left: 139px !important;
+    top: 109px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-connecting-arrow,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 87px !important;
+    top: 157px !important;
+    width: 82px !important;
+    height: 37px !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-btn-wrapper,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-btn-wrapper {
+    width: auto !important;
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-inner,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-inner {
+    gap: 64px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-header,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 64px !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-body,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-body {
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-main,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-main {
+    gap: 64px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-images,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-images {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-interactive-wrapper,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-interactive-wrapper {
+    width: 512px !important;
+    max-width: calc(100% - 80px) !important;
+    height: 303px !important;
+    margin: 0 auto !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-card {
+    width: 292px !important;
+    height: 194px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .before-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .before-card {
+    left: 0 !important;
+    top: 0 !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .after-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .after-card {
+    left: 220px !important;
+    top: 109px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-connecting-arrow,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-connecting-arrow {
+    left: 83px !important;
+    top: 176px !important;
+    width: 91px !important;
+    height: 41px !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-info,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-info {
+    padding: 0 40px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-info-wrapper,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-info-wrapper {
+    gap: 64px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-details-data.active,
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details.active,
+  .page-template-template-smile-gallery .smile-gallery-page-main .gallery-details-data.active,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details.active {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details-row,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-details-row .gallery-detail-card,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-details-row .gallery-detail-card {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 98px !important;
+    padding: 22px !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-dots,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+  }
+
+  .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-page-dots .gallery-dot,
+  .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-page-dots .gallery-dot {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
