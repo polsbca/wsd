@@ -233,8 +233,9 @@ body {
     body.page-template-template-blogs
     .blogs-page-main
     .hero-image-wrapper {
-    opacity: 0;
-    transform: translateX(50px) scale(0.95);
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0% 0% 100% 0%);
   }
 
   html.wsd-js
