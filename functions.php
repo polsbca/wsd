@@ -58,7 +58,7 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_singular( 'services' ) || is_singular( 'post' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
@@ -76,6 +76,10 @@ function wsd_scripts() {
 
 	if ( is_page_template( 'template-blogs.php' ) ) {
 		wp_enqueue_script( 'wsd-blogs', get_stylesheet_directory_uri() . '/assets/js/blogs.js', array( 'jquery' ), time(), true );
+	}
+
+	if ( is_singular( 'post' ) ) {
+		wp_enqueue_script( 'wsd-blog-single', get_stylesheet_directory_uri() . '/assets/js/blog-single.js', array( 'jquery' ), time(), true );
 	}
 
 	// jQuery (WordPress default)
@@ -613,6 +617,128 @@ function wsd_get_blog_filter_categories() {
 	}
 
 	return $terms;
+}
+
+/**
+ * Split a blog title into main + accent parts (last two words accented).
+ *
+ * @param string $title Post title.
+ * @return array{main: string, accent: string}
+ */
+function wsd_get_blog_title_parts( $title ) {
+	$title = trim( wp_strip_all_tags( (string) $title ) );
+	$words = preg_split( '/\s+/u', $title, -1, PREG_SPLIT_NO_EMPTY );
+
+	if ( empty( $words ) ) {
+		return array(
+			'main'   => '',
+			'accent' => '',
+		);
+	}
+
+	if ( count( $words ) === 1 ) {
+		return array(
+			'main'   => '',
+			'accent' => $words[0],
+		);
+	}
+
+	$accent_words = array_splice( $words, -2 );
+
+	return array(
+		'main'   => implode( ' ', $words ) . ' ',
+		'accent' => implode( ' ', $accent_words ),
+	);
+}
+
+/**
+ * Get blog like count from post meta (defaults to 0).
+ *
+ * @param int $post_id Post ID.
+ * @return int
+ */
+function wsd_get_blog_like_count( $post_id ) {
+	$post_id = (int) $post_id;
+	$count   = (int) get_post_meta( $post_id, 'wsd_like_count', true );
+
+	/**
+	 * Filter blog like count displayed on the detail page.
+	 *
+	 * @param int $count   Like count.
+	 * @param int $post_id Post ID.
+	 */
+	return (int) apply_filters( 'wsd_blog_like_count', max( 0, $count ), $post_id );
+}
+
+/**
+ * Get related blog posts for the single post page.
+ *
+ * @param int $post_id Current post ID.
+ * @param int $limit   Number of posts.
+ * @return array<int, array<string, mixed>>
+ */
+function wsd_get_related_blog_posts( $post_id, $limit = 6 ) {
+	$post_id    = (int) $post_id;
+	$limit      = (int) $limit;
+	$categories = wp_get_post_categories( $post_id );
+
+	$args = array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => $limit,
+		'post__not_in'        => array( $post_id ),
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
+	);
+
+	if ( ! empty( $categories ) ) {
+		$args['category__in'] = $categories;
+	}
+
+	$query = new WP_Query( $args );
+	$posts = array();
+
+	if ( $query->have_posts() ) {
+		foreach ( $query->posts as $post ) {
+			$card = wsd_get_blog_post_card_data( $post );
+			if ( $card ) {
+				$posts[] = $card;
+			}
+		}
+	}
+
+	// Fallback: recent posts when the category has too few articles.
+	if ( count( $posts ) < min( 3, $limit ) ) {
+		$exclude_ids = array_merge(
+			array( $post_id ),
+			wp_list_pluck( $posts, 'id' )
+		);
+
+		$fallback = new WP_Query(
+			array(
+				'post_type'           => 'post',
+				'post_status'         => 'publish',
+				'posts_per_page'      => $limit - count( $posts ),
+				'post__not_in'        => $exclude_ids,
+				'ignore_sticky_posts' => true,
+				'no_found_rows'       => true,
+			)
+		);
+
+		if ( $fallback->have_posts() ) {
+			foreach ( $fallback->posts as $post ) {
+				$card = wsd_get_blog_post_card_data( $post );
+				if ( $card ) {
+					$posts[] = $card;
+				}
+			}
+		}
+		wp_reset_postdata();
+	}
+
+	wp_reset_postdata();
+
+	return $posts;
 }
 
 /**

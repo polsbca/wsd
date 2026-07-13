@@ -47,11 +47,11 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 			<span><?php echo esc_html( $post_data['date'] ); ?></span>
 		</span>
 		<span class="blogs-meta-item">
-			<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog-icon-comments' . $suffix . '.svg' ); ?>" alt="" width="20" height="20" class="blogs-meta-icon">
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog-icon-timer' . $suffix . '.svg' ); ?>" alt="" width="20" height="20" class="blogs-meta-icon">
 			<span><?php echo esc_html( $post_data['comments_label'] ); ?></span>
 		</span>
 		<span class="blogs-meta-item">
-			<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog-icon-timer' . $suffix . '.svg' ); ?>" alt="" width="20" height="20" class="blogs-meta-icon">
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog-icon-comments' . $suffix . '.svg' ); ?>" alt="" width="20" height="20" class="blogs-meta-icon">
 			<span><?php echo esc_html( $post_data['read_time'] ); ?></span>
 		</span>
 	</div>
@@ -132,15 +132,17 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 					<span class="blogs-featured-badge"><?php esc_html_e( 'Featured article', 'wsd' ); ?></span>
 				</div>
 				<div class="blogs-featured-content">
-					<p id="blogs-featured-heading" class="blogs-featured-eyebrow"><?php esc_html_e( 'Most recent article', 'wsd' ); ?></p>
-					<div class="blogs-featured-body">
-						<h2 class="blogs-featured-title">
-							<a href="<?php echo esc_url( $featured_post['permalink'] ); ?>"><?php echo esc_html( $featured_post['title'] ); ?></a>
-						</h2>
-						<?php $render_blog_meta( $featured_post, 'gold' ); ?>
-						<?php if ( ! empty( $featured_post['excerpt'] ) ) : ?>
-							<p class="blogs-featured-excerpt"><?php echo esc_html( $featured_post['excerpt'] ); ?></p>
-						<?php endif; ?>
+					<div class="blogs-featured-copy">
+						<p id="blogs-featured-heading" class="blogs-featured-eyebrow"><?php esc_html_e( 'Most recent article', 'wsd' ); ?></p>
+						<div class="blogs-featured-body">
+							<h2 class="blogs-featured-title">
+								<a href="<?php echo esc_url( $featured_post['permalink'] ); ?>"><?php echo esc_html( $featured_post['title'] ); ?></a>
+							</h2>
+							<?php $render_blog_meta( $featured_post, 'gold' ); ?>
+							<?php if ( ! empty( $featured_post['excerpt'] ) ) : ?>
+								<p class="blogs-featured-excerpt"><?php echo esc_html( $featured_post['excerpt'] ); ?></p>
+							<?php endif; ?>
+						</div>
 					</div>
 					<a href="<?php echo esc_url( $featured_post['permalink'] ); ?>" class="btn btn-primary blogs-read-btn blogs-read-btn--featured">
 						<span><?php esc_html_e( 'Read Full Article', 'wsd' ); ?></span>
@@ -162,44 +164,40 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 					<button type="button" class="blogs-filter-all is-active" data-filter="all" aria-pressed="true">
 						<span><?php esc_html_e( 'All', 'wsd' ); ?></span>
 					</button>
-					<button
-						type="button"
-						class="blogs-filter-browse"
-						aria-expanded="false"
-						aria-controls="blogs-filter-panel"
-					>
-						<span class="blogs-filter-browse-label"><?php esc_html_e( 'Browse by Filters', 'wsd' ); ?></span>
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/filter-equalizer.svg' ); ?>" alt="" width="24" height="24" class="blogs-filter-browse-icon">
-					</button>
-				</div>
-			</div>
-
-			<div
-				id="blogs-filter-panel"
-				class="blogs-filter-panel"
-				role="dialog"
-				aria-modal="true"
-				aria-labelledby="blogs-filter-panel-title"
-				hidden
-			>
-				<button type="button" class="blogs-filter-panel-backdrop" aria-label="<?php esc_attr_e( 'Close filters', 'wsd' ); ?>"></button>
-				<div class="blogs-filter-panel-sheet">
-					<div class="blogs-filter-panel-header">
-						<h3 id="blogs-filter-panel-title" class="blogs-filter-panel-title"><?php esc_html_e( 'Browse by Filters', 'wsd' ); ?></h3>
-						<button type="button" class="blogs-filter-panel-close" aria-label="<?php esc_attr_e( 'Close', 'wsd' ); ?>">&times;</button>
-					</div>
-					<div class="blogs-filter-panel-options" role="listbox" aria-label="<?php esc_attr_e( 'Blog categories', 'wsd' ); ?>">
-						<?php foreach ( $blog_categories as $category ) : ?>
-							<button
-								type="button"
-								class="blogs-filter-panel-option"
-								role="option"
-								data-filter="<?php echo esc_attr( $category->slug ); ?>"
-								data-label="<?php echo esc_attr( $category->name ); ?>"
-							>
-								<span><?php echo esc_html( $category->name ); ?></span>
-							</button>
-						<?php endforeach; ?>
+					<div class="blogs-filter-browse-wrap">
+						<button
+							type="button"
+							class="blogs-filter-browse"
+							aria-expanded="false"
+							aria-controls="blogs-filter-panel"
+							aria-haspopup="listbox"
+						>
+							<span class="blogs-filter-browse-label"><?php esc_html_e( 'Browse by Filters', 'wsd' ); ?></span>
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/filter-equalizer.svg' ); ?>" alt="" width="24" height="24" class="blogs-filter-browse-icon">
+						</button>
+						<div
+							id="blogs-filter-panel"
+							class="blogs-filter-panel"
+							role="listbox"
+							aria-label="<?php esc_attr_e( 'Blog categories', 'wsd' ); ?>"
+							hidden
+						>
+							<?php if ( ! empty( $blog_categories ) ) : ?>
+								<?php foreach ( $blog_categories as $category ) : ?>
+									<button
+										type="button"
+										class="blogs-filter-panel-option"
+										role="option"
+										data-filter="<?php echo esc_attr( $category->slug ); ?>"
+										data-label="<?php echo esc_attr( $category->name ); ?>"
+									>
+										<span><?php echo esc_html( $category->name ); ?></span>
+									</button>
+								<?php endforeach; ?>
+							<?php else : ?>
+								<p class="blogs-filter-panel-empty"><?php esc_html_e( 'No categories available.', 'wsd' ); ?></p>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div>
 			</div>

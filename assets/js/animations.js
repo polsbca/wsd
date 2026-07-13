@@ -42,6 +42,8 @@ function initAnimations() {
   const hasSmileGalleryPage =
     document.querySelector(".smile-gallery-page-main") !== null;
   const hasBlogsPage = document.querySelector(".blogs-page-main") !== null;
+  const hasBlogDetailPage =
+    document.querySelector(".blog-detail-main") !== null;
   const hasHero = document.querySelector(".hero-title") !== null;
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
@@ -50,7 +52,8 @@ function initAnimations() {
     !hasTeamsPage &&
     !hasFeesPage &&
     !hasSmileGalleryPage &&
-    !hasBlogsPage;
+    !hasBlogsPage &&
+    !hasBlogDetailPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
 
   // ----------------------------------------------------
@@ -1179,6 +1182,10 @@ function initAnimations() {
 
   if (hasBlogsPage && isDesktop) {
     initBlogsPageAnimations();
+  }
+
+  if (hasBlogDetailPage && isDesktop) {
+    initBlogDetailPageAnimations();
   }
 
   if (isDesktop) {
@@ -3392,6 +3399,73 @@ function initBlogsPageAnimations() {
       end: "bottom top",
     });
   }
+}
+
+function initBlogDetailPageAnimations() {
+  const detailMain = document.querySelector(".blog-detail-main");
+  if (!detailMain || window.innerWidth < 992) {
+    return;
+  }
+
+  const heroSection = detailMain.querySelector(".blog-detail-hero");
+  const contentSection = detailMain.querySelector(".blog-detail-content-section");
+  const relatedSection = detailMain.querySelector(".blog-detail-related");
+
+  if (heroSection) {
+    const heroParts = heroSection.querySelectorAll(
+      ".blog-detail-hero-date, .blog-detail-hero-media, .blog-detail-hero-meta",
+    );
+    if (heroParts.length) {
+      gsap.set(heroParts, { y: 30, opacity: 0 });
+      gsap.to(heroParts, {
+        y: 0,
+        opacity: 1,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: "power3.out",
+        delay: 0.15,
+      });
+    }
+  }
+
+  const animateSectionEntrance = (section, selectors) => {
+    if (!section) {
+      return;
+    }
+
+    const elements = selectors
+      .flatMap((selector) => Array.from(section.querySelectorAll(selector)))
+      .filter(Boolean);
+
+    if (!elements.length) {
+      return;
+    }
+
+    gsap.set(elements, { y: 40, opacity: 0 });
+
+    gsap.to(elements, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  };
+
+  animateSectionEntrance(contentSection, [
+    ".blog-detail-header",
+    ".blog-detail-body",
+    ".blog-detail-comments-wrap",
+  ]);
+  animateSectionEntrance(relatedSection, [
+    ".blog-detail-related-header",
+    ".blog-detail-related-viewport",
+  ]);
 }
 
 function applySectionScrollOpacity(el, options) {

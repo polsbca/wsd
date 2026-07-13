@@ -1,5 +1,5 @@
 /**
- * Blogs page — category filter panel
+ * Blogs page — category filter dropdown
  */
 (function ($) {
   "use strict";
@@ -13,6 +13,7 @@
     var $cards = $root.find(".blogs-card");
     var $empty = $root.find(".blogs-empty-state");
     var $filterPanel = $root.find("#blogs-filter-panel");
+    var $browseWrap = $root.find(".blogs-filter-browse-wrap");
     var $browseBtn = $root.find(".blogs-filter-browse");
     var $allBtn = $root.find(".blogs-filter-all");
     var $panelOptions = $root.find(".blogs-filter-panel-option");
@@ -51,7 +52,7 @@
     function syncFilterUi() {
       $allBtn.removeClass("is-active").attr("aria-pressed", "false");
       $browseBtn.removeClass("is-active");
-      $panelOptions.removeClass("is-active");
+      $panelOptions.removeClass("is-active").attr("aria-selected", "false");
 
       if ("all" === activeFilter) {
         $allBtn.addClass("is-active").attr("aria-pressed", "true");
@@ -67,7 +68,7 @@
         ($option.length && $option.text().trim()) ||
         activeFilter;
 
-      $option.addClass("is-active");
+      $option.addClass("is-active").attr("aria-selected", "true");
       $browseBtn.addClass("is-active");
       $browseBtn.find(".blogs-filter-browse-label").text(label);
     }
@@ -79,7 +80,7 @@
 
       $filterPanel.removeAttr("hidden");
       $browseBtn.attr("aria-expanded", "true");
-      document.body.classList.add("blogs-filter-open");
+      $browseWrap.addClass("is-open");
     }
 
     function closeFilterPanel() {
@@ -89,7 +90,7 @@
 
       $filterPanel.attr("hidden", "hidden");
       $browseBtn.attr("aria-expanded", "false");
-      document.body.classList.remove("blogs-filter-open");
+      $browseWrap.removeClass("is-open");
     }
 
     function activateFilter(filterValue) {
@@ -111,6 +112,7 @@
 
     $browseBtn.on("click", function (event) {
       event.preventDefault();
+      event.stopPropagation();
       if ($filterPanel.is("[hidden]")) {
         openFilterPanel();
       } else {
@@ -118,12 +120,21 @@
       }
     });
 
-    $filterPanel
-      .find(".blogs-filter-panel-backdrop, .blogs-filter-panel-close")
-      .on("click", function (event) {
-        event.preventDefault();
+    $(document).on("click.blogsFilter", function (event) {
+      if (!$browseWrap.hasClass("is-open")) {
+        return;
+      }
+
+      if (!$(event.target).closest(".blogs-filter-browse-wrap").length) {
         closeFilterPanel();
-      });
+      }
+    });
+
+    $(document).on("keydown.blogsFilter", function (event) {
+      if (event.key === "Escape") {
+        closeFilterPanel();
+      }
+    });
 
     if ($browseBtn.length) {
       $browseBtn.data(
