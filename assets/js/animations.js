@@ -41,6 +41,7 @@ function initAnimations() {
   const hasFeesPage = document.querySelector(".fees-page-main") !== null;
   const hasSmileGalleryPage =
     document.querySelector(".smile-gallery-page-main") !== null;
+  const hasBlogsPage = document.querySelector(".blogs-page-main") !== null;
   const hasHero = document.querySelector(".hero-title") !== null;
   const hasStandardHero =
     document.querySelector(".hero-section .hero-title") !== null &&
@@ -48,7 +49,8 @@ function initAnimations() {
     !hasDentalReferralsPage &&
     !hasTeamsPage &&
     !hasFeesPage &&
-    !hasSmileGalleryPage;
+    !hasSmileGalleryPage &&
+    !hasBlogsPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
 
   // ----------------------------------------------------
@@ -113,6 +115,17 @@ function initAnimations() {
         opacity: 0,
       });
       gsap.set(".smile-gallery-page-main .hero-image-wrapper", {
+        x: 50,
+        opacity: 0,
+        scale: 0.95,
+      });
+    }
+    if (hasBlogsPage) {
+      gsap.set(".blogs-page-main .hero-buttons .btn", {
+        y: 20,
+        opacity: 0,
+      });
+      gsap.set(".blogs-page-main .hero-image-wrapper", {
         x: 50,
         opacity: 0,
         scale: 0.95,
@@ -212,6 +225,32 @@ function initAnimations() {
         )
         .to(
           ".smile-gallery-page-main .hero-image-wrapper",
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.8",
+        );
+    }
+
+    if (hasBlogsPage) {
+      mainTimeline
+        .to(
+          ".blogs-page-main .hero-buttons .btn",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.5",
+        )
+        .to(
+          ".blogs-page-main .hero-image-wrapper",
           {
             x: 0,
             opacity: 1,
@@ -377,6 +416,16 @@ function initAnimations() {
           opacity: 0,
         });
       }
+      if (hasBlogsPage) {
+        gsap.set(".blogs-page-main .hero-buttons .btn", {
+          y: 15,
+          opacity: 0,
+        });
+        gsap.set(".blogs-page-main .hero-image-wrapper", {
+          y: 30,
+          opacity: 0,
+        });
+      }
 
       const mobileTl = gsap.timeline({
         defaults: { ease: "power2.out", duration: 0.6 },
@@ -468,6 +517,27 @@ function initAnimations() {
           )
           .to(
             ".smile-gallery-page-main .hero-image-wrapper",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+            },
+            "-=0.3",
+          );
+      } else if (hasBlogsPage) {
+        mobileTl
+          .to(
+            ".blogs-page-main .hero-buttons .btn",
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.4,
+            },
+            "-=0.3",
+          )
+          .to(
+            ".blogs-page-main .hero-image-wrapper",
             {
               y: 0,
               opacity: 1,
@@ -1105,6 +1175,10 @@ function initAnimations() {
 
   if (hasSmileGalleryPage && isDesktop) {
     initSmileGalleryPageAnimations();
+  }
+
+  if (hasBlogsPage && isDesktop) {
+    initBlogsPageAnimations();
   }
 
   if (isDesktop) {
@@ -3265,6 +3339,59 @@ function initSmileGalleryPageAnimations() {
     ".smile-gallery-section-badge",
     ".smile-gallery-cases-body",
   ]);
+}
+
+function initBlogsPageAnimations() {
+  const blogsMain = document.querySelector(".blogs-page-main");
+  if (!blogsMain || window.innerWidth < 992) {
+    return;
+  }
+
+  const heroSection = blogsMain.querySelector(".blogs-hero-page");
+  const featuredSection = blogsMain.querySelector(".blogs-featured-section");
+  const listingSection = blogsMain.querySelector(".blogs-listing-section");
+
+  const animateSectionEntrance = (section, selectors) => {
+    if (!section) {
+      return;
+    }
+
+    const elements = selectors
+      .flatMap((selector) => Array.from(section.querySelectorAll(selector)))
+      .filter(Boolean);
+
+    if (!elements.length) {
+      return;
+    }
+
+    gsap.set(elements, { y: 40, opacity: 0 });
+
+    gsap.to(elements, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  };
+
+  animateSectionEntrance(featuredSection, [".blogs-featured-card"]);
+  animateSectionEntrance(listingSection, [
+    ".blogs-listing-header",
+    ".blogs-grid",
+  ]);
+
+  if (heroSection) {
+    applySectionScrollOpacity(heroSection, {
+      start: "bottom 80%",
+      end: "bottom top",
+    });
+  }
 }
 
 function applySectionScrollOpacity(el, options) {

@@ -58,7 +58,7 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_singular( 'services' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_singular( 'services' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
 	}
 
@@ -72,6 +72,10 @@ function wsd_scripts() {
 
 	if ( is_page_template( 'template-smile-gallery.php' ) ) {
 		wp_enqueue_script( 'wsd-smile-gallery', get_stylesheet_directory_uri() . '/assets/js/smile-gallery.js', array( 'jquery', 'gsap', 'gsap-scrolltrigger' ), time(), true );
+	}
+
+	if ( is_page_template( 'template-blogs.php' ) ) {
+		wp_enqueue_script( 'wsd-blogs', get_stylesheet_directory_uri() . '/assets/js/blogs.js', array( 'jquery' ), time(), true );
 	}
 
 	// jQuery (WordPress default)
@@ -444,6 +448,171 @@ function wsd_get_fees_page_url() {
  */
 function wsd_get_smile_gallery_page_url() {
 	return wsd_get_page_url_by_template( 'template-smile-gallery.php', home_url( '/smile-gallery/' ) );
+}
+
+/**
+ * Get the permalink for the Blogs page template.
+ *
+ * @return string
+ */
+function wsd_get_blogs_page_url() {
+	return wsd_get_page_url_by_template( 'template-blogs.php', home_url( '/blogs/' ) );
+}
+
+/**
+ * Get the Blogs page hero image URL (featured image, then theme fallback).
+ *
+ * @param int $page_id Optional page ID.
+ * @return string
+ */
+function wsd_get_blogs_hero_image_url( $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+	$scheme  = is_ssl() ? 'https' : 'http';
+
+	if ( $page_id && has_post_thumbnail( $page_id ) ) {
+		$featured_url = get_the_post_thumbnail_url( $page_id, 'full' );
+		if ( $featured_url ) {
+			return set_url_scheme( $featured_url, $scheme );
+		}
+	}
+
+	$fallback_path = get_theme_file_path( 'assets/images/blogs-hero.png' );
+	$fallback_url  = get_theme_file_uri( 'assets/images/blogs-hero.png' );
+
+	if ( file_exists( $fallback_path ) ) {
+		$fallback_url .= '?ver=' . filemtime( $fallback_path );
+	}
+
+	return set_url_scheme( $fallback_url, $scheme );
+}
+
+/**
+ * Estimate a blog post read time in minutes.
+ *
+ * @param int $post_id Post ID.
+ * @return int
+ */
+function wsd_get_blog_read_time_minutes( $post_id ) {
+	$post_id = (int) $post_id;
+	$content = get_post_field( 'post_content', $post_id );
+	$words   = str_word_count( wp_strip_all_tags( (string) $content ) );
+	$minutes = (int) max( 1, (int) ceil( $words / 200 ) );
+
+	/**
+	 * Filter estimated blog read time.
+	 *
+	 * @param int $minutes Estimated minutes.
+	 * @param int $post_id Post ID.
+	 */
+	return (int) apply_filters( 'wsd_blog_read_time_minutes', $minutes, $post_id );
+}
+
+/**
+ * Build a normalized blog post card data array.
+ *
+ * @param int|WP_Post $post Post object or ID.
+ * @return array<string, mixed>|null
+ */
+function wsd_get_blog_post_card_data( $post ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return null;
+	}
+
+	$post_id       = (int) $post->ID;
+	$comment_count = (int) get_comments_number( $post_id );
+	$categories    = get_the_category( $post_id );
+	$category_slugs = array();
+
+	if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
+		foreach ( $categories as $category ) {
+			$category_slugs[] = sanitize_title( $category->slug );
+		}
+	}
+
+	$image_url = get_the_post_thumbnail_url( $post_id, 'large' );
+	if ( ! $image_url ) {
+		$image_url = get_theme_file_uri( 'assets/images/blogs-hero.png' );
+	}
+
+	$excerpt = get_the_excerpt( $post );
+	$excerpt = wp_strip_all_tags( $excerpt );
+	$excerpt = preg_replace( '/\s+/', ' ', (string) $excerpt );
+	$excerpt = trim( (string) $excerpt );
+
+	return array(
+		'id'             => $post_id,
+		'title'          => get_the_title( $post ),
+		'permalink'      => get_permalink( $post ),
+		'date'           => get_the_date( 'd M Y', $post ),
+		'comment_count'  => $comment_count,
+		'comments_label' => sprintf(
+			/* translators: %d: number of comments */
+			_n( '%d Comment', '%d Comments', $comment_count, 'wsd' ),
+			$comment_count
+		),
+		'read_time'      => sprintf(
+			/* translators: %d: estimated minutes to read */
+			_n( '%d min read', '%d min read', wsd_get_blog_read_time_minutes( $post_id ), 'wsd' ),
+			wsd_get_blog_read_time_minutes( $post_id )
+		),
+		'excerpt'        => $excerpt,
+		'image_url'      => $image_url,
+		'image_alt'      => get_post_meta( (int) get_post_thumbnail_id( $post_id ), '_wp_attachment_image_alt', true ) ?: get_the_title( $post ),
+		'category_slugs' => $category_slugs,
+	);
+}
+
+/**
+ * Get published blog posts for the blogs page.
+ *
+ * @param int $limit Number of posts.
+ * @return array<int, array<string, mixed>>
+ */
+function wsd_get_blog_posts( $limit = 7 ) {
+	$query = new WP_Query(
+		array(
+			'post_type'           => 'post',
+			'post_status'         => 'publish',
+			'posts_per_page'      => (int) $limit,
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		)
+	);
+
+	$posts = array();
+	if ( $query->have_posts() ) {
+		foreach ( $query->posts as $post ) {
+			$card = wsd_get_blog_post_card_data( $post );
+			if ( $card ) {
+				$posts[] = $card;
+			}
+		}
+	}
+	wp_reset_postdata();
+
+	return $posts;
+}
+
+/**
+ * Get blog categories used for filters.
+ *
+ * @return WP_Term[]
+ */
+function wsd_get_blog_filter_categories() {
+	$terms = get_categories(
+		array(
+			'hide_empty' => true,
+			'orderby'    => 'name',
+			'order'      => 'ASC',
+		)
+	);
+
+	if ( empty( $terms ) || is_wp_error( $terms ) ) {
+		return array();
+	}
+
+	return $terms;
 }
 
 /**

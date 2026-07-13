@@ -16,11 +16,13 @@ $is_referrals_active     = is_page_template( 'template-dental-referrals.php' );
 $is_teams_active         = is_page_template( 'template-teams.php' );
 $is_fees_active          = is_page_template( 'template-fees.php' );
 $is_smile_gallery_active = is_page_template( 'template-smile-gallery.php' );
+$is_blogs_active         = is_page_template( 'template-blogs.php' );
 $contact_url             = wsd_get_contact_page_url();
 $referrals_url           = wsd_get_referrals_page_url();
 $teams_url               = wsd_get_teams_page_url();
 $fees_url                = wsd_get_fees_page_url();
 $smile_gallery_url       = wsd_get_smile_gallery_page_url();
+$blogs_url               = wsd_get_blogs_page_url();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -93,12 +95,12 @@ $smile_gallery_url       = wsd_get_smile_gallery_page_url();
 							<button class="menu-toggle d-md-none" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'wsd' ); ?></button>
 							<ul id="primary-menu" class="menu d-none d-md-flex justify-content-center align-items-center">
 								<li class="menu-item <?php echo $is_home_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-								<li class="menu-item menu-item-has-children <?php echo ( $is_teams_active || $is_smile_gallery_active ) ? 'current-menu-item' : ''; ?>">
+								<li class="menu-item menu-item-has-children <?php echo ( $is_teams_active || $is_smile_gallery_active || $is_blogs_active ) ? 'current-menu-item' : ''; ?>">
 									<a href="<?php echo esc_url( home_url( '/#our-practice' ) ); ?>" class="our-practice-trigger">Our Practice</a>
 									<!-- Our Practice Dropdown Menu -->
 									<div class="our-practice-dropdown-container">
-										<div class="dropdown-item">
-											<a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a>
+										<div class="dropdown-item <?php echo $is_blogs_active ? 'active' : ''; ?>">
+											<a href="<?php echo esc_url( $blogs_url ); ?>">Blog & Advice</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item <?php echo $is_teams_active ? 'active' : ''; ?>">
@@ -241,7 +243,7 @@ $smile_gallery_url       = wsd_get_smile_gallery_page_url();
 							</div>
 							<div class="sub-menu-container">
 								<ul class="sub-menu">
-									<li><a href="<?php echo esc_url( home_url( '/#blog-advice' ) ); ?>">Blog & Advice</a></li>
+									<li class="<?php echo $is_blogs_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $blogs_url ); ?>">Blog & Advice</a></li>
 									<li class="<?php echo $is_teams_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $teams_url ); ?>">Meet the Team</a></li>
 									<li class="<?php echo $is_smile_gallery_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $smile_gallery_url ); ?>">Smile Gallery</a></li>
 								</ul>
