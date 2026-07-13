@@ -14121,6 +14121,8 @@ body.home
 .blogs-featured-section,
 .blogs-listing-section {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -14470,9 +14472,11 @@ body.home
   .blogs-listing-inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: 80px;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     overflow: visible;
   }
 
@@ -14666,17 +14670,23 @@ body.home
     gap: 40px;
     width: 100%;
     max-width: 1685px;
+    margin: 0 auto;
     padding: 0 117px;
     box-sizing: border-box;
+    min-width: 0;
   }
 
   .blogs-page-main article.blogs-card,
   .blogs-card,
   .blog-detail-main article.blogs-card {
     position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     height: 797px;
     border-radius: 20px;
     overflow: hidden;
+    isolation: isolate;
   }
 
   .blogs-card-media {
@@ -14704,15 +14714,17 @@ body.home
 
   .blogs-card-content {
     position: absolute;
-    left: 50%;
+    left: 24px;
+    right: 24px;
     top: 484px;
-    transform: translateX(-50%);
+    transform: none;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: calc(100% - 43px);
-    max-width: 492px;
+    width: auto;
+    max-width: none;
     z-index: 1;
+    box-sizing: border-box;
   }
 
   .blogs-card-copy {
@@ -14796,9 +14808,12 @@ body.home
   .blogs-grid {
     padding: 0 60px;
     gap: 28px;
+    max-width: 100%;
   }
 
-  .blogs-card {
+  .blogs-page-main article.blogs-card,
+  .blogs-card,
+  .blog-detail-main article.blogs-card {
     height: auto;
     aspect-ratio: 535 / 797;
   }
@@ -14806,7 +14821,9 @@ body.home
   .blogs-card-content {
     top: auto;
     bottom: 40px;
-    transform: translateX(-50%);
+    left: 24px;
+    right: 24px;
+    transform: none;
   }
 
   .blogs-featured-title {
@@ -14818,6 +14835,7 @@ body.home
   }
 }
 
+/* Keep 3 columns on all desktop widths (Figma 4078:37454) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .blogs-hero-page {
     padding-left: 40px;
@@ -14831,7 +14849,8 @@ body.home
 
   .blogs-grid {
     padding: 0 40px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
   }
 
   .blogs-featured-card {
@@ -14850,6 +14869,24 @@ body.home
     max-width: none;
     width: 100%;
     flex: 0 0 auto;
+  }
+
+  .blogs-card-title {
+    font-size: clamp(16px, 1.6vw, 20px);
+  }
+
+  .blogs-meta {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .blogs-meta-item {
+    font-size: 12px;
+  }
+
+  .blogs-page-main .blogs-read-btn,
+  .blog-detail-main .blogs-read-btn {
+    font-size: 16px;
   }
 }
 
