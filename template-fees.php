@@ -153,7 +153,7 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 						<?php
 						$panel_id = 'fees-panel-' . $category->slug;
 						$items    = $fees_items_by_category[ $category->slug ] ?? array();
-						wsd_render_fees_accordion_panel( $panel_id, $items, 0 === $index );
+						wsd_render_fees_accordion_panel( $panel_id, $items, 0 === $index, $category->slug );
 						?>
 					<?php endforeach; ?>
 				</div>

@@ -266,6 +266,11 @@
     border-radius: 30px 30px 0 0 !important;
   }
 
+  .page-template-template-fees-php .fees-accordion-item:last-child.is-open,
+  .page-template-template-fees .fees-accordion-item:last-child.is-open {
+    border-radius: 0 0 30px 30px !important;
+  }
+
   .page-template-template-fees-php .fees-accordion-trigger,
   .page-template-template-fees .fees-accordion-trigger {
     min-height: 127px !important;
@@ -283,9 +288,399 @@
 
   .page-template-template-fees-php .fees-accordion-content-inner,
   .page-template-template-fees .fees-accordion-content-inner {
-    padding: 0 60px 36px !important;
+    padding: 0 !important;
+    background: #faf3e6 !important;
     font-size: 18px !important;
     line-height: 30px !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-item.is-open .fees-accordion-content-inner,
+  .page-template-template-fees .fees-accordion-item.is-open .fees-accordion-content-inner {
+    padding: 50px 100px !important;
+    background: #faf3e6 !important;
+    border-bottom: 1px solid #e9cb95 !important;
+  }
+
+  .page-template-template-fees-php .fees-accordion-item:last-child.is-open .fees-accordion-content-inner,
+  .page-template-template-fees .fees-accordion-item:last-child.is-open .fees-accordion-content-inner {
+    border-radius: 0 0 30px 30px !important;
+    border-bottom: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-heading,
+  .page-template-template-fees .fees-treatment-heading {
+    display: none !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-row,
+  .page-template-template-fees .fees-treatment-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 40px !important;
+    padding: 40px 0 !important;
+    border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-row:last-child,
+  .page-template-template-fees .fees-treatment-row:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-copy,
+  .page-template-template-fees .fees-treatment-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 22px !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 720px !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-name,
+  .page-template-template-fees .fees-treatment-name {
+    display: block !important;
+    width: 100% !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.2 !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-desc,
+  .page-template-template-fees .fees-treatment-desc {
+    display: block !important;
+    width: 100% !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 28px !important;
+    color: rgba(94, 93, 95, 0.68) !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-price,
+  .page-template-template-fees .fees-treatment-price {
+    flex: 0 0 auto !important;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.2 !important;
+    color: #d8a444 !important;
+    white-space: nowrap !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-notes,
+  .page-template-template-fees .fees-treatment-notes {
+    width: 100% !important;
+    margin-top: 8px !important;
+    padding-top: 28px !important;
+    border-top: 1px solid rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-fees-php .fees-treatment-note,
+  .page-template-template-fees .fees-treatment-note {
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 28px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-cards,
+  .page-template-template-fees .fees-consult-cards {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 40px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-card,
+  .page-template-template-fees .fees-consult-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 61px !important;
+    width: 100% !important;
+    padding: 100px !important;
+    background: #faf3e6 !important;
+    border: 0 !important;
+    border-radius: 50px !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-badge,
+  .page-template-template-fees .fees-consult-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    height: 50px !important;
+    padding: 10px 20px !important;
+    border: 1px solid #d8a444 !important;
+    border-radius: 32px !important;
+    background: transparent !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: none !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-badge-dot,
+  .page-template-template-fees .fees-consult-badge-dot {
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50% !important;
+    background: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-title,
+  .page-template-template-fees .fees-consult-title {
+    margin: 0 !important;
+    font-size: 48px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    line-height: 50px !important;
+    text-transform: capitalize !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-title-accent,
+  .page-template-template-fees .fees-consult-title-accent {
+    color: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-body p,
+  .page-template-template-fees .fees-consult-body p {
+    margin: 0 !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 43px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-consult-body p + p,
+  .page-template-template-fees .fees-consult-body p + p {
+    margin-top: 43px !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main a.fees-consult-cta,
+  .page-template-template-fees .fees-page-main a.fees-consult-cta,
+  .page-template-template-fees-php .fees-page-main a.fees-consult-cta:hover,
+  .page-template-template-fees .fees-page-main a.fees-consult-cta:hover,
+  .page-template-template-fees-php .fees-page-main a.fees-consult-cta:focus-visible,
+  .page-template-template-fees .fees-page-main a.fees-consult-cta:focus-visible,
+  .page-template-template-fees-php .fees-page-main a.fees-consult-cta:active,
+  .page-template-template-fees .fees-page-main a.fees-consult-cta:active {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 420px !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 28px !important;
+    border: 1px solid #d8a444 !important;
+    border-radius: 32px !important;
+    background-color: #d8a444 !important;
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    line-height: normal !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main a.fees-consult-cta:hover,
+  .page-template-template-fees .fees-page-main a.fees-consult-cta:hover,
+  .page-template-template-fees-php .fees-page-main a.fees-consult-cta:focus-visible,
+  .page-template-template-fees .fees-page-main a.fees-consult-cta:focus-visible {
+    background-color: #c4933a !important;
+    border-color: #c4933a !important;
+    color: #ffffff !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-card,
+  .page-template-template-fees .fees-membership-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 61px !important;
+    width: 100% !important;
+    padding: 100px !important;
+    background: #faf3e6 !important;
+    border-radius: 50px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-badge,
+  .page-template-template-fees .fees-membership-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    height: 50px !important;
+    padding: 10px 20px !important;
+    border: 1px solid #d8a444 !important;
+    border-radius: 32px !important;
+    background: transparent !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-badge-dot,
+  .page-template-template-fees .fees-membership-badge-dot {
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50% !important;
+    background: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-title,
+  .page-template-template-fees .fees-membership-title {
+    margin: 0 !important;
+    font-size: 48px !important;
+    font-weight: 600 !important;
+    line-height: 50px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-title-accent,
+  .page-template-template-fees .fees-membership-title-accent {
+    color: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-body > p,
+  .page-template-template-fees .fees-membership-body > p,
+  .page-template-template-fees-php .fees-membership-benefits li,
+  .page-template-template-fees .fees-membership-benefits li {
+    margin: 0 !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 43px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-benefits,
+  .page-template-template-fees .fees-membership-benefits {
+    list-style: none !important;
+    margin: 43px 0 0 !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-fees-php .fees-membership-check,
+  .page-template-template-fees .fees-membership-check {
+    color: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-card,
+  .page-template-template-fees .fees-finance-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 61px !important;
+    width: 100% !important;
+    padding: 100px !important;
+    background: #faf3e6 !important;
+    border-radius: 50px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-badge,
+  .page-template-template-fees .fees-finance-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    height: 50px !important;
+    padding: 10px 20px !important;
+    border: 1px solid #d8a444 !important;
+    border-radius: 32px !important;
+    background: transparent !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-badge-dot,
+  .page-template-template-fees .fees-finance-badge-dot {
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50% !important;
+    background: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-title,
+  .page-template-template-fees .fees-finance-title {
+    margin: 0 !important;
+    font-size: 48px !important;
+    font-weight: 600 !important;
+    line-height: 50px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-title-accent,
+  .page-template-template-fees .fees-finance-title-accent {
+    color: #d8a444 !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-body > p,
+  .page-template-template-fees .fees-finance-body > p,
+  .page-template-template-fees-php .fees-finance-disclaimer,
+  .page-template-template-fees .fees-finance-disclaimer {
+    margin: 0 !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 43px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-fees-php .fees-finance-body > p.fees-finance-body-spaced,
+  .page-template-template-fees .fees-finance-body > p.fees-finance-body-spaced {
+    margin-top: 43px !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main a.fees-finance-cta,
+  .page-template-template-fees .fees-page-main a.fees-finance-cta,
+  .page-template-template-fees-php .fees-page-main a.fees-finance-cta:hover,
+  .page-template-template-fees .fees-page-main a.fees-finance-cta:hover,
+  .page-template-template-fees-php .fees-page-main a.fees-finance-cta:focus-visible,
+  .page-template-template-fees .fees-page-main a.fees-finance-cta:focus-visible,
+  .page-template-template-fees-php .fees-page-main a.fees-finance-cta:active,
+  .page-template-template-fees .fees-page-main a.fees-finance-cta:active {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 420px !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 28px !important;
+    border: 1px solid #d8a444 !important;
+    border-radius: 32px !important;
+    background-color: #d8a444 !important;
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    line-height: normal !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+  }
+
+  .page-template-template-fees-php .fees-page-main a.fees-finance-cta:hover,
+  .page-template-template-fees .fees-page-main a.fees-finance-cta:hover,
+  .page-template-template-fees-php .fees-page-main a.fees-finance-cta:focus-visible,
+  .page-template-template-fees .fees-page-main a.fees-finance-cta:focus-visible {
+    background-color: #c4933a !important;
+    border-color: #c4933a !important;
+    color: #ffffff !important;
   }
 
   .page-template-template-fees-php .fees-page-main,
@@ -1534,9 +1929,12 @@
     }
 
     .fees-accordion-item,
-    .fees-accordion-item.is-open,
     .fees-accordion-item:not(.is-open):hover {
       background: #faf3e6 !important;
+    }
+
+    .fees-accordion-item.is-open {
+      background: #efdab2 !important;
     }
 
     .fees-accordion-item {
@@ -1572,20 +1970,187 @@
     }
 
     .fees-accordion-content-inner {
-      padding: 0 20px 24px !important;
+      padding: 0 !important;
+      background: #faf3e6 !important;
       font-size: 14px !important;
       line-height: 24px !important;
+    }
+
+    .fees-accordion-item.is-open .fees-accordion-content-inner {
+      padding: 24px 20px !important;
+      border-bottom: 1px solid #e9cb95 !important;
+    }
+
+    .fees-treatment-heading {
+      display: none !important;
+    }
+
+    .fees-treatment-row {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      padding: 22px 0 !important;
+      gap: 12px !important;
+    }
+
+    .fees-treatment-copy {
+      gap: 10px !important;
+      max-width: none !important;
+    }
+
+    .fees-treatment-name {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.4px !important;
+      line-height: 1.3 !important;
+    }
+
+    .fees-treatment-desc {
+      font-size: 13px !important;
+      line-height: 22px !important;
+    }
+
+    .fees-treatment-price {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.5px !important;
+      color: #d8a444 !important;
+    }
+
+    .fees-treatment-notes {
+      padding-top: 20px !important;
+      margin-top: 4px !important;
+    }
+
+    .fees-treatment-note {
+      font-size: 13px !important;
+      line-height: 22px !important;
     }
 
     .fees-accordion-content-inner p {
       font-size: 14px !important;
       line-height: 24px !important;
     }
-  }
 
-  /* ============================================================
-     FEES PAGE TABLET (FIGMA 4078:39596)
-     ============================================================ */
+    .fees-consult-cards {
+      gap: 24px !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
+    .fees-consult-card {
+      padding: 32px 20px !important;
+      gap: 28px !important;
+      border-radius: 24px !important;
+      background: #faf3e6 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .fees-consult-badge {
+      height: auto !important;
+      min-height: 40px !important;
+      padding: 8px 14px !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.5px !important;
+      text-transform: none !important;
+      color: #5e5d5f !important;
+      white-space: normal !important;
+      background: transparent !important;
+      border: 1px solid #d8a444 !important;
+    }
+
+    .fees-consult-title {
+      font-size: 28px !important;
+      line-height: 34px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .fees-consult-body p {
+      font-size: 15px !important;
+      line-height: 26px !important;
+    }
+
+    .fees-consult-body p + p {
+      margin-top: 24px !important;
+    }
+
+    .fees-page-main a.fees-consult-cta {
+      width: 100% !important;
+      padding: 18px 24px !important;
+      font-size: 15px !important;
+      border-radius: 28px !important;
+    }
+
+    .fees-membership-card {
+      padding: 32px 20px !important;
+      gap: 28px !important;
+      border-radius: 24px !important;
+    }
+
+    .fees-membership-badge {
+      height: auto !important;
+      min-height: 40px !important;
+      padding: 8px 14px !important;
+      font-size: 13px !important;
+      white-space: normal !important;
+    }
+
+    .fees-membership-title {
+      font-size: 28px !important;
+      line-height: 34px !important;
+    }
+
+    .fees-membership-body > p,
+    .fees-membership-benefits li {
+      font-size: 15px !important;
+      line-height: 26px !important;
+    }
+
+    .fees-membership-check {
+      line-height: 26px !important;
+    }
+
+    .fees-membership-benefits {
+      margin-top: 24px !important;
+    }
+
+    .fees-finance-card {
+      padding: 32px 20px !important;
+      gap: 28px !important;
+      border-radius: 24px !important;
+    }
+
+    .fees-finance-badge {
+      height: auto !important;
+      min-height: 40px !important;
+      padding: 8px 14px !important;
+      font-size: 13px !important;
+      white-space: normal !important;
+    }
+
+    .fees-finance-title {
+      font-size: 28px !important;
+      line-height: 34px !important;
+    }
+
+    .fees-finance-body > p,
+    .fees-finance-disclaimer {
+      font-size: 15px !important;
+      line-height: 26px !important;
+    }
+
+    .fees-finance-body > p.fees-finance-body-spaced {
+      margin-top: 24px !important;
+    }
+
+    .fees-page-main a.fees-finance-cta {
+      width: 100% !important;
+      padding: 18px 24px !important;
+      font-size: 15px !important;
+      border-radius: 28px !important;
+    }
+  }
   @media (min-width: 768px) and (max-width: 991.98px) {
     .page-template-template-fees-php .site-content,
     .page-template-template-fees .site-content {
@@ -1805,9 +2370,12 @@
     }
 
     .fees-accordion-item,
-    .fees-accordion-item.is-open,
     .fees-accordion-item:not(.is-open):hover {
       background: #faf3e6 !important;
+    }
+
+    .fees-accordion-item.is-open {
+      background: #efdab2 !important;
     }
 
     .fees-accordion-item {
@@ -1843,8 +2411,57 @@
     }
 
     .fees-accordion-content-inner {
-      padding: 0 20px 32px !important;
+      padding: 0 !important;
+      background: #faf3e6 !important;
       font-size: 16px !important;
+      line-height: 24px !important;
+    }
+
+    .fees-accordion-item.is-open .fees-accordion-content-inner {
+      padding: 32px 28px !important;
+      border-bottom: 1px solid #e9cb95 !important;
+    }
+
+    .fees-treatment-heading {
+      display: none !important;
+    }
+
+    .fees-treatment-row {
+      padding: 28px 0 !important;
+      gap: 20px !important;
+      align-items: flex-start !important;
+    }
+
+    .fees-treatment-copy {
+      gap: 12px !important;
+      max-width: none !important;
+    }
+
+    .fees-treatment-name {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.5px !important;
+      line-height: 1.25 !important;
+    }
+
+    .fees-treatment-desc {
+      font-size: 14px !important;
+      line-height: 24px !important;
+    }
+
+    .fees-treatment-price {
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.5px !important;
+      color: #d8a444 !important;
+    }
+
+    .fees-treatment-notes {
+      padding-top: 24px !important;
+    }
+
+    .fees-treatment-note {
+      font-size: 15px !important;
       line-height: 24px !important;
     }
 
@@ -1852,11 +2469,97 @@
       font-size: 16px !important;
       line-height: 24px !important;
     }
-  }
 
-  /* ============================================================
-     CONTACT PAGE MOBILE (FIGMA 4086:50029)
-     ============================================================ */
+    .fees-consult-cards {
+      gap: 28px !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
+    .fees-consult-card {
+      padding: 48px 32px !important;
+      gap: 36px !important;
+      border-radius: 36px !important;
+      background: #faf3e6 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .fees-consult-title {
+      font-size: 34px !important;
+      line-height: 40px !important;
+      letter-spacing: 0 !important;
+    }
+
+    .fees-consult-body p {
+      font-size: 18px !important;
+      line-height: 32px !important;
+    }
+
+    .fees-consult-body p + p {
+      margin-top: 28px !important;
+    }
+
+    .fees-page-main a.fees-consult-cta {
+      width: 100% !important;
+      max-width: 420px !important;
+      padding: 22px 28px !important;
+      font-size: 18px !important;
+    }
+
+    .fees-membership-card {
+      padding: 48px 32px !important;
+      gap: 36px !important;
+      border-radius: 36px !important;
+    }
+
+    .fees-membership-title {
+      font-size: 34px !important;
+      line-height: 40px !important;
+    }
+
+    .fees-membership-body > p,
+    .fees-membership-benefits li {
+      font-size: 18px !important;
+      line-height: 32px !important;
+    }
+
+    .fees-membership-check {
+      line-height: 32px !important;
+    }
+
+    .fees-membership-benefits {
+      margin-top: 28px !important;
+    }
+
+    .fees-finance-card {
+      padding: 48px 32px !important;
+      gap: 36px !important;
+      border-radius: 36px !important;
+    }
+
+    .fees-finance-title {
+      font-size: 34px !important;
+      line-height: 40px !important;
+    }
+
+    .fees-finance-body > p,
+    .fees-finance-disclaimer {
+      font-size: 18px !important;
+      line-height: 32px !important;
+    }
+
+    .fees-finance-body > p.fees-finance-body-spaced {
+      margin-top: 28px !important;
+    }
+
+    .fees-page-main a.fees-finance-cta {
+      width: 100% !important;
+      max-width: 420px !important;
+      padding: 22px 28px !important;
+      font-size: 18px !important;
+    }
+  }
   .page-template-template-contact-php .site-content,
   .page-template-template-contact .site-content {
     background-color: #faf3e6 !important;

@@ -927,7 +927,10 @@ function wsd_format_fees_membership_item( $post ) {
 		$content = '<p>' . esc_html( get_the_excerpt( $post ) ) . '</p>';
 	}
 
-	if ( '' === trim( wp_strip_all_tags( $content ) ) ) {
+	$rows  = wsd_parse_fees_treatment_rows( $content );
+	$notes = wsd_parse_fees_treatment_notes( $content );
+
+	if ( empty( $rows ) && '' === trim( wp_strip_all_tags( $content ) ) ) {
 		$content = '<p>' . esc_html__( 'A full written estimate will be provided before any treatment begins. Please speak to our team for the latest pricing.', 'wsd' ) . '</p>';
 	}
 
@@ -935,7 +938,168 @@ function wsd_format_fees_membership_item( $post ) {
 		'id'      => $post->ID,
 		'title'   => get_the_title( $post ),
 		'content' => $content,
+		'rows'    => $rows,
+		'notes'   => $notes,
 	);
+}
+
+/**
+ * Parse treatment/price rows from fees accordion HTML content.
+ *
+ * Prefers WordPress table markup; also supports lines ending with a £ price.
+ * Supports 2-column (name | price) and 3-column (name | description | price) tables.
+ * Name cells may include a <br> to separate title and description.
+ *
+ * @param string $html Filtered post content HTML.
+ * @return array<int, array{name: string, description: string, price: string}>
+ */
+function wsd_parse_fees_treatment_rows( $html ) {
+	$rows = array();
+	$html = (string) $html;
+
+	if ( '' === trim( $html ) ) {
+		return $rows;
+	}
+
+	if ( preg_match_all( '/<tr\b[^>]*>(.*?)<\/tr>/is', $html, $tr_matches ) ) {
+		foreach ( $tr_matches[1] as $tr_html ) {
+			if ( ! preg_match_all( '/<t[dh]\b[^>]*>(.*?)<\/t[dh]>/is', $tr_html, $cell_matches ) ) {
+				continue;
+			}
+
+			$raw_cells = $cell_matches[1];
+			$cells     = array_map(
+				static function ( $cell ) {
+					$cell = preg_replace( '/<br\s*\/?>/i', "\n", (string) $cell );
+					$text = wp_strip_all_tags( html_entity_decode( $cell, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+					$text = preg_replace( "/[ \t]+/u", ' ', (string) $text );
+					$text = preg_replace( "/\n+/u", "\n", (string) $text );
+					return trim( (string) $text );
+				},
+				$raw_cells
+			);
+
+			if ( count( $cells ) < 2 ) {
+				continue;
+			}
+
+			$name        = $cells[0];
+			$description = '';
+			$price       = '';
+
+			if ( count( $cells ) >= 3 ) {
+				$description = $cells[1];
+				$price       = $cells[2];
+			} else {
+				$price = $cells[1];
+			}
+
+			if ( '' === $description && false !== strpos( $name, "\n" ) ) {
+				$parts       = preg_split( '/\n+/', $name, 2 );
+				$name        = trim( (string) ( $parts[0] ?? '' ) );
+				$description = trim( (string) ( $parts[1] ?? '' ) );
+			}
+
+			// Skip header rows like "Treatment".
+			if ( '' === $name || 0 === strcasecmp( $name, 'treatment' ) ) {
+				continue;
+			}
+
+			if ( '' === $price || 0 === strcasecmp( $price, 'price' ) || 0 === strcasecmp( $price, 'from' ) ) {
+				continue;
+			}
+
+			$rows[] = array(
+				'name'        => $name,
+				'description' => $description,
+				'price'       => $price,
+			);
+		}
+	}
+
+	if ( ! empty( $rows ) ) {
+		return $rows;
+	}
+
+	$plain = wp_strip_all_tags( html_entity_decode( $html, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+	$plain = preg_replace( "/\r\n|\r/", "\n", (string) $plain );
+	$lines = preg_split( '/\n+/', (string) $plain );
+
+	foreach ( (array) $lines as $line ) {
+		$line = trim( preg_replace( '/\s+/u', ' ', (string) $line ) );
+		if ( '' === $line ) {
+			continue;
+		}
+
+		if ( preg_match( '/^(.*?)\s+((?:From\s+)?£\s?[\d,]+(?:\.\d{1,2})?)\s*$/iu', $line, $match ) ) {
+			$name = trim( $match[1] );
+			if ( '' === $name || 0 === strcasecmp( $name, 'treatment' ) ) {
+				continue;
+			}
+			$rows[] = array(
+				'name'        => $name,
+				'description' => '',
+				'price'       => trim( $match[2] ),
+			);
+		}
+	}
+
+	return $rows;
+}
+
+/**
+ * Parse footer notes from fees content (paragraphs outside tables).
+ *
+ * @param string $html Filtered post content HTML.
+ * @return array<int, string>
+ */
+function wsd_parse_fees_treatment_notes( $html ) {
+	$notes = array();
+	$html  = (string) $html;
+
+	if ( '' === trim( $html ) ) {
+		return $notes;
+	}
+
+	// Ignore table markup so only standalone paragraphs become notes.
+	$html = preg_replace( '/<figure\b[^>]*>.*?<\/figure>/is', '', $html );
+	$html = preg_replace( '/<table\b[^>]*>.*?<\/table>/is', '', $html );
+
+	if ( preg_match_all( '/<p\b[^>]*>(.*?)<\/p>/is', (string) $html, $p_matches ) ) {
+		foreach ( $p_matches[1] as $p_html ) {
+			$text = trim( wp_strip_all_tags( html_entity_decode( $p_html, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			$text = preg_replace( '/\s+/u', ' ', (string) $text );
+			if ( '' !== $text ) {
+				$notes[] = $text;
+			}
+		}
+	}
+
+	return $notes;
+}
+
+/**
+ * Format a fees treatment price label for display.
+ *
+ * @param string $price Raw price text.
+ * @return string
+ */
+function wsd_format_fees_treatment_price( $price ) {
+	$price = trim( preg_replace( '/\s+/u', ' ', (string) $price ) );
+
+	if ( '' === $price ) {
+		return '';
+	}
+
+	if ( preg_match( '/^from\b/i', $price ) ) {
+		return preg_replace( '/^from\s+/i', 'From ', $price );
+	}
+
+	if ( preg_match( '/^£/', $price ) ) {
+		return 'From ' . $price;
+	}
+
+	return $price;
 }
 
 /**
@@ -1077,13 +1241,521 @@ function wsd_get_fees_membership_tab_short_label( $term ) {
 }
 
 /**
- * Render a fees accordion panel.
+ * Whether a fees category uses the consultation cards layout (not accordion).
+ *
+ * @param string $slug Category slug.
+ * @return bool
+ */
+function wsd_is_fees_consultation_category( $slug ) {
+	$slug = sanitize_title( (string) $slug );
+
+	return in_array( $slug, array( 'consultation-charges', 'consultation' ), true );
+}
+
+/**
+ * Whether a fees category uses the membership plan card layout (not accordion).
+ *
+ * @param string $slug Category slug.
+ * @return bool
+ */
+function wsd_is_fees_membership_category( $slug ) {
+	$slug = sanitize_title( (string) $slug );
+
+	return in_array( $slug, array( 'membership-plan', 'membership' ), true );
+}
+
+/**
+ * Whether a fees category uses the finance options card layout (not accordion).
+ *
+ * @param string $slug Category slug.
+ * @return bool
+ */
+function wsd_is_fees_finance_category( $slug ) {
+	$slug = sanitize_title( (string) $slug );
+
+	return in_array( $slug, array( 'finance-options', 'finance' ), true );
+}
+
+/**
+ * Build consultation card data from fees membership items.
+ *
+ * @param array<int, array<string, mixed>> $items Fees items.
+ * @return array<int, array<string, mixed>>
+ */
+function wsd_get_fees_consultation_cards( $items ) {
+	$cards = array();
+
+	foreach ( (array) $items as $item_index => $item ) {
+		$html  = isset( $item['content'] ) ? (string) $item['content'] : '';
+		$title = isset( $item['title'] ) ? (string) $item['title'] : '';
+
+		if ( '' === trim( wp_strip_all_tags( $html ) ) ) {
+			continue;
+		}
+
+		if ( ! preg_match_all( '/<h2\b[^>]*>(.*?)<\/h2>/is', $html, $heading_matches, PREG_OFFSET_CAPTURE ) ) {
+			$parsed = wsd_parse_fees_consultation_card_chunk( $html, 0 === $item_index ? $title : '' );
+			if ( $parsed ) {
+				$cards[] = $parsed;
+			}
+			continue;
+		}
+
+		$heading_count = count( $heading_matches[0] );
+
+		for ( $i = 0; $i < $heading_count; $i++ ) {
+			$heading_html = $heading_matches[1][ $i ][0];
+			$start        = $heading_matches[0][ $i ][1] + strlen( $heading_matches[0][ $i ][0] );
+			$end          = ( $i + 1 < $heading_count ) ? $heading_matches[0][ $i + 1 ][1] : strlen( $html );
+			$chunk_html   = substr( $html, $start, max( 0, $end - $start ) );
+			$badge        = ( 0 === $item_index && 0 === $i ) ? $title : '';
+
+			$parsed = wsd_parse_fees_consultation_card_chunk( $chunk_html, $badge, $heading_html );
+			if ( $parsed ) {
+				$cards[] = $parsed;
+			}
+		}
+	}
+
+	return $cards;
+}
+
+/**
+ * Parse one consultation card chunk into structured data.
+ *
+ * @param string $html         Body HTML.
+ * @param string $badge        Optional badge label.
+ * @param string $heading_html Optional heading HTML (may include <em>).
+ * @return array<string, mixed>|null
+ */
+function wsd_parse_fees_consultation_card_chunk( $html, $badge = '', $heading_html = '' ) {
+	$html = (string) $html;
+	$cta  = null;
+
+	if ( preg_match( '/<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)<\/a>/is', $html, $link_match ) ) {
+		$cta_label = trim( wp_strip_all_tags( html_entity_decode( $link_match[2], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+		$cta_url   = esc_url_raw( html_entity_decode( $link_match[1], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+
+		if ( $cta_label ) {
+			$book_url = home_url( '/#book-appointment' );
+			if ( ! $cta_url || false !== stripos( (string) $cta_url, 'claudeusercontent.com' ) ) {
+				$cta_url = $book_url;
+			}
+
+			// Figma CTA label for consultation card.
+			if ( preg_match( '/book/i', $cta_label ) ) {
+				$cta_label = __( 'Book an appointment', 'wsd' );
+			}
+
+			$cta = array(
+				'label' => $cta_label,
+				'url'   => $cta_url,
+			);
+		}
+
+		$html = str_replace( $link_match[0], '', $html );
+	}
+
+	$body = trim( $html );
+	$body = preg_replace( '/<p>\s*<\/p>/i', '', $body );
+	$body = trim( (string) $body );
+
+	$title_main   = '';
+	$title_accent = '';
+	$heading_html = trim( (string) $heading_html );
+
+	if ( $heading_html ) {
+		$heading_html = preg_replace( '/&nbsp;/i', ' ', $heading_html );
+
+		if ( preg_match( '/^(.*?)<em\b[^>]*>(.*?)<\/em>(.*)$/is', $heading_html, $heading_parts ) ) {
+			$title_main   = trim( wp_strip_all_tags( html_entity_decode( $heading_parts[1], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			$title_accent = trim( wp_strip_all_tags( html_entity_decode( $heading_parts[2] . $heading_parts[3], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			if ( '' !== $title_main ) {
+				$title_main .= ' ';
+			}
+		} else {
+			$title_parts  = wsd_get_blog_title_parts( wp_strip_all_tags( html_entity_decode( $heading_html, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			$title_main   = $title_parts['main'];
+			$title_accent = $title_parts['accent'];
+		}
+	}
+
+	if ( '' === $title_main && '' === $title_accent && '' === $badge && '' === trim( wp_strip_all_tags( $body ) ) ) {
+		return null;
+	}
+
+	return array(
+		'badge'        => $badge ? $badge : '',
+		'title_main'   => $title_main,
+		'title_accent' => $title_accent,
+		'body_html'    => $body,
+		'cta'          => $cta,
+	);
+}
+
+/**
+ * Render consultation charges cards panel (non-accordion).
  *
  * @param string                             $panel_id  Panel id.
- * @param array<int, array<string, mixed>>   $items     Accordion items.
- * @param bool                               $is_active Whether this panel is visible.
+ * @param array<int, array<string, mixed>>   $items     Fees items.
+ * @param bool                               $is_active Whether panel is visible.
  */
-function wsd_render_fees_accordion_panel( $panel_id, $items, $is_active = false ) {
+function wsd_render_fees_consultation_panel( $panel_id, $items, $is_active = false ) {
+	$cards = wsd_get_fees_consultation_cards( $items );
+	?>
+	<div
+		class="fees-accordion-panel fees-consult-panel<?php echo $is_active ? ' is-active' : ''; ?>"
+		id="<?php echo esc_attr( $panel_id ); ?>"
+		role="tabpanel"
+		<?php echo $is_active ? '' : 'hidden'; ?>
+	>
+		<?php if ( ! empty( $cards ) ) : ?>
+			<div class="fees-consult-cards">
+				<?php foreach ( $cards as $card ) : ?>
+					<article class="fees-consult-card">
+						<?php if ( ! empty( $card['badge'] ) ) : ?>
+							<p class="fees-consult-badge">
+								<span class="fees-consult-badge-dot" aria-hidden="true"></span>
+								<span class="fees-consult-badge-label"><?php echo esc_html( $card['badge'] ); ?></span>
+							</p>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $card['title_main'] ) || ! empty( $card['title_accent'] ) ) : ?>
+							<h3 class="fees-consult-title">
+								<?php if ( ! empty( $card['title_main'] ) ) : ?>
+									<span class="fees-consult-title-main"><?php echo esc_html( $card['title_main'] ); ?></span>
+								<?php endif; ?>
+								<?php if ( ! empty( $card['title_accent'] ) ) : ?>
+									<span class="fees-consult-title-accent"><?php echo esc_html( $card['title_accent'] ); ?></span>
+								<?php endif; ?>
+							</h3>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $card['body_html'] ) ) : ?>
+							<div class="fees-consult-body">
+								<?php echo wp_kses_post( $card['body_html'] ); ?>
+							</div>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $card['cta']['url'] ) && ! empty( $card['cta']['label'] ) ) : ?>
+							<a class="btn btn-primary fees-consult-cta" href="<?php echo esc_url( $card['cta']['url'] ); ?>">
+								<span><?php echo esc_html( $card['cta']['label'] ); ?></span>
+							</a>
+						<?php endif; ?>
+					</article>
+				<?php endforeach; ?>
+			</div>
+		<?php else : ?>
+			<div class="fees-consult-cards">
+				<article class="fees-consult-card fees-consult-card--empty">
+					<p><?php esc_html_e( 'No consultation information is available yet.', 'wsd' ); ?></p>
+				</article>
+			</div>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Build membership plan card data from fees membership items.
+ *
+ * @param array<int, array<string, mixed>> $items Fees items.
+ * @return array<string, mixed>|null
+ */
+function wsd_get_fees_membership_plan_data( $items ) {
+	if ( empty( $items ) || ! is_array( $items ) ) {
+		return null;
+	}
+
+	$item    = $items[0];
+	$title   = isset( $item['title'] ) ? (string) $item['title'] : __( 'Dental Memberships', 'wsd' );
+	$html    = isset( $item['content'] ) ? (string) $item['content'] : '';
+	$badge   = __( 'Patient Plan Direct', 'wsd' );
+	$paras   = array();
+	$benefits = array();
+
+	$title       = trim( wp_strip_all_tags( $title ) );
+	$title_words = preg_split( '/\s+/u', $title, -1, PREG_SPLIT_NO_EMPTY );
+	$title_main  = '';
+	$title_accent = $title;
+
+	if ( is_array( $title_words ) && count( $title_words ) > 1 ) {
+		$title_accent = array_pop( $title_words );
+		$title_main   = implode( ' ', $title_words ) . ' ';
+	}
+
+	if ( preg_match( '/Patient Plan Direct/i', wp_strip_all_tags( $html ) ) ) {
+		$badge = 'Patient Plan Direct';
+	}
+
+	if ( preg_match_all( '/<p\b[^>]*>(.*?)<\/p>/is', $html, $p_matches ) ) {
+		foreach ( $p_matches[1] as $p_html ) {
+			$text = trim( wp_strip_all_tags( html_entity_decode( $p_html, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			$text = preg_replace( '/\s+/u', ' ', (string) $text );
+			if ( '' !== $text ) {
+				$paras[] = $text;
+			}
+		}
+	}
+
+	if ( preg_match_all( '/<li\b[^>]*>(.*?)<\/li>/is', $html, $li_matches ) ) {
+		foreach ( $li_matches[1] as $li_html ) {
+			$text = trim( wp_strip_all_tags( html_entity_decode( $li_html, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			$text = preg_replace( '/\s+/u', ' ', (string) $text );
+			$text = preg_replace( '/^[✓✔√]\s*/u', '', (string) $text );
+			$text = trim( (string) $text );
+			if ( '' !== $text ) {
+				$benefits[] = $text;
+			}
+		}
+	}
+
+	if ( empty( $paras ) && empty( $benefits ) && '' === trim( wp_strip_all_tags( $html ) ) ) {
+		return null;
+	}
+
+	return array(
+		'badge'        => $badge,
+		'title_main'   => $title_main,
+		'title_accent' => $title_accent,
+		'paragraphs'   => $paras,
+		'benefits'     => $benefits,
+	);
+}
+
+/**
+ * Render membership plan panel (non-accordion). Figma 4562:605.
+ *
+ * @param string                             $panel_id  Panel id.
+ * @param array<int, array<string, mixed>>   $items     Fees items.
+ * @param bool                               $is_active Whether panel is visible.
+ */
+function wsd_render_fees_membership_panel( $panel_id, $items, $is_active = false ) {
+	$data = wsd_get_fees_membership_plan_data( $items );
+	?>
+	<div
+		class="fees-accordion-panel fees-membership-panel<?php echo $is_active ? ' is-active' : ''; ?>"
+		id="<?php echo esc_attr( $panel_id ); ?>"
+		role="tabpanel"
+		<?php echo $is_active ? '' : 'hidden'; ?>
+	>
+		<?php if ( $data ) : ?>
+			<article class="fees-membership-card">
+				<?php if ( ! empty( $data['badge'] ) ) : ?>
+					<p class="fees-membership-badge">
+						<span class="fees-membership-badge-dot" aria-hidden="true"></span>
+						<span class="fees-membership-badge-label"><?php echo esc_html( $data['badge'] ); ?></span>
+					</p>
+				<?php endif; ?>
+
+				<h3 class="fees-membership-title">
+					<?php if ( ! empty( $data['title_main'] ) ) : ?>
+						<span class="fees-membership-title-main"><?php echo esc_html( $data['title_main'] ); ?></span>
+					<?php endif; ?>
+					<?php if ( ! empty( $data['title_accent'] ) ) : ?>
+						<span class="fees-membership-title-accent"><?php echo esc_html( $data['title_accent'] ); ?></span>
+					<?php endif; ?>
+				</h3>
+
+				<div class="fees-membership-body">
+					<?php foreach ( $data['paragraphs'] as $paragraph ) : ?>
+						<p><?php echo esc_html( $paragraph ); ?></p>
+					<?php endforeach; ?>
+
+					<?php if ( ! empty( $data['benefits'] ) ) : ?>
+						<ul class="fees-membership-benefits">
+							<?php foreach ( $data['benefits'] as $benefit ) : ?>
+								<li>
+									<span class="fees-membership-check" aria-hidden="true">✓</span>
+									<span class="fees-membership-benefit-text"><?php echo esc_html( $benefit ); ?></span>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+				</div>
+			</article>
+		<?php else : ?>
+			<article class="fees-membership-card fees-membership-card--empty">
+				<p><?php esc_html_e( 'No membership plan information is available yet.', 'wsd' ); ?></p>
+			</article>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Build finance options card data from fees membership items.
+ *
+ * @param array<int, array<string, mixed>> $items Fees items.
+ * @return array<string, mixed>|null
+ */
+function wsd_get_fees_finance_plan_data( $items ) {
+	if ( empty( $items ) || ! is_array( $items ) ) {
+		return null;
+	}
+
+	$item         = $items[0];
+	$title        = isset( $item['title'] ) ? (string) $item['title'] : __( 'Dental Finance', 'wsd' );
+	$html         = isset( $item['content'] ) ? (string) $item['content'] : '';
+	$badge        = __( 'Flexible payment', 'wsd' );
+	$paragraphs   = array();
+	$disclaimer   = '';
+	$cta          = array(
+		'label' => __( 'Explore Finance Options', 'wsd' ),
+		'url'   => home_url( '/#finance-calculator' ),
+	);
+
+	$title        = trim( wp_strip_all_tags( $title ) );
+	$title_words  = preg_split( '/\s+/u', $title, -1, PREG_SPLIT_NO_EMPTY );
+	$title_main   = '';
+	$title_accent = $title;
+
+	if ( is_array( $title_words ) && count( $title_words ) > 1 ) {
+		$title_accent = array_pop( $title_words );
+		$title_main   = implode( ' ', $title_words ) . ' ';
+	}
+
+	if ( preg_match( '/<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)<\/a>/is', $html, $link_match ) ) {
+		$cta_label = trim( wp_strip_all_tags( html_entity_decode( $link_match[2], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+		$cta_url   = esc_url_raw( html_entity_decode( $link_match[1], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+
+		if ( $cta_label ) {
+			if ( ! $cta_url || false !== stripos( (string) $cta_url, 'claudeusercontent.com' ) ) {
+				$cta_url = home_url( '/#finance-calculator' );
+			}
+
+			$cta = array(
+				'label' => $cta_label,
+				'url'   => $cta_url,
+			);
+		}
+
+		$html = str_replace( $link_match[0], '', $html );
+	}
+
+	if ( preg_match_all( '/<p\b[^>]*>(.*?)<\/p>/is', $html, $p_matches ) ) {
+		foreach ( $p_matches[1] as $p_html ) {
+			$text = trim( wp_strip_all_tags( html_entity_decode( $p_html, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+			$text = preg_replace( '/\s+/u', ' ', (string) $text );
+			if ( '' === $text ) {
+				continue;
+			}
+
+			if (
+				'' === $disclaimer
+				&& (
+					false !== stripos( $text, 'Financial Conduct Authority' )
+					|| false !== stripos( $text, 'Introducer Appointed Representative' )
+					|| false !== stripos( $text, 'credit broker' )
+				)
+			) {
+				$disclaimer = $text;
+				continue;
+			}
+
+			$paragraphs[] = $text;
+		}
+	}
+
+	if ( empty( $paragraphs ) && '' === $disclaimer && '' === trim( wp_strip_all_tags( $html ) ) ) {
+		return null;
+	}
+
+	return array(
+		'badge'        => $badge,
+		'title_main'   => $title_main,
+		'title_accent' => $title_accent,
+		'paragraphs'   => $paragraphs,
+		'disclaimer'   => $disclaimer,
+		'cta'          => $cta,
+	);
+}
+
+/**
+ * Render finance options panel (non-accordion). Figma 4562:674.
+ *
+ * @param string                             $panel_id  Panel id.
+ * @param array<int, array<string, mixed>>   $items     Fees items.
+ * @param bool                               $is_active Whether panel is visible.
+ */
+function wsd_render_fees_finance_panel( $panel_id, $items, $is_active = false ) {
+	$data = wsd_get_fees_finance_plan_data( $items );
+	?>
+	<div
+		class="fees-accordion-panel fees-finance-panel<?php echo $is_active ? ' is-active' : ''; ?>"
+		id="<?php echo esc_attr( $panel_id ); ?>"
+		role="tabpanel"
+		<?php echo $is_active ? '' : 'hidden'; ?>
+	>
+		<?php if ( $data ) : ?>
+			<article class="fees-finance-card">
+				<?php if ( ! empty( $data['badge'] ) ) : ?>
+					<p class="fees-finance-badge">
+						<span class="fees-finance-badge-dot" aria-hidden="true"></span>
+						<span class="fees-finance-badge-label"><?php echo esc_html( $data['badge'] ); ?></span>
+					</p>
+				<?php endif; ?>
+
+				<h3 class="fees-finance-title">
+					<?php if ( ! empty( $data['title_main'] ) ) : ?>
+						<span class="fees-finance-title-main"><?php echo esc_html( $data['title_main'] ); ?></span>
+					<?php endif; ?>
+					<?php if ( ! empty( $data['title_accent'] ) ) : ?>
+						<span class="fees-finance-title-accent"><?php echo esc_html( $data['title_accent'] ); ?></span>
+					<?php endif; ?>
+				</h3>
+
+				<?php if ( ! empty( $data['paragraphs'] ) ) : ?>
+					<div class="fees-finance-body">
+						<?php foreach ( $data['paragraphs'] as $index => $paragraph ) : ?>
+							<p<?php echo 0 === $index ? '' : ' class="fees-finance-body-spaced"'; ?>><?php echo esc_html( $paragraph ); ?></p>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $data['cta']['url'] ) && ! empty( $data['cta']['label'] ) ) : ?>
+					<a class="btn btn-primary fees-finance-cta" href="<?php echo esc_url( $data['cta']['url'] ); ?>">
+						<span><?php echo esc_html( $data['cta']['label'] ); ?></span>
+					</a>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $data['disclaimer'] ) ) : ?>
+					<p class="fees-finance-disclaimer"><?php echo esc_html( $data['disclaimer'] ); ?></p>
+				<?php endif; ?>
+			</article>
+		<?php else : ?>
+			<article class="fees-finance-card fees-finance-card--empty">
+				<p><?php esc_html_e( 'No finance information is available yet.', 'wsd' ); ?></p>
+			</article>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Render a fees accordion panel.
+ *
+ * @param string                             $panel_id      Panel id.
+ * @param array<int, array<string, mixed>>   $items         Accordion items.
+ * @param bool                               $is_active     Whether this panel is visible.
+ * @param string                             $category_slug Category slug.
+ */
+function wsd_render_fees_accordion_panel( $panel_id, $items, $is_active = false, $category_slug = '' ) {
+	if ( wsd_is_fees_consultation_category( $category_slug ) ) {
+		wsd_render_fees_consultation_panel( $panel_id, $items, $is_active );
+		return;
+	}
+
+	if ( wsd_is_fees_membership_category( $category_slug ) ) {
+		wsd_render_fees_membership_panel( $panel_id, $items, $is_active );
+		return;
+	}
+
+	if ( wsd_is_fees_finance_category( $category_slug ) ) {
+		wsd_render_fees_finance_panel( $panel_id, $items, $is_active );
+		return;
+	}
+
 	$theme_uri = get_template_directory_uri();
 	?>
 	<div
@@ -1108,7 +1780,32 @@ function wsd_render_fees_accordion_panel( $panel_id, $items, $is_active = false 
 						</button>
 						<div class="fees-accordion-content" hidden>
 							<div class="fees-accordion-content-inner">
-								<?php echo wp_kses_post( $item['content'] ); ?>
+								<?php if ( ! empty( $item['rows'] ) ) : ?>
+									<div class="fees-treatment-table">
+										<div class="fees-treatment-rows">
+											<?php foreach ( $item['rows'] as $row ) : ?>
+												<div class="fees-treatment-row">
+													<div class="fees-treatment-copy">
+														<span class="fees-treatment-name"><?php echo esc_html( $row['name'] ); ?></span>
+														<?php if ( ! empty( $row['description'] ) ) : ?>
+															<span class="fees-treatment-desc"><?php echo esc_html( $row['description'] ); ?></span>
+														<?php endif; ?>
+													</div>
+													<span class="fees-treatment-price"><?php echo esc_html( wsd_format_fees_treatment_price( $row['price'] ) ); ?></span>
+												</div>
+											<?php endforeach; ?>
+										</div>
+										<?php if ( ! empty( $item['notes'] ) ) : ?>
+											<div class="fees-treatment-notes">
+												<?php foreach ( $item['notes'] as $note ) : ?>
+													<p class="fees-treatment-note"><?php echo esc_html( $note ); ?></p>
+												<?php endforeach; ?>
+											</div>
+										<?php endif; ?>
+									</div>
+								<?php else : ?>
+									<?php echo wp_kses_post( $item['content'] ); ?>
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>

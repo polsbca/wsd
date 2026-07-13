@@ -3285,18 +3285,26 @@ function initFeesPageAnimations() {
     ".fees-panels",
   ]);
 
+  // Fees page has dynamic-height tab panels. Scrub fade-out on the hero (or
+  // info section) jumps to opacity 0 on tab change / ScrollTrigger.refresh
+  // while those sections are still on screen. Keep both fully visible.
   if (heroSection) {
-    applySectionScrollOpacity(heroSection, {
-      start: "bottom 80%",
-      end: "bottom top",
+    ScrollTrigger.getAll().forEach(function (trigger) {
+      if (trigger.trigger === heroSection) {
+        trigger.kill();
+      }
     });
+    gsap.set(heroSection, { opacity: 1 });
+    gsap.set(
+      heroSection.querySelectorAll(
+        ".hero-title, .hero-description, .hero-buttons .btn, .hero-image-wrapper",
+      ),
+      { opacity: 1, x: 0, y: 0, scale: 1 },
+    );
   }
 
   if (infoSection) {
-    applySectionScrollOpacity(infoSection, {
-      start: "bottom bottom",
-      end: "bottom top",
-    });
+    gsap.set(infoSection, { opacity: 1 });
   }
 }
 

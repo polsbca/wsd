@@ -77,6 +77,18 @@
         window.setTimeout(function () {
           $panel.removeClass("is-entering");
         }, 400);
+
+        // Tab panels change page height; keep the hero readable after layout shift.
+        var heroEl = $root.find(".fees-hero-page").get(0);
+        if (heroEl && typeof gsap !== "undefined") {
+          gsap.set(heroEl, { opacity: 1 });
+          gsap.set(
+            heroEl.querySelectorAll(
+              ".hero-title, .hero-description, .hero-buttons .btn, .hero-image-wrapper",
+            ),
+            { opacity: 1, x: 0, y: 0, scale: 1 },
+          );
+        }
       });
     }
 
