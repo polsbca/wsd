@@ -14741,6 +14741,10 @@ body.home
   color: #d8a444;
 }
 
+.blogs-page-main .hero-buttons .blogs-hero-cta--tablet {
+  display: none;
+}
+
 .blogs-featured-section,
 .blogs-listing-section {
   width: 100%;
@@ -14792,6 +14796,14 @@ body.home
 
   .blogs-page-main .hero-buttons .btn {
     width: 100%;
+  }
+
+  .blogs-page-main .hero-buttons .blogs-hero-cta--tablet {
+    display: none;
+  }
+
+  .blogs-page-main .hero-buttons .blogs-hero-cta--desktop {
+    display: inline-flex;
   }
 
   .blogs-hero-page {

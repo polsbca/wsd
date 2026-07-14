@@ -22,8 +22,9 @@ $hero_image      = wsd_get_blogs_hero_image_url( $page_id );
 $blog_posts      = wsd_get_blog_posts( 6 );
 $featured_post   = ! empty( $blog_posts ) ? $blog_posts[0] : null;
 $grid_posts      = $blog_posts;
-$blog_categories = wsd_get_blog_filter_categories();
+$blog_categories   = wsd_get_blog_filter_categories();
 $smile_gallery_url = wsd_get_smile_gallery_page_url();
+$fees_url          = wsd_get_fees_page_url();
 
 if ( $page_id && has_post_thumbnail( $page_id ) ) {
 	$thumbnail_alt = get_post_meta( (int) get_post_thumbnail_id( $page_id ), '_wp_attachment_image_alt', true );
@@ -76,8 +77,11 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 				</div>
 				<div class="hero-buttons">
 					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
-					<a href="<?php echo esc_url( $smile_gallery_url ); ?>" class="btn btn-secondary blogs-hero-cta">
+					<a href="<?php echo esc_url( $smile_gallery_url ); ?>" class="btn btn-secondary blogs-hero-cta blogs-hero-cta--desktop">
 						<span><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>
+					</a>
+					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary blogs-hero-cta blogs-hero-cta--tablet">
+						<span><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></span>
 					</a>
 				</div>
 			</div>
