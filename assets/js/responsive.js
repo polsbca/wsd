@@ -713,10 +713,6 @@ jQuery(document).ready(function($) {
     }
 
     function initDentalReferralsMobile() {
-        if (window.innerWidth >= 768) {
-            return;
-        }
-
         var main = document.querySelector('.dental-referrals-main');
         if (!main) {
             return;
@@ -727,6 +723,12 @@ jQuery(document).ready(function($) {
         var progressFill = main.querySelector('.dental-referrals-mobile-progress-fill');
         var progressTrack = main.querySelector('.dental-referrals-mobile-progress');
         var formPanel = main.querySelector('.dental-referrals-form-panel');
+        var form = main.querySelector('.dental-referrals-form');
+        var rafId = null;
+
+        function isPhone() {
+            return window.innerWidth < 768;
+        }
 
         if (!sections.length) {
             return;
@@ -745,6 +747,10 @@ jQuery(document).ready(function($) {
 
         toggles.forEach(function(button) {
             button.addEventListener('click', function() {
+                if (!isPhone()) {
+                    return;
+                }
+
                 var section = button.closest('.dental-referrals-accordion');
                 if (!section) {
                     return;
@@ -755,42 +761,80 @@ jQuery(document).ready(function($) {
                 }
 
                 setExpanded(section);
-                window.setTimeout(updateProgress, 50);
+                window.setTimeout(function() {
+                    scheduleProgressUpdate();
+                }, 60);
             });
         });
 
         function getHeaderOffset() {
             var header = document.querySelector('.mobile-header');
-            return header ? header.offsetHeight + 20 : 94;
+            return header ? header.getBoundingClientRect().height + 8 : 94;
         }
 
         function updateProgress() {
-            if (!progressFill || !progressTrack || !formPanel) {
+            if (!isPhone() || !progressFill || !progressTrack || !formPanel) {
                 return;
             }
 
-            var trackWidth = progressTrack.offsetWidth;
-            var panelTop = formPanel.getBoundingClientRect().top + window.pageYOffset;
-            var panelHeight = formPanel.offsetHeight;
-            var scrollMarker = window.pageYOffset + getHeaderOffset() + 40;
-            var progress = (scrollMarker - panelTop) / Math.max(panelHeight, 1);
+            var panelRect = formPanel.getBoundingClientRect();
+            var viewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+            var headerOffset = getHeaderOffset();
+            var startLine = headerOffset;
+            var scrolled = startLine - panelRect.top;
+            var scrollable = Math.max(panelRect.height - (viewportH - headerOffset), 1);
+            var progress = scrolled / scrollable;
 
             progress = Math.max(0, Math.min(1, progress));
 
-            if (progress <= 0 && panelTop > scrollMarker) {
-                progress = 129 / Math.max(trackWidth, 312);
+            // Keep a small visible start fill once the form is on screen (matches Figma ~first segment).
+            if (progress > 0 && progress < 0.12) {
+                progress = 0.12;
+            } else if (
+                progress <= 0 &&
+                panelRect.top < viewportH &&
+                panelRect.bottom > headerOffset
+            ) {
+                progress = 0.12;
             }
 
-            progressFill.style.width = (progress * trackWidth) + 'px';
+            progressFill.style.width = (progress * 100).toFixed(2) + '%';
+            progressTrack.setAttribute('aria-hidden', 'false');
+            progressTrack.setAttribute('role', 'progressbar');
+            progressTrack.setAttribute('aria-valuemin', '0');
+            progressTrack.setAttribute('aria-valuemax', '100');
+            progressTrack.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
         }
 
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        window.addEventListener('resize', updateProgress);
+        function scheduleProgressUpdate() {
+            if (rafId) {
+                window.cancelAnimationFrame(rafId);
+            }
+            rafId = window.requestAnimationFrame(function() {
+                rafId = null;
+                updateProgress();
+            });
+        }
+
+        window.addEventListener('scroll', scheduleProgressUpdate, { passive: true });
+        window.addEventListener('resize', scheduleProgressUpdate);
+        window.addEventListener('orientationchange', scheduleProgressUpdate);
         window.addEventListener('load', function() {
-            window.setTimeout(updateProgress, 100);
-            window.setTimeout(updateProgress, 800);
+            window.setTimeout(scheduleProgressUpdate, 100);
+            window.setTimeout(scheduleProgressUpdate, 600);
         });
-        updateProgress();
+
+        if (window.ResizeObserver && formPanel) {
+            var resizeObserver = new ResizeObserver(function() {
+                scheduleProgressUpdate();
+            });
+            resizeObserver.observe(formPanel);
+            if (form) {
+                resizeObserver.observe(form);
+            }
+        }
+
+        scheduleProgressUpdate();
     }
 
     // Initialize when DOM is ready
