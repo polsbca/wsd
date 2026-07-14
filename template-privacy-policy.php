@@ -13,12 +13,12 @@ $theme_uri = get_template_directory_uri();
 <main id="main" class="site-main privacy-policy-main">
 	<section class="privacy-policy-hero" aria-labelledby="privacy-policy-heading">
 		<div class="privacy-policy-hero-waves" aria-hidden="true">
-			<img src="<?php echo esc_url( $theme_uri . '/assets/images/hero-bg-waves.svg' ); ?>" alt="" class="privacy-policy-hero-waves-img">
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/privacy-policy-hero-pattern.svg' ); ?>" alt="" class="privacy-policy-hero-waves-img" width="1539" height="266">
 		</div>
 		<div class="privacy-policy-hero-content">
 			<h1 id="privacy-policy-heading" class="privacy-policy-hero-title">
-				<span class="privacy-policy-hero-brand">Waterside Dental Care</span>
-				<span class="privacy-policy-hero-accent">Privacy Policy</span>
+				<span class="privacy-policy-hero-brand"><?php esc_html_e( 'Waterside Dental Care', 'wsd' ); ?></span>
+				<span class="privacy-policy-hero-accent"><?php echo esc_html( get_the_title() ); ?></span>
 			</h1>
 		</div>
 	</section>

@@ -8882,7 +8882,8 @@
   }
 
   .privacy-policy-hero-waves {
-    display: none !important;
+    display: block !important;
+    inset: 0 !important;
   }
 
   .privacy-policy-hero-content {

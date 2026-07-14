@@ -78,9 +78,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<h4 class="footer-nav-title">Legal Links</h4>
 							<ul class="footer-nav-list list-unstyled">
 								<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
-								<li><a href="#gdc">GDC Regulations</a></li>
-								<li><a href="#complaints">Complaints Procedure</a></li>
-								<li><a href="#terms">Terms of Use</a></li>
+								<li><a href="<?php echo esc_url( home_url( '/gdc-regulations/' ) ); ?>">GDC Regulations</a></li>
+								<li><a href="<?php echo esc_url( home_url( '/complaints-procedure/' ) ); ?>">Complaints Procedure</a></li>
+								<li><a href="<?php echo esc_url( home_url( '/terms-of-use/' ) ); ?>">Terms of Use</a></li>
 							</ul>
 						</div>
 
@@ -147,9 +147,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<h4 class="footer-nav-title">Legal Links</h4>
 									<ul class="footer-nav-list list-unstyled">
 										<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
-										<li><a href="#gdc">GDC Regulations</a></li>
-										<li><a href="#complaints">Complaints Procedure</a></li>
-										<li><a href="#terms">Terms of Use</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/gdc-regulations/' ) ); ?>">GDC Regulations</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/complaints-procedure/' ) ); ?>">Complaints Procedure</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/terms-of-use/' ) ); ?>">Terms of Use</a></li>
 									</ul>
 								</div>
 							</div>
@@ -196,9 +196,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<h4 class="footer-nav-title">Legal Links</h4>
 									<ul class="footer-nav-list list-unstyled">
 										<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a></li>
-										<li><a href="#gdc">GDC Regulations</a></li>
-										<li><a href="#complaints">Complaints Procedure</a></li>
-										<li><a href="#terms">Terms of Use</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/gdc-regulations/' ) ); ?>">GDC Regulations</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/complaints-procedure/' ) ); ?>">Complaints Procedure</a></li>
+										<li><a href="<?php echo esc_url( home_url( '/terms-of-use/' ) ); ?>">Terms of Use</a></li>
 									</ul>
 								</div>
 							</div>

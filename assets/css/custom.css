@@ -6997,15 +6997,22 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
 .privacy-policy-hero-waves {
   position: absolute;
-  inset: -41.7% 0 -108.36% -6.15%;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .privacy-policy-hero-waves-img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: fill;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
 }
 
 .privacy-policy-hero-content {
