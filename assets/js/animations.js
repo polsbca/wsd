@@ -1733,29 +1733,72 @@ function initModalSmileGallery(modalElement) {
 
 function initServicePageTextAnimations() {
   const serviceMain = document.querySelector(".single-service-main");
-  if (!serviceMain) return;
+  if (!serviceMain || typeof gsap === "undefined") {
+    return;
+  }
 
-  const animateIn = (elements, vars = {}) => {
+  const reduceMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const revealNow = (elements, vars = {}) => {
     const targets = gsap.utils.toArray(elements).filter(Boolean);
-    if (!targets.length) return null;
+    if (!targets.length) {
+      return;
+    }
 
-    const toVars = {
+    gsap.to(targets, {
       y: 0,
+      x: 0,
+      scale: 1,
       opacity: 1,
       stagger: vars.stagger || 0.12,
       duration: vars.duration || 0.8,
       ease: vars.ease || "power3.out",
-    };
+      overwrite: "auto",
+    });
+  };
 
-    if (vars.trigger) {
-      toVars.scrollTrigger = {
-        trigger: vars.trigger,
-        start: vars.start || "top 80%",
-        toggleActions: "play none none none",
-      };
+  const revealOnScroll = (elements, trigger, vars = {}) => {
+    const targets = gsap.utils.toArray(elements).filter(Boolean);
+    if (!targets.length || !trigger) {
+      return;
     }
 
-    return gsap.fromTo(targets, { y: vars.yStart || 30, opacity: 0 }, toVars);
+    gsap.set(targets, {
+      y: vars.yStart || 30,
+      x: vars.xStart || 0,
+      scale: vars.scaleStart || 1,
+      opacity: 0,
+    });
+
+    if (reduceMotion || typeof ScrollTrigger === "undefined") {
+      gsap.set(targets, { y: 0, x: 0, scale: 1, opacity: 1 });
+      return;
+    }
+
+    const playReveal = () => {
+      revealNow(targets, vars);
+    };
+
+    // Already in (or near) view on load — don't wait for a scroll that never comes.
+    const rect = trigger.getBoundingClientRect();
+    const viewportH =
+      window.innerHeight || document.documentElement.clientHeight || 0;
+    const alreadyVisible = rect.top < viewportH * 0.9 && rect.bottom > 0;
+
+    if (alreadyVisible) {
+      playReveal();
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger: trigger,
+      start: vars.start || "top 85%",
+      once: true,
+      onEnter: playReveal,
+      onEnterBack: playReveal,
+    });
   };
 
   const cosmeticHero = serviceMain.querySelector(".cosmetic-service-hero");
@@ -1767,13 +1810,19 @@ function initServicePageTextAnimations() {
     );
 
     gsap.set([heroTitle, heroDesc].filter(Boolean), { y: 30, opacity: 0 });
-    if (heroImage) gsap.set(heroImage, { x: 50, opacity: 0, scale: 0.95 });
+    if (heroImage) {
+      gsap.set(heroImage, { x: 50, opacity: 0, scale: 0.95 });
+    }
 
     const heroTl = gsap.timeline({
       defaults: { ease: "power3.out", duration: 0.8 },
     });
-    if (heroTitle) heroTl.to(heroTitle, { y: 0, opacity: 1 });
-    if (heroDesc) heroTl.to(heroDesc, { y: 0, opacity: 1 }, "-=0.6");
+    if (heroTitle) {
+      heroTl.to(heroTitle, { y: 0, opacity: 1 });
+    }
+    if (heroDesc) {
+      heroTl.to(heroDesc, { y: 0, opacity: 1 }, "-=0.6");
+    }
     if (heroImage) {
       heroTl.to(
         heroImage,
@@ -1793,15 +1842,19 @@ function initServicePageTextAnimations() {
     ".cosmetic-treatments-container",
   );
   if (treatments) {
-    animateIn(treatments.querySelectorAll(".cosmetic-treatment-row"), {
-      trigger: treatments,
-      stagger: 0.1,
-    });
+    revealOnScroll(
+      treatments.querySelectorAll(".cosmetic-treatment-row"),
+      treatments,
+      {
+        stagger: 0.1,
+        start: "top 85%",
+      },
+    );
   }
 
   const membership = serviceMain.querySelector(".cosmetic-membership-section");
   if (membership) {
-    animateIn(
+    revealOnScroll(
       [
         membership.querySelector(".cosmetic-membership-badge"),
         membership.querySelector(".cosmetic-membership-title"),
@@ -1810,10 +1863,10 @@ function initServicePageTextAnimations() {
         ...membership.querySelectorAll(".cosmetic-membership-benefit-item"),
         membership.querySelector(".cosmetic-membership-ctas"),
       ],
+      membership,
       {
-        trigger: membership,
-        start: "top 80%",
         stagger: 0.12,
+        start: "top 85%",
       },
     );
 
@@ -1821,31 +1874,32 @@ function initServicePageTextAnimations() {
       ".cosmetic-membership-img-col img",
     );
     if (membershipImage) {
-      gsap.fromTo(
-        membershipImage,
-        { x: -40, opacity: 0, scale: 0.96 },
-        {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: membership,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
+      revealOnScroll([membershipImage], membership, {
+        yStart: 0,
+        xStart: -40,
+        scaleStart: 0.96,
+        stagger: 0,
+        duration: 1,
+        start: "top 85%",
+      });
     }
   }
 
   const serviceDetails = serviceMain.querySelector(".service-details-section");
   if (serviceDetails) {
-    animateIn(serviceDetails.querySelectorAll(".entry-content > *"), {
-      trigger: serviceDetails,
-      start: "top 85%",
-      stagger: 0.1,
+    revealOnScroll(
+      serviceDetails.querySelectorAll(".entry-content > *"),
+      serviceDetails,
+      {
+        stagger: 0.1,
+        start: "top 85%",
+      },
+    );
+  }
+
+  if (typeof ScrollTrigger !== "undefined") {
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
     });
   }
 }
