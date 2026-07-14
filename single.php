@@ -225,6 +225,15 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 					<?php endforeach; ?>
 				</div>
 			</div>
+
+			<?php if ( count( $related_posts ) > 1 ) : ?>
+			<div
+				class="blog-detail-related-dots"
+				data-related-dots
+				role="tablist"
+				aria-label="<?php esc_attr_e( 'Related blogs pagination', 'wsd' ); ?>"
+			></div>
+			<?php endif; ?>
 		</section>
 		<?php endif; ?>
 

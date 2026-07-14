@@ -15554,6 +15554,10 @@ body.home
   background-color: #fefdf6;
 }
 
+.blog-detail-related-dots {
+  display: none;
+}
+
 .blog-detail-main .screen-reader-text {
   position: absolute;
   width: 1px;
@@ -16132,6 +16136,7 @@ body.home
     overflow: hidden;
     padding: 0 120px 80px;
     box-sizing: border-box;
+    touch-action: pan-y;
   }
 
   .blog-detail-related-track {
@@ -16146,6 +16151,10 @@ body.home
     flex: 0 0 calc((100% - 80px) / 3);
     width: calc((100% - 80px) / 3);
     max-width: none;
+  }
+
+  .blog-detail-related-dots {
+    display: none;
   }
 }
 
