@@ -80,7 +80,7 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 					<a href="<?php echo esc_url( $smile_gallery_url ); ?>" class="btn btn-secondary blogs-hero-cta blogs-hero-cta--desktop">
 						<span><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>
 					</a>
-					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary blogs-hero-cta blogs-hero-cta--tablet">
+					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary blogs-hero-cta blogs-hero-cta--compact">
 						<span><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></span>
 					</a>
 				</div>
@@ -162,7 +162,8 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 			<div class="blogs-listing-header">
 				<h2 id="blogs-listing-heading" class="blogs-listing-title">
 					<span class="blogs-listing-title-main"><?php esc_html_e( 'All ', 'wsd' ); ?></span>
-					<span class="blogs-listing-title-accent"><?php esc_html_e( 'blogs', 'wsd' ); ?></span>
+					<span class="blogs-listing-title-accent blogs-listing-title-accent--short"><?php esc_html_e( 'blogs', 'wsd' ); ?></span>
+					<span class="blogs-listing-title-accent blogs-listing-title-accent--full"><?php esc_html_e( 'blogs & news', 'wsd' ); ?></span>
 				</h2>
 				<div class="blogs-filters">
 					<button type="button" class="blogs-filter-all is-active" data-filter="all" aria-pressed="true">
@@ -207,45 +208,54 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 			</div>
 
 			<?php if ( ! empty( $grid_posts ) ) : ?>
-			<div class="blogs-grid" data-blogs-grid>
-				<?php foreach ( $grid_posts as $blog_post ) : ?>
-					<?php
-					$category_attr = ! empty( $blog_post['category_slugs'] )
-						? implode( ' ', array_map( 'sanitize_title', $blog_post['category_slugs'] ) )
-						: '';
-					?>
-					<article
-						class="blogs-card"
-						data-category-slugs="<?php echo esc_attr( $category_attr ); ?>"
-					>
-						<div class="blogs-card-media">
-							<img
-								src="<?php echo esc_url( $blog_post['image_url'] ); ?>"
-								alt="<?php echo esc_attr( $blog_post['image_alt'] ); ?>"
-								class="blogs-card-img"
-								width="535"
-								height="797"
-								loading="lazy"
-								decoding="async"
-							>
-							<div class="blogs-card-overlay" aria-hidden="true"></div>
-						</div>
-						<div class="blogs-card-content">
-							<div class="blogs-card-copy">
-								<h3 class="blogs-card-title">
-									<a href="<?php echo esc_url( $blog_post['permalink'] ); ?>"><?php echo esc_html( $blog_post['title'] ); ?></a>
-								</h3>
-								<?php $render_blog_meta( $blog_post, 'white' ); ?>
-								<?php if ( ! empty( $blog_post['excerpt'] ) ) : ?>
-									<p class="blogs-card-excerpt"><?php echo esc_html( $blog_post['excerpt'] ); ?></p>
-								<?php endif; ?>
+			<div class="blogs-grid-shell" data-blogs-grid-shell>
+				<div class="blogs-grid" data-blogs-grid>
+					<?php foreach ( $grid_posts as $blog_post ) : ?>
+						<?php
+						$category_attr = ! empty( $blog_post['category_slugs'] )
+							? implode( ' ', array_map( 'sanitize_title', $blog_post['category_slugs'] ) )
+							: '';
+						?>
+						<article
+							class="blogs-card"
+							data-category-slugs="<?php echo esc_attr( $category_attr ); ?>"
+						>
+							<div class="blogs-card-media">
+								<img
+									src="<?php echo esc_url( $blog_post['image_url'] ); ?>"
+									alt="<?php echo esc_attr( $blog_post['image_alt'] ); ?>"
+									class="blogs-card-img"
+									width="535"
+									height="797"
+									loading="lazy"
+									decoding="async"
+								>
+								<div class="blogs-card-overlay" aria-hidden="true"></div>
 							</div>
-							<a href="<?php echo esc_url( $blog_post['permalink'] ); ?>" class="btn btn-primary blogs-read-btn blogs-read-btn--card">
-								<span><?php esc_html_e( 'Read Full Article', 'wsd' ); ?></span>
-							</a>
-						</div>
-					</article>
-				<?php endforeach; ?>
+							<div class="blogs-card-content">
+								<div class="blogs-card-copy">
+									<h3 class="blogs-card-title">
+										<a href="<?php echo esc_url( $blog_post['permalink'] ); ?>"><?php echo esc_html( $blog_post['title'] ); ?></a>
+									</h3>
+									<?php $render_blog_meta( $blog_post, 'white' ); ?>
+									<?php if ( ! empty( $blog_post['excerpt'] ) ) : ?>
+										<p class="blogs-card-excerpt"><?php echo esc_html( $blog_post['excerpt'] ); ?></p>
+									<?php endif; ?>
+								</div>
+								<a href="<?php echo esc_url( $blog_post['permalink'] ); ?>" class="btn btn-primary blogs-read-btn blogs-read-btn--card">
+									<span><?php esc_html_e( 'Read Full Article', 'wsd' ); ?></span>
+								</a>
+							</div>
+						</article>
+					<?php endforeach; ?>
+				</div>
+				<div
+					class="blogs-grid-track"
+					data-blogs-grid-track
+					aria-hidden="true"
+				>
+					<span class="blogs-grid-track-fill" data-blogs-grid-progress></span>
+				</div>
 			</div>
 			<p class="blogs-empty-state" hidden><?php esc_html_e( 'No articles found for this filter.', 'wsd' ); ?></p>
 			<?php else : ?>

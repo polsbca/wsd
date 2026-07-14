@@ -14741,8 +14741,28 @@ body.home
   color: #d8a444;
 }
 
-.blogs-page-main .hero-buttons .blogs-hero-cta--tablet {
+.blogs-page-main .hero-buttons .blogs-hero-cta--compact {
   display: none;
+}
+
+.blogs-page-main .hero-buttons .blogs-hero-cta--desktop {
+  display: none;
+}
+
+.blogs-listing-title-accent--full {
+  display: none;
+}
+
+.blogs-grid-track {
+  display: none;
+}
+
+.blogs-grid-shell {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .blogs-featured-section,
@@ -14798,12 +14818,16 @@ body.home
     width: 100%;
   }
 
-  .blogs-page-main .hero-buttons .blogs-hero-cta--tablet {
+  .blogs-page-main .hero-buttons .blogs-hero-cta--compact {
     display: none;
   }
 
   .blogs-page-main .hero-buttons .blogs-hero-cta--desktop {
     display: inline-flex;
+  }
+
+  .blogs-listing-title-accent--full {
+    display: none;
   }
 
   .blogs-hero-page {

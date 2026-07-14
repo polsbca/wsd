@@ -1,8 +1,105 @@
 /**
- * Blogs page — category filter dropdown
+ * Blogs page — category filter dropdown + mobile grid progress
  */
 (function ($) {
   "use strict";
+
+  function isPhone() {
+    return window.matchMedia("(max-width: 767.98px)").matches;
+  }
+
+  function initBlogsGridProgress() {
+    var $shell = $("[data-blogs-grid-shell]");
+    var $track = $shell.find("[data-blogs-grid-track]");
+    var $fill = $shell.find("[data-blogs-grid-progress]");
+
+    if (!$shell.length || !$track.length || !$fill.length) {
+      return;
+    }
+
+    var shellEl = $shell.get(0);
+    var fillEl = $fill.get(0);
+    var rafId = null;
+
+    function getHeaderOffset() {
+      var header =
+        document.querySelector(".mobile-header") ||
+        document.querySelector("#masthead");
+      if (!header) {
+        return 0;
+      }
+      return Math.ceil(header.getBoundingClientRect().height || 0);
+    }
+
+    function setProgress(progress) {
+      var pct = (Math.max(0, Math.min(1, progress)) * 100).toFixed(2) + "%";
+      fillEl.style.setProperty("--blogs-grid-progress", pct);
+    }
+
+    function updateProgress() {
+      if (!isPhone()) {
+        setProgress(0.262);
+        $track.attr("aria-hidden", "true");
+        return;
+      }
+
+      var rect = shellEl.getBoundingClientRect();
+      var viewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+      var headerOffset = getHeaderOffset();
+      var startLine = headerOffset;
+      var scrolled = startLine - rect.top;
+      var scrollable = Math.max(rect.height - (viewportH - headerOffset), 1);
+      var progress = scrolled / scrollable;
+      var minProgress = 0.262;
+
+      progress = Math.max(0, Math.min(1, progress));
+
+      if (progress > 0 && progress < minProgress) {
+        progress = minProgress;
+      } else if (
+        progress <= 0 &&
+        rect.top < viewportH &&
+        rect.bottom > headerOffset
+      ) {
+        progress = minProgress;
+      }
+
+      setProgress(progress);
+      $track.attr({
+        "aria-hidden": "false",
+        role: "progressbar",
+        "aria-valuemin": "0",
+        "aria-valuemax": "100",
+        "aria-valuenow": String(Math.round(progress * 100)),
+      });
+    }
+
+    function scheduleUpdate() {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      rafId = window.requestAnimationFrame(function () {
+        rafId = null;
+        updateProgress();
+      });
+    }
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate, { passive: true });
+    window.addEventListener("orientationchange", scheduleUpdate, { passive: true });
+    document.addEventListener("scroll", scheduleUpdate, { passive: true, capture: true });
+    $(window).on("load.blogsGridProgress", function () {
+      window.setTimeout(scheduleUpdate, 100);
+      window.setTimeout(scheduleUpdate, 600);
+    });
+
+    if (window.ResizeObserver) {
+      var observer = new ResizeObserver(scheduleUpdate);
+      observer.observe(shellEl);
+    }
+
+    scheduleUpdate();
+  }
 
   function initBlogsPage() {
     var $root = $(".blogs-page-main");
@@ -47,6 +144,8 @@
         $empty.prop("hidden", visibleCount > 0);
         $empty.toggleClass("is-visible", visibleCount === 0);
       }
+
+      window.dispatchEvent(new Event("resize"));
     }
 
     function syncFilterUi() {
@@ -145,6 +244,7 @@
 
     applyFilterState();
     syncFilterUi();
+    initBlogsGridProgress();
   }
 
   $(initBlogsPage);

@@ -416,7 +416,7 @@ function initAnimations() {
         });
       }
       if (hasBlogsPage) {
-        gsap.set(".blogs-page-main .hero-buttons .btn", {
+        gsap.set(".blogs-page-main .hero-buttons .btn:not(.blogs-hero-cta--desktop)", {
           y: 15,
           opacity: 0,
         });
@@ -525,7 +525,7 @@ function initAnimations() {
       } else if (hasBlogsPage) {
         mobileTl
           .to(
-            ".blogs-page-main .hero-buttons .btn",
+            ".blogs-page-main .hero-buttons .btn:not(.blogs-hero-cta--desktop)",
             {
               y: 0,
               opacity: 1,

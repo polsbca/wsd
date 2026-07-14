@@ -2,7 +2,9 @@
 /**
  * The template for displaying single blog posts.
  *
- * Desktop design: Figma 4078:37103
+ * Desktop: Figma 4078:37103
+ * Tablet:  Figma 4078:38149
+ * Mobile:  Figma 4078:38753
  *
  * @package wsd
  */
