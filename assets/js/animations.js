@@ -55,6 +55,8 @@ function initAnimations() {
     !hasBlogsPage &&
     !hasBlogDetailPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
+  const hasHomeHero =
+    hasStandardHero && document.body.classList.contains("home");
 
   // ----------------------------------------------------
   // 1. Initial State Setup (Prevents abrupt jumps on load)
@@ -68,7 +70,17 @@ function initAnimations() {
     if (hasStandardHero) {
       gsap.set(".hero-buttons .btn", { y: 20, opacity: 0 });
       gsap.set(".stat", { y: 20, opacity: 0 });
-      gsap.set(".hero-image-wrapper", { x: 50, opacity: 0, scale: 0.95 });
+      if (hasHomeHero) {
+        // Curtain reveal top → bottom (front-page hero)
+        gsap.set(".hero-section .hero-image-wrapper", {
+          clipPath: "inset(0% 0% 100% 0%)",
+          opacity: 1,
+          x: 0,
+          scale: 1,
+        });
+      } else {
+        gsap.set(".hero-image-wrapper", { x: 50, opacity: 0, scale: 0.95 });
+      }
     }
     if (hasCallUsTab) {
       gsap.set(".call-us-tab", { x: 70, opacity: 0 });
@@ -335,10 +347,21 @@ function initAnimations() {
             duration: 0.6,
           },
           "-=0.4",
-        )
+        );
 
-        // Animate Hero Image
-        .to(
+      if (hasHomeHero) {
+        // Curtain slide-in from top to bottom
+        mainTimeline.to(
+          ".hero-section .hero-image-wrapper",
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 1.25,
+            ease: "power3.inOut",
+          },
+          "-=0.8",
+        );
+      } else {
+        mainTimeline.to(
           ".hero-image-wrapper",
           {
             x: 0,
@@ -349,6 +372,7 @@ function initAnimations() {
           },
           "-=0.8",
         );
+      }
     }
 
     if (hasCallUsTab) {
@@ -374,7 +398,15 @@ function initAnimations() {
       if (hasStandardHero) {
         gsap.set(".hero-buttons .btn", { y: 15, opacity: 0 });
         gsap.set(".stat", { y: 15, opacity: 0 });
-        gsap.set(".hero-image-wrapper", { y: 30, opacity: 0 });
+        if (hasHomeHero) {
+          gsap.set(".hero-section .hero-image-wrapper", {
+            clipPath: "inset(0% 0% 100% 0%)",
+            opacity: 1,
+            y: 0,
+          });
+        } else {
+          gsap.set(".hero-image-wrapper", { y: 30, opacity: 0 });
+        }
       }
       if (hasCallUsTab) {
         gsap.set(".call-us-tab", { x: 40, opacity: 0 });
@@ -559,8 +591,20 @@ function initAnimations() {
               duration: 0.4,
             },
             "-=0.3",
-          )
-          .to(
+          );
+
+        if (hasHomeHero) {
+          mobileTl.to(
+            ".hero-section .hero-image-wrapper",
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 0.85,
+              ease: "power2.inOut",
+            },
+            "-=0.3",
+          );
+        } else {
+          mobileTl.to(
             ".hero-image-wrapper",
             {
               y: 0,
@@ -569,6 +613,7 @@ function initAnimations() {
             },
             "-=0.3",
           );
+        }
       }
 
       if (hasCallUsTab) {
@@ -739,16 +784,17 @@ function initAnimations() {
           trigger: aboutSection,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5,
+          scrub: 0.35,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (textContents.length < 3) return;
 
+            // Equal thirds: hold each slide before advancing
             let activeIndex = 0;
-            if (self.progress >= 0.6) {
+            if (self.progress >= 0.66) {
               activeIndex = 2;
-            } else if (self.progress >= 0.25) {
+            } else if (self.progress >= 0.33) {
               activeIndex = 1;
             }
 
@@ -757,7 +803,7 @@ function initAnimations() {
         },
       });
 
-      // 1. Move scroll indicator handle
+      // 1. Move scroll indicator handle across the full scroll track
       aboutTl.to(
         handle,
         {
@@ -768,14 +814,14 @@ function initAnimations() {
         0,
       );
 
-      // 2. Cross-fade images while text uses a bottom-up reveal.
+      // 2. Cross-fade images at equal thirds so each slide fully settles
       if (textContents.length >= 3) {
         aboutTl
           .to(
             images[0],
             {
               opacity: 0,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[0], { visibility: "visible" }),
               onComplete: () => {
                 gsap.set(images[0], { visibility: "hidden" });
@@ -784,19 +830,19 @@ function initAnimations() {
                 gsap.set(images[0], { visibility: "visible" });
               },
             },
-            0.25,
+            0.33,
           )
           .to(
             images[1],
             {
               opacity: 1,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[1], { visibility: "visible" }),
               onComplete: () => gsap.set(images[1], { visibility: "visible" }),
               onReverseComplete: () =>
                 gsap.set(images[1], { visibility: "hidden" }),
             },
-            0.25,
+            0.33,
           );
 
         aboutTl
@@ -804,7 +850,7 @@ function initAnimations() {
             images[1],
             {
               opacity: 0,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[1], { visibility: "visible" }),
               onComplete: () => {
                 gsap.set(images[1], { visibility: "hidden" });
@@ -813,19 +859,19 @@ function initAnimations() {
                 gsap.set(images[1], { visibility: "visible" });
               },
             },
-            0.6,
+            0.66,
           )
           .to(
             images[2],
             {
               opacity: 1,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[2], { visibility: "visible" }),
               onComplete: () => gsap.set(images[2], { visibility: "visible" }),
               onReverseComplete: () =>
                 gsap.set(images[2], { visibility: "hidden" }),
             },
-            0.6,
+            0.66,
           );
       } else {
         aboutTl
@@ -833,25 +879,25 @@ function initAnimations() {
             images[0],
             {
               opacity: 0,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[0], { visibility: "visible" }),
               onComplete: () => gsap.set(images[0], { visibility: "hidden" }),
               onReverseComplete: () =>
                 gsap.set(images[0], { visibility: "visible" }),
             },
-            0.25,
+            0.33,
           )
           .to(
             images[1],
             {
               opacity: 1,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[1], { visibility: "visible" }),
               onComplete: () => gsap.set(images[1], { visibility: "visible" }),
               onReverseComplete: () =>
                 gsap.set(images[1], { visibility: "hidden" }),
             },
-            0.25,
+            0.33,
           );
 
         aboutTl
@@ -859,25 +905,25 @@ function initAnimations() {
             images[1],
             {
               opacity: 0,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[1], { visibility: "visible" }),
               onComplete: () => gsap.set(images[1], { visibility: "hidden" }),
               onReverseComplete: () =>
                 gsap.set(images[1], { visibility: "visible" }),
             },
-            0.6,
+            0.66,
           )
           .to(
             images[2],
             {
               opacity: 1,
-              duration: 0.2,
+              duration: 0.12,
               onStart: () => gsap.set(images[2], { visibility: "visible" }),
               onComplete: () => gsap.set(images[2], { visibility: "visible" }),
               onReverseComplete: () =>
                 gsap.set(images[2], { visibility: "hidden" }),
             },
-            0.6,
+            0.66,
           );
       }
     }

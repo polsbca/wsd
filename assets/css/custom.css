@@ -126,7 +126,12 @@ body {
     transform: translateY(30px);
   }
 
-  html.wsd-js body.home .hero-image-wrapper,
+  html.wsd-js body.home .hero-image-wrapper {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0% 0% 100% 0%);
+  }
+
   html.wsd-js body.page-template-template-services .hero-image-wrapper,
   html.wsd-js body.single-services .hero-image-wrapper,
   html.wsd-js body.single-services .cosmetic-hero-image-wrapper,
@@ -839,6 +844,7 @@ body {
   align-items: flex-end;
   justify-content: flex-end;
   z-index: 1;
+  overflow: hidden;
 }
 
 .hero-img {
@@ -2019,7 +2025,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
    ABOUT WATERSIDE DENTAL CARE SECTION
    ============================================================ */
 .about-waterside-section {
-  height: 300vh;
+  height: 400vh;
   /* Scroll track for stickiness */
   position: relative;
   background-color: #faf3e6;
@@ -3806,7 +3812,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   }
 
   .about-waterside-section {
-    height: 1800px !important;
+    /* ~1 viewport sticky + ~1 viewport dwell per slide (3 slides) */
+    height: 400vh !important;
     background-color: #faf3e6 !important;
   }
 
