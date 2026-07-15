@@ -16608,7 +16608,31 @@ body.home
 /* Built */
 .implants-built-section {
   background-color: #faf3e6;
+  position: relative;
+  overflow: visible;
+}
+
+.implants-built-sticky {
+  background-color: #faf3e6;
   padding: 160px 120px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .implants-built-section {
+    height: 1800px;
+  }
+
+  .implants-built-sticky {
+    position: sticky;
+    top: 82px;
+    z-index: 4;
+    min-height: calc(100vh - 82px);
+    display: flex;
+    align-items: center;
+    padding: 80px 120px;
+  }
 }
 
 .implants-built-inner {
@@ -16616,6 +16640,7 @@ body.home
   grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
   gap: 100px;
   align-items: center;
+  width: 100%;
 }
 
 .implants-built-diagram {
@@ -16725,7 +16750,31 @@ body.home
 /* Compare */
 .implants-compare-section {
   background-color: #fefdf6;
+  position: relative;
+  overflow: visible;
+}
+
+.implants-compare-sticky {
+  background-color: #fefdf6;
   padding: 160px 187.5px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .implants-compare-section {
+    height: 1800px;
+  }
+
+  .implants-compare-sticky {
+    position: sticky;
+    top: 82px;
+    z-index: 3;
+    min-height: calc(100vh - 82px);
+    display: flex;
+    align-items: center;
+    padding: 80px 120px;
+  }
 }
 
 .implants-compare-inner {
@@ -16734,6 +16783,7 @@ body.home
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 100%;
 }
 
 .implants-compare-intro {
@@ -16925,12 +16975,12 @@ body.home
 @media (max-width: 1600px) {
   .implants-hero,
   .implants-about-body,
-  .implants-built-section {
+  .implants-built-sticky {
     padding-left: 60px;
     padding-right: 60px;
   }
 
-  .implants-compare-section {
+  .implants-compare-sticky {
     padding-left: 60px;
     padding-right: 60px;
   }

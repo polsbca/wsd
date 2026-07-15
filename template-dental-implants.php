@@ -253,90 +253,94 @@ get_header();
 
 	<!-- How an implant is built -->
 	<section class="implants-built-section">
-		<div class="implants-built-inner">
-			<div class="implants-built-diagram">
-				<img
-					src="<?php echo esc_url( $theme_uri . '/assets/images/dental-implants-diagram.png' ); ?>"
-					alt="<?php esc_attr_e( 'Diagram of crown, abutment and implant in the jawbone', 'wsd' ); ?>"
-				>
-			</div>
-			<div class="implants-built-content">
-				<div class="implants-built-intro">
-					<h2 class="implants-built-title">
-						How an implant is <span class="accent">built</span>
-					</h2>
-					<p class="implants-built-lead">
-						Every dental implant has three parts that work together to replicate a natural tooth from root to crown.
-					</p>
+		<div class="implants-built-sticky">
+			<div class="implants-built-inner">
+				<div class="implants-built-diagram">
+					<img
+						src="<?php echo esc_url( $theme_uri . '/assets/images/dental-implants-diagram.png' ); ?>"
+						alt="<?php esc_attr_e( 'Diagram of crown, abutment and implant in the jawbone', 'wsd' ); ?>"
+					>
 				</div>
-				<ul class="implants-built-list">
-					<?php foreach ( $built_parts as $part ) : ?>
-						<li class="implants-built-item">
-							<img
-								src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>"
-								alt=""
-								class="implants-built-icon"
-								aria-hidden="true"
-							>
-							<div class="implants-built-item-copy">
-								<h3 class="implants-built-item-title"><?php echo esc_html( $part['title'] ); ?></h3>
-								<p class="implants-built-item-desc"><?php echo esc_html( $part['desc'] ); ?></p>
-							</div>
-						</li>
-					<?php endforeach; ?>
-				</ul>
+				<div class="implants-built-content">
+					<div class="implants-built-intro">
+						<h2 class="implants-built-title">
+							How an implant is <span class="accent">built</span>
+						</h2>
+						<p class="implants-built-lead">
+							Every dental implant has three parts that work together to replicate a natural tooth from root to crown.
+						</p>
+					</div>
+					<ul class="implants-built-list">
+						<?php foreach ( $built_parts as $part ) : ?>
+							<li class="implants-built-item">
+								<img
+									src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>"
+									alt=""
+									class="implants-built-icon"
+									aria-hidden="true"
+								>
+								<div class="implants-built-item-copy">
+									<h3 class="implants-built-item-title"><?php echo esc_html( $part['title'] ); ?></h3>
+									<p class="implants-built-item-desc"><?php echo esc_html( $part['desc'] ); ?></p>
+								</div>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
 
 	<!-- Implants vs other options -->
 	<section class="implants-compare-section">
-		<div class="implants-compare-inner">
-			<div class="implants-compare-intro">
-				<h2 class="implants-compare-title">
-					Implants vs <span class="accent">other options</span>
-				</h2>
-				<p class="implants-compare-lead">
-					Understanding how implants compare helps you make the right choice for your situation.
-				</p>
-			</div>
-
-			<div class="implants-compare-table" role="table" aria-label="<?php esc_attr_e( 'Implants compared with bridges and dentures', 'wsd' ); ?>">
-				<div class="implants-compare-labels" role="rowgroup">
-					<div class="implants-compare-corner" role="columnheader"></div>
-					<?php foreach ( $compare_rows as $row ) : ?>
-						<div class="implants-compare-label" role="rowheader"><?php echo esc_html( $row['label'] ); ?></div>
-					<?php endforeach; ?>
+		<div class="implants-compare-sticky">
+			<div class="implants-compare-inner">
+				<div class="implants-compare-intro">
+					<h2 class="implants-compare-title">
+						Implants vs <span class="accent">other options</span>
+					</h2>
+					<p class="implants-compare-lead">
+						Understanding how implants compare helps you make the right choice for your situation.
+					</p>
 				</div>
 
-				<div class="implants-compare-col implants-compare-col--highlight" role="column">
-					<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Implants', 'wsd' ); ?></div>
-					<?php foreach ( $compare_rows as $row ) : ?>
-						<div class="implants-compare-cell" role="cell">
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>" alt="" aria-hidden="true">
-							<span><?php echo esc_html( $row['implants'] ); ?></span>
-						</div>
-					<?php endforeach; ?>
-				</div>
+				<div class="implants-compare-table" role="table" aria-label="<?php esc_attr_e( 'Implants compared with bridges and dentures', 'wsd' ); ?>">
+					<div class="implants-compare-labels" role="rowgroup">
+						<div class="implants-compare-corner" role="columnheader"></div>
+						<?php foreach ( $compare_rows as $row ) : ?>
+							<div class="implants-compare-label" role="rowheader"><?php echo esc_html( $row['label'] ); ?></div>
+						<?php endforeach; ?>
+					</div>
 
-				<div class="implants-compare-col" role="column">
-					<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Bridge', 'wsd' ); ?></div>
-					<?php foreach ( $compare_rows as $row ) : ?>
-						<div class="implants-compare-cell" role="cell">
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
-							<span><?php echo esc_html( $row['bridge'] ); ?></span>
-						</div>
-					<?php endforeach; ?>
-				</div>
+					<div class="implants-compare-col implants-compare-col--highlight" role="column">
+						<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Implants', 'wsd' ); ?></div>
+						<?php foreach ( $compare_rows as $row ) : ?>
+							<div class="implants-compare-cell" role="cell">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>" alt="" aria-hidden="true">
+								<span><?php echo esc_html( $row['implants'] ); ?></span>
+							</div>
+						<?php endforeach; ?>
+					</div>
 
-				<div class="implants-compare-col" role="column">
-					<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Denture', 'wsd' ); ?></div>
-					<?php foreach ( $compare_rows as $row ) : ?>
-						<div class="implants-compare-cell" role="cell">
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
-							<span><?php echo esc_html( $row['denture'] ); ?></span>
-						</div>
-					<?php endforeach; ?>
+					<div class="implants-compare-col" role="column">
+						<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Bridge', 'wsd' ); ?></div>
+						<?php foreach ( $compare_rows as $row ) : ?>
+							<div class="implants-compare-cell" role="cell">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
+								<span><?php echo esc_html( $row['bridge'] ); ?></span>
+							</div>
+						<?php endforeach; ?>
+					</div>
+
+					<div class="implants-compare-col" role="column">
+						<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Denture', 'wsd' ); ?></div>
+						<?php foreach ( $compare_rows as $row ) : ?>
+							<div class="implants-compare-cell" role="cell">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
+								<span><?php echo esc_html( $row['denture'] ); ?></span>
+							</div>
+						<?php endforeach; ?>
+					</div>
 				</div>
 			</div>
 		</div>
