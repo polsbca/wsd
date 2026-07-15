@@ -61,35 +61,18 @@ body {
 
 @media (min-width: 992px) {
   html.wsd-js body.home .header-top,
-  html.wsd-js body.home #masthead.site-header,
   html.wsd-js body.page-template-template-services .header-top,
-  html.wsd-js body.page-template-template-services #masthead.site-header,
   html.wsd-js body.page-template-template-contact-php .header-top,
-  html.wsd-js body.page-template-template-contact-php #masthead.site-header,
   html.wsd-js body.page-template-template-contact .header-top,
-  html.wsd-js body.page-template-template-contact #masthead.site-header,
   html.wsd-js body.page-template-template-dental-referrals-php .header-top,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    #masthead.site-header,
   html.wsd-js body.page-template-template-dental-referrals .header-top,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    #masthead.site-header,
   html.wsd-js body.page-template-template-teams-php .header-top,
-  html.wsd-js body.page-template-template-teams-php #masthead.site-header,
   html.wsd-js body.page-template-template-teams .header-top,
-  html.wsd-js body.page-template-template-teams #masthead.site-header,
   html.wsd-js body.page-template-template-fees-php .header-top,
-  html.wsd-js body.page-template-template-fees-php #masthead.site-header,
   html.wsd-js body.page-template-template-fees .header-top,
-  html.wsd-js body.page-template-template-fees #masthead.site-header,
   html.wsd-js body.page-template-template-smile-gallery-php .header-top,
-  html.wsd-js body.page-template-template-smile-gallery-php #masthead.site-header,
   html.wsd-js body.page-template-template-smile-gallery .header-top,
-  html.wsd-js body.page-template-template-smile-gallery #masthead.site-header,
-  html.wsd-js body.single-services .header-top,
-  html.wsd-js body.single-services #masthead.site-header {
+  html.wsd-js body.single-services .header-top {
     opacity: 0;
     transform: translateY(-50px);
   }

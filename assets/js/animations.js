@@ -61,7 +61,7 @@ function initAnimations() {
   //    Desktop only — mobile uses CSS transitions via .mobile-visible
   // ----------------------------------------------------
   if (isDesktop) {
-    gsap.set(".header-top, #masthead.site-header", { y: -50, opacity: 0 });
+    gsap.set(".header-top", { y: -50, opacity: 0 });
     if (hasHero) {
       gsap.set(".hero-title, .hero-description", { y: 30, opacity: 0 });
     }
@@ -144,13 +144,8 @@ function initAnimations() {
     });
 
     mainTimeline
-      // Fade & Slide in Header Top and Main Navigation
-      .to(".header-top", { y: 0, opacity: 1, duration: 0.8 })
-      .to(
-        "#masthead.site-header",
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.6",
-      );
+      // Fade & Slide in Header Top (nav menu stays static — no load animation)
+      .to(".header-top", { y: 0, opacity: 1, duration: 0.8 });
 
     if (hasHero) {
       mainTimeline
