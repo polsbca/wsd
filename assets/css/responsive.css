@@ -1317,12 +1317,20 @@
 
   /* Key Treatments Mobile Styling */
   .key-treatments-section {
+    /* Closed-tab row height — also used as sticky-track buffer (see JS) */
+    --treatments-closed-tab-height: 52px;
     margin-top: 60px !important;
     margin-bottom: 60px !important;
     overflow: visible !important;
     position: relative !important;
-    height: 1600px !important;
-    /* taller parent defines scroll/sticky duration */
+    /* JS sets --treatments-track-height from sticky content + closed tab height */
+    height: var(--treatments-track-height, auto) !important;
+    min-height: 0 !important;
+  }
+
+  .key-treatments-section .accordion-tab:not(.active) .accordion-tab-header {
+    min-height: var(--treatments-closed-tab-height);
+    box-sizing: border-box;
   }
 
   .treatments-sticky-wrapper {

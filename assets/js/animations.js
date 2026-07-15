@@ -2513,6 +2513,43 @@ function initTreatmentsAccordion() {
     return height;
   }
 
+  function syncMobileTreatmentsTrackHeight() {
+    const section = document.querySelector(".key-treatments-section");
+    const sticky = section
+      ? section.querySelector(".treatments-sticky-wrapper")
+      : null;
+
+    if (!section || !sticky) return;
+
+    if (window.innerWidth >= 992) {
+      section.style.removeProperty("--treatments-track-height");
+      return;
+    }
+
+    // Closed-tab height is the tuning unit for leftover sticky space / section gap
+    const closedHeader = section.querySelector(
+      ".accordion-tab:not(.active) .accordion-tab-header",
+    );
+    const cssTabHeight = parseFloat(
+      getComputedStyle(section).getPropertyValue(
+        "--treatments-closed-tab-height",
+      ),
+    );
+    const closedTabHeight =
+      (closedHeader && closedHeader.offsetHeight) ||
+      (Number.isFinite(cssTabHeight) ? cssTabHeight : 52);
+    const closedCount = section.querySelectorAll(
+      ".accordion-tab:not(.active)",
+    ).length;
+
+    // Track = content height + one closed-tab of dwell per closed row
+    const trackHeight =
+      Math.ceil(sticky.offsetHeight) +
+      Math.round(closedTabHeight) * Math.max(closedCount, 1);
+
+    section.style.setProperty("--treatments-track-height", trackHeight + "px");
+  }
+
   function lockAccordionMinHeight() {
     if (!accordionWrapper || window.innerWidth < 992) {
       if (accordionWrapper) {
@@ -2521,6 +2558,7 @@ function initTreatmentsAccordion() {
         accordionWrapper.style.removeProperty("max-height");
         accordionWrapper.style.removeProperty("overflow");
       }
+      syncMobileTreatmentsTrackHeight();
       return;
     }
 
@@ -2568,6 +2606,20 @@ function initTreatmentsAccordion() {
 
   lockAccordionMinHeight();
   window.addEventListener("resize", lockAccordionMinHeight);
+
+  // Mobile treatment images load after first paint — refresh sticky track height
+  const treatmentsSection = document.querySelector(".key-treatments-section");
+  if (treatmentsSection) {
+    treatmentsSection
+      .querySelectorAll(".mobile-treatment-img")
+      .forEach((img) => {
+        if (img.complete) return;
+        img.addEventListener("load", syncMobileTreatmentsTrackHeight, {
+          once: true,
+        });
+      });
+    requestAnimationFrame(syncMobileTreatmentsTrackHeight);
+  }
 
   function swapImage(tab) {
     if (!imgFrame) return;
@@ -2766,6 +2818,7 @@ function initTreatmentsAccordion() {
             onComplete: () => {
               isTransitioning = false;
               accordionTween = null;
+              syncMobileTreatmentsTrackHeight();
             },
           });
         }
@@ -2795,6 +2848,7 @@ function initTreatmentsAccordion() {
         onComplete: () => {
           isTransitioning = false;
           accordionTween = null;
+          syncMobileTreatmentsTrackHeight();
         },
       });
 
