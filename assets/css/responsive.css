@@ -96,25 +96,13 @@
     font-weight: 500 !important;
   }
 
-  .page-template-template-fees-php
-    .fees-page-main
-    .hero-buttons
-    .fees-hero-cta--mobile,
-  .page-template-template-fees
-    .fees-page-main
-    .hero-buttons
-    .fees-hero-cta--mobile {
+  .page-template-template-fees-php .fees-page-main .hero-buttons .fees-hero-cta--mobile,
+  .page-template-template-fees .fees-page-main .hero-buttons .fees-hero-cta--mobile {
     display: none !important;
   }
 
-  .page-template-template-fees-php
-    .fees-page-main
-    .hero-buttons
-    .fees-hero-cta--desktop,
-  .page-template-template-fees
-    .fees-page-main
-    .hero-buttons
-    .fees-hero-cta--desktop {
+  .page-template-template-fees-php .fees-page-main .hero-buttons .fees-hero-cta--desktop,
+  .page-template-template-fees .fees-page-main .hero-buttons .fees-hero-cta--desktop {
     display: flex !important;
   }
 
@@ -461,8 +449,8 @@
     color: #5e5d5f !important;
   }
 
-  .page-template-template-fees-php .fees-consult-body p + p,
-  .page-template-template-fees .fees-consult-body p + p {
+  .page-template-template-fees-php .fees-consult-body p+p,
+  .page-template-template-fees .fees-consult-body p+p {
     margin-top: 43px !important;
   }
 
@@ -555,8 +543,8 @@
     color: #d8a444 !important;
   }
 
-  .page-template-template-fees-php .fees-membership-body > p,
-  .page-template-template-fees .fees-membership-body > p,
+  .page-template-template-fees-php .fees-membership-body>p,
+  .page-template-template-fees .fees-membership-body>p,
   .page-template-template-fees-php .fees-membership-benefits li,
   .page-template-template-fees .fees-membership-benefits li {
     margin: 0 !important;
@@ -630,8 +618,8 @@
     color: #d8a444 !important;
   }
 
-  .page-template-template-fees-php .fees-finance-body > p,
-  .page-template-template-fees .fees-finance-body > p,
+  .page-template-template-fees-php .fees-finance-body>p,
+  .page-template-template-fees .fees-finance-body>p,
   .page-template-template-fees-php .fees-finance-disclaimer,
   .page-template-template-fees .fees-finance-disclaimer {
     margin: 0 !important;
@@ -641,8 +629,8 @@
     color: #5e5d5f !important;
   }
 
-  .page-template-template-fees-php .fees-finance-body > p.fees-finance-body-spaced,
-  .page-template-template-fees .fees-finance-body > p.fees-finance-body-spaced {
+  .page-template-template-fees-php .fees-finance-body>p.fees-finance-body-spaced,
+  .page-template-template-fees .fees-finance-body>p.fees-finance-body-spaced {
     margin-top: 43px !important;
   }
 
@@ -692,6 +680,7 @@
 
 /* Breakpoint: Mobile/Tablet (<992px) */
 @media (max-width: 991.98px) {
+
   html,
   body {
     overflow-x: clip !important;
@@ -978,7 +967,7 @@
     background-color: rgba(216, 164, 68, 0.2);
   }
 
-  .mobile-menu .menu-item > a {
+  .mobile-menu .menu-item>a {
     font-family: "Montserrat", sans-serif;
     color: #5e5d5f;
     font-size: 16px;
@@ -991,7 +980,7 @@
     transition: color 0.3s ease;
   }
 
-  .mobile-menu .menu-item > a:hover {
+  .mobile-menu .menu-item>a:hover {
     color: #d8a444;
   }
 
@@ -1004,7 +993,7 @@
     padding: 20px 28px;
   }
 
-  .menu-item-row > a {
+  .menu-item-row>a {
     font-family: "Montserrat", sans-serif;
     color: #5e5d5f;
     font-size: 16px;
@@ -1014,7 +1003,7 @@
     transition: color 0.3s ease;
   }
 
-  .menu-item-row > a:hover {
+  .menu-item-row>a:hover {
     color: #d8a444;
   }
 
@@ -1259,6 +1248,7 @@
   body.page-template-template-teams-php .teams-page-main .hero-buttons,
   body.page-template-template-teams .teams-page-main .hero-buttons {
     margin-bottom: 0 !important;
+    width: 65% !important;
   }
 
   .hero-buttons .btn {
@@ -1412,40 +1402,25 @@
   }
 
   .testimonials-section.mobile-visible .testimonials-header,
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-title,
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-text,
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-stars,
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-author {
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title,
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text,
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars,
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
     opacity: 1 !important;
     transform: translateY(0) !important;
   }
 
   /* Tablet: one visible slide only; don’t leave inactive slides in the layout stack */
   @media (min-width: 768px) and (max-width: 991.98px) {
+
     .testimonials-section .testimonial-slide.active .testimonial-title,
     .testimonials-section .testimonial-slide.active .testimonial-text,
     .testimonials-section .testimonial-slide.active .testimonial-stars,
     .testimonials-section .testimonial-slide.active .testimonial-author,
-    .testimonials-section.mobile-visible
-      .testimonial-slide.active
-      .testimonial-title,
-    .testimonials-section.mobile-visible
-      .testimonial-slide.active
-      .testimonial-text,
-    .testimonials-section.mobile-visible
-      .testimonial-slide.active
-      .testimonial-stars,
-    .testimonials-section.mobile-visible
-      .testimonial-slide.active
-      .testimonial-author {
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title,
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text,
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars,
+    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
       opacity: 1 !important;
       transform: none !important;
       transition: none !important;
@@ -1482,27 +1457,19 @@
     transition-delay: 0.2s !important;
   }
 
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-title {
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title {
     transition-delay: 0.1s !important;
   }
 
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-text {
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text {
     transition-delay: 0.2s !important;
   }
 
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-stars {
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars {
     transition-delay: 0.3s !important;
   }
 
-  .testimonials-section.mobile-visible
-    .testimonial-slide.active
-    .testimonial-author {
+  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
     transition-delay: 0.4s !important;
   }
 
@@ -1690,6 +1657,7 @@
      FEES PAGE MOBILE (FIGMA 4078:39343)
      ============================================================ */
   @media (max-width: 767.98px) {
+
     .page-template-template-fees-php .site-content,
     .page-template-template-fees .site-content {
       background-color: #fefdf6 !important;
@@ -1709,24 +1677,12 @@
       overflow: visible !important;
     }
 
-    html.wsd-js
-      body.page-template-template-fees-php
-      .fees-page-main
-      .hero-image-wrapper,
-    html.wsd-js
-      body.page-template-template-fees
-      .fees-page-main
-      .hero-image-wrapper,
+    html.wsd-js body.page-template-template-fees-php .fees-page-main .hero-image-wrapper,
+    html.wsd-js body.page-template-template-fees .fees-page-main .hero-image-wrapper,
     html.wsd-js body.page-template-template-fees-php .fees-hero-image-frame,
     html.wsd-js body.page-template-template-fees .fees-hero-image-frame,
-    html.wsd-js
-      body.page-template-template-fees-php
-      .fees-hero-image-frame
-      .fees-hero-img,
-    html.wsd-js
-      body.page-template-template-fees
-      .fees-hero-image-frame
-      .fees-hero-img {
+    html.wsd-js body.page-template-template-fees-php .fees-hero-image-frame .fees-hero-img,
+    html.wsd-js body.page-template-template-fees .fees-hero-image-frame .fees-hero-img {
       opacity: 1 !important;
       visibility: visible !important;
       transform: none !important;
@@ -2079,7 +2035,7 @@
       line-height: 26px !important;
     }
 
-    .fees-consult-body p + p {
+    .fees-consult-body p+p {
       margin-top: 24px !important;
     }
 
@@ -2109,7 +2065,7 @@
       line-height: 34px !important;
     }
 
-    .fees-membership-body > p,
+    .fees-membership-body>p,
     .fees-membership-benefits li {
       font-size: 15px !important;
       line-height: 26px !important;
@@ -2142,13 +2098,13 @@
       line-height: 34px !important;
     }
 
-    .fees-finance-body > p,
+    .fees-finance-body>p,
     .fees-finance-disclaimer {
       font-size: 15px !important;
       line-height: 26px !important;
     }
 
-    .fees-finance-body > p.fees-finance-body-spaced {
+    .fees-finance-body>p.fees-finance-body-spaced {
       margin-top: 24px !important;
     }
 
@@ -2159,7 +2115,9 @@
       border-radius: 28px !important;
     }
   }
+
   @media (min-width: 768px) and (max-width: 991.98px) {
+
     .page-template-template-fees-php .site-content,
     .page-template-template-fees .site-content {
       background-color: #fefdf6 !important;
@@ -2179,24 +2137,12 @@
       overflow: visible !important;
     }
 
-    html.wsd-js
-      body.page-template-template-fees-php
-      .fees-page-main
-      .hero-image-wrapper,
-    html.wsd-js
-      body.page-template-template-fees
-      .fees-page-main
-      .hero-image-wrapper,
+    html.wsd-js body.page-template-template-fees-php .fees-page-main .hero-image-wrapper,
+    html.wsd-js body.page-template-template-fees .fees-page-main .hero-image-wrapper,
     html.wsd-js body.page-template-template-fees-php .fees-hero-image-frame,
     html.wsd-js body.page-template-template-fees .fees-hero-image-frame,
-    html.wsd-js
-      body.page-template-template-fees-php
-      .fees-hero-image-frame
-      .fees-hero-img,
-    html.wsd-js
-      body.page-template-template-fees
-      .fees-hero-image-frame
-      .fees-hero-img {
+    html.wsd-js body.page-template-template-fees-php .fees-hero-image-frame .fees-hero-img,
+    html.wsd-js body.page-template-template-fees .fees-hero-image-frame .fees-hero-img {
       opacity: 1 !important;
       visibility: visible !important;
       transform: none !important;
@@ -2504,7 +2450,7 @@
       line-height: 32px !important;
     }
 
-    .fees-consult-body p + p {
+    .fees-consult-body p+p {
       margin-top: 28px !important;
     }
 
@@ -2526,7 +2472,7 @@
       line-height: 40px !important;
     }
 
-    .fees-membership-body > p,
+    .fees-membership-body>p,
     .fees-membership-benefits li {
       font-size: 18px !important;
       line-height: 32px !important;
@@ -2551,13 +2497,13 @@
       line-height: 40px !important;
     }
 
-    .fees-finance-body > p,
+    .fees-finance-body>p,
     .fees-finance-disclaimer {
       font-size: 18px !important;
       line-height: 32px !important;
     }
 
-    .fees-finance-body > p.fees-finance-body-spaced {
+    .fees-finance-body>p.fees-finance-body-spaced {
       margin-top: 28px !important;
     }
 
@@ -2568,6 +2514,7 @@
       font-size: 18px !important;
     }
   }
+
   .page-template-template-contact-php .site-content,
   .page-template-template-contact .site-content {
     background-color: #faf3e6 !important;
@@ -3284,7 +3231,7 @@
       text-box-edge: auto !important;
     }
 
-    .key-treatments-section .accordion-tab-title--in-content + .tab-desc {
+    .key-treatments-section .accordion-tab-title--in-content+.tab-desc {
       margin-top: 0 !important;
       text-box-trim: none !important;
       text-box-edge: auto !important;
@@ -4274,11 +4221,9 @@
   .dentist-gradient-overlay {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(
-      to bottom,
-      rgba(43, 43, 44, 0) 31.37%,
-      rgba(43, 43, 44, 0.8) 52.26%
-    ) !important;
+    background: linear-gradient(to bottom,
+        rgba(43, 43, 44, 0) 31.37%,
+        rgba(43, 43, 44, 0.8) 52.26%) !important;
     z-index: 2 !important;
   }
 
@@ -4733,26 +4678,32 @@
     }
   }
 }
+
 @media (max-width: 1200px) and (min-width: 992px) {
   #masthead.site-header {
     padding: 24px 40px;
   }
+
   .header-top {
     padding: 24px 40px;
   }
 }
+
 @media (max-width: 1200px) and (min-width: 768px) {
   .mobile-header {
     padding: 40px 40px;
   }
+
   .hero-section {
     padding-top: 60px !important;
   }
+
   .hero-content-col,
   .hero-image-col {
     padding-left: 40px !important;
     padding-right: 40px !important;
   }
+
   .hero-image-wrapper {
     margin-top: 62px !important;
     justify-content: flex-end !important;
@@ -4763,175 +4714,222 @@
     margin-top: 0 !important;
     justify-content: flex-start !important;
   }
+
   .hero-content {
     max-width: 540px;
   }
+
   .hero-content .hero-title {
     margin-bottom: 30px !important;
     font-size: 28px !important;
   }
+
   .hero-content .hero-description {
     font-size: 16px !important;
     margin-bottom: 48px !important;
   }
+
   .hero-stats {
     margin-bottom: 48px !important;
     flex-wrap: nowrap !important;
   }
+
   .hero-buttons {
     flex-direction: row !important;
     width: auto !important;
     gap: 15px !important;
     margin-bottom: 0 !important;
   }
+
   .hero-img {
     max-width: 594px;
   }
+
   .hero-stats .stat {
     width: 27.33% !important;
   }
+
   .hero-stats .stat-number {
     font-size: 20px !important;
   }
+
   .hero-stats .stat-label {
     font-size: 12px !important;
     line-height: 18px !important;
   }
+
   .hero-buttons .btn {
     padding: 20px !important;
     line-height: 100%;
   }
+
   .treatments-main-container {
     padding: 0 40px !important;
   }
+
   .treatments-right-col {
     padding: 0 12px !important;
   }
+
   .treatments-header-badge {
     margin-bottom: 50px !important;
     padding: 32px 40px 32px !important;
   }
+
   .treatments-header-title {
     font-size: 30px !important;
   }
+
   .accordion-tab-header {
     padding: 30px 0 !important;
   }
+
   .accordion-tab.active .accordion-tab-header {
     padding: 30px 0 !important;
   }
+
   .tab-desc {
     font-size: 16px !important;
     margin-bottom: 48px !important;
   }
+
   .includes-label {
     margin-bottom: 20px !important;
     font-size: 12px !important;
   }
+
   .tab-includes-wrapper {
     margin-bottom: 48px !important;
   }
+
   .includes-items {
     gap: 23px 29px !important;
     font-size: 14px !important;
   }
+
   .tab-action-btn {
     padding: 20px !important;
     line-height: 100%;
   }
+
   .accordion-tab.active .accordion-tab-content {
     padding-bottom: 32px !important;
   }
+
   .tab-button-wrapper {
     margin-bottom: 8px !important;
   }
+
   .mobile-treatment-image-wrapper {
     display: none !important;
   }
+
   .treatment-slide-counter {
     display: none !important;
   }
+
   .treatments-left-col,
   .treatments-right-col {
     width: 50% !important;
   }
+
   .treatments-row {
     flex-direction: row;
     gap: 0px;
     flex-wrap: nowrap;
   }
+
   .treatment-image-frame,
   .active-treatment-image {
     border-radius: 8px;
   }
+
   .about-header-badge {
     padding: 0 40px 40px !important;
   }
+
   .about-header-title {
     font-size: 30px !important;
     font-weight: 600 !important;
   }
+
   .about-left-col,
   .about-container {
     gap: 48px !important;
   }
+
   .about-subtitle {
     font-size: 20px !important;
   }
+
   .about-description {
     font-size: 16px !important;
   }
+
   .about-image-frame-container {
     height: 775px !important;
   }
+
   .gallery-header-row {
     flex-direction: row !important;
     gap: 56px !important;
   }
+
   .about-text-content {
     padding: 0 40px !important;
   }
+
   .gallery-header-badge {
     padding: 27px 40px !important;
     width: auto !important;
     margin-left: -40px !important;
   }
+
   .gallery-header-title {
     font-size: 30px !important;
     font-weight: 600 !important;
   }
+
   .gallery-container {
     padding: 0 40px !important;
     gap: 60px !important;
   }
+
   .gallery-header-desc {
     text-align: left !important;
     font-weight: 400;
   }
+
   .smile-gallery-section .gallery-content-layout {
     gap: 64px !important;
   }
+
   .smile-gallery-section .before-card {
     left: 13% !important;
   }
+
   .smile-gallery-section .after-card {
     left: 45% !important;
     top: 104px !important;
   }
+
   .smile-gallery-section .gallery-card {
     width: 285px !important;
     height: 186px !important;
     border-radius: 14px !important;
   }
+
   .smile-gallery-section .gallery-card-image-wrapper,
   .smile-gallery-section .gallery-img {
     border-radius: 8px !important;
   }
+
   .smile-gallery-section .gallery-card-label {
     bottom: 3px !important;
     font-size: 12px !important;
     border-radius: 0 4px !important;
   }
+
   .smile-gallery-section .gallery-connecting-arrow {
     left: 27% !important;
     top: 168px !important;
@@ -4939,16 +4937,19 @@
     width: 91px !important;
     height: 41px !important;
   }
+
   .smile-gallery-section .gallery-info-wrapper {
     gap: 23px !important;
     flex-direction: row !important;
   }
+
   .gallery-details-data {
     flex-direction: row !important;
     gap: 14px !important;
     flex-wrap: wrap;
     height: fit-content;
   }
+
   .gallery-detail-card {
     height: 98px !important;
     gap: 6px !important;
@@ -4956,200 +4957,253 @@
     width: 48%;
     justify-content: flex-start !important;
   }
+
   .gallery-details-grid {
     height: 215px !important;
     width: 55% !important;
   }
+
   .gallery-btn-wrapper {
     width: 45%;
     display: grid;
   }
+
   .gallery-slider-dots {
     order: 2;
     margin-top: 35px !important;
   }
+
   .btn-gallery-action {
     width: 100% !important;
     margin-top: 0px !important;
     padding: 20px !important;
     height: 50px !important;
   }
+
   .detail-value {
     font-size: 12px !important;
   }
+
   .detail-label {
     font-size: 14px !important;
   }
+
   .testimonials-section {
     height: auto !important;
     padding: 0 !important;
   }
+
   .testimonials-sticky-wrapper {
     height: 100% !important;
     top: 126px !important;
   }
+
   .testimonials-container {
     padding: 0px 40px !important;
     width: 100%;
   }
+
   .testimonials-header {
     padding-block: 40px;
     flex-direction: row !important;
   }
+
   .testimonials-rating-badge {
     justify-content: flex-start !important;
   }
+
   .testimonials-dot {
     display: block !important;
   }
+
   .testimonials-header-title {
     width: auto !important;
   }
+
   .testimonials-nav-buttons {
     display: flex !important;
     position: relative !important;
     z-index: 5 !important;
   }
+
   .testimonials-slider {
     max-width: 420px !important;
     min-height: 275px !important;
     margin: 0 auto 90px !important;
   }
+
   .testimonial-quote-mark.left-quote {
     left: 0px !important;
     top: 30% !important;
   }
+
   .testimonials-slider {
     max-width: 420px !important;
     min-height: 210px !important;
     margin: 0 auto 90px !important;
   }
+
   .testimonial-quote-mark.right-quote {
     right: 0px !important;
   }
+
   .testimonial-text {
     line-height: 25px !important;
     margin: 0 0 44px 0 !important;
   }
+
   .smile-gallery-section {
     padding: 100px 0 !important;
   }
+
   .principal-dentist-section {
     margin: 100px 0 !important;
     height: 482px !important;
     min-height: 482px !important;
   }
+
   .dentist-sticky-wrapper {
     height: 500px !important;
     top: 126px !important;
   }
+
   .gallery-sticky-wrapper {
     top: 126px !important;
   }
+
   .dentist-content-container {
     width: 50% !important;
     padding: 40px !important;
   }
+
   .dentist-img-tag.tab1-img {
     object-position: 10% top !important;
   }
+
   .dentist-section-title {
     font-size: 24px !important;
   }
+
   .dentist-tabs-nav {
     gap: 20px !important;
   }
+
   .payment-options-section {
     margin: 0px 0 100px !important;
     padding: 0px 40px !important;
     height: 600px !important;
   }
+
   .dentist-desc-text p {
     font-size: 16px !important;
   }
+
   .dentist-tab-btn {
     line-height: 100%;
   }
+
   .hero-section .container-fluid {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+
   .payment-grid {
     flex-direction: row !important;
   }
+
   .payment-options-section .payment-card::after {
     display: none !important;
   }
+
   .payment-options-section .payment-card-text,
   .payment-options-section .payment-card-button-wrapper {
     display: block !important;
   }
+
   .payment-options-section .payment-card-text {
     line-height: 24px !important;
   }
+
   .payment-options-section .payment-card:hover {
     background-color: #faf3e6 !important;
   }
+
   .payment-options-section .payment-card {
     flex-direction: column !important;
     padding: 40px 24px !important;
     border-right: 1px solid rgba(216, 164, 68, 0.2) !important;
     gap: 48px;
   }
+
   .payment-options-section .payment-card-title {
     font-size: 20px !important;
   }
+
   .payment-btn {
     font-size: 14px;
     padding: 18px;
     font-weight: 700;
   }
+
   .payment-header {
     padding: 40px 24px !important;
   }
+
   .payment-options-section .payment-title {
     font-size: 30px !important;
   }
+
   .payment-options-section .payment-desc {
     font-size: 16px !important;
   }
+
   #colophon.site-footer {
     padding: 40px !important;
   }
+
   .payment-sticky-wrapper {
     top: 127px !important;
   }
+
   .logo-socials-col {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 60px !important;
   }
+
   .footer-socials {
     margin-top: 0;
     gap: 19px !important;
   }
+
   .social-icons-wrapper {
     justify-content: flex-end;
   }
+
   #colophon.site-footer .logo-mark {
     height: 40px;
     width: 46px;
   }
+
   #colophon.site-footer .logo-text-top {
     height: 15.37px;
     width: 129px;
   }
+
   #colophon.site-footer .logo-text-bottom {
     height: 9.95px;
     width: 129px;
   }
+
   #colophon.site-footer .logo-text-group {
     gap: 3.9px;
   }
+
   .subscribe-input-wrapper {
     flex: 1;
   }
+
   .language-col {
     margin-right: auto;
     width: 100%;
@@ -5157,37 +5211,46 @@
     align-items: flex-end;
     justify-content: space-between;
   }
+
   .last-updated-text.ipad-updated-text {
     display: inline-flex;
     font-size: 10px;
     color: rgba(255, 255, 255, 0.6);
   }
+
   .footer-middle-row {
     margin-bottom: 60px;
   }
+
   .footer-bottom-row {
     font-size: 10px;
   }
+
   .lang-label {
     margin-right: 0;
   }
+
   .copyright-text {
     margin-top: 0;
     width: 100%;
   }
+
   .last-updated-text {
     display: none;
   }
+
   .footer-nav-title {
     font-size: 12px;
     margin-bottom: 19px;
     line-height: 100%;
   }
+
   .footer-nav-list li {
     margin-bottom: 11px;
     text-box-edge: cap alphabetic;
     text-box-trim: trim-both;
   }
+
   .btn {
     font-weight: 400;
     letter-spacing: 0;
@@ -5602,9 +5665,7 @@
     cursor: pointer !important;
   }
 
-  body.single-services
-    .cosmetic-modal-mobile-nav
-    summary::-webkit-details-marker {
+  body.single-services .cosmetic-modal-mobile-nav summary::-webkit-details-marker {
     display: none !important;
   }
 
@@ -5652,7 +5713,7 @@
     margin-bottom: 60px !important;
   }
 
-  body.single-services .cosmetic-modal-about-section > .d-flex {
+  body.single-services .cosmetic-modal-about-section>.d-flex {
     gap: 30px !important;
     align-items: flex-start !important;
     margin-bottom: 34px !important;
@@ -5796,9 +5857,7 @@
     min-height: 0 !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .modal-gallery-sticky-wrapper {
+  body.single-services .cosmetic-modal-gallery-section .modal-gallery-sticky-wrapper {
     position: static !important;
     min-height: 0 !important;
     padding: 0 !important;
@@ -5849,9 +5908,7 @@
     display: block !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-interactive-wrapper {
+  body.single-services .cosmetic-modal-gallery-section .gallery-interactive-wrapper {
     width: 100% !important;
     height: 279px !important;
     touch-action: pan-y !important;
@@ -5874,9 +5931,7 @@
     top: 109px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-card-image-wrapper {
+  body.single-services .cosmetic-modal-gallery-section .gallery-card-image-wrapper {
     height: 100% !important;
     border-radius: 8px !important;
   }
@@ -5890,9 +5945,7 @@
     line-height: 16px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-connecting-arrow {
+  body.single-services .cosmetic-modal-gallery-section .gallery-connecting-arrow {
     width: 82px !important;
     height: 37px !important;
     left: 25% !important;
@@ -5922,9 +5975,7 @@
     overflow: hidden !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-details-data.active {
+  body.single-services .cosmetic-modal-gallery-section .gallery-details-data.active {
     opacity: 1 !important;
     visibility: visible !important;
     height: auto !important;
@@ -5966,9 +6017,7 @@
     margin: 13px 0 0 !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-scroll-indicator-container {
+  body.single-services .cosmetic-modal-gallery-section .gallery-scroll-indicator-container {
     display: none !important;
   }
 
@@ -6014,10 +6063,7 @@
   }
 
   body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper img,
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .google-logo-wrapper
-    img[style] {
+  body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper img[style] {
     width: 12px !important;
     height: 12px !important;
   }
@@ -6078,25 +6124,19 @@
     pointer-events: none !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .review-quote-mark.left-quote {
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark.left-quote {
     left: 0 !important;
     top: 0 !important;
     transform: none !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .review-quote-mark.right-quote {
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark.right-quote {
     right: -24px !important;
     top: 0 !important;
     transform: rotate(180deg) !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-slider-container {
+  body.single-services .cosmetic-modal-reviews-section .reviews-slider-container {
     width: 100% !important;
     max-width: none !important;
     min-height: 255px !important;
@@ -6439,6 +6479,7 @@
    Tablet-only overrides; desktop and phone styles remain unchanged.
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
+
   .page-template-template-contact-php .site-content,
   .page-template-template-contact .site-content {
     background-color: #faf3e6 !important;
@@ -6696,6 +6737,7 @@
     padding-bottom: 20px !important;
     box-sizing: border-box !important;
   }
+
   .contact-info-block--information .contact-social-icons {
     gap: 42px !important;
   }
@@ -7247,7 +7289,7 @@
     row-gap: 0 !important;
   }
 
-  body.single-services .cosmetic-modal-about-section > .d-flex {
+  body.single-services .cosmetic-modal-about-section>.d-flex {
     gap: 40px !important;
     margin-bottom: 60px !important;
     padding: 0 !important;
@@ -7306,7 +7348,7 @@
     --bs-gutter-y: 20px !important;
   }
 
-  body.single-services .cosmetic-modal-process-tabs .row > [class*="col-"] {
+  body.single-services .cosmetic-modal-process-tabs .row>[class*="col-"] {
     width: 100% !important;
     flex: 0 0 100% !important;
     max-width: 100% !important;
@@ -7336,10 +7378,7 @@
     height: 240px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .row {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .row {
     display: grid !important;
     grid-template-columns: repeat(2, 320px) !important;
     gap: 32px 20px !important;
@@ -7348,57 +7387,38 @@
     margin: 0 !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .row
-    > [class*="col-"] {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .row>[class*="col-"] {
     width: 320px !important;
     max-width: 320px !important;
     flex: none !important;
     padding: 0 !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .symptom-card {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .symptom-card {
     width: 320px !important;
     height: 300px !important;
     border-radius: 10px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .symptom-card
-    img {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .symptom-card img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     border-radius: 10px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .symptom-card-overlay {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .symptom-card-overlay {
     height: 113px !important;
     padding: 20px 10px 22px !important;
     border-radius: 0 0 10px 10px !important;
-    background: linear-gradient(
-      0.203deg,
-      #000000 35.15%,
-      rgba(0, 0, 0, 0) 99.51%
-    ) !important;
+    background: linear-gradient(0.203deg,
+        #000000 35.15%,
+        rgba(0, 0, 0, 0) 99.51%) !important;
     gap: 23px !important;
     justify-content: flex-end !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .symptom-card-title {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .symptom-card-title {
     width: 100% !important;
     font-family: "Poppins", sans-serif !important;
     font-weight: 400 !important;
@@ -7408,10 +7428,7 @@
     text-align: center !important;
   }
 
-  body.single-services
-    .cosmetic-modal-process-tabs
-    .tab-pane[id^="symptoms-content"]
-    .symptom-card-desc {
+  body.single-services .cosmetic-modal-process-tabs .tab-pane[id^="symptoms-content"] .symptom-card-desc {
     width: 100% !important;
     font-family: "Poppins", sans-serif !important;
     font-weight: 300 !important;
@@ -7471,9 +7488,7 @@
     width: 100% !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-interactive-wrapper {
+  body.single-services .cosmetic-modal-gallery-section .gallery-interactive-wrapper {
     width: 512px !important;
     height: 303px !important;
     margin: 0 auto !important;
@@ -7496,9 +7511,7 @@
     top: 109px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-connecting-arrow {
+  body.single-services .cosmetic-modal-gallery-section .gallery-connecting-arrow {
     width: 91px !important;
     height: 41.179px !important;
     left: 83px !important;
@@ -7519,9 +7532,7 @@
     width: auto !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-details-data.active {
+  body.single-services .cosmetic-modal-gallery-section .gallery-details-data.active {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 14px !important;
@@ -7563,9 +7574,7 @@
     line-height: normal !important;
   }
 
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .modal-gallery-slider-dots {
+  body.single-services .cosmetic-modal-gallery-section .modal-gallery-slider-dots {
     width: 92px !important;
     display: flex !important;
     justify-content: center !important;
@@ -7670,10 +7679,7 @@
   }
 
   body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper img,
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .google-logo-wrapper
-    img[style] {
+  body.single-services .cosmetic-modal-reviews-section .google-logo-wrapper img[style] {
     width: 24px !important;
     height: 25px !important;
   }
@@ -7717,16 +7723,12 @@
     border-radius: 50% !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-nav-btn.prev-btn {
+  body.single-services .cosmetic-modal-reviews-section .reviews-nav-btn.prev-btn {
     background-color: #ffffff !important;
     border: 1px solid #5e5d5f !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-nav-btn.next-btn {
+  body.single-services .cosmetic-modal-reviews-section .reviews-nav-btn.next-btn {
     background-color: #d8a444 !important;
     border: 1px solid #d8a444 !important;
   }
@@ -7736,17 +7738,11 @@
     height: 25.2px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-nav-btn.prev-btn
-    img {
+  body.single-services .cosmetic-modal-reviews-section .reviews-nav-btn.prev-btn img {
     filter: brightness(0) invert(0.36) !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-nav-btn.next-btn
-    img {
+  body.single-services .cosmetic-modal-reviews-section .reviews-nav-btn.next-btn img {
     filter: brightness(0) invert(1) !important;
   }
 
@@ -7777,26 +7773,20 @@
     z-index: 1 !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .review-quote-mark.left-quote {
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark.left-quote {
     left: auto !important;
     top: auto !important;
     transform: none !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .review-quote-mark.right-quote {
+  body.single-services .cosmetic-modal-reviews-section .review-quote-mark.right-quote {
     right: auto !important;
     bottom: auto !important;
     top: auto !important;
     transform: none !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-slider-container {
+  body.single-services .cosmetic-modal-reviews-section .reviews-slider-container {
     width: 416px !important;
     max-width: 416px !important;
     height: 250px !important;
@@ -8054,12 +8044,19 @@
 }
 
 @media (max-width: 767.98px) {
+
+  body.page-template-template-teams-php .teams-page-main .hero-buttons,
+  body.page-template-template-teams .teams-page-main .hero-buttons {
+    width: 75% !important;
+  }
+
   .call-us-tab {
     display: none !important;
   }
 
   body.home .call-us-tab,
-  body.single-services .call-us-tab {
+  body.single-services .call-us-tab, 
+  body.page-template-template-teams .call-us-tab {
     display: block !important;
     position: fixed !important;
     right: 24px !important;
@@ -8072,7 +8069,8 @@
   }
 
   body.home .call-us-tab .btn-call-us,
-  body.single-services .call-us-tab .btn-call-us {
+  body.single-services .call-us-tab .btn-call-us,
+  body.page-template-template-teams .call-us-tab .btn-call-us {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -8081,7 +8079,7 @@
     min-height: 0 !important;
     border-radius: 50% !important;
     background-color: #d8a444 !important;
-    box-shadow: 0 4px 12px rgba(216, 164, 68, 0.3) !important;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25), 0 0 20px 0 rgba(216, 164, 68, 0.50) !important;
     transform: none !important;
     position: static !important;
     padding: 0 !important;
@@ -8089,14 +8087,16 @@
   }
 
   body.home .call-us-tab .btn-call-us .phone-icon,
-  body.single-services .call-us-tab .btn-call-us .phone-icon {
+  body.single-services .call-us-tab .btn-call-us .phone-icon,
+  body.page-template-template-teams .btn-call-us .phone-icon {
     width: 20px !important;
     height: 20px !important;
-    transform: none !important;
+    transform: rotate(180deg);
   }
 
   body.home .call-us-tab .btn-call-us .call-text,
-  body.single-services .call-us-tab .btn-call-us .call-text {
+  body.single-services .call-us-tab .btn-call-us .call-text,
+  body.page-template-template-teams .call-us-tab .btn-call-us .call-text {
     display: none !important;
   }
 
@@ -8107,100 +8107,124 @@
     min-height: 158px !important;
     height: 209px !important;
   }
+
   .about-waterside-section {
     padding-bottom: 13px !important;
   }
+
   .after-card {
     left: 40% !important;
     width: 60% !important;
     height: 162px !important;
     border-radius: 14px !important;
   }
+
   .gallery-card-image-wrapper {
     border-radius: 8px !important;
   }
+
   .gallery-connecting-arrow {
     transform: rotate(-8deg) !important;
     top: 150px !important;
   }
+
   .gallery-card-label {
     border-radius: 0 4px 0 0 !important;
     bottom: 4px !important;
   }
+
   .payment-card {
     padding: 20px 20px;
   }
+
   .testimonials-container {
     padding: 60px 48px !important;
     max-width: 100%;
     width: 100%;
   }
+
   .about-slider-dots {
     margin-top: 0px !important;
   }
+
   .includes-items span {
     text-decoration: none;
   }
+
   .tab-desc {
     margin-bottom: 30px !important;
   }
+
   .tab-includes-wrapper {
     margin-bottom: 20px !important;
   }
+
   body.single-services .fees-box-header h3,
   body.single-services .cosmetic-accordion-section-header h3 {
     margin: 0 0 0px !important;
   }
+
   body.single-services .fees-box-header,
   body.single-services .cosmetic-accordion-section-header {
     row-gap: 30px;
   }
+
   body.single-services .cosmetic-modal-gallery-section .gallery-card {
     width: 207px !important;
     height: 162px !important;
   }
+
   body.single-services .cosmetic-modal-gallery-section .after-card {
     left: calc(100% - 207px) !important;
   }
+
   .symptom-card-overlay {
     padding: 20px 10px !important;
     gap: 15px;
     height: 100px;
   }
-  body.single-services
-    .cosmetic-modal-gallery-section
-    .gallery-connecting-arrow {
+
+  body.single-services .cosmetic-modal-gallery-section .gallery-connecting-arrow {
     width: 72px !important;
     height: 30px !important;
     left: 20% !important;
     top: 148px !important;
     transform: rotate(-5deg) !important;
   }
+
   .gallery-img {
     border-radius: 8px !important;
   }
+
   body.single-services .symptom-card {
     border-radius: 5px !important;
   }
+
   body.single-services .cosmetic-modal-process-tabs .tab-content {
     padding: 0 14px !important;
   }
+
   body.single-services .symptom-card-desc {
     font-size: 10px !important;
   }
+
   body.single-services .cosmetic-modal-process-tabs .row {
     --bs-gutter-x: 14px !important;
     --bs-gutter-y: 14px !important;
   }
+
   body.single-services .cosmetic-hero-title {
     margin-bottom: 0 !important;
   }
+
   body.single-services .cosmetic-hero-content {
     row-gap: 20px;
   }
+
   body.single-services .cosmetic-membership-img-col img {
     object-position: top center !important;
   }
+
   body.single-services .cosmetic-full-modal,
   body.single-services .cosmetic-full-modal .modal-dialog,
   body.single-services .cosmetic-modal-content {
@@ -8245,7 +8269,7 @@
     row-gap: 0 !important;
   }
 
-  body.single-services .cosmetic-modal-about-section > .d-flex {
+  body.single-services .cosmetic-modal-about-section>.d-flex {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -8327,18 +8351,10 @@
     overflow: hidden !important;
   }
 
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-header,
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-title,
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-slider-container,
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-progress-wrapper {
+  body.single-services .cosmetic-modal-more-services-section .more-services-header,
+  body.single-services .cosmetic-modal-more-services-section .more-services-title,
+  body.single-services .cosmetic-modal-more-services-section .more-services-slider-container,
+  body.single-services .cosmetic-modal-more-services-section .more-services-progress-wrapper {
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
@@ -8346,9 +8362,7 @@
     box-sizing: border-box !important;
   }
 
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-slider-container {
+  body.single-services .cosmetic-modal-more-services-section .more-services-slider-container {
     height: 252px !important;
     padding-right: 0 !important;
     overflow-x: auto !important;
@@ -8359,9 +8373,7 @@
     margin-right: -24px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-slider-track {
+  body.single-services .cosmetic-modal-more-services-section .more-services-slider-track {
     gap: 20px !important;
     width: max-content !important;
     max-width: none !important;
@@ -8370,15 +8382,9 @@
     padding-inline: 24px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-service-card-wrapper,
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-service-card-wrapper:first-child,
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-service-card-wrapper:last-child {
+  body.single-services .cosmetic-modal-more-services-section .more-service-card-wrapper,
+  body.single-services .cosmetic-modal-more-services-section .more-service-card-wrapper:first-child,
+  body.single-services .cosmetic-modal-more-services-section .more-service-card-wrapper:last-child {
     flex: 0 0 min(306px, calc(100vw - 48px)) !important;
     width: min(306px, calc(100vw - 48px)) !important;
     min-width: min(306px, calc(100vw - 48px)) !important;
@@ -8387,28 +8393,24 @@
     margin-right: 0 !important;
     scroll-snap-align: none !important;
   }
+
   body.single-services .cosmetic-modal-reviews-section .reviews-progress-track {
     bottom: 0px !important;
   }
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-service-card-footer {
+
+  body.single-services .cosmetic-modal-more-services-section .more-service-card-footer {
     width: 100% !important;
     margin-top: 20px !important;
     gap: 31px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-service-card-title {
+  body.single-services .cosmetic-modal-more-services-section .more-service-card-title {
     flex: 1 1 auto !important;
     min-width: 0 !important;
     line-height: 60px !important;
   }
 
-  body.single-services
-    .cosmetic-modal-more-services-section
-    .more-services-progress-track {
+  body.single-services .cosmetic-modal-more-services-section .more-services-progress-track {
     width: 159px !important;
     height: 9px !important;
     gap: 8px !important;
@@ -8451,18 +8453,12 @@
     margin: 0 auto !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-rating-badge
-    .google-logo-wrapper,
+  body.single-services .cosmetic-modal-reviews-section .reviews-rating-badge .google-logo-wrapper,
   body.single-services .cosmetic-modal-reviews-section .reviews-rating-link {
     flex: 0 0 auto !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-rating-badge
-    .google-logo-wrapper {
+  body.single-services .cosmetic-modal-reviews-section .reviews-rating-badge .google-logo-wrapper {
     display: flex !important;
     grid-column: 1 !important;
     grid-row: 1 !important;
@@ -8497,9 +8493,7 @@
     margin: 0 !important;
   }
 
-  body.single-services
-    .cosmetic-modal-reviews-section
-    .reviews-slider-container {
+  body.single-services .cosmetic-modal-reviews-section .reviews-slider-container {
     height: 255px !important;
     min-height: 255px !important;
     max-height: 255px !important;
@@ -8526,11 +8520,13 @@
   .treatments-left-col {
     display: none !important;
   }
+
   .treatments-row {
     display: flex !important;
     flex-direction: column !important;
     gap: 26px !important;
   }
+
   /* Mobile Footer Layout (Figma 4084:43766) */
   #colophon.site-footer {
     padding: 20px 24px 30px !important;
@@ -8852,15 +8848,18 @@
     line-height: normal;
     width: 100%;
   }
+
   body.single-services .more-services-progress-dot {
     width: 10px !important;
     height: 10px !important;
     flex: 0 0 10px !important;
   }
+
   body.single-services .more-services-title::before {
     text-box-edge: cap alphabetic;
     text-box-trim: trim-both;
   }
+
   body.single-services .more-services-title {
     text-box-edge: cap alphabetic;
     text-box-trim: trim-both;
@@ -8872,6 +8871,7 @@
    PRIVACY POLICY PAGE MOBILE / TABLET
    ============================================================ */
 @media (max-width: 991.98px) {
+
   .page-template-template-privacy-policy-php .site-content,
   .page-template-template-privacy-policy .site-content {
     background-color: #fefdf6 !important;
@@ -9150,6 +9150,12 @@
    Tablet-only overrides; desktop and phone styles remain unchanged.
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
+
+  html.wsd-js body.page-template-template-smile-gallery-php .smile-gallery-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-smile-gallery .smile-gallery-page-main .hero-image-wrapper {
+    margin-top: 0 !important;
+  }
+
   .page-template-template-dental-referrals-php .site-content,
   .page-template-template-dental-referrals .site-content {
     background-color: #faf3e6 !important;
@@ -9196,9 +9202,7 @@
 
   .page-template-template-dental-referrals-php .dental-referrals-title,
   .page-template-template-dental-referrals .dental-referrals-title,
-  .page-template-template-dental-referrals-php
-    .dental-referrals-main
-    .hero-title,
+  .page-template-template-dental-referrals-php .dental-referrals-main .hero-title,
   .page-template-template-dental-referrals .dental-referrals-main .hero-title {
     font-size: 28px !important;
     font-weight: 600 !important;
@@ -9209,12 +9213,8 @@
 
   .page-template-template-dental-referrals-php .dental-referrals-intro-text,
   .page-template-template-dental-referrals .dental-referrals-intro-text,
-  .page-template-template-dental-referrals-php
-    .dental-referrals-main
-    .hero-description,
-  .page-template-template-dental-referrals
-    .dental-referrals-main
-    .hero-description {
+  .page-template-template-dental-referrals-php .dental-referrals-main .hero-description,
+  .page-template-template-dental-referrals .dental-referrals-main .hero-description {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
@@ -9227,12 +9227,8 @@
     margin: 0 0 24px !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-intro-text
-    p:last-child,
-  .page-template-template-dental-referrals
-    .dental-referrals-intro-text
-    p:last-child {
+  .page-template-template-dental-referrals-php .dental-referrals-intro-text p:last-child,
+  .page-template-template-dental-referrals .dental-referrals-intro-text p:last-child {
     margin-bottom: 0 !important;
   }
 
@@ -9266,8 +9262,7 @@
     margin-bottom: -40px;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-panel-track-fill,
+  .page-template-template-dental-referrals-php .dental-referrals-panel-track-fill,
   .page-template-template-dental-referrals .dental-referrals-panel-track-fill {
     height: 193.5px;
   }
@@ -9404,6 +9399,7 @@
 
 /* Dental Referrals — phone (FIGMA 4084:45962) */
 @media (max-width: 767.98px) {
+
   .page-template-template-dental-referrals-php .site-content,
   .page-template-template-dental-referrals .site-content {
     background-color: #faf3e6 !important;
@@ -9447,9 +9443,7 @@
 
   .page-template-template-dental-referrals-php .dental-referrals-title,
   .page-template-template-dental-referrals .dental-referrals-title,
-  .page-template-template-dental-referrals-php
-    .dental-referrals-main
-    .hero-title,
+  .page-template-template-dental-referrals-php .dental-referrals-main .hero-title,
   .page-template-template-dental-referrals .dental-referrals-main .hero-title {
     font-size: 24px !important;
     font-weight: 700 !important;
@@ -9460,12 +9454,8 @@
 
   .page-template-template-dental-referrals-php .dental-referrals-intro-text,
   .page-template-template-dental-referrals .dental-referrals-intro-text,
-  .page-template-template-dental-referrals-php
-    .dental-referrals-main
-    .hero-description,
-  .page-template-template-dental-referrals
-    .dental-referrals-main
-    .hero-description {
+  .page-template-template-dental-referrals-php .dental-referrals-main .hero-description,
+  .page-template-template-dental-referrals .dental-referrals-main .hero-description {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
@@ -9478,12 +9468,8 @@
     margin: 0 0 17px !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-intro-text
-    p:last-child,
-  .page-template-template-dental-referrals
-    .dental-referrals-intro-text
-    p:last-child {
+  .page-template-template-dental-referrals-php .dental-referrals-intro-text p:last-child,
+  .page-template-template-dental-referrals .dental-referrals-intro-text p:last-child {
     margin-bottom: 0 !important;
   }
 
@@ -9505,8 +9491,7 @@
     display: none !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-mobile-progress,
+  .page-template-template-dental-referrals-php .dental-referrals-mobile-progress,
   .page-template-template-dental-referrals .dental-referrals-mobile-progress {
     display: block !important;
     position: sticky !important;
@@ -9520,10 +9505,8 @@
     overflow: hidden !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-mobile-progress-fill,
-  .page-template-template-dental-referrals
-    .dental-referrals-mobile-progress-fill {
+  .page-template-template-dental-referrals-php .dental-referrals-mobile-progress-fill,
+  .page-template-template-dental-referrals .dental-referrals-mobile-progress-fill {
     display: block !important;
     position: absolute !important;
     top: 0 !important;
@@ -9543,8 +9526,7 @@
     padding: 2px 0 0 !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-section-divider,
+  .page-template-template-dental-referrals-php .dental-referrals-section-divider,
   .page-template-template-dental-referrals .dental-referrals-section-divider {
     display: none !important;
   }
@@ -9555,10 +9537,12 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+
   section.dental-referrals-form-section.dental-referrals-accordion.is-expanded {
     padding-bottom: 30px !important;
     border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
   }
+
   label.dental-referrals-field.dental-referrals-field--inline {
     width: 100%;
   }
@@ -9574,28 +9558,19 @@
     box-sizing: border-box !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion.is-expanded
-    .dental-referrals-section-header,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion.is-expanded
-    .dental-referrals-section-header {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded .dental-referrals-section-header,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded .dental-referrals-section-header {
     padding: 20px 0 !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-section-header,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-section-header {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-header,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-header {
     padding: 24px 0 !important;
     box-sizing: border-box !important;
     border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion-toggle,
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-toggle,
   .page-template-template-dental-referrals .dental-referrals-accordion-toggle {
     display: flex !important;
     align-items: center !important;
@@ -9621,45 +9596,29 @@
     color: #d8a444 !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion-icon-svg,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion-icon-svg {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-icon-svg,
+  .page-template-template-dental-referrals .dental-referrals-accordion-icon-svg {
     display: block !important;
     flex: 0 0 auto !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion-icon-cross,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion-icon-cross {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion-icon-cross,
+  .page-template-template-dental-referrals .dental-referrals-accordion-icon-cross {
     display: none !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion.is-expanded
-    .dental-referrals-accordion-icon-plus,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion.is-expanded
-    .dental-referrals-accordion-icon-plus {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-plus,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-plus {
     display: none !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion.is-expanded
-    .dental-referrals-accordion-icon-cross,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion.is-expanded
-    .dental-referrals-accordion-icon-cross {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-cross,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded .dental-referrals-accordion-icon-cross {
     display: block !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-accordion-icon,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-accordion-icon {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-accordion-icon,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-accordion-icon {
     color: #5e5d5f !important;
   }
 
@@ -9674,12 +9633,8 @@
     letter-spacing: 0 !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-section-title,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-section-title {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-title,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-title {
     font-weight: 400 !important;
     color: #5e5d5f !important;
     text-transform: capitalize !important;
@@ -9687,26 +9642,18 @@
     line-height: normal !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-section-title-full,
-  .page-template-template-dental-referrals
-    .dental-referrals-section-title-full {
+  .page-template-template-dental-referrals-php .dental-referrals-section-title-full,
+  .page-template-template-dental-referrals .dental-referrals-section-title-full {
     display: none !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-section-title-short,
-  .page-template-template-dental-referrals
-    .dental-referrals-section-title-short {
+  .page-template-template-dental-referrals-php .dental-referrals-section-title-short,
+  .page-template-template-dental-referrals .dental-referrals-section-title-short {
     display: inline !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-section-body,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion:not(.is-expanded)
-    .dental-referrals-section-body {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-body,
+  .page-template-template-dental-referrals .dental-referrals-accordion:not(.is-expanded) .dental-referrals-section-body {
     display: none !important;
   }
 
@@ -9740,8 +9687,8 @@
   .dental-referrals-field textarea {
     padding: 7px 0px 8px 0;
   }
-  .page-template-template-dental-referrals-php
-    .dental-referrals-treatments-grid,
+
+  .page-template-template-dental-referrals-php .dental-referrals-treatments-grid,
   .page-template-template-dental-referrals .dental-referrals-treatments-grid {
     grid-template-columns: 1fr !important;
     row-gap: 20px !important;
@@ -9821,12 +9768,8 @@
     margin-top: 2px !important;
   }
 
-  .page-template-template-dental-referrals-php
-    .dental-referrals-accordion.is-expanded
-    + .dental-referrals-accordion,
-  .page-template-template-dental-referrals
-    .dental-referrals-accordion.is-expanded
-    + .dental-referrals-accordion {
+  .page-template-template-dental-referrals-php .dental-referrals-accordion.is-expanded+.dental-referrals-accordion,
+  .page-template-template-dental-referrals .dental-referrals-accordion.is-expanded+.dental-referrals-accordion {
     margin-top: 30px !important;
   }
 
@@ -9938,7 +9881,7 @@
     padding: 0 !important;
   }
 
-  #colophon.site-footer .footer-desktop-nav > .footer-links-grid:first-of-type {
+  #colophon.site-footer .footer-desktop-nav>.footer-links-grid:first-of-type {
     display: flex !important;
     flex-wrap: nowrap !important;
     justify-content: space-between !important;
@@ -9949,10 +9892,7 @@
     gap: 0 !important;
   }
 
-  #colophon.site-footer
-    .footer-desktop-nav
-    > .footer-links-grid:first-of-type
-    > [class*="col-"] {
+  #colophon.site-footer .footer-desktop-nav>.footer-links-grid:first-of-type>[class*="col-"] {
     flex: 0 0 auto !important;
     width: auto !important;
     max-width: none !important;
@@ -9976,9 +9916,11 @@
     line-height: normal !important;
     margin: 0 0 20px !important;
   }
+
   #colophon.site-footer .ipad-continfo .footer-nav-title {
     margin-bottom: 0 !important;
   }
+
   #colophon.site-footer .footer-nav-list li {
     margin-bottom: 11px !important;
     line-height: normal !important;
@@ -9995,7 +9937,7 @@
     line-height: normal !important;
   }
 
-  #colophon.site-footer .footer-desktop-nav > .footer-links-grid.d-md-flex {
+  #colophon.site-footer .footer-desktop-nav>.footer-links-grid.d-md-flex {
     display: flex !important;
     justify-content: space-between !important;
     align-items: flex-start !important;
@@ -10005,10 +9947,7 @@
     --bs-gutter-y: 0;
   }
 
-  #colophon.site-footer
-    .footer-desktop-nav
-    > .footer-links-grid.d-md-flex
-    > [class*="col-"] {
+  #colophon.site-footer .footer-desktop-nav>.footer-links-grid.d-md-flex>[class*="col-"] {
     flex: 0 0 auto !important;
     width: auto !important;
     max-width: none !important;
@@ -10026,18 +9965,12 @@
     min-height: 0 !important;
   }
 
-  #colophon.site-footer
-    .footer-desktop-nav
-    > .footer-links-grid.d-md-flex
-    .col-4 {
+  #colophon.site-footer .footer-desktop-nav>.footer-links-grid.d-md-flex .col-4 {
     width: 208px !important;
     max-width: 100%;
   }
 
-  #colophon.site-footer
-    .footer-desktop-nav
-    > .footer-links-grid.d-md-flex
-    .footer-nav-col {
+  #colophon.site-footer .footer-desktop-nav>.footer-links-grid.d-md-flex .footer-nav-col {
     align-self: flex-start !important;
     height: auto !important;
   }
@@ -10219,9 +10152,11 @@
     width: 100% !important;
     margin: 0 !important;
   }
+
   .dental-referrals-field--inline {
     width: 100%;
   }
+
   .dental-referrals-field--inline input {
     padding-bottom: 0;
     padding-top: 0;
@@ -10233,6 +10168,7 @@
    (responsive.css loads after custom.css and uses !important)
    ============================================================ */
 @media (max-width: 991.98px) {
+
   .page-template-template-smile-gallery-php .smile-gallery-page-main .gallery-info-wrapper,
   .page-template-template-smile-gallery .smile-gallery-page-main .gallery-info-wrapper {
     display: flex !important;
@@ -10389,6 +10325,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+
   .page-template-template-smile-gallery-php .smile-gallery-page-main .smile-gallery-cases-inner,
   .page-template-template-smile-gallery .smile-gallery-page-main .smile-gallery-cases-inner {
     gap: 64px !important;
@@ -10519,6 +10456,7 @@
    BLOGS PAGE — TABLET (Figma 4078:37838, 768–991.98px)
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
+
   .page-template-template-blogs-php .site-content,
   .page-template-template-blogs .site-content {
     display: block !important;
@@ -11189,11 +11127,9 @@
   .page-template-template-blogs .blogs-card-overlay {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 102, 102, 0) 0%,
-      rgba(0, 0, 0, 1) 81.686%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(102, 102, 102, 0) 0%,
+        rgba(0, 0, 0, 1) 81.686%) !important;
     pointer-events: none !important;
   }
 
@@ -11276,6 +11212,7 @@
    BLOG DETAIL — TABLET (Figma 4078:38149, 768–991.98px)
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
+
   .single-post .site-content,
   .single.single-post .site-content {
     display: block !important;
@@ -11435,7 +11372,7 @@
     color: #5e5d5f !important;
   }
 
-  .blog-detail-hero-stat + .blog-detail-hero-stat {
+  .blog-detail-hero-stat+.blog-detail-hero-stat {
     margin-left: -30px !important;
   }
 
@@ -11498,7 +11435,7 @@
     color: #5e5d5f !important;
   }
 
-  .blog-detail-body > * {
+  .blog-detail-body>* {
     margin: 0 !important;
   }
 
@@ -11657,18 +11594,18 @@
     margin: 0 !important;
   }
 
-  .blog-detail-comment-form > .comment-form-comment,
-  .blog-detail-comment-form > .blog-detail-comment-textarea {
+  .blog-detail-comment-form>.comment-form-comment,
+  .blog-detail-comment-form>.blog-detail-comment-textarea {
     grid-column: 1 / -1 !important;
   }
 
-  .blog-detail-comment-form > .comment-form-cookies-consent,
-  .blog-detail-comment-form > .blog-detail-comment-cookies {
+  .blog-detail-comment-form>.comment-form-cookies-consent,
+  .blog-detail-comment-form>.blog-detail-comment-cookies {
     grid-column: 1 / -1 !important;
   }
 
-  .blog-detail-comment-form > .blog-detail-comment-submit-wrap,
-  .blog-detail-comment-form > .form-submit {
+  .blog-detail-comment-form>.blog-detail-comment-submit-wrap,
+  .blog-detail-comment-form>.form-submit {
     grid-column: 1 / -1 !important;
     justify-self: stretch !important;
     margin: 0 !important;
@@ -11890,11 +11827,9 @@
   .blog-detail-related-card .blogs-card-overlay {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 102, 102, 0) 0%,
-      rgba(0, 0, 0, 1) 81.686%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(102, 102, 102, 0) 0%,
+        rgba(0, 0, 0, 1) 81.686%) !important;
     pointer-events: none !important;
   }
 
@@ -12045,6 +11980,7 @@
    BLOGS PAGE — MOBILE (Figma 4078:38485, max-width 767.98px)
    ============================================================ */
 @media (max-width: 767.98px) {
+
   .page-template-template-blogs-php .site-content,
   .page-template-template-blogs .site-content {
     display: block !important;
@@ -12831,11 +12767,9 @@
   .page-template-template-blogs .blogs-card-overlay {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 102, 102, 0) 0%,
-      rgba(0, 0, 0, 1) 81.686%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(102, 102, 102, 0) 0%,
+        rgba(0, 0, 0, 1) 81.686%) !important;
     pointer-events: none !important;
   }
 
@@ -12975,6 +12909,7 @@
    BLOG DETAIL — MOBILE (Figma 4078:38753, max-width 767.98px)
    ============================================================ */
 @media (max-width: 767.98px) {
+
   .single-post .site-content,
   .single.single-post .site-content {
     display: block !important;
@@ -13135,7 +13070,7 @@
     color: #5e5d5f !important;
   }
 
-  .blog-detail-hero-stat + .blog-detail-hero-stat {
+  .blog-detail-hero-stat+.blog-detail-hero-stat {
     margin-left: -30px !important;
   }
 
@@ -13198,7 +13133,7 @@
     color: #5e5d5f !important;
   }
 
-  .blog-detail-body > * {
+  .blog-detail-body>* {
     margin: 0 !important;
   }
 
@@ -13319,13 +13254,13 @@
     margin: 0 !important;
   }
 
-  .blog-detail-comment-form > * + * {
+  .blog-detail-comment-form>*+* {
     margin-top: 30px !important;
   }
 
-  .blog-detail-comment-form > .comment-form-author + .comment-form-email,
-  .blog-detail-comment-form > .comment-form-email + .comment-form-url,
-  .blog-detail-comment-form > .comment-form-author + .comment-form-url {
+  .blog-detail-comment-form>.comment-form-author+.comment-form-email,
+  .blog-detail-comment-form>.comment-form-email+.comment-form-url,
+  .blog-detail-comment-form>.comment-form-author+.comment-form-url {
     margin-top: 0 !important;
   }
 
@@ -13445,7 +13380,7 @@
   }
 
   .blog-detail-comment-submit-wrap,
-  .blog-detail-comment-form > .form-submit {
+  .blog-detail-comment-form>.form-submit {
     display: flex !important;
     justify-content: stretch !important;
     width: 100% !important;
@@ -13594,11 +13529,9 @@
   .blog-detail-related-card .blogs-card-overlay {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 102, 102, 0) 0%,
-      rgba(0, 0, 0, 1) 81.686%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(102, 102, 102, 0) 0%,
+        rgba(0, 0, 0, 1) 81.686%) !important;
     pointer-events: none !important;
   }
 

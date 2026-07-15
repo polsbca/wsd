@@ -60,6 +60,7 @@ body {
 }
 
 @media (min-width: 992px) {
+
   html.wsd-js body.home .header-top,
   html.wsd-js body.page-template-template-services .header-top,
   html.wsd-js body.page-template-template-contact-php .header-top,
@@ -88,9 +89,7 @@ body {
   html.wsd-js body.page-template-template-contact .hero-title,
   html.wsd-js body.page-template-template-contact .hero-description,
   html.wsd-js body.page-template-template-dental-referrals-php .hero-title,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .hero-description,
+  html.wsd-js body.page-template-template-dental-referrals-php .hero-description,
   html.wsd-js body.page-template-template-dental-referrals .hero-title,
   html.wsd-js body.page-template-template-dental-referrals .hero-description,
   html.wsd-js body.page-template-template-teams-php .hero-title,
@@ -132,125 +131,51 @@ body {
   html.wsd-js body.page-template-template-services .hero-image-wrapper,
   html.wsd-js body.single-services .hero-image-wrapper,
   html.wsd-js body.single-services .cosmetic-hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-teams-php
-    .teams-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-teams
-    .teams-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-fees-php
-    .fees-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-fees
-    .fees-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-smile-gallery-php
-    .smile-gallery-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-smile-gallery
-    .smile-gallery-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-blogs-php
-    .blogs-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-blogs
-    .blogs-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-dental-implants-php
-    .implants-hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-dental-implants
-    .implants-hero-image-wrapper {
+  html.wsd-js body.page-template-template-teams-php .teams-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-teams .teams-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-fees-php .fees-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-fees .fees-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-smile-gallery-php .smile-gallery-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-smile-gallery .smile-gallery-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-blogs-php .blogs-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-blogs .blogs-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-dental-implants-php .implants-hero-image-wrapper,
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-image-wrapper {
     opacity: 1;
     transform: none;
     clip-path: inset(0% 0% 100% 0%);
   }
 
-  html.wsd-js
-    body.page-template-template-dental-implants-php
-    .implants-hero-title,
-  html.wsd-js
-    body.page-template-template-dental-implants
-    .implants-hero-title,
-  html.wsd-js
-    body.page-template-template-dental-implants-php
-    .implants-hero-desc,
-  html.wsd-js
-    body.page-template-template-dental-implants
-    .implants-hero-desc,
-  html.wsd-js
-    body.page-template-template-dental-implants-php
-    .implants-hero-ctas
-    .implants-btn,
-  html.wsd-js
-    body.page-template-template-dental-implants
-    .implants-hero-ctas
-    .implants-btn {
+  html.wsd-js body.page-template-template-dental-implants-php .implants-hero-title,
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-title,
+  html.wsd-js body.page-template-template-dental-implants-php .implants-hero-desc,
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-desc,
+  html.wsd-js body.page-template-template-dental-implants-php .implants-hero-ctas .implants-btn,
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-ctas .implants-btn {
     opacity: 0;
     transform: translateY(30px);
   }
 
-  html.wsd-js
-    body.page-template-template-fees-php
-    .fees-page-main
-    .hero-buttons
-    .btn,
-  html.wsd-js
-    body.page-template-template-fees
-    .fees-page-main
-    .hero-buttons
-    .btn {
+  html.wsd-js body.page-template-template-fees-php .fees-page-main .hero-buttons .btn,
+  html.wsd-js body.page-template-template-fees .fees-page-main .hero-buttons .btn {
     opacity: 0;
     transform: translateY(20px);
   }
 
-  html.wsd-js
-    body.page-template-template-smile-gallery-php
-    .smile-gallery-page-main
-    .hero-buttons
-    .btn,
-  html.wsd-js
-    body.page-template-template-smile-gallery
-    .smile-gallery-page-main
-    .hero-buttons
-    .btn {
+  html.wsd-js body.page-template-template-smile-gallery-php .smile-gallery-page-main .hero-buttons .btn,
+  html.wsd-js body.page-template-template-smile-gallery .smile-gallery-page-main .hero-buttons .btn {
     opacity: 0;
     transform: translateY(20px);
   }
 
-  html.wsd-js
-    body.page-template-template-blogs-php
-    .blogs-page-main
-    .hero-buttons
-    .btn,
-  html.wsd-js
-    body.page-template-template-blogs
-    .blogs-page-main
-    .hero-buttons
-    .btn {
+  html.wsd-js body.page-template-template-blogs-php .blogs-page-main .hero-buttons .btn,
+  html.wsd-js body.page-template-template-blogs .blogs-page-main .hero-buttons .btn {
     opacity: 0;
     transform: translateY(20px);
   }
 
-  html.wsd-js
-    body.page-template-template-teams-php
-    .teams-page-main
-    .hero-buttons
-    .btn,
-  html.wsd-js
-    body.page-template-template-teams
-    .teams-page-main
-    .hero-buttons
-    .btn {
+  html.wsd-js body.page-template-template-teams-php .teams-page-main .hero-buttons .btn,
+  html.wsd-js body.page-template-template-teams .teams-page-main .hero-buttons .btn {
     opacity: 0;
     transform: translateY(20px);
   }
@@ -262,38 +187,14 @@ body {
 
   html.wsd-js body.page-template-template-contact-php .contact-sidebar,
   html.wsd-js body.page-template-template-contact .contact-sidebar,
-  html.wsd-js
-    body.page-template-template-contact-php
-    .contact-form-block
-    .contact-panel-title,
-  html.wsd-js
-    body.page-template-template-contact
-    .contact-form-block
-    .contact-panel-title,
-  html.wsd-js
-    body.page-template-template-contact-php
-    .contact-form-block
-    .contact-field,
-  html.wsd-js
-    body.page-template-template-contact
-    .contact-form-block
-    .contact-field,
-  html.wsd-js
-    body.page-template-template-contact-php
-    .contact-form-block
-    .contact-consent,
-  html.wsd-js
-    body.page-template-template-contact
-    .contact-form-block
-    .contact-consent,
-  html.wsd-js
-    body.page-template-template-contact-php
-    .contact-form-block
-    .contact-submit-btn,
-  html.wsd-js
-    body.page-template-template-contact
-    .contact-form-block
-    .contact-submit-btn {
+  html.wsd-js body.page-template-template-contact-php .contact-form-block .contact-panel-title,
+  html.wsd-js body.page-template-template-contact .contact-form-block .contact-panel-title,
+  html.wsd-js body.page-template-template-contact-php .contact-form-block .contact-field,
+  html.wsd-js body.page-template-template-contact .contact-form-block .contact-field,
+  html.wsd-js body.page-template-template-contact-php .contact-form-block .contact-consent,
+  html.wsd-js body.page-template-template-contact .contact-form-block .contact-consent,
+  html.wsd-js body.page-template-template-contact-php .contact-form-block .contact-submit-btn,
+  html.wsd-js body.page-template-template-contact .contact-form-block .contact-submit-btn {
     opacity: 0;
     transform: translateY(30px);
   }
@@ -304,72 +205,34 @@ body {
     transform: translateX(50px);
   }
 
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-form-panel,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-form-panel {
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-form-panel,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-form-panel {
     opacity: 0;
     transform: translateX(50px);
   }
 
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-section-title,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-section-title,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-field,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-field,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-checkbox,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-checkbox,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-other-field,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-other-field,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-media-uploads,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-media-uploads,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-consent,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-consent,
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-submit-btn,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-submit-btn {
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-section-title,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-section-title,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-field,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-field,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-checkbox,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-checkbox,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-other-field,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-other-field,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-media-uploads,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-media-uploads,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-consent,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-consent,
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-submit-btn,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-submit-btn {
     opacity: 0;
     transform: translateY(30px);
   }
 
   html.wsd-js body.page-template-template-contact-php .contact-info-item,
   html.wsd-js body.page-template-template-contact .contact-info-item,
-  html.wsd-js
-    body.page-template-template-contact-php
-    .contact-info-block
-    .contact-panel-title,
-  html.wsd-js
-    body.page-template-template-contact
-    .contact-info-block
-    .contact-panel-title,
+  html.wsd-js body.page-template-template-contact-php .contact-info-block .contact-panel-title,
+  html.wsd-js body.page-template-template-contact .contact-info-block .contact-panel-title,
   html.wsd-js body.page-template-template-contact-php .contact-social-row,
   html.wsd-js body.page-template-template-contact .contact-social-row,
   html.wsd-js body.page-template-template-contact-php .contact-map-card,
@@ -385,12 +248,9 @@ body {
 }
 
 @media (max-width: 991.98px) {
-  html.wsd-js
-    body.page-template-template-dental-referrals-php
-    .dental-referrals-form-panel,
-  html.wsd-js
-    body.page-template-template-dental-referrals
-    .dental-referrals-form-panel {
+
+  html.wsd-js body.page-template-template-dental-referrals-php .dental-referrals-form-panel,
+  html.wsd-js body.page-template-template-dental-referrals .dental-referrals-form-panel {
     opacity: 0;
     transform: translateY(20px);
   }
@@ -524,7 +384,7 @@ body {
 }
 
 .main-navigation a:hover,
-.main-navigation .current-menu-item > a {
+.main-navigation .current-menu-item>a {
   color: var(--primary-color);
 }
 
@@ -922,6 +782,7 @@ body {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  transform: rotate(180deg);
 }
 
 .call-text {
@@ -1208,9 +1069,11 @@ body {
 .opening-hours-list {
   text-align: left !important;
 }
+
 .footer-nav-col {
   min-height: 172px;
 }
+
 .social-icons-wrapper {
   display: flex;
   align-items: center;
@@ -1342,12 +1205,9 @@ body {
 
 /* Prevent browser autofill white background override */
 #colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill,
-#colophon.site-footer
-  input[type="email"].subscribe-input:-webkit-autofill:hover,
-#colophon.site-footer
-  input[type="email"].subscribe-input:-webkit-autofill:focus,
-#colophon.site-footer
-  input[type="email"].subscribe-input:-webkit-autofill:active {
+#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:hover,
+#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:focus,
+#colophon.site-footer input[type="email"].subscribe-input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s;
@@ -3180,11 +3040,9 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 .dentist-gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    270deg,
-    rgba(43, 43, 44, 0) 0%,
-    rgba(43, 43, 44, 0.8) 100%
-  );
+  background: linear-gradient(270deg,
+      rgba(43, 43, 44, 0) 0%,
+      rgba(43, 43, 44, 0.8) 100%);
   z-index: 3;
 }
 
@@ -3315,11 +3173,9 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   }
 
   .dentist-gradient-overlay {
-    background: linear-gradient(
-      to top,
-      #faf3e6 0%,
-      rgba(250, 243, 230, 0) 100%
-    );
+    background: linear-gradient(to top,
+        #faf3e6 0%,
+        rgba(250, 243, 230, 0) 100%);
   }
 
   .principal-dentist-section {
@@ -3523,25 +3379,31 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     padding: 60px 80px !important;
     gap: 30px !important;
   }
+
   .payment-title {
     font-size: 42px !important;
     line-height: 46px !important;
   }
+
   .payment-desc {
     font-size: 18px !important;
     line-height: 26px !important;
   }
+
   .payment-card {
     padding: 80px 50px !important;
     gap: 60px !important;
   }
+
   .payment-card-title {
     font-size: 24px !important;
   }
+
   .payment-card-text {
     font-size: 15px !important;
     line-height: 23px !important;
   }
+
   .payment-btn {
     padding: 20px !important;
     font-size: 15px !important;
@@ -3814,6 +3676,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
    DESKTOP SECTION SCROLL PINNING (Same logic as mobile version)
    ============================================================ */
 @media (min-width: 992px) {
+
   .key-treatments-section,
   .about-waterside-section,
   .smile-gallery-section,
@@ -3925,8 +3788,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     z-index: 0 !important;
   }
 
-  .treatments-sticky-wrapper > *,
-  .about-sticky-wrapper > * {
+  .treatments-sticky-wrapper>*,
+  .about-sticky-wrapper>* {
     position: relative !important;
     z-index: 1 !important;
   }
@@ -3983,6 +3846,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
    BUTTON HOVER TRANSITIONS (DESKTOP ONLY)
    ============================================================ */
 @media (min-width: 992px) {
+
   .btn,
   .teams-member-btn,
   .teams-support-tab,
@@ -4092,13 +3956,13 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   }
 
   /* Label above sweep */
-  .btn > span,
-  .btn-primary > span,
-  .tab-action-btn > span,
-  .dentist-tab-btn > span,
-  .btn-view-plan > span,
-  .book-appointment-btn > span,
-  .smile-gallery-filter > span {
+  .btn>span,
+  .btn-primary>span,
+  .tab-action-btn>span,
+  .dentist-tab-btn>span,
+  .btn-view-plan>span,
+  .book-appointment-btn>span,
+  .smile-gallery-filter>span {
     position: relative !important;
     z-index: 1 !important;
   }
@@ -4825,9 +4689,11 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 .btn-close-circle:hover {
   background-color: #c79333;
 }
+
 .cosmetic-modal-nav.gap-4 {
   gap: 40px !important;
 }
+
 .cosmetic-modal-nav .modal-nav-link {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
@@ -4863,19 +4729,23 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   overflow-x: hidden;
   overscroll-behavior: contain;
 }
+
 .cosmetic-modal-about-section {
   row-gap: 100px;
   display: grid;
   padding-inline: 120px;
   padding-block: 100px 160px;
 }
+
 .cosmetic-modal-process-tabs {
   display: grid;
   row-gap: 80px;
 }
+
 .cosmetic-tab-grp {
   gap: 21px;
 }
+
 .cosmetic-tab-grp .btn-process-tab {
   letter-spacing: 1px;
   line-height: 100%;
@@ -4883,9 +4753,11 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   text-box-trim: trim-both;
   height: auto;
 }
+
 .cosmetic-tab-grp .btn-process-tab::before {
   display: none;
 }
+
 .cosmetic-modal-title-badge h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
@@ -4946,6 +4818,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   color: #ffffff;
   font-weight: 600;
 }
+
 .cosmetic-tab-grp .btn-process-tab:hover {
   background-color: #d8a444 !important;
 }
@@ -5219,6 +5092,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   line-height: 1.35;
   color: #5e5d5f;
 }
+
 .cosmetic-accordion-trigger.collapsed {
   padding: 40px 0;
 }
@@ -5446,17 +5320,21 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   display: flex;
   gap: 20px;
 }
+
 .cosmetic-modal-reviews-section .reviews-nav-btn {
   padding: 8px;
 }
+
 .cosmetic-modal-reviews-section .reviews-nav-btn.prev-btn,
 .cosmetic-modal-reviews-section .reviews-nav-btn.next-btn {
   background-color: #fff !important;
 }
+
 .cosmetic-modal-reviews-section .reviews-nav-btn img {
   width: 25px;
   height: 25px;
 }
+
 .reviews-nav-btn {
   width: 50px;
   height: 50px;
@@ -5630,6 +5508,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 }
 
 @media (max-width: 1440px) {
+
   .cosmetic-modal-header,
   .cosmetic-modal-body {
     padding-left: 60px;
@@ -5888,9 +5767,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     z-index: 2 !important;
   }
 
-  .cosmetic-full-modal
-    .modal-smile-gallery
-    .gallery-scroll-indicator-container {
+  .cosmetic-full-modal .modal-smile-gallery .gallery-scroll-indicator-container {
     align-self: stretch;
     height: auto;
     min-height: 0;
@@ -6034,13 +5911,16 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
 .more-services-slider-container {
   overflow-x: auto;
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none;
+  /* Hide scrollbar for IE/Edge */
   margin-inline: -120px;
 }
 
 .more-services-slider-container::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome/Safari */
+  display: none;
+  /* Hide scrollbar for Chrome/Safari */
 }
 
 .more-services-slider-track {
@@ -6054,6 +5934,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   width: calc((100% - 48px) / 3);
   max-width: 566px;
 }
+
 .more-service-card-wrapper:first-child {
   margin-left: 120px;
 }
@@ -6287,6 +6168,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 }
 
 @media (min-width: 992px) {
+
   .cosmetic-full-modal .btn-close-circle,
   .cosmetic-full-modal .btn-process-tab,
   .cosmetic-full-modal .reviews-nav-btn,
@@ -6324,9 +6206,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .cosmetic-full-modal .btn-process-tab:hover::before,
   .cosmetic-full-modal .reviews-nav-btn:hover::before,
   .cosmetic-full-modal .more-services-nav-btn:hover::before,
-  .cosmetic-full-modal
-    .more-service-card:hover
-    .more-service-card-arrow::before {
+  .cosmetic-full-modal .more-service-card:hover .more-service-card-arrow::before {
     transform: skewX(-25deg) scaleX(1) !important;
   }
 
@@ -6354,6 +6234,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     border-color: #d8a444 !important;
     color: #ffffff !important;
   }
+
   .btn-process-tab.active,
   .btn-process-tab:hover,
   .cosmetic-full-modal .btn-process-tab:not(.active):hover {
@@ -6362,6 +6243,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     color: #ffffff;
     font-weight: 600;
   }
+
   .cosmetic-full-modal .btn-close-circle:hover,
   .cosmetic-full-modal .btn-process-tab.active:hover,
   .cosmetic-full-modal .more-service-card:hover .more-service-card-arrow {
@@ -6378,6 +6260,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 }
 
 @media (min-width: 992px) {
+
   .cosmetic-membership-ctas .btn-view-plan,
   .cosmetic-membership-ctas .btn-book-outline {
     position: relative !important;
@@ -6613,6 +6496,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   outline: none;
   box-shadow: none;
 }
+
 .contact-field input:focus,
 .contact-field textarea:focus {
   box-shadow: none;
@@ -6712,6 +6596,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   width: 30px;
   height: 30px;
 }
+
 .contact-info-icon svg {
   width: 100%;
   height: 100%;
@@ -7328,11 +7213,13 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   border-radius: 0;
   border-bottom: 1px solid #d8a444;
 }
+
 .dental-referrals-field input:focus,
 .dental-referrals-field textarea:focus {
   box-shadow: none;
   border-color: #d8a444;
 }
+
 .dental-referrals-field input::placeholder,
 .dental-referrals-field textarea::placeholder {
   color: rgba(94, 93, 95, 0.48);
@@ -7789,6 +7676,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   background: transparent;
   box-shadow: none;
   border: 0;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 .teams-member-photo {
@@ -7862,6 +7751,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   letter-spacing: 0.64px;
   text-transform: capitalize;
   color: #5e5d5f;
+
 }
 
 .teams-member-bio {
@@ -8067,8 +7957,9 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   background-color: #faf3e6;
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 60px;
   padding: 60px 0 60px 120px;
+  margin-bottom: 160px;
 }
 
 .teams-support-header {
@@ -8803,11 +8694,11 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   color: #5e5d5f;
 }
 
-.teams-doctor-journey-text > :first-child {
+.teams-doctor-journey-text> :first-child {
   margin-top: 0;
 }
 
-.teams-doctor-journey-text > :last-child {
+.teams-doctor-journey-text> :last-child {
   margin-bottom: 0;
 }
 
@@ -10102,14 +9993,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
   /* On some templates the mobile GSAP entry sequence is skipped (no .mobile-header),
      so we must not keep the hero image hidden on mobile. */
-  html.wsd-js
-    body.page-template-template-teams-php
-    .teams-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-teams
-    .teams-page-main
-    .hero-image-wrapper {
+  html.wsd-js body.page-template-template-teams-php .teams-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-teams .teams-page-main .hero-image-wrapper {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
@@ -10323,6 +10208,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.56px;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
   }
 
   .teams-member-bio {
@@ -11482,9 +11369,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
    Home hero: Book button hover
    Grey sweep over gold ? label stays above fill
    ------------------------------------------------------------ */
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"] {
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"] {
   position: relative !important;
   overflow: hidden !important;
   z-index: 1 !important;
@@ -11492,31 +11377,20 @@ body.home
   --hover-sweep-bg: #837257 !important;
 }
 
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:hover,
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:focus-visible,
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:active {
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:hover,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:focus-visible,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:active {
   background-color: #d8a444 !important;
   color: #ffffff !important;
   border-color: #d8a444 !important;
 }
 
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]
-  > span {
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]>span {
   position: relative !important;
   z-index: 1 !important;
 }
 
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]::before {
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]::before {
   content: "" !important;
   position: absolute !important;
   top: 0 !important;
@@ -11531,15 +11405,9 @@ body.home
   pointer-events: none !important;
 }
 
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:hover::before,
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:focus-visible::before,
-body.home
-  .hero-buttons
-  a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:active::before {
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:hover::before,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:focus-visible::before,
+body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-appointment"]:active::before {
   transform: skewX(-25deg) scaleX(1) !important;
 }
 
@@ -11992,7 +11860,7 @@ body.home
   border-bottom: 0;
 }
 
-.fees-accordion-content-inner > p {
+.fees-accordion-content-inner>p {
   margin: 0;
   max-width: 920px;
   padding-top: 12px;
@@ -12087,7 +11955,7 @@ body.home
   color: #5e5d5f;
 }
 
-.fees-treatment-note + .fees-treatment-note {
+.fees-treatment-note+.fees-treatment-note {
   margin-top: 16px;
 }
 
@@ -12180,7 +12048,7 @@ body.home
   color: #5e5d5f;
 }
 
-.fees-consult-body p + p {
+.fees-consult-body p+p {
   margin-top: 43px;
 }
 
@@ -12298,7 +12166,7 @@ body.home
   width: 100%;
 }
 
-.fees-membership-body > p {
+.fees-membership-body>p {
   margin: 0 0 0;
   font-family: var(--font-family-primary);
   font-size: 24px;
@@ -12307,7 +12175,7 @@ body.home
   color: #5e5d5f;
 }
 
-.fees-membership-body > p + p {
+.fees-membership-body>p+p {
   margin-top: 0;
 }
 
@@ -12420,7 +12288,7 @@ body.home
   width: 100%;
 }
 
-.fees-finance-body > p {
+.fees-finance-body>p {
   margin: 0;
   font-family: var(--font-family-primary);
   font-size: 24px;
@@ -12429,7 +12297,7 @@ body.home
   color: #5e5d5f;
 }
 
-.fees-finance-body > p.fees-finance-body-spaced {
+.fees-finance-body>p.fees-finance-body-spaced {
   margin-top: 43px;
 }
 
@@ -12488,6 +12356,7 @@ body.home
    FEES & MEMBERSHIP PAGE ? DESKTOP LAYOUT
    ============================================================ */
 @media (min-width: 992px) {
+
   .page-template-template-fees-php #main.fees-page-main,
   .page-template-template-fees #main.fees-page-main {
     gap: 160px;
@@ -12792,7 +12661,7 @@ body.home
     line-height: 32px;
   }
 
-  .fees-consult-body p + p {
+  .fees-consult-body p+p {
     margin-top: 32px;
   }
 
@@ -12814,7 +12683,7 @@ body.home
     line-height: 42px;
   }
 
-  .fees-membership-body > p,
+  .fees-membership-body>p,
   .fees-membership-benefits li {
     font-size: 18px;
     line-height: 32px;
@@ -12839,13 +12708,13 @@ body.home
     line-height: 42px;
   }
 
-  .fees-finance-body > p,
+  .fees-finance-body>p,
   .fees-finance-disclaimer {
     font-size: 18px;
     line-height: 32px;
   }
 
-  .fees-finance-body > p.fees-finance-body-spaced {
+  .fees-finance-body>p.fees-finance-body-spaced {
     margin-top: 32px;
   }
 
@@ -13128,7 +12997,7 @@ body.home
     background-color 0.5s ease;
 }
 
-.smile-gallery-filter > span {
+.smile-gallery-filter>span {
   position: relative;
   z-index: 1;
 }
@@ -13153,6 +13022,7 @@ body.home
 }
 
 @media (max-width: 991.98px) {
+
   .smile-gallery-filter:not(.is-active):hover,
   .smile-gallery-filter:not(.is-active):focus-visible {
     background-color: #d8a444;
@@ -13218,6 +13088,7 @@ body.home
    SMILE GALLERY PAGE ? DESKTOP LAYOUT
    ============================================================ */
 @media (min-width: 992px) {
+
   .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
   .page-template-template-smile-gallery #main.smile-gallery-page-main {
     gap: 160px;
@@ -13587,6 +13458,7 @@ body.home
    SMILE GALLERY PAGE ? MOBILE LAYOUT (Figma 4078:36621)
    ============================================================ */
 @media (max-width: 991.98px) {
+
   .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
   .page-template-template-smile-gallery #main.smile-gallery-page-main {
     gap: 94px;
@@ -13689,14 +13561,8 @@ body.home
     object-position: center bottom;
   }
 
-  html.wsd-js
-    body.page-template-template-smile-gallery-php
-    .smile-gallery-page-main
-    .hero-image-wrapper,
-  html.wsd-js
-    body.page-template-template-smile-gallery
-    .smile-gallery-page-main
-    .hero-image-wrapper {
+  html.wsd-js body.page-template-template-smile-gallery-php .smile-gallery-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-smile-gallery .smile-gallery-page-main .hero-image-wrapper {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
@@ -14184,6 +14050,30 @@ body.home
 
 /* Phone-only refinements */
 @media (max-width: 767.98px) {
+
+  .teams-member-focus-text,
+  .teams-member-focus-label--support {
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
+  }
+
+  .teams-support-section{
+    margin-bottom: 94px;
+  }
+  .teams-clinical-heading-wrap {
+    padding: 20px 24px;
+  }
+
+  .teams-clinical-heading {
+    font-size: 20px;
+  }
+
+  .teams-hero-title,
+  .teams-page-main .hero-title {
+    font-size: 24px;
+    line-height: normal;
+  }
+
   .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
   .page-template-template-smile-gallery #main.smile-gallery-page-main {
     gap: 94px;
@@ -14191,7 +14081,8 @@ body.home
   }
 
   .smile-gallery-hero-content-col {
-    padding: 30px 24px 0;
+    padding: 50px 24px 0;
+    gap: 50px;
   }
 
   .smile-gallery-hero-title,
@@ -14209,6 +14100,12 @@ body.home
     flex-direction: column;
     gap: 20px;
     width: 250px;
+    margin-bottom: 0 !important;
+  }
+
+  html.wsd-js body.page-template-template-smile-gallery-php .smile-gallery-page-main .hero-image-wrapper,
+  html.wsd-js body.page-template-template-smile-gallery .smile-gallery-page-main .hero-image-wrapper {
+    margin-top: 0 !important;
   }
 
   .smile-gallery-page-main .hero-buttons .btn {
@@ -14325,6 +14222,7 @@ body.home
    SMILE GALLERY PAGE ? TABLET LAYOUT (Figma 4078:36846)
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
+
   .page-template-template-smile-gallery-php #main.smile-gallery-page-main,
   .page-template-template-smile-gallery #main.smile-gallery-page-main {
     gap: 100px;
@@ -14650,7 +14548,7 @@ body.home
   }
 
   .smile-gallery-filter-panel-sheet {
-    max-width: 660px;
+    max-width: 100%;
     margin: 0 auto;
     border-radius: 24px 24px 0 0;
   }
@@ -14663,6 +14561,7 @@ body.home
 }
 
 @media (min-width: 992px) {
+
   .smile-gallery-section-heading-mobile,
   .smile-gallery-section-heading-tablet,
   .smile-gallery-mobile-filters,
@@ -14680,10 +14579,7 @@ body.home
 @container sg-cases-body (inline-size < 1710px) {
   .smile-gallery-cases-row {
     --sg-row-scale: min(1, calc(100cqi / var(--sg-row-natural-width, 1709px)));
-    --sg-row-margin-bottom: calc(
-      var(--sg-row-natural-height, 540px) *
-        (var(--sg-row-scale, 1) - 1)
-    );
+    --sg-row-margin-bottom: calc(var(--sg-row-natural-height, 540px) * (var(--sg-row-scale, 1) - 1));
   }
 }
 
@@ -14842,6 +14738,7 @@ body.home
 }
 
 @media (min-width: 992px) {
+
   .page-template-template-blogs-php #main.blogs-page-main,
   .page-template-template-blogs #main.blogs-page-main {
     gap: 160px;
@@ -15406,11 +15303,9 @@ body.home
   .blogs-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(102, 102, 102, 0) 0%,
-      rgba(0, 0, 0, 1) 81.686%
-    );
+    background: linear-gradient(180deg,
+        rgba(102, 102, 102, 0) 0%,
+        rgba(0, 0, 0, 1) 81.686%);
     pointer-events: none;
   }
 
@@ -15809,11 +15704,11 @@ body.home
     color: #5e5d5f;
   }
 
-  .blog-detail-body > * {
+  .blog-detail-body>* {
     margin: 0;
   }
 
-  .blog-detail-body > * + * {
+  .blog-detail-body>*+* {
     margin-top: 0;
   }
 
@@ -15971,18 +15866,18 @@ body.home
     margin: 0;
   }
 
-  .blog-detail-comment-form > .comment-form-comment,
-  .blog-detail-comment-form > .blog-detail-comment-textarea {
+  .blog-detail-comment-form>.comment-form-comment,
+  .blog-detail-comment-form>.blog-detail-comment-textarea {
     grid-column: 1 / -1;
   }
 
-  .blog-detail-comment-form > .comment-form-cookies-consent,
-  .blog-detail-comment-form > .blog-detail-comment-cookies {
+  .blog-detail-comment-form>.comment-form-cookies-consent,
+  .blog-detail-comment-form>.blog-detail-comment-cookies {
     grid-column: 1 / -1;
   }
 
-  .blog-detail-comment-form > .blog-detail-comment-submit-wrap,
-  .blog-detail-comment-form > .form-submit {
+  .blog-detail-comment-form>.blog-detail-comment-submit-wrap,
+  .blog-detail-comment-form>.form-submit {
     grid-column: 1 / -1;
     justify-self: end;
     margin: 0;
@@ -16226,6 +16121,7 @@ body.home
 }
 
 @media (min-width: 992px) and (max-width: 1868px) {
+
   .blog-detail-hero-inner,
   .blog-detail-content-inner,
   .blog-detail-related-header {
@@ -16257,6 +16153,7 @@ body.home
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
+
   .blog-detail-hero-inner,
   .blog-detail-content-inner,
   .blog-detail-related-header {
@@ -16473,7 +16370,8 @@ body.home
 
   .implants-about-sticky {
     position: sticky;
-    top: 82px; /* sits under sticky #masthead nav */
+    top: 82px;
+    /* sits under sticky #masthead nav */
     z-index: 5;
     min-height: calc(100vh - 82px);
     justify-content: flex-start;
@@ -17041,6 +16939,7 @@ body.home
 }
 
 @media (max-width: 1600px) {
+
   .implants-hero,
   .implants-about-body,
   .implants-built-sticky {
