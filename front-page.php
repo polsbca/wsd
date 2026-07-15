@@ -71,7 +71,7 @@ get_header();
 			</div>
 
 			<div class="container-fluid px-lg-120 treatments-main-container">
-				<div class="row align-items-center treatments-row">
+				<div class="row treatments-row">
 					<!-- Left Column: Counter & Active Image -->
 					<div class="col-lg-6 treatments-left-col">
 						<div class="treatments-interactive-wrapper">

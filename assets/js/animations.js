@@ -986,6 +986,15 @@ function initAnimations() {
         "-=0.6",
       )
       .to(
+        ".treatment-image-frame",
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 1.1,
+          ease: "power3.inOut",
+        },
+        "-=0.55",
+      )
+      .to(
         ".accordion-tab",
         {
           y: 0,
@@ -994,7 +1003,7 @@ function initAnimations() {
           duration: 0.8,
           ease: "power3.out",
         },
-        "-=0.6",
+        "-=0.85",
       );
   }
 
@@ -2494,6 +2503,7 @@ function initTreatmentsAccordion() {
   let isTransitioning = false;
   let accordionTween = null;
   let imageTween = null;
+  let imageSwapId = 0;
 
   // Preload treatment images to prevent jerk/flicker on swap
   tabs.forEach((tab) => {
@@ -2546,6 +2556,9 @@ function initTreatmentsAccordion() {
     if (!accordionWrapper || window.innerWidth < 992) {
       if (accordionWrapper) {
         accordionWrapper.style.removeProperty("--treatments-accordion-min-height");
+        accordionWrapper.style.removeProperty("height");
+        accordionWrapper.style.removeProperty("max-height");
+        accordionWrapper.style.removeProperty("overflow");
       }
       return;
     }
@@ -2562,10 +2575,15 @@ function initTreatmentsAccordion() {
       );
     });
 
+    const lockedHeight = headerTotal + tallestContent + "px";
     accordionWrapper.style.setProperty(
       "--treatments-accordion-min-height",
-      headerTotal + tallestContent + "px",
+      lockedHeight,
     );
+    // Hard-lock height so mid-swap accordion grow/shrink cannot nudge the image
+    accordionWrapper.style.setProperty("height", lockedHeight);
+    accordionWrapper.style.setProperty("max-height", lockedHeight);
+    accordionWrapper.style.setProperty("overflow", "hidden");
   }
 
   // Initialize content heights (GSAP-owned; CSS owns padding)
@@ -2593,32 +2611,121 @@ function initTreatmentsAccordion() {
   function swapImage(tab) {
     if (!imgFrame) return;
 
-    const activeImg = imgFrame.querySelector(".active-treatment-image");
     const newImgUrl = tab.getAttribute("data-image");
     const newImgAlt =
       (tab.querySelector(".accordion-tab-title") || {}).textContent || "";
+    const currentImg = imgFrame.querySelector(
+      ":scope > .active-treatment-image",
+    );
 
-    if (!activeImg || activeImg.getAttribute("src") === newImgUrl) return;
+    if (!currentImg || !newImgUrl || currentImg.getAttribute("src") === newImgUrl) {
+      return;
+    }
+
+    const swapId = ++imageSwapId;
 
     if (imageTween) {
       imageTween.kill();
       imageTween = null;
     }
 
-    // Remove leftover overlays from interrupted swaps
+    // Clean interrupted curtain overlays
     Array.prototype.slice
-      .call(imgFrame.querySelectorAll(".active-treatment-image"))
+      .call(imgFrame.querySelectorAll(".treatment-image-curtain"))
+      .forEach((el) => el.remove());
+    Array.prototype.slice
+      .call(imgFrame.querySelectorAll(":scope > .active-treatment-image"))
       .forEach((img, index) => {
         if (index > 0) img.remove();
       });
 
-    const currentImg = imgFrame.querySelector(".active-treatment-image");
-    if (!currentImg) return;
+    const isDesktopSwap = window.innerWidth >= 992;
+
+    if (isDesktopSwap) {
+      const tempImg = document.createElement("img");
+      tempImg.alt = newImgAlt;
+      tempImg.className = "active-treatment-image";
+      tempImg.src = newImgUrl;
+      tempImg.decoding = "async";
+
+      // Keep both images identical full-frame size; wipe with clip only
+      gsap.set(currentImg, {
+        zIndex: 1,
+        scale: 1,
+        x: 0,
+        y: 0,
+        transform: "none",
+      });
+      gsap.set(tempImg, {
+        position: "absolute",
+        left: 0,
+        top: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: "center center",
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        y: 0,
+        transform: "none",
+        zIndex: 2,
+        clipPath: "inset(0px 0px 100% 0px)",
+        webkitClipPath: "inset(0px 0px 100% 0px)",
+      });
+      imgFrame.appendChild(tempImg);
+
+      const runCurtainSwap = () => {
+        if (swapId !== imageSwapId) return;
+
+        imageTween = gsap.fromTo(
+          tempImg,
+          {
+            clipPath: "inset(0px 0px 100% 0px)",
+            webkitClipPath: "inset(0px 0px 100% 0px)",
+          },
+          {
+            clipPath: "inset(0px 0px 0px 0px)",
+            webkitClipPath: "inset(0px 0px 0px 0px)",
+            duration: 0.7,
+            ease: "power2.inOut",
+            overwrite: true,
+            onComplete: () => {
+              if (swapId !== imageSwapId) return;
+
+              // Promote overlay image — never reassign src (avoids decode flash/jerk)
+              gsap.set(tempImg, {
+                clearProps: "clipPath,webkitClipPath,zIndex,transform,scale,x,y",
+              });
+              currentImg.remove();
+              imageTween = null;
+            },
+          },
+        );
+      };
+
+      if (tempImg.complete && tempImg.naturalWidth) {
+        runCurtainSwap();
+      } else {
+        tempImg.addEventListener("load", runCurtainSwap, { once: true });
+        tempImg.addEventListener(
+          "error",
+          () => {
+            if (swapId !== imageSwapId) return;
+            tempImg.remove();
+            imageTween = null;
+          },
+          { once: true },
+        );
+      }
+      return;
+    }
 
     const tempImg = document.createElement("img");
     tempImg.alt = newImgAlt;
     tempImg.className = "active-treatment-image";
     tempImg.src = newImgUrl;
+
     gsap.set(tempImg, {
       opacity: 0,
       position: "absolute",
@@ -2631,9 +2738,12 @@ function initTreatmentsAccordion() {
     imgFrame.appendChild(tempImg);
 
     const runSwap = () => {
+      if (swapId !== imageSwapId) return;
+
       imageTween = gsap
         .timeline({
           onComplete: () => {
+            if (swapId !== imageSwapId) return;
             currentImg.remove();
             gsap.set(tempImg, { clearProps: "opacity" });
             imageTween = null;
@@ -2671,21 +2781,8 @@ function initTreatmentsAccordion() {
     const targetIndex = tab.getAttribute("data-index");
     if (!targetIndex || activeSlideNum.textContent === targetIndex) return;
 
-    gsap.killTweensOf(activeSlideNum);
-    gsap.to(activeSlideNum, {
-      y: -8,
-      opacity: 0,
-      duration: 0.2,
-      ease: "power2.in",
-      onComplete: () => {
-        activeSlideNum.textContent = targetIndex;
-        gsap.fromTo(
-          activeSlideNum,
-          { y: 8, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.2, ease: "power2.out" },
-        );
-      },
-    });
+    // Instant update — no y tween (was contributing to perceived left-column jump)
+    activeSlideNum.textContent = targetIndex;
   }
 
   tabs.forEach((tab) => {

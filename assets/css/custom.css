@@ -1509,6 +1509,7 @@ body {
 .treatments-row {
   display: flex;
   gap: 110px;
+  align-items: flex-start;
 }
 
 @media (min-width: 1800px) {
@@ -1533,9 +1534,10 @@ body {
 
 .treatments-left-col {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  align-self: flex-start;
   gap: 18px;
-  height: stretch;
+  height: auto;
 }
 
 .treatments-interactive-wrapper {
@@ -1543,7 +1545,7 @@ body {
   align-items: center;
   gap: 18px;
   width: 100%;
-  height: 96%;
+  height: auto;
 }
 
 .treatment-slide-counter {
@@ -1573,24 +1575,32 @@ body {
 }
 
 .treatment-image-frame {
-  flex-grow: 1;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
   height: 846px;
+  min-height: 846px;
+  max-height: 846px;
   border-radius: 30px;
   overflow: hidden;
   background-color: #faf3e6;
   position: relative;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .active-treatment-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   border-radius: 30px;
   position: absolute;
   left: 0;
   top: 0;
   opacity: 1;
-  transition: opacity 0.4s ease-in-out;
+  transition: none;
+  transform: none;
 }
 
 .treatment-accordion-wrapper {
@@ -1662,18 +1672,28 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
 @media (min-width: 992px) {
   html.wsd-js .treatment-accordion-wrapper {
+    height: var(--treatments-accordion-min-height, auto);
     min-height: var(--treatments-accordion-min-height, auto);
+    max-height: var(--treatments-accordion-min-height, none);
+    overflow: hidden;
   }
 
   html.wsd-js .treatment-image-frame {
     transform: translateZ(0);
     backface-visibility: hidden;
+    clip-path: inset(0% 0% 100% 0%);
   }
 
   html.wsd-js .active-treatment-image {
-    transition: none;
-    will-change: opacity;
+    transition: none !important;
+    will-change: clip-path;
     backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .treatments-left-col,
+  .treatments-right-col {
+    align-self: flex-start;
   }
 }
 
