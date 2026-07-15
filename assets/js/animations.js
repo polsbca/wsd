@@ -55,8 +55,23 @@ function initAnimations() {
     !hasBlogsPage &&
     !hasBlogDetailPage;
   const hasCallUsTab = document.querySelector(".call-us-tab") !== null;
-  const hasHomeHero =
-    hasStandardHero && document.body.classList.contains("home");
+  const heroCurtainClosed = {
+    clipPath: "inset(0% 0% 100% 0%)",
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+  };
+  const heroCurtainOpen = {
+    clipPath: "inset(0% 0% 0% 0%)",
+    duration: 1.25,
+    ease: "power3.inOut",
+  };
+  const heroCurtainOpenMobile = {
+    clipPath: "inset(0% 0% 0% 0%)",
+    duration: 0.85,
+    ease: "power2.inOut",
+  };
 
   // ----------------------------------------------------
   // 1. Initial State Setup (Prevents abrupt jumps on load)
@@ -70,17 +85,7 @@ function initAnimations() {
     if (hasStandardHero) {
       gsap.set(".hero-buttons .btn", { y: 20, opacity: 0 });
       gsap.set(".stat", { y: 20, opacity: 0 });
-      if (hasHomeHero) {
-        // Curtain reveal top → bottom (front-page hero)
-        gsap.set(".hero-section .hero-image-wrapper", {
-          clipPath: "inset(0% 0% 100% 0%)",
-          opacity: 1,
-          x: 0,
-          scale: 1,
-        });
-      } else {
-        gsap.set(".hero-image-wrapper", { x: 50, opacity: 0, scale: 0.95 });
-      }
+      gsap.set(".hero-section .hero-image-wrapper", heroCurtainClosed);
     }
     if (hasCallUsTab) {
       gsap.set(".call-us-tab", { x: 70, opacity: 0 });
@@ -102,11 +107,7 @@ function initAnimations() {
     }
     if (hasTeamsPage) {
       gsap.set(".teams-page-main .hero-buttons .btn", { y: 20, opacity: 0 });
-      gsap.set(".teams-page-main .hero-image-wrapper", {
-        x: 50,
-        opacity: 0,
-        scale: 0.95,
-      });
+      gsap.set(".teams-page-main .hero-image-wrapper", heroCurtainClosed);
       gsap.set(
         ".teams-clinical-section .teams-clinical-heading-wrap, .teams-clinical-section .teams-clinical-slider",
         { y: 40, opacity: 0 },
@@ -118,31 +119,24 @@ function initAnimations() {
     }
     if (hasFeesPage) {
       gsap.set(".fees-page-main .hero-buttons .btn", { y: 20, opacity: 0 });
-      gsap.set(".fees-page-main .hero-image-wrapper", {
-        x: 50,
-        opacity: 0,
-        scale: 0.95,
-      });
+      gsap.set(".fees-page-main .hero-image-wrapper", heroCurtainClosed);
     }
     if (hasSmileGalleryPage) {
       gsap.set(".smile-gallery-page-main .hero-buttons .btn", {
         y: 20,
         opacity: 0,
       });
-      gsap.set(".smile-gallery-page-main .hero-image-wrapper", {
-        x: 50,
-        opacity: 0,
-        scale: 0.95,
-      });
+      gsap.set(
+        ".smile-gallery-page-main .hero-image-wrapper",
+        heroCurtainClosed,
+      );
     }
     if (hasBlogsPage) {
       gsap.set(".blogs-page-main .hero-buttons .btn", {
         y: 20,
         opacity: 0,
       });
-      gsap.set(".blogs-page-main .hero-image-wrapper", {
-        clipPath: "inset(0% 0% 100% 0%)",
-      });
+      gsap.set(".blogs-page-main .hero-image-wrapper", heroCurtainClosed);
     }
   }
 
@@ -181,13 +175,7 @@ function initAnimations() {
         )
         .to(
           ".teams-page-main .hero-image-wrapper",
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power4.out",
-          },
+          heroCurtainOpen,
           "-=0.8",
         );
     }
@@ -207,13 +195,7 @@ function initAnimations() {
         )
         .to(
           ".fees-page-main .hero-image-wrapper",
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power4.out",
-          },
+          heroCurtainOpen,
           "-=0.8",
         );
     }
@@ -233,13 +215,7 @@ function initAnimations() {
         )
         .to(
           ".smile-gallery-page-main .hero-image-wrapper",
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power4.out",
-          },
+          heroCurtainOpen,
           "-=0.8",
         );
     }
@@ -259,11 +235,7 @@ function initAnimations() {
         )
         .to(
           ".blogs-page-main .hero-image-wrapper",
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.25,
-            ease: "power3.inOut",
-          },
+          heroCurtainOpen,
           "-=0.8",
         );
     }
@@ -347,32 +319,14 @@ function initAnimations() {
             duration: 0.6,
           },
           "-=0.4",
-        );
+        )
 
-      if (hasHomeHero) {
         // Curtain slide-in from top to bottom
-        mainTimeline.to(
+        .to(
           ".hero-section .hero-image-wrapper",
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.25,
-            ease: "power3.inOut",
-          },
+          heroCurtainOpen,
           "-=0.8",
         );
-      } else {
-        mainTimeline.to(
-          ".hero-image-wrapper",
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power4.out",
-          },
-          "-=0.8",
-        );
-      }
     }
 
     if (hasCallUsTab) {
@@ -398,15 +352,7 @@ function initAnimations() {
       if (hasStandardHero) {
         gsap.set(".hero-buttons .btn", { y: 15, opacity: 0 });
         gsap.set(".stat", { y: 15, opacity: 0 });
-        if (hasHomeHero) {
-          gsap.set(".hero-section .hero-image-wrapper", {
-            clipPath: "inset(0% 0% 100% 0%)",
-            opacity: 1,
-            y: 0,
-          });
-        } else {
-          gsap.set(".hero-image-wrapper", { y: 30, opacity: 0 });
-        }
+        gsap.set(".hero-section .hero-image-wrapper", heroCurtainClosed);
       }
       if (hasCallUsTab) {
         gsap.set(".call-us-tab", { x: 40, opacity: 0 });
@@ -426,30 +372,28 @@ function initAnimations() {
       }
       if (hasTeamsPage) {
         gsap.set(".teams-page-main .hero-buttons .btn", { y: 15, opacity: 0 });
-        gsap.set(".teams-page-main .hero-image-wrapper", { y: 30, opacity: 0 });
+        gsap.set(".teams-page-main .hero-image-wrapper", heroCurtainClosed);
       }
       if (hasFeesPage) {
         gsap.set(".fees-page-main .hero-buttons .btn", { y: 15, opacity: 0 });
-        gsap.set(".fees-page-main .hero-image-wrapper", { y: 30, opacity: 0 });
+        gsap.set(".fees-page-main .hero-image-wrapper", heroCurtainClosed);
       }
       if (hasSmileGalleryPage) {
         gsap.set(".smile-gallery-page-main .hero-buttons .btn", {
           y: 15,
           opacity: 0,
         });
-        gsap.set(".smile-gallery-page-main .hero-image-wrapper", {
-          y: 30,
-          opacity: 0,
-        });
+        gsap.set(
+          ".smile-gallery-page-main .hero-image-wrapper",
+          heroCurtainClosed,
+        );
       }
       if (hasBlogsPage) {
         gsap.set(".blogs-page-main .hero-buttons .btn:not(.blogs-hero-cta--desktop)", {
           y: 15,
           opacity: 0,
         });
-        gsap.set(".blogs-page-main .hero-image-wrapper", {
-          clipPath: "inset(0% 0% 100% 0%)",
-        });
+        gsap.set(".blogs-page-main .hero-image-wrapper", heroCurtainClosed);
       }
 
       const mobileTl = gsap.timeline({
@@ -500,11 +444,7 @@ function initAnimations() {
           )
           .to(
             ".teams-page-main .hero-image-wrapper",
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-            },
+            heroCurtainOpenMobile,
             "-=0.3",
           );
       } else if (hasFeesPage) {
@@ -521,11 +461,7 @@ function initAnimations() {
           )
           .to(
             ".fees-page-main .hero-image-wrapper",
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-            },
+            heroCurtainOpenMobile,
             "-=0.3",
           );
       } else if (hasSmileGalleryPage) {
@@ -542,11 +478,7 @@ function initAnimations() {
           )
           .to(
             ".smile-gallery-page-main .hero-image-wrapper",
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-            },
+            heroCurtainOpenMobile,
             "-=0.3",
           );
       } else if (hasBlogsPage) {
@@ -563,11 +495,7 @@ function initAnimations() {
           )
           .to(
             ".blogs-page-main .hero-image-wrapper",
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 0.85,
-              ease: "power2.inOut",
-            },
+            heroCurtainOpenMobile,
             "-=0.3",
           );
       } else if (hasStandardHero) {
@@ -591,29 +519,12 @@ function initAnimations() {
               duration: 0.4,
             },
             "-=0.3",
-          );
-
-        if (hasHomeHero) {
-          mobileTl.to(
+          )
+          .to(
             ".hero-section .hero-image-wrapper",
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 0.85,
-              ease: "power2.inOut",
-            },
+            heroCurtainOpenMobile,
             "-=0.3",
           );
-        } else {
-          mobileTl.to(
-            ".hero-image-wrapper",
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-            },
-            "-=0.3",
-          );
-        }
       }
 
       if (hasCallUsTab) {
@@ -1861,7 +1772,13 @@ function initServicePageTextAnimations() {
 
     gsap.set([heroTitle, heroDesc].filter(Boolean), { y: 30, opacity: 0 });
     if (heroImage) {
-      gsap.set(heroImage, { x: 50, opacity: 0, scale: 0.95 });
+      gsap.set(heroImage, {
+        clipPath: "inset(0% 0% 100% 0%)",
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+      });
     }
 
     const heroTl = gsap.timeline({
@@ -1877,11 +1794,9 @@ function initServicePageTextAnimations() {
       heroTl.to(
         heroImage,
         {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power4.out",
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 1.25,
+          ease: "power3.inOut",
         },
         "-=0.6",
       );
