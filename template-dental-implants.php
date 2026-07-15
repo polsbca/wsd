@@ -13,6 +13,16 @@ $theme_uri      = get_template_directory_uri();
 $fees_url       = function_exists( 'wsd_get_fees_page_url' ) ? wsd_get_fees_page_url() : home_url( '/fees/' );
 $gallery_url    = function_exists( 'wsd_get_smile_gallery_page_url' ) ? wsd_get_smile_gallery_page_url() : home_url( '/smile-gallery/' );
 $book_url       = home_url( '/#book-appointment' );
+$page_id        = get_queried_object_id();
+$hero_alt       = __( 'Dental implant instruments', 'wsd' );
+$hero_image_id  = ( $page_id && has_post_thumbnail( $page_id ) ) ? (int) get_post_thumbnail_id( $page_id ) : 0;
+
+if ( $hero_image_id ) {
+	$thumbnail_alt = get_post_meta( $hero_image_id, '_wp_attachment_image_alt', true );
+	if ( $thumbnail_alt ) {
+		$hero_alt = $thumbnail_alt;
+	}
+}
 $implants_fees  = array(
 	array(
 		'title' => 'Single Tooth Implant (incl. crown)',
@@ -201,11 +211,31 @@ get_header();
 			</div>
 			<div class="implants-hero-image-col">
 				<div class="implants-hero-image-wrapper">
-					<img
-						src="<?php echo esc_url( $theme_uri . '/assets/images/dental-implants-hero.png' ); ?>"
-						alt="<?php esc_attr_e( 'Dental implant instruments', 'wsd' ); ?>"
-						class="implants-hero-img"
-					>
+					<?php
+					if ( $hero_image_id ) {
+						echo wp_get_attachment_image(
+							$hero_image_id,
+							'full',
+							false,
+							array(
+								'class'    => 'implants-hero-img',
+								'alt'      => $hero_alt,
+								'loading'  => 'eager',
+								'decoding' => 'async',
+							)
+						);
+					} else {
+						?>
+						<img
+							src="<?php echo esc_url( $theme_uri . '/assets/images/dental-implants-hero.png' ); ?>"
+							alt="<?php echo esc_attr( $hero_alt ); ?>"
+							class="implants-hero-img"
+							loading="eager"
+							decoding="async"
+						>
+						<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>
