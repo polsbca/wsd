@@ -315,7 +315,7 @@ get_header();
 					<div class="implants-compare-col implants-compare-col--highlight" role="column">
 						<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Implants', 'wsd' ); ?></div>
 						<?php foreach ( $compare_rows as $row ) : ?>
-							<div class="implants-compare-cell" role="cell">
+							<div class="implants-compare-cell" role="cell" data-label="<?php echo esc_attr( $row['label'] ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>" alt="" aria-hidden="true">
 								<span><?php echo esc_html( $row['implants'] ); ?></span>
 							</div>
@@ -325,7 +325,7 @@ get_header();
 					<div class="implants-compare-col" role="column">
 						<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Bridge', 'wsd' ); ?></div>
 						<?php foreach ( $compare_rows as $row ) : ?>
-							<div class="implants-compare-cell" role="cell">
+							<div class="implants-compare-cell" role="cell" data-label="<?php echo esc_attr( $row['label'] ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
 								<span><?php echo esc_html( $row['bridge'] ); ?></span>
 							</div>
@@ -335,7 +335,7 @@ get_header();
 					<div class="implants-compare-col" role="column">
 						<div class="implants-compare-col-head" role="columnheader"><?php esc_html_e( 'Denture', 'wsd' ); ?></div>
 						<?php foreach ( $compare_rows as $row ) : ?>
-							<div class="implants-compare-cell" role="cell">
+							<div class="implants-compare-cell" role="cell" data-label="<?php echo esc_attr( $row['label'] ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
 								<span><?php echo esc_html( $row['denture'] ); ?></span>
 							</div>

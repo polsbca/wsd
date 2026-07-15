@@ -16686,8 +16686,7 @@ body.home
   gap: 20px;
 }
 
-.implants-built-title,
-.implants-compare-title {
+.implants-built-title {
   margin: 0;
   font-family: var(--font-family-primary);
   font-weight: 600;
@@ -16699,19 +16698,42 @@ body.home
   text-box-trim: trim-both;
 }
 
+.implants-compare-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -1px;
+  color: #5e5d5f;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
 .implants-built-title .accent,
 .implants-compare-title .accent {
   color: #d8a444;
 }
 
-.implants-built-lead,
-.implants-compare-lead {
+.implants-built-lead {
   margin: 0;
   font-family: var(--font-family-primary);
   font-weight: 400;
   font-size: 20px;
   line-height: 28px;
   color: #5e5d5f;
+}
+
+.implants-compare-lead {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 37px;
+  letter-spacing: 0.4px;
+  color: #5e5d5f;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .implants-built-list {
@@ -16808,7 +16830,7 @@ body.home
 
 .implants-compare-table {
   display: grid;
-  grid-template-columns: minmax(220px, 356px) minmax(280px, 418px) minmax(240px, 356px) minmax(240px, 356px);
+  grid-template-columns: minmax(220px, 355.67px) minmax(280px, 418px) minmax(240px, 355.67px) minmax(240px, 355.67px);
   gap: 20px;
   align-items: stretch;
 }
@@ -16816,68 +16838,101 @@ body.home
 .implants-compare-labels {
   display: grid;
   grid-template-rows: 114px repeat(6, minmax(97px, 1fr));
+  background-color: #faf3e6;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .implants-compare-corner {
   min-height: 114px;
+  background-color: #faf3e6;
 }
 
 .implants-compare-label {
   display: flex;
   align-items: center;
-  padding: 0 30px;
+  padding: 40px 30px;
+  border-bottom: 1px solid rgba(94, 93, 95, 0.08);
+  background-color: #faf3e6;
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 24px;
-  line-height: normal;
+  line-height: 1;
+  letter-spacing: 1px;
   color: #5e5d5f;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+.implants-compare-label:last-child {
+  border-bottom: none;
 }
 
 .implants-compare-col {
-  background-color: #faf3e6;
-  border-radius: 24px;
-  overflow: hidden;
   display: grid;
   grid-template-rows: 114px repeat(6, minmax(97px, 1fr));
-}
-
-.implants-compare-col--highlight {
-  background-color: #efdab2;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .implants-compare-col-head {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 50px 30px;
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 1px;
-  color: #ffffff;
-  background-color: rgba(94, 93, 95, 0.55);
+  line-height: 1;
+  color: #5e5d5f;
+  background-color: #f3e3c6;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+  border-radius: 20px 20px 0 0;
 }
 
 .implants-compare-col--highlight .implants-compare-col-head {
-  background-color: #d8a444;
+  background-color: rgba(216, 164, 68, 0.47);
 }
 
 .implants-compare-cell {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 30px;
-  border-top: 1px solid rgba(94, 93, 95, 0.12);
+  padding: 40px 30px;
+  min-height: 97px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(94, 93, 95, 0.08);
+  background-color: #faf3e6;
   font-family: var(--font-family-primary);
   font-weight: 400;
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 1px;
   color: #5e5d5f;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+.implants-compare-cell:last-child {
+  border-bottom: none;
+  border-radius: 0 0 20px 20px;
+}
+
+.implants-compare-col--highlight .implants-compare-cell {
+  background-color: rgba(216, 164, 68, 0.2);
 }
 
 .implants-compare-cell img {
   width: 17px;
   height: 17px;
   flex-shrink: 0;
+}
+
+.implants-compare-cell span {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 /* Smile Gallery on implants page ? reuse front-page gallery styles */
@@ -17047,9 +17102,30 @@ body.home
 
   .implants-compare-table {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .implants-compare-labels {
     display: none;
+  }
+
+  .implants-compare-col {
+    grid-template-rows: auto;
+  }
+
+  .implants-compare-cell {
+    flex-wrap: wrap;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .implants-compare-cell::before {
+    content: attr(data-label);
+    flex: 0 0 100%;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #5e5d5f;
   }
 }
