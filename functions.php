@@ -63,7 +63,7 @@ function wsd_scripts() {
 	}
 
 	if ( is_page_template( 'template-dental-implants.php' ) ) {
-		wp_enqueue_script( 'wsd-dental-implants', get_stylesheet_directory_uri() . '/assets/js/dental-implants.js', array( 'jquery' ), time(), true );
+		wp_enqueue_script( 'wsd-dental-implants', get_stylesheet_directory_uri() . '/assets/js/dental-implants.js', array( 'jquery', 'gsap' ), time(), true );
 	}
 
 	if ( is_page_template( 'template-teams.php' ) ) {

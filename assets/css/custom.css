@@ -3993,6 +3993,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn,
   .btn-close-circle,
   .btn-process-tab,
+  .implants-tab-btn,
   .reviews-nav-btn,
   .more-services-nav-btn,
   .btn-view-plan,
@@ -4018,6 +4019,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn::before,
   .btn-close-circle::before,
   .btn-process-tab::before,
+  .implants-tab-btn::before,
   .reviews-nav-btn::before,
   .more-services-nav-btn::before,
   .btn-view-plan::before,
@@ -4048,6 +4050,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn:hover::before,
   .btn-close-circle:hover::before,
   .btn-process-tab:hover::before,
+  .implants-tab-btn:hover::before,
   .reviews-nav-btn:hover::before,
   .more-services-nav-btn:hover::before,
   .btn-view-plan:hover::before,
@@ -4061,6 +4064,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .book-appointment-btn,
   .btn-close-circle,
   .btn-process-tab.active,
+  .implants-tab-btn.active,
   .btn-view-plan,
   .teams-support-tab.is-active,
   .teams-slider-nav-btn--next.is-active,
@@ -4075,6 +4079,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .book-appointment-btn:hover,
   .btn-close-circle:hover,
   .btn-process-tab.active:hover,
+  .implants-tab-btn.active:hover,
   .btn-view-plan:hover,
   .teams-support-tab.is-active:hover,
   .teams-slider-nav-btn--next.is-active:hover,
@@ -4104,6 +4109,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn.prev-btn,
   .testimonials-nav-btn.next-btn,
   .btn-process-tab:not(.active),
+  .implants-tab-btn:not(.active),
   .reviews-nav-btn,
   .more-services-nav-btn,
   .btn-book-outline,
@@ -4120,6 +4126,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn.prev-btn:hover,
   .testimonials-nav-btn.next-btn:hover,
   .btn-process-tab:not(.active):hover,
+  .implants-tab-btn:not(.active):hover,
   .reviews-nav-btn:hover,
   .more-services-nav-btn:hover,
   .btn-book-outline:hover,
@@ -16528,22 +16535,28 @@ body.home
   color: #5e5d5f;
   font-family: var(--font-family-primary);
   font-size: 18px;
-  font-weight: 400;
+  /* Keep weight stable ? 400?600 on hover caused layout jerk */
+  font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
   transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    font-weight 0.25s ease;
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease;
 }
 
-.implants-tab-btn.active,
-.implants-tab-btn:hover {
+.implants-tab-btn.active {
   background-color: #d8a444;
-  border-color: #d88c00;
+  border-color: #d8a444;
   color: #ffffff;
-  font-weight: 600;
+}
+
+@media (max-width: 991.98px) {
+  .implants-tab-btn:hover {
+    background-color: #d8a444;
+    border-color: #d8a444;
+    color: #ffffff;
+  }
 }
 
 .implants-about-panel {
