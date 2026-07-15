@@ -16474,8 +16474,7 @@ body.home
   }
 }
 
-.implants-about-header,
-.implants-gallery-header {
+.implants-about-header {
   display: flex;
   align-items: center;
   padding-right: 120px;
@@ -16614,16 +16613,26 @@ body.home
 
 .implants-built-inner {
   display: grid;
-  grid-template-columns: minmax(0, 472px) minmax(0, 1054px);
-  gap: 154px;
-  align-items: start;
+  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+  gap: 100px;
+  align-items: center;
+}
+
+.implants-built-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 612px;
 }
 
 .implants-built-diagram img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
-  max-width: 472px;
+  max-width: 100%;
+  max-height: 640px;
+  object-fit: contain;
 }
 
 .implants-built-content {
@@ -16808,144 +16817,9 @@ body.home
   flex-shrink: 0;
 }
 
-/* Gallery */
-.implants-gallery-section {
+/* Smile Gallery on implants page ? reuse front-page gallery styles */
+.dental-implants-main .smile-gallery-section.implants-smile-gallery {
   background-color: #fefdf6;
-  padding: 0 0 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-}
-
-.implants-gallery-header {
-  gap: 135px;
-}
-
-.implants-gallery-desc {
-  margin: 0;
-  flex: 1;
-  max-width: 1107px;
-  font-family: var(--font-family-primary);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
-  color: #5e5d5f;
-}
-
-.implants-gallery-body {
-  display: grid;
-  grid-template-columns: minmax(0, 990px) minmax(0, 661px);
-  gap: 60px;
-  align-items: center;
-  padding: 0 120px;
-}
-
-.implants-gallery-visuals {
-  position: relative;
-  width: 100%;
-  max-width: 990px;
-  height: 540px;
-}
-
-.implants-gallery-card {
-  position: absolute;
-  width: 533px;
-  background: #ffffff;
-  border-radius: 40px;
-  padding: 16px;
-  box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
-}
-
-.implants-gallery-card img {
-  display: block;
-  width: 100%;
-  height: 349px;
-  object-fit: cover;
-  border-radius: 24px;
-}
-
-.implants-gallery-card--before {
-  left: 0;
-  top: 0;
-}
-
-.implants-gallery-card--after {
-  right: 0;
-  bottom: 0;
-}
-
-.implants-gallery-label {
-  position: absolute;
-  left: 32px;
-  bottom: 32px;
-  background: rgba(254, 253, 246, 0.92);
-  border-radius: 24px;
-  padding: 8px 24px;
-  font-family: var(--font-family-primary);
-  font-weight: 500;
-  font-size: 18px;
-  color: #5e5d5f;
-}
-
-.implants-gallery-arrow {
-  position: absolute;
-  left: 261px;
-  top: 389px;
-  width: 179px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.implants-gallery-arrow img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.implants-gallery-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
-}
-
-.implants-gallery-details {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 304px));
-  gap: 19px 23px;
-  width: 100%;
-}
-
-.implants-gallery-detail {
-  background-color: #faf3e6;
-  border-radius: 16px;
-  min-height: 150px;
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  box-sizing: border-box;
-}
-
-.implants-gallery-detail-label {
-  font-family: var(--font-family-primary);
-  font-weight: 500;
-  font-size: 16px;
-  color: rgba(94, 93, 95, 0.55);
-}
-
-.implants-gallery-detail-value {
-  font-family: var(--font-family-primary);
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  color: #5e5d5f;
-}
-
-.implants-gallery-cta {
-  width: 489px;
-  max-width: 100%;
 }
 
 /* Fees */
@@ -17051,8 +16925,7 @@ body.home
 @media (max-width: 1600px) {
   .implants-hero,
   .implants-about-body,
-  .implants-built-section,
-  .implants-gallery-body {
+  .implants-built-section {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -17078,15 +16951,20 @@ body.home
   }
 
   .implants-built-inner {
-    gap: 80px;
+    gap: 60px;
+    grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+  }
+
+  .implants-built-diagram {
+    min-height: 520px;
+  }
+
+  .implants-built-diagram img {
+    max-height: 560px;
   }
 
   .implants-compare-table {
     grid-template-columns: minmax(180px, 1fr) minmax(220px, 1.15fr) minmax(200px, 1fr) minmax(200px, 1fr);
-  }
-
-  .implants-gallery-body {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   }
 }
 
@@ -17096,18 +16974,12 @@ body.home
   }
 
   .implants-built-inner,
-  .implants-gallery-body,
   .implants-hero-inner {
     grid-template-columns: 1fr;
   }
 
   .implants-hero-content {
     padding-bottom: 60px;
-  }
-
-  .implants-gallery-visuals {
-    height: auto;
-    min-height: 480px;
   }
 
   .implants-compare-table {

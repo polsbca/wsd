@@ -342,62 +342,112 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Smile Gallery (static desktop strip) -->
-	<section class="implants-gallery-section">
-		<div class="implants-gallery-header">
-			<div class="implants-section-badge">
-				<h2 class="implants-section-title">
-					Smile <span class="accent">Gallery</span>
-				</h2>
-			</div>
-			<p class="implants-gallery-desc">
-				Real patient transformations showcasing the natural look and lasting results of our dental implant treatments.
-			</p>
-		</div>
+	<?php
+	$smile_gallery_slides = function_exists( 'wsd_get_smile_gallery_slides' )
+		? wsd_get_smile_gallery_slides( get_queried_object_id() )
+		: array();
 
-		<div class="implants-gallery-body">
-			<div class="implants-gallery-visuals">
-				<div class="implants-gallery-card implants-gallery-card--before">
-					<img
-						src="<?php echo esc_url( $theme_uri . '/assets/images/smile_gallery/BeforeImage_1.png' ); ?>"
-						alt="<?php esc_attr_e( 'Before dental implant treatment', 'wsd' ); ?>"
-					>
-					<span class="implants-gallery-label"><?php esc_html_e( 'Before', 'wsd' ); ?></span>
-				</div>
-				<div class="implants-gallery-arrow" aria-hidden="true">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/images/gallery_arrow.svg' ); ?>" alt="">
-				</div>
-				<div class="implants-gallery-card implants-gallery-card--after">
-					<img
-						src="<?php echo esc_url( $theme_uri . '/assets/images/smile_gallery/AfterImage_1.png' ); ?>"
-						alt="<?php esc_attr_e( 'After dental implant treatment', 'wsd' ); ?>"
-					>
-					<span class="implants-gallery-label"><?php esc_html_e( 'After', 'wsd' ); ?></span>
-				</div>
-			</div>
+	if ( empty( $smile_gallery_slides ) ) {
+		$front_page_id = (int) get_option( 'page_on_front' );
+		if ( $front_page_id && function_exists( 'wsd_get_smile_gallery_slides' ) ) {
+			$smile_gallery_slides = wsd_get_smile_gallery_slides( $front_page_id );
+		}
+	}
 
-			<div class="implants-gallery-meta">
-				<div class="implants-gallery-details">
-					<div class="implants-gallery-detail">
-						<span class="implants-gallery-detail-label"><?php esc_html_e( 'Treatment', 'wsd' ); ?></span>
-						<span class="implants-gallery-detail-value"><?php esc_html_e( 'Single Implant', 'wsd' ); ?></span>
+	if ( empty( $smile_gallery_slides ) ) {
+		$smile_gallery_slides = array(
+			array(
+				'before_image' => $theme_uri . '/assets/images/smile_gallery/BeforeImage_1.png',
+				'after_image'  => $theme_uri . '/assets/images/smile_gallery/AfterImage_1.png',
+				'treatment'    => 'Dental Implant',
+				'concern'      => 'Worn & Discoloured Teeth',
+				'duration'     => 'Effective results in 3 months',
+				'visits'       => '2 visits in 5 months',
+			),
+		);
+	}
+	?>
+
+	<!-- Smile Gallery (same structure as front-page) -->
+	<section
+		class="smile-gallery-section implants-smile-gallery"
+		id="smile-gallery"
+		style="--smile-gallery-track-height: <?php echo esc_attr( max( 1, count( $smile_gallery_slides ) ) * 75 ); ?>vh;"
+	>
+		<div class="gallery-sticky-wrapper">
+			<div class="gallery-container">
+				<div class="gallery-header-row">
+					<div class="gallery-header-badge">
+						<h2 class="gallery-header-title">
+							<span class="light">Smile </span><span class="accent">Gallery</span>
+						</h2>
 					</div>
-					<div class="implants-gallery-detail">
-						<span class="implants-gallery-detail-label"><?php esc_html_e( 'Total Cost', 'wsd' ); ?></span>
-						<span class="implants-gallery-detail-value"><?php esc_html_e( 'Within standard fees', 'wsd' ); ?></span>
+					<p class="gallery-header-desc">These joyful smiles from our patients truly reflect their trust in the services provided by Waterside Dental</p>
+				</div>
+
+				<div class="gallery-content-layout">
+					<div class="gallery-left-col">
+						<div class="gallery-interactive-wrapper">
+							<?php foreach ( $smile_gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+								<div class="gallery-slide <?php echo ( 0 === $gallery_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $gallery_slide_index + 1 ); ?>">
+									<div class="gallery-image-pair-container">
+										<div class="gallery-card before-card">
+											<div class="gallery-card-image-wrapper">
+												<img src="<?php echo esc_url( $gallery_slide['before_image'] ); ?>" alt="<?php esc_attr_e( 'Before treatment', 'wsd' ); ?>" class="gallery-img before-img-crop1">
+											</div>
+											<div class="gallery-card-label"><?php esc_html_e( 'Before', 'wsd' ); ?></div>
+										</div>
+										<div class="gallery-connecting-arrow">
+											<img src="<?php echo esc_url( $theme_uri . '/assets/images/gallery_arrow.svg' ); ?>" alt="" class="arrow-vector-svg">
+										</div>
+										<div class="gallery-card after-card">
+											<div class="gallery-card-image-wrapper">
+												<img src="<?php echo esc_url( $gallery_slide['after_image'] ); ?>" alt="<?php esc_attr_e( 'After treatment', 'wsd' ); ?>" class="gallery-img after-img-crop1">
+											</div>
+											<div class="gallery-card-label"><?php esc_html_e( 'After', 'wsd' ); ?></div>
+										</div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
-					<div class="implants-gallery-detail">
-						<span class="implants-gallery-detail-label"><?php esc_html_e( 'Duration', 'wsd' ); ?></span>
-						<span class="implants-gallery-detail-value"><?php esc_html_e( '3 months from start to finish', 'wsd' ); ?></span>
-					</div>
-					<div class="implants-gallery-detail">
-						<span class="implants-gallery-detail-label"><?php esc_html_e( 'Patient', 'wsd' ); ?></span>
-						<span class="implants-gallery-detail-value"><?php esc_html_e( 'Male in his 40s', 'wsd' ); ?></span>
+
+					<div class="gallery-right-col">
+						<div class="gallery-info-wrapper">
+							<div class="gallery-details-grid">
+								<?php foreach ( $smile_gallery_slides as $gallery_slide_index => $gallery_slide ) : ?>
+									<div class="gallery-details-data <?php echo ( 0 === $gallery_slide_index ) ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $gallery_slide_index + 1 ); ?>">
+										<div class="gallery-detail-card">
+											<span class="detail-label"><?php esc_html_e( 'Treatment', 'wsd' ); ?></span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['treatment'] ); ?></span>
+										</div>
+										<div class="gallery-detail-card">
+											<span class="detail-label"><?php esc_html_e( 'Main Concern', 'wsd' ); ?></span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['concern'] ); ?></span>
+										</div>
+										<div class="gallery-detail-card">
+											<span class="detail-label"><?php esc_html_e( 'Duration', 'wsd' ); ?></span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['duration'] ); ?></span>
+										</div>
+										<div class="gallery-detail-card">
+											<span class="detail-label"><?php esc_html_e( 'Visits', 'wsd' ); ?></span>
+											<span class="detail-value"><?php echo esc_html( $gallery_slide['visits'] ); ?></span>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							</div>
+
+							<div class="gallery-btn-wrapper">
+								<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-gallery-action"><?php esc_html_e( 'View Smile Gallery', 'wsd' ); ?></a>
+							</div>
+						</div>
+
+						<div class="gallery-scroll-indicator-container">
+							<div class="gallery-scroll-indicator-track"></div>
+							<div class="gallery-scroll-indicator-handle"></div>
+						</div>
 					</div>
 				</div>
-				<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-secondary implants-btn implants-gallery-cta">
-					<?php esc_html_e( 'View other results', 'wsd' ); ?>
-				</a>
 			</div>
 		</div>
 	</section>
