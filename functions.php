@@ -58,8 +58,12 @@ function wsd_scripts() {
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
-	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_singular( 'services' ) || is_singular( 'post' ) ) {
+	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_page_template( 'template-dental-implants.php' ) || is_singular( 'services' ) || is_singular( 'post' ) ) {
 		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
+	}
+
+	if ( is_page_template( 'template-dental-implants.php' ) ) {
+		wp_enqueue_script( 'wsd-dental-implants', get_stylesheet_directory_uri() . '/assets/js/dental-implants.js', array( 'jquery' ), time(), true );
 	}
 
 	if ( is_page_template( 'template-teams.php' ) ) {

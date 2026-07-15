@@ -1123,6 +1123,7 @@ function initAnimations() {
   initContactPageAnimations();
   initPrivacyPolicyAnimations();
   initDentalReferralsAnimations();
+  initDentalImplantsAnimations();
 
   if (hasTeamsPage && isDesktop) {
     initTeamsPageAnimations();
@@ -2031,6 +2032,64 @@ function initPrivacyPolicyAnimations() {
       },
     );
   });
+}
+
+function initDentalImplantsAnimations() {
+  const main = document.querySelector(".dental-implants-main");
+  if (!main) return;
+
+  const hero = main.querySelector(".implants-hero");
+  if (!hero) return;
+
+  const title = hero.querySelector(".implants-hero-title");
+  const desc = hero.querySelector(".implants-hero-desc");
+  const buttons = hero.querySelectorAll(".implants-hero-ctas .implants-btn");
+  const image = hero.querySelector(".implants-hero-image-wrapper");
+
+  if (typeof gsap === "undefined") {
+    [title, desc, image, ...buttons].filter(Boolean).forEach((el) => {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      el.style.clipPath = "none";
+    });
+    return;
+  }
+
+  gsap.set([title, desc, ...buttons].filter(Boolean), { y: 30, opacity: 0 });
+  if (image) {
+    gsap.set(image, {
+      clipPath: "inset(0% 0% 100% 0%)",
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+    });
+  }
+
+  const heroTl = gsap.timeline({
+    defaults: { ease: "power3.out", duration: 0.8 },
+  });
+
+  if (title) heroTl.to(title, { y: 0, opacity: 1 });
+  if (desc) heroTl.to(desc, { y: 0, opacity: 1 }, "-=0.55");
+  if (buttons.length) {
+    heroTl.to(
+      buttons,
+      { y: 0, opacity: 1, stagger: 0.12, ease: "back.out(1.7)" },
+      "-=0.45",
+    );
+  }
+  if (image) {
+    heroTl.to(
+      image,
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.25,
+        ease: "power3.inOut",
+      },
+      "-=0.85",
+    );
+  }
 }
 
 function initDentalReferralsAnimations() {
