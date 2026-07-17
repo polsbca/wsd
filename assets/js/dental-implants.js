@@ -1,13 +1,13 @@
 /**
- * Dental Implants page — about tabs, tablet UI, and content animation
+ * Dental Implants page — about tabs, responsive UI, and content animation
  */
 (function ($) {
   "use strict";
 
-  var tabletMq = window.matchMedia("(min-width: 768px) and (max-width: 991.98px)");
+  var compactMq = window.matchMedia("(max-width: 991.98px)");
 
-  function isTabletViewport() {
-    return tabletMq.matches;
+  function isCompactViewport() {
+    return compactMq.matches;
   }
 
   function getPanelItems(panel) {
@@ -102,7 +102,7 @@
     if (!$button.length || !$details.length) return;
 
     $button.on("click", function () {
-      if (!isTabletViewport()) return;
+      if (!isCompactViewport()) return;
 
       var isOpen = $details.hasClass("is-open");
       $details.toggleClass("is-open", !isOpen);
@@ -225,7 +225,7 @@
     }
 
     $dots.off("click.implantsTablet").on("click.implantsTablet", function () {
-      if (!isTabletViewport()) return;
+      if (!isCompactViewport()) return;
       showSlide($(this).index());
     });
   }
@@ -235,7 +235,7 @@
     var $details = $("#implants-built-details");
     if (!$details.length) return;
 
-    if (isTabletViewport()) {
+    if (isCompactViewport()) {
       $details.removeClass("is-open").attr("hidden", true);
       $button.removeClass("is-open").attr("aria-expanded", "false");
     } else {
@@ -256,10 +256,10 @@
     initCompareTablet();
     initTabletHandlers();
 
-    if (typeof tabletMq.addEventListener === "function") {
-      tabletMq.addEventListener("change", initTabletHandlers);
-    } else if (typeof tabletMq.addListener === "function") {
-      tabletMq.addListener(initTabletHandlers);
+    if (typeof compactMq.addEventListener === "function") {
+      compactMq.addEventListener("change", initTabletHandlers);
+    } else if (typeof compactMq.addListener === "function") {
+      compactMq.addListener(initTabletHandlers);
     }
   });
 })(jQuery);

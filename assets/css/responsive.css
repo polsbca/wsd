@@ -6997,6 +6997,972 @@
 }
 
 /* ============================================================
+   DENTAL IMPLANTS PAGE MOBILE (FIGMA 4078:35314)
+   ============================================================ */
+@media (max-width: 767.98px) {
+
+  .page-template-template-dental-implants-php #main.dental-implants-main,
+  .page-template-template-dental-implants #main.dental-implants-main {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 94px !important;
+    padding: 0 0 94px !important;
+    overflow: hidden !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-section,
+  .page-template-template-dental-implants .implants-about-section,
+  .page-template-template-dental-implants-php .implants-built-section,
+  .page-template-template-dental-implants .implants-built-section,
+  .page-template-template-dental-implants-php .implants-compare-section,
+  .page-template-template-dental-implants .implants-compare-section {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-sticky,
+  .page-template-template-dental-implants .implants-about-sticky,
+  .page-template-template-dental-implants-php .implants-built-sticky,
+  .page-template-template-dental-implants .implants-built-sticky,
+  .page-template-template-dental-implants-php .implants-compare-sticky,
+  .page-template-template-dental-implants .implants-compare-sticky {
+    position: static !important;
+    top: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  /* Hero */
+  .page-template-template-dental-implants-php .implants-hero,
+  .page-template-template-dental-implants .implants-hero {
+    padding: 30px 0 0 !important;
+    background-color: #faf3e6 !important;
+    overflow: hidden !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-inner,
+  .page-template-template-dental-implants .implants-hero-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-content,
+  .page-template-template-dental-implants .implants-hero-content {
+    gap: 20px !important;
+    padding: 0 24px !important;
+    max-width: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-copy,
+  .page-template-template-dental-implants .implants-hero-copy {
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-title,
+  .page-template-template-dental-implants .implants-hero-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
+    letter-spacing: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-desc,
+  .page-template-template-dental-implants .implants-hero-desc {
+    font-size: 14px !important;
+    line-height: 24px !important;
+    letter-spacing: 0.5px !important;
+    max-width: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-ctas,
+  .page-template-template-dental-implants .implants-hero-ctas {
+    width: 250px !important;
+    max-width: calc(100vw - 48px) !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-ctas .implants-btn,
+  .page-template-template-dental-implants .implants-hero-ctas .implants-btn {
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 16px !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-image-col,
+  .page-template-template-dental-implants .implants-hero-image-col {
+    width: 100% !important;
+    height: 437px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-image-wrapper,
+  .page-template-template-dental-implants .implants-hero-image-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-hero-img,
+  .page-template-template-dental-implants .implants-hero-img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center bottom !important;
+  }
+
+  /* All About */
+  .page-template-template-dental-implants-php .implants-about-sticky,
+  .page-template-template-dental-implants .implants-about-sticky {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-header,
+  .page-template-template-dental-implants .implants-about-header {
+    padding-right: 10px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-section-badge,
+  .page-template-template-dental-implants .implants-section-badge {
+    min-height: 54px !important;
+    padding: 20px 40px 20px 24px !important;
+    border: 0 !important;
+    border-radius: 0 20px 20px 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-section-title,
+  .page-template-template-dental-implants .implants-section-title {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-lead,
+  .page-template-template-dental-implants .implants-about-lead {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 24px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    color: rgba(94, 93, 95, 0.5) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-body,
+  .page-template-template-dental-implants .implants-about-body {
+    gap: 34px !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-tabs,
+  .page-template-template-dental-implants .implants-about-tabs {
+    width: 100% !important;
+    padding: 0 24px !important;
+    gap: 11px !important;
+    flex-wrap: nowrap !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-tab-btn,
+  .page-template-template-dental-implants .implants-tab-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: 33px !important;
+    padding: 8px !important;
+    border: 1px solid rgba(94, 93, 95, 0.5) !important;
+    border-radius: 16px !important;
+    background: transparent !important;
+    color: rgba(94, 93, 95, 0.48) !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-tab-btn.active,
+  .page-template-template-dental-implants .implants-tab-btn.active {
+    border-color: #d8a444 !important;
+    background-color: #d8a444 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-panel,
+  .page-template-template-dental-implants .implants-about-panel {
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-card-grid,
+  .page-template-template-dental-implants .implants-card-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-step-card,
+  .page-template-template-dental-implants .implants-step-card {
+    min-height: 0 !important;
+    padding: 18px 8px !important;
+    gap: 16px !important;
+    margin: 0 !important;
+    border: 0.5px solid rgba(94, 93, 95, 0.18) !important;
+    border-radius: 8px !important;
+    transform: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-step-number,
+  .page-template-template-dental-implants .implants-step-number {
+    width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 12px !important;
+    line-height: 15px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-step-title,
+  .page-template-template-dental-implants .implants-step-title {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    line-height: 15px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-step-desc,
+  .page-template-template-dental-implants .implants-step-desc {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-dots,
+  .page-template-template-dental-implants .implants-about-dots {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    min-height: 10px !important;
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-dot,
+  .page-template-template-dental-implants .implants-about-dot {
+    width: 8px !important;
+    height: 8px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background-color: rgba(216, 164, 68, 0.28) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-about-dot.is-active,
+  .page-template-template-dental-implants .implants-about-dot.is-active {
+    background-color: #d8a444 !important;
+  }
+
+  /* How the implant is built */
+  .page-template-template-dental-implants-php .implants-built-section,
+  .page-template-template-dental-implants .implants-built-section {
+    background-color: #faf3e6 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-sticky,
+  .page-template-template-dental-implants .implants-built-sticky {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 40px 24px 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-inner,
+  .page-template-template-dental-implants .implants-built-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-content,
+  .page-template-template-dental-implants .implants-built-content {
+    order: 1 !important;
+    gap: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-title,
+  .page-template-template-dental-implants .implants-built-title {
+    font-size: 18px !important;
+    line-height: 44px !important;
+    letter-spacing: -1px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-lead,
+  .page-template-template-dental-implants .implants-built-lead {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    letter-spacing: 0.24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-diagram,
+  .page-template-template-dental-implants .implants-built-diagram {
+    order: 2 !important;
+    width: min(348px, 100%) !important;
+    min-height: 0 !important;
+    height: 452px !important;
+    margin: 0 auto !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-diagram img,
+  .page-template-template-dental-implants .implants-built-diagram img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-details,
+  .page-template-template-dental-implants .implants-built-details {
+    display: none !important;
+    padding-top: 24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-details.is-open,
+  .page-template-template-dental-implants .implants-built-details.is-open {
+    display: block !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-disclosure,
+  .page-template-template-dental-implants .implants-built-disclosure {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    order: 3 !important;
+    width: calc(100% + 48px) !important;
+    margin: 0 -24px !important;
+    padding: 40px 24px !important;
+    border: 0 !important;
+    background-color: rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-disclosure-label,
+  .page-template-template-dental-implants .implants-built-disclosure-label {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    line-height: 37px !important;
+    letter-spacing: 0.4px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-disclosure-icon,
+  .page-template-template-dental-implants .implants-built-disclosure-icon {
+    width: 24px !important;
+    height: 24px !important;
+    transition: transform 0.25s ease !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-built-disclosure.is-open .implants-built-disclosure-icon,
+  .page-template-template-dental-implants .implants-built-disclosure.is-open .implants-built-disclosure-icon {
+    transform: rotate(45deg) !important;
+  }
+
+  /* Comparison */
+  .page-template-template-dental-implants-php .implants-compare-sticky,
+  .page-template-template-dental-implants .implants-compare-sticky {
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-inner,
+  .page-template-template-dental-implants .implants-compare-inner {
+    gap: 22px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-intro,
+  .page-template-template-dental-implants .implants-compare-intro {
+    gap: 20px !important;
+    padding: 20px 24px !important;
+    border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-title,
+  .page-template-template-dental-implants .implants-compare-title {
+    font-size: 20px !important;
+    line-height: 44px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-lead,
+  .page-template-template-dental-implants .implants-compare-lead {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    letter-spacing: 0.28px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-table,
+  .page-template-template-dental-implants .implants-compare-table {
+    display: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet,
+  .page-template-template-dental-implants .implants-compare-tablet {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-pickers,
+  .page-template-template-dental-implants .implants-compare-pickers {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 0 24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-picker,
+  .page-template-template-dental-implants .implants-compare-picker {
+    display: flex !important;
+    flex: 1 1 0 !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    min-width: 0 !important;
+    padding: 10px 20px !important;
+    border: 1px solid rgba(216, 164, 68, 0.2) !important;
+    border-radius: 10px !important;
+    background-color: #faf3e6 !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-picker:first-child,
+  .page-template-template-dental-implants .implants-compare-picker:first-child {
+    background-color: #f3e3c6 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-picker-label,
+  .page-template-template-dental-implants .implants-compare-picker-label {
+    font-size: 10px !important;
+    line-height: 14px !important;
+    letter-spacing: 0.2px !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-picker-field,
+  .page-template-template-dental-implants .implants-compare-picker-field {
+    position: relative !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-select,
+  .page-template-template-dental-implants .implants-compare-select {
+    appearance: none !important;
+    width: 100% !important;
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 28px 0 0 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    letter-spacing: 0.28px !important;
+    color: #5e5d5f !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-picker-chevron,
+  .page-template-template-dental-implants .implants-compare-picker-chevron {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    width: 24px !important;
+    height: 24px !important;
+    transform: translateY(-50%) !important;
+    pointer-events: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-swap,
+  .page-template-template-dental-implants .implants-compare-swap {
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-rows,
+  .page-template-template-dental-implants .implants-compare-tablet-rows {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-row,
+  .page-template-template-dental-implants .implants-compare-tablet-row {
+    padding: 10px 24px !important;
+    border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-label,
+  .page-template-template-dental-implants .implants-compare-tablet-label {
+    margin-bottom: 10px !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    line-height: 14px !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-cells,
+  .page-template-template-dental-implants .implants-compare-tablet-cells {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-cell,
+  .page-template-template-dental-implants .implants-compare-tablet-cell {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    min-height: 54px !important;
+    padding: 20px 10px !important;
+    box-sizing: border-box !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    letter-spacing: 0.24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-cell--a,
+  .page-template-template-dental-implants .implants-compare-tablet-cell--a {
+    background-color: rgba(216, 164, 68, 0.2) !important;
+    border-right: 1px solid rgba(94, 93, 95, 0.06) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-cell--b,
+  .page-template-template-dental-implants .implants-compare-tablet-cell--b {
+    background-color: #faf3e6 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-compare-tablet-cell img,
+  .page-template-template-dental-implants .implants-compare-tablet-cell img {
+    width: 12px !important;
+    height: 12px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Smile Gallery */
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    background-color: #fefdf6 !important;
+    overflow: visible !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-sticky-wrapper,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-sticky-wrapper {
+    position: static !important;
+    top: auto !important;
+    height: auto !important;
+    z-index: auto !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-container,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-container {
+    height: auto !important;
+    padding: 0 !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-header-row,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-header-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-header-badge,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-header-badge {
+    align-self: flex-start !important;
+    width: auto !important;
+    min-height: 54px !important;
+    margin: 0 !important;
+    padding: 20px 40px 20px 24px !important;
+    border-radius: 0 20px 20px 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-header-title,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-header-title {
+    width: auto !important;
+    font-size: 20px !important;
+    line-height: normal !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-header-desc,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-header-desc {
+    margin: 0 !important;
+    padding: 0 24px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-content-layout,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-content-layout {
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-left-col,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-left-col {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 354 / 274 !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-interactive-wrapper,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-interactive-wrapper {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 354 / 274 !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-card,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-card {
+    width: 60.734% !important;
+    height: auto !important;
+    aspect-ratio: 215 / 170 !important;
+    padding: 4px !important;
+    border-radius: 14px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .before-card,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .before-card {
+    left: 9.322% !important;
+    top: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .after-card,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .after-card {
+    left: 36.723% !important;
+    top: 37.956% !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-card-image-wrapper,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-card-image-wrapper,
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-img,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-img {
+    height: 100% !important;
+    border-radius: 8px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-connecting-arrow,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-connecting-arrow {
+    left: 27.966% !important;
+    top: 64.234% !important;
+    width: 23.164% !important;
+    height: auto !important;
+    aspect-ratio: 82 / 37 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-right-col,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-right-col {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-info-wrapper,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-info-wrapper {
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-details-grid,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-details-grid {
+    width: 100% !important;
+    height: 344px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-details-data,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-details-data {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-details-data.active,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-details-data.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-detail-card,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-detail-card {
+    width: 100% !important;
+    min-height: 78px !important;
+    height: auto !important;
+    padding: 14px 20px !important;
+    gap: 10px !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .detail-label,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .detail-label {
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .detail-value,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .detail-value {
+    font-size: 11px !important;
+    line-height: 22px !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-btn-wrapper,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-btn-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 13px !important;
+    width: 100% !important;
+    align-items: center !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-gallery-dots,
+  .page-template-template-dental-implants .dental-implants-main .implants-gallery-dots {
+    display: flex !important;
+    order: 0 !important;
+    gap: 8px !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .btn-gallery-action,
+  .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .btn-gallery-action {
+    order: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 16px !important;
+    border-radius: 32px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Fees */
+  .page-template-template-dental-implants-php .implants-fees-section,
+  .page-template-template-dental-implants .implants-fees-section {
+    padding: 0 !important;
+    background-color: #faf3e6 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fees-box,
+  .page-template-template-dental-implants .implants-fees-box {
+    max-width: none !important;
+    border-radius: 0 !important;
+    background-color: #faf3e6 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fees-header,
+  .page-template-template-dental-implants .implants-fees-header {
+    gap: 30px !important;
+    padding: 30px 24px !important;
+    border-bottom: 1px solid rgba(216, 164, 68, 0.2) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fees-title,
+  .page-template-template-dental-implants .implants-fees-title {
+    font-size: 20px !important;
+    line-height: normal !important;
+    letter-spacing: 0.4px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fees-lead,
+  .page-template-template-dental-implants .implants-fees-lead {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    color: rgba(94, 93, 95, 0.5) !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fees-list,
+  .page-template-template-dental-implants .implants-fees-list {
+    padding: 0 24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fee-row,
+  .page-template-template-dental-implants .implants-fee-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    padding: 30px 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fee-copy,
+  .page-template-template-dental-implants .implants-fee-copy {
+    gap: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fee-name,
+  .page-template-template-dental-implants .implants-fee-name {
+    font-size: 14px !important;
+    line-height: normal !important;
+    letter-spacing: 0.4px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fee-desc,
+  .page-template-template-dental-implants .implants-fee-desc {
+    display: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-fee-price,
+  .page-template-template-dental-implants .implants-fee-price {
+    font-size: 20px !important;
+    line-height: 1 !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* Membership */
+  .page-template-template-dental-implants-php .implants-membership-section,
+  .page-template-template-dental-implants .implants-membership-section {
+    padding: 0 24px !important;
+    background-color: #fefdf6 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .container-fluid,
+  .page-template-template-dental-implants .implants-membership-section .container-fluid {
+    padding: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-card,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-img-col,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-img-col {
+    width: 100% !important;
+    aspect-ratio: 282 / 249 !important;
+    overflow: hidden !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-img-col img,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-img-col img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    border-radius: 0 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-badge,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-badge {
+    display: none !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-content-col,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-content-col {
+    gap: 30px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-info,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-info {
+    gap: 24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-title,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-title {
+    font-size: 20px !important;
+    line-height: 50px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-desc,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-desc {
+    font-size: 14px !important;
+    line-height: 24px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-price,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-price {
+    font-size: 12px !important;
+    line-height: 47px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-price .price-amount,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-price .price-amount {
+    font-size: 16px !important;
+    color: #d8a444 !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-benefits,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-benefits {
+    width: 241px !important;
+    max-width: 100% !important;
+    gap: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-benefit-icon,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-benefit-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-benefit-text,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-benefit-text {
+    font-size: 12px !important;
+    line-height: 24px !important;
+    white-space: normal !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-ctas,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-ctas {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-ctas .btn-view-plan,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-ctas .btn-view-plan,
+  .page-template-template-dental-implants-php .implants-membership-section .cosmetic-membership-ctas .btn-book-outline,
+  .page-template-template-dental-implants .implants-membership-section .cosmetic-membership-ctas .btn-book-outline {
+    width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 16px !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+  }
+}
+
+/* ============================================================
    SINGLE SERVICES TABLET - FIGMA NODE 3569:62335
    Tablet-only overrides; desktop and phone styles remain unchanged.
    ============================================================ */
