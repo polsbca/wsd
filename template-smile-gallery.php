@@ -29,6 +29,67 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 	}
 }
 
+$gallery_title_defaults = array(
+	'desktop' => array(
+		'light'  => __( 'Smile ', 'wsd' ),
+		'accent' => __( 'Gallery', 'wsd' ),
+	),
+	'mobile'  => array(
+		'light'  => __( 'All Treatment', 'wsd' ),
+		'accent' => __( ' Results', 'wsd' ),
+	),
+	'tablet'  => array(
+		'light'  => __( 'All ', 'wsd' ),
+		'accent' => __( 'Treatments', 'wsd' ),
+	),
+);
+
+$split_gallery_title = static function ( $text ) {
+	$text = trim( wp_strip_all_tags( $text ) );
+	$pos  = strrpos( $text, ' ' );
+
+	if ( false === $pos ) {
+		return array(
+			'light'  => '',
+			'accent' => $text,
+		);
+	}
+
+	return array(
+		'light'  => substr( $text, 0, $pos + 1 ),
+		'accent' => substr( $text, $pos + 1 ),
+	);
+};
+
+$gallery_title_for_label = static function ( $label ) use ( $split_gallery_title ) {
+	$parts = $split_gallery_title( $label );
+
+	return array(
+		'desktop' => $parts,
+		'mobile'  => $parts,
+		'tablet'  => $parts,
+	);
+};
+
+$render_gallery_title_attrs = static function ( $titles ) {
+	$attrs = array();
+
+	foreach ( array( 'desktop', 'mobile', 'tablet' ) as $viewport ) {
+		$attrs[] = sprintf(
+			'data-title-%1$s-light="%2$s"',
+			esc_attr( $viewport ),
+			esc_attr( $titles[ $viewport ]['light'] ?? '' )
+		);
+		$attrs[] = sprintf(
+			'data-title-%1$s-accent="%2$s"',
+			esc_attr( $viewport ),
+			esc_attr( $titles[ $viewport ]['accent'] ?? '' )
+		);
+	}
+
+	return implode( ' ', $attrs );
+};
+
 ?>
 
 <main id="main" class="site-main smile-gallery-page-main">
@@ -95,35 +156,46 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 		style="--smile-gallery-track-height: <?php echo esc_attr( max( 1, count( $gallery_cases ) ) * 75 ); ?>vh;"
 		aria-labelledby="smile-gallery-section-heading"
 		data-smile-gallery-total="<?php echo esc_attr( count( $gallery_cases ) ); ?>"
+		data-gallery-title-defaults="<?php echo esc_attr( wp_json_encode( $gallery_title_defaults ) ); ?>"
 	>
 		<div class="smile-gallery-cases-sticky">
 			<div class="smile-gallery-cases-inner">
 				<div class="smile-gallery-cases-header">
 					<div class="smile-gallery-section-badge">
-						<h2 id="smile-gallery-section-heading" class="smile-gallery-section-title">
+						<h2 id="smile-gallery-section-heading" class="smile-gallery-section-title" data-smile-gallery-title>
 							<span class="smile-gallery-section-heading-desktop">
-								<span class="light"><?php esc_html_e( 'Smile ', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( 'Gallery', 'wsd' ); ?></span>
+								<span class="light" data-title-part="light"><?php echo esc_html( $gallery_title_defaults['desktop']['light'] ); ?></span><span class="accent" data-title-part="accent"><?php echo esc_html( $gallery_title_defaults['desktop']['accent'] ); ?></span>
 							</span>
 							<span class="smile-gallery-section-heading-mobile">
-								<span class="light"><?php esc_html_e( 'All Treatment', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( ' Results', 'wsd' ); ?></span>
+								<span class="light" data-title-part="light"><?php echo esc_html( $gallery_title_defaults['mobile']['light'] ); ?></span><span class="accent" data-title-part="accent"><?php echo esc_html( $gallery_title_defaults['mobile']['accent'] ); ?></span>
 							</span>
 							<span class="smile-gallery-section-heading-tablet">
-								<span class="light"><?php esc_html_e( 'All ', 'wsd' ); ?></span><span class="accent"><?php esc_html_e( 'Treatments', 'wsd' ); ?></span>
+								<span class="light" data-title-part="light"><?php echo esc_html( $gallery_title_defaults['tablet']['light'] ); ?></span><span class="accent" data-title-part="accent"><?php echo esc_html( $gallery_title_defaults['tablet']['accent'] ); ?></span>
 							</span>
 						</h2>
 					</div>
 
 					<div class="smile-gallery-filters smile-gallery-filters--desktop" role="tablist" aria-label="<?php esc_attr_e( 'Smile gallery categories', 'wsd' ); ?>">
-					<button type="button" class="smile-gallery-filter is-active" role="tab" aria-selected="true" data-filter="all">
+					<button
+						type="button"
+						class="smile-gallery-filter is-active"
+						role="tab"
+						aria-selected="true"
+						data-filter="all"
+						<?php echo $render_gallery_title_attrs( $gallery_title_defaults ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					>
 						<span><?php esc_html_e( 'All', 'wsd' ); ?></span>
 					</button>
 					<?php foreach ( $gallery_categories as $category ) : ?>
+						<?php $category_titles = $gallery_title_for_label( $category->name ); ?>
 						<button
 							type="button"
 							class="smile-gallery-filter"
 							role="tab"
 							aria-selected="false"
 							data-filter="<?php echo esc_attr( $category->slug ); ?>"
+							data-label="<?php echo esc_attr( $category->name ); ?>"
+							<?php echo $render_gallery_title_attrs( $category_titles ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						>
 							<span><?php echo esc_html( $category->name ); ?></span>
 						</button>
@@ -131,7 +203,13 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 					</div>
 
 					<div class="smile-gallery-mobile-filters">
-						<button type="button" class="smile-gallery-filter smile-gallery-mobile-all is-active" data-filter="all" aria-pressed="true">
+						<button
+							type="button"
+							class="smile-gallery-filter smile-gallery-mobile-all is-active"
+							data-filter="all"
+							aria-pressed="true"
+							<?php echo $render_gallery_title_attrs( $gallery_title_defaults ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						>
 							<span><?php esc_html_e( 'All', 'wsd' ); ?></span>
 						</button>
 						<button
@@ -162,12 +240,14 @@ if ( $page_id && has_post_thumbnail( $page_id ) ) {
 						</div>
 						<div class="smile-gallery-filter-panel-options" role="listbox" aria-label="<?php esc_attr_e( 'Filter categories', 'wsd' ); ?>">
 							<?php foreach ( $gallery_categories as $category ) : ?>
+								<?php $category_titles = $gallery_title_for_label( $category->name ); ?>
 								<button
 									type="button"
 									class="smile-gallery-filter-panel-option"
 									role="option"
 									data-filter="<?php echo esc_attr( $category->slug ); ?>"
 									data-label="<?php echo esc_attr( $category->name ); ?>"
+									<?php echo $render_gallery_title_attrs( $category_titles ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								>
 									<span><?php echo esc_html( $category->name ); ?></span>
 								</button>

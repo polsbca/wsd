@@ -25,6 +25,8 @@
     var $browseBtn = $root.find(".smile-gallery-mobile-browse");
     var $mobileAllBtn = $root.find(".smile-gallery-mobile-all");
     var $panelOptions = $root.find(".smile-gallery-filter-panel-option");
+    var $sectionTitle = $root.find("[data-smile-gallery-title]");
+    var titleDefaults = {};
     var activeFilter = "all";
     var scrollTimeline = null;
     var isDesktop = window.innerWidth >= 992;
@@ -104,6 +106,78 @@
       });
       rowResizeObserver.observe($casesBody[0]);
       rowResizeObserver.observe($casesRow[0]);
+    }
+
+    function getTitleSource($filterEl) {
+      if ($filterEl && $filterEl.length) {
+        return $filterEl;
+      }
+
+      if ("all" === activeFilter) {
+        return $mobileAllBtn;
+      }
+
+      var $desktopFilter = $root
+        .find(
+          '.smile-gallery-filters--desktop .smile-gallery-filter[data-filter="' +
+            activeFilter +
+            '"]',
+        )
+        .first();
+
+      if ($desktopFilter.length) {
+        return $desktopFilter;
+      }
+
+      return $panelOptions.filter('[data-filter="' + activeFilter + '"]').first();
+    }
+
+    function getTitleParts($source, viewport) {
+      var defaults = titleDefaults[viewport] || {};
+
+      if ($source && $source.length) {
+        return {
+          light:
+            $source.attr("data-title-" + viewport + "-light") ||
+            defaults.light ||
+            "",
+          accent:
+            $source.attr("data-title-" + viewport + "-accent") ||
+            defaults.accent ||
+            "",
+        };
+      }
+
+      return {
+        light: defaults.light || "",
+        accent: defaults.accent || "",
+      };
+    }
+
+    function syncSectionTitle($filterEl) {
+      if (!$sectionTitle.length) {
+        return;
+      }
+
+      var $source = getTitleSource($filterEl);
+
+      $sectionTitle.find(".smile-gallery-section-heading-desktop").each(function () {
+        var parts = getTitleParts($source, "desktop");
+        $(this).find('[data-title-part="light"]').text(parts.light);
+        $(this).find('[data-title-part="accent"]').text(parts.accent);
+      });
+
+      $sectionTitle.find(".smile-gallery-section-heading-mobile").each(function () {
+        var parts = getTitleParts($source, "mobile");
+        $(this).find('[data-title-part="light"]').text(parts.light);
+        $(this).find('[data-title-part="accent"]').text(parts.accent);
+      });
+
+      $sectionTitle.find(".smile-gallery-section-heading-tablet").each(function () {
+        var parts = getTitleParts($source, "tablet");
+        $(this).find('[data-title-part="light"]').text(parts.light);
+        $(this).find('[data-title-part="accent"]').text(parts.accent);
+      });
     }
 
     function matchesFilter(categorySlugs) {
@@ -236,6 +310,8 @@
           $browseBtn.find(".smile-gallery-mobile-browse-label").text(label);
         }
       }
+
+      syncSectionTitle($activeFilterEl);
     }
 
     function openFilterPanel() {
@@ -614,6 +690,14 @@
         "default-label",
         $browseBtn.find(".smile-gallery-mobile-browse-label").text(),
       );
+    }
+
+    if ($section.length) {
+      try {
+        titleDefaults = JSON.parse($section.attr("data-gallery-title-defaults") || "{}");
+      } catch (error) {
+        titleDefaults = {};
+      }
     }
 
     applyFilterState();
