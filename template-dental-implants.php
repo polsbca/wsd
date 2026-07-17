@@ -252,6 +252,10 @@ get_header();
 				</div>
 			</div>
 
+			<p class="implants-about-lead">
+				<?php esc_html_e( 'Dental implants replace missing teeth with a permanent solution that looks, feels and functions like your own — planned and placed with precision at every stage.', 'wsd' ); ?>
+			</p>
+
 			<div class="implants-about-body">
 				<div class="implants-about-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Dental implant topics', 'wsd' ); ?>">
 					<button type="button" class="implants-tab-btn active" role="tab" aria-selected="true" data-tab="process"><?php esc_html_e( 'Process', 'wsd' ); ?></button>
@@ -277,6 +281,8 @@ get_header();
 						</div>
 					</div>
 				<?php endforeach; ?>
+
+				<div class="implants-about-dots" aria-hidden="true"></div>
 			</div>
 		</div>
 	</section>
@@ -300,24 +306,40 @@ get_header();
 							Every dental implant has three parts that work together to replicate a natural tooth from root to crown.
 						</p>
 					</div>
-					<ul class="implants-built-list">
-						<?php foreach ( $built_parts as $part ) : ?>
-							<li class="implants-built-item">
-								<img
-									src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>"
-									alt=""
-									class="implants-built-icon"
-									aria-hidden="true"
-								>
-								<div class="implants-built-item-copy">
-									<h3 class="implants-built-item-title"><?php echo esc_html( $part['title'] ); ?></h3>
-									<p class="implants-built-item-desc"><?php echo esc_html( $part['desc'] ); ?></p>
-								</div>
-							</li>
-						<?php endforeach; ?>
-					</ul>
+					<div class="implants-built-details" id="implants-built-details">
+						<ul class="implants-built-list">
+							<?php foreach ( $built_parts as $part ) : ?>
+								<li class="implants-built-item">
+									<img
+										src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>"
+										alt=""
+										class="implants-built-icon"
+										aria-hidden="true"
+									>
+									<div class="implants-built-item-copy">
+										<h3 class="implants-built-item-title"><?php echo esc_html( $part['title'] ); ?></h3>
+										<p class="implants-built-item-desc"><?php echo esc_html( $part['desc'] ); ?></p>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				</div>
 			</div>
+			<button
+				type="button"
+				class="implants-built-disclosure"
+				aria-expanded="false"
+				aria-controls="implants-built-details"
+			>
+				<span class="implants-built-disclosure-label"><?php esc_html_e( 'Read more about Implants', 'wsd' ); ?></span>
+				<img
+					src="<?php echo esc_url( $theme_uri . '/assets/images/implants-plus.svg' ); ?>"
+					alt=""
+					class="implants-built-disclosure-icon"
+					aria-hidden="true"
+				>
+			</button>
 		</div>
 	</section>
 
@@ -368,6 +390,73 @@ get_header();
 							<div class="implants-compare-cell" role="cell" data-label="<?php echo esc_attr( $row['label'] ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/implants-indeterminate-circle.svg' ); ?>" alt="" aria-hidden="true">
 								<span><?php echo esc_html( $row['denture'] ); ?></span>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+
+				<div class="implants-compare-tablet" aria-label="<?php esc_attr_e( 'Implants compared with bridges and dentures', 'wsd' ); ?>">
+					<div class="implants-compare-pickers">
+						<div class="implants-compare-picker">
+							<label class="implants-compare-picker-label" for="implants-compare-select-a"><?php esc_html_e( 'Option A', 'wsd' ); ?></label>
+							<div class="implants-compare-picker-field">
+								<select id="implants-compare-select-a" class="implants-compare-select implants-compare-select--a">
+									<option value="implants" selected><?php esc_html_e( 'Implants', 'wsd' ); ?></option>
+									<option value="bridge"><?php esc_html_e( 'Bridge', 'wsd' ); ?></option>
+									<option value="denture"><?php esc_html_e( 'Denture', 'wsd' ); ?></option>
+								</select>
+								<img
+									src="<?php echo esc_url( $theme_uri . '/assets/images/implants-dropdown-arrow.svg' ); ?>"
+									alt=""
+									class="implants-compare-picker-chevron"
+									aria-hidden="true"
+								>
+							</div>
+						</div>
+
+						<button type="button" class="implants-compare-swap" aria-label="<?php esc_attr_e( 'Swap comparison options', 'wsd' ); ?>">
+							<img
+								src="<?php echo esc_url( $theme_uri . '/assets/images/implants-compare-swap.svg' ); ?>"
+								alt=""
+								aria-hidden="true"
+							>
+						</button>
+
+						<div class="implants-compare-picker">
+							<label class="implants-compare-picker-label" for="implants-compare-select-b"><?php esc_html_e( 'Option B', 'wsd' ); ?></label>
+							<div class="implants-compare-picker-field">
+								<select id="implants-compare-select-b" class="implants-compare-select implants-compare-select--b">
+									<option value="implants"><?php esc_html_e( 'Implants', 'wsd' ); ?></option>
+									<option value="bridge" selected><?php esc_html_e( 'Bridge', 'wsd' ); ?></option>
+									<option value="denture"><?php esc_html_e( 'Denture', 'wsd' ); ?></option>
+								</select>
+								<img
+									src="<?php echo esc_url( $theme_uri . '/assets/images/implants-dropdown-arrow.svg' ); ?>"
+									alt=""
+									class="implants-compare-picker-chevron"
+									aria-hidden="true"
+								>
+							</div>
+						</div>
+					</div>
+
+					<div class="implants-compare-tablet-rows">
+						<?php foreach ( $compare_rows as $row ) : ?>
+							<div
+								class="implants-compare-tablet-row"
+								data-label="<?php echo esc_attr( $row['label'] ); ?>"
+								data-implants="<?php echo esc_attr( $row['implants'] ); ?>"
+								data-implants-icon="check"
+								data-bridge="<?php echo esc_attr( $row['bridge'] ); ?>"
+								data-bridge-icon="indeterminate"
+								data-denture="<?php echo esc_attr( $row['denture'] ); ?>"
+								data-denture-icon="indeterminate"
+							>
+								<div class="implants-compare-tablet-label"><?php echo esc_html( $row['label'] ); ?></div>
+								<div class="implants-compare-tablet-cells">
+									<div class="implants-compare-tablet-cell implants-compare-tablet-cell--a"></div>
+									<div class="implants-compare-tablet-cell implants-compare-tablet-cell--b"></div>
+								</div>
 							</div>
 						<?php endforeach; ?>
 					</div>
@@ -472,6 +561,7 @@ get_header();
 							</div>
 
 							<div class="gallery-btn-wrapper">
+								<div class="gallery-slider-dots implants-gallery-dots" aria-hidden="true"></div>
 								<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-gallery-action"><?php esc_html_e( 'View Smile Gallery', 'wsd' ); ?></a>
 							</div>
 						</div>
