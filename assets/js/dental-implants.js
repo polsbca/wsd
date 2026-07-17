@@ -15,7 +15,6 @@
 
     return panel.querySelectorAll(
       [
-        ".implants-step-card",
         ".implants-step-number",
         ".implants-step-title",
         ".implants-step-desc",
@@ -27,6 +26,8 @@
     var items = getPanelItems(panel);
     if (!items.length || typeof gsap === "undefined") return;
 
+    var cards = panel.querySelectorAll(".implants-step-card");
+    gsap.set(cards, { clearProps: "transform" });
     gsap.killTweensOf(items);
     gsap.fromTo(
       items,
