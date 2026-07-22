@@ -62,7 +62,7 @@ if ( $fees_page_id && has_post_thumbnail( $fees_page_id ) ) {
 						<?php esc_html_e( 'Clear, honest pricing with no surprises. Every patient receives a written cost estimate before any treatment begins. We also offer flexible finance and membership options to suit every budget.', 'wsd' ); ?>
 					</p>
 				</div>
-				<div class="hero-buttons">
+				<div class="hero-buttons d-none">
 					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
 					<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>" class="btn btn-secondary fees-hero-cta fees-hero-cta--desktop">
 						<span><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>

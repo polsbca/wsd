@@ -372,7 +372,7 @@ body {
   font-family: var(--font-family-primary);
   font-weight: 500;
   font-size: 20px;
-  padding: 0px 10px 13px;
+  padding: 10px;
   transition:
     color 0.25s ease,
     opacity 0.25s ease;
@@ -415,9 +415,6 @@ body {
 /* Treatments / Our Practice dropdown */
 .menu-item-has-children {
   position: relative;
-  /* Extend hover hit-area into the gap below the link */
-  padding-bottom: 18px;
-  margin-bottom: -18px;
 }
 
 .menu-item-has-children::after {
@@ -434,7 +431,7 @@ body {
 .treatments-dropdown-container,
 .our-practice-dropdown-container {
   position: absolute;
-  top: calc(100% - 8px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) scale(0.98);
   transform-origin: top center;
@@ -742,8 +739,8 @@ body {
   position: fixed;
   right: 0;
   top: 50%;
-  width: 54px;
-  height: 163px;
+  width: 61px;
+  height: 222px;
   margin-top: calc(-81.5px + 120px);
   z-index: 999;
   pointer-events: none;
@@ -755,13 +752,13 @@ body {
 
 .btn-call-us {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  width: 54px;
-  height: 163px;
-  padding: 15px 12px;
+  gap: 7px;
+  width: 61px;
+  height: 220px;
+  padding: 30px 15px;
   background-color: #d8a444;
   color: #ffffff;
   border-radius: 20px 0 0 20px;
@@ -782,13 +779,13 @@ body {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .call-text {
   font-family: var(--font-family-secondary);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 1;
   letter-spacing: 0.2px;
   color: #ffffff;
@@ -11467,6 +11464,11 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   width: 100%;
 }
 
+.page-template-template-fees-php .fees-page-main .hero-buttons,
+.page-template-template-fees .fees-page-main .hero-buttons.d-none {
+  display: none !important;
+}
+
 .fees-hero-image-col {
   min-width: 0;
 }
@@ -12512,6 +12514,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     align-items: center;
     text-align: center;
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .fees-info-title {
@@ -14057,9 +14060,10 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     text-box-trim: trim-both;
   }
 
-  .teams-support-section{
+  .teams-support-section {
     margin-bottom: 94px;
   }
+
   .teams-clinical-heading-wrap {
     padding: 20px 24px;
   }
@@ -15268,9 +15272,8 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px;
     width: 100%;
-    max-width: 1685px;
     margin: 0 auto;
-    padding: 0 117px;
+    padding: 0 120px;
     box-sizing: border-box;
     min-width: 0;
   }
@@ -15298,6 +15301,11 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all 0.35s;
+  }
+
+  .blog-detail-related-card:hover .blogs-card-img {
+    transform: scale(1.03);
   }
 
   .blogs-card-overlay {
@@ -15771,6 +15779,8 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     letter-spacing: -1px;
     line-height: 60px;
     color: #d8a444;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
   }
 
   .blog-detail-comment-list {
@@ -15810,6 +15820,8 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     letter-spacing: -1px;
     line-height: 60px;
     color: #5e5d5f;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
   }
 
   .blog-detail-comments #respond {
@@ -15847,6 +15859,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     color: #5e5d5f;
     resize: vertical;
     box-sizing: border-box;
+    margin-block: 0;
   }
 
   .blog-detail-comment-form textarea::placeholder {
@@ -15898,7 +15911,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   .blog-detail-comment-form .comment-form-url input {
     display: block;
     width: 100%;
-    padding: 30px 0;
+    padding: 25px 0;
     border: 0;
     border-bottom: 1px solid #d8a444;
     border-radius: 0;
@@ -15906,9 +15919,10 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     font-family: var(--font-family-primary);
     font-size: 24px;
     font-weight: 400;
-    line-height: 28px;
+    line-height: 25px;
     color: #5e5d5f;
     box-sizing: border-box;
+    margin-block: 0;
   }
 
   .blog-detail-comment-field input::placeholder,

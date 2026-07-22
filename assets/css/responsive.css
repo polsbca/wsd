@@ -188,7 +188,7 @@
     min-height: 70px !important;
     padding: 23px 20px !important;
     border-radius: 40px !important;
-    font-size: clamp(14px, 1vw, 20px) !important;
+    font-size: clamp(14px, 1.1vw, 20px) !important;
     letter-spacing: 0.5px !important;
   }
 
@@ -379,7 +379,7 @@
   .page-template-template-fees .fees-consult-cards {
     display: flex !important;
     flex-direction: column !important;
-    gap: 40px !important;
+    gap: 60px !important;
     width: 100% !important;
   }
 
@@ -396,6 +396,7 @@
     border-radius: 50px !important;
     box-shadow: none !important;
     box-sizing: border-box !important;
+    margin-bottom: 0;
   }
 
   .page-template-template-fees-php .fees-consult-badge,
@@ -1704,6 +1705,7 @@
     .fees-hero-copy {
       gap: 20px !important;
       padding: 30px 0 !important;
+      margin-top: 20px;
     }
 
     .fees-hero-title,
@@ -1803,13 +1805,14 @@
       flex-direction: column !important;
       align-items: center !important;
       gap: 30px !important;
-      padding: 0 24px !important;
+
     }
 
     .fees-info-header {
       gap: 30px !important;
       align-items: center !important;
       text-align: center !important;
+      padding: 0 24px !important;
     }
 
     .fees-info-title {
@@ -1850,9 +1853,10 @@
       min-height: 0 !important;
       padding: 20px 5px !important;
       border-radius: 14px !important;
-      font-size: 12px !important;
+      font-size: 9px !important;
       letter-spacing: 1px !important;
       overflow: visible !important;
+      font-weight: 700;
     }
 
     .fees-tabs-indicator {
@@ -1865,10 +1869,6 @@
 
     .fees-tab-label--mobile {
       display: block !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      max-width: 72px !important;
       text-align: center !important;
       line-height: normal !important;
     }
@@ -1881,8 +1881,8 @@
 
     .fees-panels {
       width: 100% !important;
-      max-width: 319px !important;
       margin: 0 auto !important;
+      padding: 0 24px !important;
     }
 
     .fees-accordion-list {
@@ -1897,7 +1897,7 @@
       background: #faf3e6 !important;
     }
 
-    .fees-accordion-item.is-open {
+    .fees-accordion-item.is-open button.fees-accordion-trigger {
       background: #efdab2 !important;
     }
 
@@ -1913,6 +1913,7 @@
       min-height: 0 !important;
       padding: 35px 20px !important;
       gap: 16px !important;
+      border-radius: 0;
     }
 
     .fees-accordion-title {
@@ -1941,8 +1942,8 @@
     }
 
     .fees-accordion-item.is-open .fees-accordion-content-inner {
-      padding: 24px 20px !important;
-      border-bottom: 1px solid #e9cb95 !important;
+      padding: 0 20px !important;
+      border-bottom: none !important;
     }
 
     .fees-treatment-heading {
@@ -2002,12 +2003,13 @@
     }
 
     .fees-consult-card {
-      padding: 32px 20px !important;
-      gap: 28px !important;
-      border-radius: 24px !important;
+      padding: 20px !important;
+      gap: 30px !important;
+      border-radius: 20px !important;
       background: #faf3e6 !important;
       border: 0 !important;
       box-shadow: none !important;
+      margin-bottom: 10px;
     }
 
     .fees-consult-badge {
@@ -2025,9 +2027,10 @@
     }
 
     .fees-consult-title {
-      font-size: 28px !important;
-      line-height: 34px !important;
+      font-size: 20px !important;
+      line-height: 100% !important;
       letter-spacing: 0 !important;
+      margin-top: -8px;
     }
 
     .fees-consult-body p {
@@ -2304,13 +2307,23 @@
 
     .fees-tab-icon,
     .fees-tab-icon img {
-      width: 14px !important;
-      height: 14px !important;
+      width: 24px !important;
+      height: 24px !important;
+    }
+
+    .fees-accordion-item.is-open .fees-accordion-trigger,
+    .fees-accordion-item.is-open .fees-accordion-trigger:hover,
+    .fees-accordion-item.is-open .fees-accordion-trigger:focus,
+    .fees-accordion-item.is-open .fees-accordion-trigger:active,
+    .fees-accordion-item.is-open .fees-accordion-trigger:focus-visible {
+      background: #efdab2 !important;
+      margin-left: -20px;
+      width: calc(100% + 40px);
+      padding-inline: 20px !important;
     }
 
     .fees-panels {
       width: 100% !important;
-      max-width: 660px !important;
       margin: 0 auto !important;
     }
 
@@ -2344,14 +2357,15 @@
       min-height: 0 !important;
       padding: 40px 20px !important;
       gap: 16px !important;
+      margin-left: -20px;
+      width: calc(100% + 40px);
+      padding-inline: 20px !important;
+      border-radius: 0;
     }
 
     .fees-accordion-title {
       font-size: 24px !important;
       letter-spacing: -1px !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
     }
 
     .fees-accordion-icon {
@@ -2372,7 +2386,7 @@
     }
 
     .fees-accordion-item.is-open .fees-accordion-content-inner {
-      padding: 32px 28px !important;
+      padding: 0px 0px 40px !important;
       border-bottom: 1px solid #e9cb95 !important;
     }
 
@@ -2381,9 +2395,10 @@
     }
 
     .fees-treatment-row {
-      padding: 28px 0 !important;
+      padding: 30px 0 !important;
       gap: 20px !important;
       align-items: flex-start !important;
+      flex-direction: column;
     }
 
     .fees-treatment-copy {
@@ -2392,10 +2407,10 @@
     }
 
     .fees-treatment-name {
-      font-size: 18px !important;
+      font-size: 16px !important;
       font-weight: 600 !important;
       letter-spacing: 0.5px !important;
-      line-height: 1.25 !important;
+      line-height: 1 !important;
     }
 
     .fees-treatment-desc {
@@ -2404,10 +2419,11 @@
     }
 
     .fees-treatment-price {
-      font-size: 22px !important;
+      font-size: 24px !important;
       font-weight: 600 !important;
-      letter-spacing: 0.5px !important;
+      letter-spacing: 1px !important;
       color: #d8a444 !important;
+      line-height: 1;
     }
 
     .fees-treatment-notes {
@@ -2440,9 +2456,10 @@
     }
 
     .fees-consult-title {
-      font-size: 34px !important;
-      line-height: 40px !important;
+      font-size: 20px !important;
+      line-height: 24px !important;
       letter-spacing: 0 !important;
+      margin-bottom: -16px;
     }
 
     .fees-consult-body p {
@@ -2701,7 +2718,7 @@
     box-sizing: border-box !important;
   }
 
-  .contact-mobile-slide[data-contact-slide="2"] {
+  .contact-mobile-slide {
     padding: 0 24px !important;
   }
 
@@ -6596,7 +6613,6 @@
     align-items: flex-start !important;
     gap: 12px !important;
     width: 100% !important;
-    max-width: 660px !important;
     margin: 0 auto !important;
     padding: 20px 20px 40px 0px !important;
     background-color: #ffffff !important;
@@ -8055,8 +8071,9 @@
   }
 
   body.home .call-us-tab,
-  body.single-services .call-us-tab, 
-  body.page-template-template-teams .call-us-tab {
+  body.single-services .call-us-tab,
+  body.page-template-template-teams .call-us-tab,
+  body.page-template-template-blogs .call-us-tab {
     display: block !important;
     position: fixed !important;
     right: 24px !important;
@@ -8070,7 +8087,8 @@
 
   body.home .call-us-tab .btn-call-us,
   body.single-services .call-us-tab .btn-call-us,
-  body.page-template-template-teams .call-us-tab .btn-call-us {
+  body.page-template-template-teams .call-us-tab .btn-call-us,
+  body.page-template-template-blogs .call-us-tab .btn-call-us {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -8088,7 +8106,8 @@
 
   body.home .call-us-tab .btn-call-us .phone-icon,
   body.single-services .call-us-tab .btn-call-us .phone-icon,
-  body.page-template-template-teams .btn-call-us .phone-icon {
+  body.page-template-template-teams .btn-call-us .phone-icon,
+  body.page-template-template-blogs .btn-call-us .phone-icon {
     width: 20px !important;
     height: 20px !important;
     transform: rotate(180deg);
@@ -8096,7 +8115,8 @@
 
   body.home .call-us-tab .btn-call-us .call-text,
   body.single-services .call-us-tab .btn-call-us .call-text,
-  body.page-template-template-teams .call-us-tab .btn-call-us .call-text {
+  body.page-template-template-teams .call-us-tab .btn-call-us .call-text,
+  body.page-template-template-blogs .call-us-tab .btn-call-us .call-text {
     display: none !important;
   }
 
@@ -8865,6 +8885,18 @@
     text-box-trim: trim-both;
     line-height: 100% !important;
   }
+
+  .privacy-policy-hero-waves-img {
+    width: 467px;
+    height: 100%;
+    object-fit: cover;
+    object-position: 30% center;
+  }
+
+  .privacy-policy-hero-title .privacy-policy-hero-brand {
+    font-size: 24px !important;
+  }
+
 }
 
 /* ============================================================
@@ -8972,8 +9004,13 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+  .privacy-policy-hero-waves-img {
+    height: 100%;
+    object-fit: cover;
+  }
+
   .privacy-policy-hero {
-    min-height: 300px !important;
+    min-height: 336px !important;
   }
 
   .privacy-policy-hero-content {
@@ -8987,24 +9024,23 @@
   }
 
   .privacy-policy-hero-brand {
-    font-size: 18px !important;
+    font-size: 28px !important;
     line-height: 26px !important;
     letter-spacing: 1px !important;
     margin-bottom: 10px !important;
   }
 
   .privacy-policy-hero-accent {
-    font-size: 32px !important;
+    font-size: 28px !important;
     line-height: 44px !important;
     letter-spacing: 1px !important;
   }
 
   .privacy-policy-content {
     padding-inline: 40px !important;
-    padding-top: 50px !important;
-    padding-bottom: 80px !important;
+    padding-top: 40px !important;
+    padding-bottom: 70px !important;
     gap: 60px !important;
-    max-width: 660px !important;
     margin-inline: auto !important;
   }
 
@@ -9038,7 +9074,7 @@
   }
 
   .privacy-policy-content .entry-content h2 {
-    font-size: 22px !important;
+    font-size: 28px !important;
     line-height: 34px !important;
     margin-bottom: 30px !important;
     letter-spacing: -0.5px !important;
@@ -9046,8 +9082,19 @@
 
   .privacy-policy-content .entry-content p {
     font-size: 16px !important;
-    line-height: 24px !important;
+    line-height: 26px !important;
     margin-bottom: 24px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .privacy-policy-content .entry-content h2 {
+    font-size: 24px !important;
+  }
+
+  .privacy-policy-content .entry-content p {
+    font-size: 14px !important;
+    line-height: 22px !important;
   }
 }
 
@@ -10513,11 +10560,10 @@
   .page-template-template-blogs .blogs-hero-inner {
     display: flex !important;
     flex-direction: column !important;
-    align-items: stretch !important;
+    align-items: center !important;
     justify-content: flex-start !important;
     gap: 62px !important;
     width: 100% !important;
-    max-width: 660px !important;
     margin: 0 auto !important;
     height: auto !important;
     min-height: 0 !important;
@@ -10635,8 +10681,9 @@
   .page-template-template-blogs .blogs-hero-image-frame {
     display: block !important;
     width: 100% !important;
-    max-width: 660px !important;
+    max-width: 100% !important;
     line-height: 0 !important;
+    margin-top: 0 !important;
   }
 
   .page-template-template-blogs-php .blogs-hero-image-frame .blogs-hero-img,
@@ -10646,7 +10693,7 @@
     height: auto !important;
     max-height: 620px !important;
     object-fit: cover !important;
-    object-position: center top !important;
+    object-position: 110px top !important;
   }
 
   /* —— Featured article —— */
@@ -11089,7 +11136,6 @@
     align-items: center !important;
     gap: 40px !important;
     width: 100% !important;
-    max-width: 660px !important;
     margin: 0 auto !important;
     padding: 0 40px !important;
     box-sizing: border-box !important;
@@ -11101,7 +11147,6 @@
   .page-template-template-blogs .blogs-card {
     position: relative !important;
     width: 100% !important;
-    max-width: 638px !important;
     min-width: 0 !important;
     height: 625px !important;
     border-radius: 20px !important;
@@ -11138,14 +11183,13 @@
     position: absolute !important;
     left: 37px !important;
     right: 37px !important;
-    top: 334px !important;
-    bottom: auto !important;
+    top: auto !important;
+    bottom: 29px !important;
     transform: none !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 30px !important;
     width: auto !important;
-    max-width: 564px !important;
     margin: 0 auto !important;
     z-index: 1 !important;
     box-sizing: border-box !important;
@@ -11837,8 +11881,8 @@
     position: absolute !important;
     left: 20.5px !important;
     right: 20.5px !important;
-    top: 325px !important;
-    bottom: auto !important;
+    top: auto !important;
+    bottom: 40px !important;
     transform: none !important;
     display: flex !important;
     flex-direction: column !important;
@@ -12235,17 +12279,18 @@
     width: 100% !important;
     max-width: 100% !important;
     line-height: 0 !important;
+    margin-top: 0;
   }
 
   .page-template-template-blogs-php .blogs-hero-image-frame .blogs-hero-img,
   .page-template-template-blogs .blogs-hero-image-frame .blogs-hero-img {
     display: block !important;
     width: 100% !important;
-    height: auto !important;
+    height: 432px !important;
     min-height: 320px !important;
     max-height: 432px !important;
     object-fit: cover !important;
-    object-position: center top !important;
+    object-position: 0px top !important;
   }
 
   /* —— Featured —— */
@@ -12798,6 +12843,7 @@
     flex: 1 1 auto !important;
     flex-direction: column !important;
     align-items: flex-start !important;
+    justify-content: flex-end;
     gap: 0 !important;
     width: 100% !important;
     min-height: 0 !important;
@@ -13185,7 +13231,7 @@
   .blog-detail-comments {
     display: flex !important;
     flex-direction: column !important;
-    gap: 30px !important;
+    gap: 60px !important;
     width: 100% !important;
   }
 
@@ -13267,7 +13313,7 @@
   .blog-detail-comment-form .comment-form-comment,
   .blog-detail-comment-textarea {
     width: 100% !important;
-    margin: 0 !important;
+    margin: 0 0 30px !important;
   }
 
   .blog-detail-comment-form textarea {
@@ -13287,6 +13333,7 @@
     color: #5e5d5f !important;
     resize: vertical !important;
     box-sizing: border-box !important;
+    margin: 0;
   }
 
   .blog-detail-comment-form textarea::placeholder {
@@ -13332,6 +13379,7 @@
     line-height: 28px !important;
     color: #5e5d5f !important;
     box-sizing: border-box !important;
+    margin: 0;
   }
 
   .blog-detail-comment-field input::placeholder,
@@ -13355,7 +13403,7 @@
     display: flex !important;
     align-items: flex-start !important;
     gap: 30px !important;
-    margin: 0 !important;
+    margin: 30px 0 !important;
     width: 100% !important;
   }
 
@@ -13377,6 +13425,8 @@
     font-weight: 400 !important;
     line-height: 28px !important;
     color: #5e5d5f !important;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
   }
 
   .blog-detail-comment-submit-wrap,
