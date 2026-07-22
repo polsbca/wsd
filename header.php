@@ -9,20 +9,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$is_home_active          = is_front_page();
-$is_treatments_active    = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' );
-$is_contact_active       = is_page_template( 'template-contact.php' );
-$is_referrals_active     = is_page_template( 'template-dental-referrals.php' );
-$is_teams_active         = is_page_template( 'template-teams.php' );
-$is_fees_active          = is_page_template( 'template-fees.php' );
-$is_smile_gallery_active = is_page_template( 'template-smile-gallery.php' );
-$is_blogs_active         = is_page_template( 'template-blogs.php' );
-$contact_url             = wsd_get_contact_page_url();
-$referrals_url           = wsd_get_referrals_page_url();
-$teams_url               = wsd_get_teams_page_url();
-$fees_url                = wsd_get_fees_page_url();
-$smile_gallery_url       = wsd_get_smile_gallery_page_url();
-$blogs_url               = wsd_get_blogs_page_url();
+$is_home_active            = is_front_page();
+$is_dental_implants_active = is_page_template( 'template-dental-implants.php' );
+$is_treatments_active      = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' ) || $is_dental_implants_active;
+$is_contact_active         = is_page_template( 'template-contact.php' );
+$is_referrals_active       = is_page_template( 'template-dental-referrals.php' );
+$is_teams_active           = is_page_template( 'template-teams.php' );
+$is_fees_active            = is_page_template( 'template-fees.php' );
+$is_smile_gallery_active   = is_page_template( 'template-smile-gallery.php' );
+$is_blogs_active           = is_page_template( 'template-blogs.php' );
+$contact_url               = wsd_get_contact_page_url();
+$referrals_url             = wsd_get_referrals_page_url();
+$teams_url                 = wsd_get_teams_page_url();
+$fees_url                  = wsd_get_fees_page_url();
+$smile_gallery_url         = wsd_get_smile_gallery_page_url();
+$blogs_url                 = wsd_get_blogs_page_url();
+$dental_implants_url       = wsd_get_dental_implants_page_url();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -125,8 +127,8 @@ $blogs_url               = wsd_get_blogs_page_url();
 											<a href="/services/all-about-cosmetic-dentistry-services">Cosmetic Dentistry</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
-										<div class="dropdown-item">
-											<a href="<?php echo esc_url( home_url( '/#dental-implants' ) ); ?>">Dental Implants</a>
+										<div class="dropdown-item <?php echo $is_dental_implants_active ? 'active' : ''; ?>">
+											<a href="<?php echo esc_url( $dental_implants_url ); ?>">Dental Implants</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 										<div class="dropdown-item">
@@ -267,7 +269,7 @@ $blogs_url               = wsd_get_blogs_page_url();
 								<ul class="sub-menu">
 									<li><a href="/services/all-about-general-dentistry-services/">General Dentistry</a></li>
 									<li><a href="/services/all-about-cosmetic-dentistry-services/">Cosmetic Dentistry</a></li>
-									<li><a href="<?php echo esc_url( home_url( '/#dental-implants' ) ); ?>">Dental Implants</a></li>
+									<li class="<?php echo $is_dental_implants_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $dental_implants_url ); ?>">Dental Implants</a></li>
 									<li><a href="<?php echo esc_url( home_url( '/#invisalign' ) ); ?>">Invisalign</a></li>
 								</ul>
 							</div>

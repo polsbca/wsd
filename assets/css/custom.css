@@ -16952,6 +16952,21 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   background-color: #fefdf6;
 }
 
+/* Tablet-only implants UI (shown in responsive.css 768–991.98px) */
+.implants-about-lead,
+.implants-about-dots,
+.implants-built-disclosure,
+.implants-compare-tablet,
+.dental-implants-main .implants-gallery-dots {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .implants-built-disclosure {
+    display: none;
+  }
+}
+
 @media (max-width: 1600px) {
 
   .implants-hero,

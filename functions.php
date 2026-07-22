@@ -468,6 +468,15 @@ function wsd_get_blogs_page_url() {
 }
 
 /**
+ * Get the permalink for the Dental Implants page template.
+ *
+ * @return string
+ */
+function wsd_get_dental_implants_page_url() {
+	return wsd_get_page_url_by_template( 'template-dental-implants.php', home_url( '/dental-implants/' ) );
+}
+
+/**
  * Get the Blogs page hero image URL (featured image, then theme fallback).
  *
  * @param int $page_id Optional page ID.

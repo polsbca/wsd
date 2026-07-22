@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<div class="footer-nav-col footer-accordion-item">
 							<h4 class="footer-nav-title">General Dentistry</h4>
 							<ul class="footer-nav-list list-unstyled">
-								<li><a href="#dental-implants">Dental Implants</a></li>
+								<li><a href="<?php echo esc_url( function_exists( 'wsd_get_dental_implants_page_url' ) ? wsd_get_dental_implants_page_url() : home_url( '/dental-implants/' ) ); ?>">Dental Implants</a></li>
 								<li><a href="#checkups">Monthly Checkups</a></li>
 								<li><a href="#emergency">Emergency</a></li>
 							</ul>
@@ -137,7 +137,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="footer-nav-col mb-5">
 									<h4 class="footer-nav-title">General Dentistry</h4>
 									<ul class="footer-nav-list list-unstyled">
-										<li><a href="#dental-implants">Dental Implants</a></li>
+										<li><a href="<?php echo esc_url( function_exists( 'wsd_get_dental_implants_page_url' ) ? wsd_get_dental_implants_page_url() : home_url( '/dental-implants/' ) ); ?>">Dental Implants</a></li>
 										<li><a href="#checkups">Monthly Checkups</a></li>
 										<li><a href="#emergency">Emergency</a></li>
 									</ul>

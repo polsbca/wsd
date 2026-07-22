@@ -165,7 +165,7 @@ get_header();
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
-										<a href="#dental-implants" class="btn btn-primary tab-action-btn">View Dental Implants</a>
+										<a href="<?php echo esc_url( function_exists( 'wsd_get_dental_implants_page_url' ) ? wsd_get_dental_implants_page_url() : home_url( '/dental-implants/' ) ); ?>" class="btn btn-primary tab-action-btn">View Dental Implants</a>
 									</div>
 								</div>
 							</div>
