@@ -191,7 +191,7 @@ get_header();
 										</div>
 									</div> -->
 									<div class="tab-button-wrapper">
-										<a href="#invisalign" class="btn btn-primary tab-action-btn">View Invisalign</a>
+										<a href="<?php echo esc_url( function_exists( 'wsd_get_invisalign_page_url' ) ? wsd_get_invisalign_page_url() : home_url( '/invisalign/' ) ); ?>" class="btn btn-primary tab-action-btn">View Invisalign</a>
 									</div>
 								</div>
 							</div>

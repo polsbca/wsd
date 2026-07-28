@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $is_home_active            = is_front_page();
 $is_dental_implants_active = is_page_template( 'template-dental-implants.php' );
-$is_treatments_active      = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' ) || $is_dental_implants_active;
+$is_invisalign_active      = is_page_template( 'template-invisalign.php' );
+$is_treatments_active      = is_singular( 'services' ) || is_post_type_archive( 'services' ) || is_tax( 'service_category' ) || $is_dental_implants_active || $is_invisalign_active;
 $is_contact_active         = is_page_template( 'template-contact.php' );
 $is_referrals_active       = is_page_template( 'template-dental-referrals.php' );
 $is_teams_active           = is_page_template( 'template-teams.php' );
@@ -25,6 +26,7 @@ $fees_url                  = wsd_get_fees_page_url();
 $smile_gallery_url         = wsd_get_smile_gallery_page_url();
 $blogs_url                 = wsd_get_blogs_page_url();
 $dental_implants_url       = wsd_get_dental_implants_page_url();
+$invisalign_url            = wsd_get_invisalign_page_url();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -131,8 +133,8 @@ $dental_implants_url       = wsd_get_dental_implants_page_url();
 											<a href="<?php echo esc_url( $dental_implants_url ); ?>">Dental Implants</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
-										<div class="dropdown-item">
-											<a href="<?php echo esc_url( home_url( '/#invisalign' ) ); ?>">Invisalign</a>
+										<div class="dropdown-item <?php echo $is_invisalign_active ? 'active' : ''; ?>">
+											<a href="<?php echo esc_url( $invisalign_url ); ?>">Invisalign</a>
 											<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-right.svg' ); ?>" alt="" class="arrow-icon">
 										</div>
 									</div>
@@ -270,7 +272,7 @@ $dental_implants_url       = wsd_get_dental_implants_page_url();
 									<li><a href="/services/all-about-general-dentistry-services/">General Dentistry</a></li>
 									<li><a href="/services/all-about-cosmetic-dentistry-services/">Cosmetic Dentistry</a></li>
 									<li class="<?php echo $is_dental_implants_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $dental_implants_url ); ?>">Dental Implants</a></li>
-									<li><a href="<?php echo esc_url( home_url( '/#invisalign' ) ); ?>">Invisalign</a></li>
+									<li class="<?php echo $is_invisalign_active ? 'current-menu-item' : ''; ?>"><a href="<?php echo esc_url( $invisalign_url ); ?>">Invisalign</a></li>
 								</ul>
 							</div>
 						</li>

@@ -140,7 +140,9 @@ body {
   html.wsd-js body.page-template-template-blogs-php .blogs-page-main .hero-image-wrapper,
   html.wsd-js body.page-template-template-blogs .blogs-page-main .hero-image-wrapper,
   html.wsd-js body.page-template-template-dental-implants-php .implants-hero-image-wrapper,
-  html.wsd-js body.page-template-template-dental-implants .implants-hero-image-wrapper {
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-image-wrapper,
+  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-image-wrapper,
+  html.wsd-js body.page-template-template-invisalign .invisalign-hero-image-wrapper {
     opacity: 1;
     transform: none;
     clip-path: inset(0% 0% 100% 0%);
@@ -151,7 +153,13 @@ body {
   html.wsd-js body.page-template-template-dental-implants-php .implants-hero-desc,
   html.wsd-js body.page-template-template-dental-implants .implants-hero-desc,
   html.wsd-js body.page-template-template-dental-implants-php .implants-hero-ctas .implants-btn,
-  html.wsd-js body.page-template-template-dental-implants .implants-hero-ctas .implants-btn {
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-ctas .implants-btn,
+  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-title,
+  html.wsd-js body.page-template-template-invisalign .invisalign-hero-title,
+  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-desc,
+  html.wsd-js body.page-template-template-invisalign .invisalign-hero-desc,
+  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-ctas .invisalign-btn,
+  html.wsd-js body.page-template-template-invisalign .invisalign-hero-ctas .invisalign-btn {
     opacity: 0;
     transform: translateY(30px);
   }
@@ -3855,6 +3863,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-close-circle,
   .btn-process-tab,
   .implants-tab-btn,
+  .invisalign-tab-btn,
   .reviews-nav-btn,
   .more-services-nav-btn,
   .btn-view-plan,
@@ -3881,6 +3890,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-close-circle::before,
   .btn-process-tab::before,
   .implants-tab-btn::before,
+  .invisalign-tab-btn::before,
   .reviews-nav-btn::before,
   .more-services-nav-btn::before,
   .btn-view-plan::before,
@@ -3912,6 +3922,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-close-circle:hover::before,
   .btn-process-tab:hover::before,
   .implants-tab-btn:hover::before,
+  .invisalign-tab-btn:hover::before,
   .reviews-nav-btn:hover::before,
   .more-services-nav-btn:hover::before,
   .btn-view-plan:hover::before,
@@ -3926,6 +3937,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-close-circle,
   .btn-process-tab.active,
   .implants-tab-btn.active,
+  .invisalign-tab-btn.active,
   .btn-view-plan,
   .teams-support-tab.is-active,
   .teams-slider-nav-btn--next.is-active,
@@ -3941,6 +3953,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .btn-close-circle:hover,
   .btn-process-tab.active:hover,
   .implants-tab-btn.active:hover,
+  .invisalign-tab-btn.active:hover,
   .btn-view-plan:hover,
   .teams-support-tab.is-active:hover,
   .teams-slider-nav-btn--next.is-active:hover,
@@ -3971,6 +3984,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn.next-btn,
   .btn-process-tab:not(.active),
   .implants-tab-btn:not(.active),
+  .invisalign-tab-btn:not(.active),
   .reviews-nav-btn,
   .more-services-nav-btn,
   .btn-book-outline,
@@ -3988,6 +4002,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   .testimonials-nav-btn.next-btn:hover,
   .btn-process-tab:not(.active):hover,
   .implants-tab-btn:not(.active):hover,
+  .invisalign-tab-btn:not(.active):hover,
   .reviews-nav-btn:hover,
   .more-services-nav-btn:hover,
   .btn-book-outline:hover,
@@ -16952,7 +16967,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   background-color: #fefdf6;
 }
 
-/* Tablet-only implants UI (shown in responsive.css 768–991.98px) */
+/* Tablet-only implants UI (shown in responsive.css 768?991.98px) */
 .implants-about-lead,
 .implants-about-dots,
 .implants-built-disclosure,
@@ -17055,5 +17070,813 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     font-size: 16px;
     letter-spacing: 0.5px;
     color: #5e5d5f;
+  }
+}
+/* ============================================================
+   INVISALIGN PAGE (DESKTOP ? FIGMA 3957:21164)
+   ============================================================ */
+.page-template-template-invisalign-php .site-content,
+.page-template-template-invisalign .site-content {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  grid-template-columns: none !important;
+  overflow-x: clip;
+  background-color: #fefdf6;
+}
+
+.page-template-template-invisalign-php #main.invisalign-main,
+.page-template-template-invisalign #main.invisalign-main {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 160px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 0 160px !important;
+  background-color: #fefdf6;
+}
+
+.invisalign-main {
+  background-color: #fefdf6;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Hero */
+.invisalign-hero {
+  background-color: #faf3e6;
+  padding: 100px 120px 0;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.invisalign-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) minmax(0, 1fr);
+  column-gap: 80px;
+  align-items: end;
+  width: 100%;
+}
+
+.invisalign-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  max-width: 760px;
+  padding: 80px 0 140px;
+  width: 100%;
+}
+
+.invisalign-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.invisalign-hero-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  font-size: clamp(40px, 3.15vw, 60px);
+  line-height: normal;
+  letter-spacing: 0;
+  color: #5e5d5f;
+}
+
+.invisalign-hero-title .accent {
+  color: #d8a444;
+}
+
+.invisalign-hero-desc {
+  margin: 0;
+  max-width: 760px;
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  font-size: clamp(16px, 1.05vw, 20px);
+  line-height: 36px;
+  color: #5e5d5f;
+}
+
+.invisalign-hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.invisalign-btn {
+  width: 100%;
+  min-height: 70px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  font-family: var(--font-family-primary);
+  font-size: clamp(16px, 1.05vw, 20px);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.invisalign-hero-image-col {
+  width: 100%;
+  min-width: 0;
+  align-self: end;
+}
+
+.invisalign-hero-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background-color: #faf3e6;
+}
+
+.invisalign-hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 840px;
+  margin-left: auto;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* All About */
+.invisalign-about-section {
+  background-color: #fefdf6;
+  width: 100%;
+}
+
+.invisalign-about-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  width: 100%;
+}
+
+.invisalign-about-header {
+  display: flex;
+  align-items: center;
+  padding-right: 120px;
+}
+
+.invisalign-section-badge {
+  background-color: #faf3e6;
+  border-bottom: 1px solid rgba(216, 164, 68, 0.37);
+  border-radius: 0 30px 30px 0;
+  padding: 40px 120px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.invisalign-section-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 48px;
+  line-height: normal;
+  letter-spacing: -1px;
+  color: #5e5d5f;
+  text-transform: capitalize;
+}
+
+.invisalign-section-title .accent {
+  color: #d8a444;
+}
+
+.invisalign-about-body {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 120px;
+}
+
+.invisalign-about-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 21px;
+  align-items: center;
+}
+
+.invisalign-tab-btn {
+  border: 1px solid #5e5d5f;
+  border-radius: 40px;
+  padding: 20px 60px;
+  background: transparent;
+  color: #5e5d5f;
+  font-family: var(--font-family-primary);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.invisalign-tab-btn.active {
+  background-color: #d8a444;
+  border-color: #d8a444;
+  color: #ffffff;
+}
+
+.invisalign-about-panel {
+  display: none;
+}
+
+.invisalign-about-panel.active {
+  display: block;
+}
+
+.invisalign-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 38px;
+}
+
+.invisalign-step-card {
+  background-color: #faf3e6;
+  border-radius: 16px;
+  min-height: 308px;
+  padding: 38px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-sizing: border-box;
+}
+
+.invisalign-step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #d8a444;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  flex-shrink: 0;
+}
+
+.invisalign-step-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #757575;
+}
+
+.invisalign-step-desc {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 26, 26, 0.5);
+}
+
+/* Straight teeth / process */
+.invisalign-treatment-section {
+  background-color: #faf3e6;
+  width: 100%;
+}
+
+.invisalign-treatment-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 126px;
+  padding: 160px 120px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.invisalign-treatment-visual {
+  display: flex;
+  flex-direction: column;
+  width: 311px;
+  flex-shrink: 0;
+  height: 607px;
+}
+
+.invisalign-process-step {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 0;
+  width: 100%;
+}
+
+.invisalign-process-step-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+}
+
+.invisalign-process-step-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #d8a444;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.invisalign-process-step-text {
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #757575;
+  text-align: center;
+}
+
+.invisalign-process-step-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 100px;
+  overflow: hidden;
+}
+
+.invisalign-process-step-image img {
+  display: block;
+  width: 100%;
+  max-width: 311px;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.invisalign-treatment-content {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  flex: 1 1 auto;
+  max-width: 1156px;
+  min-width: 0;
+}
+
+.invisalign-treatment-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.invisalign-treatment-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -1px;
+  color: #5e5d5f;
+  text-transform: capitalize;
+}
+
+.invisalign-treatment-title .accent {
+  color: #d8a444;
+}
+
+.invisalign-treatment-lead {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.invisalign-treatment-lead p {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 37px;
+  letter-spacing: 0.4px;
+  color: #5e5d5f;
+}
+
+.invisalign-treatment-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.invisalign-treatment-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.invisalign-treatment-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.invisalign-treatment-item span {
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 37px;
+  letter-spacing: 0.4px;
+  color: #5e5d5f;
+}
+
+/* Why Invisalign is Better */
+.invisalign-compare-section {
+  width: 100%;
+  background-color: #fefdf6;
+}
+
+.invisalign-compare-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: 40px 200px 0;
+  box-sizing: border-box;
+}
+
+.invisalign-compare-title {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 56px;
+  color: #5e5d5f;
+}
+
+.invisalign-compare-title .accent {
+  color: #d8a444;
+}
+
+.invisalign-compare-cards {
+  display: flex;
+  gap: 10px;
+  width: 1110px;
+  max-width: 100%;
+  height: 572px;
+}
+
+.invisalign-compare-card {
+  position: relative;
+  flex: 1 1 0;
+  width: 550px;
+  max-width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.invisalign-compare-card--left {
+  border-radius: 24px 0 0 24px;
+}
+
+.invisalign-compare-card--right {
+  border-radius: 0 24px 24px 0;
+}
+
+.invisalign-compare-card-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.invisalign-compare-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(51, 51, 51, 0) 38.024%,
+    rgba(51, 51, 51, 0.8) 77.622%
+  );
+  pointer-events: none;
+}
+
+.invisalign-compare-badge {
+  position: absolute;
+  top: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 104px;
+  height: 35px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background-color: #d8a444;
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  color: #fefdf6;
+  box-sizing: border-box;
+}
+
+.invisalign-compare-card--left .invisalign-compare-badge {
+  left: 14px;
+}
+
+.invisalign-compare-card--right .invisalign-compare-badge {
+  right: 14px;
+}
+
+.invisalign-compare-points {
+  position: absolute;
+  left: 40px;
+  bottom: 56px;
+  z-index: 2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.invisalign-compare-card--right .invisalign-compare-points {
+  left: 50px;
+}
+
+.invisalign-compare-points li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.invisalign-compare-points img {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.invisalign-compare-points span {
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 40px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Smile Gallery */
+.invisalign-main .smile-gallery-section.invisalign-smile-gallery {
+  background-color: #fefdf6;
+}
+
+/* Fees */
+.invisalign-fees-section {
+  padding: 0 215px;
+  background-color: #fefdf6;
+}
+
+.invisalign-fees-box {
+  background-color: #faf3e6;
+  border-radius: 58px;
+  overflow: hidden;
+  max-width: 1490px;
+  margin: 0 auto;
+}
+
+.invisalign-fees-header {
+  padding: 100px;
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.invisalign-fees-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 50px;
+  color: #5e5d5f;
+  text-transform: capitalize;
+}
+
+.invisalign-fees-title .accent {
+  color: #d8a444;
+}
+
+.invisalign-fees-lead {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #5e5d5f;
+}
+
+.invisalign-fees-list {
+  padding: 0 100px 100px;
+}
+
+.invisalign-fee-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+}
+
+.invisalign-fee-row.is-last {
+  border-bottom: none;
+}
+
+.invisalign-fee-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 581px;
+}
+
+.invisalign-fee-name {
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: #5e5d5f;
+}
+
+.invisalign-fee-desc {
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: rgba(94, 93, 95, 0.68);
+}
+
+.invisalign-fee-price {
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #d8a444;
+  white-space: nowrap;
+}
+
+.invisalign-membership-section {
+  background-color: #fefdf6;
+}
+
+/* More services */
+.invisalign-more-services-section {
+  width: 100%;
+  background-color: #fefdf6;
+  padding: 0;
+}
+
+.invisalign-more-services-inner {
+  padding: 73px 0 0;
+  box-sizing: border-box;
+}
+
+.invisalign-more-services-section .more-services-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 120px;
+  margin-bottom: 100px;
+  gap: 24px;
+}
+
+.invisalign-more-services-section .more-services-nav {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.invisalign-more-services-section .more-service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 16px;
+}
+
+.invisalign-more-services-section .more-services-slider-container {
+  margin-inline: 0;
+  padding: 0;
+}
+
+.invisalign-more-services-section .more-services-progress-wrapper {
+  margin-top: 40px;
+  padding: 0 120px;
+}
+
+@media (max-width: 1600px) {
+  .invisalign-hero,
+  .invisalign-about-body,
+  .invisalign-treatment-inner {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .invisalign-section-badge {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .invisalign-compare-inner {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .invisalign-fees-section {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .invisalign-more-services-section .more-services-header,
+  .invisalign-more-services-section .more-services-progress-wrapper {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .invisalign-hero-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .invisalign-treatment-inner {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .invisalign-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .invisalign-hero-inner,
+  .invisalign-treatment-inner {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .invisalign-hero-content {
+    padding-bottom: 60px;
+  }
+
+  .invisalign-treatment-visual {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .invisalign-compare-inner {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .invisalign-compare-cards {
+    width: 100%;
+    height: auto;
+    min-height: 480px;
   }
 }
