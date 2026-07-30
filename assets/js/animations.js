@@ -914,9 +914,8 @@ function initAnimations() {
       );
   }
 
-  // Entrance animation for treatments section elements in a single staggered timeline (same style as About section)
-  // Only on desktop — mobile uses CSS transitions + IntersectionObserver in responsive.js
-  if (isDesktop && document.querySelector(".treatments-header-badge")) {
+  // Entrance animation for treatments section (desktop + tablet — phone uses CSS .mobile-visible)
+  if (window.innerWidth >= 768 && document.querySelector(".treatments-header-badge")) {
     const treatmentsTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".treatments-header-badge",
@@ -1273,6 +1272,9 @@ function initAnimations() {
     initModalTabContentAnimations(modal);
     initModalNavScroll(modal);
   });
+
+  // After modal listeners are ready, open deep-linked treatment modals.
+  initServiceTreatmentDeepLink();
 }
 
 function initModalHorizontalReset(modalElement) {
@@ -1691,6 +1693,90 @@ function initModalSmileGallery(modalElement) {
 
   mediaQuery.addEventListener("change", requestScaleSync);
   requestScaleSync();
+}
+
+function initServiceTreatmentDeepLink() {
+  const container = document.querySelector(".cosmetic-treatments-container");
+  if (!container) {
+    return;
+  }
+
+  const rows = Array.from(
+    container.querySelectorAll(".cosmetic-treatment-row[data-treatment-slug]"),
+  );
+  if (!rows.length) {
+    return;
+  }
+
+  const activateRow = (row) => {
+    if (!row) {
+      return;
+    }
+
+    rows.forEach((item) => item.classList.remove("active"));
+    row.classList.add("active");
+  };
+
+  const openTreatmentModal = (row) => {
+    const targetSelector = row.getAttribute("data-bs-target");
+    if (!targetSelector) {
+      return;
+    }
+
+    const modalEl = document.querySelector(targetSelector);
+    if (!modalEl) {
+      return;
+    }
+
+    if (window.bootstrap && window.bootstrap.Modal) {
+      window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+      return;
+    }
+
+    // Fallback if Bootstrap API is not ready yet.
+    row.click();
+  };
+
+  const activateFromHash = (options = {}) => {
+    const raw = (window.location.hash || "").replace(/^#/, "");
+    if (!raw) {
+      return;
+    }
+
+    let slug = raw;
+    try {
+      slug = decodeURIComponent(raw);
+    } catch (error) {
+      slug = raw;
+    }
+
+    const target = rows.find(
+      (row) => row.getAttribute("data-treatment-slug") === slug,
+    );
+    if (!target) {
+      return;
+    }
+
+    activateRow(target);
+
+    if (options.openModal !== false) {
+      // Defer one frame so layout/hash scroll settles before the modal opens.
+      window.requestAnimationFrame(() => {
+        openTreatmentModal(target);
+      });
+    }
+  };
+
+  rows.forEach((row) => {
+    row.addEventListener("click", () => {
+      activateRow(row);
+    });
+  });
+
+  activateFromHash({ openModal: true });
+  window.addEventListener("hashchange", () => {
+    activateFromHash({ openModal: true });
+  });
 }
 
 function initServicePageTextAnimations() {
@@ -2610,7 +2696,7 @@ function initTreatmentsAccordion() {
   }
 
   function lockAccordionMinHeight() {
-    if (!accordionWrapper || window.innerWidth < 992) {
+    if (!accordionWrapper || window.innerWidth < 768) {
       if (accordionWrapper) {
         accordionWrapper.style.removeProperty("--treatments-accordion-min-height");
         accordionWrapper.style.removeProperty("height");
@@ -2711,7 +2797,7 @@ function initTreatmentsAccordion() {
         if (index > 0) img.remove();
       });
 
-    const isDesktopSwap = window.innerWidth >= 992;
+    const isDesktopSwap = window.innerWidth >= 768;
 
     if (isDesktopSwap) {
       const tempImg = document.createElement("img");
@@ -2862,10 +2948,11 @@ function initTreatmentsAccordion() {
     if (!header) return;
 
     const toggleTab = () => {
-      const isMobile = window.innerWidth < 992;
+      const isPhone = window.innerWidth < 768;
 
       if (tab.classList.contains("active")) {
-        if (isMobile && !isTransitioning) {
+        // Phone accordion can collapse; tablet/desktop only switch between tabs
+        if (isPhone && !isTransitioning) {
           isTransitioning = true;
           tab.classList.remove("active");
           const content = getContent(tab);
@@ -3011,17 +3098,7 @@ function initTestimonialsSlider() {
       activeTween = null;
     }
 
-    // Tablet/phone: CSS forces opacity with !important — swap .active only
-    // (never two absolute slides visible at once; that stacks overlapping text)
-    if (window.innerWidth < 992) {
-      currentSlide.classList.remove("active");
-      nextSlide.classList.add("active");
-      currentIndex = newIndex;
-      updateProgress();
-      isTransitioning = false;
-      return;
-    }
-
+    // Tablet/phone: same GSAP text transition as desktop (CSS must not use !important on parts)
     activeTween = gsap.timeline({
       onComplete: () => {
         gsap.set([currentParts, nextParts], {
@@ -3043,7 +3120,7 @@ function initTestimonialsSlider() {
         ease: "power2.in",
       })
       .call(() => {
-        currentSlide.classList.remove("active");
+        currentSlide.classList.remove("active", "is-entering");
         gsap.set(currentParts, { clearProps: "opacity,transform,y,scale" });
         nextSlide.classList.add("active");
         gsap.set(nextParts, { opacity: 0, y: 14 });
@@ -3056,6 +3133,10 @@ function initTestimonialsSlider() {
         ease: "power2.out",
       });
   };
+
+  // Allow mobile swipe/autoplay (responsive.js) to reuse the same transition
+  window.wsdTestimonialsGoToSlide = goToSlide;
+  window.wsdTestimonialsGetIndex = () => currentIndex;
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
@@ -3071,7 +3152,7 @@ function initTestimonialsSlider() {
     });
   }
 
-  // Viewport entrance animation for the testimonials section elements (desktop only)
+  // Viewport entrance animation for the testimonials section elements
   if (window.innerWidth >= 992) {
     const testimonialsEntranceTl = gsap.timeline({
       scrollTrigger: {
@@ -3161,6 +3242,71 @@ function initTestimonialsSlider() {
         },
         "-=0.5",
       );
+  } else {
+    // Mobile: match desktop text reveal when the section enters view
+    const firstParts = slides[0].querySelectorAll(
+      ".testimonial-title, .testimonial-text, .testimonial-stars, .testimonial-author",
+    );
+    gsap.set(firstParts, { opacity: 0, y: 30 });
+
+    const playMobileEntrance = () => {
+      if (section.dataset.wsdTestimonialsEntered === "1") return;
+      section.dataset.wsdTestimonialsEntered = "1";
+
+      const tl = gsap.timeline();
+      tl.to(slides[0].querySelector(".testimonial-title"), {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+        .to(
+          slides[0].querySelector(".testimonial-text"),
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.6",
+        )
+        .to(
+          slides[0].querySelector(".testimonial-stars"),
+          {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.6",
+        )
+        .to(
+          slides[0].querySelector(".testimonial-author"),
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.5",
+        );
+    };
+
+    if (section.classList.contains("mobile-visible")) {
+      playMobileEntrance();
+    } else {
+      const entranceObserver = new MutationObserver(() => {
+        if (section.classList.contains("mobile-visible")) {
+          playMobileEntrance();
+          entranceObserver.disconnect();
+        }
+      });
+      entranceObserver.observe(section, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    }
   }
 }
 

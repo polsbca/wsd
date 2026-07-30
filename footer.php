@@ -90,7 +90,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
 								<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
 								<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
-								<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+								<a href="https://www.google.com/maps/place/Waterside+Dental+Care/@53.6226932,-2.1459005,17z/data=!3m1!4b1!4m6!3m5!1s0x487bb94834821ef7:0x70d1fd62402d310e!8m2!3d53.6226932!4d-2.1459005!16s%2Fg%2F1tyywnww?entry=ttu" class="btn-directions text-gold text-underline" target="_blank" rel="noopener noreferrer">Get Directions</a>
 							</div>
 						</div>
 
@@ -187,7 +187,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
 										<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
 										<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
-										<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+										<a href="https://www.google.com/maps/place/Waterside+Dental+Care/@53.6226932,-2.1459005,17z/data=!3m1!4b1!4m6!3m5!1s0x487bb94834821ef7:0x70d1fd62402d310e!8m2!3d53.6226932!4d-2.1459005!16s%2Fg%2F1tyywnww?entry=ttu" class="btn-directions text-gold text-underline" target="_blank" rel="noopener noreferrer">Get Directions</a>
 									</div>
 								</div>
 
@@ -213,7 +213,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<p>Call Us: <a href="tel:01706632661" class="contact-link text-underline">01706 632 661</a></p>
 										<p>Email: <a href="mailto:info@waterside-dentalcare.co.uk" class="contact-link text-underline">info@waterside-dentalcare.co.uk</a></p>
 										<p class="address-text">Waterside Dental Care, 330 Yorkshire Street, Rochdale, Greater Manchester, OL16 2DS</p>
-										<a href="#" class="btn-directions text-gold text-underline">Get Directions</a>
+										<a href="https://www.google.com/maps/place/Waterside+Dental+Care/@53.6226932,-2.1459005,17z/data=!3m1!4b1!4m6!3m5!1s0x487bb94834821ef7:0x70d1fd62402d310e!8m2!3d53.6226932!4d-2.1459005!16s%2Fg%2F1tyywnww?entry=ttu" class="btn-directions text-gold text-underline" target="_blank" rel="noopener noreferrer">Get Directions</a>
 									</div>
 								</div>
 							</div>
@@ -238,18 +238,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="row align-items-end justify-content-between footer-middle-row flex-column flex-lg-row">
 					<!-- Subscribe -->
 					<div class="col-xl-7 col-12 subscribe-col">
-						<div class="footer-subscribe d-flex flex-wrap align-items-end gap-4">
+						<form class="footer-subscribe d-flex flex-wrap align-items-end gap-4" id="footer-subscribe-form" action="#" method="post">
 							<div class="subscribe-input-wrapper">
 								<label for="subscribe-email" class="subscribe-label">Get to know our updates:</label>
-								<input type="email" id="subscribe-email" class="subscribe-input" />
-								<!-- <div class="subscribe-line-wrapper">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/subscribe-line.svg' ); ?>" alt="" class="subscribe-line-img">
-								</div> -->
+								<input type="email" id="subscribe-email" name="subscribe_email" class="subscribe-input" placeholder="" autocomplete="email" required aria-required="true">
 							</div>
 							<div class="subscribe-btn-wrapper">
-								<button class="btn btn-subscribe">Subscribe</button>
+								<button type="button" class="btn btn-subscribe" id="footer-subscribe-btn">
+									<span class="btn-subscribe-label"><?php esc_html_e( 'Subscribe', 'wsd' ); ?></span>
+								</button>
 							</div>
-						</div>
+						</form>
 					</div>
 
 					<!-- Language Selector -->
@@ -274,7 +273,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<span>Last updated: June 10, 2025 - 12:55 pm</span>
 					</div>
 					<div class="col-md-6 col-12 text-center text-xl-end copyright-text">
-						<span>Copyright 2026 watersidedentalcare | Crafted by Funky Vibes Marketing</span>
+						<span>Copyright 2026 watersidedentalcare | Crafted by <a href="https://funkyvibes.co.uk/" target="_blank" rel="noopener noreferrer">Funky Vibes Marketing</a></span>
 					</div>
 				</div>
 			</div>

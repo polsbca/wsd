@@ -88,7 +88,7 @@ function wsd_scripts() {
 
 	// Front-page, services template, single services, and contact page animations.
 	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_page_template( 'template-dental-implants.php' ) || is_page_template( 'template-invisalign.php' ) || is_singular( 'services' ) || is_singular( 'post' ) ) {
-		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery' ), time(), true );
+		wp_enqueue_script( 'wsd-animations', get_stylesheet_directory_uri() . '/assets/js/animations.js', array( 'gsap', 'gsap-scrolltrigger', 'jquery', 'bootstrap-js' ), time(), true );
 	}
 
 	if ( is_page_template( 'template-dental-implants.php' ) ) {
@@ -498,6 +498,64 @@ function wsd_get_smile_gallery_page_url() {
  */
 function wsd_get_blogs_page_url() {
 	return wsd_get_page_url_by_template( 'template-blogs.php', home_url( '/blogs/' ) );
+}
+
+/**
+ * Get a services CPT post by path (slug path under the services post type).
+ *
+ * @param string $path Path like 'all-about-general-dentistry-services'.
+ * @return WP_Post|null
+ */
+function wsd_get_services_post_by_path( $path ) {
+	$post = get_page_by_path( $path, OBJECT, 'services' );
+	return ( $post instanceof WP_Post ) ? $post : null;
+}
+
+/**
+ * Permalink for a services CPT post path, with optional treatment hash.
+ *
+ * @param string $path           Parent service path.
+ * @param string $fallback_path  Fallback path segment.
+ * @param string $treatment_slug Optional child treatment slug for #hash.
+ * @return string
+ */
+function wsd_get_services_url_by_path( $path, $fallback_path = '', $treatment_slug = '' ) {
+	$post = wsd_get_services_post_by_path( $path );
+	$url  = $post ? get_permalink( $post ) : home_url( '/services/' . ( $fallback_path ? $fallback_path : $path ) . '/' );
+
+	if ( $treatment_slug ) {
+		$url = untrailingslashit( $url ) . '/#' . sanitize_title( $treatment_slug );
+	}
+
+	return $url;
+}
+
+/**
+ * General Dentistry parent page URL (optional treatment tab hash).
+ *
+ * @param string $treatment_slug Optional child slug, e.g. 'bridges'.
+ * @return string
+ */
+function wsd_get_general_dentistry_url( $treatment_slug = '' ) {
+	return wsd_get_services_url_by_path(
+		'all-about-general-dentistry-services',
+		'all-about-general-dentistry-services',
+		$treatment_slug
+	);
+}
+
+/**
+ * Cosmetic Dentistry parent page URL (optional treatment tab hash).
+ *
+ * @param string $treatment_slug Optional child slug, e.g. 'dental-veneers'.
+ * @return string
+ */
+function wsd_get_cosmetic_dentistry_url( $treatment_slug = '' ) {
+	return wsd_get_services_url_by_path(
+		'all-about-cosmetic-dentistry-services',
+		'all-about-cosmetic-dentistry-services',
+		$treatment_slug
+	);
 }
 
 /**
@@ -2311,8 +2369,8 @@ function wsd_render_call_us_tab() {
 	?>
 	<div class="call-us-tab">
 		<a href="<?php echo esc_url( $contact_url ); ?>" class="btn-call-us">
-			<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon1.svg' ); ?>" alt="" class="phone-icon" width="24" height="24">
 			<span class="call-text"><?php esc_html_e( 'Contact us', 'wsd' ); ?></span>
+			<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-icon1.svg' ); ?>" alt="" class="phone-icon" width="24" height="24">
 		</a>
 	</div>
 	<?php

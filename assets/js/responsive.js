@@ -35,17 +35,29 @@ jQuery(document).ready(function($) {
         $('body').removeClass('mobile-menu-open');
     });
 
-    // Toggle Mobile Submenus
+    // Toggle Mobile Submenus (CSS handles show/hide — Figma 3949:15165)
     $('.submenu-toggle-btn').on('click', function(e) {
         e.preventDefault();
         var $btn = $(this);
         var $container = $btn.closest('.menu-item-has-children-mobile');
         var $submenuContainer = $container.find('> .sub-menu-container');
-        
-        $btn.find('.plus-icon').toggleClass('d-none');
-        $btn.find('.cross-icon').toggleClass('d-none');
-        $container.toggleClass('submenu-active');
-        $submenuContainer.slideToggle(300);
+        var isOpening = !$container.hasClass('submenu-active');
+
+        // Close any other open submenu so only one expands
+        $('.menu-item-has-children-mobile.submenu-active').not($container).each(function() {
+            var $open = $(this);
+            $open.removeClass('submenu-active');
+            $open.find('> .menu-item-row .plus-icon').removeClass('d-none');
+            $open.find('> .menu-item-row .cross-icon').addClass('d-none');
+            $open.find('> .sub-menu-container').hide().css({ height: '', overflow: '', display: '' });
+        });
+
+        $btn.find('.plus-icon').toggleClass('d-none', isOpening);
+        $btn.find('.cross-icon').toggleClass('d-none', !isOpening);
+        $container.toggleClass('submenu-active', isOpening);
+
+        // Clear any leftover jQuery animation inline styles, then let CSS display
+        $submenuContainer.stop(true, true).css({ height: '', overflow: '', display: '' });
     });
 
     // Drawer search button transition
@@ -447,66 +459,100 @@ jQuery(document).ready(function($) {
 
     // Initialize Mobile Testimonials Slider
     function initMobileTestimonialsSlider() {
-        if (window.innerWidth >= 992) return; // Only run on mobile
-        
-        var $wrapper = jQuery('.testimonials-content-row');
+        if (window.innerWidth >= 992) return;
+
+        var $section = jQuery('.testimonials-section');
+        var $wrapper = $section.find('.testimonials-content-row');
         if ($wrapper.length === 0) return;
 
-        var $slides = jQuery('.testimonial-slide');
+        var $slides = $section.find('.testimonial-slide');
         if ($slides.length <= 1) return;
 
-        var $progressBar = jQuery('.testimonials-progress-bar');
-        var currentIndex = 0;
         var totalSlides = $slides.length;
+        var slideInterval = null;
 
-        function updateProgress() {
-            if ($progressBar.length > 0) {
-                var widthPct = ((currentIndex + 1) / totalSlides) * 100;
-                $progressBar.css('width', widthPct + '%');
+        function getIndex() {
+            if (typeof window.wsdTestimonialsGetIndex === 'function') {
+                return window.wsdTestimonialsGetIndex();
             }
+            var activeIdx = $slides.index($slides.filter('.active').first());
+            return activeIdx >= 0 ? activeIdx : 0;
         }
 
-        // Set initial progress
-        updateProgress();
-
         function showSlide(index) {
-            $slides.removeClass('active');
+            if (typeof window.wsdTestimonialsGoToSlide === 'function') {
+                window.wsdTestimonialsGoToSlide(index);
+                return;
+            }
+
+            // Fallback if animations.js has not registered yet
+            $slides.removeClass('active is-entering');
             $slides.eq(index).addClass('active');
-            currentIndex = index;
-            updateProgress();
+        }
+
+        function goNext() {
+            showSlide((getIndex() + 1) % totalSlides);
+        }
+
+        function goPrev() {
+            showSlide((getIndex() - 1 + totalSlides) % totalSlides);
+        }
+
+        function startTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(goNext, 5000);
+        }
+
+        function resetTimer() {
+            startTimer();
         }
 
         // Swipe gestures
         var touchStartX = 0;
-        var touchEndX = 0;
-        
+        var touchStartY = 0;
+        var touchTracking = false;
+
         $wrapper.on('touchstart', function(e) {
-            var touches = e.touches || (e.originalEvent && e.originalEvent.touches);
+            var touches = e.originalEvent && e.originalEvent.touches;
             if (touches && touches.length > 0) {
                 touchStartX = touches[0].clientX;
-            }
-        });
-        
-        $wrapper.on('touchend', function(e) {
-            var touches = e.changedTouches || (e.originalEvent && e.originalEvent.changedTouches);
-            if (touches && touches.length > 0) {
-                touchEndX = touches[0].clientX;
-                handleSwipe();
+                touchStartY = touches[0].clientY;
+                touchTracking = true;
             }
         });
 
-        function handleSwipe() {
-            var swipeThreshold = 50;
-            if (touchStartX - touchEndX > swipeThreshold) {
-                // Swipe left -> Next slide
-                var nextIndex = (currentIndex + 1) % totalSlides;
-                showSlide(nextIndex);
-            } else if (touchEndX - touchStartX > swipeThreshold) {
-                // Swipe right -> Prev slide
-                var prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                showSlide(prevIndex);
+        $wrapper.on('touchend touchcancel', function(e) {
+            if (!touchTracking) return;
+            touchTracking = false;
+
+            var touches = e.originalEvent && e.originalEvent.changedTouches;
+            if (!touches || touches.length === 0) return;
+
+            var deltaX = touches[0].clientX - touchStartX;
+            var deltaY = touches[0].clientY - touchStartY;
+            var swipeThreshold = 40;
+
+            if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) < Math.abs(deltaY)) {
+                return;
             }
-        }
+
+            if (deltaX < 0) {
+                goNext();
+            } else {
+                goPrev();
+            }
+            resetTimer();
+        });
+
+        // Retry binding once animations.js has exposed the GSAP helper
+        var bindAttempts = 0;
+        var bindTimer = setInterval(function() {
+            bindAttempts += 1;
+            if (typeof window.wsdTestimonialsGoToSlide === 'function' || bindAttempts > 40) {
+                clearInterval(bindTimer);
+                startTimer();
+            }
+        }, 100);
     }
 
     // Initialize Mobile Payment Section Accordion
@@ -848,5 +894,106 @@ jQuery(document).ready(function($) {
         initContactTabletScrollNav();
         initDentalReferralsMobile();
     });
+})();
+
+/**
+ * Footer newsletter subscribe — runs on all viewports
+ */
+(function() {
+    function initFooterSubscribe() {
+        var form = document.getElementById('footer-subscribe-form');
+        var input = document.getElementById('subscribe-email');
+        var button = document.getElementById('footer-subscribe-btn');
+        if (!form || !input || !button) {
+            return;
+        }
+
+        var label = button.querySelector('.btn-subscribe-label') || button;
+        var subscribeText = (label.textContent || '').trim() || 'Subscribe';
+        var doneText = 'Done';
+        var resetTimer = null;
+        var isConfirming = false;
+
+        function isValidEmail(value) {
+            var email = String(value || '').trim();
+            if (!email) {
+                return false;
+            }
+            return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+        }
+
+        function markInvalid() {
+            input.setAttribute('aria-invalid', 'true');
+            input.classList.add('is-invalid');
+            button.classList.remove('is-done');
+            button.disabled = false;
+            label.textContent = subscribeText;
+            input.focus();
+        }
+
+        function showDone() {
+            isConfirming = true;
+            button.disabled = true;
+            button.classList.add('is-done');
+            label.textContent = doneText;
+            input.removeAttribute('aria-invalid');
+            input.classList.remove('is-invalid');
+
+            if (resetTimer) {
+                window.clearTimeout(resetTimer);
+            }
+
+            resetTimer = window.setTimeout(function() {
+                isConfirming = false;
+                button.disabled = false;
+                button.classList.remove('is-done');
+                label.textContent = subscribeText;
+                input.value = '';
+                resetTimer = null;
+            }, 2500);
+        }
+
+        function handleSubscribe(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            if (isConfirming) {
+                return false;
+            }
+
+            var email = (input.value || '').trim();
+            if (!email || !isValidEmail(email)) {
+                markInvalid();
+                return false;
+            }
+
+            showDone();
+            return false;
+        }
+
+        form.addEventListener('submit', handleSubscribe);
+        button.addEventListener('click', handleSubscribe);
+
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                handleSubscribe(event);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            if ((input.value || '').trim()) {
+                input.removeAttribute('aria-invalid');
+                input.classList.remove('is-invalid');
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFooterSubscribe);
+    } else {
+        initFooterSubscribe();
+    }
 })();
 

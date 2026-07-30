@@ -937,12 +937,15 @@
     height: 14px;
   }
 
-  /* Mobile Drawer Menu */
+  /* Mobile Drawer Menu — Figma 3949:15067: equal rows fill viewport below header */
   .mobile-nav-menu {
     overflow-y: auto;
-    flex-grow: 1;
+    flex: 1 1 auto;
+    min-height: 0;
     background-color: #faf3e6;
     border-top: 1px solid rgba(216, 164, 68, 0.28);
+    display: flex;
+    flex-direction: column;
   }
 
   .mobile-menu {
@@ -951,37 +954,63 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 100%;
   }
 
-  .mobile-menu .menu-item {
+  .mobile-menu > .menu-item {
     background-color: #faf3e6;
     border-bottom: 1px solid rgba(216, 164, 68, 0.28);
     margin: 0;
-    padding: 20px 28px;
+    padding: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    flex: 1 1 0;
+    min-height: 0;
+    box-sizing: border-box;
     transition: background-color 0.3s ease;
   }
 
-  .mobile-menu .menu-item.submenu-active {
-    background-color: rgba(216, 164, 68, 0.2);
+  .mobile-menu > .menu-item:last-child {
+    border-bottom-width: 2px;
   }
 
-  .mobile-menu .menu-item>a {
+  /* Expanded submenu — Figma 3949:15165: shrink-wrap content, no flex stretch */
+  .mobile-menu > .menu-item.submenu-active {
+    background-color: rgba(216, 164, 68, 0.2);
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    min-height: auto;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 18px;
+    padding: 20px 24px;
+  }
+
+  .mobile-menu .menu-item > a {
     font-family: "Montserrat", sans-serif;
     color: #5e5d5f;
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.3966px;
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 100%;
+    min-height: 100%;
     padding: 20px 28px;
+    box-sizing: border-box;
     transition: color 0.3s ease;
+    text-box-edge: cap alphabetic;
+    text-box-trim: trim-both;
   }
 
-  .mobile-menu .menu-item>a:hover {
+  .mobile-menu .menu-item > a:hover {
     color: #d8a444;
   }
 
@@ -991,10 +1020,25 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    min-height: 100%;
+    flex: 1 1 auto;
     padding: 20px 28px;
+    box-sizing: border-box;
   }
 
-  .menu-item-row>a {
+  .mobile-menu > .menu-item.submenu-active > .menu-item-row {
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    min-height: 44px;
+    max-height: 44px;
+    height: 44px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(216, 164, 68, 0.1);
+  }
+
+  .menu-item-row > a {
     font-family: "Montserrat", sans-serif;
     color: #5e5d5f;
     font-size: 16px;
@@ -1004,7 +1048,7 @@
     transition: color 0.3s ease;
   }
 
-  .menu-item-row>a:hover {
+  .menu-item-row > a:hover {
     color: #d8a444;
   }
 
@@ -1035,9 +1079,17 @@
 
   .sub-menu-container {
     display: none;
-    padding: 18px 28px 28px 28px;
+    padding: 0;
     width: 100%;
-    border-top: 1px solid rgba(216, 164, 68, 0.1);
+    border-top: none;
+    flex: 0 0 auto;
+    min-height: 0;
+  }
+
+  .mobile-menu > .menu-item.submenu-active > .sub-menu-container {
+    display: block;
+    flex: 0 0 auto;
+    min-height: 0;
   }
 
   .mobile-menu .sub-menu {
@@ -1047,6 +1099,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    align-items: flex-start;
   }
 
   .mobile-menu .sub-menu li {
@@ -1058,7 +1111,11 @@
     color: #5e5d5f;
     font-size: 14px;
     font-weight: 400;
+    line-height: normal;
     text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-underline-position: from-font;
+    white-space: nowrap;
     transition: color 0.3s ease;
   }
 
@@ -1358,55 +1415,53 @@
 
   /* Mobile Entrance Animations: Start Hidden and Animate on .mobile-visible */
 
-  /* 1. Key Treatments Section */
-  .key-treatments-section .treatments-header-badge,
-  .key-treatments-section .treatments-left-col,
-  .key-treatments-section .accordion-tab {
-    opacity: 0 !important;
-    transform: translateY(30px) !important;
-    transition:
-      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
-      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    will-change: opacity, transform !important;
+  /* 1. Key Treatments Section — phone only (tablet uses desktop GSAP) */
+  @media (max-width: 767.98px) {
+    .key-treatments-section .treatments-header-badge,
+    .key-treatments-section .treatments-left-col,
+    .key-treatments-section .accordion-tab {
+      opacity: 0 !important;
+      transform: translateY(30px) !important;
+      transition:
+        opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+      will-change: opacity, transform !important;
+    }
+
+    .key-treatments-section.mobile-visible .treatments-header-badge,
+    .key-treatments-section.mobile-visible .treatments-left-col,
+    .key-treatments-section.mobile-visible .accordion-tab {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .key-treatments-section.mobile-visible .treatments-header-badge {
+      transition-delay: 0s !important;
+    }
+
+    .key-treatments-section.mobile-visible .treatments-left-col {
+      transition-delay: 0.15s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(1) {
+      transition-delay: 0.3s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(2) {
+      transition-delay: 0.4s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(3) {
+      transition-delay: 0.5s !important;
+    }
+
+    .key-treatments-section.mobile-visible .accordion-tab:nth-child(4) {
+      transition-delay: 0.6s !important;
+    }
   }
 
-  .key-treatments-section.mobile-visible .treatments-header-badge,
-  .key-treatments-section.mobile-visible .treatments-left-col,
-  .key-treatments-section.mobile-visible .accordion-tab {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-
-  .key-treatments-section.mobile-visible .treatments-header-badge {
-    transition-delay: 0s !important;
-  }
-
-  .key-treatments-section.mobile-visible .treatments-left-col {
-    transition-delay: 0.15s !important;
-  }
-
-  .key-treatments-section.mobile-visible .accordion-tab:nth-child(1) {
-    transition-delay: 0.3s !important;
-  }
-
-  .key-treatments-section.mobile-visible .accordion-tab:nth-child(2) {
-    transition-delay: 0.4s !important;
-  }
-
-  .key-treatments-section.mobile-visible .accordion-tab:nth-child(3) {
-    transition-delay: 0.5s !important;
-  }
-
-  .key-treatments-section.mobile-visible .accordion-tab:nth-child(4) {
-    transition-delay: 0.6s !important;
-  }
-
-  /* 2. Testimonials Section */
-  .testimonials-section .testimonials-header,
-  .testimonials-section .testimonial-slide.active .testimonial-title,
-  .testimonials-section .testimonial-slide.active .testimonial-text,
-  .testimonials-section .testimonial-slide.active .testimonial-stars,
-  .testimonials-section .testimonial-slide.active .testimonial-author {
+  /* 2. Testimonials Section — header/quotes entrance only; text uses GSAP like desktop */
+  .testimonials-section:not(.mobile-visible) .testimonials-header {
     opacity: 0 !important;
     transform: translateY(30px) !important;
     transition:
@@ -1425,31 +1480,28 @@
     will-change: opacity, transform !important;
   }
 
-  .testimonials-section.mobile-visible .testimonials-header,
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title,
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text,
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars,
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
+  .testimonials-section.mobile-visible .testimonials-header {
     opacity: 1 !important;
     transform: translateY(0) !important;
+    transition-delay: 0s !important;
   }
 
-  /* Tablet: one visible slide only; don’t leave inactive slides in the layout stack */
+  .testimonials-section.mobile-visible .left-quote,
+  .testimonials-section.mobile-visible .right-quote {
+    opacity: 0.2 !important;
+    transform: scale(1) !important;
+  }
+
+  .testimonials-section.mobile-visible .left-quote {
+    transition-delay: 0.2s !important;
+  }
+
+  .testimonials-section.mobile-visible .right-quote {
+    transition-delay: 0.2s !important;
+  }
+
+  /* Tablet: keep single-slide visibility */
   @media (min-width: 768px) and (max-width: 991.98px) {
-
-    .testimonials-section .testimonial-slide.active .testimonial-title,
-    .testimonials-section .testimonial-slide.active .testimonial-text,
-    .testimonials-section .testimonial-slide.active .testimonial-stars,
-    .testimonials-section .testimonial-slide.active .testimonial-author,
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title,
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text,
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars,
-    .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-
     .testimonials-section .testimonial-slide:not(.active) {
       display: none !important;
       visibility: hidden !important;
@@ -1461,40 +1513,6 @@
       visibility: visible !important;
       z-index: 2;
     }
-  }
-
-  .testimonials-section.mobile-visible .left-quote,
-  .testimonials-section.mobile-visible .right-quote {
-    opacity: 0.2 !important;
-    transform: scale(1) !important;
-  }
-
-  .testimonials-section.mobile-visible .testimonials-header {
-    transition-delay: 0s !important;
-  }
-
-  .testimonials-section.mobile-visible .left-quote {
-    transition-delay: 0.2s !important;
-  }
-
-  .testimonials-section.mobile-visible .right-quote {
-    transition-delay: 0.2s !important;
-  }
-
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-title {
-    transition-delay: 0.1s !important;
-  }
-
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-text {
-    transition-delay: 0.2s !important;
-  }
-
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-stars {
-    transition-delay: 0.3s !important;
-  }
-
-  .testimonials-section.mobile-visible .testimonial-slide.active .testimonial-author {
-    transition-delay: 0.4s !important;
   }
 
   /* 3. Principal Dentist Section */
@@ -3278,7 +3296,8 @@
     }
 
     .key-treatments-section .includes-label,
-    .key-treatments-section .includes-items span {
+    .key-treatments-section .includes-items span,
+    .key-treatments-section .includes-items a {
       text-box-trim: none !important;
       text-box-edge: auto !important;
     }
@@ -3349,12 +3368,12 @@
     letter-spacing: 0.5px !important;
   }
 
-  /* About Waterside Section Mobile Layout */
+  /* About Waterside Section Mobile Layout — Figma 3949:14870 / 3949:14871 */
   .about-waterside-section {
     height: 1500px !important;
     position: relative !important;
     background-color: #faf3e6 !important;
-    padding: 40px 0 !important;
+    padding: 0 !important;
     overflow: visible !important;
   }
 
@@ -3382,26 +3401,34 @@
     gap: 20px !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
+    align-items: stretch !important;
   }
 
   .about-header-badge {
     background-color: #faf3e6 !important;
     border-bottom: 1px solid rgba(216, 164, 68, 0.37) !important;
+    border-radius: 0 !important;
     padding: 24px !important;
     width: 100% !important;
+    max-width: none !important;
     text-align: center !important;
-    margin-bottom: 0 !important;
+    margin: 0 !important;
+    align-self: stretch !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
   .about-header-title {
     font-family: "Montserrat", sans-serif !important;
     font-size: 20px !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     letter-spacing: normal !important;
     color: #5e5d5f !important;
     text-align: center !important;
     margin: 0 !important;
+    white-space: nowrap !important;
   }
 
   .about-header-title .light,
@@ -3478,6 +3505,7 @@
     letter-spacing: -1px !important;
     text-align: center !important;
     margin: 0 !important;
+    width: 100% !important;
   }
 
   .about-description {
@@ -3487,6 +3515,7 @@
     color: #5e5d5f !important;
     text-align: center !important;
     margin: 0 !important;
+    width: 100% !important;
   }
 
   .about-right-col {
@@ -4129,13 +4158,31 @@
     margin: 0 auto !important;
   }
 
-  .testimonial-slide {
+  /* Phone + tablet: only one slide visible; text opacity/y controlled by GSAP */
+  .testimonials-section .testimonial-slide {
     padding: 0 !important;
     box-sizing: border-box !important;
     position: absolute !important;
     top: 50% !important;
-    transform: translateY(-50%) !important;
+    left: 0 !important;
     width: 100% !important;
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .testimonials-section .testimonial-slide.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 2 !important;
+  }
+
+  .testimonials-content-row {
+    touch-action: pan-y !important;
   }
 
   .testimonial-title {
@@ -4729,6 +4776,238 @@
   }
 }
 
+/* Key Treatments — tablet (Figma 3290:12233) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .key-treatments-section {
+    margin-top: 80px !important;
+    margin-bottom: 80px !important;
+  }
+
+  .treatments-sticky-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 80px !important;
+  }
+
+  .treatments-header-badge {
+    background-color: #faf3e6 !important;
+    padding: 32px 40px !important;
+    margin: 0 !important;
+    border: none !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    align-self: flex-start !important;
+    width: auto !important;
+    max-width: calc(100% - 40px) !important;
+    box-sizing: border-box !important;
+  }
+
+  .treatments-header-title {
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 30px !important;
+    font-weight: 600 !important;
+    letter-spacing: -1px !important;
+    color: #5e5d5f !important;
+    margin: 0 !important;
+    text-transform: capitalize !important;
+    white-space: nowrap !important;
+  }
+
+  .treatments-header-title .accent {
+    color: #d8a444 !important;
+    font-weight: 600 !important;
+  }
+
+  .treatments-main-container {
+    padding: 0 40px !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .treatments-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+    margin: 0 !important;
+  }
+
+  .treatments-left-col,
+  .treatments-right-col {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .treatments-left-col {
+    display: flex !important;
+    align-items: stretch !important;
+    align-self: stretch !important;
+  }
+
+  .treatments-interactive-wrapper {
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    gap: 0 !important;
+  }
+
+  .treatment-slide-counter {
+    display: none !important;
+  }
+
+  .treatment-image-frame {
+    width: 100% !important;
+    height: 739px !important;
+    max-height: 739px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    flex: 1 1 auto !important;
+  }
+
+  .active-treatment-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+  }
+
+  .mobile-treatment-image-wrapper {
+    display: none !important;
+  }
+
+  .treatments-right-col {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .treatment-accordion-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    /* height locked by GSAP/JS like desktop — do not force 100% */
+  }
+
+  .accordion-tab {
+    border-bottom: 1px solid rgba(94, 93, 95, 0.18) !important;
+    border-top: none !important;
+    padding: 0 !important;
+  }
+
+  .accordion-tab:first-child {
+    border-top: none !important;
+  }
+
+  .accordion-tab.active {
+    border-bottom: none !important;
+  }
+
+  .accordion-tab-header {
+    padding: 30px 0 !important;
+    min-height: 93px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .accordion-tab.active .accordion-tab-header {
+    padding: 0 !important;
+    min-height: 0 !important;
+    margin-bottom: 30px !important;
+  }
+
+  .accordion-tab-title {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    letter-spacing: -1px !important;
+    color: rgba(94, 93, 95, 0.4) !important;
+    line-height: normal !important;
+  }
+
+  .accordion-tab.active .accordion-tab-title {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: -1px !important;
+    color: #5e5d5f !important;
+    line-height: 26px !important;
+  }
+
+  .accordion-tab.active .accordion-tab-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 48px !important;
+    padding: 0 0 40px !important;
+    /* height/opacity owned by GSAP (same as desktop) — do not force auto/1 */
+  }
+
+  .tab-desc {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+  }
+
+  .tab-includes-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin: 0 !important;
+  }
+
+  .includes-label {
+    font-size: 12px !important;
+    line-height: 24px !important;
+    font-weight: 300 !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+  }
+
+  .includes-items {
+    gap: 23px 29px !important;
+    font-size: 14px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .includes-items a,
+  .includes-items span {
+    font-size: 14px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .tab-button-wrapper {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .tab-action-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 20px !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    line-height: normal !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Closed tabs below active content share top border with first closed row */
+  .accordion-tab.active + .accordion-tab {
+    border-top: 1px solid rgba(94, 93, 95, 0.18) !important;
+  }
+}
+
 @media (max-width: 1200px) and (min-width: 768px) {
   .mobile-header {
     padding: 40px 40px;
@@ -4803,94 +5082,18 @@
     line-height: 100%;
   }
 
-  .treatments-main-container {
-    padding: 0 40px !important;
-  }
-
-  .treatments-right-col {
-    padding: 0 12px !important;
-  }
-
-  .treatments-header-badge {
-    margin-bottom: 50px !important;
-    padding: 32px 40px 32px !important;
-  }
-
-  .treatments-header-title {
-    font-size: 30px !important;
-  }
-
-  .accordion-tab-header {
-    padding: 30px 0 !important;
-  }
-
-  .accordion-tab.active .accordion-tab-header {
-    padding: 30px 0 !important;
-  }
-
-  .tab-desc {
-    font-size: 16px !important;
-    margin-bottom: 48px !important;
-  }
-
-  .includes-label {
-    margin-bottom: 20px !important;
-    font-size: 12px !important;
-  }
-
-  .tab-includes-wrapper {
-    margin-bottom: 48px !important;
-  }
-
-  .includes-items {
-    gap: 23px 29px !important;
-    font-size: 14px !important;
-  }
-
-  .tab-action-btn {
-    padding: 20px !important;
-    line-height: 100%;
-  }
-
-  .accordion-tab.active .accordion-tab-content {
-    padding-bottom: 32px !important;
-  }
-
-  .tab-button-wrapper {
-    margin-bottom: 8px !important;
-  }
-
-  .mobile-treatment-image-wrapper {
-    display: none !important;
-  }
-
-  .treatment-slide-counter {
-    display: none !important;
-  }
-
-  .treatments-left-col,
-  .treatments-right-col {
-    width: 50% !important;
-  }
-
-  .treatments-row {
-    flex-direction: row;
-    gap: 0px;
-    flex-wrap: nowrap;
-  }
-
-  .treatment-image-frame,
-  .active-treatment-image {
-    border-radius: 8px;
-  }
-
   .about-header-badge {
-    padding: 0 40px 40px !important;
+    padding: 24px !important;
+    text-align: center !important;
+    align-self: stretch !important;
+    justify-content: center !important;
   }
 
   .about-header-title {
     font-size: 30px !important;
     font-weight: 600 !important;
+    text-align: center !important;
+    white-space: normal !important;
   }
 
   .about-left-col,
@@ -9071,7 +9274,8 @@
     margin-top: 0 !important;
     width: 49px !important;
     height: 49px !important;
-    z-index: 10 !important;
+    /* Above sticky section tracks (998); below mobile header/menu (9999+) */
+    z-index: 9000 !important;
   }
 
   body.home .call-us-tab .btn-call-us,
@@ -9099,7 +9303,8 @@
   body.page-template-template-blogs .btn-call-us .phone-icon {
     width: 20px !important;
     height: 20px !important;
-    transform: rotate(180deg);
+    /* Figma mobile — upright, earpiece toward top-right */
+    transform: none !important;
   }
 
   body.home .call-us-tab .btn-call-us .call-text,
@@ -9156,7 +9361,8 @@
     margin-top: 0px !important;
   }
 
-  .includes-items span {
+  .includes-items span,
+  .includes-items a {
     text-decoration: none;
   }
 

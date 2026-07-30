@@ -936,7 +936,61 @@ body {
   margin-bottom: 0px;
 }
 
-/* Contact Us Side Tab - Figma 4173:6724 */
+/*
+ * Front-page hero (desktop): pin content to the section bottom so the
+ * photo touches the bottom edge, but keep natural aspect ratio.
+ * Avoid height:100% + object-fit:cover — that crops hard on 1080p / 125% scale.
+ */
+@media (min-width: 992px) {
+  body.home .hero-section {
+    align-items: flex-end;
+    height: auto;
+    min-height: min(calc(100dvh - 215px), 760px);
+    padding: 60px 0 0;
+    box-sizing: border-box;
+  }
+
+  body.home .hero-section > .container-fluid {
+    height: auto;
+    width: 100%;
+  }
+
+  body.home .hero-section .row {
+    height: auto;
+    align-items: flex-end !important;
+  }
+
+  body.home .hero-image-col {
+    align-self: flex-end;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  body.home .hero-image-wrapper {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  body.home .hero-img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    /* Subtract header + hero top padding so overflow:hidden doesn't clip the top */
+    max-height: min(680px, calc(100dvh - 215px - 60px));
+    object-fit: contain;
+    object-position: bottom right;
+  }
+}
+
+/* Contact Us Side Tab — Figma 4676:618 (desktop) */
 .call-us-tab {
   position: fixed;
   right: 0;
@@ -976,24 +1030,58 @@ body {
   color: #ffffff;
 }
 
-.phone-icon {
+.btn-call-us .phone-icon {
   display: block;
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  transform: none;
+  /* Figma 4676:621 — rotate-90 so earpiece points top-left on the side tab */
+  transform: rotate(90deg);
+  order: 2;
 }
 
-.call-text {
-  font-family: var(--font-family-secondary);
+.btn-call-us .call-text {
+  order: 1;
+  font-family: var(--font-family-secondary); /* Open Sans */
   font-weight: 600;
   font-size: 24px;
-  line-height: 1;
+  line-height: normal;
   letter-spacing: 0.2px;
   color: #ffffff;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+@media (min-width: 992px) {
+  .call-us-tab {
+    width: 62px;
+    height: 219px;
+  }
+
+  .btn-call-us {
+    width: 62px;
+    height: 219px;
+    padding: 30px 15px;
+    gap: 10px;
+    border-radius: 30px 0 0 30px;
+    background-color: #d8a444;
+  }
+
+  .btn-call-us .phone-icon {
+    width: 24px;
+    height: 24px;
+    transform: rotate(90deg);
+  }
+
+  .btn-call-us .call-text {
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.2px;
+  }
 }
 
 /* ============================================================
@@ -1112,6 +1200,11 @@ body {
     padding-bottom: 60px;
   }
 
+  /* Home: no extra bottom padding — image must sit on the section edge */
+  body.home .hero-section {
+    padding-bottom: 0;
+  }
+
   .hero-content {
     padding-left: 0;
     margin-top: 40px;
@@ -1121,6 +1214,10 @@ body {
     min-height: 500px;
   }
 
+  body.home .hero-image-col {
+    min-height: 0;
+  }
+
   .hero-image-wrapper {
     position: relative;
     height: auto;
@@ -1128,9 +1225,17 @@ body {
     margin-top: 40px;
   }
 
+  body.home .hero-image-wrapper {
+    margin-top: 0;
+  }
+
   .hero-img {
     max-height: 500px;
     width: auto;
+  }
+
+  body.home .hero-img {
+    max-height: min(560px, calc(100dvh - 215px - 60px));
   }
 
   .main-navigation ul {
@@ -1454,6 +1559,20 @@ body {
   color: #000000 !important;
 }
 
+.btn-subscribe:disabled,
+.btn-subscribe.is-done {
+  opacity: 1;
+  cursor: default;
+  background-color: var(--primary-color);
+  color: #000000 !important;
+  pointer-events: none;
+}
+
+#colophon.site-footer input[type="email"].subscribe-input[aria-invalid="true"],
+#colophon.site-footer input[type="email"].subscribe-input.is-invalid {
+  border-bottom-color: #e57373 !important;
+}
+
 .lang-label {
   font-size: 15.24px;
   color: #ffffff;
@@ -1489,6 +1608,17 @@ body {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
   font-weight: 400;
+}
+
+.footer-bottom-row a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-bottom-row a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
 }
 
 /* Responsive Footer updates */
@@ -1567,7 +1697,7 @@ body {
   align-self: flex-start;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  margin-bottom: 60px;
+  margin-bottom: 100px; /* Figma 3290:11493 gap */
 }
 
 .treatments-header-title {
@@ -1591,8 +1721,8 @@ body {
 
 .treatments-row {
   display: flex;
-  gap: 110px;
-  align-items: flex-start;
+  gap: 125px; /* Figma 3290:11497 */
+  align-items: center;
 }
 
 @media (min-width: 1800px) {
@@ -1633,9 +1763,9 @@ body {
 
 .treatment-slide-counter {
   display: flex;
-  /* flex-direction: column; */
   align-items: flex-end;
-  width: 120px;
+  gap: 10px; /* Figma 3290:11499 */
+  width: 101px;
   flex-shrink: 0;
 }
 
@@ -1646,15 +1776,21 @@ body {
   color: #d8a444;
   letter-spacing: -1px;
   line-height: 1;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .treatment-slide-counter .total-slides {
   font-family: var(--font-family-primary);
   font-size: 18px;
+  font-weight: 600;
   color: #5e5d5f;
   letter-spacing: -1px;
-  margin-left: 15px;
-  margin-top: 5px;
+  margin-left: 0;
+  margin-top: 0;
+  line-height: 1;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }
 
 .treatment-image-frame {
@@ -1711,12 +1847,22 @@ body {
   cursor: pointer;
 }
 
+/* Active tab title aligns with image top (Figma 3290:11504) */
+@media (min-width: 992px) {
+  .key-treatments-section .accordion-tab.active .accordion-tab-header {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+}
+
 .accordion-tab-title {
   font-family: var(--font-family-primary);
   font-size: 40px;
   font-weight: 500;
   color: rgba(94, 93, 95, 0.4);
   margin: 0;
+  letter-spacing: -1px;
+  line-height: 60px;
   transition: all 0.3s ease;
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
@@ -1724,7 +1870,7 @@ body {
 
 .accordion-tab.active .accordion-tab-title {
   color: #5e5d5f;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .accordion-tab-content {
@@ -1753,7 +1899,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   padding-bottom: 40px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   html.wsd-js .treatment-accordion-wrapper {
     height: var(--treatments-accordion-min-height, auto);
     min-height: var(--treatments-accordion-min-height, auto);
@@ -1776,22 +1922,28 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
   .treatments-left-col,
   .treatments-right-col {
-    align-self: flex-start;
+    align-self: center;
   }
 }
 
 .tab-desc {
   font-family: var(--font-family-primary);
   font-size: 20px;
+  font-weight: 400;
   line-height: 32px;
   color: #5e5d5f;
-  margin-bottom: 48px;
+  margin-bottom: 48px; /* Figma 3290:11504 gap */
   margin-top: 0;
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
 }
 
+/* Figma 3290:11508 — label + items stack */
 .tab-includes-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
   margin-bottom: 48px;
 }
 
@@ -1799,41 +1951,52 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   font-family: var(--font-family-primary);
   font-weight: 300;
   font-size: 16px;
+  line-height: 36px;
   color: #5e5d5f;
-  margin-bottom: 25px;
+  margin-bottom: 0;
   margin-top: 0;
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
 }
 
+/* Figma 3290:11510 — row-gap 20px, column-gap 29px */
 .includes-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 29px;
+  align-items: center;
+  align-content: center;
+  gap: 20px 29px;
   font-family: var(--font-family-primary);
   font-weight: 500;
   font-size: 20px;
   color: #5e5d5f;
   letter-spacing: 1px;
   line-height: normal;
+  width: 100%;
 }
 
+.includes-items a,
 .includes-items span {
-  text-box-edge: cap alphabetic;
-  text-box-trim: trim-both;
-  transition: all 0.25s;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease;
 }
 
+.includes-items a:hover,
 .includes-items span:hover {
   color: #d8a444;
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
 }
 
+.includes-items a.gold-underlined,
 .gold-underlined {
   color: #d8a444;
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
 }
 
 .tab-action-btn {
@@ -1873,7 +2036,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 @media (max-width: 1600px) {
   .treatments-header-badge {
     padding: 30px 100px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
 
   .treatments-main-container {
@@ -1881,14 +2044,14 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   }
 
   .treatments-row {
-    gap: 80px;
+    gap: 90px;
   }
 }
 
 @media (max-width: 1440px) {
   .treatments-header-badge {
     padding: 30px 80px;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
   }
 
   .treatments-main-container {
@@ -1896,7 +2059,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   }
 
   .treatments-row {
-    gap: 60px;
+    gap: 70px;
   }
 
   .treatments-header-title {
@@ -1905,24 +2068,31 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
   .accordion-tab-title {
     font-size: 32px;
+    line-height: 1.2;
   }
 
   .accordion-tab-header {
     padding: 30px 0;
   }
 
+  .key-treatments-section .accordion-tab.active .accordion-tab-header {
+    padding-top: 0;
+    padding-bottom: 30px;
+  }
+
   .tab-desc {
     font-size: 18px;
     line-height: 28px;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
   }
 
   .includes-items {
     font-size: 18px;
-    gap: 14px 24px;
+    gap: 16px 24px;
   }
 
   .tab-includes-wrapper {
+    gap: 20px;
     margin-bottom: 36px;
   }
 

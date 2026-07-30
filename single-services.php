@@ -83,7 +83,7 @@ get_header();
 					$index = 0;
 					while ( $sub_services_query->have_posts() ) : $sub_services_query->the_post();
 						?>
-						<a href="javascript:void(0)" class="cosmetic-treatment-row <?php echo ($index === 0) ? 'active' : ''; ?>" data-bs-toggle="modal" data-bs-target="#sub-service-modal-<?php the_ID(); ?>">
+						<a href="#<?php echo esc_attr( get_post_field( 'post_name' ) ); ?>" id="<?php echo esc_attr( get_post_field( 'post_name' ) ); ?>" class="cosmetic-treatment-row <?php echo ($index === 0) ? 'active' : ''; ?>" data-treatment-slug="<?php echo esc_attr( get_post_field( 'post_name' ) ); ?>" data-bs-toggle="modal" data-bs-target="#sub-service-modal-<?php the_ID(); ?>">
 							<h3 class="cosmetic-treatment-title"><?php the_title(); ?></h3>
 							<div class="cosmetic-treatment-arrow">
 								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/arrow-gold-circle.svg' ); ?>" alt="" style="filter: brightness(0) invert(1);">

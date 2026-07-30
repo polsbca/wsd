@@ -103,17 +103,17 @@ get_header();
 									<div class="tab-includes-wrapper">
 										<p class="includes-label">General Dentistry Includes:</p>
 										<div class="includes-items">
-											<span>Hygiene</span>
-											<span>Oral Health</span>
-											<span>Nervous patients</span>
-											<span>Fillings</span>
-											<span>Crowns</span>
-											<span>Bridges</span>
-											<span class="gold-underlined">Dentures</span>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'hygiene' ) ); ?>">Hygiene</a>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'oral-health' ) ); ?>">Oral Health</a>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'nervous-patients' ) ); ?>">Nervous patients</a>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'fillings' ) ); ?>">Fillings</a>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'crowns' ) ); ?>">Crowns</a>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'bridges' ) ); ?>">Bridges</a>
+											<a class="gold-underlined" href="<?php echo esc_url( wsd_get_general_dentistry_url( 'dentures' ) ); ?>">Dentures</a>
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
-										<a href="#general-dentistry" class="btn btn-primary tab-action-btn">View General Dentistry</a>
+										<a href="<?php echo esc_url( wsd_get_general_dentistry_url() ); ?>" class="btn btn-primary tab-action-btn">View General Dentistry</a>
 									</div>
 								</div>
 							</div>
@@ -132,14 +132,14 @@ get_header();
 									<div class="tab-includes-wrapper">
 										<p class="includes-label">Cosmetic Dentistry Includes:</p>
 										<div class="includes-items">
-											<span>Whitening</span>
-											<span>Straightening</span>
-											<span>Smile Make Over</span>
-											<span class="gold-underlined">Veneers</span>
+											<a href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'teeth-whitening' ) ); ?>">Whitening</a>
+											<a href="<?php echo esc_url( wsd_get_invisalign_page_url() ); ?>">Straightening</a>
+											<a href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'smile-makeovers' ) ); ?>">Smile Make Over</a>
+											<a class="gold-underlined" href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'dental-veneers' ) ); ?>">Veneers</a>
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
-										<a href="#cosmetic-dentistry" class="btn btn-primary tab-action-btn">View Cosmetic Dentistry</a>
+										<a href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url() ); ?>" class="btn btn-primary tab-action-btn">View Cosmetic Dentistry</a>
 									</div>
 								</div>
 							</div>
@@ -165,7 +165,7 @@ get_header();
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
-										<a href="<?php echo esc_url( function_exists( 'wsd_get_dental_implants_page_url' ) ? wsd_get_dental_implants_page_url() : home_url( '/dental-implants/' ) ); ?>" class="btn btn-primary tab-action-btn">View Dental Implants</a>
+										<a href="<?php echo esc_url( wsd_get_dental_implants_page_url() ); ?>" class="btn btn-primary tab-action-btn">View Dental Implants</a>
 									</div>
 								</div>
 							</div>
@@ -191,7 +191,7 @@ get_header();
 										</div>
 									</div> -->
 									<div class="tab-button-wrapper">
-										<a href="<?php echo esc_url( function_exists( 'wsd_get_invisalign_page_url' ) ? wsd_get_invisalign_page_url() : home_url( '/invisalign/' ) ); ?>" class="btn btn-primary tab-action-btn">View Invisalign</a>
+										<a href="<?php echo esc_url( wsd_get_invisalign_page_url() ); ?>" class="btn btn-primary tab-action-btn">View Invisalign</a>
 									</div>
 								</div>
 							</div>
@@ -546,7 +546,7 @@ get_header();
 							<p class="payment-card-text">We are able to arrange finance for your dental treatment at Waterside Dental Care.</p>
 						</div>
 						<div class="payment-card-button-wrapper">
-							<a href="#finance-calculator" class="payment-btn btn-primary-calc">Calculate My Rate</a>
+							<a href="https://cfl-retailer.chrysalisfinance.com/waterside-dental-care-1199" class="payment-btn btn-primary-calc" target="_blank" rel="noopener noreferrer">Calculate My Rate</a>
 						</div>
 					</div>
 
@@ -557,7 +557,7 @@ get_header();
 							<p class="payment-card-text">Patients get monthly dental checks and hygienist visits for routine care.</p>
 						</div>
 						<div class="payment-card-button-wrapper">
-							<a href="#dental-plans" class="payment-btn btn-secondary-plan">View All plan</a>
+							<a href="<?php echo esc_url( wsd_get_fees_page_url() . '#membership-plan' ); ?>" class="payment-btn btn-secondary-plan">View All plan</a>
 						</div>
 					</div>
 
@@ -568,7 +568,7 @@ get_header();
 							<p class="payment-card-text">Quality care with transparent and budget-friendly costs for every smile</p>
 						</div>
 						<div class="payment-card-button-wrapper">
-							<a href="#pricing" class="payment-btn btn-secondary-price">view All Pricing</a>
+							<a href="<?php echo esc_url( wsd_get_fees_page_url() . '#service-fees' ); ?>" class="payment-btn btn-secondary-price">view All Pricing</a>
 						</div>
 					</div>
 				</div>

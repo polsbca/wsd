@@ -147,6 +147,47 @@
 
     refreshTabIndicator(false);
 
+    function activateTabFromHash() {
+      var raw = (window.location.hash || "").replace(/^#/, "");
+      if (!raw) {
+        return;
+      }
+
+      var slug = raw;
+      try {
+        slug = decodeURIComponent(raw);
+      } catch (error) {
+        slug = raw;
+      }
+
+      // Accept #membership-plan, #fees-tab-membership-plan, #fees-panel-membership-plan
+      slug = slug
+        .replace(/^fees-tab-/, "")
+        .replace(/^fees-panel-/, "");
+
+      var $tab = $tabs.filter('[data-fees-tab="' + slug + '"]').first();
+      if (!$tab.length) {
+        return;
+      }
+
+      activateTab($tab);
+
+      var tabsEl = $tablist.get(0);
+      if (!tabsEl) {
+        return;
+      }
+
+      window.requestAnimationFrame(function () {
+        var header = document.querySelector("#masthead.site-header");
+        var offset = header ? header.getBoundingClientRect().height + 24 : 24;
+        var top = tabsEl.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      });
+    }
+
+    activateTabFromHash();
+    $(window).on("hashchange.feesTabs", activateTabFromHash);
+
     if (window.ResizeObserver && $tablist[0]) {
       var tablistObserver = new ResizeObserver(function () {
         refreshTabIndicator(false);
