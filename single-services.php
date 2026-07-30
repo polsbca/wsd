@@ -777,7 +777,7 @@ get_header();
 							<!-- CTAs -->
 							<div class="cosmetic-membership-ctas">
 								<a href="<?php echo esc_url( home_url( '/membership/' ) ); ?>" class="btn-view-plan">View membership</a>
-								<a href="#appointment-cta" class="btn-book-outline">Book an appointment</a>
+								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn-book-outline">Book an appointment</a>
 							</div>
 						</div>
 					</div>
@@ -810,7 +810,7 @@ get_header();
 								<?php endif; ?>
 								
 								<div class="hero-buttons">
-									<a href="#appointment-cta" class="btn btn-primary">Book an appointment</a>
+									<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary">Book an appointment</a>
 									<a href="javascript:history.back()" class="btn btn-secondary">Back to Services</a>
 								</div>
 							</div>

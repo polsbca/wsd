@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $theme_uri     = get_template_directory_uri();
 $fees_url      = function_exists( 'wsd_get_fees_page_url' ) ? wsd_get_fees_page_url() : home_url( '/fees/' );
 $gallery_url   = function_exists( 'wsd_get_smile_gallery_page_url' ) ? wsd_get_smile_gallery_page_url() : home_url( '/smile-gallery/' );
-$book_url      = home_url( '/#book-appointment' );
+$book_url      = function_exists( 'wsd_get_contact_page_url' ) ? wsd_get_contact_page_url() : home_url( '/contact/' );
 $page_id       = (int) get_queried_object_id();
 if ( ! $page_id ) {
 	$page_id = (int) get_the_ID();

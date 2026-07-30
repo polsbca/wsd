@@ -107,7 +107,7 @@ $render_gallery_title_attrs = static function ( $titles ) {
 					</p>
 				</div>
 				<div class="hero-buttons">
-					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
+					<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
 					<a href="#smile-gallery-cases" class="btn btn-secondary smile-gallery-hero-cta">
 						<span class="smile-gallery-section-heading-desktop"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>
 						<span class="smile-gallery-section-heading-tablet"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></span>

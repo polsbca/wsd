@@ -1392,7 +1392,7 @@ function wsd_parse_fees_consultation_card_chunk( $html, $badge = '', $heading_ht
 		$cta_url   = esc_url_raw( html_entity_decode( $link_match[1], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
 
 		if ( $cta_label ) {
-			$book_url = home_url( '/#book-appointment' );
+			$book_url = wsd_get_contact_page_url();
 			if ( ! $cta_url || false !== stripos( (string) $cta_url, 'claudeusercontent.com' ) ) {
 				$cta_url = $book_url;
 			}

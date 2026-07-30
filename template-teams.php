@@ -82,7 +82,7 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 					<p class="teams-hero-description hero-description"><?php echo esc_html( $teams_hero_description ); ?></p>
 				</div>
 				<div class="hero-buttons">
-					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
 					<a href="<?php echo esc_url( home_url( '/#fees-membership' ) ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
 				</div>
 			</div>
@@ -361,10 +361,10 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 							</div>
 
 							<div class="teams-doctor-hero-ctas">
-								<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-doctor-hero-cta-book d-none d-lg-inline-flex">
+								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book d-none d-lg-inline-flex">
 									<?php esc_html_e( 'Book Appointment', 'wsd' ); ?>
 								</a>
-								<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile d-md-none">
+								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile d-md-none">
 									<?php esc_html_e( 'Book an appointment', 'wsd' ); ?>
 								</a>
 								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-refer d-none d-md-inline-flex"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>

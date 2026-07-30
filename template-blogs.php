@@ -76,7 +76,7 @@ $render_blog_meta = static function ( $post_data, $variant = 'gold' ) use ( $the
 					</p>
 				</div>
 				<div class="hero-buttons">
-					<a href="<?php echo esc_url( home_url( '/#book-appointment' ) ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
+					<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
 					<a href="<?php echo esc_url( $smile_gallery_url ); ?>" class="btn btn-secondary blogs-hero-cta blogs-hero-cta--desktop">
 						<span><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></span>
 					</a>
