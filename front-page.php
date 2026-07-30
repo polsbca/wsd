@@ -49,7 +49,7 @@ get_header();
 
 						<div class="hero-buttons">
 							<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary hero-book-appointment-btn"><span>Book an appointment</span></a>
-							<a href="#fees" class="btn btn-secondary">Fees & Membership</a>
+							<a href="<?php echo esc_url( wsd_get_fees_page_url() ); ?>" class="btn btn-secondary">Fees & Membership</a>
 						</div>
 					</div>
 				</div>

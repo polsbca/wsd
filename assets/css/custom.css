@@ -13187,6 +13187,14 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   display: inline;
 }
 
+.smile-gallery-hero-cta--fees {
+  display: none;
+}
+
+.smile-gallery-hero-cta--desktop {
+  display: inline-flex;
+}
+
 .smile-gallery-filter {
   appearance: none;
   border: 1px solid rgba(94, 93, 95, 0.52);
@@ -13824,6 +13832,14 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 
   .smile-gallery-section-heading-mobile {
     display: inline;
+  }
+
+  .smile-gallery-hero-cta--desktop {
+    display: none;
+  }
+
+  .smile-gallery-hero-cta--fees {
+    display: inline-flex;
   }
 
   .smile-gallery-filters--desktop {

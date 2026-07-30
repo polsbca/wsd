@@ -68,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<div class="footer-nav-col footer-accordion-item">
 							<h4 class="footer-nav-title">Finance</h4>
 							<ul class="footer-nav-list list-unstyled">
-								<li><a href="#fees">Fees</a></li>
+								<li><a href="<?php echo esc_url( wsd_get_fees_page_url() ); ?>">Fees</a></li>
 								<li><a href="#calculator">Finance Calculator</a></li>
 								<li><a href="#plans">Dental Plans</a></li>
 							</ul>
@@ -125,7 +125,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<div class="footer-nav-col d-md-none d-xl-block">
 									<h4 class="footer-nav-title">Finance</h4>
 									<ul class="footer-nav-list list-unstyled">
-										<li><a href="#fees">Fees</a></li>
+										<li><a href="<?php echo esc_url( wsd_get_fees_page_url() ); ?>">Fees</a></li>
 										<li><a href="#calculator">Finance Calculator</a></li>
 										<li><a href="#plans">Dental Plans</a></li>
 									</ul>
@@ -172,7 +172,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								 <div class="footer-nav-col d-none d-md-block d-xl-none">
 									<h4 class="footer-nav-title">Finance</h4>
 									<ul class="footer-nav-list list-unstyled">
-										<li><a href="#fees">Fees</a></li>
+										<li><a href="<?php echo esc_url( wsd_get_fees_page_url() ); ?>">Fees</a></li>
 										<li><a href="#calculator">Finance Calculator</a></li>
 										<li><a href="#plans">Dental Plans</a></li>
 									</ul>
