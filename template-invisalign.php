@@ -85,46 +85,46 @@ $about_panels = array(
 	),
 	'who'      => array(
 		array(
-			'num'   => '1',
-			'title' => 'Mild to Moderate Crowding',
-			'desc'  => 'Ideal if your teeth overlap or sit too close together and you want a discreet way to straighten them.',
+			'title' => 'Teeth Crowding',
+			'image' => $theme_uri . '/assets/images/invisalign/invisalign-who-teeth-crowding.png',
+			'desc'  => 'For overlapping teeth caused by limited jaw space.',
 		),
 		array(
-			'num'   => '2',
-			'title' => 'Gaps & Spacing Issues',
-			'desc'  => 'Suitable for closing spaces between teeth while keeping treatment almost invisible day to day.',
+			'title' => 'Teeth Gaps',
+			'image' => $theme_uri . '/assets/images/invisalign/invisalign-who-teeth-gaps.png',
+			'desc'  => 'Visible gaps between one or more teeth.',
 		),
 		array(
-			'num'   => '3',
-			'title' => 'Bite Concerns',
-			'desc'  => 'Can help improve overbite, underbite and crossbite cases assessed as appropriate for clear aligners.',
+			'title' => 'Bite Issues',
+			'image' => $theme_uri . '/assets/images/invisalign/invisalign-who-bite-issues.png',
+			'desc'  => 'Improper tooth and jaw alignment when biting down.',
 		),
 		array(
-			'num'   => '4',
-			'title' => 'Adults & Teens',
-			'desc'  => 'A great option for patients who want effective straightening without fixed metal braces.',
+			'title' => 'Shifted Teeth',
+			'image' => $theme_uri . '/assets/images/invisalign/invisalign-who-shifted-teeth.png',
+			'desc'  => 'Changes in tooth alignment following braces.',
 		),
 	),
 	'benefits' => array(
 		array(
 			'num'   => '1',
-			'title' => 'Virtually Invisible',
-			'desc'  => 'Clear aligners blend with your smile, so most people will not notice you are in treatment.',
+			'title' => 'Nearly Invisible',
+			'desc'  => 'Clear aligners mean most people won\'t notice you\'re in treatment — ideal for professional and social settings.',
 		),
 		array(
 			'num'   => '2',
-			'title' => 'Removable Anytime',
-			'desc'  => 'Take them out to eat, drink, brush and floss — keeping oral hygiene simple throughout treatment.',
+			'title' => 'Removable',
+			'desc'  => 'Take them out to eat anything you like and to brush and floss with ease — no dietary restrictions.',
 		),
 		array(
 			'num'   => '3',
-			'title' => 'Comfortable Fit',
-			'desc'  => 'Smooth custom trays avoid wires and brackets, reducing irritation to lips and cheeks.',
+			'title' => 'Comfortable',
+			'desc'  => 'Smooth BPA-free plastic with no metal wires or brackets — far fewer irritation-related appointments.',
 		),
 		array(
 			'num'   => '4',
-			'title' => 'See Your Result First',
-			'desc'  => 'Your digital smile preview shows the planned outcome before you commit to treatment.',
+			'title' => 'Predictable Results',
+			'desc'  => 'Your digital treatment plan maps every tooth movement in advance so you can see the outcome before you commit.',
 		),
 	),
 );
@@ -207,11 +207,28 @@ get_header();
 			<div class="invisalign-hero-content">
 				<div class="invisalign-hero-copy">
 					<h1 class="invisalign-hero-title">
-						Invisalign <span class="accent">Clear<br>Aligners</span>
+						Invisalign Clear <span class="accent">Aligners</span>
 					</h1>
 					<p class="invisalign-hero-desc">
 						Straighten your teeth discreetly with removable, virtually invisible aligners, no wires, no brackets, just a confident smile at every stage of your journey.
 					</p>
+				</div>
+				<div class="invisalign-hero-stats" aria-label="<?php esc_attr_e( 'Practice highlights', 'wsd' ); ?>">
+					<div class="invisalign-hero-stat">
+						<span class="invisalign-hero-stat-value">4.5</span>
+						<p class="invisalign-hero-stat-label">
+							<span class="gold-label"><?php esc_html_e( 'Google rating', 'wsd' ); ?></span>
+							<?php esc_html_e( 'Based on 200+ reviews', 'wsd' ); ?>
+						</p>
+					</div>
+					<div class="invisalign-hero-stat">
+						<span class="invisalign-hero-stat-value">15+</span>
+						<p class="invisalign-hero-stat-label"><?php esc_html_e( 'Clinical Dental Excellence', 'wsd' ); ?></p>
+					</div>
+					<div class="invisalign-hero-stat">
+						<span class="invisalign-hero-stat-value">GDC</span>
+						<p class="invisalign-hero-stat-label"><?php esc_html_e( 'Fully regulated by the General Dental Council', 'wsd' ); ?></p>
+					</div>
 				</div>
 				<div class="invisalign-hero-ctas">
 					<a href="<?php echo esc_url( $book_url ); ?>" class="btn btn-primary invisalign-btn"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
@@ -271,6 +288,10 @@ get_header();
 				</div>
 			</div>
 
+			<p class="invisalign-about-lead">
+				<?php esc_html_e( 'Invisalign straightens teeth discreetly with clear, removable aligners — planned digitally so you can see your new smile before treatment begins.', 'wsd' ); ?>
+			</p>
+
 			<div class="invisalign-about-body">
 				<div class="invisalign-about-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Invisalign topics', 'wsd' ); ?>">
 					<button type="button" class="invisalign-tab-btn active" role="tab" aria-selected="true" data-tab="process"><?php esc_html_e( 'Process', 'wsd' ); ?></button>
@@ -287,15 +308,32 @@ get_header();
 					>
 						<div class="invisalign-card-grid">
 							<?php foreach ( $cards as $card ) : ?>
-								<article class="invisalign-step-card">
-									<div class="invisalign-step-number" aria-hidden="true"><?php echo esc_html( $card['num'] ); ?></div>
-									<h3 class="invisalign-step-title"><?php echo esc_html( $card['title'] ); ?></h3>
-									<p class="invisalign-step-desc"><?php echo esc_html( $card['desc'] ); ?></p>
-								</article>
+								<?php if ( 'who' === $panel_key ) : ?>
+									<article class="invisalign-who-card">
+										<img
+											src="<?php echo esc_url( $card['image'] ); ?>"
+											alt=""
+											aria-hidden="true"
+											class="invisalign-who-card-img"
+										>
+										<div class="invisalign-who-card-overlay">
+											<h3 class="invisalign-who-card-title"><?php echo esc_html( $card['title'] ); ?></h3>
+											<p class="invisalign-who-card-desc"><?php echo esc_html( $card['desc'] ); ?></p>
+										</div>
+									</article>
+								<?php else : ?>
+									<article class="invisalign-step-card">
+										<div class="invisalign-step-number" aria-hidden="true"><?php echo esc_html( $card['num'] ); ?></div>
+										<h3 class="invisalign-step-title"><?php echo esc_html( $card['title'] ); ?></h3>
+										<p class="invisalign-step-desc"><?php echo esc_html( $card['desc'] ); ?></p>
+									</article>
+								<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
 					</div>
 				<?php endforeach; ?>
+
+				<div class="invisalign-about-dots" aria-hidden="true"></div>
 			</div>
 		</div>
 	</section>
@@ -303,6 +341,35 @@ get_header();
 	<!-- Straight teeth, invisible treatment -->
 	<section class="invisalign-treatment-section">
 		<div class="invisalign-treatment-inner">
+			<div class="invisalign-treatment-content">
+				<div class="invisalign-treatment-intro">
+					<h2 class="invisalign-treatment-title">
+						Straight teeth, <span class="accent">invisible treatment</span>
+					</h2>
+					<div class="invisalign-treatment-lead">
+						<p>Invisalign uses a series of custom-made, clear plastic aligners that gently shift your teeth into position over time. Each set of aligners is worn for about two weeks before progressing to the next, gradually guiding your smile toward its ideal alignment.</p>
+					</div>
+				</div>
+				<div class="invisalign-treatment-details" id="invisalign-treatment-details">
+					<div class="invisalign-treatment-lead invisalign-treatment-lead--extra">
+						<p>Unlike traditional braces, Invisalign aligners are removable — you take them out to eat, brush, and floss — and because they're virtually clear, most people won't even notice you're wearing them.</p>
+					</div>
+					<ul class="invisalign-treatment-list">
+						<?php foreach ( $treatment_points as $point ) : ?>
+							<li class="invisalign-treatment-item">
+								<img
+									src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>"
+									alt=""
+									class="invisalign-treatment-icon"
+									aria-hidden="true"
+								>
+								<span><?php echo esc_html( $point ); ?></span>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			</div>
+
 			<div class="invisalign-treatment-visual">
 				<?php foreach ( $process_steps as $index => $step ) : ?>
 					<div class="invisalign-process-step">
@@ -320,32 +387,21 @@ get_header();
 					</div>
 				<?php endforeach; ?>
 			</div>
-
-			<div class="invisalign-treatment-content">
-				<div class="invisalign-treatment-intro">
-					<h2 class="invisalign-treatment-title">
-						Straight teeth, <span class="accent">invisible treatment</span>
-					</h2>
-					<div class="invisalign-treatment-lead">
-						<p>Invisalign uses a series of custom-made, clear plastic aligners that gently shift your teeth into position over time. Each set of aligners is worn for about two weeks before progressing to the next, gradually guiding your smile toward its ideal alignment.</p>
-						<p>Unlike traditional braces, Invisalign aligners are removable — you take them out to eat, brush, and floss — and because they're virtually clear, most people won't even notice you're wearing them.</p>
-					</div>
-				</div>
-				<ul class="invisalign-treatment-list">
-					<?php foreach ( $treatment_points as $point ) : ?>
-						<li class="invisalign-treatment-item">
-							<img
-								src="<?php echo esc_url( $theme_uri . '/assets/images/implants-check-circle.svg' ); ?>"
-								alt=""
-								class="invisalign-treatment-icon"
-								aria-hidden="true"
-							>
-							<span><?php echo esc_html( $point ); ?></span>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
 		</div>
+		<button
+			type="button"
+			class="invisalign-treatment-disclosure"
+			aria-expanded="false"
+			aria-controls="invisalign-treatment-details"
+		>
+			<span class="invisalign-treatment-disclosure-label"><?php esc_html_e( 'Read more about Invisalign', 'wsd' ); ?></span>
+			<img
+				src="<?php echo esc_url( $theme_uri . '/assets/images/implants-plus.svg' ); ?>"
+				alt=""
+				class="invisalign-treatment-disclosure-icon"
+				aria-hidden="true"
+			>
+		</button>
 	</section>
 
 	<!-- Why Invisalign is Better -->
@@ -475,6 +531,7 @@ get_header();
 							</div>
 
 							<div class="gallery-btn-wrapper">
+								<div class="gallery-slider-dots invisalign-gallery-dots" aria-hidden="true"></div>
 								<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-gallery-action"><?php esc_html_e( 'View Smile Gallery', 'wsd' ); ?></a>
 							</div>
 						</div>

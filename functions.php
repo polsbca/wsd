@@ -67,7 +67,7 @@ function wsd_scripts() {
 	}
 
 	if ( is_page_template( 'template-invisalign.php' ) ) {
-		wp_enqueue_script( 'wsd-invisalign', get_stylesheet_directory_uri() . '/assets/js/invisalign.js', array( 'jquery', 'gsap' ), time(), true );
+		wp_enqueue_script( 'wsd-invisalign', get_stylesheet_directory_uri() . '/assets/js/invisalign.js', array( 'jquery', 'gsap', 'gsap-scrolltrigger' ), time(), true );
 	}
 
 	if ( is_page_template( 'template-teams.php' ) ) {

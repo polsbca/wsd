@@ -4,13 +4,24 @@
 (function ($) {
   "use strict";
 
+  var compactMq = window.matchMedia("(max-width: 991.98px)");
+
+  function isCompactViewport() {
+    return compactMq.matches;
+  }
+
   function getPanelItems(panel) {
     if (!panel) return [];
 
     return panel.querySelectorAll(
-      [".invisalign-step-number", ".invisalign-step-title", ".invisalign-step-desc"].join(
-        ", "
-      )
+      [
+        ".invisalign-step-number",
+        ".invisalign-step-title",
+        ".invisalign-step-desc",
+        ".invisalign-who-card-title",
+        ".invisalign-who-card-desc",
+        ".invisalign-who-card",
+      ].join(", ")
     );
   }
 
@@ -33,6 +44,26 @@
     );
   }
 
+  function syncAboutDots($section) {
+    var $dots = $section.find(".invisalign-about-dots");
+    if (!$dots.length) return;
+
+    var $activePanel = $section.find(".invisalign-about-panel.active");
+    var cardCount = $activePanel.find(
+      ".invisalign-step-card, .invisalign-who-card"
+    ).length;
+    var html = "";
+
+    for (var i = 0; i < cardCount; i += 1) {
+      html +=
+        '<span class="invisalign-about-dot' +
+        (i === 0 ? " is-active" : "") +
+        '"></span>';
+    }
+
+    $dots.html(html);
+  }
+
   function initInvisalignAboutTabs() {
     var $section = $(".invisalign-about-section");
     if (!$section.length) return;
@@ -40,6 +71,8 @@
     var $tabs = $section.find(".invisalign-tab-btn");
     var $panels = $section.find(".invisalign-about-panel");
     var sectionEl = $section[0];
+
+    syncAboutDots($section);
 
     $tabs.on("click", function () {
       var tab = $(this).data("tab");
@@ -55,11 +88,102 @@
         .addClass("active")
         .removeAttr("hidden");
 
+      syncAboutDots($section);
+
       window.setTimeout(function () {
         animatePanel(
           $panel[0] || sectionEl.querySelector(".invisalign-about-panel.active")
         );
       }, 60);
+    });
+  }
+
+  function initTreatmentDisclosure() {
+    var $button = $(".invisalign-treatment-disclosure");
+    var $details = $("#invisalign-treatment-details");
+    if (!$button.length || !$details.length) return;
+
+    $button.on("click", function () {
+      if (!isCompactViewport()) return;
+
+      var isOpen = $details.hasClass("is-open");
+      $details.toggleClass("is-open", !isOpen);
+      $button.toggleClass("is-open", !isOpen).attr("aria-expanded", !isOpen);
+
+      if (!isOpen) {
+        $details.removeAttr("hidden");
+      } else {
+        $details.attr("hidden", true);
+      }
+    });
+  }
+
+  function resetTreatmentForViewport() {
+    var $button = $(".invisalign-treatment-disclosure");
+    var $details = $("#invisalign-treatment-details");
+    if (!$details.length) return;
+
+    if (isCompactViewport()) {
+      $details.removeClass("is-open").attr("hidden", true);
+      $button.removeClass("is-open").attr("aria-expanded", "false");
+    } else {
+      $details.removeClass("is-open").removeAttr("hidden");
+      $button.attr("aria-expanded", "false");
+    }
+  }
+
+  function resetCompareForViewport() {
+    var cards = document.querySelectorAll(
+      ".invisalign-compare-card, .invisalign-compare-points, .invisalign-compare-points li, .invisalign-compare-title"
+    );
+    if (!cards.length || typeof gsap === "undefined") return;
+
+    if (isCompactViewport()) {
+      gsap.set(cards, { clearProps: "opacity,visibility,transform,y" });
+    }
+  }
+
+  function initInvisalignGalleryDots() {
+    if (!isCompactViewport()) return;
+
+    var $gallery = $(".invisalign-smile-gallery");
+    if (!$gallery.length) return;
+
+    var $slides = $gallery.find(".gallery-slide");
+    var $details = $gallery.find(".gallery-details-data");
+    var $dotsContainer = $gallery.find(".invisalign-gallery-dots");
+
+    if (!$slides.length || !$dotsContainer.length) return;
+
+    if (!$dotsContainer.children().length) {
+      $slides.each(function (index) {
+        var $dot = $(
+          '<button type="button" class="gallery-dot" aria-label="Go to slide ' +
+            (index + 1) +
+            '"></button>'
+        );
+        if (index === 0) {
+          $dot.addClass("active");
+        }
+        $dotsContainer.append($dot);
+      });
+    }
+
+    var $dots = $dotsContainer.find(".gallery-dot");
+
+    function showSlide(index) {
+      $slides.removeClass("active");
+      $details.removeClass("active");
+      $dots.removeClass("active");
+
+      $slides.eq(index).addClass("active");
+      $details.eq(index).addClass("active");
+      $dots.eq(index).addClass("active");
+    }
+
+    $dots.off("click.invisalignMobile").on("click.invisalignMobile", function () {
+      if (!isCompactViewport()) return;
+      showSlide($(this).index());
     });
   }
 
@@ -154,9 +278,83 @@
     }
   }
 
+  function initScrollAnimations() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+    if (window.innerWidth < 992) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    var sections = [
+      {
+        trigger: ".invisalign-about-section",
+        items:
+          ".invisalign-about-header, .invisalign-about-tabs, .invisalign-about-panel.active .invisalign-step-card, .invisalign-about-panel.active .invisalign-who-card",
+      },
+      {
+        trigger: ".invisalign-treatment-section",
+        items:
+          ".invisalign-treatment-visual, .invisalign-treatment-title, .invisalign-treatment-lead, .invisalign-treatment-list",
+      },
+      {
+        trigger: ".invisalign-compare-section",
+        items: ".invisalign-compare-title, .invisalign-compare-card",
+      },
+      {
+        trigger: ".invisalign-fees-section",
+        items: ".invisalign-fees-header, .invisalign-fee-row",
+      },
+      {
+        trigger: ".invisalign-membership-section",
+        items: ".cosmetic-membership-card",
+      },
+      {
+        trigger: ".invisalign-more-services-section",
+        items: ".more-services-header, .more-service-card-wrapper",
+      },
+    ];
+
+    sections.forEach(function (cfg) {
+      var trigger = document.querySelector(cfg.trigger);
+      if (!trigger) return;
+
+      var items = trigger.querySelectorAll(cfg.items);
+      if (!items.length) return;
+
+      gsap.set(items, { y: 40, opacity: 0 });
+
+      gsap.to(items, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: trigger,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+    });
+  }
+
+  function initCompactHandlers() {
+    resetTreatmentForViewport();
+    resetCompareForViewport();
+    initInvisalignGalleryDots();
+  }
+
   $(function () {
     initInvisalignAboutTabs();
+    initTreatmentDisclosure();
     initInvisalignMoreServices();
     initInvisalignHeroAnimation();
+    initScrollAnimations();
+    initCompactHandlers();
+
+    if (typeof compactMq.addEventListener === "function") {
+      compactMq.addEventListener("change", initCompactHandlers);
+    } else if (typeof compactMq.addListener === "function") {
+      compactMq.addListener(initCompactHandlers);
+    }
   });
 })(jQuery);
