@@ -80,9 +80,20 @@ $invisalign_url            = wsd_get_invisalign_page_url();
 					<div class="col-12 col-md-auto d-flex justify-content-center">
 						<div class="header-search">
 							<form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<label class="screen-reader-text" for="header-search-field"><?php esc_html_e( 'Search the site', 'wsd' ); ?></label>
 								<div class="search-input-wrapper">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/search-icon.svg' ); ?>" alt="Search" class="search-icon-img">
-									<input type="search" class="search-field" placeholder="Search for 'veneers'" value="<?php echo get_search_query(); ?>" name="s" />
+									<button type="submit" class="search-submit" aria-label="<?php esc_attr_e( 'Search', 'wsd' ); ?>">
+										<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/search-icon.svg' ); ?>" alt="" class="search-icon-img" aria-hidden="true">
+									</button>
+									<input
+										type="search"
+										id="header-search-field"
+										class="search-field"
+										placeholder="<?php esc_attr_e( "Search for 'veneers'", 'wsd' ); ?>"
+										value="<?php echo esc_attr( get_search_query() ); ?>"
+										name="s"
+										required
+									/>
 								</div>
 							</form>
 						</div>
@@ -183,11 +194,22 @@ $invisalign_url            = wsd_get_invisalign_page_url();
 				<!-- Search Active Bar (Hidden by default) -->
 				<div class="mobile-search-active-bar d-none w-100">
 					<form role="search" method="get" class="search-form w-100" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<label class="screen-reader-text" for="mobile-search-field"><?php esc_html_e( 'Search the site', 'wsd' ); ?></label>
 						<div class="search-active-input-wrapper">
-							<svg width="11" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-active-icon">
-								<path d="M12.5599 11.9408L9.8217 9.20318C10.6153 8.25036 11.0111 7.02825 10.9266 5.79108C10.8422 4.55391 10.284 3.39693 9.3682 2.56082C8.45242 1.72471 7.24955 1.27385 6.00982 1.30203C4.77009 1.3302 3.58894 1.83524 2.71209 2.71209C1.83524 3.58894 1.3302 4.77009 1.30203 6.00982C1.27385 7.24955 1.72471 8.45242 2.56082 9.3682C3.39693 10.284 4.55391 10.8422 5.79108 10.9266C7.02825 11.0111 8.25036 10.6153 9.20318 9.8217L11.9408 12.5599C11.9815 12.6005 12.0297 12.6328 12.0829 12.6548C12.136 12.6768 12.1929 12.6881 12.2504 12.6881C12.3079 12.6881 12.3648 12.6768 12.4179 12.6548C12.471 12.6328 12.5193 12.6005 12.5599 12.5599C12.6005 12.5193 12.6328 12.471 12.6548 12.4179C12.6768 12.3648 12.6881 12.3079 12.6881 12.2504C12.6881 12.1929 12.6768 12.136 12.6548 12.0829C12.6328 12.0297 12.6005 11.9815 12.5599 11.9408ZM2.18787 6.12537C2.18787 5.3466 2.4188 4.58533 2.85146 3.93781C3.28412 3.29029 3.89907 2.78561 4.61855 2.48759C5.33804 2.18957 6.12974 2.1116 6.89354 2.26353C7.65734 2.41546 8.35893 2.79047 8.9096 3.34114C9.46027 3.89181 9.83528 4.5934 9.98721 5.3572C10.1391 6.121 10.0612 6.9127 9.76315 7.63218C9.46513 8.35167 8.96045 8.96662 8.31293 9.39928C7.66541 9.83194 6.90413 10.0629 6.12537 10.0629C5.08143 10.0617 4.08059 9.6465 3.34241 8.90832C2.60424 8.17015 2.18903 7.1693 2.18787 6.12537Z" fill="#5E5D5F"/>
-							</svg>
-							<input type="search" class="search-field-active" placeholder="Search for ‘veneers’" value="<?php echo get_search_query(); ?>" name="s" />
+							<button type="submit" class="search-submit search-submit--mobile" aria-label="<?php esc_attr_e( 'Search', 'wsd' ); ?>">
+								<svg width="11" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-active-icon" aria-hidden="true">
+									<path d="M12.5599 11.9408L9.8217 9.20318C10.6153 8.25036 11.0111 7.02825 10.9266 5.79108C10.8422 4.55391 10.284 3.39693 9.3682 2.56082C8.45242 1.72471 7.24955 1.27385 6.00982 1.30203C4.77009 1.3302 3.58894 1.83524 2.71209 2.71209C1.83524 3.58894 1.3302 4.77009 1.30203 6.00982C1.27385 7.24955 1.72471 8.45242 2.56082 9.3682C3.39693 10.284 4.55391 10.8422 5.79108 10.9266C7.02825 11.0111 8.25036 10.6153 9.20318 9.8217L11.9408 12.5599C11.9815 12.6005 12.0297 12.6328 12.0829 12.6548C12.136 12.6768 12.1929 12.6881 12.2504 12.6881C12.3079 12.6881 12.3648 12.6768 12.4179 12.6548C12.471 12.6328 12.5193 12.6005 12.5599 12.5599C12.6005 12.5193 12.6328 12.471 12.6548 12.4179C12.6768 12.3648 12.6881 12.3079 12.6881 12.2504C12.6881 12.1929 12.6768 12.136 12.6548 12.0829C12.6328 12.0297 12.6005 11.9815 12.5599 11.9408ZM2.18787 6.12537C2.18787 5.3466 2.4188 4.58533 2.85146 3.93781C3.28412 3.29029 3.89907 2.78561 4.61855 2.48759C5.33804 2.18957 6.12974 2.1116 6.89354 2.26353C7.65734 2.41546 8.35893 2.79047 8.9096 3.34114C9.46027 3.89181 9.83528 4.5934 9.98721 5.3572C10.1391 6.121 10.0612 6.9127 9.76315 7.63218C9.46513 8.35167 8.96045 8.96662 8.31293 9.39928C7.66541 9.83194 6.90413 10.0629 6.12537 10.0629C5.08143 10.0617 4.08059 9.6465 3.34241 8.90832C2.60424 8.17015 2.18903 7.1693 2.18787 6.12537Z" fill="#5E5D5F"/>
+								</svg>
+							</button>
+							<input
+								type="search"
+								id="mobile-search-field"
+								class="search-field-active"
+								placeholder="<?php esc_attr_e( "Search for 'veneers'", 'wsd' ); ?>"
+								value="<?php echo esc_attr( get_search_query() ); ?>"
+								name="s"
+								required
+							/>
 						</div>
 					</form>
 					<button class="mobile-search-close-btn" aria-label="Close Search">

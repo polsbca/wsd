@@ -10,59 +10,89 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
+
+$search_query = get_search_query();
+$result_count = (int) $GLOBALS['wp_query']->found_posts;
 ?>
 
-	<main id="main" class="site-main">
+	<main id="main" class="site-main search-results-main">
+		<section class="search-results-section">
+			<div class="container-fluid px-lg-120">
+				<header class="search-results-header">
+					<h1 class="search-results-title">
+						<?php
+						if ( $search_query ) {
+							printf(
+								/* translators: %s: search query */
+								esc_html__( 'Search results for “%s”', 'wsd' ),
+								esc_html( $search_query )
+							);
+						} else {
+							esc_html_e( 'Search', 'wsd' );
+						}
+						?>
+					</h1>
+					<p class="search-results-count">
+						<?php
+						printf(
+							/* translators: %d: number of search results */
+							esc_html( _n( '%d result found', '%d results found', $result_count, 'wsd' ) ),
+							$result_count
+						);
+						?>
+					</p>
+				</header>
 
-		<?php
-		if ( have_posts() ) {
-			?>
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					printf(
-						esc_html__( 'Search Results for: %s', 'wsd' ),
-						'<span>' . get_search_query() . '</span>'
-					);
-					?>
-				</h1>
-			</header>
-
-			<?php
-			while ( have_posts() ) {
-				the_post();
-				?>
-				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<header class="entry-header">
-						<?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); ?>
-					</header>
-
-					<div class="entry-content">
-						<?php the_excerpt(); ?>
+				<?php if ( have_posts() ) : ?>
+					<div class="search-results-list">
+						<?php
+						while ( have_posts() ) {
+							the_post();
+							$post_type_object = get_post_type_object( get_post_type() );
+							$type_label       = $post_type_object && ! empty( $post_type_object->labels->singular_name )
+								? $post_type_object->labels->singular_name
+								: __( 'Content', 'wsd' );
+							?>
+							<article id="post-<?php the_ID(); ?>" <?php post_class( 'search-result-card' ); ?>>
+								<span class="search-result-type"><?php echo esc_html( $type_label ); ?></span>
+								<h2 class="search-result-title">
+									<a href="<?php echo esc_url( get_permalink() ); ?>"><?php the_title(); ?></a>
+								</h2>
+								<?php if ( has_excerpt() || get_the_content() ) : ?>
+									<div class="search-result-excerpt">
+										<?php echo esc_html( wp_trim_words( get_the_excerpt() ? get_the_excerpt() : wp_strip_all_tags( get_the_content() ), 28 ) ); ?>
+									</div>
+								<?php endif; ?>
+								<a class="search-result-link" href="<?php echo esc_url( get_permalink() ); ?>">
+									<?php esc_html_e( 'View details', 'wsd' ); ?>
+								</a>
+							</article>
+							<?php
+						}
+						?>
 					</div>
 
-					<footer class="entry-footer">
-						<a href="<?php echo esc_url( get_permalink() ); ?>" class="read-more"><?php esc_html_e( 'Read More', 'wsd' ); ?></a>
-					</footer>
-				</article>
-				<?php
-			}
-
-			// Posts pagination
-			the_posts_pagination( array(
-				'prev_text' => esc_html__( 'Previous', 'wsd' ),
-				'next_text' => esc_html__( 'Next', 'wsd' ),
-			) );
-		} else {
-			?>
-			<p><?php esc_html_e( 'Nothing found for your search.', 'wsd' ); ?></p>
-			<?php
-		}
-		?>
-
+					<div class="search-results-pagination">
+						<?php
+						the_posts_pagination(
+							array(
+								'prev_text' => esc_html__( 'Previous', 'wsd' ),
+								'next_text' => esc_html__( 'Next', 'wsd' ),
+							)
+						);
+						?>
+					</div>
+				<?php else : ?>
+					<div class="search-results-empty">
+						<p><?php esc_html_e( 'Nothing matched your search. Try a different keyword.', 'wsd' ); ?></p>
+						<a class="search-results-home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<?php esc_html_e( 'Back to home', 'wsd' ); ?>
+						</a>
+					</div>
+				<?php endif; ?>
+			</div>
+		</section>
 	</main>
-
-	<?php get_sidebar(); ?>
 
 <?php
 get_footer();

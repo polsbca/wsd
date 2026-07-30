@@ -1087,10 +1087,33 @@
     flex-grow: 1;
   }
 
+  .search-submit--mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    line-height: 0;
+  }
+
+  .search-submit--mobile:hover,
+  .search-submit--mobile:focus,
+  .search-submit--mobile:focus-visible {
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+  }
+
   .search-active-icon {
     width: 11px;
     height: 12px;
     flex-shrink: 0;
+    display: block;
+    pointer-events: none;
   }
 
   .search-field-active {

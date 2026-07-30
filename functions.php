@@ -34,6 +34,35 @@ function wsd_setup() {
 add_action( 'after_setup_theme', 'wsd_setup' );
 
 /**
+ * Make front-end search global across all public, searchable post types.
+ *
+ * @param WP_Query $query Main query.
+ */
+function wsd_global_search_query( $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_search() ) {
+		return;
+	}
+
+	$post_types = get_post_types(
+		array(
+			'public'              => true,
+			'exclude_from_search' => false,
+		),
+		'names'
+	);
+
+	if ( empty( $post_types ) ) {
+		return;
+	}
+
+	// Keep attachment out of front-end search results.
+	unset( $post_types['attachment'] );
+
+	$query->set( 'post_type', array_values( $post_types ) );
+}
+add_action( 'pre_get_posts', 'wsd_global_search_query' );
+
+/**
  * Enqueue styles and scripts
  */
 function wsd_scripts() {
