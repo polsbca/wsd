@@ -249,7 +249,7 @@
 
     var title = hero.querySelector(".invisalign-hero-title");
     var desc = hero.querySelector(".invisalign-hero-desc");
-    var buttons = hero.querySelectorAll(".invisalign-hero-ctas .invisalign-btn");
+    var buttons = hero.querySelectorAll(".invisalign-hero-ctas .btn");
     var image = hero.querySelector(".invisalign-hero-image-wrapper");
 
     gsap.set([title, desc].concat([].slice.call(buttons)).filter(Boolean), {

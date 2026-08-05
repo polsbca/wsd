@@ -18,6 +18,10 @@
         ".implants-step-number",
         ".implants-step-title",
         ".implants-step-desc",
+        ".implants-type-label",
+        ".implants-type-title",
+        ".implants-type-desc",
+        ".implants-type-ideal",
       ].join(", ")
     );
   }
@@ -26,7 +30,9 @@
     var items = getPanelItems(panel);
     if (!items.length || typeof gsap === "undefined") return;
 
-    var cards = panel.querySelectorAll(".implants-step-card");
+    var cards = panel.querySelectorAll(
+      ".implants-step-card, .implants-type-card"
+    );
     gsap.set(cards, { clearProps: "transform" });
     gsap.killTweensOf(items);
     gsap.fromTo(
@@ -48,7 +54,9 @@
     if (!$dots.length) return;
 
     var $activePanel = $section.find(".implants-about-panel.active");
-    var cardCount = $activePanel.find(".implants-step-card").length;
+    var cardCount = $activePanel.find(
+      ".implants-step-card, .implants-type-card"
+    ).length;
     var html = "";
 
     for (var i = 0; i < cardCount; i += 1) {

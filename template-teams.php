@@ -82,7 +82,7 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 					<p class="teams-hero-description hero-description"><?php echo esc_html( $teams_hero_description ); ?></p>
 				</div>
 				<div class="hero-buttons">
-					<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
 					<a href="<?php echo esc_url( wsd_get_fees_page_url() ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
 				</div>
 			</div>

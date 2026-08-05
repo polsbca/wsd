@@ -23,6 +23,38 @@ if ( $hero_image_id ) {
 		$hero_alt = $thumbnail_alt;
 	}
 }
+
+$built_diagram_fallback = $theme_uri . '/assets/images/dental-implants-diagram.png';
+$built_diagram_image    = $built_diagram_fallback;
+$built_diagram_alt      = __( 'Diagram of crown, abutment and implant in the jawbone', 'wsd' );
+
+if ( function_exists( 'get_field' ) && $page_id ) {
+	$built_diagram_field = get_field( 'dental_implants_left_side_image', $page_id );
+	$built_diagram_url   = function_exists( 'wsd_normalize_media_url' )
+		? wsd_normalize_media_url( $built_diagram_field, '' )
+		: ( is_string( $built_diagram_field ) ? $built_diagram_field : '' );
+
+	if ( $built_diagram_url ) {
+		$built_diagram_image = $built_diagram_url;
+
+		$built_diagram_attachment_id = 0;
+		if ( is_numeric( $built_diagram_field ) ) {
+			$built_diagram_attachment_id = (int) $built_diagram_field;
+		} elseif ( is_array( $built_diagram_field ) && ! empty( $built_diagram_field['ID'] ) ) {
+			$built_diagram_attachment_id = (int) $built_diagram_field['ID'];
+		} elseif ( function_exists( 'attachment_url_to_postid' ) ) {
+			$built_diagram_attachment_id = (int) attachment_url_to_postid( $built_diagram_url );
+		}
+
+		if ( $built_diagram_attachment_id ) {
+			$built_diagram_field_alt = get_post_meta( $built_diagram_attachment_id, '_wp_attachment_image_alt', true );
+			if ( $built_diagram_field_alt ) {
+				$built_diagram_alt = $built_diagram_field_alt;
+			}
+		}
+	}
+}
+
 $implants_fees  = array(
 	array(
 		'title' => 'Single Tooth Implant (incl. crown)',
@@ -61,74 +93,13 @@ $implants_fees  = array(
 	),
 );
 
-$about_panels = array(
-	'process'  => array(
-		array(
-			'num'   => '1',
-			'title' => 'Consultation & Assessment',
-			'desc'  => 'Digital scans and examination to plan your implant treatment.',
-		),
-		array(
-			'num'   => '2',
-			'title' => 'Implant Placement',
-			'desc'  => 'The titanium implant is placed securely into the jawbone.',
-		),
-		array(
-			'num'   => '3',
-			'title' => 'Healing & Integration',
-			'desc'  => 'The implant naturally bonds with the bone over several months.',
-		),
-		array(
-			'num'   => '4',
-			'title' => 'Crown Fitting & Aftercare',
-			'desc'  => 'Your custom crown is fitted, followed by ongoing care and review appointments.',
-		),
-	),
-	'types'    => array(
-		array(
-			'num'   => '1',
-			'title' => 'Single Tooth Implant',
-			'desc'  => 'A standalone implant and crown that replaces one missing tooth without affecting neighbours.',
-		),
-		array(
-			'num'   => '2',
-			'title' => 'Implant-Supported Bridge',
-			'desc'  => 'Two or more implants supporting a fixed bridge across several missing teeth.',
-		),
-		array(
-			'num'   => '3',
-			'title' => 'Full Arch (All-on-4 / All-on-6)',
-			'desc'  => 'A complete arch of teeth fixed on four or six implants for a stable, non-removable smile.',
-		),
-		array(
-			'num'   => '4',
-			'title' => 'Implant-Retained Dentures',
-			'desc'  => 'Snap-on dentures secured by implants for comfort, retention and easier eating.',
-		),
-	),
-	'benefits' => array(
-		array(
-			'num'   => '1',
-			'title' => 'Looks & Feels Natural',
-			'desc'  => 'Custom crowns match shade, shape and bite so your implant blends with your smile.',
-		),
-		array(
-			'num'   => '2',
-			'title' => 'Protects Your Jawbone',
-			'desc'  => 'The implant stimulates bone like a natural root, helping prevent long-term bone loss.',
-		),
-		array(
-			'num'   => '3',
-			'title' => 'Spares Healthy Teeth',
-			'desc'  => 'No need to grind down neighbouring teeth as you would for a traditional bridge.',
-		),
-		array(
-			'num'   => '4',
-			'title' => 'Built to Last',
-			'desc'  => 'With good hygiene and reviews, implants can provide a lifetime of reliable function.',
-		),
-	),
-);
+$about_panels = function_exists( 'wsd_get_dental_implants_about_panels' )
+	? wsd_get_dental_implants_about_panels( $page_id )
+	: array(
+		'process'  => array(),
+		'types'    => array(),
+		'benefits' => array(),
+	);
 
 $built_parts = array(
 	array(
@@ -205,8 +176,8 @@ get_header();
 					</p>
 				</div>
 				<div class="implants-hero-ctas">
-					<a href="<?php echo esc_url( $book_url ); ?>" class="btn btn-primary implants-btn"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
-					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary implants-btn"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( $book_url ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
+					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
 				</div>
 			</div>
 			<div class="implants-hero-image-col">
@@ -270,15 +241,39 @@ get_header();
 						role="tabpanel"
 						<?php echo 'process' !== $panel_key ? 'hidden' : ''; ?>
 					>
-						<div class="implants-card-grid">
-							<?php foreach ( $cards as $card ) : ?>
-								<article class="implants-step-card">
-									<div class="implants-step-number" aria-hidden="true"><?php echo esc_html( $card['num'] ); ?></div>
-									<h3 class="implants-step-title"><?php echo esc_html( $card['title'] ); ?></h3>
-									<p class="implants-step-desc"><?php echo esc_html( $card['desc'] ); ?></p>
-								</article>
-							<?php endforeach; ?>
-						</div>
+						<?php if ( 'types' === $panel_key ) : ?>
+							<div class="implants-types-grid">
+								<?php foreach ( $cards as $card ) : ?>
+									<article class="implants-type-card">
+										<?php if ( ! empty( $card['type'] ) ) : ?>
+											<p class="implants-type-label"><?php echo esc_html( $card['type'] ); ?></p>
+										<?php endif; ?>
+										<?php if ( ! empty( $card['title'] ) ) : ?>
+											<h3 class="implants-type-title"><?php echo esc_html( $card['title'] ); ?></h3>
+										<?php endif; ?>
+										<?php if ( ! empty( $card['desc'] ) ) : ?>
+											<p class="implants-type-desc"><?php echo esc_html( $card['desc'] ); ?></p>
+										<?php endif; ?>
+										<?php if ( ! empty( $card['ideal'] ) ) : ?>
+											<p class="implants-type-ideal">
+												<strong><?php esc_html_e( 'Ideal for:', 'wsd' ); ?></strong>
+												<?php echo esc_html( ' ' . $card['ideal'] ); ?>
+											</p>
+										<?php endif; ?>
+									</article>
+								<?php endforeach; ?>
+							</div>
+						<?php else : ?>
+							<div class="implants-card-grid">
+								<?php foreach ( $cards as $card ) : ?>
+									<article class="implants-step-card">
+										<div class="implants-step-number" aria-hidden="true"><?php echo esc_html( $card['num'] ); ?></div>
+										<h3 class="implants-step-title"><?php echo esc_html( $card['title'] ); ?></h3>
+										<p class="implants-step-desc"><?php echo esc_html( $card['desc'] ); ?></p>
+									</article>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>
 
@@ -293,8 +288,8 @@ get_header();
 			<div class="implants-built-inner">
 				<div class="implants-built-diagram">
 					<img
-						src="<?php echo esc_url( $theme_uri . '/assets/images/dental-implants-diagram.png' ); ?>"
-						alt="<?php esc_attr_e( 'Diagram of crown, abutment and implant in the jawbone', 'wsd' ); ?>"
+						src="<?php echo esc_url( $built_diagram_image ); ?>"
+						alt="<?php echo esc_attr( $built_diagram_alt ); ?>"
 					>
 				</div>
 				<div class="implants-built-content">

@@ -298,7 +298,7 @@ get_header();
 											<?php if ( ( $show_smile_gallery && ! empty( $gallery_slides ) ) || ! empty( $review_slides ) ) : ?>
 												<a href="#modal-gallery-<?php the_ID(); ?>" class="modal-nav-link"><?php echo ( $show_smile_gallery && ! empty( $gallery_slides ) ) ? 'Results' : 'Reviews'; ?></a>
 											<?php endif; ?>
-											<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link text-gold underline">Treatment fees</a>
+											<a href="#modal-fees-<?php the_ID(); ?>" class="modal-nav-link">Treatment fees</a>
 										</div>
 									</details>
 								</div>

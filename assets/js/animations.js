@@ -1123,6 +1123,7 @@ function initAnimations() {
   initPrivacyPolicyAnimations();
   initDentalReferralsAnimations();
   initDentalImplantsAnimations();
+  initInvisalignAnimations();
 
   if (hasTeamsPage && isDesktop) {
     initTeamsPageAnimations();
@@ -1311,8 +1312,12 @@ function initModalNavScroll(modalElement) {
   };
 
   const setActiveLink = (activeLink) => {
+    const href = activeLink.getAttribute("href");
     navLinks.forEach((link) => {
-      link.classList.toggle("active", link === activeLink);
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === href,
+      );
     });
   };
 
@@ -1327,6 +1332,11 @@ function initModalNavScroll(modalElement) {
 
       event.preventDefault();
       setActiveLink(link);
+
+      const mobileNav = link.closest(".cosmetic-modal-mobile-nav");
+      if (mobileNav && mobileNav.tagName === "DETAILS") {
+        mobileNav.open = false;
+      }
 
       gsap.to(scrollContainer, {
         scrollTop: getTargetTop(target),
@@ -2120,6 +2130,38 @@ function initPrivacyPolicyAnimations() {
   });
 }
 
+function animatePageSectionEntrance(section, selectors, options = {}) {
+  if (!section || typeof gsap === "undefined") {
+    return;
+  }
+
+  const elements = selectors
+    .flatMap((selector) => Array.from(section.querySelectorAll(selector)))
+    .filter(Boolean);
+
+  if (!elements.length) {
+    return;
+  }
+
+  gsap.set(elements, {
+    y: options.yStart || 40,
+    opacity: 0,
+  });
+
+  gsap.to(elements, {
+    y: 0,
+    opacity: 1,
+    duration: options.duration || 0.8,
+    stagger: options.stagger || 0.12,
+    ease: options.ease || "power3.out",
+    scrollTrigger: {
+      trigger: section,
+      start: options.start || "top 80%",
+      toggleActions: "play none none none",
+    },
+  });
+}
+
 function initDentalImplantsAnimations() {
   const main = document.querySelector(".dental-implants-main");
   if (!main) return;
@@ -2129,7 +2171,7 @@ function initDentalImplantsAnimations() {
 
   const title = hero.querySelector(".implants-hero-title");
   const desc = hero.querySelector(".implants-hero-desc");
-  const buttons = hero.querySelectorAll(".implants-hero-ctas .implants-btn");
+  const buttons = hero.querySelectorAll(".implants-hero-ctas .btn");
   const image = hero.querySelector(".implants-hero-image-wrapper");
 
   if (typeof gsap === "undefined") {
@@ -2176,6 +2218,160 @@ function initDentalImplantsAnimations() {
       "-=0.85",
     );
   }
+
+  if (window.innerWidth < 992 || typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
+  animatePageSectionEntrance(main.querySelector(".implants-about-section"), [
+    ".implants-section-badge",
+    ".implants-about-lead",
+    ".implants-about-tabs",
+    ".implants-about-panel.active .implants-step-card, .implants-about-panel.active .implants-type-card",
+  ]);
+
+  animatePageSectionEntrance(main.querySelector(".implants-built-section"), [
+    ".implants-built-diagram",
+    ".implants-built-title",
+    ".implants-built-lead",
+    ".implants-built-item",
+    ".implants-built-disclosure",
+  ]);
+
+  animatePageSectionEntrance(main.querySelector(".implants-compare-section"), [
+    ".implants-compare-title",
+    ".implants-compare-card",
+  ]);
+
+  animatePageSectionEntrance(main.querySelector(".implants-fees-section"), [
+    ".implants-fees-title",
+    ".implants-fees-lead",
+    ".implants-fee-row",
+  ]);
+
+  animatePageSectionEntrance(
+    main.querySelector(".implants-membership-section"),
+    [
+      ".cosmetic-membership-badge",
+      ".cosmetic-membership-title",
+      ".cosmetic-membership-desc",
+      ".cosmetic-membership-price",
+      ".cosmetic-membership-benefit-item",
+      ".cosmetic-membership-ctas",
+      ".cosmetic-membership-img-col img",
+    ],
+  );
+}
+
+function initInvisalignAnimations() {
+  const main = document.querySelector(".invisalign-main");
+  if (!main) return;
+
+  const hero = main.querySelector(".invisalign-hero");
+  if (!hero) return;
+
+  const title = hero.querySelector(".invisalign-hero-title");
+  const desc = hero.querySelector(".invisalign-hero-desc");
+  const buttons = hero.querySelectorAll(".invisalign-hero-ctas .btn");
+  const image = hero.querySelector(".invisalign-hero-image-wrapper");
+  const stats = hero.querySelectorAll(".invisalign-hero-stat");
+
+  if (typeof gsap === "undefined") {
+    [title, desc, image, ...buttons, ...stats].filter(Boolean).forEach((el) => {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      el.style.clipPath = "none";
+    });
+    return;
+  }
+
+  gsap.set([title, desc, ...buttons, ...stats].filter(Boolean), {
+    y: 30,
+    opacity: 0,
+  });
+  if (image) {
+    gsap.set(image, {
+      clipPath: "inset(0% 0% 100% 0%)",
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+    });
+  }
+
+  const heroTl = gsap.timeline({
+    defaults: { ease: "power3.out", duration: 0.8 },
+  });
+
+  if (title) heroTl.to(title, { y: 0, opacity: 1 });
+  if (desc) heroTl.to(desc, { y: 0, opacity: 1 }, "-=0.55");
+  if (stats.length) {
+    heroTl.to(stats, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.5");
+  }
+  if (buttons.length) {
+    heroTl.to(
+      buttons,
+      { y: 0, opacity: 1, stagger: 0.12, ease: "back.out(1.7)" },
+      "-=0.45",
+    );
+  }
+  if (image) {
+    heroTl.to(
+      image,
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.25,
+        ease: "power3.inOut",
+      },
+      "-=0.85",
+    );
+  }
+
+  if (window.innerWidth < 992 || typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
+  animatePageSectionEntrance(main.querySelector(".invisalign-about-section"), [
+    ".invisalign-section-badge",
+    ".invisalign-about-lead",
+    ".invisalign-about-tabs",
+    ".invisalign-about-panel.active .invisalign-step-card, .invisalign-about-panel.active .invisalign-who-card",
+  ]);
+
+  animatePageSectionEntrance(
+    main.querySelector(".invisalign-treatment-section"),
+    [
+      ".invisalign-treatment-title",
+      ".invisalign-treatment-lead",
+      ".invisalign-treatment-item",
+      ".invisalign-process-step",
+      ".invisalign-treatment-disclosure",
+    ],
+  );
+
+  animatePageSectionEntrance(main.querySelector(".invisalign-compare-section"), [
+    ".invisalign-compare-title",
+    ".invisalign-compare-card",
+  ]);
+
+  animatePageSectionEntrance(main.querySelector(".invisalign-fees-section"), [
+    ".invisalign-fees-title",
+    ".invisalign-fees-lead",
+    ".invisalign-fee-row",
+  ]);
+
+  animatePageSectionEntrance(
+    main.querySelector(".invisalign-membership-section"),
+    [
+      ".cosmetic-membership-badge",
+      ".cosmetic-membership-title",
+      ".cosmetic-membership-desc",
+      ".cosmetic-membership-price",
+      ".cosmetic-membership-benefit-item",
+      ".cosmetic-membership-ctas",
+      ".cosmetic-membership-img-col img",
+    ],
+  );
 }
 
 function initDentalReferralsAnimations() {
@@ -2398,14 +2594,26 @@ function initModalReviewsSlider(modalElement) {
 
   if (slides.length <= 1) return;
 
-    let currentIndex = 0;
-    let isTransitioning = false;
-    const mobileQuery = window.matchMedia('(max-width: 991.98px)');
+  let currentIndex = 0;
+  let isTransitioning = false;
+  let activeTween = null;
+  const mobileQuery = window.matchMedia("(max-width: 991.98px)");
+
+  const slideParts = (slide) =>
+    slide.querySelectorAll(
+      ".review-slide-title, .review-slide-text, .review-slide-stars, .review-slide-author",
+    );
 
   slides.forEach((slide, index) => {
     const isActive = index === currentIndex;
     slide.classList.toggle("active", isActive);
-    gsap.set(slide, { opacity: isActive ? 1 : 0 });
+    gsap.set(slide, {
+      opacity: isActive ? 1 : 0,
+      visibility: isActive ? "visible" : "hidden",
+    });
+    if (!isActive) {
+      gsap.set(slideParts(slide), { opacity: 0, y: 0 });
+    }
   });
 
   const updateProgress = () => {
@@ -2419,97 +2627,117 @@ function initModalReviewsSlider(modalElement) {
     });
   };
 
-    const getWrappedIndex = (index) => (index + slides.length) % slides.length;
+  const getWrappedIndex = (index) => (index + slides.length) % slides.length;
 
-    const goToSlide = (newIndex) => {
-        newIndex = getWrappedIndex(newIndex);
-        if (isTransitioning || newIndex === currentIndex) return;
-        isTransitioning = true;
+  const goToSlide = (newIndex) => {
+    newIndex = getWrappedIndex(newIndex);
+    if (isTransitioning || newIndex === currentIndex) return;
+    isTransitioning = true;
 
     const currentSlide = slides[currentIndex];
     const nextSlide = slides[newIndex];
-    const currentParts = currentSlide.querySelectorAll(
-      ".review-slide-title, .review-slide-text, .review-slide-stars, .review-slide-author",
-    );
-    const nextParts = nextSlide.querySelectorAll(
-      ".review-slide-title, .review-slide-text, .review-slide-stars, .review-slide-author",
-    );
+    const currentParts = slideParts(currentSlide);
+    const nextParts = slideParts(nextSlide);
 
-    const timeline = gsap.timeline({
+    if (activeTween) {
+      activeTween.kill();
+      activeTween = null;
+    }
+
+    // Sequential swap (same pattern as homepage testimonials):
+    // never leave two .active slides visible at once.
+    activeTween = gsap.timeline({
       onComplete: () => {
-        currentSlide.classList.remove("active");
-        nextSlide.classList.add("active");
-        gsap.set(currentSlide, { opacity: 0, clearProps: "transform" });
-        gsap.set(currentParts, { clearProps: "all" });
-        gsap.set(nextSlide, { opacity: 1, clearProps: "transform" });
-        gsap.set(nextParts, { clearProps: "all" });
+        gsap.set([currentParts, nextParts], {
+          clearProps: "opacity,transform,y",
+        });
+        gsap.set(currentSlide, {
+          opacity: 0,
+          visibility: "hidden",
+          clearProps: "transform",
+        });
+        gsap.set(nextSlide, {
+          opacity: 1,
+          visibility: "visible",
+          clearProps: "transform",
+        });
         currentIndex = newIndex;
         updateProgress();
         isTransitioning = false;
+        activeTween = null;
       },
     });
 
-    timeline
+    activeTween
       .to(currentParts, {
-        y: -20,
+        y: -12,
         opacity: 0,
-        stagger: 0.04,
-        duration: 0.25,
+        stagger: 0.02,
+        duration: 0.28,
         ease: "power2.in",
       })
       .call(() => {
+        currentSlide.classList.remove("active");
+        gsap.set(currentSlide, { opacity: 0, visibility: "hidden" });
+        gsap.set(currentParts, { clearProps: "opacity,transform,y" });
+
         nextSlide.classList.add("active");
-        gsap.set(nextSlide, { opacity: 1 });
+        gsap.set(nextSlide, { opacity: 1, visibility: "visible" });
+        gsap.set(nextParts, { opacity: 0, y: 14 });
       })
-      .fromTo(
-        nextParts,
-        { y: 22, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.06,
-          duration: 0.38,
-          ease: "power2.out",
-        },
-      );
+      .to(nextParts, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.03,
+        duration: 0.35,
+        ease: "power2.out",
+      });
   };
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      goToSlide((currentIndex - 1 + slides.length) % slides.length);
+      goToSlide(currentIndex - 1);
     });
   }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            goToSlide(currentIndex + 1);
-        });
-    }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+  }
 
-    let touchStartX = 0;
-    let touchStartY = 0;
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-    section.addEventListener('touchstart', (event) => {
-        if (!mobileQuery.matches || !event.touches.length) return;
+  section.addEventListener(
+    "touchstart",
+    (event) => {
+      if (!mobileQuery.matches || !event.touches.length) return;
 
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
-    }, { passive: true });
+      touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
+    },
+    { passive: true },
+  );
 
-    section.addEventListener('touchend', (event) => {
-        if (!mobileQuery.matches || !event.changedTouches.length) return;
+  section.addEventListener(
+    "touchend",
+    (event) => {
+      if (!mobileQuery.matches || !event.changedTouches.length) return;
 
-        const deltaX = event.changedTouches[0].clientX - touchStartX;
-        const deltaY = event.changedTouches[0].clientY - touchStartY;
+      const deltaX = event.changedTouches[0].clientX - touchStartX;
+      const deltaY = event.changedTouches[0].clientY - touchStartY;
 
-        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
 
-        if (deltaX < 0) {
-            goToSlide(currentIndex + 1);
-        } else {
-            goToSlide(currentIndex - 1);
-        }
-    }, { passive: true });
+      if (deltaX < 0) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(currentIndex - 1);
+      }
+    },
+    { passive: true },
+  );
 
   updateProgress();
 }
@@ -3906,6 +4134,107 @@ function initSectionFadeOut() {
     {
       selector: ".book-appointment-section",
       start: "bottom 80%",
+      end: "bottom top",
+    },
+    {
+      selector: ".about-waterside-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".smile-gallery-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    // Dental implants
+    {
+      selector: ".dental-implants-main > .implants-hero",
+      start: "bottom 80%",
+      end: "bottom top",
+    },
+    {
+      selector: ".dental-implants-main > .implants-about-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".dental-implants-main > .implants-built-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".dental-implants-main > .implants-compare-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".dental-implants-main > .implants-fees-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".dental-implants-main > .implants-membership-section",
+      start: "bottom 80%",
+      end: "bottom top",
+    },
+    // Invisalign
+    {
+      selector: ".invisalign-main > .invisalign-hero",
+      start: "bottom 80%",
+      end: "bottom top",
+    },
+    {
+      selector: ".invisalign-main > .invisalign-about-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".invisalign-main > .invisalign-treatment-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".invisalign-main > .invisalign-compare-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".invisalign-main > .invisalign-fees-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".invisalign-main > .invisalign-membership-section",
+      start: "bottom 80%",
+      end: "bottom top",
+    },
+    // Teams (hero + clinical already handled in initTeamsPageAnimations)
+    {
+      selector: ".teams-page-main > .teams-support-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    // Smile Gallery page
+    {
+      selector: ".smile-gallery-page-main > .smile-gallery-cases-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    // Blogs (hero already handled in initBlogsPageAnimations)
+    {
+      selector: ".blogs-page-main > .blogs-featured-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    {
+      selector: ".blogs-page-main > .blogs-listing-section",
+      start: "bottom bottom",
+      end: "bottom top",
+    },
+    // Services listing
+    {
+      selector: ".services-page-main > .services-list-section",
+      start: "bottom bottom",
       end: "bottom top",
     },
   ];

@@ -568,6 +568,173 @@ function wsd_get_dental_implants_page_url() {
 }
 
 /**
+ * Build All About Dental Implants tab panels from ACF (with Figma fallbacks).
+ *
+ * @param int $page_id Optional page ID.
+ * @return array{process: array<int, array>, types: array<int, array>, benefits: array<int, array>}
+ */
+function wsd_get_dental_implants_about_panels( $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : (int) get_queried_object_id();
+
+	$defaults = array(
+		'process'  => array(
+			array(
+				'num'   => '1',
+				'title' => 'Consultation & Assessment',
+				'desc'  => 'Digital scans and examination to plan your implant treatment.',
+			),
+			array(
+				'num'   => '2',
+				'title' => 'Implant Placement',
+				'desc'  => 'The titanium implant is placed securely into the jawbone.',
+			),
+			array(
+				'num'   => '3',
+				'title' => 'Healing & Integration',
+				'desc'  => 'The implant naturally bonds with the bone over several months.',
+			),
+			array(
+				'num'   => '4',
+				'title' => 'Crown Fitting & Aftercare',
+				'desc'  => 'Your custom crown is fitted, followed by ongoing care and review appointments.',
+			),
+		),
+		'types'    => array(
+			array(
+				'type'  => 'Most common',
+				'title' => 'Single Tooth Implant',
+				'desc'  => 'A single titanium post and crown used to replace one missing tooth. Leaves adjacent healthy teeth completely untouched and prevents bone loss at the site.',
+				'ideal' => 'One or two missing teeth in otherwise healthy jaw',
+			),
+			array(
+				'type'  => 'Multiple teeth',
+				'title' => 'Implant-Supported Bridge',
+				'desc'  => 'Two or more implant posts support a bridge that spans a gap of several teeth — eliminating the need to crown healthy adjacent teeth as traditional bridges do.',
+				'ideal' => '3–4 consecutive missing teeth',
+			),
+			array(
+				'type'  => 'Full arch',
+				'title' => 'All-on-4 / All-on-6',
+				'desc'  => 'A full arch of teeth supported by just four or six strategically placed implants. A fixed, permanent solution for patients with extensive tooth loss or failing dentition.',
+				'ideal' => 'Full arch replacement or denture upgrade',
+			),
+			array(
+				'type'  => 'Implant-retained',
+				'title' => 'Implant-Retained Dentures',
+				'desc'  => 'Existing or new dentures that clip securely onto two or more implants — dramatically improving stability and eliminating the embarrassment of loose dentures.',
+				'ideal' => 'Current denture wearers seeking more security',
+			),
+			array(
+				'type'  => 'Same-day',
+				'title' => 'Immediate Loading (Teeth in a Day)',
+				'desc'  => 'In select cases, a temporary crown is fitted on the same day as implant placement, so you leave with a tooth rather than waiting months for the final crown.',
+				'ideal' => 'Suitable bone density, front teeth',
+			),
+			array(
+				'type'  => 'Bone graft',
+				'title' => 'Implants with Bone Grafting',
+				'desc'  => 'If you\'ve experienced bone loss following tooth extraction, a bone graft can rebuild the area to create a secure foundation for the implant post.',
+				'ideal' => 'Patients with insufficient bone density',
+			),
+		),
+		'benefits' => array(
+			array(
+				'num'   => '1',
+				'title' => 'Looks & Feels Natural',
+				'desc'  => 'Custom crowns match shade, shape and bite so your implant blends with your smile.',
+			),
+			array(
+				'num'   => '2',
+				'title' => 'Protects Your Jawbone',
+				'desc'  => 'The implant stimulates bone like a natural root, helping prevent long-term bone loss.',
+			),
+			array(
+				'num'   => '3',
+				'title' => 'Spares Healthy Teeth',
+				'desc'  => 'No need to grind down neighbouring teeth as you would for a traditional bridge.',
+			),
+			array(
+				'num'   => '4',
+				'title' => 'Built to Last',
+				'desc'  => 'With good hygiene and reviews, implants can provide a lifetime of reliable function.',
+			),
+		),
+	);
+
+	if ( ! function_exists( 'get_field' ) || ! $page_id ) {
+		return $defaults;
+	}
+
+	$panels = $defaults;
+
+	$process_group = get_field( 'process', $page_id );
+	if ( is_array( $process_group ) ) {
+		$process_cards = array();
+		for ( $i = 1; $i <= 4; $i++ ) {
+			$title = isset( $process_group[ "process_title_{$i}" ] ) ? trim( (string) $process_group[ "process_title_{$i}" ] ) : '';
+			$desc  = isset( $process_group[ "process_descreption_{$i}" ] ) ? trim( (string) $process_group[ "process_descreption_{$i}" ] ) : '';
+			if ( '' === $title && '' === $desc ) {
+				continue;
+			}
+			$process_cards[] = array(
+				'num'   => (string) $i,
+				'title' => $title,
+				'desc'  => $desc,
+			);
+		}
+		if ( ! empty( $process_cards ) ) {
+			$panels['process'] = $process_cards;
+		}
+	}
+
+	$types_group = get_field( 'types_of_implant', $page_id );
+	if ( is_array( $types_group ) ) {
+		$type_cards = array();
+		for ( $i = 1; $i <= 6; $i++ ) {
+			$type  = isset( $types_group[ "implant_type_{$i}" ] ) ? trim( (string) $types_group[ "implant_type_{$i}" ] ) : '';
+			$title = isset( $types_group[ "implant_title_{$i}" ] ) ? trim( (string) $types_group[ "implant_title_{$i}" ] ) : '';
+			$desc  = isset( $types_group[ "implant_content_{$i}" ] ) ? trim( (string) $types_group[ "implant_content_{$i}" ] ) : '';
+			$ideal = isset( $types_group[ "implant_ideal_for_{$i}" ] ) ? trim( (string) $types_group[ "implant_ideal_for_{$i}" ] ) : '';
+			$ideal = preg_replace( '/^ideal\s*for\s*:\s*/i', '', $ideal );
+			if ( '' === $type && '' === $title && '' === $desc && '' === $ideal ) {
+				continue;
+			}
+			$type_cards[] = array(
+				'type'  => $type,
+				'title' => $title,
+				'desc'  => $desc,
+				'ideal' => $ideal,
+			);
+		}
+		if ( ! empty( $type_cards ) ) {
+			$panels['types'] = $type_cards;
+		}
+	}
+
+	$benefits_group = get_field( 'key_benefits', $page_id );
+	if ( is_array( $benefits_group ) ) {
+		$benefit_cards = array();
+		for ( $i = 1; $i <= 4; $i++ ) {
+			$title = isset( $benefits_group[ "key_benefits_title_{$i}" ] ) ? trim( (string) $benefits_group[ "key_benefits_title_{$i}" ] ) : '';
+			$desc  = isset( $benefits_group[ "key_benefits_content_{$i}" ] ) ? trim( (string) $benefits_group[ "key_benefits_content_{$i}" ] ) : '';
+			if ( '' === $title && '' === $desc ) {
+				continue;
+			}
+			$benefit_cards[] = array(
+				'num'   => (string) $i,
+				'title' => $title,
+				'desc'  => $desc,
+			);
+		}
+		if ( ! empty( $benefit_cards ) ) {
+			$panels['benefits'] = $benefit_cards;
+		}
+	}
+
+	return $panels;
+}
+
+/**
  * Get Invisalign page URL by template, with path fallback.
  *
  * @return string
@@ -2391,6 +2558,14 @@ function wsd_dental_referrals_accordion_icon() {
 	</span>
 	<?php
 }
+
+
+function allow_svg_uploads( $mimes ) {
+    $mimes['svg'] = 'image/svg+xml';
+    $mimes['svgz'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'allow_svg_uploads' );
 
 
 

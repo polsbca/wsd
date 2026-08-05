@@ -138,18 +138,42 @@ $treatment_points = array(
 
 $process_steps = array(
 	array(
+		'key'   => 'crooked_teeth',
 		'label' => 'Crooked teeth',
 		'image' => $theme_uri . '/assets/images/invisalign/invisalign-process-1.png',
 	),
 	array(
+		'key'   => 'aligner_fitted',
 		'label' => 'Aligner fitted',
 		'image' => $theme_uri . '/assets/images/invisalign/invisalign-process-2.png',
 	),
 	array(
+		'key'   => 'straightened_teeth',
 		'label' => 'Straightened teeth',
 		'image' => $theme_uri . '/assets/images/invisalign/invisalign-process-3.png',
 	),
 );
+
+if ( function_exists( 'get_field' ) && $page_id ) {
+	$straight_teeth_group = get_field( 'straight_teeth_invisible_treatment', $page_id );
+	if ( is_array( $straight_teeth_group ) ) {
+		foreach ( $process_steps as $step_index => $step ) {
+			$field_key = isset( $step['key'] ) ? $step['key'] : '';
+			if ( ! $field_key || empty( $straight_teeth_group[ $field_key ] ) ) {
+				continue;
+			}
+
+			$acf_image = $straight_teeth_group[ $field_key ];
+			$acf_url   = function_exists( 'wsd_normalize_media_url' )
+				? wsd_normalize_media_url( $acf_image, '' )
+				: ( is_string( $acf_image ) ? $acf_image : '' );
+
+			if ( $acf_url ) {
+				$process_steps[ $step_index ]['image'] = $acf_url;
+			}
+		}
+	}
+}
 
 $compare_columns = array(
 	array(
@@ -167,35 +191,6 @@ $compare_columns = array(
 		'points' => array( 'Removable', 'Invisible', 'Pain-free' ),
 	),
 );
-
-$more_services_query = new WP_Query(
-	array(
-		'post_type'      => 'services',
-		'posts_per_page' => 6,
-		'post_status'    => 'publish',
-		'orderby'        => 'menu_order',
-		'order'          => 'ASC',
-		'tax_query'      => array(
-			array(
-				'taxonomy' => 'service_category',
-				'field'    => 'slug',
-				'terms'    => array( 'general-dentistry', 'all-about-general-dentistry-services' ),
-			),
-		),
-	)
-);
-
-if ( ! $more_services_query->have_posts() ) {
-	$more_services_query = new WP_Query(
-		array(
-			'post_type'      => 'services',
-			'posts_per_page' => 6,
-			'post_status'    => 'publish',
-			'orderby'        => 'menu_order',
-			'order'          => 'ASC',
-		)
-	);
-}
 
 get_header();
 ?>
@@ -231,8 +226,8 @@ get_header();
 					</div>
 				</div>
 				<div class="invisalign-hero-ctas">
-					<a href="<?php echo esc_url( $book_url ); ?>" class="btn btn-primary invisalign-btn"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
-					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary invisalign-btn"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
+					<a href="<?php echo esc_url( $book_url ); ?>" class="btn btn-primary hero-book-appointment-btn"><span><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></span></a>
+					<a href="<?php echo esc_url( $fees_url ); ?>" class="btn btn-secondary"><?php esc_html_e( 'Fees & Membership', 'wsd' ); ?></a>
 				</div>
 			</div>
 			<div class="invisalign-hero-image-col">
@@ -380,8 +375,7 @@ get_header();
 						<div class="invisalign-process-step-image">
 							<img
 								src="<?php echo esc_url( $step['image'] ); ?>"
-								alt=""
-								aria-hidden="true"
+								alt="<?php echo esc_attr( $step['label'] ); ?>"
 							>
 						</div>
 					</div>
@@ -619,59 +613,6 @@ get_header();
 			</div>
 		</div>
 	</section>
-
-	<?php if ( $more_services_query->have_posts() ) : ?>
-		<!-- More General Dentistry services -->
-		<section class="invisalign-more-services-section">
-			<div class="invisalign-more-services-inner">
-				<div class="more-services-header">
-					<h2 class="more-services-title"><?php esc_html_e( 'More General Dentistry services', 'wsd' ); ?></h2>
-					<div class="more-services-nav">
-						<button class="more-services-nav-btn prev-btn" aria-label="<?php esc_attr_e( 'Previous service', 'wsd' ); ?>" type="button">
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/left_arrow.svg' ); ?>" alt="">
-						</button>
-						<button class="more-services-nav-btn next-btn" aria-label="<?php esc_attr_e( 'Next service', 'wsd' ); ?>" type="button">
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/right_arrow.svg' ); ?>" alt="">
-						</button>
-					</div>
-				</div>
-
-				<div class="more-services-slider-container">
-					<div class="more-services-slider-track">
-						<?php
-						while ( $more_services_query->have_posts() ) :
-							$more_services_query->the_post();
-							$card_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-							if ( ! $card_img ) {
-								$card_img = $theme_uri . '/assets/images/cosmetic-hero.png';
-							}
-							?>
-							<div class="more-service-card-wrapper">
-								<a href="<?php the_permalink(); ?>" class="more-service-card">
-									<div class="more-service-card-image">
-										<img src="<?php echo esc_url( $card_img ); ?>" alt="<?php the_title_attribute(); ?>">
-									</div>
-									<div class="more-service-card-footer">
-										<span class="more-service-card-title"><?php the_title(); ?></span>
-										<div class="more-service-card-arrow">
-											<img class="more-service-card-arrow-img" src="<?php echo esc_url( $theme_uri . '/assets/images/arrow-gold-circle.svg' ); ?>" alt="" width="40" height="40">
-										</div>
-									</div>
-								</a>
-							</div>
-						<?php endwhile; ?>
-						<?php wp_reset_postdata(); ?>
-					</div>
-				</div>
-
-				<div class="more-services-progress-wrapper">
-					<div class="more-services-progress-track">
-						<div class="more-services-progress-bar"></div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
 
 </main>
 <?php

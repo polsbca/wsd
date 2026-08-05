@@ -75,6 +75,8 @@ body {
   html.wsd-js body.page-template-template-smile-gallery .header-top,
   html.wsd-js body.page-template-template-dental-implants-php .header-top,
   html.wsd-js body.page-template-template-dental-implants .header-top,
+  html.wsd-js body.page-template-template-invisalign-php .header-top,
+  html.wsd-js body.page-template-template-invisalign .header-top,
   html.wsd-js body.single-services .header-top {
     opacity: 0;
     transform: translateY(-50px);
@@ -152,14 +154,16 @@ body {
   html.wsd-js body.page-template-template-dental-implants .implants-hero-title,
   html.wsd-js body.page-template-template-dental-implants-php .implants-hero-desc,
   html.wsd-js body.page-template-template-dental-implants .implants-hero-desc,
-  html.wsd-js body.page-template-template-dental-implants-php .implants-hero-ctas .implants-btn,
-  html.wsd-js body.page-template-template-dental-implants .implants-hero-ctas .implants-btn,
+  html.wsd-js body.page-template-template-dental-implants-php .implants-hero-ctas .btn,
+  html.wsd-js body.page-template-template-dental-implants .implants-hero-ctas .btn,
   html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-title,
   html.wsd-js body.page-template-template-invisalign .invisalign-hero-title,
   html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-desc,
   html.wsd-js body.page-template-template-invisalign .invisalign-hero-desc,
-  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-ctas .invisalign-btn,
-  html.wsd-js body.page-template-template-invisalign .invisalign-hero-ctas .invisalign-btn {
+  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-ctas .btn,
+  html.wsd-js body.page-template-template-invisalign .invisalign-hero-ctas .btn,
+  html.wsd-js body.page-template-template-invisalign-php .invisalign-hero-stat,
+  html.wsd-js body.page-template-template-invisalign .invisalign-hero-stat {
     opacity: 0;
     transform: translateY(30px);
   }
@@ -892,7 +896,7 @@ body {
 }
 
 .btn-secondary {
-  background-color: var(--light-bg);
+  background-color: transparent;
   color: rgba(94, 93, 95, 0.52);
   border: 1px solid rgba(94, 93, 95, 0.52);
   font-weight: 500;
@@ -5794,6 +5798,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   position: relative;
   min-height: 262px;
   width: 100%;
+  overflow: hidden;
 }
 
 .modal-review-slide {
@@ -5806,12 +5811,16 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   width: 100%;
   min-height: 262px;
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   row-gap: 60px;
 }
 
 .modal-review-slide.active {
   display: flex;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .review-slide-title {
@@ -16710,24 +16719,34 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 100%;
-  max-width: 420px;
+  width: 420px;
+  max-width: 100%;
 }
 
-.implants-btn {
+.implants-hero-ctas .btn {
   width: 100%;
-  min-height: 70px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  height: 68px;
+  min-height: 68px;
+  padding: 0 32px;
   border-radius: 32px;
   font-family: var(--font-family-primary);
-  font-size: clamp(16px, 1.05vw, 20px);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  padding: 20px 32px;
+  font-size: 20px;
+  letter-spacing: 1px;
   box-sizing: border-box;
+}
+
+.implants-hero-ctas .btn-primary {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.implants-hero-ctas .btn-secondary {
+  background-color: transparent;
+  border: 1px solid rgba(94, 93, 95, 0.52);
+  color: rgba(94, 93, 95, 0.52);
+  font-weight: 500;
 }
 
 .implants-hero-image-col {
@@ -16773,8 +16792,8 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 
 @media (min-width: 992px) {
   .implants-about-section {
-    /* Tall track so sticky content can pin while scrolling */
-    height: 1800px;
+    /* Tall track so sticky content can pin while scrolling (types tab is 2 rows) */
+    height: 2200px;
   }
 
   .implants-about-sticky {
@@ -16878,6 +16897,71 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 38px;
+}
+
+/* Types of Implant — Figma 4078:35272 (3×2 cards, no step numbers) */
+.implants-types-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 38px;
+  width: 100%;
+}
+
+.implants-type-card {
+  background-color: #faf3e6;
+  border: 1px solid rgba(216, 164, 68, 0.2);
+  border-radius: 16px;
+  min-height: 298px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+.implants-type-label {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 32px;
+  color: #d8a444;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+.implants-type-title {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #5e5d5f;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+.implants-type-desc {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(94, 93, 95, 0.52);
+  flex: 1 1 auto;
+}
+
+.implants-type-ideal {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 21px;
+  color: #5e5d5f;
+}
+
+.implants-type-ideal strong {
+  font-weight: 700;
 }
 
 .implants-step-card {
@@ -17414,6 +17498,10 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .implants-types-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .implants-built-inner,
   .implants-hero-inner {
     grid-template-columns: 1fr;
@@ -17549,24 +17637,34 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 100%;
-  max-width: 420px;
+  width: 420px;
+  max-width: 100%;
 }
 
-.invisalign-btn {
+.invisalign-hero-ctas .btn {
   width: 100%;
-  min-height: 70px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  height: 68px;
+  min-height: 68px;
+  padding: 0 32px;
   border-radius: 32px;
   font-family: var(--font-family-primary);
-  font-size: clamp(16px, 1.05vw, 20px);
-  font-weight: 700;
+  font-size: 20px;
   letter-spacing: 1px;
-  text-decoration: none;
-  padding: 28px;
   box-sizing: border-box;
+}
+
+.invisalign-hero-ctas .btn-primary {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.invisalign-hero-ctas .btn-secondary {
+  background-color: transparent;
+  border: 1px solid rgba(94, 93, 95, 0.52);
+  color: rgba(94, 93, 95, 0.52);
+  font-weight: 500;
 }
 
 .invisalign-hero-image-col {
@@ -17691,10 +17789,13 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   background-color: #faf3e6;
   border-radius: 16px;
   min-height: 308px;
+  margin: 0;
   padding: 38px 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  border: 0;
+  box-shadow: none;
   box-sizing: border-box;
 }
 
@@ -17736,9 +17837,14 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 .invisalign-about-panel[data-panel="who"] .invisalign-who-card {
   position: relative;
   height: 311px;
+  margin: 0;
+  padding: 0;
+  border: 0;
   border-radius: 16px;
   overflow: hidden;
   background-color: #000000;
+  box-shadow: none;
+  outline: none;
 }
 
 .invisalign-about-panel[data-panel="who"] .invisalign-who-card-img {
@@ -17987,7 +18093,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   color: #5e5d5f;
 }
 
-/* Why Invisalign is Better */
+/* Why Invisalign is Better — Figma 4078:33481 */
 .invisalign-compare-section {
   width: 100%;
   background-color: #fefdf6;
@@ -17999,6 +18105,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   align-items: center;
   gap: 64px;
   max-width: 1510px;
+  width: 100%;
   margin: 0 auto;
   padding: 40px 200px 0;
   box-sizing: border-box;
@@ -18013,6 +18120,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   font-size: 36px;
   line-height: 56px;
   color: #5e5d5f;
+  word-break: break-word;
 }
 
 .invisalign-compare-title .accent {
@@ -18021,6 +18129,9 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 
 .invisalign-compare-cards {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
   gap: 10px;
   width: 1110px;
   max-width: 100%;
@@ -18030,10 +18141,17 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 .invisalign-compare-card {
   position: relative;
   flex: 1 1 0;
+  min-width: 0;
   width: 550px;
-  max-width: 50%;
+  max-width: none;
   height: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  border: 0;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 .invisalign-compare-card--left {
@@ -18045,23 +18163,39 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 }
 
 .invisalign-compare-card-img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.invisalign-compare-card--left .invisalign-compare-card-img {
+  object-position: 58% center;
+}
+
+.invisalign-compare-card--right .invisalign-compare-card-img {
+  object-position: center top;
 }
 
 .invisalign-compare-card::after {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     180deg,
     rgba(51, 51, 51, 0) 38.024%,
     rgba(51, 51, 51, 0.8) 77.622%
   );
   pointer-events: none;
+  border-radius: inherit;
 }
 
 .invisalign-compare-badge {
@@ -18071,38 +18205,46 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 104px;
   min-width: 104px;
   height: 35px;
-  padding: 0 16px;
+  padding: 0;
   border-radius: 14px;
   background-color: #d8a444;
   font-family: var(--font-family-primary);
   font-weight: 500;
   font-size: 14px;
+  line-height: 1;
   letter-spacing: 0.4px;
   color: #fefdf6;
+  text-align: center;
   box-sizing: border-box;
 }
 
 .invisalign-compare-card--left .invisalign-compare-badge {
   left: 14px;
+  right: auto;
 }
 
 .invisalign-compare-card--right .invisalign-compare-badge {
+  left: auto;
   right: 14px;
 }
 
 .invisalign-compare-points {
   position: absolute;
   left: 40px;
-  bottom: 56px;
+  top: 380px;
+  bottom: auto;
   z-index: 2;
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
+  width: 211px;
 }
 
 .invisalign-compare-card--right .invisalign-compare-points {
@@ -18113,6 +18255,9 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   display: flex;
   align-items: center;
   gap: 12px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .invisalign-compare-points img {
@@ -18127,6 +18272,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   font-size: 24px;
   line-height: 40px;
   color: #ffffff;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -18215,7 +18361,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
 .invisalign-fee-desc {
   font-family: var(--font-family-primary);
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 28px;
   color: rgba(94, 93, 95, 0.68);
 }
@@ -18318,7 +18464,7 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 992px) {
   .invisalign-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -18344,11 +18490,32 @@ body.home .hero-buttons a.btn.btn-primary.hero-book-appointment-btn[href="#book-
   .invisalign-compare-inner {
     padding-left: 40px;
     padding-right: 40px;
+    gap: 48px;
   }
 
   .invisalign-compare-cards {
     width: 100%;
+    max-width: 1110px;
     height: auto;
-    min-height: 480px;
+    aspect-ratio: 1110 / 572;
+    min-height: 0;
+  }
+
+  .invisalign-compare-card {
+    height: 100%;
+  }
+
+  .invisalign-compare-points {
+    top: 66.43%;
+  }
+
+  .invisalign-compare-points span {
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.67;
+  }
+
+  .invisalign-compare-points img {
+    width: clamp(24px, 2.6vw, 32px);
+    height: clamp(24px, 2.6vw, 32px);
   }
 }
