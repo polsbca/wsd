@@ -6,7 +6,7 @@
     display: none !important;
   }
 
-  /* Fees page — restore desktop layout after mobile/tablet overrides */
+  /* Fees page ? restore desktop layout after mobile/tablet overrides */
   .page-template-template-fees-php .fees-hero-inner,
   .page-template-template-fees .fees-hero-inner {
     flex-direction: row !important;
@@ -937,7 +937,7 @@
     height: 14px;
   }
 
-  /* Mobile Drawer Menu — Figma 3949:15067: equal rows fill viewport below header */
+  /* Mobile Drawer Menu ? Figma 3949:15067: equal rows fill viewport below header */
   .mobile-nav-menu {
     overflow-y: auto;
     flex: 1 1 auto;
@@ -978,7 +978,7 @@
     border-bottom-width: 2px;
   }
 
-  /* Expanded submenu — Figma 3949:15165: shrink-wrap content, no flex stretch */
+  /* Expanded submenu ? Figma 3949:15165: shrink-wrap content, no flex stretch */
   .mobile-menu > .menu-item.submenu-active {
     background-color: rgba(216, 164, 68, 0.2);
     flex: 0 0 auto;
@@ -1388,7 +1388,7 @@
 
   /* Key Treatments Mobile Styling */
   .key-treatments-section {
-    /* Closed-tab row height — also used as sticky-track buffer (see JS) */
+    /* Closed-tab row height ? also used as sticky-track buffer (see JS) */
     --treatments-closed-tab-height: 52px;
     margin-top: 60px !important;
     margin-bottom: 60px !important;
@@ -1415,7 +1415,7 @@
 
   /* Mobile Entrance Animations: Start Hidden and Animate on .mobile-visible */
 
-  /* 1. Key Treatments Section — phone only (tablet uses desktop GSAP) */
+  /* 1. Key Treatments Section ? phone only (tablet uses desktop GSAP) */
   @media (max-width: 767.98px) {
     .key-treatments-section .treatments-header-badge,
     .key-treatments-section .treatments-left-col,
@@ -1460,7 +1460,7 @@
     }
   }
 
-  /* 2. Testimonials Section — header/quotes entrance only; text uses GSAP like desktop */
+  /* 2. Testimonials Section ? header/quotes entrance only; text uses GSAP like desktop */
   .testimonials-section:not(.mobile-visible) .testimonials-header {
     opacity: 0 !important;
     transform: translateY(30px) !important;
@@ -3372,7 +3372,7 @@
     letter-spacing: 0.5px !important;
   }
 
-  /* About Waterside Section Mobile Layout — Figma 3949:14870 / 3949:14871 */
+  /* About Waterside Section Mobile Layout ? Figma 3949:14870 / 3949:14871 */
   .about-waterside-section {
     height: 1500px !important;
     position: relative !important;
@@ -4780,7 +4780,7 @@
   }
 }
 
-/* Key Treatments — tablet (Figma 3290:12233) */
+/* Key Treatments ? tablet (Figma 3290:12233) */
 @media (min-width: 768px) and (max-width: 991.98px) {
   .key-treatments-section {
     margin-top: 80px !important;
@@ -4895,7 +4895,7 @@
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    /* height locked by GSAP/JS like desktop — do not force 100% */
+    /* height locked by GSAP/JS like desktop ? do not force 100% */
   }
 
   .accordion-tab {
@@ -4952,7 +4952,7 @@
     flex-direction: column !important;
     gap: 48px !important;
     padding: 0 0 40px !important;
-    /* height/opacity owned by GSAP (same as desktop) — do not force auto/1 */
+    /* height/opacity owned by GSAP (same as desktop) ? do not force auto/1 */
   }
 
   .tab-desc {
@@ -5891,7 +5891,7 @@
     transform: translateY(-1px);
   }
 
-  /* Scroll Navigation dropdown — Figma 4710:3416 */
+  /* Scroll Navigation dropdown ? Figma 4710:3416 */
   body.single-services .cosmetic-modal-mobile-nav {
     position: relative !important;
     display: block !important;
@@ -6492,7 +6492,7 @@
     letter-spacing: 0.42px !important;
     color: #5e5d5f !important;
     opacity: 1;
-    /* No !important — GSAP must control opacity during slide changes */
+    /* No !important ? GSAP must control opacity during slide changes */
     text-align: center !important;
   }
 
@@ -7342,11 +7342,11 @@
     height: auto !important;
   }
 
-  /* Hero — Figma 4078:35315 (mobile 402)
+  /* Hero ? Figma 4078:35315 (mobile 402)
      Frame: gap 20 between header / copy / ctas / image
-     Copy: px 24, py 30, title↔desc gap 20
+     Copy: px 24, py 30, title?desc gap 20
      CTAs: w 250, px 24, gap 20, btn p 16 / radius 32
-     Image: full width × 437 */
+     Image: full width ? 437 */
   .page-template-template-dental-implants-php .implants-hero,
   .page-template-template-dental-implants .implants-hero {
     padding: 20px 0 0 !important;
@@ -7515,7 +7515,7 @@
     padding: 0 !important;
   }
 
-  /* Tabs — Figma 4078:35395 */
+  /* Tabs ? Figma 4078:35395 */
   .page-template-template-dental-implants-php .implants-about-tabs,
   .page-template-template-dental-implants .implants-about-tabs {
     display: flex !important;
@@ -7715,7 +7715,7 @@
   }
 
   /* Flatten so intro / diagram / details can be reordered independently.
-     Figma 4078:35736: title → lead → image → expanded content */
+     Figma 4078:35736: title ? lead ? image ? expanded content */
   .page-template-template-dental-implants-php .implants-built-content,
   .page-template-template-dental-implants .implants-built-content {
     display: contents !important;
@@ -9546,7 +9546,7 @@
   body.page-template-template-blogs .btn-call-us .phone-icon {
     width: 20px !important;
     height: 20px !important;
-    /* Figma mobile — upright, earpiece toward top-right */
+    /* Figma mobile ? upright, earpiece toward top-right */
     transform: none !important;
   }
 
@@ -10537,7 +10537,7 @@
 }
 
 /* ============================================================
-   MODAL SMILE GALLERY — desktop layout (loads last)
+   MODAL SMILE GALLERY ? desktop layout (loads last)
    ============================================================ */
 @media (min-width: 992px) {
   .cosmetic-full-modal .modal-smile-gallery {
@@ -10882,7 +10882,7 @@
   }
 }
 
-/* Dental Referrals — phone (FIGMA 4084:45962) */
+/* Dental Referrals ? phone (FIGMA 4084:45962) */
 @media (max-width: 767.98px) {
 
   .page-template-template-dental-referrals-php .site-content,
@@ -11649,7 +11649,7 @@
 }
 
 /* ============================================================
-   SMILE GALLERY PAGE TEMPLATE — overrides global .gallery-* rules
+   SMILE GALLERY PAGE TEMPLATE ? overrides global .gallery-* rules
    (responsive.css loads after custom.css and uses !important)
    ============================================================ */
 @media (max-width: 991.98px) {
@@ -11938,7 +11938,7 @@
 }
 
 /* ============================================================
-   BLOGS PAGE — TABLET (Figma 4078:37838, 768–991.98px)
+   BLOGS PAGE ? TABLET (Figma 4078:37838, 768?991.98px)
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
 
@@ -11977,7 +11977,7 @@
     box-shadow: none !important;
   }
 
-  /* —— Hero —— */
+  /* ?? Hero ?? */
   .page-template-template-blogs-php .blogs-hero-page,
   .page-template-template-blogs .blogs-hero-page {
     background-color: #faf3e6 !important;
@@ -12134,7 +12134,7 @@
     object-position: 110px top !important;
   }
 
-  /* —— Featured article —— */
+  /* ?? Featured article ?? */
   .page-template-template-blogs-php .blogs-featured-section,
   .page-template-template-blogs .blogs-featured-section {
     width: 100% !important;
@@ -12362,7 +12362,7 @@
     flex-shrink: 0 !important;
   }
 
-  /* —— Listing / filters —— */
+  /* ?? Listing / filters ?? */
   .page-template-template-blogs-php .blogs-listing-section,
   .page-template-template-blogs .blogs-listing-section {
     width: 100% !important;
@@ -12552,7 +12552,7 @@
     font-weight: 600 !important;
   }
 
-  /* —— Blog cards grid (single column) —— */
+  /* ?? Blog cards grid (single column) ?? */
   .page-template-template-blogs-php .blogs-grid-shell,
   .page-template-template-blogs .blogs-grid-shell {
     display: block !important;
@@ -12691,7 +12691,7 @@
 }
 
 /* ============================================================
-   BLOG DETAIL — TABLET (Figma 4078:38149, 768–991.98px)
+   BLOG DETAIL ? TABLET (Figma 4078:38149, 768?991.98px)
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
 
@@ -12735,7 +12735,7 @@
     width: 100% !important;
   }
 
-  /* —— Hero —— */
+  /* ?? Hero ?? */
   .blog-detail-hero {
     position: relative !important;
     width: 100% !important;
@@ -12862,7 +12862,7 @@
     color: #d8a444 !important;
   }
 
-  /* —— Content —— */
+  /* ?? Content ?? */
   .blog-detail-content-section {
     width: 100% !important;
     background-color: #fefdf6 !important;
@@ -12961,7 +12961,7 @@
     color: #837257 !important;
   }
 
-  /* —— Comments —— */
+  /* ?? Comments ?? */
   .blog-detail-comments-wrap {
     width: 100% !important;
   }
@@ -13207,7 +13207,7 @@
     color: #faf3e6 !important;
   }
 
-  /* —— Related blogs —— */
+  /* ?? Related blogs ?? */
   .blog-detail-related {
     display: flex !important;
     flex-direction: column !important;
@@ -13459,7 +13459,7 @@
 }
 
 /* ============================================================
-   BLOGS PAGE — MOBILE (Figma 4078:38485, max-width 767.98px)
+   BLOGS PAGE ? MOBILE (Figma 4078:38485, max-width 767.98px)
    ============================================================ */
 @media (max-width: 767.98px) {
 
@@ -13498,7 +13498,7 @@
     box-shadow: none !important;
   }
 
-  /* —— Hero —— */
+  /* ?? Hero ?? */
   .page-template-template-blogs-php .blogs-hero-page,
   .page-template-template-blogs .blogs-hero-page {
     background-color: #faf3e6 !important;
@@ -13581,7 +13581,7 @@
     max-width: none !important;
   }
 
-  /* Figma 4078:38553 — 250px frame with 24px side padding → 202px buttons */
+  /* Figma 4078:38553 ? 250px frame with 24px side padding ? 202px buttons */
   .page-template-template-blogs-php .blogs-page-main .hero-buttons,
   .page-template-template-blogs .blogs-page-main .hero-buttons {
     display: flex !important;
@@ -13731,7 +13731,7 @@
     object-position: 0px top !important;
   }
 
-  /* —— Featured —— */
+  /* ?? Featured ?? */
   .page-template-template-blogs-php .blogs-featured-section,
   .page-template-template-blogs .blogs-featured-section {
     width: 100% !important;
@@ -13955,7 +13955,7 @@
     flex-shrink: 0 !important;
   }
 
-  /* —— Listing —— */
+  /* ?? Listing ?? */
   .page-template-template-blogs-php .blogs-listing-section,
   .page-template-template-blogs .blogs-listing-section {
     width: 100% !important;
@@ -14162,7 +14162,7 @@
     font-weight: 600 !important;
   }
 
-  /* —— Cards (Figma 4078:38598) —— */
+  /* ?? Cards (Figma 4078:38598) ?? */
   .page-template-template-blogs-php .blogs-grid-shell,
   .page-template-template-blogs .blogs-grid-shell {
     display: flex !important;
@@ -14390,7 +14390,7 @@
 }
 
 /* ============================================================
-   BLOG DETAIL — MOBILE (Figma 4078:38753, max-width 767.98px)
+   BLOG DETAIL ? MOBILE (Figma 4078:38753, max-width 767.98px)
    ============================================================ */
 @media (max-width: 767.98px) {
 
@@ -14434,7 +14434,7 @@
     width: 100% !important;
   }
 
-  /* —— Hero —— */
+  /* ?? Hero ?? */
   .blog-detail-hero {
     position: relative !important;
     width: 100% !important;
@@ -14562,7 +14562,7 @@
     color: #d8a444 !important;
   }
 
-  /* —— Content —— */
+  /* ?? Content ?? */
   .blog-detail-content-section {
     width: 100% !important;
     background-color: #fefdf6 !important;
@@ -14661,7 +14661,7 @@
     color: #837257 !important;
   }
 
-  /* —— Comments —— */
+  /* ?? Comments ?? */
   .blog-detail-comments-wrap {
     width: 100% !important;
   }
@@ -14910,7 +14910,7 @@
     color: #faf3e6 !important;
   }
 
-  /* —— Related blogs —— */
+  /* ?? Related blogs ?? */
   .blog-detail-related {
     display: flex !important;
     flex-direction: column !important;
@@ -15337,7 +15337,7 @@
     object-position: center bottom !important;
   }
 
-  /* All About — Figma 4078:35914 */
+  /* All About ? Figma 4078:35914 */
   .page-template-template-dental-implants-php .implants-about-section,
   .page-template-template-dental-implants .implants-about-section {
     background-color: #fefdf6 !important;
@@ -16056,7 +16056,7 @@
     transform: none !important;
   }
 
-  /* Bottom row: 2×2 cards + CTA — Figma 4267:878 / 4267:884 */
+  /* Bottom row: 2?2 cards + CTA ? Figma 4267:878 / 4267:884 */
   .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-info-wrapper,
   .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-info-wrapper {
     display: flex !important;
@@ -16100,7 +16100,7 @@
     visibility: visible !important;
   }
 
-  /* Detail card — Figma 4267:884 */
+  /* Detail card ? Figma 4267:884 */
   .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-detail-card,
   .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-detail-card {
     display: flex !important;
@@ -16152,7 +16152,7 @@
     text-box-trim: none !important;
   }
 
-  /* CTA column: 276×98, vertically centered beside the 2×2 grid */
+  /* CTA column: 276?98, vertically centered beside the 2?2 grid */
   .page-template-template-dental-implants-php .dental-implants-main .implants-smile-gallery .gallery-btn-wrapper,
   .page-template-template-dental-implants .dental-implants-main .implants-smile-gallery .gallery-btn-wrapper {
     display: flex !important;
@@ -16498,7 +16498,7 @@
     border-radius: 32px !important;
   }
 }/* ============================================================
-   INVISALIGN PAGE — MOBILE (FIGMA 3989:39621)
+   INVISALIGN PAGE ? MOBILE (FIGMA 3989:39621)
    ============================================================ */
 @media (max-width: 767.98px) {
 
@@ -16775,7 +16775,7 @@
     height: 500px !important;
   }
 
-  /* Key Benefits + Process cards — Figma 4078:34230 */
+  /* Key Benefits + Process cards ? Figma 4078:34230 */
   .page-template-template-invisalign-php .invisalign-step-card,
   .page-template-template-invisalign .invisalign-step-card,
   .page-template-template-invisalign-php .invisalign-about-panel[data-panel="benefits"] .invisalign-step-card,
@@ -17104,7 +17104,7 @@
     height: 20px !important;
   }
 
-  /* Compare — Figma 4078:34000 */
+  /* Compare ? Figma 4078:34000 */
   .page-template-template-invisalign-php .invisalign-compare-section,
   .page-template-template-invisalign .invisalign-compare-section {
     background-color: #fefdf6 !important;
@@ -17895,7 +17895,7 @@
   }
 }
 /* ============================================================
-   INVISALIGN PAGE — TABLET (FIGMA 4042:10479)
+   INVISALIGN PAGE ? TABLET (FIGMA 4042:10479)
    Tablet-only overrides; desktop and phone styles remain unchanged.
    ============================================================ */
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -18028,7 +18028,7 @@
     object-position: center bottom !important;
   }
 
-  /* All About — Figma 4078:34378 */
+  /* All About ? Figma 4078:34378 */
   .page-template-template-invisalign-php .invisalign-about-section,
   .page-template-template-invisalign .invisalign-about-section {
     height: auto !important;
@@ -18316,7 +18316,7 @@
     background-color: #d8a444 !important;
   }
 
-  /* Straight teeth / treatment — Figma 4078:34419 */
+  /* Straight teeth / treatment ? Figma 4078:34419 */
   .page-template-template-invisalign-php .invisalign-treatment-section,
   .page-template-template-invisalign .invisalign-treatment-section {
     display: flex !important;
@@ -18565,7 +18565,7 @@
     height: 20px !important;
   }
 
-  /* Compare — Figma 4078:34447 */
+  /* Compare ? Figma 4078:34447 */
   .page-template-template-invisalign-php .invisalign-compare-section,
   .page-template-template-invisalign .invisalign-compare-section {
     background-color: #fefdf6 !important;
@@ -18668,7 +18668,7 @@
 
   .page-template-template-invisalign-php .invisalign-compare-card--right .invisalign-compare-card-img,
   .page-template-template-invisalign .invisalign-compare-card--right .invisalign-compare-card-img {
-    /* Figma 4078:34467 — crop to braces smile, not forehead */
+    /* Figma 4078:34467 ? crop to braces smile, not forehead */
     object-position: center 42% !important;
   }
 
@@ -19099,7 +19099,7 @@
     opacity: 1 !important;
   }
 
-  /* CTA column — match implants tablet: centered beside 2×2 grid */
+  /* CTA column ? match implants tablet: centered beside 2?2 grid */
   .page-template-template-invisalign-php .invisalign-main .invisalign-smile-gallery .gallery-btn-wrapper,
   .page-template-template-invisalign .invisalign-main .invisalign-smile-gallery .gallery-btn-wrapper {
     display: flex !important;
@@ -19420,5 +19420,614 @@
   .page-template-template-invisalign .invisalign-more-services-section .more-services-progress-wrapper {
     padding: 0 40px !important;
     margin-top: 40px !important;
+  }
+}
+
+/* ==========================================================================
+   Teams doctor modal ? mobile hero hard-fix (Figma 4084:44380)
+   Loaded last so it wins over custom.css desktop flex sizing.
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  .teams-doctor-modal .teams-doctor-hero {
+    position: relative !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    padding: 40px 24px 0 !important;
+    margin: 0 !important;
+    background-color: #faf3e6 !important;
+    overflow: visible !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-copy {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    order: 0 !important;
+    align-self: stretch !important;
+    text-align: left !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-details {
+    position: relative !important;
+    z-index: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 254px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 30px !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    color: #5e5d5f !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-identity,
+  .teams-doctor-modal .teams-doctor-hero-meta,
+  .teams-doctor-modal .teams-doctor-hero-ctas {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-identity {
+    gap: 20px !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-meta {
+    gap: 14px !important;
+    min-height: 54px !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-ctas {
+    gap: 15px !important;
+    width: 240px !important;
+    max-width: 100% !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-name,
+  .teams-doctor-modal .teams-doctor-gdc,
+  .teams-doctor-modal .teams-doctor-role,
+  .teams-doctor-modal .teams-doctor-qualifications,
+  .teams-doctor-modal .teams-doctor-fullname {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    color: #5e5d5f !important;
+    text-align: left !important;
+    text-box-trim: unset !important;
+    text-box-edge: unset !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-prefix {
+    display: inline !important;
+    color: #d8a444 !important;
+    opacity: 1 !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-role[hidden],
+  .teams-doctor-modal .teams-doctor-qualifications[hidden] {
+    display: none !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-name {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.8px !important;
+    margin: 0 !important;
+    text-transform: capitalize !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-gdc {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.48px !important;
+    margin: 0 !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-role {
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.48px !important;
+    margin: 0 !important;
+    text-transform: capitalize !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-qualifications {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+    letter-spacing: 0.28px !important;
+    margin: 0 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-cta-book,
+  .teams-doctor-modal .teams-doctor-hero-cta-refer,
+  .teams-doctor-modal .teams-doctor-hero-cta-readmore {
+    display: none !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-cta-book-mobile,
+  .teams-doctor-modal .teams-doctor-hero-cta-gallery {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: none !important;
+    width: 100% !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    max-height: 40px !important;
+    padding: 0 20px !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 32px !important;
+    text-decoration: none !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-cta-book-mobile {
+    background-color: #d8a444 !important;
+    border: 1px solid #d8a444 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-hero-cta-gallery {
+    background-color: #faf3e6 !important;
+    border: 1px solid rgba(94, 93, 95, 0.52) !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+    font-weight: 500 !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-photo {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+    z-index: 1 !important;
+    display: block !important;
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    order: 1 !important;
+    width: calc(100% + 48px) !important;
+    max-width: calc(100% + 48px) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 0 -24px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: none !important;
+    align-self: stretch !important;
+    background-color: transparent !important;
+  }
+
+  .teams-doctor-modal .teams-doctor-photo-img {
+    position: static !important;
+    display: block !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 280px !important;
+    max-height: 432px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Teams doctor modal ? tablet hero hard-fix (Figma 4084:43113 / 4084:43100)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #teamsDoctorModal .teams-doctor-modal-body > section {
+    flex: 0 0 auto !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    height: 640px !important;
+    min-height: 640px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background-color: #faf3e6 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-inner {
+    position: relative !important;
+    display: block !important;
+    height: 100% !important;
+    width: 100% !important;
+    min-height: 640px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-copy {
+    position: absolute !important;
+    top: 60px !important;
+    left: 40px !important;
+    right: 40px !important;
+    z-index: 2 !important;
+    width: auto !important;
+    max-width: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 43px !important;
+    flex: none !important;
+    order: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-details {
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    gap: 30px !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-identity {
+    max-width: 253px !important;
+    gap: 20px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-meta {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 54px !important;
+    gap: 14px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-cta-book,
+  #teamsDoctorModal .teams-doctor-hero-cta-book-mobile,
+  #teamsDoctorModal .teams-doctor-hero-cta-gallery {
+    display: none !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-cta-refer,
+  #teamsDoctorModal .teams-doctor-hero-cta-readmore {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-ctas {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 287px !important;
+    max-width: 100% !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-cta-refer {
+    height: 48px !important;
+    min-height: 48px !important;
+    background-color: #d8a444 !important;
+    border-color: #d8a444 !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-cta-readmore {
+    height: 50px !important;
+    min-height: 50px !important;
+    background-color: transparent !important;
+    border: 0.952px solid rgba(94, 93, 95, 0.52) !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+    font-weight: 500 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-photo {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    top: auto !important;
+    z-index: 1 !important;
+    display: block !important;
+    width: 360px !important;
+    max-width: 48% !important;
+    height: 360px !important;
+    min-height: 360px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: none !important;
+    background: transparent !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-photo-img {
+    position: absolute !important;
+    display: block !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-about-badge-title {
+    font-size: 30px !important;
+    letter-spacing: -1px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-about-name-accent,
+  #teamsDoctorModal .teams-doctor-about-name,
+  #teamsDoctorModal .teams-doctor-about-prefix {
+    color: #d8a444 !important;
+  }
+}
+
+/* ==========================================================================
+   Teams doctor modal photo ? final mobile fix (img is direct hero child)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  #teamsDoctorModal .teams-doctor-hero-inner > .teams-doctor-photo-img,
+  #teamsDoctorModal .teams-doctor-photo-img {
+    display: block !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    flex: 0 0 auto !important;
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 280px !important;
+    max-height: 432px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    clip: auto !important;
+    clip-path: none !important;
+    filter: none !important;
+    pointer-events: none !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    order: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero-cta-book-mobile,
+  #teamsDoctorModal .teams-doctor-hero-cta-gallery {
+    display: inline-flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Prevent flex shrink clipping (root cause of blank mobile hero) */
+  #teamsDoctorModal .teams-doctor-modal-body > section {
+    flex: 0 0 auto !important;
+    min-height: auto !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-hero {
+    flex: 0 0 auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Teams doctor modal ? tablet results gallery (Figma 4084:43198)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #teamsDoctorModal .teams-doctor-results {
+    gap: 80px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-heading {
+    font-size: 30px !important;
+    letter-spacing: -1px !important;
+    padding: 32px 40px !important;
+    border-radius: 0 20px 20px 0 !important;
+    border-bottom: 0 !important;
+    background-color: #faf3e6 !important;
+    color: #5e5d5f !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-heading-patient {
+    color: #5e5d5f !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-heading-accent {
+    color: #d8a444 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-gallery {
+    padding: 0 !important;
+    gap: 36px !important;
+    align-items: center !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-viewport {
+    overflow: hidden !important;
+    width: 100% !important;
+    padding: 0 40px 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-track {
+    gap: 40px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-card,
+  #teamsDoctorModal article.teams-doctor-result-card {
+    flex: 0 0 512px !important;
+    width: 512px !important;
+    height: 303px !important;
+    min-height: 303px !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-pair {
+    width: 512px !important;
+    height: 303px !important;
+    max-width: none !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-image {
+    width: 292px !important;
+    height: 194px !important;
+    padding: 5.74px 4px 4px !important;
+    border-radius: 14.334px !important;
+    background-color: #fff !important;
+    box-shadow: 0 1.433px 2.867px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-image--before {
+    left: 0 !important;
+    top: 0 !important;
+    right: auto !important;
+    z-index: 1 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-image--after {
+    left: 220px !important;
+    top: 109px !important;
+    right: auto !important;
+    z-index: 2 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-arrow {
+    display: block !important;
+    left: 83px !important;
+    top: 176px !important;
+    width: 91px !important;
+    height: 41.18px !important;
+    z-index: 3 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-label {
+    left: 4px !important;
+    bottom: 4px !important;
+    top: auto !important;
+    padding: 4px 6px !important;
+    border-radius: 0 4px 0 4px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    font-weight: 600 !important;
+    background-color: #fff !important;
+    color: #d8a444 !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-result-readmore {
+    display: none !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 92px !important;
+    margin: 0 auto !important;
+  }
+
+  #teamsDoctorModal .teams-doctor-results-dots .teams-slider-dot {
+    width: 14px !important;
+    height: 14px !important;
   }
 }

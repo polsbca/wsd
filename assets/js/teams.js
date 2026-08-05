@@ -802,7 +802,7 @@
 
   function initDoctorModal() {
     var modalEl = document.getElementById("teamsDoctorModal");
-    if (!modalEl || typeof window.bootstrap === "undefined") {
+    if (!modalEl) {
       return;
     }
 
@@ -814,6 +814,7 @@
     var roleEl = modalEl.querySelector(".teams-doctor-role");
     var qualificationsEl = modalEl.querySelector(".teams-doctor-qualifications");
     var aboutNameEl = modalEl.querySelector(".teams-doctor-about-name");
+    var aboutPrefixEl = modalEl.querySelector(".teams-doctor-about-prefix");
     var resultsHeadingNameEl = modalEl.querySelector(
       ".teams-doctor-results-heading-name",
     );
@@ -839,6 +840,96 @@
     var galleryCta = modalEl.querySelector(".teams-doctor-hero-cta-gallery");
     var readmoreCta = modalEl.querySelector(".teams-doctor-hero-cta-readmore");
     var focusSlider = modalEl.querySelector("[data-teams-focus-slider]");
+    var photoEl = modalEl.querySelector(".teams-doctor-photo");
+    var photoFallback =
+      modalEl.getAttribute("data-photo-fallback") ||
+      (photoImg && photoImg.getAttribute("src")) ||
+      "";
+    var lastModalTrigger = null;
+
+    function setDoctorPhoto(doctor, trigger) {
+      if (!photoImg) {
+        return;
+      }
+
+      var themeFallback = photoFallback || "";
+      var activeTrigger = trigger || lastModalTrigger;
+      var fromTrigger =
+        activeTrigger && activeTrigger.getAttribute
+          ? activeTrigger.getAttribute("data-doctor-image") || ""
+          : "";
+      var candidate =
+        (doctor && (doctor.detail_image || doctor.image)) ||
+        fromTrigger ||
+        themeFallback ||
+        "";
+      var nextAlt =
+        ((doctor && doctor.prefix ? doctor.prefix + " " : "") +
+          (doctor && doctor.name ? doctor.name : "")) ||
+        "";
+
+      // Clear prior layout overrides so breakpoint CSS (esp. tablet crop) can win
+      [
+        "display",
+        "opacity",
+        "visibility",
+        "position",
+        "left",
+        "top",
+        "right",
+        "bottom",
+        "width",
+        "max-width",
+        "height",
+        "min-height",
+        "max-height",
+        "object-fit",
+        "object-position",
+        "margin",
+        "transform",
+        "clip-path",
+        "order",
+      ].forEach(function (prop) {
+        photoImg.style.removeProperty(prop);
+      });
+
+      if (photoEl) {
+        [
+          "display",
+          "position",
+          "left",
+          "top",
+          "right",
+          "bottom",
+          "width",
+          "max-width",
+          "height",
+          "min-height",
+          "margin",
+          "order",
+          "opacity",
+          "visibility",
+          "overflow",
+        ].forEach(function (prop) {
+          photoEl.style.removeProperty(prop);
+        });
+      }
+
+      photoImg.loading = "eager";
+      photoImg.removeAttribute("loading");
+      photoImg.alt = nextAlt;
+      photoImg.style.setProperty("opacity", "1");
+      photoImg.style.setProperty("visibility", "visible");
+
+      photoImg.onerror = function () {
+        photoImg.onerror = null;
+        if (themeFallback) {
+          photoImg.src = themeFallback;
+        }
+      };
+
+      photoImg.src = candidate || themeFallback;
+    }
 
     function scrollToSection(targetSelector, activeLink) {
       var target = modalEl.querySelector(targetSelector);
@@ -910,15 +1001,12 @@
       }
     }
 
-    function fillModal(doctor) {
+    function fillModal(doctor, trigger) {
       if (!doctor) {
         return;
       }
 
-      if (photoImg) {
-        photoImg.src = doctor.detail_image || doctor.image || "";
-        photoImg.alt = (doctor.prefix ? doctor.prefix + " " : "") + (doctor.name || "");
-      }
+      setDoctorPhoto(doctor, trigger);
       if (prefixEl) {
         prefixEl.textContent = doctor.prefix || "";
       }
@@ -931,15 +1019,28 @@
       }
       if (roleEl) {
         roleEl.textContent = doctor.role || "";
-        roleEl.hidden = !doctor.role;
+        if (doctor.role) {
+          roleEl.removeAttribute("hidden");
+        } else {
+          roleEl.setAttribute("hidden", "");
+        }
       }
       if (qualificationsEl) {
         qualificationsEl.textContent = doctor.qualifications || "";
-        qualificationsEl.hidden = !doctor.qualifications;
+        if (doctor.qualifications) {
+          qualificationsEl.removeAttribute("hidden");
+        } else {
+          qualificationsEl.setAttribute("hidden", "");
+        }
       }
 
+      if (aboutPrefixEl) {
+        aboutPrefixEl.textContent = doctor.prefix || "Dr";
+      }
       if (aboutNameEl) {
-        aboutNameEl.textContent = (doctor.name || "") + "\u2019s";
+        var aboutFirstName = getDoctorFirstName(doctor.name || "");
+        aboutNameEl.textContent =
+          (aboutFirstName || doctor.name || "") + "\u2019s";
       }
       if (resultsHeadingNameEl) {
         var resultsFirstName = getDoctorFirstName(doctor.name || "");
@@ -987,12 +1088,17 @@
 
     modalEl.addEventListener("show.bs.modal", function (event) {
       var trigger = event.relatedTarget;
+      lastModalTrigger = trigger || null;
       var index =
         trigger && trigger.getAttribute
           ? parseInt(trigger.getAttribute("data-doctor-index"), 10)
           : 0;
       var doctors = window.wsdTeamsDoctors || [];
-      fillModal(doctors[index] || doctors[0]);
+      if (isNaN(index) || index < 0) {
+        index = 0;
+      }
+      modalEl.setAttribute("data-active-doctor", String(index));
+      fillModal(doctors[index] || doctors[0], trigger);
 
       if (bodyEl) {
         bodyEl.scrollTop = 0;
@@ -1011,6 +1117,75 @@
           resultsSlider._teamsResultsRefresh();
         }
       });
+    });
+
+    modalEl.addEventListener("shown.bs.modal", function () {
+      var doctors = window.wsdTeamsDoctors || [];
+      var activeIndex = parseInt(modalEl.getAttribute("data-active-doctor") || "0", 10);
+      var isMobile = window.matchMedia("(max-width: 767.98px)").matches;
+
+      setDoctorPhoto(doctors[activeIndex] || doctors[0], lastModalTrigger);
+
+      if (isMobile) {
+        var hero = modalEl.querySelector(".teams-doctor-hero");
+        var heroInner = modalEl.querySelector(".teams-doctor-hero-inner");
+        var heroCopy = modalEl.querySelector(".teams-doctor-hero-copy");
+
+        if (hero) {
+          hero.style.setProperty("display", "block", "important");
+          hero.style.setProperty("flex", "0 0 auto", "important");
+          hero.style.setProperty("height", "auto", "important");
+          hero.style.setProperty("min-height", "auto", "important");
+          hero.style.setProperty("padding", "40px 24px 0", "important");
+          hero.style.setProperty("overflow", "visible", "important");
+        }
+        if (heroInner) {
+          heroInner.style.setProperty("display", "flex", "important");
+          heroInner.style.setProperty("flex-direction", "column", "important");
+          heroInner.style.setProperty("align-items", "stretch", "important");
+          heroInner.style.setProperty("gap", "30px", "important");
+          heroInner.style.setProperty("width", "100%", "important");
+          heroInner.style.setProperty("height", "auto", "important");
+          heroInner.style.setProperty("padding", "0", "important");
+        }
+        if (heroCopy) {
+          heroCopy.style.setProperty("display", "flex", "important");
+          heroCopy.style.setProperty("flex-direction", "column", "important");
+          heroCopy.style.setProperty("width", "100%", "important");
+          heroCopy.style.setProperty("max-width", "100%", "important");
+          heroCopy.style.setProperty("order", "0", "important");
+          heroCopy.style.setProperty("position", "relative", "important");
+          heroCopy.style.setProperty("top", "auto", "important");
+          heroCopy.style.setProperty("left", "auto", "important");
+          heroCopy.style.setProperty("opacity", "1", "important");
+          heroCopy.style.setProperty("visibility", "visible", "important");
+        }
+        if (photoEl) {
+          photoEl.style.setProperty("display", "block", "important");
+          photoEl.style.setProperty("position", "relative", "important");
+          photoEl.style.setProperty("order", "1", "important");
+          photoEl.style.setProperty("width", "calc(100% + 48px)", "important");
+          photoEl.style.setProperty("max-width", "calc(100% + 48px)", "important");
+          photoEl.style.setProperty("height", "auto", "important");
+          photoEl.style.setProperty("margin", "0 0 0 -24px", "important");
+          photoEl.style.setProperty("opacity", "1", "important");
+          photoEl.style.setProperty("visibility", "visible", "important");
+        }
+        if (photoImg) {
+          photoImg.style.setProperty("display", "block", "important");
+          photoImg.style.setProperty("position", "static", "important");
+          photoImg.style.setProperty("width", "100%", "important");
+          photoImg.style.setProperty("height", "auto", "important");
+          photoImg.style.setProperty("max-height", "432px", "important");
+          photoImg.style.setProperty("object-fit", "cover", "important");
+          photoImg.style.setProperty("opacity", "1", "important");
+          photoImg.style.setProperty("visibility", "visible", "important");
+        }
+      }
+
+      if (bodyEl) {
+        bodyEl.scrollTop = 0;
+      }
     });
 
     navLinks.forEach(function (link) {
@@ -1046,8 +1221,14 @@
 
     if (galleryCta && bodyEl) {
       galleryCta.addEventListener("click", function (e) {
+        var href = galleryCta.getAttribute("href") || "";
+        // In-modal section jump only; external Smile Gallery links navigate normally
+        if (href.charAt(0) !== "#") {
+          return;
+        }
+
         e.preventDefault();
-        scrollToSection("#teamsDoctorResultsGallery", null);
+        scrollToSection(href, null);
       });
     }
 

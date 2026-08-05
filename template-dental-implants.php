@@ -640,10 +640,10 @@ get_header();
 						<a href="<?php echo esc_url( $fees_url ); ?>" class="btn-view-plan"><?php esc_html_e( 'View membership', 'wsd' ); ?></a>
 						<a href="<?php echo esc_url( $book_url ); ?>" class="btn-book-outline"><?php esc_html_e( 'Book an appointment', 'wsd' ); ?></a>
 					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </main>
 <?php

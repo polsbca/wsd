@@ -82,8 +82,8 @@ function wsd_scripts() {
 	wp_enqueue_style( 'wsd-responsive', get_stylesheet_directory_uri() . '/assets/css/responsive.css', array( 'wsd-custom' ), time() );
 
 	// GSAP, ScrollTrigger, and site-wide smooth scrolling.
-	wp_enqueue_script( 'gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), '3.12.5', true );
-	wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.12.5', true );
+		wp_enqueue_script( 'gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), '3.12.5', true );
+		wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.12.5', true );
 	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
@@ -100,7 +100,7 @@ function wsd_scripts() {
 	}
 
 	if ( is_page_template( 'template-teams.php' ) ) {
-		wp_enqueue_script( 'wsd-teams', get_stylesheet_directory_uri() . '/assets/js/teams.js', array( 'jquery' ), time(), true );
+		wp_enqueue_script( 'wsd-teams', get_stylesheet_directory_uri() . '/assets/js/teams.js', array( 'jquery', 'bootstrap-js' ), time(), true );
 	}
 
 	if ( is_page_template( 'template-fees.php' ) ) {
@@ -2252,8 +2252,11 @@ function wsd_get_clinical_specialist_focus_cards( $post_id ) {
 function wsd_format_clinical_specialist( $post ) {
 	$post_id       = $post->ID;
 	$name_parts    = wsd_parse_team_name_parts( get_the_title( $post ) );
-	$image_fallback = get_template_directory_uri() . '/assets/images/team-andrew.png';
-	$image         = get_the_post_thumbnail_url( $post, 'full' ) ?: $image_fallback;
+	$image_fallback = get_template_directory_uri() . '/assets/images/doctor-modal-hero.jpg';
+	if ( ! file_exists( get_template_directory() . '/assets/images/doctor-modal-hero.jpg' ) ) {
+		$image_fallback = get_template_directory_uri() . '/assets/images/team-andrew.png';
+	}
+	$image         = get_the_post_thumbnail_url( $post, 'large' ) ?: ( get_the_post_thumbnail_url( $post, 'full' ) ?: $image_fallback );
 	$detail_image  = wsd_normalize_media_url(
 		function_exists( 'get_field' ) ? get_field( 'detail_image', $post_id ) : '',
 		$image

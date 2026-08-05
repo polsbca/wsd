@@ -154,6 +154,7 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 											type="button"
 											class="btn btn-primary teams-member-btn teams-member-btn--solid js-doctor-modal-open"
 											data-doctor-index="<?php echo esc_attr( (string) $index ); ?>"
+											data-doctor-image="<?php echo esc_url( $member['image'] ); ?>"
 											data-bs-toggle="modal"
 											data-bs-target="#teamsDoctorModal"
 										><?php esc_html_e( 'Read more', 'wsd' ); ?></button>
@@ -316,7 +317,146 @@ $teams_doctor_payload     = wsd_get_teams_doctor_modal_payload( $clinical_specia
 window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 </script>
 
-<div class="modal fade teams-doctor-modal" id="teamsDoctorModal" tabindex="-1" aria-hidden="true">
+<?php
+$teams_modal_photo_fallback = $theme_uri . '/assets/images/team-andrew.png';
+if ( file_exists( get_template_directory() . '/assets/images/doctor-modal-hero.jpg' ) ) {
+	$teams_modal_photo_fallback = $theme_uri . '/assets/images/doctor-modal-hero.jpg';
+}
+?>
+<style id="teams-doctor-modal-mobile-hero">
+/* Guaranteed mobile hero layout — Figma 4084:44380 */
+@media (max-width: 767.98px) {
+  #teamsDoctorModal .teams-doctor-hero {
+    display: block !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 40px 24px 0 !important;
+    background: #faf3e6 !important;
+    overflow: visible !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-copy {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    order: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-details {
+    width: 100% !important;
+    max-width: 254px !important;
+    gap: 30px !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-ctas {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 240px !important;
+    max-width: 100% !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-cta-book,
+  #teamsDoctorModal .teams-doctor-hero-cta-refer,
+  #teamsDoctorModal .teams-doctor-hero-cta-readmore {
+    display: none !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-cta-book-mobile,
+  #teamsDoctorModal .teams-doctor-hero-cta-gallery {
+    display: inline-flex !important;
+    width: 100% !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 32px !important;
+    font-size: 14px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-cta-book-mobile {
+    background: #d8a444 !important;
+    border-color: #d8a444 !important;
+    color: #fff !important;
+  }
+  #teamsDoctorModal .teams-doctor-hero-cta-gallery {
+    background: #faf3e6 !important;
+    border: 1px solid rgba(94, 93, 95, 0.52) !important;
+    color: rgba(94, 93, 95, 0.52) !important;
+  }
+  #teamsDoctorModal .teams-doctor-name,
+  #teamsDoctorModal .teams-doctor-gdc,
+  #teamsDoctorModal .teams-doctor-role,
+  #teamsDoctorModal .teams-doctor-qualifications {
+    color: #5e5d5f !important;
+    text-align: left !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  #teamsDoctorModal .teams-doctor-prefix {
+    color: #d8a444 !important;
+  }
+  #teamsDoctorModal .teams-doctor-photo {
+    display: block !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    flex: 0 0 auto !important;
+    order: 1 !important;
+    width: calc(100% + 48px) !important;
+    max-width: calc(100% + 48px) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 0 -24px !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+  #teamsDoctorModal .teams-doctor-photo-img {
+    display: block !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 280px !important;
+    max-height: 432px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    order: 1 !important;
+    margin: 0 !important;
+  }
+}
+</style>
+<div class="modal fade teams-doctor-modal" id="teamsDoctorModal" tabindex="-1" aria-hidden="true" data-photo-fallback="<?php echo esc_url( $teams_modal_photo_fallback ); ?>">
 	<div class="modal-dialog modal-fullscreen">
 		<div class="modal-content teams-doctor-modal-content">
 			<div class="teams-doctor-modal-header">
@@ -347,34 +487,56 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 			<div class="teams-doctor-modal-body">
 				<section class="teams-doctor-hero" id="teamsDoctorAbout">
 					<div class="teams-doctor-hero-inner">
-						<div class="teams-doctor-photo">
-							<img src="" alt="" class="teams-doctor-photo-img" loading="lazy" decoding="async">
-						</div>
-						<div class="teams-doctor-hero-details">
-							<div class="teams-doctor-hero-identity">
-								<h2 class="teams-doctor-name">
-									<span class="teams-doctor-prefix"></span>
-									<span class="teams-doctor-fullname"></span>
-								</h2>
-								<p class="teams-doctor-gdc"></p>
-							</div>
+						<div class="teams-doctor-hero-copy">
+							<div class="teams-doctor-hero-details">
+								<div class="teams-doctor-hero-identity">
+									<h2 class="teams-doctor-name">
+										<span class="teams-doctor-prefix"></span>
+										<span class="teams-doctor-fullname"></span>
+									</h2>
+									<p class="teams-doctor-gdc"></p>
+								</div>
 
-							<div class="teams-doctor-hero-meta">
-								<p class="teams-doctor-role"></p>
-								<p class="teams-doctor-qualifications"></p>
+								<div class="teams-doctor-hero-meta">
+									<p class="teams-doctor-role"></p>
+									<p class="teams-doctor-qualifications"></p>
+								</div>
 							</div>
 
 							<div class="teams-doctor-hero-ctas">
-								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book d-none d-lg-inline-flex">
+								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book">
 									<?php esc_html_e( 'Book Appointment', 'wsd' ); ?>
 								</a>
-								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile d-md-none">
+								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile">
 									<?php esc_html_e( 'Book an appointment', 'wsd' ); ?>
 								</a>
-								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-refer d-none d-md-inline-flex"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
-								<a href="#teamsDoctorAboutDetails" class="btn btn-secondary teams-doctor-hero-cta-readmore d-none d-md-inline-flex d-lg-none"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
-								<a href="#teamsDoctorResultsGallery" class="btn btn-secondary teams-doctor-hero-cta-gallery d-md-none"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
+								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-refer"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
+								<a href="#teamsDoctorAboutDetails" class="btn btn-secondary teams-doctor-hero-cta-readmore"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
+								<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-gallery"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
 							</div>
+						</div>
+
+						<?php
+						$teams_modal_photo_url = $teams_modal_photo_fallback;
+						if ( ! empty( $clinical_specialists[0]['detail_image'] ) ) {
+							$teams_modal_photo_url = (string) $clinical_specialists[0]['detail_image'];
+						} elseif ( ! empty( $clinical_specialists[0]['image'] ) ) {
+							$teams_modal_photo_url = (string) $clinical_specialists[0]['image'];
+						}
+						?>
+						<div class="teams-doctor-photo">
+							<img
+								src="<?php echo esc_url( $teams_modal_photo_url ); ?>"
+								alt="<?php esc_attr_e( 'Doctor portrait', 'wsd' ); ?>"
+								class="teams-doctor-photo-img skip-lazy"
+								width="900"
+								height="900"
+								loading="eager"
+								decoding="async"
+								fetchpriority="high"
+								data-no-lazy="1"
+								onerror="this.onerror=null;this.src='<?php echo esc_url( $theme_uri . '/assets/images/team-andrew.png' ); ?>';"
+							>
 						</div>
 					</div>
 				</section>
@@ -384,8 +546,11 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 						<div class="teams-doctor-about-badge">
 							<h3 class="teams-doctor-about-badge-title">
 								<span class="teams-doctor-about-badge-desktop d-none d-md-inline">
-									<span><?php esc_html_e( 'About Dr', 'wsd' ); ?></span>
-									<span class="teams-doctor-about-name"></span>
+									<span><?php esc_html_e( 'About', 'wsd' ); ?></span>
+									<span class="teams-doctor-about-name-accent">
+										<span class="teams-doctor-about-prefix"></span>
+										<span class="teams-doctor-about-name"></span>
+									</span>
 								</span>
 								<span class="teams-doctor-about-badge-mobile d-md-none">
 									<span class="teams-doctor-about-badge-mobile-prefix"></span>
@@ -472,9 +637,10 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 								<span><?php esc_html_e( 'About Dr', 'wsd' ); ?></span>
 								<span class="teams-doctor-results-heading-accent teams-doctor-results-heading-name"></span>
 							</span>
-							<span class="teams-doctor-results-heading-mobile d-md-inline d-lg-none">
+							<span class="teams-doctor-results-heading-mobile d-inline d-lg-none">
 								<span class="teams-doctor-results-heading-mobile-prefix"></span>
-								<span class="teams-doctor-results-heading-accent"><?php esc_html_e( 'Patient Results', 'wsd' ); ?></span>
+								<span class="teams-doctor-results-heading-patient"><?php esc_html_e( 'Patient', 'wsd' ); ?></span>
+								<span class="teams-doctor-results-heading-accent"><?php esc_html_e( 'Results', 'wsd' ); ?></span>
 							</span>
 						</h3>
 					</div>

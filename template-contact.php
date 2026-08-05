@@ -263,11 +263,11 @@ $facebook_url  = wsd_get_contact_page_field( 'facebook', '' );
 							<a href="<?php echo esc_url( $maps_url ); ?>" class="contact-direction-btn" target="_blank" rel="noopener noreferrer">GET DIRECTION</a>
 						</div>
 					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <?php get_footer(); ?>
