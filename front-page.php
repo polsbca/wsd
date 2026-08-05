@@ -333,7 +333,7 @@ get_header();
 
 							<!-- Button -->
 							<div class="gallery-btn-wrapper">
-								<a href="#smile-gallery" class="btn btn-gallery-action">View Smile Gallery</a>
+								<a href="<?php echo esc_url( wsd_get_smile_gallery_page_url() ); ?>" class="btn btn-gallery-action">View Smile Gallery</a>
 							</div>
 						</div>
 
