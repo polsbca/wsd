@@ -3212,6 +3212,10 @@
     border-top: none !important;
   }
 
+  .accordion-tab:has(+ .accordion-tab.active) {
+    border-bottom-color: transparent !important;
+  }
+
   .accordion-tab-header {
     padding: 16px 0 !important;
     cursor: pointer;
@@ -4906,6 +4910,10 @@
 
   .accordion-tab.active {
     border-bottom: none !important;
+  }
+
+  .accordion-tab:has(+ .accordion-tab.active) {
+    border-bottom-color: transparent !important;
   }
 
   .accordion-tab-header {

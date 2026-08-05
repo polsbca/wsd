@@ -814,6 +814,9 @@
     var roleEl = modalEl.querySelector(".teams-doctor-role");
     var qualificationsEl = modalEl.querySelector(".teams-doctor-qualifications");
     var aboutNameEl = modalEl.querySelector(".teams-doctor-about-name");
+    var resultsHeadingNameEl = modalEl.querySelector(
+      ".teams-doctor-results-heading-name",
+    );
     var aboutBadgeMobilePrefix = modalEl.querySelector(
       ".teams-doctor-about-badge-mobile-prefix",
     );
@@ -913,7 +916,7 @@
       }
 
       if (photoImg) {
-        photoImg.src = doctor.image || "";
+        photoImg.src = doctor.detail_image || doctor.image || "";
         photoImg.alt = (doctor.prefix ? doctor.prefix + " " : "") + (doctor.name || "");
       }
       if (prefixEl) {
@@ -937,6 +940,11 @@
 
       if (aboutNameEl) {
         aboutNameEl.textContent = (doctor.name || "") + "\u2019s";
+      }
+      if (resultsHeadingNameEl) {
+        var resultsFirstName = getDoctorFirstName(doctor.name || "");
+        resultsHeadingNameEl.textContent =
+          (resultsFirstName || doctor.name || "") + "\u2019s";
       }
 
       var patientResultsPrefix = getDoctorPatientResultsPrefix(doctor);

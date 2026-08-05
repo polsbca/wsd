@@ -2254,6 +2254,10 @@ function wsd_format_clinical_specialist( $post ) {
 	$name_parts    = wsd_parse_team_name_parts( get_the_title( $post ) );
 	$image_fallback = get_template_directory_uri() . '/assets/images/team-andrew.png';
 	$image         = get_the_post_thumbnail_url( $post, 'full' ) ?: $image_fallback;
+	$detail_image  = wsd_normalize_media_url(
+		function_exists( 'get_field' ) ? get_field( 'detail_image', $post_id ) : '',
+		$image
+	);
 	$feature_image = wsd_normalize_media_url(
 		function_exists( 'get_field' ) ? get_field( 'doctor_details_middle_image', $post_id ) : '',
 		$image
@@ -2271,6 +2275,7 @@ function wsd_format_clinical_specialist( $post ) {
 
 	return array(
 		'image'                  => $image,
+		'detail_image'           => $detail_image,
 		'feature_image'          => $feature_image,
 		'role'                   => function_exists( 'get_field' ) ? (string) get_field( 'positions_title', $post_id ) : '',
 		'prefix'                 => $name_parts['prefix'],
@@ -2442,6 +2447,7 @@ function wsd_get_teams_doctor_modal_payload( $clinical_specialists ) {
 		static function ( $doctor ) {
 			return array(
 				'image'                  => $doctor['image'] ?? '',
+				'detail_image'           => $doctor['detail_image'] ?? ( $doctor['image'] ?? '' ),
 				'feature_image'          => $doctor['feature_image'] ?? ( $doctor['image'] ?? '' ),
 				'role'                   => $doctor['role'] ?? '',
 				'prefix'                 => $doctor['prefix'] ?? '',

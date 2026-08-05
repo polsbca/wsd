@@ -109,7 +109,7 @@ get_header();
 											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'fillings' ) ); ?>">Fillings</a>
 											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'crowns' ) ); ?>">Crowns</a>
 											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'bridges' ) ); ?>">Bridges</a>
-											<a class="gold-underlined" href="<?php echo esc_url( wsd_get_general_dentistry_url( 'dentures' ) ); ?>">Dentures</a>
+											<a href="<?php echo esc_url( wsd_get_general_dentistry_url( 'dentures' ) ); ?>">Dentures</a>
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
@@ -135,7 +135,7 @@ get_header();
 											<a href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'teeth-whitening' ) ); ?>">Whitening</a>
 											<a href="<?php echo esc_url( wsd_get_invisalign_page_url() ); ?>">Straightening</a>
 											<a href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'smile-makeovers' ) ); ?>">Smile Make Over</a>
-											<a class="gold-underlined" href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'dental-veneers' ) ); ?>">Veneers</a>
+											<a href="<?php echo esc_url( wsd_get_cosmetic_dentistry_url( 'dental-veneers' ) ); ?>">Veneers</a>
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
@@ -161,7 +161,7 @@ get_header();
 											<span>Single Implants</span>
 											<span>Multiple Implants</span>
 											<span>All-on-4</span>
-											<span class="gold-underlined">Implant Bridges</span>
+											<span>Implant Bridges</span>
 										</div>
 									</div>
 									<div class="tab-button-wrapper">
@@ -187,7 +187,7 @@ get_header();
 											<span>Clear Aligners</span>
 											<span>Consultations</span>
 											<span>Teen Invisalign</span>
-											<span class="gold-underlined">Retainers</span>
+											<span>Retainers</span>
 										</div>
 									</div> -->
 									<div class="tab-button-wrapper">

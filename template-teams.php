@@ -27,6 +27,7 @@ if ( $teams_page_id && has_post_thumbnail( $teams_page_id ) ) {
 	}
 }
 $referrals_url = function_exists( 'wsd_get_referrals_page_url' ) ? wsd_get_referrals_page_url() : home_url( '/#referrals' );
+$gallery_url   = function_exists( 'wsd_get_smile_gallery_page_url' ) ? wsd_get_smile_gallery_page_url() : home_url( '/smile-gallery/' );
 $smile_gallery_slides = function_exists( 'wsd_get_smile_gallery_slides' )
 	? wsd_get_smile_gallery_slides( array( $teams_page_id, (int) get_option( 'page_on_front' ) ) )
 	: array();
@@ -346,6 +347,9 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 			<div class="teams-doctor-modal-body">
 				<section class="teams-doctor-hero" id="teamsDoctorAbout">
 					<div class="teams-doctor-hero-inner">
+						<div class="teams-doctor-photo">
+							<img src="" alt="" class="teams-doctor-photo-img" loading="lazy" decoding="async">
+						</div>
 						<div class="teams-doctor-hero-details">
 							<div class="teams-doctor-hero-identity">
 								<h2 class="teams-doctor-name">
@@ -371,9 +375,6 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 								<a href="#teamsDoctorAboutDetails" class="btn btn-secondary teams-doctor-hero-cta-readmore d-none d-md-inline-flex d-lg-none"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
 								<a href="#teamsDoctorResultsGallery" class="btn btn-secondary teams-doctor-hero-cta-gallery d-md-none"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
 							</div>
-						</div>
-						<div class="teams-doctor-photo">
-							<img src="" alt="" class="teams-doctor-photo-img" loading="lazy" decoding="async">
 						</div>
 					</div>
 				</section>
@@ -468,8 +469,8 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 					<div class="teams-doctor-results-heading-wrap">
 						<h3 class="teams-doctor-results-heading">
 							<span class="d-none d-lg-inline">
-								<span><?php esc_html_e( 'Smile ', 'wsd' ); ?></span>
-								<span class="teams-doctor-results-heading-accent"><?php esc_html_e( 'Gallery', 'wsd' ); ?></span>
+								<span><?php esc_html_e( 'About Dr', 'wsd' ); ?></span>
+								<span class="teams-doctor-results-heading-accent teams-doctor-results-heading-name"></span>
 							</span>
 							<span class="teams-doctor-results-heading-mobile d-md-inline d-lg-none">
 								<span class="teams-doctor-results-heading-mobile-prefix"></span>
@@ -502,7 +503,7 @@ window.wsdTeamsDoctors = <?php echo wp_json_encode( $teams_doctor_payload ); ?>;
 												<span class="teams-doctor-result-label"><?php esc_html_e( 'After', 'wsd' ); ?></span>
 											</div>
 
-											<a href="<?php echo esc_url( home_url( '/#smile-gallery' ) ); ?>" class="teams-doctor-result-readmore"><?php esc_html_e( 'Read More', 'wsd' ); ?></a>
+											<a href="<?php echo esc_url( $gallery_url ); ?>" class="teams-doctor-result-readmore"><?php esc_html_e( 'Read More', 'wsd' ); ?></a>
 										</div>
 									</article>
 								<?php endforeach; ?>

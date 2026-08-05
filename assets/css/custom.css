@@ -1768,9 +1768,13 @@ body {
 .treatment-slide-counter {
   display: flex;
   align-items: flex-end;
+  flex-wrap: nowrap;
   gap: 10px; /* Figma 3290:11499 */
-  width: 101px;
+  /* Figma frame is 101px for "01"; "04" is wider — don't clip */
+  width: auto;
+  min-width: 101px;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .treatment-slide-counter .active-slide {
@@ -1780,6 +1784,8 @@ body {
   color: #d8a444;
   letter-spacing: -1px;
   line-height: 1;
+  flex-shrink: 0;
+  white-space: nowrap;
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
 }
@@ -1793,6 +1799,8 @@ body {
   margin-left: 0;
   margin-top: 0;
   line-height: 1;
+  flex-shrink: 0;
+  white-space: nowrap;
   text-box-edge: cap alphabetic;
   text-box-trim: trim-both;
 }
@@ -1844,6 +1852,11 @@ body {
 
 .accordion-tab.active:first-child {
   border-top-color: transparent;
+}
+
+/* Hide divider above the open accordion item */
+.accordion-tab:has(+ .accordion-tab.active) {
+  border-bottom-color: transparent;
 }
 
 .accordion-tab-header {
@@ -1983,24 +1996,23 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 .includes-items span {
   color: inherit;
   text-decoration: none;
+  text-decoration-color: transparent;
   white-space: nowrap;
-  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    text-decoration-color 0.25s ease;
 }
 
 .includes-items a:hover,
+.includes-items a:focus-visible,
 .includes-items span:hover {
   color: #d8a444;
   text-decoration: underline;
+  text-decoration-color: #d8a444;
   text-decoration-skip-ink: none;
   text-underline-position: from-font;
-}
-
-.includes-items a.gold-underlined,
-.gold-underlined {
-  color: #d8a444;
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  text-underline-position: from-font;
+  text-underline-offset: 0.12em;
 }
 
 .tab-action-btn {
@@ -8530,6 +8542,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
 .teams-doctor-modal-header {
   border-bottom: 1px solid rgba(216, 164, 68, 0.2);
+  height: 148px;
+  min-height: 148px;
   padding: 40px 120px;
   background-color: #fefdf6;
   display: flex;
@@ -8537,6 +8551,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   justify-content: space-between;
   gap: 40px;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .teams-doctor-modal .btn-close-circle .close-x {
@@ -8588,40 +8603,56 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 .teams-doctor-hero {
   background-color: #faf3e6;
   min-height: 775px;
-  padding: 183px 120px 0;
+  height: 775px;
+  padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .teams-doctor-hero-inner {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 72px;
-  width: 100%;
+  width: min(1617px, calc(100% - 80px));
+  max-width: 1617px;
+  height: 100%;
+  min-height: 775px;
+  margin: 0 auto;
+  padding: 183px 0 0;
+  box-sizing: border-box;
 }
 
 .teams-doctor-photo {
-  order: 1;
+  flex: 0 1 863px;
   width: 863px;
-  max-width: 100%;
-  flex: 0 0 auto;
+  max-width: 53.37%;
+  height: 592px;
+  overflow: hidden;
+  align-self: flex-end;
 }
 
 .teams-doctor-photo-img {
-  width: 100%;
-  height: auto;
   display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .teams-doctor-hero-details {
-  order: 2;
+  flex: 0 1 682px;
   width: 682px;
-  max-width: 100%;
+  max-width: 42.18%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 89px;
   text-align: center;
+  align-self: center;
+  box-sizing: border-box;
 }
 
 .teams-doctor-hero-identity {
@@ -8644,12 +8675,14 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
 .teams-doctor-name {
   margin: 0;
+  width: 100%;
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 40px;
   line-height: 44px;
   letter-spacing: 1.6px;
   text-transform: capitalize;
+  text-align: center;
   color: #5e5d5f;
 }
 
@@ -8657,57 +8690,86 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   color: #d8a444;
 }
 
+.teams-doctor-fullname {
+  color: #5e5d5f;
+}
+
 .teams-doctor-gdc {
-  margin: 8px 0 0;
+  margin: 0;
+  width: 100%;
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 16px;
   line-height: 44px;
   letter-spacing: 0.64px;
+  text-align: center;
+  text-transform: capitalize;
   color: #5e5d5f;
 }
 
 .teams-doctor-role {
   margin: 0;
+  width: 100%;
   font-family: var(--font-family-primary);
   font-weight: 600;
   font-size: 24px;
   line-height: 44px;
   letter-spacing: 0.96px;
   text-transform: capitalize;
+  text-align: center;
   color: #5e5d5f;
 }
 
 .teams-doctor-qualifications,
 .teams-doctor-qualifications-full {
   margin: 0;
+  width: 100%;
   font-family: var(--font-family-primary);
   font-weight: 400;
   font-size: 20px;
   line-height: 33px;
   letter-spacing: 0.4px;
+  text-align: center;
   color: #5e5d5f;
 }
 
 .teams-doctor-hero-ctas {
   display: flex;
+  align-items: center;
   gap: 30px;
   width: 100%;
 }
 
 .teams-doctor-hero-ctas .btn {
   flex: 1 1 0;
-  min-height: 58px;
+  width: auto;
+  min-width: 0;
+  height: 62px;
+  min-height: 62px;
+  max-height: 62px;
   padding: 19px 32px;
   border-radius: 32px;
+  font-family: var(--font-family-primary);
   font-size: 20px;
+  font-weight: 700;
   letter-spacing: 1px;
   line-height: normal;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .teams-doctor-hero-ctas .teams-doctor-hero-cta-book {
+  background-color: #d8a444;
+  border: 1px solid #d8a444;
+  color: #ffffff;
   font-weight: 700;
+}
+
+.teams-doctor-hero-ctas .teams-doctor-hero-cta-book:hover {
+  background-color: #c59435;
+  border-color: #c59435;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .teams-doctor-hero-ctas .teams-doctor-hero-cta-refer {
@@ -8722,6 +8784,50 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   border-color: #d8a444;
   color: #ffffff;
   text-decoration: none;
+}
+
+/* Desktop mid-widths: keep Figma proportions without overflow */
+@media (min-width: 992px) and (max-width: 1510px) {
+  .teams-doctor-hero {
+    min-height: 0;
+    height: auto;
+  }
+
+  .teams-doctor-hero-inner {
+    width: calc(100% - 80px);
+    min-height: 0;
+    height: auto;
+    padding: 80px 0 0;
+    gap: clamp(32px, 4vw, 72px);
+    align-items: flex-end;
+  }
+
+  .teams-doctor-photo {
+    height: clamp(420px, 42vw, 592px);
+  }
+
+  .teams-doctor-hero-details {
+    gap: clamp(40px, 5vw, 89px);
+  }
+
+  .teams-doctor-name {
+    font-size: clamp(28px, 2.6vw, 40px);
+  }
+
+  .teams-doctor-role {
+    font-size: clamp(18px, 1.6vw, 24px);
+  }
+
+  .teams-doctor-qualifications,
+  .teams-doctor-qualifications-full {
+    font-size: clamp(14px, 1.3vw, 20px);
+    line-height: 1.45;
+  }
+
+  .teams-doctor-hero-ctas .btn {
+    font-size: clamp(14px, 1.3vw, 20px);
+    padding: 16px 24px;
+  }
 }
 
 .teams-doctor-section {
@@ -9132,37 +9238,60 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   padding: 0 120px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 .teams-doctor-results-viewport {
   width: 100%;
   overflow: hidden;
+  /* Room for after-card bottom radius + drop shadow (flush at 607px) */
+  padding-bottom: 16px;
+  margin-bottom: -4px;
 }
 
 .teams-doctor-results-track {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 30px;
+  padding-bottom: 8px;
   transition: transform 0.45s ease;
   will-change: transform;
 }
 
-.teams-doctor-result-card {
+.teams-doctor-result-card,
+article.teams-doctor-result-card {
   position: relative;
   flex: 0 0 804px;
   width: 804px;
-  height: 607px;
+  height: 623px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .teams-doctor-result-pair {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 607px;
 }
 
 .teams-doctor-result-image {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   background-color: #ffffff;
   border-radius: 40px;
   padding: 16px;
@@ -9173,11 +9302,13 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 .teams-doctor-result-image--before {
   left: 0;
   top: 0;
+  z-index: 1;
 }
 
 .teams-doctor-result-image--after {
   left: 312px;
   top: 255px;
+  z-index: 2;
 }
 
 .teams-doctor-result-image-frame {
@@ -9185,6 +9316,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   height: 320px;
   border-radius: 24px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .teams-doctor-result-image-frame img {
@@ -9198,9 +9330,9 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   position: absolute;
   left: 165px;
   top: 360px;
-  width: 138px;
-  height: 64px;
-  z-index: 2;
+  width: 136px;
+  height: 62px;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -9215,6 +9347,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   position: absolute;
   left: 16px;
   top: 292px;
+  z-index: 2;
   background-color: #ffffff;
   padding: 8px 24px;
   border-radius: 0 16px 0 0;
@@ -9223,13 +9356,17 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   font-size: 20px;
   line-height: 28px;
   color: #d8a444;
+  white-space: nowrap;
 }
 
 .teams-doctor-result-readmore {
   position: absolute;
   right: 8px;
   top: 8px;
-  z-index: 3;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(216, 164, 68, 0.13);
   border: 1px solid #d8a444;
   color: #d8a444;
@@ -9242,6 +9379,16 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   text-decoration: none;
   line-height: normal;
   white-space: nowrap;
+  box-sizing: border-box;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.teams-doctor-result-readmore:hover {
+  background: #d8a444;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .teams-doctor-results-controls {
@@ -9249,9 +9396,9 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   flex-direction: column;
   align-items: flex-end;
   gap: 40px;
-  width: 100%;
+  width: min(1519px, 100%);
   max-width: 1519px;
-  margin-left: auto;
+  margin: 0;
 }
 
 .teams-doctor-results-progress {
@@ -9283,6 +9430,30 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
   display: flex;
   align-items: center;
   gap: 40px;
+}
+
+.teams-doctor-results-nav .teams-slider-nav-btn {
+  width: 50.4px;
+  height: 50.4px;
+  padding: 8.4px;
+  border-radius: 25.2px;
+  border: 1px solid #5e5d5f;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.teams-doctor-results-nav .teams-slider-nav-btn img {
+  width: 25.2px;
+  height: 25.2px;
+}
+
+.teams-doctor-results-nav .teams-slider-nav-btn--next.is-active {
+  background-color: #d8a444;
+  border-color: #d8a444;
+}
+
+.teams-doctor-results-nav .teams-slider-nav-btn--next.is-active img {
+  filter: brightness(0) invert(1);
 }
 
 @media (max-width: 767.98px) {
@@ -9347,14 +9518,23 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
   .teams-doctor-hero {
     min-height: auto;
+    height: auto;
     padding: 40px 24px 0;
     background-color: #faf3e6;
+    overflow: visible;
   }
 
   .teams-doctor-hero-inner {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 30px;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .teams-doctor-hero-details {
@@ -9362,19 +9542,24 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     width: 100%;
     max-width: 254px;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 30px;
     text-align: left;
+    align-self: flex-start;
   }
 
   .teams-doctor-photo {
     order: 2;
     width: 100%;
     max-width: 447px;
+    height: auto;
     align-self: center;
+    overflow: visible;
   }
 
   .teams-doctor-photo-img {
     width: 100%;
+    height: auto;
     max-height: 432px;
     object-fit: contain;
     object-position: center bottom;
@@ -9681,6 +9866,8 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 
   .teams-doctor-results-viewport {
     touch-action: pan-y;
+    overflow: hidden;
+    padding-bottom: 10px;
   }
 
   .teams-doctor-results-track {
@@ -9824,8 +10011,11 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     grid-template-columns: minmax(0, 1fr) min(488px, 59.5%);
     grid-template-rows: 1fr;
     align-items: end;
+    width: 100%;
+    max-width: none;
     height: 100%;
     min-height: 640px;
+    margin: 0;
     padding: 60px 0 0 40px;
     box-sizing: border-box;
     column-gap: 0;
@@ -9837,6 +10027,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     grid-row: 1;
     position: relative;
     align-self: start;
+    justify-content: flex-start;
     width: 100%;
     max-width: 367px;
     z-index: 2;
@@ -10228,6 +10419,7 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
     touch-action: pan-y;
     overflow: hidden;
     width: 100%;
+    padding-bottom: 12px;
   }
 
   .teams-doctor-results-track {
