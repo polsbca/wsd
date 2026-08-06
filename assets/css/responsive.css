@@ -959,7 +959,7 @@
     min-height: 100%;
   }
 
-  .mobile-menu > .menu-item {
+  .mobile-menu>.menu-item {
     background-color: #faf3e6;
     border-bottom: 1px solid rgba(216, 164, 68, 0.28);
     margin: 0;
@@ -974,12 +974,12 @@
     transition: background-color 0.3s ease;
   }
 
-  .mobile-menu > .menu-item:last-child {
+  .mobile-menu>.menu-item:last-child {
     border-bottom-width: 2px;
   }
 
   /* Expanded submenu ? Figma 3949:15165: shrink-wrap content, no flex stretch */
-  .mobile-menu > .menu-item.submenu-active {
+  .mobile-menu>.menu-item.submenu-active {
     background-color: rgba(216, 164, 68, 0.2);
     flex: 0 0 auto;
     flex-grow: 0;
@@ -992,7 +992,7 @@
     padding: 20px 24px;
   }
 
-  .mobile-menu .menu-item > a {
+  .mobile-menu .menu-item>a {
     font-family: "Montserrat", sans-serif;
     color: #5e5d5f;
     font-size: 16px;
@@ -1010,7 +1010,7 @@
     text-box-trim: trim-both;
   }
 
-  .mobile-menu .menu-item > a:hover {
+  .mobile-menu .menu-item>a:hover {
     color: #d8a444;
   }
 
@@ -1026,7 +1026,7 @@
     box-sizing: border-box;
   }
 
-  .mobile-menu > .menu-item.submenu-active > .menu-item-row {
+  .mobile-menu>.menu-item.submenu-active>.menu-item-row {
     flex: 0 0 auto;
     flex-grow: 0;
     flex-shrink: 0;
@@ -1038,7 +1038,7 @@
     border-bottom: 1px solid rgba(216, 164, 68, 0.1);
   }
 
-  .menu-item-row > a {
+  .menu-item-row>a {
     font-family: "Montserrat", sans-serif;
     color: #5e5d5f;
     font-size: 16px;
@@ -1048,7 +1048,7 @@
     transition: color 0.3s ease;
   }
 
-  .menu-item-row > a:hover {
+  .menu-item-row>a:hover {
     color: #d8a444;
   }
 
@@ -1086,7 +1086,7 @@
     min-height: 0;
   }
 
-  .mobile-menu > .menu-item.submenu-active > .sub-menu-container {
+  .mobile-menu>.menu-item.submenu-active>.sub-menu-container {
     display: block;
     flex: 0 0 auto;
     min-height: 0;
@@ -1417,6 +1417,7 @@
 
   /* 1. Key Treatments Section ? phone only (tablet uses desktop GSAP) */
   @media (max-width: 767.98px) {
+
     .key-treatments-section .treatments-header-badge,
     .key-treatments-section .treatments-left-col,
     .key-treatments-section .accordion-tab {
@@ -4869,11 +4870,21 @@
   .treatment-image-frame {
     width: 100% !important;
     height: 739px !important;
+    min-height: 739px !important;
     max-height: 739px !important;
     border-radius: 8px !important;
     overflow: hidden !important;
     flex: 1 1 auto !important;
   }
+
+  .about-waterside-section {
+    padding-bottom: 20px !important;
+  }
+
+  .dentist-gradient-overlay {
+    background: linear-gradient(270deg, rgba(43, 43, 44, 0.00) 0%, rgba(43, 43, 44, 0.80) 100%) !important;
+  }
+
 
   .active-treatment-image {
     width: 100% !important;
@@ -5011,7 +5022,7 @@
   }
 
   /* Closed tabs below active content share top border with first closed row */
-  .accordion-tab.active + .accordion-tab {
+  .accordion-tab.active+.accordion-tab {
     border-top: 1px solid rgba(94, 93, 95, 0.18) !important;
   }
 }
@@ -7310,6 +7321,10 @@
    DENTAL IMPLANTS PAGE MOBILE (FIGMA 4078:35314)
    ============================================================ */
 @media (max-width: 767.98px) {
+  .key-treatments-section .includes-label {
+    line-height: 100%;
+    margin-bottom: 0 !important;
+  }
 
   .page-template-template-dental-implants-php #main.dental-implants-main,
   .page-template-template-dental-implants #main.dental-implants-main {
@@ -7602,6 +7617,7 @@
     padding: 18px 16px !important;
     gap: 14px !important;
     border-radius: 8px !important;
+    margin-bottom: 0;
   }
 
   .page-template-template-dental-implants-php .implants-type-label,
@@ -9594,8 +9610,13 @@
   }
 
   .gallery-card-label {
-    border-radius: 0 4px 0 0 !important;
-    bottom: 4px !important;
+    border-radius: 0 4px 0 8px !important;
+    bottom: 3px !important;
+    box-shadow: none !important;
+  }
+
+  .search-results-section .px-lg-120 {
+    padding-inline: 0;
   }
 
   .payment-card {
@@ -9623,6 +9644,7 @@
 
   .tab-includes-wrapper {
     margin-bottom: 20px !important;
+    gap: 11px;
   }
 
   body.single-services .fees-box-header h3,
@@ -16083,7 +16105,8 @@
     flex: 1 1 0 !important;
     width: auto !important;
     min-width: 0 !important;
-    height: 210px !important; /* 98 + 14 + 98 */
+    height: 210px !important;
+    /* 98 + 14 + 98 */
     overflow: visible !important;
   }
 
@@ -16505,7 +16528,9 @@
     letter-spacing: 0.5px !important;
     border-radius: 32px !important;
   }
-}/* ============================================================
+}
+
+/* ============================================================
    INVISALIGN PAGE ? MOBILE (FIGMA 3989:39621)
    ============================================================ */
 @media (max-width: 767.98px) {
@@ -16900,11 +16925,9 @@
     justify-content: flex-start !important;
     gap: 15px !important;
     border-radius: 0 0 5px 5px !important;
-    background: linear-gradient(
-      0.334814deg,
-      #000000 35.15%,
-      rgba(0, 0, 0, 0) 99.507%
-    ) !important;
+    background: linear-gradient(0.334814deg,
+        #000000 35.15%,
+        rgba(0, 0, 0, 0) 99.507%) !important;
     box-sizing: border-box !important;
   }
 
@@ -17042,7 +17065,7 @@
 
   .page-template-template-invisalign-php .invisalign-treatment-disclosure,
   .page-template-template-invisalign .invisalign-treatment-disclosure {
-    order: 3 !important;
+    order: 4 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -17215,11 +17238,9 @@
     position: absolute !important;
     inset: 0 !important;
     z-index: 1 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(51, 51, 51, 0) 38.024%,
-      rgba(51, 51, 51, 0.8) 77.622%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(51, 51, 51, 0) 38.024%,
+        rgba(51, 51, 51, 0.8) 77.622%) !important;
     pointer-events: none !important;
     border-radius: inherit !important;
   }
@@ -17902,6 +17923,7 @@
     margin-top: 30px !important;
   }
 }
+
 /* ============================================================
    INVISALIGN PAGE ? TABLET (FIGMA 4042:10479)
    Tablet-only overrides; desktop and phone styles remain unchanged.
@@ -18500,7 +18522,7 @@
 
   .page-template-template-invisalign-php .invisalign-treatment-disclosure,
   .page-template-template-invisalign .invisalign-treatment-disclosure {
-    order: 3 !important;
+    order: 4 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -18512,8 +18534,12 @@
     background-color: rgba(216, 164, 68, 0.2) !important;
     cursor: pointer !important;
     box-sizing: border-box !important;
+    
   }
-
+.page-template-template-invisalign-php .invisalign-treatment-disclosure.is-open,
+  .page-template-template-invisalign .invisalign-treatment-disclosure.is-open{
+margin-top: -100px !important;
+  }
   .page-template-template-invisalign-php .invisalign-treatment-disclosure-label,
   .page-template-template-invisalign .invisalign-treatment-disclosure-label {
     font-family: var(--font-family-primary) !important;
@@ -18686,11 +18712,9 @@
     position: absolute !important;
     inset: 0 !important;
     z-index: 1 !important;
-    background: linear-gradient(
-      180deg,
-      rgba(51, 51, 51, 0) 38.024%,
-      rgba(51, 51, 51, 0.8) 77.622%
-    ) !important;
+    background: linear-gradient(180deg,
+        rgba(51, 51, 51, 0) 38.024%,
+        rgba(51, 51, 51, 0.8) 77.622%) !important;
     pointer-events: none !important;
     border-radius: inherit !important;
   }
@@ -19695,7 +19719,7 @@
    Teams doctor modal ? tablet hero hard-fix (Figma 4084:43113 / 4084:43100)
    ========================================================================== */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  #teamsDoctorModal .teams-doctor-modal-body > section {
+  #teamsDoctorModal .teams-doctor-modal-body>section {
     flex: 0 0 auto !important;
   }
 
@@ -19860,7 +19884,8 @@
    Teams doctor modal photo ? final mobile fix (img is direct hero child)
    ========================================================================== */
 @media (max-width: 767.98px) {
-  #teamsDoctorModal .teams-doctor-hero-inner > .teams-doctor-photo-img,
+
+  #teamsDoctorModal .teams-doctor-hero-inner>.teams-doctor-photo-img,
   #teamsDoctorModal .teams-doctor-photo-img {
     display: block !important;
     position: static !important;
@@ -19906,7 +19931,7 @@
   }
 
   /* Prevent flex shrink clipping (root cause of blank mobile hero) */
-  #teamsDoctorModal .teams-doctor-modal-body > section {
+  #teamsDoctorModal .teams-doctor-modal-body>section {
     flex: 0 0 auto !important;
     min-height: auto !important;
   }

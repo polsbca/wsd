@@ -155,7 +155,7 @@ get_header();
 									</div>
 									<h3 class="accordion-tab-title accordion-tab-title--in-content d-md-none">Dental Implants</h3>
 									<p class="tab-desc">Restore your smile and chew with confidence again. Our premium dental implants provide a permanent, natural-looking solution for missing teeth, customized to your oral health.</p>
-									<div class="tab-includes-wrapper">
+									<!-- <div class="tab-includes-wrapper">
 										<p class="includes-label">Dental Implants Includes:</p>
 										<div class="includes-items">
 											<span>Single Implants</span>
@@ -163,7 +163,7 @@ get_header();
 											<span>All-on-4</span>
 											<span>Implant Bridges</span>
 										</div>
-									</div>
+									</div> -->
 									<div class="tab-button-wrapper">
 										<a href="<?php echo esc_url( wsd_get_dental_implants_page_url() ); ?>" class="btn btn-primary tab-action-btn">View Dental Implants</a>
 									</div>

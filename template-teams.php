@@ -507,12 +507,12 @@ if ( file_exists( get_template_directory() . '/assets/images/doctor-modal-hero.j
 								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book">
 									<?php esc_html_e( 'Book Appointment', 'wsd' ); ?>
 								</a>
-								<a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile">
+								<!-- <a href="<?php echo esc_url( wsd_get_contact_page_url() ); ?>" class="btn btn-primary teams-doctor-hero-cta-book-mobile">
 									<?php esc_html_e( 'Book an appointment', 'wsd' ); ?>
-								</a>
+								</a> -->
 								<a href="<?php echo esc_url( $referrals_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-refer"><?php esc_html_e( 'Refer a Patient', 'wsd' ); ?></a>
-								<a href="#teamsDoctorAboutDetails" class="btn btn-secondary teams-doctor-hero-cta-readmore"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
-								<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-gallery"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a>
+								<!-- <a href="#teamsDoctorAboutDetails" class="btn btn-secondary teams-doctor-hero-cta-readmore"><?php esc_html_e( 'Read more', 'wsd' ); ?></a>
+								<a href="<?php echo esc_url( $gallery_url ); ?>" class="btn btn-secondary teams-doctor-hero-cta-gallery"><?php esc_html_e( 'Smile Gallery', 'wsd' ); ?></a> -->
 							</div>
 						</div>
 
