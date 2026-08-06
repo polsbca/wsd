@@ -9508,7 +9508,9 @@
   body.home .call-us-tab,
   body.single-services .call-us-tab,
   body.page-template-template-teams .call-us-tab,
-  body.page-template-template-blogs .call-us-tab {
+  body.page-template-template-teams-php .call-us-tab,
+  body.page-template-template-blogs .call-us-tab,
+  body.page-template-template-blogs-php .call-us-tab {
     display: block !important;
     position: fixed !important;
     right: 24px !important;
@@ -9524,7 +9526,9 @@
   body.home .call-us-tab .btn-call-us,
   body.single-services .call-us-tab .btn-call-us,
   body.page-template-template-teams .call-us-tab .btn-call-us,
-  body.page-template-template-blogs .call-us-tab .btn-call-us {
+  body.page-template-template-teams-php .call-us-tab .btn-call-us,
+  body.page-template-template-blogs .call-us-tab .btn-call-us,
+  body.page-template-template-blogs-php .call-us-tab .btn-call-us {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -9542,18 +9546,22 @@
 
   body.home .call-us-tab .btn-call-us .phone-icon,
   body.single-services .call-us-tab .btn-call-us .phone-icon,
-  body.page-template-template-teams .btn-call-us .phone-icon,
-  body.page-template-template-blogs .btn-call-us .phone-icon {
-    width: 20px !important;
-    height: 20px !important;
-    /* Figma mobile ? upright, earpiece toward top-right */
-    transform: none !important;
+  body.page-template-template-teams .call-us-tab .btn-call-us .phone-icon,
+  body.page-template-template-teams-php .call-us-tab .btn-call-us .phone-icon,
+  body.page-template-template-blogs .call-us-tab .btn-call-us .phone-icon,
+  body.page-template-template-blogs-php .call-us-tab .btn-call-us .phone-icon {
+    width: 24px !important;
+    height: 24px !important;
+    /* Figma 4676:624 — phone-fill rotated 180deg */
+    transform: rotate(180deg) !important;
   }
 
   body.home .call-us-tab .btn-call-us .call-text,
   body.single-services .call-us-tab .btn-call-us .call-text,
   body.page-template-template-teams .call-us-tab .btn-call-us .call-text,
-  body.page-template-template-blogs .call-us-tab .btn-call-us .call-text {
+  body.page-template-template-teams-php .call-us-tab .btn-call-us .call-text,
+  body.page-template-template-blogs .call-us-tab .btn-call-us .call-text,
+  body.page-template-template-blogs-php .call-us-tab .btn-call-us .call-text {
     display: none !important;
   }
 
