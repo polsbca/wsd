@@ -18693,6 +18693,7 @@ margin-top: -100px !important;
     object-position: center !important;
     border: 0 !important;
     box-shadow: none !important;
+    filter: none !important;
   }
 
   .page-template-template-invisalign-php .invisalign-compare-card--left .invisalign-compare-card-img,
