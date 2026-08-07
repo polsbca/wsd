@@ -3430,10 +3430,9 @@ html.wsd-js .accordion-tab.active .accordion-tab-content {
 }
 
 .dentist-img-tag.tab2-img {
-  width: 81.51%;
-  height: 215.35%;
-  left: 18.49%;
-  top: -28.82%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

@@ -483,7 +483,7 @@ get_header();
 					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/anddruw.webp' ); ?>" alt="Dr Andrew Parashchak" class="dentist-img-tag tab1-img">
 				</div>
 				<div class="dentist-bg-img" data-tab="2">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/team.webp' ); ?>" alt="Waterside Team" class="dentist-img-tag tab2-img">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/team2.webp' ); ?>" alt="Waterside Team" class="dentist-img-tag tab2-img">
 				</div>
 				<div class="dentist-gradient-overlay"></div>
 			</div>

@@ -3592,6 +3592,24 @@ function initDentistTabs() {
           desc.classList.remove("active");
                 }
             });
+
+            // 4. Update section title
+      const title = section.querySelector(".dentist-section-title");
+      if (title) {
+        const newTitleText = targetIndex === "2" ? "Meet The Team" : "Our Principal Dentist";
+        gsap.to(title, {
+          opacity: 0,
+          y: -10,
+          duration: 0.25,
+          onComplete: () => {
+            title.textContent = newTitleText;
+            gsap.fromTo(title, 
+              { y: 10, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+            );
+          }
+        });
+      }
         });
     });
 }
