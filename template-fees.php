@@ -21,6 +21,24 @@ $fees_hero_alt            = __( 'Family smiling after dental care', 'wsd' );
 $fees_categories          = wsd_get_fees_membership_categories();
 $fees_items_by_category   = wsd_get_fees_membership_items_grouped();
 
+// Update explore finance button link.
+if ( ! empty( $fees_items_by_category ) ) {
+	foreach ( array( 'finance-options', 'finance' ) as $slug ) {
+		if ( ! empty( $fees_items_by_category[ $slug ] ) ) {
+			foreach ( $fees_items_by_category[ $slug ] as &$item ) {
+				if ( isset( $item['content'] ) ) {
+					if ( preg_match( '/<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)<\/a>/is', $item['content'] ) ) {
+						$item['content'] = preg_replace( '/href=["\']([^"\']+)["\']/i', 'href="https://cfl-retailer.chrysalisfinance.com/waterside-dental-care-1199"', $item['content'] );
+					} else {
+						$item['content'] .= ' <a href="https://cfl-retailer.chrysalisfinance.com/waterside-dental-care-1199">Explore Finance Options</a>';
+					}
+				}
+			}
+			unset( $item );
+		}
+	}
+}
+
 if ( empty( $fees_categories ) && ! empty( $fees_items_by_category ) ) {
 	foreach ( array_keys( $fees_items_by_category ) as $slug ) {
 		$term = get_term_by( 'slug', $slug, 'fees-membership-category' );
