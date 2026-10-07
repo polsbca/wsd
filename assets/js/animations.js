@@ -2978,7 +2978,28 @@ function initTreatmentsAccordion() {
   });
 
   lockAccordionMinHeight();
-  window.addEventListener("resize", lockAccordionMinHeight);
+
+  // Initial measure can run before web fonts / final layout; re-measure the open panel
+  function syncOpenTreatmentHeight() {
+    if (!isTransitioning) {
+      const activeTab = document.querySelector(".accordion-tab.active");
+      const activeContent = getContent(activeTab);
+      if (activeContent) {
+        gsap.set(activeContent, { height: measureOpenHeight(activeContent) });
+      }
+    }
+    lockAccordionMinHeight();
+  }
+
+  let treatmentsResizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(treatmentsResizeTimer);
+    treatmentsResizeTimer = setTimeout(syncOpenTreatmentHeight, 120);
+  });
+  window.addEventListener("load", syncOpenTreatmentHeight, { once: true });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncOpenTreatmentHeight);
+  }
 
   // Mobile treatment images load after first paint — refresh sticky track height
   const treatmentsSection = document.querySelector(".key-treatments-section");

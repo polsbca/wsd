@@ -579,10 +579,14 @@
       closeFilterPanel();
 
       if ($section.length && isDesktop) {
-        window.scrollTo({
-          top: getGallerySectionScrollTop(),
-          behavior: "auto",
-        });
+        if (typeof window.wsdScrollTo === "function") {
+          window.wsdScrollTo(getGallerySectionScrollTop(), { immediate: true });
+        } else {
+          window.scrollTo({
+            top: getGallerySectionScrollTop(),
+            behavior: "auto",
+          });
+        }
       }
 
       initStickyScroll();
@@ -646,10 +650,14 @@
             sectionTop +
             (sectionHeight * targetIndex) / Math.max(total - 1, 1);
 
-          window.scrollTo({
-            top: targetScroll,
-            behavior: "smooth",
-          });
+          if (typeof window.wsdScrollTo === "function") {
+            window.wsdScrollTo(targetScroll);
+          } else {
+            window.scrollTo({
+              top: targetScroll,
+              behavior: "smooth",
+            });
+          }
         });
     }
 

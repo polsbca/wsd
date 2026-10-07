@@ -20065,3 +20065,171 @@ margin-top: -100px !important;
     height: 14px !important;
   }
 }
+
+/* ============================================================
+   LAPTOP / SMALL DESKTOP (992px – 1919px)
+   Figma is 1920 wide; these keep fixed-px desktop compositions
+   inside the viewport instead of overflowing to the right.
+   ============================================================ */
+
+@media (min-width: 1201px) and (max-width: 1439.98px) {
+  #masthead.site-header .main-navigation ul {
+    flex-wrap: nowrap;
+    gap: clamp(24px, 2.6vw, 40px);
+  }
+
+  #masthead.site-header .main-navigation a {
+    font-size: clamp(18px, 1.45vw, 20px);
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1919.98px) {
+  /* Key Treatments: image frame had min-height 846px + aspect-ratio, which
+     locked its min-width at 777.5px and pushed the accordion off-screen. */
+  .key-treatments-section .treatments-left-col {
+    flex: 1.43 1 0% !important;
+    min-width: 0 !important;
+  }
+
+  .key-treatments-section .treatments-right-col {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+  }
+
+  .key-treatments-section .treatments-interactive-wrapper {
+    min-width: 0;
+  }
+
+  .key-treatments-section .treatment-image-frame {
+    flex: 1 1 0% !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: calc(100vh - 200px) !important;
+    aspect-ratio: 777.5 / 846 !important;
+  }
+
+  .key-treatments-section .tab-action-btn {
+    max-width: 100%;
+  }
+
+  .key-treatments-section .includes-items {
+    flex-wrap: wrap;
+  }
+
+  /* Smile Gallery (home, implants, invisalign): before/after cards are
+     absolutely positioned at fixed px, so scale the whole composition. */
+  .smile-gallery-section .gallery-content-layout {
+    min-width: 0;
+  }
+
+  .smile-gallery-section .gallery-left-col {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+  }
+
+  .smile-gallery-section .gallery-right-col {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .smile-gallery-section .gallery-info-wrapper {
+    flex: 0 0 auto;
+    width: clamp(320px, 30vw, 390px);
+  }
+
+  .smile-gallery-section .btn-gallery-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .smile-gallery-section .gallery-interactive-wrapper {
+    zoom: var(--wsd-gallery-scale, 1);
+  }
+
+  /* Blog cards: date / comments / read-time row was nowrap in a ~315px card */
+  .blogs-card .blogs-meta,
+  .blog-detail-related-card .blogs-meta {
+    flex-wrap: wrap !important;
+    row-gap: 8px !important;
+    column-gap: 20px !important;
+  }
+}
+
+@media (min-width: 1366px) and (max-width: 1439.98px) {
+  .smile-gallery-section .gallery-interactive-wrapper {
+    --wsd-gallery-scale: 0.92;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1365.98px) {
+  .smile-gallery-section .gallery-interactive-wrapper {
+    --wsd-gallery-scale: 0.82;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1279.98px) {
+  .smile-gallery-section .gallery-interactive-wrapper {
+    --wsd-gallery-scale: 0.75;
+  }
+}
+
+/* 992–1200 inherits the tablet (768–1200) gallery composition, which is
+   already %-positioned — size it to the column instead of zooming. */
+@media (min-width: 992px) and (max-width: 1200.98px) {
+  .smile-gallery-section .gallery-content-layout {
+    gap: 30px !important;
+  }
+
+  .smile-gallery-section .gallery-interactive-wrapper {
+    --wsd-gallery-scale: 1;
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+  .smile-gallery-section .gallery-info-wrapper {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 23px !important;
+  }
+
+  .smile-gallery-section .gallery-details-grid {
+    width: 100% !important;
+    height: 262px !important;
+  }
+
+  .smile-gallery-section .gallery-details-data {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .smile-gallery-section .gallery-btn-wrapper {
+    width: 100% !important;
+  }
+
+  .smile-gallery-section .gallery-detail-card {
+    width: auto !important;
+    height: 124px !important;
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+
+  .principal-dentist-section .dentist-tab-btn {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    font-size: 16px !important;
+    white-space: nowrap;
+  }
+
+  .smile-gallery-section .detail-label {
+    font-size: 16px !important;
+  }
+
+  .smile-gallery-section .detail-value {
+    font-size: 14px !important;
+    line-height: 20px;
+  }
+}

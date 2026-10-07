@@ -84,7 +84,8 @@ function wsd_scripts() {
 	// GSAP, ScrollTrigger, and site-wide smooth scrolling.
 		wp_enqueue_script( 'gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), '3.12.5', true );
 		wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.12.5', true );
-	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger' ), time(), true );
+	wp_enqueue_script( 'lenis', 'https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js', array(), '1.1.20', true );
+	wp_enqueue_script( 'wsd-smooth-scroll', get_stylesheet_directory_uri() . '/assets/js/smooth-scroll.js', array( 'gsap', 'gsap-scrolltrigger', 'lenis' ), time(), true );
 
 	// Front-page, services template, single services, and contact page animations.
 	if ( is_front_page() || is_page_template( 'template-services.php' ) || is_page_template( 'template-contact.php' ) || is_page_template( 'template-privacy-policy.php' ) || is_page_template( 'template-dental-referrals.php' ) || is_page_template( 'template-teams.php' ) || is_page_template( 'template-fees.php' ) || is_page_template( 'template-smile-gallery.php' ) || is_page_template( 'template-blogs.php' ) || is_page_template( 'template-dental-implants.php' ) || is_page_template( 'template-invisalign.php' ) || is_singular( 'services' ) || is_singular( 'post' ) ) {
@@ -133,6 +134,25 @@ function wsd_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'wsd_scripts' );
+
+/**
+ * Prefetch internal pages on hover/focus for near-instant navigation.
+ * Prefetch (not prerender) so GSAP entrance animations still play on arrival.
+ *
+ * @param array|null $config Speculation rules configuration.
+ * @return array|null
+ */
+function wsd_speculation_rules_configuration( $config ) {
+	if ( null === $config ) {
+		return $config;
+	}
+
+	$config['mode']      = 'prefetch';
+	$config['eagerness'] = 'moderate';
+
+	return $config;
+}
+add_filter( 'wp_speculation_rules_configuration', 'wsd_speculation_rules_configuration' );
 
 /**
  * Register widget areas

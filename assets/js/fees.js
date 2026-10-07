@@ -181,7 +181,11 @@
         var header = document.querySelector("#masthead.site-header");
         var offset = header ? header.getBoundingClientRect().height + 24 : 24;
         var top = tabsEl.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        if (typeof window.wsdScrollTo === "function") {
+          window.wsdScrollTo(Math.max(0, top));
+        } else {
+          window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        }
       });
     }
 
