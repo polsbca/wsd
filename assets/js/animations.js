@@ -4314,10 +4314,13 @@ function initMoreServicesSliders(modalElement) {
   const applyEdgeSpacing = () => {
     if (!cards.length) return;
 
-    cards[0].style.marginLeft = compactMediaQuery.matches ? "0" : "120px";
-    cards[cards.length - 1].style.marginRight = compactMediaQuery.matches
-      ? "0"
-      : "120px";
+    // Match the section's fluid side padding so the first card lines up with the title
+    const section = container.closest(".cosmetic-modal-more-services-section");
+    const gutter = section ? getComputedStyle(section).paddingLeft : "120px";
+    const edge = compactMediaQuery.matches ? "0" : gutter;
+
+    cards[0].style.marginLeft = edge;
+    cards[cards.length - 1].style.marginRight = edge;
   };
 
   const setupMobileDots = () => {

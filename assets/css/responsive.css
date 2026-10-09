@@ -20233,3 +20233,137 @@ margin-top: -100px !important;
     line-height: 20px;
   }
 }
+
+/* ============================================================
+   SUB-SERVICE POPUP (.cosmetic-full-modal) — all desktop widths
+   One fluid gutter (120px at 1920) replaces the stacked 60px body
+   padding + 120px section padding used below 1440.
+   ============================================================ */
+@media (min-width: 992px) {
+  .cosmetic-full-modal {
+    --wsd-modal-gutter: clamp(40px, 6.25vw, 120px);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-header {
+    padding-left: var(--wsd-modal-gutter);
+    padding-right: var(--wsd-modal-gutter);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-about-section,
+  .cosmetic-full-modal .modal-section.cosmetic-modal-gallery-section,
+  .cosmetic-full-modal .reviews-header-row,
+  .cosmetic-full-modal .reviews-content-row {
+    padding-left: var(--wsd-modal-gutter);
+    padding-right: var(--wsd-modal-gutter);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-about-section {
+    padding-top: clamp(60px, 5.2vw, 100px);
+    padding-bottom: clamp(80px, 8.3vw, 160px);
+    row-gap: clamp(60px, 5.2vw, 100px);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-about-section > .d-flex {
+    gap: clamp(40px, 5.2vw, 100px) !important;
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-title-col {
+    flex: 0 0 auto;
+    margin-left: calc(-1 * var(--wsd-modal-gutter));
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-title-badge {
+    padding: clamp(28px, 2.1vw, 40px) var(--wsd-modal-gutter);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-title-badge h2 {
+    font-size: clamp(34px, 2.5vw, 48px);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-about-section > .d-flex > .flex-grow-1 {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-desc-text {
+    font-size: clamp(18px, 1.25vw, 24px);
+    line-height: 1.67;
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-process-tabs {
+    row-gap: clamp(48px, 4.2vw, 80px);
+  }
+
+  .cosmetic-full-modal .reviews-header-row {
+    padding-top: clamp(80px, 6.9vw, 133px);
+    padding-bottom: clamp(60px, 6.25vw, 120px);
+  }
+
+  .cosmetic-full-modal .reviews-content-row {
+    padding-bottom: clamp(100px, 8.85vw, 170px);
+  }
+
+  .cosmetic-full-modal .cosmetic-modal-more-services-section {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: var(--wsd-modal-gutter);
+    padding-right: var(--wsd-modal-gutter);
+  }
+
+  .cosmetic-full-modal .more-services-slider-container {
+    margin-left: calc(-1 * var(--wsd-modal-gutter));
+    margin-right: calc(-1 * var(--wsd-modal-gutter));
+  }
+
+  .cosmetic-full-modal .more-services-title {
+    font-size: clamp(30px, 2vw, 38px);
+  }
+}
+
+/* Undo the 768–1200 tablet gallery sizing (55% grid, 48% cards) inside the popup */
+@media (min-width: 992px) and (max-width: 1200.98px) {
+  .cosmetic-full-modal .modal-smile-gallery .gallery-info-wrapper {
+    align-items: stretch;
+    gap: 23px;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-details-grid {
+    width: 100% !important;
+    height: 262px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-details-data {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-detail-card {
+    width: auto !important;
+    height: 124px !important;
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .detail-label {
+    font-size: 16px !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .detail-value {
+    font-size: 14px !important;
+    line-height: 20px;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .gallery-btn-wrapper {
+    width: 100% !important;
+  }
+
+  .cosmetic-full-modal .modal-smile-gallery .btn-gallery-action {
+    width: 100% !important;
+    justify-content: center;
+  }
+}
