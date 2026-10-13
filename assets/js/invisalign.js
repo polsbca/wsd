@@ -44,43 +44,42 @@
     );
   }
 
-  function syncAboutDots($section) {
-    var $dots = $section.find(".invisalign-about-dots");
-    if (!$dots.length) return;
-
-    var $activePanel = $section.find(".invisalign-about-panel.active");
-    var cardCount = $activePanel.find(
-      ".invisalign-step-card, .invisalign-who-card"
-    ).length;
-    var html = "";
-
-    for (var i = 0; i < cardCount; i += 1) {
-      html +=
-        '<span class="invisalign-about-dot' +
-        (i === 0 ? " is-active" : "") +
-        '"></span>';
-    }
-
-    $dots.html(html);
-  }
-
   function initInvisalignAboutTabs() {
     var $section = $(".invisalign-about-section");
     if (!$section.length) return;
 
     var $tabs = $section.find(".invisalign-tab-btn");
     var $panels = $section.find(".invisalign-about-panel");
+    var $dotsContainer = $section.find(".invisalign-about-dots");
     var sectionEl = $section[0];
 
-    syncAboutDots($section);
+    // One dot per tab so the dots act as a pager for Process / Who / Benefits
+    $dotsContainer.empty();
+    $tabs.each(function (index) {
+      $dotsContainer.append(
+        $('<button type="button" class="invisalign-about-dot"></button>')
+          .attr("aria-label", $.trim($(this).text()))
+          .attr("data-index", index)
+      );
+    });
+    var $dots = $dotsContainer.find(".invisalign-about-dot");
 
-    $tabs.on("click", function () {
-      var tab = $(this).data("tab");
-      if (!tab) return;
-      if ($(this).hasClass("active")) return;
+    function getActiveIndex() {
+      return Math.max(0, $tabs.index($tabs.filter(".active")));
+    }
+
+    function syncDots(index) {
+      $dots.removeClass("is-active").attr("aria-current", null);
+      $dots.eq(index).addClass("is-active").attr("aria-current", "true");
+    }
+
+    function activateTab(index) {
+      var $tab = $tabs.eq(index);
+      var tab = $tab.data("tab");
+      if (!tab || $tab.hasClass("active")) return;
 
       $tabs.removeClass("active").attr("aria-selected", "false");
-      $(this).addClass("active").attr("aria-selected", "true");
+      $tab.addClass("active").attr("aria-selected", "true");
 
       $panels.removeClass("active").attr("hidden", true);
       var $panel = $panels
@@ -88,14 +87,79 @@
         .addClass("active")
         .removeAttr("hidden");
 
-      syncAboutDots($section);
+      syncDots(index);
 
       window.setTimeout(function () {
         animatePanel(
           $panel[0] || sectionEl.querySelector(".invisalign-about-panel.active")
         );
       }, 60);
+    }
+
+    syncDots(getActiveIndex());
+
+    $tabs.on("click", function () {
+      activateTab($tabs.index(this));
     });
+
+    $dots.on("click", function () {
+      activateTab(Number($(this).attr("data-index")));
+    });
+
+    // Horizontal swipe on the cards switches tabs; vertical scrolling stays native
+    var swipeArea = sectionEl.querySelector(".invisalign-about-body");
+    if (!swipeArea) return;
+
+    var startX = 0;
+    var startY = 0;
+    var tracking = false;
+
+    swipeArea.addEventListener(
+      "touchstart",
+      function (event) {
+        if (!isCompactViewport() || event.touches.length !== 1) {
+          tracking = false;
+          return;
+        }
+        if (event.target.closest(".invisalign-about-tabs")) {
+          tracking = false;
+          return;
+        }
+        tracking = true;
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    swipeArea.addEventListener(
+      "touchend",
+      function (event) {
+        if (!tracking) return;
+        tracking = false;
+
+        var touch = event.changedTouches[0];
+        var dx = touch.clientX - startX;
+        var dy = touch.clientY - startY;
+
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+        var current = getActiveIndex();
+        var next = dx < 0 ? current + 1 : current - 1;
+        if (next < 0 || next >= $tabs.length) return;
+
+        activateTab(next);
+      },
+      { passive: true }
+    );
+
+    swipeArea.addEventListener(
+      "touchcancel",
+      function () {
+        tracking = false;
+      },
+      { passive: true }
+    );
   }
 
   function initTreatmentDisclosure() {

@@ -328,7 +328,7 @@ get_header();
 					</div>
 				<?php endforeach; ?>
 
-				<div class="invisalign-about-dots" aria-hidden="true"></div>
+				<div class="invisalign-about-dots" aria-label="<?php esc_attr_e( 'Invisalign topics', 'wsd' ); ?>"></div>
 			</div>
 		</div>
 	</section>

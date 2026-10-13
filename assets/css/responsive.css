@@ -20367,3 +20367,36 @@ margin-top: -100px !important;
     justify-content: center;
   }
 }
+/* ==========================================================================
+   INVISALIGN ABOUT DOTS - interactive pager (mobile / tablet)
+   ========================================================================== */
+@media (max-width: 1199.98px) {
+  .page-template-template-invisalign-php .invisalign-about-dots .invisalign-about-dot,
+  .page-template-template-invisalign .invisalign-about-dots .invisalign-about-dot {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+  }
+
+  .page-template-template-invisalign-php .invisalign-about-dots .invisalign-about-dot::after,
+  .page-template-template-invisalign .invisalign-about-dots .invisalign-about-dot::after {
+    content: "";
+    position: absolute;
+    inset: -10px -6px;
+  }
+
+  .page-template-template-invisalign-php .invisalign-about-dots .invisalign-about-dot:focus-visible,
+  .page-template-template-invisalign .invisalign-about-dots .invisalign-about-dot:focus-visible {
+    outline: 2px solid #d8a444;
+    outline-offset: 3px;
+  }
+
+  .page-template-template-invisalign-php .invisalign-about-body,
+  .page-template-template-invisalign .invisalign-about-body {
+    touch-action: pan-y;
+  }
+}
